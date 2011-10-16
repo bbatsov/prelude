@@ -49,17 +49,21 @@ menu bar, tool bar, etc"
   :type 'boolean
   :group 'ui)
 
-(defcustom prelude-use-default-prelude-theme t
-  "If set to true Prelude will load up its default theme (Zenburn),
-instead of Emacs's default theme."
-  :type 'boolean
-  :group 'ui)
-
 (defcustom prelude-enhance-modeline t
   "If set to true Prelude will augment the default modeline settings."
   :type 'boolean
   :group 'ui)
 
+(defcustom prelude-use-terminal-mouse t
+  "If set to true, Prelude will enable mouse inside terminal."
+  :type 'boolean
+  :group 'ui)
+
+(defcustom prelude-use-default-prelude-theme t
+  "If set to true Prelude will load up its default theme (Zenburn),
+   instead of Emacs's default theme."
+  :type 'boolean
+  :group 'ui)
 
 (when prelude-use-minimalistic-ui
  ;; the toolbar is just a waste of valuable screen estate
@@ -89,6 +93,20 @@ instead of Emacs's default theme."
 
 ;; enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
+
+(when prelude-use-terminal-mouse
+  ;; terminal mouse
+  (unless window-system
+    (require 'mouse)
+    (xterm-mouse-mode t)
+    (defun track-mouse (e))
+    (setq mouse-sel-mode t)
+    (global-set-key [mouse-4] '(lambda ()
+                                 (interactive)
+                                 (scroll-down 1)))
+    (global-set-key [mouse-5] '(lambda ()
+                                 (interactive)
+                                 (scroll-up 1)))))
 
 ;; custom Emacs 24 color themes support
 (add-to-list 'custom-theme-load-path (concat prelude-dir "themes/"))
