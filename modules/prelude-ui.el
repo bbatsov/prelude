@@ -39,7 +39,7 @@
   :group 'prelude)
 
 (defcustom prelude-use-minimalistic-ui t
-  "If set to true Prelude will dispense of most the UI that's mouse related - 
+  "If set to true Prelude will dispense of most the UI that's mouse related -
 menu bar, tool bar, etc"
   :type 'boolean
   :group 'ui)
@@ -66,8 +66,9 @@ instead of Emacs's default theme."
  (tool-bar-mode -1)
  ;; the menu bar is mostly useless as well
  ;; but removing it under OS X doesn't make much sense
- (unless (string= system-type "darwin")
-   (menu-bar-mode -1))
+ (unless (and window-system (string= system-type "darwin"))
+  (menu-bar-mode -1))
+
  ;; the blinking cursor is nothing, but an annoyance
  (blink-cursor-mode -1)
 
