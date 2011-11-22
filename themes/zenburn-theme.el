@@ -426,6 +426,9 @@
    `(whitespace-empty ((,class (:background ,zenburn-yellow :foreground ,zenburn-red))))
    `(whitespace-space-after-tab ((,class (:background ,zenburn-yellow :foreground ,zenburn-red))))
 
+   ;; which-func
+   `(which-func ((,class (:foreground ,zenburn-green+2))))
+
    ;; wanderlust
    `(wl-highlight-folder-few-face ((,class (:foreground ,zenburn-red-2))))
    `(wl-highlight-folder-many-face ((,class (:foreground ,zenburn-red-1))))
