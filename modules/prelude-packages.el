@@ -47,7 +47,7 @@
 
 (defun prelude-packages-installled-p ()
   (loop for p in prelude-packages
-        when (package-installed-p p) do (return nil)
+        when (not (package-installed-p p)) do (return nil)
         finally (return t)))
 
 (unless prelude-packages-installed-p
