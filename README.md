@@ -226,6 +226,12 @@ far as navigation is concerned at least). That's why I've disabled all
 movement commands with arrows - to prevent you from being tempted to
 use them.
 
+But even after reading this, you still prefer using arrows, add the
+following to `personal/custom.el` file:
+```lisp
+(setq prelude-noob t)
+```
+
 ### Windows compatibility
 
 While everything in Prelude should work fine in Windows I test it only
