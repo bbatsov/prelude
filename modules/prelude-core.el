@@ -156,10 +156,14 @@ the curson at its beginning, according to the current mode."
   (save-excursion
     (if (region-active-p)
         (progn
+          (delete-trailing-whitespace (region-beginning) (region-end))
           (indent-region (region-beginning) (region-end))
+          (untabify (region-min) (region-max))
           (message "Indented selected region."))
       (progn
+        (delete-trailing-whitespace)
         (prelude-indent-buffer)
+        (untabify (point-min) (point-max))
         (message "Indented buffer.")))))
 
 (defun prelude-annotate-todo ()
