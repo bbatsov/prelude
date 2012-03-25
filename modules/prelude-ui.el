@@ -36,8 +36,11 @@
 ;; the toolbar is just a waste of valuable screen estate
 ;; in a tty tool-bar-mode does not properly auto-load, and is
 ;; already disabled anyway
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+
+;; I don´t like the scrollbars, so hide them!
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
 ;; the menu bar is mostly useless as well
 ;; but removing it under OS X doesn't make much sense
 (defun prelude-frame-config (frame)
@@ -89,7 +92,7 @@
 (add-to-list 'custom-theme-load-path (concat prelude-dir "themes/"))
 
 ;; use zenburn as the default theme
-(load-theme 'zenburn t)
+(load-theme 'summered t)
 
 (provide 'prelude-ui)
 ;;; prelude-ui.el ends here
