@@ -56,11 +56,13 @@ changes in this directory. All Emacs Lisp files there are loaded automatically
 by Prelude.")
 (defvar prelude-snippets-dir (concat prelude-dir "snippets/"))
 (defvar prelude-personal-snippets-dir (concat prelude-personal-dir "snippets/"))
+(defvar prelude-personal-vendor-dir (concat prelude-personal-dir "vendor/"))
 
 ;; add Prelude's directories to Emacs's `load-path'
 (add-to-list 'load-path prelude-modules-dir)
 (add-to-list 'load-path prelude-vendor-dir)
 (add-to-list 'load-path prelude-personal-dir)
+(add-to-list 'load-path prelude-personal-vendor-dir)
 
 ;; the core stuff
 (require 'prelude-packages)

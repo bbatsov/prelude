@@ -1,1 +1,0 @@
-../../projects/ruby-interpolation.el/ruby-interpolation.el
