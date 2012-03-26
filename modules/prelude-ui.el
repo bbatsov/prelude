@@ -91,7 +91,7 @@
 ;; custom Emacs 24 color themes support
 (add-to-list 'custom-theme-load-path (concat prelude-dir "themes/"))
 
-;; use zenburn as the default theme
+;; use customized sunburst as default
 (load-theme 'summered t)
 
 (provide 'prelude-ui)
