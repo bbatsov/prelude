@@ -74,8 +74,8 @@ file of a buffer in an external program."
    (concat
     "http://www.google.com/search?ie=utf-8&oe=utf-8&q="
     (url-hexify-string (if mark-active
-                           (buffer-substring (region-beginning) (region-end))
-                         (read-string "Google: "))))))
+         (buffer-substring (region-beginning) (region-end))
+       (read-string "Google: "))))))
 
 (defun prelude-indent-rigidly-and-copy-to-clipboard (begin end indent)
   "Copy the selected code region to the clipboard, indented according
