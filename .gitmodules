@@ -1,3 +1,6 @@
 [submodule "vendor/feature-mode"]
 	path = vendor/feature-mode
 	url = https://github.com/michaelklishin/cucumber.el
+[submodule "personal"]
+	path = personal
+	url = https://github.com/leoc/emacs-prelude-personal
