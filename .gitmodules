@@ -1,0 +1,3 @@
+[submodule "snippets/markdown-mode"]
+	path = snippets/markdown-mode
+	url = git@github.com:Abizern/octopress-snippets.git
