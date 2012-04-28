@@ -55,10 +55,10 @@ ELPA (or MELPA).")
 (add-to-list 'load-path prelude-vendor-dir)
 
 ;; the core stuff
+(require 'prelude-mode)
 (require 'prelude-packages)
 (require 'prelude-ui)
 (require 'prelude-core)
-(require 'prelude-mode)
 (require 'prelude-editor)
 (require 'prelude-global-keybindings)
 
