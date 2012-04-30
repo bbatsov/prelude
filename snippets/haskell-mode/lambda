@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
-# name: type synonym
-# key: type
+# name: Lambda function
+# key: lambda
 # contributor: Abizer Nasir abizern@junglecandy.com
 # --
-type ${1:synonym} = ${2:base type}
-$0
+\(${1:params} -> ${2:function}) $0

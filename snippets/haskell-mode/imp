@@ -1,7 +1,6 @@
 # -*- mode: snippet -*-
-# name: type synonym
-# key: type
+# name: import
+# key: imp
 # contributor: Abizer Nasir abizern@junglecandy.com
 # --
-type ${1:synonym} = ${2:base type}
-$0
+import $0

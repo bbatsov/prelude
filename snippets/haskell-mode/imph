@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: type synonym
-# key: type
+# name: import ... hiding (...)
+# key: imph
 # contributor: Abizer Nasir abizern@junglecandy.com
 # --
-type ${1:synonym} = ${2:base type}
+import ${1:module} hiding (${2:names})
 $0

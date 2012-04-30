@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
-# name: type synonym
-# key: type
+# name: module declaration
+# key: mod
 # contributor: Abizer Nasir abizern@junglecandy.com
 # --
-type ${1:synonym} = ${2:base type}
+module ${1:name} (${2:exports}) where
 $0
