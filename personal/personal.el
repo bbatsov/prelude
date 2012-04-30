@@ -51,6 +51,13 @@
 ;;; I like to use shell, not eshell
 (global-set-key (kbd "C-x m") 'shell)
 
+;;; Remove binding of <tab> key from Markdown cycle
+;;; This way I can use YASnippets in my markdown files.
+(defun markdown-unset-tab ()
+  "markdown-mode-hook"
+  (define-key markdown-mode-map (kbd "<tab>") nil))
+(add-hook 'markdown-mode-hook '(lambda() (markdown-unset-tab)))
+
 ;; Enable erase-buffer
 (put 'erase-buffer 'disabled nil)
 
