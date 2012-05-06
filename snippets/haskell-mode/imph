@@ -3,5 +3,4 @@
 # key: imph
 # contributor: Abizer Nasir abizern@junglecandy.com
 # --
-import ${1:module} hiding (${2:names})
-$0
+import ${1:module} hiding (${2:names})$0

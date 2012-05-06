@@ -3,5 +3,4 @@
 # key: imp(
 # contributor: Abizer Nasir abizern@junglecandy.com
 # --
-import ${1:Type} (${2:functions})
-$0
+import ${1:Type} (${2:functions})$0
