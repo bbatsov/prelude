@@ -66,5 +66,9 @@
 ;; Enable erase-buffer
 (put 'erase-buffer 'disabled nil)
 
+;; Cursor settings
+(setq-default cursor-type 'bar)
+(set-cursor-color "gold1")
+
 ;; If I'm running emacs, then I want it to be a server
 (server-start)
