@@ -37,7 +37,7 @@
 (setq url-http-attempt-keepalives nil)
 
 (defvar personal-packages
-  '(haskell-mode markdown-mode solarized-theme sass-mode textile-mode inf-ruby)
+  '(haskell-mode markdown-mode solarized-theme sass-mode textile-mode inf-ruby ruby-end)
   "A list of packages to ensure are installed at launch.")
 
 (defun personal-packages-installed-p ()
