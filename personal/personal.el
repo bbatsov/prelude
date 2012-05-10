@@ -32,7 +32,15 @@
 ;; Tell gist to use curl
 (setq gist-use-curl t)
 
-;; Remove hooks from prelude
+;;; Set modes
+
+(add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+
+;;; Remove flyspell
+
+;; Remove flyspell from hooks
 (remove-hook 'message-mode-hook 'prelude-turn-on-flyspell)
 (remove-hook 'text-mode-hook 'prelude-turn-on-flyspell)
 
