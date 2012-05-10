@@ -32,11 +32,16 @@
 ;; Tell gist to use curl
 (setq gist-use-curl t)
 
-;;; Set modes
+;;; Set up for working with Ruby
 
+;; Set file modes
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+
+;; Bind RET to newline-and-indent (bored of usig C-j all the time)
+(add-hook 'ruby-mode-hook '(lambda ()
+                             (local-set-key (kbd "RET") 'newline-and-indent)))
 
 ;;; Remove flyspell
 
