@@ -1,0 +1,7 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: flexmock mock object, ActiveRecord
+# key: fmar
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+${1:var} = flexmock(:model, ${2:YourModel})
+$0

@@ -1,0 +1,7 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: should_not be_kind_of
+# key: shnbko
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+${1:target}.should_not be_a_kind_of(${2:klass})
+$0

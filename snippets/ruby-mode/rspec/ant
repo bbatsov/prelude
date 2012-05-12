@@ -1,0 +1,6 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: and_throw
+# key: ant
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+and_throw(${1:sym})

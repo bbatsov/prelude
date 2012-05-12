@@ -1,0 +1,6 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: controller_name
+# key: conn
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+controller_name :${1:controller}

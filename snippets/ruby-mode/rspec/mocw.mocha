@@ -1,0 +1,8 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: mock_with mocha
+# key: mocw.mocha
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+Spec::Runner.configure do |config|
+  config.mock_with :mocha
+end

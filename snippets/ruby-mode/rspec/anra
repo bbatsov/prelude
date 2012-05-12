@@ -1,0 +1,6 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: and_return with args
+# key: anra
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+and_return(${1:value})

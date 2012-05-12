@@ -1,4 +1,4 @@
-# -*- mode: snippet -*-
+# -*- mode: snippet require-final-newline: nil -*-
 # name: Lambda function
 # key: lambda
 # contributor: Abizer Nasir abizern@junglecandy.com

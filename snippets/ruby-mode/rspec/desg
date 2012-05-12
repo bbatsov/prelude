@@ -1,0 +1,12 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: describe (String) :given
+# key: desg
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+describe '${1:description}', :given => '${2:a}' do
+
+  it 'should ${3:description}' do
+    $0
+  end
+
+end

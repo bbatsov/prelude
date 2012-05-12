@@ -1,0 +1,8 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: before
+# key: bef
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+before(${1::each}) do
+  $0
+end

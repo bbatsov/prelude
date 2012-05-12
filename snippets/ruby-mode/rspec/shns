@@ -1,0 +1,7 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: should_not satisfy
+# key: shns
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+${1:target}.should_not satisfy { |obj| ${2: } }
+$0

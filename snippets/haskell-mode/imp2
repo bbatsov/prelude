@@ -1,4 +1,4 @@
-# -*- mode: snippet -*-
+# -*- mode: snippet require-final-newline: nil -*-
 # name: import <Type> (<functions>)
 # key: imp(
 # contributor: Abizer Nasir abizern@junglecandy.com

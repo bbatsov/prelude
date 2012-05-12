@@ -1,0 +1,12 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: describe (RESTful Controller): PUT
+# key: desrc.put
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+require File.direname(__FILE__) + '/.../spec_helper'
+
+describe ${1:controller}, 'PUT ${3:/some/path}${4: with some parameters}' do
+
+  $0
+
+end

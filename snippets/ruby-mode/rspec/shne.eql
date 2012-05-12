@@ -1,0 +1,7 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: should_not eql
+# key: shne.eql
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+${1:target}.should_not eql(${2:value})
+$0

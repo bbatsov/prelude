@@ -1,0 +1,7 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: should_not be_redirect
+# key: shnbr
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+response.should_not be_redirect
+$0

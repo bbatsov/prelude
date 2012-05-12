@@ -1,0 +1,6 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: at_most
+# key: atm
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+at_most(${1:n}).times

@@ -1,0 +1,6 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: should predicate
+# key: shp
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+${1:target}.should ${2:be_}${3:predicate} $0

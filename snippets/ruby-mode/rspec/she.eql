@@ -1,0 +1,7 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: should eql
+# key: she.eql
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+${1:target}.should eql(${2:value})
+$0

@@ -1,0 +1,7 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: should_not be
+# key: shnb
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+${1:target}.should_not be(${2:result})
+$0

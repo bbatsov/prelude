@@ -11,6 +11,7 @@
  '(global-linum-mode t)
  '(haskell-mode-hook (quote (turn-on-haskell-indent (lambda nil (run-hooks (quote prelude-haskell-mode-hook))))))
  '(require-final-newline t)
+ '(safe-local-variable-values (quote ((require-final-newline) (encoding . utf-8))))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tool-bar-mode nil)

@@ -1,0 +1,7 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: should_not throw
+# key: shnt
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+lambda { ${1: } }.should_not throw_symbol(:${2:symbol})
+$0

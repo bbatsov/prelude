@@ -1,0 +1,8 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: mock_with flexmock
+# key: mocw.flexmock
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+Spec::Runner.configure do |config|
+  config.mock_with :flexmock
+end

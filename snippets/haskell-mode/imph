@@ -1,4 +1,4 @@
-# -*- mode: snippet -*-
+# -*- mode: snippet require-final-newline: nil -*-
 # name: import ... hiding (...)
 # key: imph
 # contributor: Abizer Nasir abizern@junglecandy.com

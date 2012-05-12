@@ -1,0 +1,6 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: once
+# key: on
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+once

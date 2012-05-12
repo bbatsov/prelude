@@ -1,4 +1,4 @@
-# -*- mode: snippet -*-
+# -*- mode: snippet require-final-newline: nil -*-
 # name: type synonym
 # key: type
 # contributor: Abizer Nasir abizern@junglecandy.com

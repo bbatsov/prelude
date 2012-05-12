@@ -1,0 +1,7 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: should match
+# key: shm.match
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+${1:target}.should match(/${2:regex}/)
+$0

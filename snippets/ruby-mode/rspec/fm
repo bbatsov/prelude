@@ -1,0 +1,7 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: flexmock mock object w/name
+# key: fm
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+${1:var} = flexmock('${2:mock_name}')
+$0

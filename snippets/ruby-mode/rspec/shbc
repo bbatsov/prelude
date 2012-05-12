@@ -1,0 +1,7 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: should be_close
+# key: shbc
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+${1:target}.should be_close(${2:result}, ${3:tolerance})
+$0
