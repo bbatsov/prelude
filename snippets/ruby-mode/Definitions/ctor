@@ -1,0 +1,14 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: def initialize(...)
+# key: ctor
+# group: Definitions
+# contributor: Jim Weirich (Github repo)
+# --
+def initialize(${1:args})
+  ${1:$
+(mapconcat
+ '(lambda (x) (concat "@" x " = " x))
+ (split-string text ", ")
+ (concat "\n" (make-string (current-column) 32)))
+}$0
+end
