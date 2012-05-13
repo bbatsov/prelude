@@ -1,0 +1,6 @@
+# -*- mode: snippet require-final-newline: nil -*-
+# name: #!/usr/bin/env ruby
+# group: Personal
+# key: rb
+# --
+#!/usr/bin/env ruby
