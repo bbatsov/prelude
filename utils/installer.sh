@@ -1,5 +1,5 @@
 PRELUDE_INSTALL_DIR="$HOME/.emacs.d"
-PRELUDE_URL=https://github.com/bbatsov/prelude.git
+PRELUDE_URL=https://github.com/abizern/prelude.git
 
 if [ -d $PRELUDE_INSTALL_DIR/prelude ]
 then
