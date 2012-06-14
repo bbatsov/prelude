@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Prelude : Prelude is an enhanced Emacs configuration that should make your experience with Emacs both more pleasant and more powerful." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Prelude</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/bbatsov/prelude">View on GitHub</a>
+
+          <h1 id="project_title">Prelude</h1>
+          <h2 id="project_tagline">Prelude is an enhanced Emacs configuration that should make your experience with Emacs both more pleasant and more powerful.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/bbatsov/prelude/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/bbatsov/prelude/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>Prelude</h2>
+
+<p>Emacs is probably the best text editor in the world. However, the
+process of coming up with a useful Emacs configuration is long and
+difficult. It's this process that separates you from truly taking
+advantage of Emacs's power. I like to refer to this process as the
+<strong>Prelude</strong>. The <strong>Emacs Prelude</strong> has the goal to ease the initial
+Emacs setup process and to provide you with a much more powerful and
+productive experience than that you get out of the box. By using <strong>Emacs
+Prelude</strong> you're basically getting a "Get me out of the Prelude, I
+just want to use Emacs" card.</p>
+
+<p>Emacs Prelude is compatible <strong>ONLY with GNU Emacs 24</strong>. While Emacs 24
+is not yet officially released it's a rock solid piece of software
+more than suitable for everyday work. There is no good excuse not to
+use Emacs 24!</p>
+
+<h2>Fast Forward</h2>
+
+<p>Assuming you're using an Unix-like OS (<code>*BSD</code>, <code>GNU/Linux</code>, <code>OS X</code>, <code>Solaris</code>,
+etc), you already have Emacs 24 installed, as well as <code>git</code> &amp; <code>curl</code> you
+can skip the whole manual and just type in your favorite shell the
+following command:</p>
+
+<p><code>curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh</code></p>
+
+<p>You can now power up your Emacs, sit back and enjoy Prelude,
+forgetting about the rest of this manual.</p>
+
+<h2>Installing Emacs 24</h2>
+
+<p>Obviously to use the Emacs Prelude you have to install Emacs 24
+first. Have a look at the <a href="http://wikemacs.org/wiki/Installing_Emacs">WikEmacs articles on installing Emacs</a>.</p>
+
+<h2>Installation</h2>
+
+<h3>Automated</h3>
+
+<p>You can install Emacs via the command line with either <code>curl</code> or
+<code>wget</code>. Naturally <code>git</code> is also required.</p>
+
+<h4>Via Curl</h4>
+
+<p>If you're using <code>curl</code> type the following command:</p>
+
+<p><code>curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh</code></p>
+
+<h4>Via Wget</h4>
+
+<p>If you're using <code>wget</code> type:</p>
+
+<p><code>wget --no-check-certificate https://github.com/bbatsov/prelude/raw/master/utils/installer.sh -O - | sh</code></p>
+
+<h3>Manual</h3>
+
+<div class="highlight">
+<pre><span class="nv">$ </span>git clone git://github.com/bbatsov/prelude.git path/to/local/repo
+<span class="nv">$ </span>ln -s path/to/local/repo ~/.emacs.d
+<span class="nv">$ </span><span class="nb">cd</span> ~/emacs.d
+</pre>
+</div>
+
+
+<p>You'd do well to replace <code>~/.emacs.d</code> with the value of
+<code>user-emacs-directory</code> for your OS. You can check the value by doing
+<code>C-h v user-emacs-directory</code> inside Emacs.</p>
+
+<h2>Running</h2>
+
+<p>Nothing fancy here. Just start Emacs as usual. Personally I run Emacs
+in daemon mode:</p>
+
+<p><code>$ emacs --daemon</code></p>
+
+<p>Afterwards I connect to the server with either a terminal or a GUI
+client like this:</p>
+
+<div class="highlight">
+<pre><span class="nv">$ </span>emacsclient -t
+<span class="nv">$ </span>emacsclient -c
+</pre>
+</div>
+
+
+<p>You'd probably do well to put a few aliases in your <code>.zshrc</code> (or
+<code>.bashrc</code>):</p>
+
+<div class="highlight">
+<pre><span class="nb">alias </span><span class="nv">e</span><span class="o">=</span>emacsclient -t
+<span class="nb">alias </span><span class="nv">ec</span><span class="o">=</span>emacsclient -c
+<span class="nb">alias </span><span class="nv">vim</span><span class="o">=</span>emacsclient -t
+<span class="nb">alias </span><span class="nv">vi</span><span class="o">=</span>emacsclient -t
+</pre>
+</div>
+
+
+<p>The last two aliases are helpful if you're used to editing files from
+the command line using <code>vi(m)</code>.</p>
+
+<h2>Getting to know Prelude</h2>
+
+<p>Certainly the best way to understand how Prelude enhances the default
+Emacs experience is to peruse Prelude's source code (which is
+obviously written in Emacs Lisp). If you're intimidated by the source</p>
+
+<ul>
+<li>do not despair. Prelude includes a <code>prelude-mode</code> minor Emacs mode
+which collects some of the additional functionality added by
+Prelude. It also adds an additional keymap that binds many of those
+extensions to keybindings.</li>
+</ul><h2>Color Themes</h2>
+
+<p>Emacs 24 ships with a new theming facility that effectively renders
+the old color-theme package obsolete. Emacs 24 provides a dozen of
+built-in themes you can use out-of-the-box by invoking the <code>M-x
+load-theme</code> command.</p>
+
+<p><a href="https://github.com/bbatsov/zenburn-emacs">Zenburn</a> is the default color theme in Prelude, but you can change it
+at your discretion. Why Zenburn? I (and lots of hackers around the
+world) find it pretty neat for some reason. Personally I find the
+default theme pretty tiresome for the eyes, that's why I took that
+"controversial" decision to replace it. You can, of course, easily go
+back to the default (or select another theme entirely).</p>
+
+<p>To disable Zenburn just put in your personal config the following
+line:</p>
+
+<pre lang="elisp"><code>(disable-theme 'zenburn)
+</code></pre>
+
+<p>Or you can use another theme altogether by adding something like:</p>
+
+<pre lang="elisp"><code>(load-theme 'solarized-dark t)
+</code></pre>
+
+<p>P.S. Solarized is not available by default - you'll have to install it from MELPA first.</p>
+
+<h2>Personalizing</h2>
+
+<p>Fork the official Prelude repo and add your own touch to it. You're advised to avoid changing stuff outside of the
+personal folder to avoid having to deal with git merge conflicts in the future.</p>
+
+<h2>Prelude Modules</h2>
+
+<p>Additional settings for various programming languages are available for installation via MELPA. You might take a look at the <a href="https://github.com/bbatsov/prelude-modules">Prelude Modules project</a> for further info.</p>
+
+<h2>Caveats &amp; Pitfalls</h2>
+
+<h3>Problems with flyspell-mode</h3>
+
+<p>Prelude makes heavy use of the flyspell-mode package for spell
+checking of various things. The proper operation of flyspell depends
+on the presence of the <code>aspell</code> program and an <code>en</code> dictionary on your
+system. You can install <code>aspell</code> and the dictionary on OS X with
+<code>homebrew</code> like this:</p>
+
+<div class="highlight">
+<pre><span class="nv">$ </span>brew install aspell --lang<span class="o">=</span>en
+</pre>
+</div>
+
+
+<p>On Linux distros - just use your distro's package manager.</p>
+
+<h3>Ugly colors in the terminal Emacs version</h3>
+
+<p>If your Emacs looks considerably uglier in a terminal (compared to the
+GUI version) try adding this to your <code>.bashrc</code> or <code>.zshrc</code>:</p>
+
+<div class="highlight">
+<pre><span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>xterm-256color
+</pre>
+</div>
+
+
+<p>Source the <code>.bashrc</code> file and start Emacs again.</p>
+
+<h3>MELPA error on initial startup</h3>
+
+<p>If you get some http connection error related to the MELPA repo
+just do a manual <code>M-x package-refresh-contents</code> and restart Emacs
+afterwards. </p>
+
+<h3>No arrow navigation in editor buffers</h3>
+
+<p>This is not a bug - it's a feature! I firmly believe that the one true
+way to use Emacs is by using it the way it was intended to be used (as
+far as navigation is concerned at least). That's why I've disabled all
+movement commands with arrows (and keys like page up, page down, etc) - to prevent you from being tempted to
+use them.</p>
+
+<p>If you'd still like to use the arrow keys just invoke <code>M-x
+guru-mode</code> to enable them for the duration of your
+current Emacs session or add <code>(guru-mode -1)</code> to your
+personal Emacs customization to enable them permanently.</p>
+
+<h3>Windows compatibility</h3>
+
+<p>While everything in Prelude should work fine in Windows, I test it only
+with Linux &amp; OSX, so there are Windows related problems from time to
+time. This situation will probably improve over time.</p>
+
+<h2>Share the knowledge</h2>
+
+<p><a href="http://wikemacs.org">WikEmacs</a> collects useful resources for working
+with GNU Emacs. Please, take the time to peruse and improve them as
+you accumulate knowledge about Emacs. Prelude makes this especially
+easy, since it bundles
+<a href="http://wikemacs.org/wiki/Mediawiki.el">MediaWiki support</a> + the
+settings required to access WikEmacs right away.</p>
+
+<h2>Known issues</h2>
+
+<p>Check out the project's
+<a href="https://github.com/bbatsov/prelude/issues?sort=created&amp;direction=desc&amp;state=open">issue list</a>
+a list of unresolved issues. By the way - feel free to fix any of them
+and sent me a pull request. :-)</p>
+
+<h2>Contributors</h2>
+
+<p>Here's a <a href="https://github.com/bbatsov/prelude/contributors">list</a> of all the people who have contributed to the
+development of Emacs Prelude.</p>
+
+<h2>Bugs &amp; Improvements</h2>
+
+<p>Bug reports and suggestions for improvements are always
+welcome. github pull requests are even better! :-)</p>
+
+<p>I'd like to include a nice variety of Emacs 24 themes into Prelude -
+so if you've developed (or simply found) one - give me a shout and
+I'll take a look at it.</p>
+
+<p>Cheers,<br>
+Bozhidar</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Prelude maintained by <a href="https://github.com/bbatsov">bbatsov</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-30626419-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
