@@ -56,9 +56,6 @@
 
 (add-hook 'prelude-prog-mode-hook 'fix-prelude-prog-mode-defaults t)
 
-;; Add back arrow keys support
-(prelude-restore-arrow-keys)
-
 ;; Keybindings
 
 ;;; I like to use shell, not eshell
