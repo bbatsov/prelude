@@ -11,5 +11,9 @@ semanticdb
 url
 ede-projects.el
 .DS_Store
+<<<<<<< HEAD
+=======
+custom.el
 places
 .smex-items
+>>>>>>> bbatsov/master
