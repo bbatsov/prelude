@@ -1,9 +1,6 @@
 *~
 *.elc
 auto-save-list
-recentf
-savehist
-saveplace
 eshell
 elpa
 el-get
@@ -13,4 +10,3 @@ ede-projects.el
 .DS_Store
 places
 .smex-items
-savefile/
