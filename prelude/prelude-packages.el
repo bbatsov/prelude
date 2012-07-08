@@ -43,7 +43,7 @@
 
 (defvar prelude-packages
   '(ack-and-a-half expand-region gist guru-mode helm helm-projectile magit magithub melpa
-                   rainbow-mode volatile-highlights yasnippet zenburn-theme)
+                   rainbow-delimiters volatile-highlights yasnippet zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
