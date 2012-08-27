@@ -73,6 +73,13 @@
 ;;; Use ido-mode for choosing snippets
 (setq yas/prompt-functions '(yas/ido-prompt yas/dropdown-prompt))
 
+;; Turn off Guru-mode
+(defun disable-guru-mode ()
+  (guru-mode -1)
+)
+
+(add-hook 'prelude-prog-mode-hook 'disable-guru-mode t)
+
 ;; Enable erase-buffer
 (put 'erase-buffer 'disabled nil)
 
