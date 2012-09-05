@@ -43,7 +43,7 @@ productive experience than that you get out of the box. By using <strong>Emacs
 Prelude</strong> you're basically getting a "Get me out of the Prelude, I
 just want to use Emacs" card.</p>
 
-<p>Emacs Prelude is compatible <strong>ONLY with GNU Emacs 24</strong>.</p>
+<p>Emacs Prelude is compatible <strong>ONLY with GNU Emacs 24.x</strong>. </p>
 
 <h2>Fast Forward</h2>
 
@@ -56,6 +56,34 @@ following command:</p>
 
 <p>You can now power up your Emacs, sit back and enjoy Prelude,
 forgetting about the rest of this manual.</p>
+
+<p>There are two environment variables you can use to control the 
+source repository and the installation directory. To change the 
+installation directory:</p>
+
+<p><code>PRELUDE_INSTALL_DIR="$HOME/.emacs.d" &amp;&amp; 
+ curl -L
+https://github.com/bbatsov/prelude/raw/master/utils/installer.sh
+| sh</code></p>
+
+<p>To change the source repository:</p>
+
+<p><code>PRELUDE_URL="https://github.com/yourname/prelude.git" &amp;&amp;
+ curl -L
+https://github.com/bbatsov/prelude/raw/master/utils/installer.sh
+| sh</code></p>
+
+<p>Note that the installer will back up any existing <code>.emacs</code> file or
+<code>.emacs.d</code> since it will unpack Prelude's code in <code>.emacs.d</code>. If
+you're doing a manual install make sure you don't have a <code>.emacs</code> file
+or back up your existing <code>.emacs.d</code> directory manually.</p>
+
+<h2>More goodies</h2>
+
+<p>The <a href="https://github.com/bbatsov/prelude-modules">Prelude Modules</a>
+project contains a lot of additional packages for Prelude
+(install-able via the <code>package-list-packages</code> command) - enhanced programming
+mode configs, latex config, erc config, etc.</p>
 
 <h2>Installing Emacs 24</h2>
 
@@ -83,13 +111,10 @@ first. Have a look at the <a href="http://wikemacs.org/wiki/Installing_Emacs">Wi
 
 <h3>Manual</h3>
 
-<div class="highlight">
-<pre><span class="nv">$ </span>git clone git://github.com/bbatsov/prelude.git path/to/local/repo
+<div class="highlight"><pre><span class="nv">$ </span>git clone git://github.com/bbatsov/prelude.git path/to/local/repo
 <span class="nv">$ </span>ln -s path/to/local/repo ~/.emacs.d
 <span class="nv">$ </span><span class="nb">cd</span> ~/emacs.d
-</pre>
-</div>
-
+</pre></div>
 
 <p>You'd do well to replace <code>~/.emacs.d</code> with the value of
 <code>user-emacs-directory</code> for your OS. You can check the value by doing
@@ -105,24 +130,18 @@ in daemon mode:</p>
 <p>Afterwards I connect to the server with either a terminal or a GUI
 client like this:</p>
 
-<div class="highlight">
-<pre><span class="nv">$ </span>emacsclient -t
+<div class="highlight"><pre><span class="nv">$ </span>emacsclient -t
 <span class="nv">$ </span>emacsclient -c
-</pre>
-</div>
-
+</pre></div>
 
 <p>You'd probably do well to put a few aliases in your <code>.zshrc</code> (or
 <code>.bashrc</code>):</p>
 
-<div class="highlight">
-<pre><span class="nb">alias </span><span class="nv">e</span><span class="o">=</span>emacsclient -t
+<div class="highlight"><pre><span class="nb">alias </span><span class="nv">e</span><span class="o">=</span>emacsclient -t
 <span class="nb">alias </span><span class="nv">ec</span><span class="o">=</span>emacsclient -c
 <span class="nb">alias </span><span class="nv">vim</span><span class="o">=</span>emacsclient -t
 <span class="nb">alias </span><span class="nv">vi</span><span class="o">=</span>emacsclient -t
-</pre>
-</div>
-
+</pre></div>
 
 <p>The last two aliases are helpful if you're used to editing files from
 the command line using <code>vi(m)</code>.</p>
@@ -184,11 +203,8 @@ on the presence of the <code>aspell</code> program and an <code>en</code> dictio
 system. You can install <code>aspell</code> and the dictionary on OS X with
 <code>homebrew</code> like this:</p>
 
-<div class="highlight">
-<pre><span class="nv">$ </span>brew install aspell --lang<span class="o">=</span>en
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="nv">$ </span>brew install aspell --lang<span class="o">=</span>en
+</pre></div>
 
 <p>On Linux distros - just use your distro's package manager.</p>
 
@@ -197,11 +213,8 @@ system. You can install <code>aspell</code> and the dictionary on OS X with
 <p>If your Emacs looks considerably uglier in a terminal (compared to the
 GUI version) try adding this to your <code>.bashrc</code> or <code>.zshrc</code>:</p>
 
-<div class="highlight">
-<pre><span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>xterm-256color
-</pre>
-</div>
-
+<div class="highlight"><pre><span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>xterm-256color
+</pre></div>
 
 <p>Source the <code>.bashrc</code> file and start Emacs again.</p>
 
@@ -255,10 +268,6 @@ development of Emacs Prelude.</p>
 
 <p>Bug reports and suggestions for improvements are always
 welcome. github pull requests are even better! :-)</p>
-
-<p>I'd like to include a nice variety of Emacs 24 themes into Prelude -
-so if you've developed (or simply found) one - give me a shout and
-I'll take a look at it.</p>
 
 <p>Cheers,<br>
 Bozhidar</p>
