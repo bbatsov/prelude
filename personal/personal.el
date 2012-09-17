@@ -29,9 +29,6 @@
 ;; But it would be nice to autoflow long paragraphs
 (setq-default fill-column 80)
 
-;; Tell gist to use curl
-(setq gist-use-curl t)
-
 ;;; Set up for working with Ruby
 
 ;; Set file modes
@@ -83,9 +80,14 @@
 ;; Enable erase-buffer
 (put 'erase-buffer 'disabled nil)
 
+;; Tell gist to use curl
+(setq gist-use-curl t)
+
 ;; Cursor settings
 (setq-default cursor-type 'bar)
 (set-cursor-color "gold1")
 
 ;; If I'm running emacs, then I want it to be a server
 (server-start)
+
+(setq debug-on-error t)
