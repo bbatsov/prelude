@@ -89,5 +89,3 @@
 
 ;; If I'm running emacs, then I want it to be a server
 (server-start)
-
-(setq debug-on-error t)
