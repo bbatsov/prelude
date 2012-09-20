@@ -86,6 +86,10 @@
 ;; Tell gist to use curl
 (setq gist-use-curl t)
 
+;; Turn on ace-jump-mode
+(require 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
 ;; Cursor settings
 (setq-default cursor-type 'bar)
 (set-cursor-color "gold1")
