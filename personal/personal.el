@@ -40,18 +40,15 @@
 (add-hook 'ruby-mode-hook '(lambda ()
                              (local-set-key (kbd "RET") 'newline-and-indent)))
 
-;;; Remove flyspell
+;; Remove flyspell and whitespace
 
-;; Remove flyspell from hooks
-(remove-hook 'message-mode-hook 'prelude-turn-on-flyspell)
-(remove-hook 'text-mode-hook 'prelude-turn-on-flyspell)
+;;; Remove flyspell from hooks
+(add-hook 'message-mode-hook 'turn-off-flyspell t)
+(add-hook 'text-mode-hook 'turn-off-flyspell t)
+(add-hook 'prog-mode-hook 'turn-off-flyspell t)
 
-;; Remove flyspell from prog-mode
-(defun fix-prelude-prog-mode-defaults ()
-  (prelude-turn-off-whitespace)
-  (turn-off-flyspell))
-
-(add-hook 'prelude-prog-mode-hook 'fix-prelude-prog-mode-defaults t)
+;;; Turn of whitespace mode
+(add-hook 'prog-mode-hook 'prelude-turn-off-whitespace t)
 
 ;; Keybindings
 
@@ -76,6 +73,12 @@
 )
 
 (add-hook 'prelude-prog-mode-hook 'disable-guru-mode t)
+
+;; ghc-mod
+(defvar ghc-mod-dir (concat prelude-vendor-dir "ghc-mod/"))
+(add-to-list 'load-path ghc-mod-dir)
+(autoload 'ghc-init "ghc" nil t)
+(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 
 ;; Enable erase-buffer
 (put 'erase-buffer 'disabled nil)
