@@ -90,6 +90,10 @@
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
+;; org-mode
+;;; Keep track of when a TODO item is finished
+(setq org-log-done 'time)
+
 ;; Cursor settings
 (setq-default cursor-type 'bar)
 (set-cursor-color "gold1")
