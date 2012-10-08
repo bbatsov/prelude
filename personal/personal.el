@@ -91,6 +91,8 @@
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 ;; org-mode
+;;; Keybinding for org-agenda
+(define-key global-map (kbd "C-c a") 'org-agenda)
 ;;; Keep track of when a TODO item is finished
 (setq org-log-done 'time)
 
