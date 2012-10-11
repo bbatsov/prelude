@@ -10,7 +10,7 @@
  '(fci-rule-color "#eee8d5")
  '(global-linum-mode nil)
  '(haskell-mode-hook (quote (turn-on-haskell-indent (lambda nil (run-hooks (quote prelude-haskell-mode-hook))))) t)
- '(org-agenda-files (quote ("~/dev/mac/Annotations/Annotations.org")))
+ '(org-agenda-files (quote ("~/Dropbox/Notes/batf/batf.org" "~/dev/mac/Annotations/Annotations.org")))
  '(require-final-newline t)
  '(safe-local-variable-values (quote ((require-final-newline) (encoding . utf-8))))
  '(scroll-bar-mode nil)
