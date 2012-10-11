@@ -84,10 +84,15 @@
 (put 'erase-buffer 'disabled nil)
 
 ;; I like to use 4 spaces instead of tabs
+(setq c-default-style "bsd"
+      c-basic-offset 4)
+
+(setq indent-tabs-mode nil)
+
 (setq c-mode-hook
-    (function (lambda ()
-                (setq indent-tabs-mode nil)
-                (setq c-indent-level 4))))
+      (function (lambda ()
+                  (setq indent-tabs-mode nil)
+                  (setq c-indent-level 4))))
 (setq objc-mode-hook
       (function (lambda ()
                   (setq indent-tabs-mode nil)
@@ -96,6 +101,7 @@
       (function (lambda ()
                   (setq indent-tabs-mode nil)
                   (setq c-indent-level 4))))
+
 
 ;; Tell gist to use curl
 (setq gist-use-curl t)
