@@ -1,6 +1,16 @@
 ;;; abizern.el --- Emacs Prelude: Personal settings
 ;;
 
+;; Remove flyspell and whitespace
+
+;;; Remove flyspell from hooks
+(add-hook 'text-mode-hook 'turn-off-flyspell t)
+(add-hook 'prog-mode-hook 'turn-off-flyspell t)
+(add-hook 'message-mode-hook 'turn-off-flyspell t)
+
+;;; Turn of whitespace mode
+(add-hook 'prog-mode-hook 'whitespace-turn-off t)
+
 ;; Set Menlo 12 as my default font
 (set-default-font "-apple-Menlo-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
 (modify-frame-parameters nil '((wait-for-wm . nil)))
@@ -39,16 +49,6 @@
 ;; Bind RET to newline-and-indent (bored of usig C-j all the time)
 (add-hook 'ruby-mode-hook '(lambda ()
                              (local-set-key (kbd "RET") 'newline-and-indent)))
-
-;; Remove flyspell and whitespace
-
-;;; Remove flyspell from hooks
-(add-hook 'message-mode-hook 'turn-off-flyspell t)
-(add-hook 'text-mode-hook 'turn-off-flyspell t)
-(add-hook 'prog-mode-hook 'turn-off-flyspell t)
-
-;;; Turn of whitespace mode
-(add-hook 'prog-mode-hook 'prelude-turn-off-whitespace t)
 
 ;; Keybindings
 
