@@ -11,6 +11,10 @@
 ;;; Turn of whitespace mode
 (add-hook 'prog-mode-hook 'whitespace-turn-off t)
 
+;; Turn on auto-fill in text modes
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'markdown-mode-hook 'turn-on-auto-fill)
+
 ;; Set Menlo 12 as my default font
 (set-default-font "-apple-Menlo-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
 (modify-frame-parameters nil '((wait-for-wm . nil)))
