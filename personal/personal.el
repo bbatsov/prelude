@@ -58,6 +58,8 @@
 
 ;;; I like to use shell, not eshell
 (global-set-key (kbd "C-x m") 'shell)
+(global-set-key (kbd "<C-return>") 'newline-next)
+(global-set-key (kbd "<C-S-return>") 'newline-previous)
 
 ;; YASnippet
 
