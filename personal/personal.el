@@ -58,8 +58,19 @@
 
 ;;; I like to use shell, not eshell
 (global-set-key (kbd "C-x m") 'shell)
+
+;;; This will call functions that I have in my defuns file
 (global-set-key (kbd "<C-return>") 'newline-next)
 (global-set-key (kbd "<C-S-return>") 'newline-previous)
+
+;;; This overrides the keybinding from Prelude-osx.el
+(global-set-key (kbd "C-c C-w") 'backward-kill-word)
+
+;;; org-mode
+;;;; Keybinding for org-agenda
+(define-key global-map (kbd "C-c a") 'org-agenda)
+;;;; Keep track of when a TODO item is finished
+(setq org-log-done 'time)
 
 ;; YASnippet
 
@@ -115,12 +126,6 @@
 ;; Turn on ace-jump-mode
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-
-;; org-mode
-;;; Keybinding for org-agenda
-(define-key global-map (kbd "C-c a") 'org-agenda)
-;;; Keep track of when a TODO item is finished
-(setq org-log-done 'time)
 
 ;; Cursor settings
 (setq-default cursor-type 'bar)
