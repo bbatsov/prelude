@@ -4,9 +4,9 @@
 ;; Remove flyspell and whitespace
 
 ;;; Remove flyspell from hooks
-(add-hook 'text-mode-hook 'turn-off-flyspell t)
-(add-hook 'prog-mode-hook 'turn-off-flyspell t)
-(add-hook 'message-mode-hook 'turn-off-flyspell t)
+;(add-hook 'text-mode-hook 'turn-off-flyspell t)
+;(add-hook 'prog-mode-hook 'turn-off-flyspell t)
+;(add-hook 'message-mode-hook 'turn-off-flyspell t)
 
 ;;; Turn of whitespace mode
 (add-hook 'prog-mode-hook 'whitespace-turn-off t)
