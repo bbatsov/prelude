@@ -49,17 +49,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun ghc-which (cmd)
-  (catch 'loop
-    (dolist (suffix '("" ".exe"))
-      (let ((cmds (concat cmd suffix)))
-	(dolist (dir exec-path)
-	  (let ((path (expand-file-name cmds dir)))
-	    (if (file-exists-p path)
-		(throw 'loop path))))))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (defun ghc-uniq-lol (lol)
   (let ((hash (make-hash-table :test 'equal))
 	ret)

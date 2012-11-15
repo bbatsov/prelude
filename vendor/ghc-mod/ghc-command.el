@@ -41,7 +41,7 @@
 (defun ghc-save-buffer ()
   (interactive)
   (if (buffer-modified-p)
-      (save-buffer)
+      (call-interactively 'save-buffer)
     (flymake-start-syntax-check)))
 
 (provide 'ghc-command)

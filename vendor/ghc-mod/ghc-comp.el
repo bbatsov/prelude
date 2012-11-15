@@ -95,7 +95,7 @@ unloaded modules are loaded")
 ;;;
 
 (defun ghc-boot (n)
-  (if (not (ghc-which ghc-module-command))
+  (if (not (executable-find ghc-module-command))
       (message "%s not found" ghc-module-command)
     (ghc-read-lisp-list
      (lambda ()
@@ -105,7 +105,7 @@ unloaded modules are loaded")
      n)))
 
 (defun ghc-load-modules (mods)
-  (if (not (ghc-which ghc-module-command))
+  (if (not (executable-find ghc-module-command))
       (message "%s not found" ghc-module-command)
     (ghc-read-lisp-list
      (lambda ()

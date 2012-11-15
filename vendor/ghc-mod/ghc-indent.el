@@ -12,24 +12,10 @@
 
 (defun ghc-make-indent-shallower (beg end)
   (interactive "r")
-  (let ((n ghc-indent-offset))
-    (save-excursion
-      (save-restriction
-	(narrow-to-region beg end)
-	(goto-char beg)
-	(while (not (eobp))
-	  (delete-region (point) (+ (point) n))
-	  (forward-line))))))
+  (indent-rigidly (region-beginning) (region-end) (- ghc-indent-offset)))
 
 (defun ghc-make-indent-deeper (beg end)
   (interactive "r")
-  (let ((indent (make-string ghc-indent-offset 32)))
-    (save-excursion
-      (save-restriction
-	(narrow-to-region beg end)
-	(goto-char beg)
-	(while (not (eobp))
-	  (insert indent)
-	  (forward-line))))))
+  (indent-rigidly (region-beginning) (region-end) ghc-indent-offset))
 
 (provide 'ghc-indent)
