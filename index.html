@@ -234,8 +234,15 @@ use them.</p>
 
 <p>If you'd still like to use the arrow keys just invoke <code>M-x
 guru-mode</code> to enable them for the duration of your
-current Emacs session or add <code>(guru-mode -1)</code> to your
+current Emacs session or add the below snippet to your
 personal Emacs customization to enable them permanently.</p>
+
+<pre>
+(defun disable-guru-mode ()
+  (guru-mode -1)
+)
+(add-hook 'prelude-prog-mode-hook 'disable-guru-mode t)
+</pre>
 
 <h3>Windows compatibility</h3>
 
