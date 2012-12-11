@@ -8,9 +8,6 @@
 ;(add-hook 'prog-mode-hook 'turn-off-flyspell t)
 ;(add-hook 'message-mode-hook 'turn-off-flyspell t)
 
-;;; Turn of whitespace mode
-(add-hook 'prog-mode-hook 'whitespace-turn-off t)
-
 ;; Turn on auto-fill in text modes
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'markdown-mode-hook 'turn-on-auto-fill)
