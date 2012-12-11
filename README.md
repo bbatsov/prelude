@@ -32,13 +32,13 @@ source repository and the installation directory. To change the
 installation directory:
 
 ```bash
-$ PRELUDE_INSTALL_DIR="$HOME/.emacs.d" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
+$ export PRELUDE_INSTALL_DIR="$HOME/.emacs.d" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 ```
 
 To change the source repository:
 
 ```bash
-$ PRELUDE_URL="https://github.com/yourname/prelude.git" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
+$ export PRELUDE_URL="https://github.com/yourname/prelude.git" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 ```
 
 Note that the installer will back up any existing `.emacs` file or
@@ -133,6 +133,64 @@ which collects some of the additional functionality added by
 Prelude. It also adds an additional keymap that binds many of those
 extensions to keybindings.
 
+### Keymap
+
+#### Global
+
+* `C-M-h` - `backward-kill-word` (as in Bash/Zsh)
+* `C-x \` - `align-regexp`
+* `C-+` - `text-scale-increase`
+* `C--` - `text-scale-decrease`
+* `C-x O` - return you to the previous window (the inverse of `other-window` (`C-x o`))
+* `C-x ^` - `join-line`
+* `C-x p` - `proced` (manage processes form Emacs, works only in Linux)
+* `C-x m` - start eshell
+* `C-x M-m` - start your default shell
+* `C-x C-m` - sames as `M-x`
+* `C-h A` - `apropos` (search in all Emacs symbols)
+* `M-\` - `hippie-expand` (a replacement for the default `dabbrev-expand`)
+* `C-x C-b` - `ibuffer` (a replacement for the default `buffer-list`)
+* `F12` - toggle the Emacs menu bar
+* `C-x g` - open Magit's status buffer
+* `C-=` - `expand-region` (incremental text selection)
+
+#### Prelude Mode
+
+* `C-c o` - open the currently visited file with external program
+* `C-c g` - search in Google for the thing under point (or an interactive query)
+* `shift+return` - insert an empty line and indent it properly (as in most IDEs)
+* `control+shift+up` - move the current line up
+* `control+shift+down` - move the current line down
+* `C-c n` - fix indentation in buffer and strip whitespace
+* `C-c f` - open recently visitted file
+* `C-M-\` - indent region (if selected) or the entire buffer
+* `C-c u` - open URL in your default browser
+* `C-c e` - eval a bit of Emacs Lisp code and replace it with its result
+* `C-c s` - swap two active windows
+* `C-c d` - duplicate the current line (or region)
+* `C-c r` - rename the currently visited file and buffer
+* `C-c t` - open a terminal emulator (`ansi-term`)
+* `C-c k` - kill all open buffers except the one you're currently in
+* `C-c h` - open Helm (a useful means of navigating your buffers and project files)
+
+#### Projectile
+
+Here's a list of the interactive Emacs Lisp functions, provided by projectile:
+
+* `projectile-find-file` <kbd>C-c p f</kbd>
+* `projectile-grep` <kbd>C-c p g</kbd>
+* `projectile-switch-to-buffer` <kbd>C-c p b</kbd>
+* `projectile-multi-occur` <kbd>C-c p o</kbd>
+* `projectile-replace` <kbd>C-c p r</kbd>
+* `projectile-invalidate-cache` <kbd>C-c p i</kbd>
+* `projectile-regenerate-tags` <kbd>C-c p t</kbd>
+* `projectile-kill-buffers` <kbd>C-c p k</kbd>
+* `projectile-dired` <kbd>C-c p d</kbd>
+* `projectile-recentf` <kbd>C-c p e</kbd>
+* `projectile-ack` <kbd>C-c p a</kbd>
+* `projectile-compile-project` <kbd>C-c p l</kbd>
+* `projectile-test-project` <kbd>C-c p p</kbd>
+
 ### Automatic package installation
 
 The default Prelude installation comes with a bare minimum of
@@ -177,14 +235,14 @@ P.S. Solarized is not available by default - you'll have to install it from MELP
 Fork the official Prelude repo and add your own touch to it. You're advised to avoid changing stuff outside of the
 personal folder to avoid having to deal with git merge conflicts in the future.
 
-#### Disable whitespace-mode
+#### Enabling whitespace-mode
 
-Some people find `whitespace-mode` too intrusive and might want to
-disable it. It come be done from your personal config with the
-following bit of code:
+Although `whitespace-mode` is awesome some people find it too
+intrusive so it's disabled by default. You can enable it in your
+personal config with the following bit of code:
 
 ```lisp
-(add-hook 'prog-mode-hook 'whitespace-turn-off t)
+(setq prelude-whitespace t)
 ```
 
 #### Disable flyspell-mode
@@ -192,8 +250,7 @@ following bit of code:
 If you're not fond of spellchecking on the fly:
 
 ```lisp
-(add-hook 'text-mode-hook 'turn-off-flyspell t)
-(add-hook 'prog-mode-hook 'turn-off-flyspell t)
+(setq prelude-flyspell nil)
 ```
 
 ### Prelude Modules
@@ -247,7 +304,7 @@ current Emacs session or add the following snippet to your
 personal Emacs customization to enable them permanently:
 
 ```lisp
-(add-hook 'prog-mode-hook 'turn-off-guru-mode t)
+(setq prelude-guru nil)
 ```
 
 ### Windows compatibility

@@ -33,8 +33,29 @@
 ;;; Code:
 
 ;; customize
-(defgroup editor nil
-  "Emacs Prelude Editor enhancements"
+(defgroup prelude nil
+  "Emacs Prelude configuration."
+  :prefix "prelude-"
+  :group 'convenience)
+
+(defcustom prelude-auto-save t
+  "Non-nil values enable Prelude's auto save."
+  :type 'boolean
+  :group 'prelude)
+
+(defcustom prelude-guru t
+  "Non-nil values enable guru-mode"
+  :type 'boolean
+  :group 'prelude)
+
+(defcustom prelude-whitespace nil
+  "Non-nil values enable Prelude's whitespace visualization."
+  :type 'boolean
+  :group 'prelude)
+
+(defcustom prelude-flyspell t
+  "Non-nil values enable Prelude's flyspell support."
+  :type 'boolean
   :group 'prelude)
 
 ;; Death to the tabs!  However, tabs historically indent to the next
@@ -85,7 +106,7 @@
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 
 ;; saveplace remembers your location in a file when saving files
-(setq save-place-file (concat prelude-savefile-dir "saveplace"))
+(setq save-place-file (expand-file-name "saveplace" prelude-savefile-dir))
 ;; activate it for all buffers
 (setq-default save-place t)
 (require 'saveplace)
@@ -97,11 +118,11 @@
       ;; save every minute
       savehist-autosave-interval 60
       ;; keep the home clean
-      savehist-file (concat prelude-savefile-dir "savehist"))
+      savehist-file (expand-file-name "savehist" prelude-savefile-dir))
 (savehist-mode t)
 
 ;; save recent files
-(setq recentf-save-file (concat prelude-savefile-dir "recentf")
+(setq recentf-save-file (expand-file-name "recentf" prelude-savefile-dir)
       recentf-max-saved-items 200
       recentf-max-menu-items 15)
 (recentf-mode t)
@@ -120,18 +141,26 @@
 
 ;; automatically save buffers associated with files on buffer switch
 ;; and on windows switch
+(defun prelude-auto-save-command ()
+  (when (and prelude-auto-save
+             buffer-file-name
+             (buffer-modified-p (current-buffer)))
+    (save-buffer)))
+
 (defadvice switch-to-buffer (before save-buffer-now activate)
-  (when buffer-file-name (save-buffer)))
+  (prelude-auto-save-command))
 (defadvice other-window (before other-window-now activate)
-  (when buffer-file-name (save-buffer)))
+  (prelude-auto-save-command))
 (defadvice windmove-up (before other-window-now activate)
-  (when buffer-file-name (save-buffer)))
+  (prelude-auto-save-command))
 (defadvice windmove-down (before other-window-now activate)
-  (when buffer-file-name (save-buffer)))
+  (prelude-auto-save-command))
 (defadvice windmove-left (before other-window-now activate)
-  (when buffer-file-name (save-buffer)))
+  (prelude-auto-save-command))
 (defadvice windmove-right (before other-window-now activate)
-  (when buffer-file-name (save-buffer)))
+  (prelude-auto-save-command))
+
+(add-hook 'mouse-leave-buffer-hook 'prelude-auto-save-command)
 
 ;; show-paren-mode: subtle highlighting of matching parens (global-mode)
 (show-paren-mode +1)
@@ -172,7 +201,7 @@
       ido-create-new-buffer 'always
       ido-use-filename-at-point 'guess
       ido-max-prospects 10
-      ido-save-directory-list-file (concat prelude-savefile-dir "ido.hist")
+      ido-save-directory-list-file (expand-file-name "ido.hist" prelude-savefile-dir)
       ido-default-file-method 'selected-window)
 
 ;; auto-completion in minibuffer
@@ -185,8 +214,12 @@
       ispell-extra-args '("--sug-mode=ultra"))
 (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
 
-(add-hook 'message-mode-hook 'flyspell-mode)
-(add-hook 'text-mode-hook 'flyspell-mode)
+(defun prelude-enable-flyspell ()
+  (when (and prelude-flyspell (executable-find ispell-program-name))
+    (flyspell-mode +1)))
+
+(add-hook 'message-mode-hook 'prelude-enable-flyspell)
+(add-hook 'text-mode-hook 'prelude-enable-flyspell)
 
 ;; enable narrowing commands
 (put 'narrow-to-region 'disabled nil)
@@ -200,16 +233,18 @@
 (require 'expand-region)
 
 ;; bookmarks
-(setq bookmark-default-file (concat prelude-savefile-dir "bookmarks")
+(setq bookmark-default-file (expand-file-name "bookmarks" prelude-savefile-dir)
       bookmark-save-flag 1)
 
 ;; load yasnippet
-(require 'yasnippet)
-(add-to-list 'yas-snippet-dirs prelude-snippets-dir)
-(yas-global-mode 1)
+;(require 'yasnippet)
+;(add-to-list 'yas-snippet-dirs prelude-snippets-dir)
+;(add-to-list 'yas-snippet-dirs prelude-personal-snippets-dir)
+;(yas-global-mode 1)
 
 ;; projectile is a project management mode
 (require 'projectile)
+(setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
 (projectile-global-mode t)
 
 (require 'helm-misc)
@@ -218,16 +253,19 @@
 (defun helm-prelude ()
   "Preconfigured `helm'."
   (interactive)
-  (if (projectile-project-root)
-      ;; add project files and buffers when in project
-      (helm-other-buffer '(helm-c-source-projectile-files-list
-                           helm-c-source-projectile-buffers-list
-                           helm-c-source-buffers-list
-                           helm-c-source-recentf
-                           helm-c-source-buffer-not-found)
-                         "*helm prelude*")
-    ;; otherwise fallback to helm-mini
-    (helm-mini)))
+  (condition-case nil
+    (if (projectile-project-root)
+        ;; add project files and buffers when in project
+        (helm-other-buffer '(helm-c-source-projectile-files-list
+                             helm-c-source-projectile-buffers-list
+                             helm-c-source-buffers-list
+                             helm-c-source-recentf
+                             helm-c-source-buffer-not-found)
+                           "*helm prelude*")
+      ;; otherwise fallback to helm-mini
+      (helm-mini))
+    ;; fall back to helm mini if an error occurs (usually in projectile-project-root)
+    (error (helm-mini))))
 
 ;; shorter aliases for ack-and-a-half commands
 (defalias 'ack 'ack-and-a-half)
@@ -245,7 +283,8 @@
 (require 'midnight)
 
 ;; automatically indenting yanked text if in programming-modes
-(defvar yank-indent-modes '(python-mode LaTeX-mode TeX-mode)
+(defvar yank-indent-modes
+  '(clojure-mode scala-mode python-mode LaTeX-mode TeX-mode)
   "Modes in which to indent regions that are yanked (or yank-popped). Only
 modes that don't derive from `prog-mode' should be listed here.")
 
@@ -287,10 +326,10 @@ indent yanked text (with prefix arg don't indent)."
 (setq reb-re-syntax 'string)
 
 (require 'eshell)
-(setq eshell-directory-name (concat prelude-savefile-dir "/eshell/"))
+(setq eshell-directory-name (expand-file-name "eshell" prelude-savefile-dir))
 
 (setq semanticdb-default-save-directory
-      (concat prelude-savefile-dir "semanticdb"))
+      (expand-file-name "semanticdb" prelude-savefile-dir))
 
 ;; enable Prelude's keybindings
 (prelude-global-mode t)

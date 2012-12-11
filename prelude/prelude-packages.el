@@ -36,14 +36,16 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; set package-user-dir to be relative to Prelude install path
+(setq package-user-dir (expand-file-name "elpa" prelude-dir))
 (package-initialize)
 
 ;; required because of a package.el bug
 (setq url-http-attempt-keepalives nil)
 
 (defvar prelude-packages
-  '(ack-and-a-half expand-region gist guru-mode helm helm-projectile magit magithub melpa
-                   rainbow-mode volatile-highlights yasnippet zenburn-theme)
+  '(ack-and-a-half exec-path-from-shell expand-region gist guru-mode helm helm-projectile magit magithub melpa
+                   rainbow-mode volatile-highlights yasnippet solarized-theme zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
@@ -93,6 +95,7 @@
     ("\\.py\\'" python python-mode)
     ("\\.rb\\'" prelude-ruby ruby-mode)
     ("\\.sass\\'" sass-mode sass-mode)
+    ("\\.scala\\'" prelude-scala scala-mode)
     ("\\.scm\\'" prelude-scheme scheme-mode)
     ("\\.scss\\'" prelude-scss scss-mode)
     ("\\.xml\\'" prelude-xml nxml-mode)
