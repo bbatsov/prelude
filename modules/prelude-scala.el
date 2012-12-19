@@ -34,12 +34,11 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-ensure-module-deps '(scala-mode))
+(prelude-ensure-module-deps '(scala-mode2))
 
-(require 'scala-mode-auto)
+(require 'scala-mode2)
 
 (defun prelude-scala-mode-defaults ()
-  (run-hooks 'prelude-prog-mode-hook) ;; run manually; not derived from prog-mode
   (subword-mode +1))
 
 (setq prelude-scala-mode-hook 'prelude-scala-mode-defaults)
