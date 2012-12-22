@@ -32,18 +32,7 @@
 
 ;;; Code:
 
-(require 'cl)
 (require 'thingatpt)
-
-(defun prelude-add-subfolders-to-load-path (parent-dir)
-  "Adds all first level `parent-dir' subdirs to the
-Emacs load path."
-  (dolist (f (directory-files parent-dir))
-    (let ((name (expand-file-name f parent-dir)))
-      (when (and (file-directory-p name)
-                 (not (equal f ".."))
-                 (not (equal f ".")))
-        (add-to-list 'load-path name)))))
 
 (defun prelude-open-with ()
   "Simple function that allows us to open the underlying
@@ -171,11 +160,12 @@ there's a region, all lines that region covers will be duplicated."
         (exchange-point-and-mark))
     (setq end (line-end-position))
     (let ((region (buffer-substring-no-properties beg end)))
-      (dotimes (i arg)
-        (goto-char end)
-        (newline)
-        (insert region)
-        (setq end (point)))
+      (-dotimes arg
+                (lambda ()
+                  (goto-char end)
+                  (newline)
+                  (insert region)
+                  (setq end (point))))
       (goto-char (+ origin (* (length region) arg) arg)))))
 
 ;; TODO doesn't work with uniquify
@@ -279,8 +269,8 @@ there's a region, all lines that region covers will be duplicated."
   (interactive)
   (if (/= (count-windows) 2)
       (message "You need exactly 2 windows to do this.")
-    (let* ((w1 (first (window-list)))
-           (w2 (second (window-list)))
+    (let* ((w1 (car (window-list)))
+           (w2 (cadr (window-list)))
            (b1 (window-buffer w1))
            (b2 (window-buffer w2))
            (s1 (window-start w1))
@@ -294,9 +284,11 @@ there's a region, all lines that region covers will be duplicated."
 (defun prelude-kill-other-buffers ()
   "Kill all buffers but the current one. Doesn't mess with special buffers."
   (interactive)
-  (dolist (buffer (buffer-list))
-    (unless (or (eql buffer (current-buffer)) (not (buffer-file-name buffer)))
-      (kill-buffer buffer))))
+  (-each
+   (->> (buffer-list)
+     (-filter #'buffer-file-name)
+     (--remove (eql (current-buffer) it)))
+   #'kill-buffer))
 
 (require 'repeat)
 

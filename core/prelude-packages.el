@@ -32,7 +32,6 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(require 'cl)
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
@@ -49,9 +48,7 @@
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
-  (loop for p in prelude-packages
-        when (not (package-installed-p p)) do (return nil)
-        finally (return t)))
+  (-all? #'package-installed-p prelude-packages))
 
 (defun prelude-install-packages ()
   (unless (prelude-packages-installed-p)
@@ -60,9 +57,9 @@
     (package-refresh-contents)
     (message "%s" " done.")
     ;; install the missing packages
-    (dolist (p prelude-packages)
-      (unless (package-installed-p p)
-        (package-install p)))))
+    (-each
+     (-reject #'package-installed-p prelude-packages)
+     #'package-install)))
 
 (prelude-install-packages)
 
@@ -74,31 +71,24 @@
                                  (,mode)))))
 
 (defvar prelude-auto-install-alist
-  '(("\\.clj\\'" prelude-clojure clojure-mode)
-    ("\\.coffee\\'" prelude-coffee coffee-mode)
-    ("\\.css\\'" prelude-css css-mode)
-    ("\\.el\\'" prelude-emacs-lisp emacs-lisp-mode)
+  '(("\\.clj\\'" clojure-mode clojure-mode)
+    ("\\.coffee\\'" coffee-mode coffee-mode)
+    ("\\.css\\'" css-mode css-mode)
     ("\\.erl\\'" erlang erlang-mode)
     ("\\.feature\\'" feature-mode feature-mode)
     ("\\.groovy\\'" groovy-mode groovy-mode)
     ("\\.haml\\'" haml-mode haml-mode)
-    ("\\.hs\\'" prelude-haskell haskell-mode)
-    ("\\.js\\'" prelude-js js-mode)
-    ("\\.latex\\'" prelude-latex LaTeX-mode)
+    ("\\.hs\\'" haskell-mode haskell-mode)
+    ("\\.latex\\'" auctex LaTeX-mode)
     ("\\.less\\'" less-css-mode less-css-mode)
-    ("\\.lisp\\'" prelude-common-lisp lisp-mode)
     ("\\.lua\\'" lua-mode lua-mode)
     ("\\.markdown\\'" markdown-mode markdown-mode)
     ("\\.md\\'" markdown-mode markdown-mode)
     ("\\.php\\'" php-mode php-mode)
-    ("\\.pl\\'" prelude-perl cperl-mode)
     ("\\.py\\'" python python-mode)
-    ("\\.rb\\'" prelude-ruby ruby-mode)
     ("\\.sass\\'" sass-mode sass-mode)
-    ("\\.scala\\'" prelude-scala scala-mode)
-    ("\\.scm\\'" prelude-scheme scheme-mode)
-    ("\\.scss\\'" prelude-scss scss-mode)
-    ("\\.xml\\'" prelude-xml nxml-mode)
+    ("\\.scala\\'" scala-mode2 scala-mode)
+    ("\\.scss\\'" scss-mode scss-mode)
     ("\\.yml\\'" yaml-mode yaml-mode)))
 
 ;; markdown-mode doesn't have autoloads for the auto-mode-alist
@@ -107,12 +97,16 @@
   (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
   (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
 
-(dolist (entry prelude-auto-install-alist)
-  (let ((extension (first entry))
-        (package (second entry))
-        (mode (third entry)))
-    (unless (package-installed-p package)
-      (prelude-auto-install extension package mode))))
+(-each prelude-auto-install-alist
+  (lambda (entry)
+    (let ((extension (car entry))
+          (package (cadr entry))
+          (mode (cadr (cdr entry))))
+      (unless (package-installed-p package)
+        (prelude-auto-install extension package mode)))))
+
+(defun prelude-ensure-module-deps (packages)
+  (-each (-remove #'package-installed-p packages) #'package-install))
 
 (provide 'prelude-packages)
 ;;; prelude-packages.el ends here
