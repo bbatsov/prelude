@@ -1,13 +1,6 @@
 ;;; abizern.el --- Emacs Prelude: Personal settings
 ;;
 
-;; Remove flyspell and whitespace
-
-;;; Remove flyspell from hooks
-;(add-hook 'text-mode-hook 'turn-off-flyspell t)
-;(add-hook 'prog-mode-hook 'turn-off-flyspell t)
-;(add-hook 'message-mode-hook 'turn-off-flyspell t)
-
 ;; Turn on auto-fill in text modes
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'markdown-mode-hook 'turn-on-auto-fill)
@@ -123,6 +116,12 @@
 ;; Turn on ace-jump-mode
 (require 'ace-jump-mode)
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+;; Save point position between sessions
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file (expand-file-name ".places" user-emacs-directory))
+
 
 ;; Cursor settings
 (setq-default cursor-type 'bar)
