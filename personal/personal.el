@@ -129,4 +129,5 @@
 (set-cursor-color "gold1")
 
 ;; If I'm running emacs, then I want it to be a server
-(server-start)
+(unless (server-running-p)
+  (server-start))
