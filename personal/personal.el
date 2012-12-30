@@ -109,7 +109,6 @@
                   (setq indent-tabs-mode nil)
                   (setq c-indent-level 4))))
 
-
 ;; Tell gist to use curl
 (setq gist-use-curl t)
 
@@ -122,6 +121,11 @@
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 
+;; Let's try Solarized as the theme
+;;(load-theme 'solarized-dark t)
+
+;; Turn off flyspell - it gets in the way more than it helps
+(setq prelude-flyspell nil)
 
 ;; Cursor settings
 (setq-default cursor-type 'bar)
