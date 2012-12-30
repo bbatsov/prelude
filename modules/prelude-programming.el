@@ -78,8 +78,8 @@
                 (get-text-property 1 'org-imenu-marker symbol))))
         (unless (or (null position) (null name)
                     (string= (car imenu--rescan-item) name))
-          (add-to-list 'symbol-names name)
-          (add-to-list 'name-and-pos (cons name position))))))))
+          (add-to-list 'symbol-names (substring-no-properties name))
+          (add-to-list 'name-and-pos (cons (substring-no-properties name) position))))))))
 
 ;; add a shortcut for prelude-ido-goto-symbol
 (eval-after-load 'prelude-mode
@@ -115,11 +115,11 @@
   (when prelude-guru
     (guru-mode +1))
   (when prelude-whitespace
+    ;; keep the whitespace decent all the time (in this buffer)
+    (add-hook 'before-save-hook 'whitespace-cleanup nil t)
     (whitespace-mode +1))
   (prelude-local-comment-auto-fill)
-  (prelude-add-watchwords)
-  ;; keep the whitespace decent all the time (in this buffer)
-  (add-hook 'before-save-hook 'whitespace-cleanup nil t))
+  (prelude-add-watchwords))
 
 (setq prelude-prog-mode-hook 'prelude-prog-mode-defaults)
 
