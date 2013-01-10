@@ -13,7 +13,7 @@
  '(haskell-mode-hook (quote (turn-on-haskell-indent (lambda nil (run-hooks (quote prelude-haskell-mode-hook))))) t)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-tail-colors (quote (("#073642" . 0) ("#546E00" . 20) ("#00736F" . 30) ("#00629D" . 50) ("#7B6000" . 60) ("#8B2C02" . 70) ("#93115C" . 85) ("#073642" . 100))))
- '(org-agenda-files (quote ("~/Dropbox/Notes/batf/batf.org" "~/Dropbox/Notes/batf/contracting.org" "~/Dropbox/Notes/batf/personal.org")))
+ '(org-agenda-files (quote ("~/Dropbox/Notes/batf/batf.org" "~/Dropbox/Notes/batf/personal.org" "~/Dropbox/Notes/batf/contracting.org" "~/Dropbox/Notes/batf/open_source.org")))
  '(require-final-newline t)
  '(safe-local-variable-values (quote ((require-final-newline) (encoding . utf-8))))
  '(scroll-bar-mode nil)
