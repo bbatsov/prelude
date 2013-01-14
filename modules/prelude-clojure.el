@@ -1,12 +1,11 @@
 ;;; prelude-clojure.el --- Emacs Prelude: Clojure programming configuration.
 ;;
-;; Copyright (c) 2011-2012 Bozhidar Batsov
+;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://batsov.com/prelude
 ;; Version: 1.0.0
 ;; Keywords: convenience
-;; Package-Requires: ((prelude-lisp "1.0.0") (clojure-mode "1.11.5") (nrepl "0.1.4"))
 
 ;; This file is not part of GNU Emacs.
 
@@ -34,12 +33,13 @@
 ;;; Code:
 
 (require 'prelude-lisp)
-(prelude-ensure-module-deps '(clojure-mode nrepl))
+(prelude-ensure-module-deps '(clojure-mode clojure-test-mode nrepl))
 
 (eval-after-load 'clojure-mode
   '(progn
      (defun prelude-clojure-mode-defaults ()
        (subword-mode +1)
+       (clojure-test-mode +1)
        (run-hooks 'prelude-lisp-coding-hook))
 
      (setq prelude-clojure-mode-hook 'prelude-clojure-mode-defaults)

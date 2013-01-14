@@ -1,6 +1,6 @@
 ;;; prelude-org.el --- Emacs Prelude: org-mode configuration.
 ;;
-;; Copyright (c) 2011-2012 Bozhidar Batsov
+;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://batsov.com/emacs-prelude
@@ -38,12 +38,12 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 (setq org-log-done t)
 
-(defun prelude-org-mode-defaults ()
-  (electric-indent-mode -1))
+;; (defun prelude-org-mode-defaults ()
+;; )
 
-(setq prelude-org-mode-hook 'prelude-org-mode-defaults)
+;; (setq prelude-org-mode-hook 'prelude-org-mode-defaults)
 
-(add-hook 'org-mode-hook (lambda () (run-hooks 'prelude-org-mode-hook)))
+;; (add-hook 'org-mode-hook (lambda () (run-hooks 'prelude-org-mode-hook)))
 
 (provide 'prelude-org)
 

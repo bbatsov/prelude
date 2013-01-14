@@ -1,6 +1,9 @@
 *~
 *.elc
 auto-save-list
+recentf
+savehist
+saveplace
 eshell
 elpa
 el-get
@@ -8,7 +11,9 @@ semanticdb
 url
 ede-projects.el
 .DS_Store
+custom.el
 places
 .smex-items
 savefile/
+/prelude-modules.el
 .places

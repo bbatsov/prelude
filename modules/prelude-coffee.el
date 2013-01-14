@@ -1,12 +1,11 @@
 ;;; prelude-coffee.el --- Emacs Prelude: CoffeeScript programming support.
 ;;
-;; Copyright (c) 2011-2012 Bozhidar Batsov
+;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://batsov.com/emacs-prelude
 ;; Version: 1.0.0
 ;; Keywords: convenience
-;; Package-Requires: ((coffee-mode "0.4.0"))
 
 ;; This file is not part of GNU Emacs.
 
@@ -51,10 +50,6 @@
 
        ;; *Messages* spam
        (setq coffee-debug-mode t)
-
-       ;; electric-indent doesn't play nice with coffee-mode's "smart"
-       ;; indent
-       (electric-indent-mode -1)
 
        ;; Emacs key binding
        (define-key coffee-mode-map [(meta r)] 'coffee-compile-buffer)
