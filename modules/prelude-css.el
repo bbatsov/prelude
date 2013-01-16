@@ -1,12 +1,11 @@
 ;;; prelude-css.el --- Emacs Prelude: css support
 ;;
-;; Copyright (c) 2011-2012 Bozhidar Batsov
+;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://www.batsov.com/emacs-prelude
 ;; Version: 1.0.0
 ;; Keywords: convenience
-;; Package-Requires: ((rainbow-mode "0.2"))
 
 ;; This file is not part of GNU Emacs.
 

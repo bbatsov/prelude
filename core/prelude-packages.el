@@ -1,6 +1,6 @@
 ;;; prelude-packages.el --- Emacs Prelude: default package selection.
 ;;
-;; Copyright (c) 2011-2012 Bozhidar Batsov
+;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://batsov.com/emacs-prelude
@@ -43,8 +43,11 @@
 (setq url-http-attempt-keepalives nil)
 
 (defvar prelude-packages
-  '(ack-and-a-half elisp-slime-nav exec-path-from-shell expand-region gist guru-mode helm helm-projectile magit magithub melpa
-                   rainbow-mode volatile-highlights yasnippet solarized-theme zenburn-theme)
+  '(ace-jump-mode ack-and-a-half elisp-slime-nav exec-path-from-shell
+                  expand-region flycheck gist guru-mode helm helm-projectile
+                  magit magithub melpa
+                  rainbow-mode solarized-theme volatile-highlights yasnippet
+                  zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()

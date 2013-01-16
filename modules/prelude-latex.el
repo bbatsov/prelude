@@ -1,12 +1,11 @@
 ;;; prelude-latex.el --- Emacs Prelude: Sane setup for LaTeX writers.
 ;;
-;; Copyright (c) 2011-2012 Bozhidar Batsov
+;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://batsov.com/emacs-prelude
 ;; Version: 1.0.0
 ;; Keywords: convenience
-;; Package-Requires: ((auctex "11.86"))
 
 ;; This file is not part of GNU Emacs.
 
@@ -32,6 +31,8 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
+
+(prelude-ensure-module-deps '(auctex))
 
 ;; AUCTeX configuration
 (setq TeX-auto-save t)

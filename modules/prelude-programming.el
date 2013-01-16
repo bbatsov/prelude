@@ -1,12 +1,11 @@
 ;;; prelude-programming.el --- Emacs Prelude: prog-mode configuration
 ;;
-;; Copyright (c) 2011-2012 Bozhidar Batsov
+;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://batsov.com/emacs-prelude
 ;; Version: 1.0.0
 ;; Keywords: convenience
-;; Package-Requires: ((guru-mode "0.1"))
 
 ;; This file is not part of GNU Emacs.
 
@@ -32,6 +31,8 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
+
+(prelude-ensure-module-deps '(guru-mode))
 
 (defun prelude-ido-goto-symbol (&optional symbol-list)
   "Refresh imenu and jump to a place in the buffer using Ido."
@@ -95,6 +96,7 @@
 
 ;; show the name of the current function definition in the modeline
 (require 'which-func)
+(setq which-func-modes t)
 (which-function-mode 1)
 
 ;; in Emacs 24 programming major modes generally derive from a common
@@ -114,10 +116,8 @@
     (flyspell-prog-mode))
   (when prelude-guru
     (guru-mode +1))
-  (when prelude-whitespace
-    ;; keep the whitespace decent all the time (in this buffer)
-    (add-hook 'before-save-hook 'whitespace-cleanup nil t)
-    (whitespace-mode +1))
+  (prelude-enable-whitespace)
+  (flycheck-mode +1)
   (prelude-local-comment-auto-fill)
   (prelude-add-watchwords))
 

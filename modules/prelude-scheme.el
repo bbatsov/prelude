@@ -1,12 +1,11 @@
 ;;; prelude-scheme.el --- Emacs Prelude: Some defaults for Scheme.
 ;;
-;; Copyright (c) 2011-2012 Bozhidar Batsov
+;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://batsov.com/emacs-prelude
 ;; Version: 1.0.0
 ;; Keywords: convenience
-;; Package-Requires: ((prelude-lisp "1.0.0"))
 
 ;; This file is not part of GNU Emacs.
 
