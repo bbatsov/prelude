@@ -52,8 +52,11 @@ file of a buffer in an external program."
 (defun prelude-visit-term-buffer ()
   (interactive)
   (if (not (get-buffer "*ansi-term*"))
-      (ansi-term (getenv "SHELL"))
-    (switch-to-buffer "*ansi-term*")))
+      (progn
+        (split-window-sensibly (selected-window))
+        (other-window 1)
+        (ansi-term (getenv "SHELL")))
+    (switch-to-buffer-other-window "*ansi-term*")))
 
 (defun prelude-google ()
   "Googles a query or region if any."
@@ -161,7 +164,7 @@ there's a region, all lines that region covers will be duplicated."
     (setq end (line-end-position))
     (let ((region (buffer-substring-no-properties beg end)))
       (-dotimes arg
-                (lambda ()
+                (lambda (n)
                   (goto-char end)
                   (newline)
                   (insert region)
@@ -336,6 +339,8 @@ and so on."
 
 (defun prelude-tip-of-the-day ()
   (interactive)
+  ;; pick a new random seed
+  (random t)
   (message
    (concat "Prelude tip: " (nth (random (length prelude-tips)) prelude-tips))))
 

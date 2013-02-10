@@ -82,7 +82,7 @@ $ wget --no-check-certificate https://github.com/bbatsov/prelude/raw/master/util
 ```bash
 $ git clone git://github.com/bbatsov/prelude.git path/to/local/repo
 $ ln -s path/to/local/repo ~/.emacs.d
-$ cd ~/emacs.d
+$ cd ~/.emacs.d
 ```
 
 You'd do well to replace `~/.emacs.d` with the value of
@@ -293,7 +293,7 @@ system. You can install `aspell` and the dictionary on OS X with
 `homebrew` like this:
 
 ```bash
-$ brew install aspell --lang=en
+$ brew install aspell --with-lang=en
 ```
 
 On Linux distros - just use your distro's package manager.
