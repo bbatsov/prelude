@@ -3,7 +3,7 @@
 (exec-path-from-shell-initialize)
 
 ;; It's all in the Meta
-(setq mac-command-modifier 'meta)
+;;(setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'meta)
 
 (defun prelude-swap-meta-and-super ()
