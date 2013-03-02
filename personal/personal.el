@@ -1,5 +1,9 @@
 ;;; abizern.el --- Emacs Prelude: Personal settings
 ;;
+;;; Commentary:
+;; Personal settings to augment those of Prelude
+
+;;; Code:
 
 ;; Turn on auto-fill in text modes
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -112,9 +116,8 @@
 ;; Tell gist to use curl
 (setq gist-use-curl t)
 
-;; Turn on ace-jump-mode
-(require 'ace-jump-mode)
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+;; Give me back my command key
+(setq mac-command-modifier 'super)
 
 ;; Save point position between sessions
 (require 'saveplace)
