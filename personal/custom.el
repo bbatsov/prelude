@@ -18,7 +18,6 @@
  '(safe-local-variable-values (quote ((require-final-newline) (encoding . utf-8))))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
- '(tool-bar-mode nil)
  '(visible-bell t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
