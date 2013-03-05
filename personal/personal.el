@@ -66,6 +66,11 @@
 ;;;; Keep track of when a TODO item is finished
 (setq org-log-done 'time)
 
+;;; recentf
+(setq recentf-max-menu-items 25)
+(global-set-key (kbd "C-c C-r") 'recentf-open-files)
+
+
 ;; YASnippet
 
 ;;; Remove binding of <tab> key from Markdown cycle
