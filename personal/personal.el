@@ -10,7 +10,7 @@
 (add-hook 'markdown-mode-hook 'turn-on-auto-fill)
 
 ;; Set Menlo 12 as my default font
-(set-default-font "-apple-Menlo-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
+(set-frame-font "-apple-Menlo-medium-normal-normal-*-12-*-*-*-m-0-iso10646-1")
 (modify-frame-parameters nil '((wait-for-wm . nil)))
 
 ;; Set up what my default browser is
