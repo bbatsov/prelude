@@ -3,7 +3,7 @@
 ;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
-;; URL: http://batsov.com/emacs-prelude
+;; URL: https://github.com/bbatsov/prelude
 ;; Version: 1.0.0
 ;; Keywords: convenience
 
@@ -33,9 +33,8 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-ensure-module-deps '(ruby-tools inf-ruby yari ruby-end ruby-block))
+(prelude-ensure-module-deps '(ruby-tools inf-ruby yari ruby-end))
 
-(require 'ruby-block)
 ;; Rake files are ruby, too, as are gemspecs, rackup files, and gemfiles.
 (add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile\\'" . ruby-mode))
@@ -59,7 +58,6 @@
        (inf-ruby-setup-keybindings)
        ;; turn off the annoying input echo in irb
        (setq comint-process-echoes t)
-       (ruby-block-mode t)
        (ruby-end-mode +1)
        (ruby-tools-mode +1)
        ;; CamelCase aware editing operations

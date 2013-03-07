@@ -3,7 +3,7 @@
 ;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
-;; URL: http://batsov.com/emacs-prelude
+;; URL: https://github.com/bbatsov/prelude
 ;; Version: 1.0.0
 ;; Keywords: convenience
 
@@ -40,7 +40,7 @@
 (package-initialize)
 
 (defvar prelude-packages
-  '(ace-jump-mode ack-and-a-half elisp-slime-nav exec-path-from-shell
+  '(ace-jump-mode ack-and-a-half diminish elisp-slime-nav exec-path-from-shell
                   expand-region flycheck gist
                   git-commit-mode gitconfig-mode gitignore-mode
                   guru-mode helm helm-projectile
