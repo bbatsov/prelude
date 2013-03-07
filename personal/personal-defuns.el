@@ -3,13 +3,13 @@
 ;; I might want to shift this into a minor mode when I learn how to do that.
 ;;
 ;;; Commentary:
-;; Convenience defuns that I sue myself
+;; Convenience defuns that I use myself
 
 ;;; Code:
 
 ;; Shortcut C-S-return
 (defun newline-previous ()
-  "Insert a blank line above the cursor and move the cursor up one line."
+  "Insert a blank line above the current line and move the point to it."
   (interactive)
   (beginning-of-line)
   (newline)
