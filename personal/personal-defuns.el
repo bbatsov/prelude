@@ -23,5 +23,15 @@
   (end-of-line)
   (newline-and-indent))
 
+;; Show line numbers only when moving by line
+(defun goto-line-with-feedback ()
+  "Show line numbers temporarily, while prompting for the line number input."
+  (interactive)
+  (unwind-protect
+      (progn
+        (linum-mode 1)
+        (call-interactively 'goto-line))
+    (linum-mode -1)))
+
 (provide 'personal-defuns)
 ;;; personal-defuns.el ends here

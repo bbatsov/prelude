@@ -70,6 +70,9 @@
 (setq recentf-max-menu-items 25)
 (global-set-key (kbd "C-c C-r") 'recentf-open-files)
 
+;;; Movement by line
+;;;; Remaps goto-line so that line numbers are turned on only when needed.
+(global-set-key [remap goto-line] 'goto-line-with-feedback)
 
 ;; YASnippet
 
