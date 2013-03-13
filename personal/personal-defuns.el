@@ -13,7 +13,7 @@
   (interactive)
   (beginning-of-line)
   (newline)
-  (previous-line)
+  (forward-line -1)
   (indent-according-to-mode))
 
 ;; Shortcut C-return
