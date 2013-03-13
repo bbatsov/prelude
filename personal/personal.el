@@ -74,6 +74,12 @@
 ;;;; Remaps goto-line so that line numbers are turned on only when needed.
 (global-set-key [remap goto-line] 'goto-line-with-feedback)
 
+;;; Join the next line to this one
+(global-set-key (kbd "M-j")
+                (lambda ()
+                  (interactive)
+                  (join-line -1)))
+
 ;; YASnippet
 
 ;;; Remove binding of <tab> key from Markdown cycle
