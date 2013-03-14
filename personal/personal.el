@@ -17,13 +17,17 @@
 (setq browse-url-browser-function 'browse-url-default-macosx-browser)
 
 ;; Load my paths so that eshell knows what I can do
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell
-         (replace-regexp-in-string "[[:space:]\n]*$" ""
-                                   (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-(when (equal system-type 'darwin) (set-exec-path-from-shell-PATH))
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
+;;; This is the old way.
+;; (defun set-exec-path-from-shell-PATH ()
+;;   (let ((path-from-shell
+;;          (replace-regexp-in-string "[[:space:]\n]*$" ""
+;;                                    (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
+;;     (setenv "PATH" path-from-shell)
+;;     (setq exec-path (split-string path-from-shell path-separator))))
+;; (when (equal system-type 'darwin) (set-exec-path-from-shell-PATH))
 
 ;; Make sure there is a final newline
 (setq-default require-final-newline t)
