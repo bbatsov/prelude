@@ -37,6 +37,9 @@
 ;; But it would be nice to autoflow long paragraphs
 (setq-default fill-column 80)
 
+;; Turn off whitespace mode
+(setq prelude-whitespace nil)
+
 ;;; Set up for working with Ruby
 
 ;; Set file modes
