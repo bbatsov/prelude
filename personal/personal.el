@@ -20,15 +20,6 @@
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
-;;; This is the old way.
-;; (defun set-exec-path-from-shell-PATH ()
-;;   (let ((path-from-shell
-;;          (replace-regexp-in-string "[[:space:]\n]*$" ""
-;;                                    (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
-;;     (setenv "PATH" path-from-shell)
-;;     (setq exec-path (split-string path-from-shell path-separator))))
-;; (when (equal system-type 'darwin) (set-exec-path-from-shell-PATH))
-
 ;; Make sure there is a final newline
 (setq-default require-final-newline t)
 
@@ -86,6 +77,28 @@
                 (lambda ()
                   (interactive)
                   (join-line -1)))
+
+;;; Move more quickly
+;;;; move about in steps of 5 with C-S insteard of just C-
+(global-set-key (kbd "C-S-n")
+                (lambda ()
+                  (interactive)
+                  (ignore-errors (forward-line 5))))
+
+(global-set-key (kbd "C-S-p")
+                (lambda ()
+                  (interactive)
+                  (ignore-errors (forward-line -5))))
+
+(global-set-key (kbd "C-S-f")
+                (lambda ()
+                  (interactive)
+                  (ignore-errors (forward-char 5))))
+
+(global-set-key (kbd "C-S-b")
+                (lambda ()
+                  (interactive)
+                  (ignore-errors (backward-char 5))))
 
 ;; YASnippet
 
