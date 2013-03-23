@@ -40,13 +40,13 @@
 (package-initialize)
 
 (defvar prelude-packages
-  '(ace-jump-mode ack-and-a-half diminish elisp-slime-nav exec-path-from-shell
-                  expand-region flycheck gist
-                  git-commit-mode gitconfig-mode gitignore-mode
-                  guru-mode helm helm-projectile
-                  magit magithub melpa
-                  rainbow-mode solarized-theme undo-tree
-                  volatile-highlights yasnippet zenburn-theme)
+  '(ace-jump-mode ack-and-a-half diminish elisp-slime-nav
+    expand-region flycheck gist
+    git-commit-mode gitconfig-mode gitignore-mode
+    guru-mode helm helm-projectile
+    magit melpa
+    rainbow-mode solarized-theme undo-tree
+    volatile-highlights yasnippet zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
