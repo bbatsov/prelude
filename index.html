@@ -4,45 +4,51 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Prelude by bbatsov</title>
-
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
-    <div class="wrapper">
+
       <header>
-        <h1 class="header">Prelude</h1>
-        <p class="header">Prelude is an enhanced Emacs configuration that should make your experience with Emacs both more pleasant and more powerful.</p>
-
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/bbatsov/prelude/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/bbatsov/prelude/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/bbatsov/prelude">View On GitHub</a></li>
-        </ul>
-
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/bbatsov">bbatsov</a></p>
-
-
+        <h1>Prelude</h1>
+        <p>Prelude is an enhanced Emacs configuration that should make your experience with Emacs both more pleasant and more powerful.</p>
       </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/bbatsov/prelude" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/bbatsov/prelude/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/bbatsov/prelude/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
       <section>
         <h1>Emacs Prelude</h1>
 
-<p>Emacs is probably the best text editor in the world. However, the
-process of coming up with a useful Emacs configuration is long and
-difficult. It's this process that separates you from truly taking
-advantage of Emacs's power. I like to refer to this process as the
-<strong>Prelude</strong>. <strong>Emacs Prelude</strong> has the goal to ease the initial Emacs
-setup process and to provide you with a much more powerful and
-productive experience than the one you get out of the box. By using
-<strong>Emacs Prelude</strong> you're basically getting a <em>"Get me out of the
-Prelude, I just want to use Emacs"</em> card.</p>
+<p>Prelude is an Emacs distribution that aims to enhance the default
+Emacs experience.  Prelude alters a lot of the default settings,
+bundles a plethora of additional packages and adds its own core
+library to the mix. The final product offers an easy to use Emacs
+configuration for Emacs newcomers and lots of additional power for
+Emacs power users.</p>
 
-<p>Emacs Prelude is compatible <strong>ONLY with GNU Emacs 24.x</strong>. </p>
+<p>Prelude is compatible <strong>ONLY with GNU Emacs 24.x</strong>.</p>
 
 <h2>Fast Forward</h2>
 
@@ -57,8 +63,8 @@ following command:</p>
 <p>You can now power up your Emacs, sit back and enjoy Prelude,
 forgetting about the rest of this manual.</p>
 
-<p>There are two environment variables you can use to control the 
-source repository and the installation directory. To change the 
+<p>There are two environment variables you can use to control the
+source repository and the installation directory. To change the
 installation directory:</p>
 
 <div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">PRELUDE_INSTALL_DIR</span><span class="o">=</span><span class="s2">"$HOME/.emacs.d"</span> <span class="o">&amp;&amp;</span> curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
@@ -74,12 +80,8 @@ installation directory:</p>
 you're doing a manual install make sure you don't have a <code>.emacs</code> file
 or back up your existing <code>.emacs.d</code> directory manually.</p>
 
-<h2>More goodies</h2>
-
-<p>The <a href="https://github.com/bbatsov/prelude-modules">Prelude Modules</a>
-project contains a lot of additional packages for Prelude
-(install-able via the <code>package-list-packages</code> command) - enhanced programming
-mode configs, latex config, erc config, etc.</p>
+<p>Don't forget to adjust your <code>prelude-modules.el</code> file once the installation is done.
+By default most of the modules that ship with Prelude are not loaded.</p>
 
 <h2>Installing Emacs 24</h2>
 
@@ -111,12 +113,64 @@ first. Have a look at the <a href="http://wikemacs.org/wiki/Installing_Emacs">Wi
 
 <div class="highlight"><pre><span class="nv">$ </span>git clone git://github.com/bbatsov/prelude.git path/to/local/repo
 <span class="nv">$ </span>ln -s path/to/local/repo ~/.emacs.d
-<span class="nv">$ </span><span class="nb">cd</span> ~/emacs.d
+<span class="nv">$ </span><span class="nb">cd</span> ~/.emacs.d
 </pre></div>
 
 <p>You'd do well to replace <code>~/.emacs.d</code> with the value of
 <code>user-emacs-directory</code> for your OS. You can check the value by doing
 <code>C-h v user-emacs-directory</code> inside Emacs.</p>
+
+<h2>Updating Prelude</h2>
+
+<p>The update procedure is fairly straightforward:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>path/to/prelude/installation
+<span class="nv">$ </span>git pull
+</pre></div>
+
+<p>The <code>path/to/prelude/installation</code> is usually <code>~/.emacs.d</code> (at least
+on Unix systems).</p>
+
+<p>Alternatively you can run <kbd>M-x prelude-update</kbd> from Emacs itself.</p>
+
+<p>It's generally a good idea to stop Emacs before you do the update. The
+next time Prelude starts it will install any new dependencies (if
+there are such).</p>
+
+<h2>Enabling additional modules</h2>
+
+<p>By default most of the modules that ship with Prelude are not loaded.</p>
+
+<div class="highlight"><pre><span class="c1">;;; Uncomment the modules you'd like to use and restart Prelude afterwards</span>
+
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'prelude-c</span><span class="p">)</span>
+<span class="c1">;; (require 'prelude-clojure)</span>
+<span class="c1">;; (require 'prelude-coffee)</span>
+<span class="c1">;; (require 'prelude-common-lisp)</span>
+<span class="c1">;; (require 'prelude-css)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'prelude-emacs-lisp</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'prelude-erc</span><span class="p">)</span>
+<span class="c1">;; (require 'prelude-erlang)</span>
+<span class="c1">;; (require 'prelude-haskell)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'prelude-js</span><span class="p">)</span>
+<span class="c1">;; (require 'prelude-latex)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'prelude-lisp</span><span class="p">)</span>
+<span class="c1">;; (require 'prelude-markdown)</span>
+<span class="c1">;; (require 'prelude-mediawiki)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'prelude-org</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'prelude-perl</span><span class="p">)</span>
+<span class="c1">;; (require 'prelude-python)</span>
+<span class="c1">;; (require 'prelude-ruby)</span>
+<span class="c1">;; (require 'prelude-scala)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'prelude-scheme</span><span class="p">)</span>
+<span class="c1">;; (require 'prelude-scss)</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">'prelude-xml</span><span class="p">)</span>
+</pre></div>
+
+<p>You'll need to adjust your <code>prelude-modules.el</code> file once the installation is done.</p>
+
+<p>After you've uncommented a module you should either restart Emacs or evaluate the module
+<code>require</code> expression with <kbd>C-x C-e</kbd>.</p>
 
 <h2>Running</h2>
 
@@ -159,124 +213,224 @@ extensions to keybindings.</p>
 
 <h4>Global</h4>
 
-<ul>
-<li>
-<code>C-M-h</code> - <code>backward-kill-word</code> (as in Bash/Zsh)</li>
-<li>
-<code>C-x \</code> - <code>align-regexp</code>
-</li>
-<li>
-<code>C-+</code> - <code>text-scale-increase</code>
-</li>
-<li>
-<code>C--</code> - <code>text-scale-decrease</code>
-</li>
-<li>
-<code>C-x O</code> - return you to the previous window (the inverse of <code>other-window</code> (<code>C-x o</code>))</li>
-<li>
-<code>C-x ^</code> - <code>join-line</code>
-</li>
-<li>
-<code>C-x p</code> - <code>proced</code> (manage processes form Emacs, works only in Linux)</li>
-<li>
-<code>C-x m</code> - start eshell</li>
-<li>
-<code>C-x M-m</code> - start your default shell</li>
-<li>
-<code>C-x C-m</code> - sames as <code>M-x</code>
-</li>
-<li>
-<code>C-h A</code> - <code>apropos</code> (search in all Emacs symbols)</li>
-<li>
-<code>M-\</code> - <code>hippie-expand</code> (a replacement for the default <code>dabbrev-expand</code>)</li>
-<li>
-<code>C-x C-b</code> - <code>ibuffer</code> (a replacement for the default <code>buffer-list</code>)</li>
-<li>
-<code>F12</code> - toggle the Emacs menu bar</li>
-<li>
-<code>C-x g</code> - open Magit's status buffer</li>
-<li>
-<code>C-=</code> - <code>expand-region</code> (incremental text selection)</li>
-</ul><h4>Prelude Mode</h4>
+<table>
+<tr>
+<th>Keybinding</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><kbd>C-M-h</kbd></td>
+<td>Kill the previous word(<code>backward-kill-word</code>). (as in Bash/Zsh)</td>
+</tr>
+<tr>
+<td><kbd>C-x &lt;/kbd&gt;</kbd></td>
+<td><code>align-regexp</code></td>
+</tr>
+<tr>
+<td><kbd>C-+</kbd></td>
+<td>Increase font size(<code>text-scale-increase</code>).</td>
+</tr>
+<tr>
+<td><kbd>C--</kbd></td>
+<td>Decrease font size(<code>text-scale-decrease</code>).</td>
+</tr>
+<tr>
+<td><kbd>C-x O</kbd></td>
+<td>Go back to previous window (the inverse of <code>other-window</code> (<code>C-x o</code>)).</td>
+</tr>
+<tr>
+<td><kbd>C-x ^</kbd></td>
+<td>Join two lines into one(<code>join-line</code>).</td>
+</tr>
+<tr>
+<td><kbd>C-x p</kbd></td>
+<td>Start <code>proced</code> (manage processes form Emacs, works only in Linux).</td>
+</tr>
+<tr>
+<td><kbd>C-x m</kbd></td>
+<td>Start <code>eshell</code>.</td>
+</tr>
+<tr>
+<td><kbd>C-x M-m</kbd></td>
+<td>Start your default shell.</td>
+</tr>
+<tr>
+<td><kbd>C-x C-m</kbd></td>
+<td>Alias for <code>M-x</code>.</td>
+</tr>
+<tr>
+<td><kbd>C-h A</kbd></td>
+<td>Run <code>apropos</code> (search in all Emacs symbols).</td>
+</tr>
+<tr>
+<td><kbd>M-&lt;/kbd&gt;</kbd></td>
+<td>Run <code>hippie-expand</code> (a replacement for the default <code>dabbrev-expand</code>).</td>
+</tr>
+<tr>
+<td><kbd>C-x C-b</kbd></td>
+<td>Open <code>ibuffer</code> (a replacement for the default <code>buffer-list</code>).</td>
+</tr>
+<tr>
+<td><kbd>F12</kbd></td>
+<td>Toggle the Emacs menu bar.</td>
+</tr>
+<tr>
+<td><kbd>C-x g</kbd></td>
+<td>Open Magit's status buffer.</td>
+</tr>
+<tr>
+<td><kbd>C-=</kbd></td>
+<td>Run <code>expand-region</code> (incremental text selection).</td>
+</tr>
+</table><h4>Prelude Mode</h4>
 
-<ul>
-<li>
-<code>C-c o</code> - open the currently visited file with external program</li>
-<li>
-<code>C-c g</code> - search in Google for the thing under point (or an interactive query)</li>
-<li>
-<code>shift+return</code> - insert an empty line and indent it properly (as in most IDEs)</li>
-<li>
-<code>control+shift+up</code> - move the current line up</li>
-<li>
-<code>control+shift+down</code> - move the current line down</li>
-<li>
-<code>C-c n</code> - fix indentation in buffer and strip whitespace</li>
-<li>
-<code>C-c f</code> - open recently visitted file</li>
-<li>
-<code>C-M-\</code> - indent region (if selected) or the entire buffer</li>
-<li>
-<code>C-c u</code> - open URL in your default browser</li>
-<li>
-<code>C-c e</code> - eval a bit of Emacs Lisp code and replace it with its result</li>
-<li>
-<code>C-c s</code> - swap two active windows</li>
-<li>
-<code>C-c d</code> - duplicate the current line (or region)</li>
-<li>
-<code>C-c r</code> - rename the currently visited file and buffer</li>
-<li>
-<code>C-c t</code> - open a terminal emulator (<code>ansi-term</code>)</li>
-<li>
-<code>C-c k</code> - kill all open buffers except the one you're currently in</li>
-<li>
-<code>C-c h</code> - open Helm (a useful means of navigating your buffers and project files)</li>
-</ul><h4>Projectile</h4>
+<table>
+<tr>
+<th>Keybinding</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><kbd>C-c o</kbd></td>
+<td>Open the currently visited file with an external program.</td>
+</tr>
+<tr>
+<td><kbd>C-c g</kbd></td>
+<td>Search in Google for the thing under point (or an interactive query).</td>
+</tr>
+<tr>
+<td><kbd>S-RET</kbd></td>
+<td>Insert an empty line and indent it properly (as in most IDEs).</td>
+</tr>
+<tr>
+<td><kbd>C-S-up</kbd></td>
+<td>Move the current line up.</td>
+</tr>
+<tr>
+<td><kbd>C-S-down</kbd></td>
+<td>Move the current line down.</td>
+</tr>
+<tr>
+<td><kbd>C-c n</kbd></td>
+<td>Fix indentation in buffer and strip whitespace.</td>
+</tr>
+<tr>
+<td><kbd>C-c f</kbd></td>
+<td>Open recently visitted file.</td>
+</tr>
+<tr>
+<td><kbd>C-M-&lt;/kbd&gt;</kbd></td>
+<td>Indent region (if selected) or the entire buffer.</td>
+</tr>
+<tr>
+<td><kbd>C-c u</kbd></td>
+<td>Open URL in your default browser.</td>
+</tr>
+<tr>
+<td><kbd>C-c e</kbd></td>
+<td>Eval a bit of Emacs Lisp code and replace it with its result.</td>
+</tr>
+<tr>
+<td><kbd>C-c s</kbd></td>
+<td>Swap two active windows.</td>
+</tr>
+<tr>
+<td><kbd>C-c d</kbd></td>
+<td>Duplicate the current line (or region).</td>
+</tr>
+<tr>
+<td><kbd>C-c r</kbd></td>
+<td>Rename the currently visited file and buffer.</td>
+</tr>
+<tr>
+<td><kbd>C-c t</kbd></td>
+<td>Open a terminal emulator (<code>ansi-term</code>).</td>
+</tr>
+<tr>
+<td><kbd>C-c k</kbd></td>
+<td>Kill all open buffers except the one you're currently in.</td>
+</tr>
+<tr>
+<td><kbd>C-c h</kbd></td>
+<td>Open Helm (a useful means of navigating your buffers and project files).</td>
+</tr>
+</table><h4>Projectile</h4>
 
-<p>Here's a list of the interactive Emacs Lisp functions, provided by projectile:</p>
+<p>Here's a list of functionality provided by <a href="https://github.com/bbatsov/prelude">Projectile</a>:</p>
 
-<ul>
-<li>
-<code>projectile-find-file</code> <kbd>C-c p f</kbd>
-</li>
-<li>
-<code>projectile-grep</code> <kbd>C-c p g</kbd>
-</li>
-<li>
-<code>projectile-switch-to-buffer</code> <kbd>C-c p b</kbd>
-</li>
-<li>
-<code>projectile-multi-occur</code> <kbd>C-c p o</kbd>
-</li>
-<li>
-<code>projectile-replace</code> <kbd>C-c p r</kbd>
-</li>
-<li>
-<code>projectile-invalidate-cache</code> <kbd>C-c p i</kbd>
-</li>
-<li>
-<code>projectile-regenerate-tags</code> <kbd>C-c p t</kbd>
-</li>
-<li>
-<code>projectile-kill-buffers</code> <kbd>C-c p k</kbd>
-</li>
-<li>
-<code>projectile-dired</code> <kbd>C-c p d</kbd>
-</li>
-<li>
-<code>projectile-recentf</code> <kbd>C-c p e</kbd>
-</li>
-<li>
-<code>projectile-ack</code> <kbd>C-c p a</kbd>
-</li>
-<li>
-<code>projectile-compile-project</code> <kbd>C-c p l</kbd>
-</li>
-<li>
-<code>projectile-test-project</code> <kbd>C-c p p</kbd>
-</li>
-</ul><h3>Automatic package installation</h3>
+<table>
+<tr>
+<th>Keybinding</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><kbd>C-c p f</kbd></td>
+<td>Display a list of all files in the project. With a prefix argument it will clear the cache first.</td>
+</tr>
+<tr>
+<td><kbd>C-c p T</kbd></td>
+<td>Display a list of all test files(specs, features, etc) in the project.</td>
+</tr>
+<tr>
+<td><kbd>C-c p g</kbd></td>
+<td>Run grep on the files in the project.</td>
+</tr>
+<tr>
+<td><kbd>C-c p b</kbd></td>
+<td>Display a list of all project buffers currently open.</td>
+</tr>
+<tr>
+<td><kbd>C-c p o</kbd></td>
+<td>Runs <code>multi-occur</code> on all project buffers currently open.</td>
+</tr>
+<tr>
+<td><kbd>C-c p r</kbd></td>
+<td>Runs interactive query-replace on all files in the projects.</td>
+</tr>
+<tr>
+<td><kbd>C-c p i</kbd></td>
+<td>Invalidates the project cache (if existing).</td>
+</tr>
+<tr>
+<td><kbd>C-c p R</kbd></td>
+<td>Regenerates the projects <code>TAGS</code> file.</td>
+</tr>
+<tr>
+<td><kbd>C-c p k</kbd></td>
+<td>Kills all project buffers.</td>
+</tr>
+<tr>
+<td><kbd>C-c p d</kbd></td>
+<td>Opens the root of the project in <code>dired</code>.</td>
+</tr>
+<tr>
+<td><kbd>C-c p e</kbd></td>
+<td>Shows a list of recently visited project files.</td>
+</tr>
+<tr>
+<td><kbd>C-c p a</kbd></td>
+<td>Runs <code>ack</code> on the project. Requires the presence of <code>ack-and-a-half</code>.</td>
+</tr>
+<tr>
+<td><kbd>C-c p l</kbd></td>
+<td>Runs a standard compilation command for your type of project.</td>
+</tr>
+<tr>
+<td><kbd>C-c p p</kbd></td>
+<td>Runs a standard test command for your type of project.</td>
+</tr>
+<tr>
+<td><kbd>C-c p z</kbd></td>
+<td>Adds the currently visited to the cache.</td>
+</tr>
+<tr>
+<td><kbd>C-c p s</kbd></td>
+<td>Display a list of known projects you can switch to.</td>
+</tr>
+</table><p>If you ever forget any of Projectile's keybindings just do a:</p>
+
+<p><kbd>C-c p C-h</kbd></p>
+
+<h3>Automatic package installation</h3>
 
 <p>The default Prelude installation comes with a bare minimum of
 functionality. It will however install add-ons for various programming
@@ -318,14 +472,31 @@ line:</p>
 <p>Fork the official Prelude repo and add your own touch to it. You're advised to avoid changing stuff outside of the
 personal folder to avoid having to deal with git merge conflicts in the future.</p>
 
-<h4>Enabling whitespace-mode</h4>
+<p>If you'd like to add some auto installation of packages in your
+personal config use the following code:</p>
 
-<p>Although <code>whitespace-mode</code> is awesome some people find it too
-intrusive so it's disabled by default. You can enable it in your
+<div class="highlight"><pre><span class="p">(</span><span class="nv">prelude-ensure-module-deps</span> <span class="o">'</span><span class="p">(</span><span class="nv">some-package</span> <span class="nv">some-other-package</span><span class="p">))</span>
+</pre></div>
+
+<h4>Disabling whitespace-mode</h4>
+
+<p>Although <code>whitespace-mode</code> is awesome some people might find it too
+intrusive. You can disable it in your
 personal config with the following bit of code:</p>
 
-<div class="highlight"><pre><span class="p">(</span><span class="k">setq</span> <span class="nv">prelude-whitespace</span> <span class="no">t</span><span class="p">)</span>
+<div class="highlight"><pre><span class="p">(</span><span class="k">setq</span> <span class="nv">prelude-whitespace</span> <span class="no">nil</span><span class="p">)</span>
 </pre></div>
+
+<p>If you like <code>whitespace-mode</code> but prefer it to not automatically
+cleanup your file on save, you can disable that behavior by setting
+prelude-clean-whitespace-on-save to nil in your config file with:</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="k">setq</span> <span class="nv">prelude-clean-whitespace-on-save</span> <span class="no">nil</span><span class="p">)</span>
+</pre></div>
+
+<p>The prelude-clean-whitespace-on-save setting can also be set on a
+per-file or directory basis by using a file variable or a
+.dir-locals.el file.</p>
 
 <h4>Disable flyspell-mode</h4>
 
@@ -344,7 +515,7 @@ on the presence of the <code>aspell</code> program and an <code>en</code> dictio
 system. You can install <code>aspell</code> and the dictionary on OS X with
 <code>homebrew</code> like this:</p>
 
-<div class="highlight"><pre><span class="nv">$ </span>brew install aspell --lang<span class="o">=</span>en
+<div class="highlight"><pre><span class="nv">$ </span>brew install aspell --with-lang<span class="o">=</span>en
 </pre></div>
 
 <p>On Linux distros - just use your distro's package manager.</p>
@@ -363,7 +534,7 @@ GUI version) try adding this to your <code>.bashrc</code> or <code>.zshrc</code>
 
 <p>If you get some http connection error related to the MELPA repo
 just do a manual <code>M-x package-refresh-contents</code> and restart Emacs
-afterwards. </p>
+afterwards.</p>
 
 <h3>No arrow navigation in editor buffers</h3>
 
@@ -417,15 +588,15 @@ development of Emacs Prelude.</p>
 <p>Bug reports and suggestions for improvements are always
 welcome. GitHub pull requests are even better! :-)</p>
 
-<p>Cheers,<br>
-Bozhidar</p>
+<p>Cheers,<br><a href="https://twitter.com/bbatsov">Bozhidar</a></p>
       </section>
       <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+        <p>Project maintained by <a href="https://github.com/bbatsov">bbatsov</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		          <script type="text/javascript">
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
