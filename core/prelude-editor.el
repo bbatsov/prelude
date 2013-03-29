@@ -44,12 +44,18 @@
   :group 'prelude)
 
 (defcustom prelude-guru t
-  "Non-nil values enable guru-mode"
+  "Non-nil values enable guru-mode."
   :type 'boolean
   :group 'prelude)
 
 (defcustom prelude-whitespace t
   "Non-nil values enable Prelude's whitespace visualization."
+  :type 'boolean
+  :group 'prelude)
+
+(defcustom prelude-clean-whitespace-on-save t
+  "Cleanup whitespace from file before it's saved.
+Will only occur if prelude-whitespace is also enabled."
   :type 'boolean
   :group 'prelude)
 
@@ -218,10 +224,14 @@
   (when (and prelude-flyspell (executable-find ispell-program-name))
     (flyspell-mode +1)))
 
+(defun prelude-cleanup-maybe ()
+  (when prelude-clean-whitespace-on-save
+    (whitespace-cleanup)))
+
 (defun prelude-enable-whitespace ()
   (when prelude-whitespace
     ;; keep the whitespace decent all the time (in this buffer)
-    (add-hook 'before-save-hook 'whitespace-cleanup nil t)
+    (add-hook 'before-save-hook 'prelude-cleanup-maybe nil t)
     (whitespace-mode +1)))
 
 (add-hook 'text-mode-hook 'prelude-enable-flyspell)

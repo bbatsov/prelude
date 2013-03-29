@@ -79,14 +79,12 @@
       (indent-rigidly (point-min) (point-max) arg)
       (clipboard-kill-ring-save (point-min) (point-max)))))
 
-(defun prelude-insert-empty-line ()
+(defun prelude-smart-open-line ()
   "Insert an empty line after the current line.
 Position the cursor at its beginning, according to the current mode."
   (interactive)
   (move-end-of-line nil)
-  (open-line 1)
-  (forward-line 1)
-  (indent-according-to-mode))
+  (newline-and-indent))
 
 (defun prelude-move-line-up ()
   "Move up the current line."
@@ -117,6 +115,13 @@ Position the cursor at its beginning, according to the current mode."
       (progn
         (prelude-indent-buffer)
         (message "Indented buffer.")))))
+
+(defun prelude-indent-defun ()
+  "Indent the current defun."
+  (interactive)
+  (save-excursion
+    (mark-defun)
+    (indent-region (region-beginning) (region-end))))
 
 (defun prelude-annotate-todo ()
   "Put fringe marker on TODO: lines in the curent buffer."

@@ -15,5 +15,7 @@ custom.el
 places
 .smex-items
 savefile/
+/prelude-modules.el
+projectile-bookmarks.eld
 .places
 var/
