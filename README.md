@@ -187,7 +187,7 @@ extensions to keybindings.
 Keybinding         | Description
 -------------------|------------------------------------------------------------
 <kbd>C-M-h</kbd>   | Kill the previous word(`backward-kill-word`). (as in Bash/Zsh)
-<kbd>C-x \</kbd>   | `align-regexp`
+<kbd>C-x \\</kbd>   | `align-regexp`
 <kbd>C-+</kbd>     | Increase font size(`text-scale-increase`).
 <kbd>C--</kbd>     | Decrease font size(`text-scale-decrease`).
 <kbd>C-x O</kbd>   | Go back to previous window (the inverse of `other-window` (`C-x o`)).
@@ -214,7 +214,7 @@ Keybinding         | Description
 <kbd>C-S-down</kbd> | Move the current line down.
 <kbd>C-c n</kbd> | Fix indentation in buffer and strip whitespace.
 <kbd>C-c f</kbd> | Open recently visited file.
-<kbd>C-M-\</kbd> | Indent region (if selected) or the entire buffer.
+<kbd>C-M-\\</kbd> | Indent region (if selected) or the entire buffer.
 <kbd>C-c u</kbd> | Open URL in your default browser.
 <kbd>C-c e</kbd> | Eval a bit of Emacs Lisp code and replace it with its result.
 <kbd>C-c s</kbd> | Swap two active windows.
