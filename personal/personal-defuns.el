@@ -7,21 +7,21 @@
 
 ;;; Code:
 
-;; Shortcut C-S-return
-(defun newline-previous ()
-  "Insert a blank line above the current line and move the point to it."
-  (interactive)
-  (beginning-of-line)
-  (newline)
-  (forward-line -1)
-  (indent-according-to-mode))
+;; ;; Shortcut C-S-return
+;; (defun newline-previous ()
+;;   "Insert a blank line above the current line and move the point to it."
+;;   (interactive)
+;;   (beginning-of-line)
+;;   (newline)
+;;   (forward-line -1)
+;;   (indent-according-to-mode))
 
-;; Shortcut C-return
-(defun newline-next ()
-  "Insert an indented newline after the current line and move the point to it."
-  (interactive)
-  (end-of-line)
-  (newline-and-indent))
+;; ;; Shortcut C-return
+;; (defun newline-next ()
+;;   "Insert an indented newline after the current line and move the point to it."
+;;   (interactive)
+;;   (end-of-line)
+;;   (newline-and-indent))
 
 ;; Show line numbers only when moving by line
 (defun goto-line-with-feedback ()
