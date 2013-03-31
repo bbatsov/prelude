@@ -35,9 +35,8 @@
 ;; Turn off whitespace mode
 (setq prelude-whitespace nil)
 
-;;; Set up for working with lisp
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "/usr/local/bin/clisp")
+;;; Set up for working with Lisp
+(setq slime-default-lisp 'clisp)
 
 ;;; Set up for working with Ruby
 
