@@ -54,10 +54,6 @@
 ;;; I like to use shell, not eshell
 (global-set-key (kbd "C-x m") 'shell)
 
-;;; This will call functions that I have in my defuns file
-(global-set-key (kbd "<C-return>") 'newline-next)
-(global-set-key (kbd "<C-S-return>") 'newline-previous)
-
 ;;; This overrides the keybinding from Prelude-osx.el
 (global-set-key (kbd "C-c C-w") 'backward-kill-word)
 
