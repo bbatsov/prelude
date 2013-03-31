@@ -197,7 +197,7 @@ Keybinding         | Description
 <kbd>C-x M-m</kbd> | Start your default shell.
 <kbd>C-x C-m</kbd> | Alias for `M-x`.
 <kbd>C-h A</kbd>   | Run `apropos` (search in all Emacs symbols).
-<kbd>M-\</kbd>     | Run `hippie-expand` (a replacement for the default `dabbrev-expand`).
+<kbd>M-\\</kbd>     | Run `hippie-expand` (a replacement for the default `dabbrev-expand`).
 <kbd>C-x C-b</kbd> | Open `ibuffer` (a replacement for the default `buffer-list`).
 <kbd>F12</kbd>     | Toggle the Emacs menu bar.
 <kbd>C-x g</kbd>   | Open Magit's status buffer.
@@ -213,7 +213,7 @@ Keybinding         | Description
 <kbd>C-S-up</kbd>  | Move the current line up.
 <kbd>C-S-down</kbd> | Move the current line down.
 <kbd>C-c n</kbd> | Fix indentation in buffer and strip whitespace.
-<kbd>C-c f</kbd> | Open recently visitted file.
+<kbd>C-c f</kbd> | Open recently visited file.
 <kbd>C-M-\</kbd> | Indent region (if selected) or the entire buffer.
 <kbd>C-c u</kbd> | Open URL in your default browser.
 <kbd>C-c e</kbd> | Eval a bit of Emacs Lisp code and replace it with its result.
@@ -226,7 +226,7 @@ Keybinding         | Description
 
 #### Projectile
 
-Here's a list of functionality provided by [Projectile](https://github.com/bbatsov/prelude):
+Here's a list of functionality provided by [Projectile](https://github.com/bbatsov/projectile):
 
 Keybinding         | Description
 -------------------|------------------------------------------------------------
