@@ -161,6 +161,9 @@
 ;; Let's try Solarized as the theme
 ;;(load-theme 'solarized-dark t)
 
+;; Make sure the packages I like are installed
+(prelude-ensure-module-deps '(haskell-mode markdown-mode solarized-theme sass-mode textile-mode inf-ruby windresize ace-jump-mode exec-path-from-shell))
+
 ;; Turn off flyspell - it gets in the way more than it helps
 (setq prelude-flyspell nil)
 
