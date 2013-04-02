@@ -97,14 +97,16 @@ Position the cursor at its beginning, according to the current mode."
   "Move the current line up."
   (interactive)
   (transpose-lines 1)
-  (forward-line -2))
+  (forward-line -2)
+  (indent-according-to-mode))
 
 (defun prelude-move-line-down ()
   "Move the current line down."
   (interactive)
   (forward-line 1)
   (transpose-lines 1)
-  (forward-line -1))
+  (forward-line -1)
+  (indent-according-to-mode))
 
 (defun prelude-indent-buffer ()
   "Indent the currently visited buffer."
