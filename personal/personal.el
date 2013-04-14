@@ -60,6 +60,8 @@
 ;;; org-mode
 ;;;; Keybinding for org-agenda
 (define-key global-map (kbd "C-c a") 'org-agenda)
+;;;; Don't keep track of when a TODO item is finished
+(setq org-log-done nil)
 
 ;;; recentf
 (setq recentf-max-menu-items 25)
