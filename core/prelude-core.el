@@ -250,9 +250,21 @@ there's a region, all lines that region covers will be duplicated."
   (byte-recompile-directory prelude-dir 0))
 
 (defun prelude-sudo-edit (&optional arg)
-  (interactive "p")
+  "Edit currently visited file as root.
+
+With a prefix ARG prompt for a file to visit.
+Will also prompt for a file to visit if current
+buffer is not visiting a file."
+  (interactive "P")
   (if (or arg (not buffer-file-name))
-      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
+      (find-file (concat "/sudo:root@localhost:"
+                         (ido-read-file-name "Find file(as root): ")))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+(defadvice ido-find-file (after find-file-sudo activate)
+  "Find file as root if necessary."
+  (unless (and buffer-file-name
+               (file-writable-p buffer-file-name))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (defun prelude-switch-or-start (function buffer)
@@ -298,6 +310,12 @@ there's a region, all lines that region covers will be duplicated."
       (set-window-start w1 s2)
       (set-window-start w2 s1)))
   (other-window 1))
+
+(defun prelude-switch-to-previous-buffer ()
+  "Switch to previously open buffer.
+Repeated invocations toggle between the two most recently open buffers."
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
 
 (defun prelude-kill-other-buffers ()
   "Kill all buffers but the current one.
