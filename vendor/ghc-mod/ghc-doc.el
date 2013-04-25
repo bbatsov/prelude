@@ -8,17 +8,28 @@
 
 (require 'ghc-func)
 (require 'ghc-comp)
+(require 'ghc-info)
 
 ;;; Code:
 
 (defun ghc-browse-document (&optional haskell-org)
   (interactive "P")
-  (let* ((mod0 (ghc-extract-module))
-	 (mod (ghc-read-module-name mod0))
-	 (pkg (ghc-resolve-package-name mod)))
-    (if (and pkg mod)
-	(ghc-display-document pkg mod haskell-org)
-      (message "No document found"))))
+  (let ((mod0 (ghc-extract-module))
+	(expr (ghc-things-at-point)))
+    (cond
+     ((and (not mod0) expr)
+      (let* ((info (ghc-get-info expr))
+	     (mod (ghc-extact-module-from-info info))
+	     (pkg (ghc-resolve-package-name mod)))
+	(if (and pkg mod)
+	    (ghc-display-document pkg mod haskell-org expr)
+	  (message "No document found"))))
+     (t
+      (let* ((mod (ghc-read-module-name mod0))
+	     (pkg (ghc-resolve-package-name mod)))
+	(if (and pkg mod)
+	    (ghc-display-document pkg mod haskell-org)
+	  (message "No document found")))))))
 
 (defun ghc-resolve-package-name (mod)
   (with-temp-buffer
@@ -44,7 +55,7 @@
 
 (ghc-defstruct pkg-ver pkg ver)
 
-(defun ghc-display-document (pkg-ver mod haskell-org)
+(defun ghc-display-document (pkg-ver mod haskell-org &optional symbol)
   (when (and pkg-ver mod)
     (let* ((mod- (ghc-replace-character mod ?. ?-))
 	   (pkg (ghc-pkg-ver-get-pkg pkg-ver))
@@ -54,8 +65,31 @@
 	   (local (format ghc-doc-local-format path mod-))
 	   (remote (format ghc-doc-hackage-format pkg ver mod-))
 	   (file (format "%s/%s.html" path mod-))
-           (url (if (or haskell-org (not (file-exists-p file))) remote local)))
+           (url0 (if (or haskell-org (not (file-exists-p file))) remote local))
+	   (url (if symbol (ghc-add-anchor url0 symbol) url0)))
+      ;; Mac's "open" removes the anchor from "file://", sigh.
       (browse-url url))))
+
+(defun ghc-add-anchor (url symbol)
+  (let ((case-fold-search nil))
+    (if (string-match "^[A-Z]" symbol)
+	(concat url "#t:" symbol)
+      (if (string-match "^[a-z]" symbol)
+	  (concat url "#v:" symbol)
+	(concat url "#v:" (ghc-url-encode symbol))))))
+
+(defun ghc-url-encode (symbol)
+  (let ((len (length symbol))
+	(i 0)
+	acc)
+    (while (< i len)
+      (setq acc (cons (format "-%d-" (aref symbol i)) acc))
+      (setq i (1+ i)))
+    (apply 'concat (nreverse acc))))
+
+(defun ghc-extact-module-from-info (info)
+  (when (string-match "\`\\([^']+\\)'" info)
+    (match-string 1 info)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

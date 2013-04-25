@@ -147,11 +147,10 @@
 (defconst ghc-error-buffer-name "*GHC Info*")
 
 (defun ghc-display (fontify ins-func)
-  (let ((cdir default-directory)
-	(buf (get-buffer-create ghc-error-buffer-name)))
+  (let ((buf (get-buffer-create ghc-error-buffer-name)))
     (with-current-buffer buf
       (erase-buffer)
-      (funcall ins-func cdir)
+      (funcall ins-func)
       (ghc-replace-character-buffer ghc-null ghc-newline)
       (goto-char (point-min))
       (if (not fontify)
@@ -159,5 +158,20 @@
 	(haskell-font-lock-defaults-create)
 	(turn-on-haskell-font-lock)))
     (display-buffer buf)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun ghc-run-ghc-mod (cmds)
+  (cond
+   ((executable-find ghc-module-command)
+    (let ((cdir default-directory))
+      (with-temp-buffer
+	(cd cdir)
+	(apply 'call-process ghc-module-command nil t nil
+	       (append (ghc-make-ghc-options) cmds))
+	(buffer-substring (point-min) (1- (point-max))))))
+   (t
+    (message "%s not found" ghc-module-command)
+    nil)))
 
 (provide 'ghc-func)

@@ -12,12 +12,19 @@
 
 (defun ghc-show-info (&optional ask)
   (interactive "P")
+  (let* ((expr0 (ghc-things-at-point))
+	 (expr (if (or ask (not expr0)) (ghc-read-expression expr0) expr0))
+	 (info (ghc-get-info expr)))
+    (when info
+      (ghc-display
+       nil
+       (lambda () (insert info))))))
+
+(defun ghc-get-info (expr)
   (let* ((modname (or (ghc-find-module-name) "Main"))
-	 (expr0 (ghc-things-at-point))
-	 (expr (if ask (ghc-read-expression expr0) expr0))
 	 (file (buffer-file-name))
 	 (cmds (list "info" file modname expr)))
-    (ghc-display-information cmds nil)))
+    (ghc-run-ghc-mod cmds)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -124,27 +131,12 @@
 (defun ghc-expand-th ()
   (interactive)
   (let* ((file (buffer-file-name))
-	 (cmds (list "expand" file)))
-    (ghc-display-information cmds t)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Display
-;;;
-
-(defun ghc-display-information (cmds fontify)
-  (interactive)
-  (if (not (executable-find ghc-module-command))
-      (message "%s not found" ghc-module-command)
-    (ghc-display
-     fontify
-     (lambda (cdir)
-       (insert
-	(with-temp-buffer
-	  (cd cdir)
-	  (apply 'call-process ghc-module-command nil t nil
-		 (append (ghc-make-ghc-options) cmds))
-	  (buffer-substring (point-min) (1- (point-max)))))))))
+	 (cmds (list "expand" file))
+	 (source (ghc-run-ghc-mod cmds)))
+    (when source
+      (ghc-display
+       'fontify
+       (lambda () (insert source))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

@@ -64,6 +64,7 @@ unloaded modules are loaded")
 (defvar ghc-loaded-module nil)
 
 (defun ghc-comp-init ()
+  (add-hook 'find-file-hook 'ghc-import-module)
   (let* ((syms '(ghc-module-names
 		 ghc-language-extensions
 		 ghc-option-flags
@@ -226,8 +227,6 @@ unloaded modules are loaded")
 ;;;
 ;;; Loading keywords
 ;;;
-
-(add-hook 'find-file-hook 'ghc-import-module)
 
 (defun ghc-import-module ()
   (interactive)
