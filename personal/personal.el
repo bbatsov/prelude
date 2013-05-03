@@ -143,9 +143,9 @@
                   (setq indent-tabs-mode nil)
                   (setq c-indent-level 4))))
 
-(add-to-list 'auto-mode-alist
-             (append '(("\\.h$" . objc-mode)
-                       ("\\.m$" . objc-mode))))
+(add-to-list 'auto-mode-alist '("\\.h$" . objc-mode))
+(add-to-list 'auto-mode-alist '("\\.m$" . objc-mode))
+
 
 ;; Tell gist to use curl
 (setq gist-use-curl t)
