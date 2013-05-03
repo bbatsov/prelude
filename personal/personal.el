@@ -23,9 +23,6 @@
 ;; Make sure there is a final newline
 (setq-default require-final-newline t)
 
-;; Get rid of trailing white space on saves
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
 ;; Turn off long line highlighting.
 (setq whitespace-line-column 250)
 
@@ -145,6 +142,10 @@
       (function (lambda ()
                   (setq indent-tabs-mode nil)
                   (setq c-indent-level 4))))
+
+(add-to-list 'auto-mode-alist
+             (append '(("\\.h$" . objc-mode)
+                       ("\\.m$" . objc-mode))))
 
 ;; Tell gist to use curl
 (setq gist-use-curl t)
