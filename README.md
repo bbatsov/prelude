@@ -261,10 +261,10 @@ If you ever forget any of Projectile's keybindings just do a:
 #### Key-chords
 
 Keybinding         | Description
-------------------------------------------------------------------
-<kbd>jj</kbd>       | ace-jump-mode
-<kbd>JJ</kbd>       | prelude-switch-to-previous-buffer
-<kbd>uu</kbd>       | undo-tree-visualize
+-------------------|----------------------------------------------
+<kbd>jj</kbd>      | ace-jump-mode
+<kbd>JJ</kbd>      | prelude-switch-to-previous-buffer
+<kbd>uu</kbd>      | undo-tree-visualize
 
 ### Automatic package installation
 
