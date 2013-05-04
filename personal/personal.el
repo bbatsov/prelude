@@ -164,12 +164,10 @@
 ;; Make sure the packages I like are installed
 (prelude-ensure-module-deps '(haskell-mode markdown-mode solarized-theme sass-mode textile-mode inf-ruby windresize ace-jump-mode exec-path-from-shell))
 
-;; Turn off flyspell - it gets in the way more than it helps
-;;(setq prelude-flyspell nil)
-
 ;; Cursor settings
+(add-to-list 'default-frame-alist '(cursor-color . "gold1"))
 (setq-default cursor-type 'bar)
-(set-cursor-color "gold1")
+
 
 ;; If I'm running emacs, then I want it to be a server
 (require 'server)
