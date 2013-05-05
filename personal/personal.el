@@ -116,8 +116,6 @@
 (add-hook 'prelude-prog-mode-hook 'disable-guru-mode t)
 
 ;; ghc-mod
-(defvar ghc-mod-dir (concat prelude-vendor-dir "ghc-mod/"))
-(add-to-list 'load-path ghc-mod-dir)
 (autoload 'ghc-init "ghc" nil t)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 
@@ -162,7 +160,7 @@
 ;;(load-theme 'solarized-dark t)
 
 ;; Make sure the packages I like are installed
-(prelude-ensure-module-deps '(haskell-mode markdown-mode solarized-theme sass-mode textile-mode inf-ruby windresize ace-jump-mode exec-path-from-shell))
+(prelude-ensure-module-deps '(haskell-mode ghc ghci-completion markdown-mode solarized-theme sass-mode textile-mode inf-ruby windresize ace-jump-mode exec-path-from-shell))
 
 ;; Cursor settings
 (add-to-list 'default-frame-alist '(cursor-color . "gold1"))
