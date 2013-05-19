@@ -108,13 +108,6 @@
 ;;; Use ido-mode for choosing snippets
 (setq yas/prompt-functions '(yas/ido-prompt yas/dropdown-prompt))
 
-;; Turn off Guru-mode
-(defun disable-guru-mode ()
-  (guru-mode -1)
-)
-
-(add-hook 'prelude-prog-mode-hook 'disable-guru-mode t)
-
 ;; ghc-mod
 (autoload 'ghc-init "ghc" nil t)
 (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
