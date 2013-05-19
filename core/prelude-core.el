@@ -47,7 +47,7 @@ With a prefix ARG always prompt for command to use."
                      ((and (not arg) (member system-type '(gnu gnu/linux gnu/kfreebsd))) "xdg-open")
                      (t (read-shell-command "Open current file with: ")))
                     " "
-                    buffer-file-name))))
+                    (shell-quote-argument buffer-file-name)))))
 
 (defun prelude-buffer-mode (buffer-or-name)
   "Retrieve the `major-mode' of BUFFER-OR-NAME."
@@ -195,9 +195,7 @@ there's a region, all lines that region covers will be duplicated."
          ((vc-backend filename) (vc-rename-file filename new-name))
          (t
           (rename-file filename new-name t)
-          (rename-buffer new-name)
-          (set-visited-file-name new-name)
-          (set-buffer-modified-p nil)))))))
+          (set-visited-file-name new-name t t)))))))
 
 (defun prelude-delete-file-and-buffer ()
   "Kill the current buffer and deletes the file it is visiting."

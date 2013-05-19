@@ -148,7 +148,8 @@ Will only occur if prelude-whitespace is also enabled."
   "Save the current buffer if `prelude-auto-save' is not nil."
   (when (and prelude-auto-save
              buffer-file-name
-             (buffer-modified-p (current-buffer)))
+             (buffer-modified-p (current-buffer))
+             (file-writable-p buffer-file-name))
     (save-buffer)))
 
 (defadvice switch-to-buffer (before save-buffer-now activate)
@@ -379,6 +380,9 @@ indent yanked text (with prefix arg don't indent)."
 ;; make a shell script executable automatically on save
 (add-hook 'after-save-hook
           'executable-make-buffer-file-executable-if-script-p)
+
+;; .zsh file is shell script too
+(add-to-list 'auto-mode-alist '("\\.zsh\\'" . shell-script-mode))
 
 ;; whitespace-mode config
 (require 'whitespace)
