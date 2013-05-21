@@ -18,4 +18,5 @@ savefile/
 projectile-bookmarks.eld
 .places
 var/
+session*
 /tramp
