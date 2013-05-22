@@ -1,0 +1,7 @@
+# -*- mode: snippet require-final-newline: nil -*-
+# name: module declaration
+# key: mod
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+module ${1:name} (${2:exports}) where
+$0

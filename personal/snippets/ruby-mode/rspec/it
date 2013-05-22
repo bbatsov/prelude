@@ -1,0 +1,8 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: 
+# key: it
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+it 'should ${1:description}' do
+  $0
+end

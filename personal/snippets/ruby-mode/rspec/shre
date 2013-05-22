@@ -1,0 +1,7 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: should raise_error
+# key: shre
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+lambda { ${1: } }.should raise_error(${2:error})
+$0

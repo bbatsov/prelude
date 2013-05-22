@@ -1,0 +1,6 @@
+# -*- mode: snippet require-final-newline: nil -*-
+# name: Lambda function
+# key: lambda
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+\(${1:params} -> ${2:function}) $0

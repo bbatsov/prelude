@@ -1,0 +1,12 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: describe (type, string)
+# key: dests
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+describe ${1:Type}, '${2:description}' do
+
+  it 'should ${3:description}' do
+    $0
+  end
+
+end

@@ -1,0 +1,6 @@
+# -*- mode: snippet require-final-newline: nil -*-
+# name: hiding (<names>)
+# key: hid
+## contributor: Abizer Nasir abizern@junglecandy.com
+# --
+hiding (${1:names})

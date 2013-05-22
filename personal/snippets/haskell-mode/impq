@@ -1,0 +1,6 @@
+# -*- mode: snippet require-final-newline: nil -*-
+# name: import qualiified <lib> as <qualifier>
+# key: impq
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+import qualified ${1:module} as (${2:qualifier})$0

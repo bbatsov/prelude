@@ -1,0 +1,9 @@
+# -*- mode: snippet require-final-newline: nil -*-
+# name: if block
+# key: if
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+if ${1:predicate}
+    then ${2:branch}
+    else ${3:branch}
+$0

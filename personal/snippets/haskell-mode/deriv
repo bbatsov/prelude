@@ -1,0 +1,6 @@
+# -*- mode: snippet require-final-newline: nil -*-
+# name: deriving (<classes>)
+# key: deriv
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+deriving (${1:classes})

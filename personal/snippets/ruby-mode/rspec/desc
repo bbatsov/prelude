@@ -1,0 +1,12 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: describe (Controller)
+# key: desc
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+require File.dirname(__FILE__) + '/../spec_helper'
+
+describe ${1:controller} do
+
+  $0
+
+end

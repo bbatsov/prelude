@@ -1,0 +1,12 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: describe (RESTful Controller): GET
+# key: desrc.get
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+require File.direname(__FILE__) + '/.../spec_helper'
+
+describe ${1:controller}, 'GET ${3:/some/path}${4: with some parameters}' do
+
+  $0
+
+end

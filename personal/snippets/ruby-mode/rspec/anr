@@ -1,0 +1,6 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: and_raise
+# key: anr
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+and_raise(${1:exception})

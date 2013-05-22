@@ -1,0 +1,6 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: should_receive
+# key: shr
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+${1:mock}.should_receive(:${2:message})$0

@@ -1,0 +1,8 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: after
+# key: aft
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+after(${1::each}) do
+  $0
+end

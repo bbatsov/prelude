@@ -1,0 +1,6 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: exactly
+# key: ex
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+exactly(${1:n}).times

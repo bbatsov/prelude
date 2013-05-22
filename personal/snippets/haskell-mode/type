@@ -1,0 +1,7 @@
+# -*- mode: snippet require-final-newline: nil -*-
+# name: type synonym
+# key: type
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+type ${1:synonym} = ${2:base type}
+$0

@@ -1,0 +1,7 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: should throw
+# key: sht
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+lambda { ${1: } }.should throw_symbol(:${2:symbol})
+$0

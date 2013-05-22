@@ -1,0 +1,12 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: describe (String)
+# key: des
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+describe '${1:description}' do
+
+  it 'should ${2:description}' do
+    $0
+  end
+
+end

@@ -1,0 +1,6 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: and_return with block
+# key: anrb
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+and_return { $1 }

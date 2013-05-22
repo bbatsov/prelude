@@ -1,0 +1,6 @@
+# -*- mode: snippet require-final-newline: nil -*-
+# name: import
+# key: imp
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+import $0

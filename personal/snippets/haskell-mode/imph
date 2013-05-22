@@ -1,0 +1,6 @@
+# -*- mode: snippet require-final-newline: nil -*-
+# name: import ... hiding (...)
+# key: imph
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+import ${1:module} hiding (${2:names})$0

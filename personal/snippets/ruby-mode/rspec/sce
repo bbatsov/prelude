@@ -1,0 +1,11 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: Scenario
+# key: sce
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+Scenario '${1:title}' do
+  Given '${2:given}'
+  When '${3:when}'
+  Then '${4:then}'
+end
+$0

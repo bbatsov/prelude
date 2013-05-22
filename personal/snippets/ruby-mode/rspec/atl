@@ -1,0 +1,6 @@
+#-*- mode: snippet require-final-newline: nil -*-
+# name: at_least
+# key: atl
+# contributor: Abizer Nasir abizern@junglecandy.com
+# --
+at_least(${1:n}).times
