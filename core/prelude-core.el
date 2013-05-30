@@ -68,8 +68,8 @@ With a prefix ARG always prompt for command to use."
    (concat
     "http://www.google.com/search?ie=utf-8&oe=utf-8&q="
     (url-hexify-string (if mark-active
-         (buffer-substring (region-beginning) (region-end))
-       (read-string "Google: "))))))
+                           (buffer-substring (region-beginning) (region-end))
+                         (read-string "Google: "))))))
 
 (defun prelude-indent-rigidly-and-copy-to-clipboard (begin end arg)
   "Indent region between BEGIN and END by ARG columns and copy to clipboard."
@@ -168,6 +168,19 @@ point reaches the beginning or end of the buffer, stop there."
   (save-excursion
     (mark-defun)
     (indent-region (region-beginning) (region-end))))
+
+(defun toggle-comment-on-line ()
+  "Comment or uncomment current line."
+  (interactive)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+
+(defun prelude-smart-comment ()
+  "If region is active, toggle comment on current region.
+If not, toggle comment on current line"
+  (interactive)
+  (if (use-region-p)
+      (comment-or-uncomment-region (region-beginning) (region-end))
+    (toggle-comment-on-line)))
 
 (defun prelude-annotate-todo ()
   "Put fringe marker on TODO: lines in the curent buffer."
