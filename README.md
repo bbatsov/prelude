@@ -197,7 +197,7 @@ Keybinding         | Description
 <kbd>C-+</kbd>     | Increase font size(`text-scale-increase`).
 <kbd>C--</kbd>     | Decrease font size(`text-scale-decrease`).
 <kbd>C-x O</kbd>   | Go back to previous window (the inverse of `other-window` (`C-x o`)).
-<kbd>C-x ^</kbd>   | Join two lines into one(`join-line`).
+<kbd>M-^</kbd>     | Join two lines into one(`prelude-top-join-line`).
 <kbd>C-x p</kbd>   | Start `proced` (manage processes from Emacs; works only in Linux).
 <kbd>C-x m</kbd>   | Start `eshell`.
 <kbd>C-x M-m</kbd> | Start your default shell.
@@ -273,18 +273,18 @@ Keybinding         | Description
 
 In some cases you may not want to have a key-chord that is defined by prelude,
 in which case you can disable the binding in your `personal.el` file by setting
-its command to `nil`. For example, to disable the `kk` key-chord add the
+its command to `nil`. For example, to disable the `jj` key-chord add the
 following line:
 
-    ```lisp
-    (key-chord-define-global "jj" nil)
-    ```
+```lisp
+(key-chord-define-global "jj" nil)
+```
 
 If you're an `evil-mode` user you'll probably do well to disable `key-chord-mode` altogether:
 
-    ```lisp
-    (key-chord-mode -1)
-    ```
+```lisp
+(key-chord-mode -1)
+```
 
 ## Automatic package installation
 
