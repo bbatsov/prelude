@@ -16,3 +16,5 @@ places
 .smex-items
 savefile/
 /prelude-modules.el
+projectile-bookmarks.eld
+session*

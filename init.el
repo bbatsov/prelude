@@ -42,12 +42,13 @@
 (defvar prelude-modules-dir (expand-file-name  "modules" prelude-dir)
   "This directory houses all of the built-in Prelude modules.")
 (defvar prelude-personal-dir (expand-file-name "personal" prelude-dir)
-  "Users of Emacs Prelude are encouraged to keep their personal configuration
-changes in this directory. All Emacs Lisp files there are loaded automatically
+  "This directory is for your personal configuration.
+
+Users of Emacs Prelude are encouraged to keep their personal configuration
+changes in this directory.  All Emacs Lisp files there are loaded automatically
 by Prelude.")
 (defvar prelude-vendor-dir (expand-file-name "vendor" prelude-dir)
-  "This directory house Emacs Lisp packages that are not yet available in
-ELPA (or MELPA).")
+  "This directory houses packages that are not yet available in ELPA (or MELPA).")
 (defvar prelude-snippets-dir (expand-file-name "snippets" prelude-dir)
   "This folder houses additional yasnippet bundles distributed with Prelude.")
 (defvar prelude-personal-snippets-dir (expand-file-name "snippets" prelude-personal-dir)
@@ -61,13 +62,12 @@ ELPA (or MELPA).")
   (make-directory prelude-savefile-dir))
 
 (defun prelude-add-subfolders-to-load-path (parent-dir)
- "Adds all first level `parent-dir' subdirs to the
-Emacs load path."
+ "Add all first level PARENT-DIR subdirs to the `load-path'."
  (dolist (f (directory-files parent-dir))
    (let ((name (expand-file-name f parent-dir)))
      (when (and (file-directory-p name)
-     (not (equal f ".."))
-     (not (equal f ".")))
+                (not (equal f ".."))
+                (not (equal f ".")))
        (add-to-list 'load-path name)))))
 
 ;; add Prelude's directories to Emacs's `load-path'
@@ -75,8 +75,6 @@ Emacs load path."
 (add-to-list 'load-path prelude-modules-dir)
 (add-to-list 'load-path prelude-vendor-dir)
 (prelude-add-subfolders-to-load-path prelude-vendor-dir)
-
-(require 'dash)
 
 ;; the core stuff
 (require 'prelude-packages)
@@ -91,8 +89,6 @@ Emacs load path."
   (require 'prelude-osx))
 
 ;; the modules
-(require 'prelude-programming)
-
 (when (file-exists-p prelude-modules-file)
   (load prelude-modules-file))
 
@@ -101,6 +97,7 @@ Emacs load path."
 
 ;; load the personal settings (this includes `custom-file')
 (when (file-exists-p prelude-personal-dir)
+  (message "Loading personal configuration files in %s..." prelude-personal-dir)
   (mapc 'load (directory-files prelude-personal-dir 't "^[^#].*el$")))
 
 (message "Prelude is ready to do thy bidding, Master %s!" (getenv "USER"))

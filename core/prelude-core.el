@@ -1,9 +1,9 @@
-;;; prelude-core.el --- Emacs Prelude: core Prelude defuns.
+;;; prelude-core.el --- Emacs Prelude: Core Prelude functions.
 ;;
 ;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
-;; URL: http://batsov.com/emacs-prelude
+;; URL: https://github.com/bbatsov/prelude
 ;; Version: 1.0.0
 ;; Keywords: convenience
 
@@ -33,30 +33,33 @@
 ;;; Code:
 
 (require 'thingatpt)
+(require 'dash)
 
-(defun prelude-open-with ()
-  "Simple function that allows us to open the underlying
-file of a buffer in an external program."
-  (interactive)
+(defun prelude-open-with (arg)
+  "Open visited file in default external program.
+
+With a prefix ARG always prompt for command to use."
+  (interactive "P")
   (when buffer-file-name
     (shell-command (concat
-                    (if (eq system-type 'darwin)
-                        "open"
-                      (read-shell-command "Open current file with: "))
+                    (cond
+                     ((and (not arg) (eq system-type 'darwin)) "open")
+                     ((and (not arg) (member system-type '(gnu gnu/linux gnu/kfreebsd))) "xdg-open")
+                     (t (read-shell-command "Open current file with: ")))
                     " "
-                    buffer-file-name))))
+                    (shell-quote-argument buffer-file-name)))))
 
 (defun prelude-buffer-mode (buffer-or-name)
-  (with-current-buffer buffer-or-name major-mode))
+  "Retrieve the `major-mode' of BUFFER-OR-NAME."
+  (with-current-buffer buffer-or-name
+    major-mode))
 
 (defun prelude-visit-term-buffer ()
+  "Create or visit a terminal buffer."
   (interactive)
-  (if (not (get-buffer "*ansi-term*"))
-      (progn
-        (split-window-sensibly (selected-window))
-        (other-window 1)
-        (ansi-term (getenv "SHELL")))
-    (switch-to-buffer-other-window "*ansi-term*")))
+  (prelude-start-or-switch-to (lambda ()
+                                (ansi-term (getenv "SHELL")))
+                              "*ansi-term*"))
 
 (defun prelude-google ()
   "Googles a query or region if any."
@@ -68,56 +71,92 @@ file of a buffer in an external program."
          (buffer-substring (region-beginning) (region-end))
        (read-string "Google: "))))))
 
-(defun prelude-indent-rigidly-and-copy-to-clipboard (begin end indent)
-  "Copy the selected code region to the clipboard, indented according
-to Markdown blockquote rules."
-  (let ((buffer (current-buffer)))
+(defun prelude-indent-rigidly-and-copy-to-clipboard (begin end arg)
+  "Indent region between BEGIN and END by ARG columns and copy to clipboard."
+  (interactive "r\nP")
+  (let ((arg (or arg 4))
+        (buffer (current-buffer)))
     (with-temp-buffer
       (insert-buffer-substring-no-properties buffer begin end)
-      (indent-rigidly (point-min) (point-max) indent)
+      (indent-rigidly (point-min) (point-max) arg)
       (clipboard-kill-ring-save (point-min) (point-max)))))
 
-(defun prelude-indent-blockquote-and-copy-to-clipboard (begin end)
-  "Copy the selected code region to the clipboard, indented according
-to markdown blockquote rules (useful to copy snippets to StackOverflow, Assembla, Github."
-  (interactive "r")
-  (prelude-indent-rigidly-and-copy-to-clipboard begin end 4))
+(defun prelude-smart-open-line-above ()
+  "Insert an empty line above the current line.
+Position the cursor at it's beginning, according to the current mode."
+  (interactive)
+  (move-beginning-of-line nil)
+  (newline-and-indent)
+  (forward-line -1)
+  (funcall indent-line-function))
 
-(defun prelude-indent-nested-blockquote-and-copy-to-clipboard (begin end)
-  "Copy the selected code region to the clipboard, indented according
-to markdown blockquote rules. Useful to add snippets under bullet points."
-  (interactive "r")
-  (prelude-indent-rigidly-and-copy-to-clipboard begin end 6))
-
-(defun prelude-insert-empty-line ()
-  "Insert an empty line after the current line and positon
-the curson at its beginning, according to the current mode."
+(defun prelude-smart-open-line ()
+  "Insert an empty line after the current line.
+Position the cursor at its beginning, according to the current mode."
   (interactive)
   (move-end-of-line nil)
-  (open-line 1)
-  (forward-line 1)
-  (indent-according-to-mode))
+  (newline-and-indent))
+
+(defun prelude-top-join-line ()
+  "Join the current line with the line beneath it."
+  (interactive)
+  (delete-indentation 1))
 
 (defun prelude-move-line-up ()
-  "Move up the current line."
+  "Move the current line up."
   (interactive)
   (transpose-lines 1)
-  (forward-line -2))
+  (forward-line -2)
+  (indent-according-to-mode))
 
 (defun prelude-move-line-down ()
-  "Move down the current line."
+  "Move the current line down."
   (interactive)
   (forward-line 1)
   (transpose-lines 1)
-  (forward-line -1))
+  (forward-line -1)
+  (indent-according-to-mode))
+
+(defun prelude-kill-whole-line (&optional arg)
+  "A simple wrapper around command `kill-whole-line' that respects indentation.
+Passes ARG to command `kill-whole-line' when provided."
+  (interactive "P")
+  (kill-whole-line arg)
+  (back-to-indentation))
+
+(defun prelude-move-beginning-of-line (arg)
+  "Move point back to indentation of beginning of line.
+
+Move point to the first non-whitespace character on this line.
+If point is already there, move to the beginning of the line.
+Effectively toggle between the first non-whitespace character and
+the beginning of the line.
+
+If ARG is not nil or 1, move forward ARG - 1 lines first.  If
+point reaches the beginning or end of the buffer, stop there."
+  (interactive "^p")
+  (setq arg (or arg 1))
+
+  ;; Move lines first
+  (when (/= arg 1)
+    (let ((line-move-visual nil))
+      (forward-line (1- arg))))
+
+  (let ((orig-point (point)))
+    (back-to-indentation)
+    (when (= orig-point (point))
+      (move-beginning-of-line 1))))
+
+(global-set-key [remap move-beginning-of-line]
+                'prelude-move-beginning-of-line)
 
 (defun prelude-indent-buffer ()
-  "Indents the entire buffer."
+  "Indent the currently visited buffer."
   (interactive)
   (indent-region (point-min) (point-max)))
 
 (defun prelude-indent-region-or-buffer ()
-  "Indents a region if selected, otherwise the whole buffer."
+  "Indent a region if selected, otherwise the whole buffer."
   (interactive)
   (save-excursion
     (if (region-active-p)
@@ -127,6 +166,13 @@ the curson at its beginning, according to the current mode."
       (progn
         (prelude-indent-buffer)
         (message "Indented buffer.")))))
+
+(defun prelude-indent-defun ()
+  "Indent the current defun."
+  (interactive)
+  (save-excursion
+    (mark-defun)
+    (indent-region (region-beginning) (region-end))))
 
 (defun prelude-annotate-todo ()
   "Put fringe marker on TODO: lines in the curent buffer."
@@ -152,7 +198,7 @@ the curson at its beginning, according to the current mode."
 
 (defun prelude-duplicate-current-line-or-region (arg)
   "Duplicates the current line or region ARG times.
-If there's no region, the current line will be duplicated. However, if
+If there's no region, the current line will be duplicated.  However, if
 there's a region, all lines that region covers will be duplicated."
   (interactive "p")
   (let (beg end (origin (point)))
@@ -171,31 +217,30 @@ there's a region, all lines that region covers will be duplicated."
                   (setq end (point))))
       (goto-char (+ origin (* (length region) arg) arg)))))
 
-;; TODO doesn't work with uniquify
 (defun prelude-rename-file-and-buffer ()
   "Renames current buffer and file it is visiting."
   (interactive)
-  (let ((name (buffer-name))
-        (filename (buffer-file-name)))
+  (let ((filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
-        (message "Buffer '%s' is not visiting a file!" name)
+        (message "Buffer is not visiting a file!")
       (let ((new-name (read-file-name "New name: " filename)))
-        (cond ((get-buffer new-name)
-               (message "A buffer named '%s' already exists!" new-name))
-              (t
-               (rename-file name new-name 1)
-               (rename-buffer new-name)
-               (set-visited-file-name new-name)
-               (set-buffer-modified-p nil)))))))
+        (cond
+         ((vc-backend filename) (vc-rename-file filename new-name))
+         (t
+          (rename-file filename new-name t)
+          (set-visited-file-name new-name t t)))))))
 
 (defun prelude-delete-file-and-buffer ()
-  "Kills the current buffer and deletes the file it is visiting"
+  "Kill the current buffer and deletes the file it is visiting."
   (interactive)
   (let ((filename (buffer-file-name)))
     (when filename
-      (delete-file filename)
-      (message "Deleted file %s" filename)))
-  (kill-buffer))
+      (if (vc-backend filename)
+          (vc-delete-file filename)
+        (progn
+          (delete-file filename)
+          (message "Deleted file %s" filename)
+          (kill-buffer))))))
 
 (defun prelude-view-url ()
   "Open a new buffer containing the contents of URL."
@@ -204,11 +249,11 @@ there's a region, all lines that region covers will be duplicated."
          (url (read-from-minibuffer "URL: " default)))
     (switch-to-buffer (url-retrieve-synchronously url))
     (rename-buffer url t)
-    ;; TODO: switch to nxml/nxhtml mode
-    (cond ((search-forward "<?xml" nil t) (xml-mode))
+    (cond ((search-forward "<?xml" nil t) (nxml-mode))
           ((search-forward "<html" nil t) (html-mode)))))
 
 (defun prelude-untabify-buffer ()
+  "Remove all tabs from the current buffer."
   (interactive)
   (untabify (point-min) (point-max)))
 
@@ -235,26 +280,42 @@ there's a region, all lines that region covers will be duplicated."
   (byte-recompile-directory prelude-dir 0))
 
 (defun prelude-sudo-edit (&optional arg)
-  (interactive "p")
+  "Edit currently visited file as root.
+
+With a prefix ARG prompt for a file to visit.
+Will also prompt for a file to visit if current
+buffer is not visiting a file."
+  (interactive "P")
   (if (or arg (not buffer-file-name))
-      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
+      (find-file (concat "/sudo:root@localhost:"
+                         (ido-read-file-name "Find file(as root): ")))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
-(defun prelude-switch-or-start (function buffer)
-  "If the buffer is current, bury it, otherwise invoke the function."
-  (if (equal (buffer-name (current-buffer)) buffer)
-      (bury-buffer)
-    (if (get-buffer buffer)
-        (switch-to-buffer buffer)
-      (funcall function))))
+(defadvice ido-find-file (after find-file-sudo activate)
+  "Find file as root if necessary."
+  (unless (or (equal major-mode 'dired-mode)
+              (and (buffer-file-name)
+                   (file-writable-p buffer-file-name)))
+    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+(defun prelude-start-or-switch-to (function buffer-name)
+  "Invoke FUNCTION if there is no buffer with BUFFER-NAME.
+Otherwise switch to the buffer named BUFFER-NAME.  Don't clobber
+the current buffer."
+  (if (not (get-buffer buffer-name))
+      (progn
+        (split-window-sensibly (selected-window))
+        (other-window 1)
+        (funcall function))
+    (switch-to-buffer-other-window buffer-name)))
 
 (defun prelude-insert-date ()
-  "Insert a time-stamp according to locale's date and time format."
+  "Insert a timestamp according to locale's date and time format."
   (interactive)
   (insert (format-time-string "%c" (current-time))))
 
 (defun prelude-conditionally-enable-paredit-mode ()
-  "Enable paredit-mode in the minibuffer, during eval-expression."
+  "Enable `paredit-mode' in the minibuffer, during `eval-expression'."
   (if (eq this-command 'eval-expression)
       (paredit-mode 1)))
 
@@ -263,7 +324,9 @@ there's a region, all lines that region covers will be duplicated."
 (defun prelude-recentf-ido-find-file ()
   "Find a recent file using ido."
   (interactive)
-  (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
+  (let ((file (ido-completing-read "Choose recent file: "
+                                   (-map 'abbreviate-file-name recentf-list)
+                                   nil t)))
     (when file
       (find-file file))))
 
@@ -284,39 +347,21 @@ there's a region, all lines that region covers will be duplicated."
       (set-window-start w2 s1)))
   (other-window 1))
 
+(defun prelude-switch-to-previous-buffer ()
+  "Switch to previously open buffer.
+Repeated invocations toggle between the two most recently open buffers."
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+
 (defun prelude-kill-other-buffers ()
-  "Kill all buffers but the current one. Doesn't mess with special buffers."
+  "Kill all buffers but the current one.
+Doesn't mess with special buffers."
   (interactive)
   (-each
    (->> (buffer-list)
      (-filter #'buffer-file-name)
      (--remove (eql (current-buffer) it)))
    #'kill-buffer))
-
-(require 'repeat)
-
-(defun make-repeatable-command (cmd)
-  "Returns a new command that is a repeatable version of CMD.
-The new command is named CMD-repeat.  CMD should be a quoted
-command.
-
-This allows you to bind the command to a compound keystroke andб
-repeat it with just the final key.  For example:
-
-  (global-set-key (kbd \"C-c a\") (make-repeatable-command 'foo))
-
-will create a new command called foo-repeat.  Typing C-c a will
-just invoke foo.  Typing C-c a a a will invoke foo three times,
-and so on."
-  (fset (intern (concat (symbol-name cmd) "-repeat"))
-        `(lambda ,(help-function-arglist cmd) ;; arg list
-           ,(format "A repeatable version of `%s'."
-                    (symbol-name cmd)) ;; doc string
-           ,(interactive-form cmd) ;; interactive form
-           ;; see also repeat-message-function
-           (setq last-repeatable-command ',cmd)
-           (repeat nil)))
-  (intern (concat (symbol-name cmd) "-repeat")))
 
 (defun prelude-create-scratch-buffer ()
   "Create a new scratch buffer."
@@ -338,11 +383,13 @@ and so on."
     "Visit WikEmacs at http://wikemacs.org to find out even more about Emacs."))
 
 (defun prelude-tip-of-the-day ()
+  "Display a random entry from `prelude-tips'."
   (interactive)
-  ;; pick a new random seed
-  (random t)
-  (message
-   (concat "Prelude tip: " (nth (random (length prelude-tips)) prelude-tips))))
+  (unless (window-minibuffer-p)
+    ;; pick a new random seed
+    (random t)
+    (message
+     (concat "Prelude tip: " (nth (random (length prelude-tips)) prelude-tips)))))
 
 (defun prelude-eval-after-init (form)
   "Add `(lambda () FORM)' to `after-init-hook'.
@@ -358,6 +405,16 @@ and so on."
   (interactive)
   (exchange-point-and-mark)
   (deactivate-mark nil))
+
+(defun prelude-update ()
+  "Update Prelude to its latest version."
+  (interactive)
+  (when (y-or-n-p "Do you want to update Prelude? ")
+    (message "Updating Prelude...")
+    (cd prelude-dir)
+    (shell-command "git pull")
+    (prelude-recompile-init)
+    (message "Update finished. Restart Emacs to complete the process.")))
 
 (provide 'prelude-core)
 ;;; prelude-core.el ends here
