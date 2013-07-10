@@ -64,6 +64,11 @@ Will only occur if prelude-whitespace is also enabled."
   :type 'boolean
   :group 'prelude)
 
+(defcustom prelude-linum t
+  "Non-nil values enable display of line numbers."
+  :type 'boolean
+  :group 'prelude)
+
 ;; Death to the tabs!  However, tabs historically indent to the next
 ;; 8-character offset; specifying anything else will cause *mass*
 ;; confusion, as it will change the appearance of every existing file.
@@ -252,6 +257,11 @@ Will only occur if prelude-whitespace is also enabled."
     ;; keep the whitespace decent all the time (in this buffer)
     (add-hook 'before-save-hook 'prelude-cleanup-maybe nil t)
     (whitespace-mode +1)))
+
+(defun prelude-enable-linum ()
+  "Enable `linum-mode' if `prelude-linum' is not nil."
+  (when prelude-linum
+    (linum-mode +1)))
 
 (add-hook 'text-mode-hook 'prelude-enable-flyspell)
 (add-hook 'text-mode-hook 'prelude-enable-whitespace)
