@@ -118,6 +118,7 @@
   (when prelude-guru
     (guru-mode +1))
   (prelude-enable-whitespace)
+  (prelude-enable-linum)
   (prelude-local-comment-auto-fill)
   (prelude-add-watchwords))
 
