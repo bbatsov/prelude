@@ -39,7 +39,8 @@
         <ul></ul>
       </nav>
       <section>
-        <h1>Emacs Prelude</h1>
+        <h1>
+<a name="emacs-prelude" class="anchor" href="#emacs-prelude"><span class="octicon octicon-link"></span></a>Emacs Prelude</h1>
 
 <p>Prelude is an Emacs distribution that aims to enhance the default
 Emacs experience.  Prelude alters a lot of the default settings,
@@ -48,16 +49,19 @@ library to the mix. The final product offers an easy to use Emacs
 configuration for Emacs newcomers and lots of additional power for
 Emacs power users.</p>
 
-<p>Prelude is compatible <strong>ONLY with GNU Emacs 24.x</strong>.</p>
+<p>Prelude is compatible <strong>ONLY with GNU Emacs 24.x</strong>. In general you're
+advised to always run Prelude with the latest Emacs - currently
+<strong>24.3</strong>.</p>
 
-<h2>Fast Forward</h2>
+<h2>
+<a name="fast-forward" class="anchor" href="#fast-forward"><span class="octicon octicon-link"></span></a>Fast Forward</h2>
 
 <p>Assuming you're using an Unix-like OS (<code>*BSD</code>, <code>GNU/Linux</code>, <code>OS X</code>, <code>Solaris</code>,
 etc), you already have Emacs 24 installed, as well as <code>git</code> &amp; <code>curl</code> you
 can skip the whole manual and just type in your favorite shell the
 following command:</p>
 
-<div class="highlight"><pre><span class="nv">$ </span>curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
+<div class="highlight"><pre>curl -L http://git.io/epre | sh
 </pre></div>
 
 <p>You can now power up your Emacs, sit back and enjoy Prelude,
@@ -67,12 +71,12 @@ forgetting about the rest of this manual.</p>
 source repository and the installation directory. To change the
 installation directory:</p>
 
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">PRELUDE_INSTALL_DIR</span><span class="o">=</span><span class="s2">"$HOME/.emacs.d"</span> <span class="o">&amp;&amp;</span> curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
+<div class="highlight"><pre><span class="nb">export </span><span class="nv">PRELUDE_INSTALL_DIR</span><span class="o">=</span><span class="s2">"$HOME/.emacs.d"</span> <span class="o">&amp;&amp;</span> curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 </pre></div>
 
 <p>To change the source repository:</p>
 
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">PRELUDE_URL</span><span class="o">=</span><span class="s2">"https://github.com/yourname/prelude.git"</span> <span class="o">&amp;&amp;</span> curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
+<div class="highlight"><pre><span class="nb">export </span><span class="nv">PRELUDE_URL</span><span class="o">=</span><span class="s2">"https://github.com/yourname/prelude.git"</span> <span class="o">&amp;&amp;</span> curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 </pre></div>
 
 <p>Note that the installer will back up any existing <code>.emacs</code> file or
@@ -83,49 +87,56 @@ or back up your existing <code>.emacs.d</code> directory manually.</p>
 <p>Don't forget to adjust your <code>prelude-modules.el</code> file once the installation is done.
 By default most of the modules that ship with Prelude are not loaded.</p>
 
-<h2>Installing Emacs 24</h2>
+<h2>
+<a name="installing-emacs-24" class="anchor" href="#installing-emacs-24"><span class="octicon octicon-link"></span></a>Installing Emacs 24</h2>
 
 <p>Obviously to use the Emacs Prelude you have to install Emacs 24
 first. Have a look at the <a href="http://wikemacs.org/wiki/Installing_Emacs">WikEmacs articles on installing Emacs</a>.</p>
 
-<h2>Installation</h2>
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<h3>Automated</h3>
+<h3>
+<a name="automated" class="anchor" href="#automated"><span class="octicon octicon-link"></span></a>Automated</h3>
 
 <p>You can install <strong>Emacs Prelude</strong> via the command line with either <code>curl</code> or
 <code>wget</code>. Naturally <code>git</code> is also required.</p>
 
-<h4>Via Curl</h4>
+<h4>
+<a name="via-curl" class="anchor" href="#via-curl"><span class="octicon octicon-link"></span></a>Via Curl</h4>
 
 <p>If you're using <code>curl</code> type the following command:</p>
 
-<div class="highlight"><pre><span class="nv">$ </span>curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
+<div class="highlight"><pre>curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 </pre></div>
 
-<h4>Via Wget</h4>
+<h4>
+<a name="via-wget" class="anchor" href="#via-wget"><span class="octicon octicon-link"></span></a>Via Wget</h4>
 
 <p>If you're using <code>wget</code> type:</p>
 
-<div class="highlight"><pre><span class="nv">$ </span>wget --no-check-certificate https://github.com/bbatsov/prelude/raw/master/utils/installer.sh -O - | sh
+<div class="highlight"><pre>wget --no-check-certificate https://github.com/bbatsov/prelude/raw/master/utils/installer.sh -O - | sh
 </pre></div>
 
-<h3>Manual</h3>
+<h3>
+<a name="manual" class="anchor" href="#manual"><span class="octicon octicon-link"></span></a>Manual</h3>
 
-<div class="highlight"><pre><span class="nv">$ </span>git clone git://github.com/bbatsov/prelude.git path/to/local/repo
-<span class="nv">$ </span>ln -s path/to/local/repo ~/.emacs.d
-<span class="nv">$ </span><span class="nb">cd</span> ~/.emacs.d
+<div class="highlight"><pre>git clone git://github.com/bbatsov/prelude.git path/to/local/repo
+ln -s path/to/local/repo ~/.emacs.d
+<span class="nb">cd</span> ~/.emacs.d
 </pre></div>
 
 <p>You'd do well to replace <code>~/.emacs.d</code> with the value of
 <code>user-emacs-directory</code> for your OS. You can check the value by doing
 <code>C-h v user-emacs-directory</code> inside Emacs.</p>
 
-<h2>Updating Prelude</h2>
+<h2>
+<a name="updating-prelude" class="anchor" href="#updating-prelude"><span class="octicon octicon-link"></span></a>Updating Prelude</h2>
 
 <p>The update procedure is fairly straightforward:</p>
 
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>path/to/prelude/installation
-<span class="nv">$ </span>git pull
+<div class="highlight"><pre><span class="nb">cd </span>path/to/prelude/installation
+git pull
 </pre></div>
 
 <p>The <code>path/to/prelude/installation</code> is usually <code>~/.emacs.d</code> (at least
@@ -137,7 +148,8 @@ on Unix systems).</p>
 next time Prelude starts it will install any new dependencies (if
 there are such).</p>
 
-<h2>Enabling additional modules</h2>
+<h2>
+<a name="enabling-additional-modules" class="anchor" href="#enabling-additional-modules"><span class="octicon octicon-link"></span></a>Enabling additional modules</h2>
 
 <p>By default most of the modules that ship with Prelude are not loaded.</p>
 
@@ -167,24 +179,29 @@ there are such).</p>
 <span class="p">(</span><span class="nb">require</span> <span class="ss">'prelude-xml</span><span class="p">)</span>
 </pre></div>
 
-<p>You'll need to adjust your <code>prelude-modules.el</code> file once the installation is done.</p>
+<p>You'll need to adjust your <code>prelude-modules.el</code> file once the
+installation is done. If you are doing a manual install then you first
+need to copy the <code>prelude-modules.el</code> available in the sample
+directory to the root of <code>path/to/prelude/installation</code> and then
+adjust that one.</p>
 
 <p>After you've uncommented a module you should either restart Emacs or evaluate the module
 <code>require</code> expression with <kbd>C-x C-e</kbd>.</p>
 
-<h2>Running</h2>
+<h2>
+<a name="running" class="anchor" href="#running"><span class="octicon octicon-link"></span></a>Running</h2>
 
 <p>Nothing fancy here. Just start Emacs as usual. Personally I run Emacs
 in daemon mode:</p>
 
-<div class="highlight"><pre><span class="nv">$ </span>emacs --daemon
+<div class="highlight"><pre>emacs --daemon
 </pre></div>
 
 <p>Afterwards I connect to the server with either a terminal or a GUI
 client like this:</p>
 
-<div class="highlight"><pre><span class="nv">$ </span>emacsclient -t
-<span class="nv">$ </span>emacsclient -c
+<div class="highlight"><pre>emacsclient -t
+emacsclient -c
 </pre></div>
 
 <p>You'd probably do well to put a few aliases in your <code>.zshrc</code> (or
@@ -199,7 +216,8 @@ client like this:</p>
 <p>The last two aliases are helpful if you're used to editing files from
 the command line using <code>vi(m)</code>.</p>
 
-<h2>Getting to know Prelude</h2>
+<h2>
+<a name="getting-to-know-prelude" class="anchor" href="#getting-to-know-prelude"><span class="octicon octicon-link"></span></a>Getting to know Prelude</h2>
 
 <p>Certainly the best way to understand how Prelude enhances the default
 Emacs experience is to peruse Prelude's source code (which is
@@ -209,21 +227,24 @@ which collects some of the additional functionality added by
 Prelude. It also adds an additional keymap that binds many of those
 extensions to keybindings.</p>
 
-<h3>Keymap</h3>
+<h3>
+<a name="keymap" class="anchor" href="#keymap"><span class="octicon octicon-link"></span></a>Keymap</h3>
 
-<h4>Global</h4>
+<h4>
+<a name="global" class="anchor" href="#global"><span class="octicon octicon-link"></span></a>Global</h4>
 
 <table>
-<tr>
+<thead><tr>
 <th>Keybinding</th>
 <th>Description</th>
-</tr>
+</tr></thead>
+<tbody>
 <tr>
 <td><kbd>C-M-h</kbd></td>
 <td>Kill the previous word(<code>backward-kill-word</code>). (as in Bash/Zsh)</td>
 </tr>
 <tr>
-<td><kbd>C-x &lt;/kbd&gt;</kbd></td>
+<td><kbd>C-x \</kbd></td>
 <td><code>align-regexp</code></td>
 </tr>
 <tr>
@@ -239,12 +260,12 @@ extensions to keybindings.</p>
 <td>Go back to previous window (the inverse of <code>other-window</code> (<code>C-x o</code>)).</td>
 </tr>
 <tr>
-<td><kbd>C-x ^</kbd></td>
-<td>Join two lines into one(<code>join-line</code>).</td>
+<td><kbd>C-^</kbd></td>
+<td>Join two lines into one(<code>prelude-top-join-line</code>).</td>
 </tr>
 <tr>
 <td><kbd>C-x p</kbd></td>
-<td>Start <code>proced</code> (manage processes form Emacs, works only in Linux).</td>
+<td>Start <code>proced</code> (manage processes from Emacs; works only in Linux).</td>
 </tr>
 <tr>
 <td><kbd>C-x m</kbd></td>
@@ -263,7 +284,7 @@ extensions to keybindings.</p>
 <td>Run <code>apropos</code> (search in all Emacs symbols).</td>
 </tr>
 <tr>
-<td><kbd>M-&lt;/kbd&gt;</kbd></td>
+<td><kbd>M-/</kbd></td>
 <td>Run <code>hippie-expand</code> (a replacement for the default <code>dabbrev-expand</code>).</td>
 </tr>
 <tr>
@@ -282,13 +303,20 @@ extensions to keybindings.</p>
 <td><kbd>C-=</kbd></td>
 <td>Run <code>expand-region</code> (incremental text selection).</td>
 </tr>
-</table><h4>Prelude Mode</h4>
+<tr>
+<td><kbd>C-a</kbd></td>
+<td>Run <code>prelude-move-beginning-of-line</code>. Read <a href="http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/">this</a> for details.</td>
+</tr>
+</tbody>
+</table><h4>
+<a name="prelude-mode" class="anchor" href="#prelude-mode"><span class="octicon octicon-link"></span></a>Prelude Mode</h4>
 
 <table>
-<tr>
+<thead><tr>
 <th>Keybinding</th>
 <th>Description</th>
-</tr>
+</tr></thead>
+<tbody>
 <tr>
 <td><kbd>C-c o</kbd></td>
 <td>Open the currently visited file with an external program.</td>
@@ -298,7 +326,15 @@ extensions to keybindings.</p>
 <td>Search in Google for the thing under point (or an interactive query).</td>
 </tr>
 <tr>
-<td><kbd>S-RET</kbd></td>
+<td>
+<kbd>C-S-RET</kbd> or <kbd>M-o</kbd>
+</td>
+<td>Insert an empty line above the current line and indent it properly</td>
+</tr>
+<tr>
+<td>
+<kbd>S-RET</kbd> or <kbd>M-O</kbd>
+</td>
 <td>Insert an empty line and indent it properly (as in most IDEs).</td>
 </tr>
 <tr>
@@ -315,10 +351,10 @@ extensions to keybindings.</p>
 </tr>
 <tr>
 <td><kbd>C-c f</kbd></td>
-<td>Open recently visitted file.</td>
+<td>Open recently visited file.</td>
 </tr>
 <tr>
-<td><kbd>C-M-&lt;/kbd&gt;</kbd></td>
+<td><kbd>C-M-\</kbd></td>
 <td>Indent region (if selected) or the entire buffer.</td>
 </tr>
 <tr>
@@ -338,6 +374,10 @@ extensions to keybindings.</p>
 <td>Duplicate the current line (or region).</td>
 </tr>
 <tr>
+<td><kbd>C-c M-d</kbd></td>
+<td>Duplicate and comment the current line (or region).</td>
+</tr>
+<tr>
 <td><kbd>C-c r</kbd></td>
 <td>Rename the currently visited file and buffer.</td>
 </tr>
@@ -353,18 +393,57 @@ extensions to keybindings.</p>
 <td><kbd>C-c h</kbd></td>
 <td>Open Helm (a useful means of navigating your buffers and project files).</td>
 </tr>
-</table><h4>Projectile</h4>
+<tr>
+<td><kbd>C-c +</kbd></td>
+<td>Increment integer at point.</td>
+</tr>
+<tr>
+<td><kbd>C-c -</kbd></td>
+<td>Decrement integer at point.</td>
+</tr>
+<tr>
+<td><kbd>Super-r</kbd></td>
+<td>Recent files</td>
+</tr>
+<tr>
+<td><kbd>Super-x</kbd></td>
+<td>Expand region</td>
+</tr>
+<tr>
+<td><kbd>Super-j</kbd></td>
+<td>Join lines</td>
+</tr>
+<tr>
+<td><kbd>Super-k</kbd></td>
+<td>Kill whole line</td>
+</tr>
+<tr>
+<td><kbd>Super-m</kbd></td>
+<td>Magit status</td>
+</tr>
+<tr>
+<td><kbd>Super-o</kbd></td>
+<td>Open line above current line</td>
+</tr>
+</tbody>
+</table><h4>
+<a name="projectile" class="anchor" href="#projectile"><span class="octicon octicon-link"></span></a>Projectile</h4>
 
-<p>Here's a list of functionality provided by <a href="https://github.com/bbatsov/prelude">Projectile</a>:</p>
+<p>Here's a list of functionality provided by <a href="https://github.com/bbatsov/projectile">Projectile</a>:</p>
 
 <table>
-<tr>
+<thead><tr>
 <th>Keybinding</th>
 <th>Description</th>
-</tr>
+</tr></thead>
+<tbody>
 <tr>
 <td><kbd>C-c p f</kbd></td>
 <td>Display a list of all files in the project. With a prefix argument it will clear the cache first.</td>
+</tr>
+<tr>
+<td><kbd>C-c p d</kbd></td>
+<td>Display a list of all directories in the project. With a prefix argument it will clear the cache first.</td>
 </tr>
 <tr>
 <td><kbd>C-c p T</kbd></td>
@@ -399,7 +478,7 @@ extensions to keybindings.</p>
 <td>Kills all project buffers.</td>
 </tr>
 <tr>
-<td><kbd>C-c p d</kbd></td>
+<td><kbd>C-c p D</kbd></td>
 <td>Opens the root of the project in <code>dired</code>.</td>
 </tr>
 <tr>
@@ -411,7 +490,7 @@ extensions to keybindings.</p>
 <td>Runs <code>ack</code> on the project. Requires the presence of <code>ack-and-a-half</code>.</td>
 </tr>
 <tr>
-<td><kbd>C-c p l</kbd></td>
+<td><kbd>C-c p c</kbd></td>
 <td>Runs a standard compilation command for your type of project.</td>
 </tr>
 <tr>
@@ -426,11 +505,84 @@ extensions to keybindings.</p>
 <td><kbd>C-c p s</kbd></td>
 <td>Display a list of known projects you can switch to.</td>
 </tr>
+</tbody>
+</table><p>Prelude adds some extra keybindings:</p>
+
+<table>
+<thead><tr>
+<th>Keybinding</th>
+<th>Command</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><kbd>Super-f</kbd></td>
+<td>Find file in project</td>
+</tr>
+<tr>
+<td><kbd>Super-d</kbd></td>
+<td>Find directory in project</td>
+</tr>
+<tr>
+<td><kbd>Super-g</kbd></td>
+<td>Run grep on project</td>
+</tr>
+<tr>
+<td><kbd>Super-p</kbd></td>
+<td>Switch projects</td>
+</tr>
+</tbody>
 </table><p>If you ever forget any of Projectile's keybindings just do a:</p>
 
 <p><kbd>C-c p C-h</kbd></p>
 
-<h3>Automatic package installation</h3>
+<h4>
+<a name="key-chords" class="anchor" href="#key-chords"><span class="octicon octicon-link"></span></a>Key-chords</h4>
+
+<table>
+<thead><tr>
+<th>Keybinding</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><kbd>jj</kbd></td>
+<td>Jump to the beginning of a word(<code>ace-jump-word-mode</code>)</td>
+</tr>
+<tr>
+<td><kbd>jk</kbd></td>
+<td>Jump to a character(<code>ace-jump-char-mode</code>)</td>
+</tr>
+<tr>
+<td><kbd>jl</kbd></td>
+<td>Jump to the beginning of a line(<code>ace-jump-line-mode</code>)</td>
+</tr>
+<tr>
+<td><kbd>JJ</kbd></td>
+<td>Jump back to previous buffer(<code>prelude-switch-to-previous-buffer</code>)</td>
+</tr>
+<tr>
+<td><kbd>uu</kbd></td>
+<td>View edits as a tree(<code>undo-tree-visualize</code>)</td>
+</tr>
+</tbody>
+</table><h5>
+<a name="disabling-key-chords" class="anchor" href="#disabling-key-chords"><span class="octicon octicon-link"></span></a>Disabling key-chords</h5>
+
+<p>In some cases you may not want to have a key-chord that is defined by prelude,
+in which case you can disable the binding in your <code>personal.el</code> file by setting
+its command to <code>nil</code>. For example, to disable the <code>jj</code> key-chord add the
+following line:</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="nv">key-chord-define-global</span> <span class="s">"jj"</span> <span class="no">nil</span><span class="p">)</span>
+</pre></div>
+
+<p>If you're an <code>evil-mode</code> user you'll probably do well to disable <code>key-chord-mode</code> altogether:</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="nv">key-chord-mode</span> <span class="mi">-1</span><span class="p">)</span>
+</pre></div>
+
+<h2>
+<a name="automatic-package-installation" class="anchor" href="#automatic-package-installation"><span class="octicon octicon-link"></span></a>Automatic package installation</h2>
 
 <p>The default Prelude installation comes with a bare minimum of
 functionality. It will however install add-ons for various programming
@@ -440,7 +592,8 @@ configuration will be installed automatically for you.</p>
 
 <p>You can, of course, install anything you wish manually as well.</p>
 
-<h3>Color Themes</h3>
+<h3>
+<a name="color-themes" class="anchor" href="#color-themes"><span class="octicon octicon-link"></span></a>Color Themes</h3>
 
 <p>Emacs 24 ships with a new theming facility that effectively renders
 the old color-theme package obsolete. Emacs 24 provides a dozen of
@@ -467,7 +620,8 @@ line:</p>
 
 <p>P.S. Solarized is not available by default - you'll have to install it from MELPA first.</p>
 
-<h3>Personalizing</h3>
+<h3>
+<a name="personalizing" class="anchor" href="#personalizing"><span class="octicon octicon-link"></span></a>Personalizing</h3>
 
 <p>Fork the official Prelude repo and add your own touch to it. You're advised to avoid changing stuff outside of the
 personal folder to avoid having to deal with git merge conflicts in the future.</p>
@@ -475,10 +629,16 @@ personal folder to avoid having to deal with git merge conflicts in the future.<
 <p>If you'd like to add some auto installation of packages in your
 personal config use the following code:</p>
 
-<div class="highlight"><pre><span class="p">(</span><span class="nv">prelude-ensure-module-deps</span> <span class="o">'</span><span class="p">(</span><span class="nv">some-package</span> <span class="nv">some-other-package</span><span class="p">))</span>
+<div class="highlight"><pre><span class="p">(</span><span class="nv">prelude-require-packages</span> <span class="o">'</span><span class="p">(</span><span class="nv">some-package</span> <span class="nv">some-other-package</span><span class="p">))</span>
 </pre></div>
 
-<h4>Disabling whitespace-mode</h4>
+<p>If you require just a single package you can also use:</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="nv">prelude-require-package</span> <span class="ss">'some-package</span><span class="p">)</span>
+</pre></div>
+
+<h4>
+<a name="disabling-whitespace-mode" class="anchor" href="#disabling-whitespace-mode"><span class="octicon octicon-link"></span></a>Disabling whitespace-mode</h4>
 
 <p>Although <code>whitespace-mode</code> is awesome some people might find it too
 intrusive. You can disable it in your
@@ -498,16 +658,19 @@ prelude-clean-whitespace-on-save to nil in your config file with:</p>
 per-file or directory basis by using a file variable or a
 .dir-locals.el file.</p>
 
-<h4>Disable flyspell-mode</h4>
+<h4>
+<a name="disable-flyspell-mode" class="anchor" href="#disable-flyspell-mode"><span class="octicon octicon-link"></span></a>Disable flyspell-mode</h4>
 
 <p>If you're not fond of spellchecking on the fly:</p>
 
 <div class="highlight"><pre><span class="p">(</span><span class="k">setq</span> <span class="nv">prelude-flyspell</span> <span class="no">nil</span><span class="p">)</span>
 </pre></div>
 
-<h2>Caveats &amp; Pitfalls</h2>
+<h2>
+<a name="caveats--pitfalls" class="anchor" href="#caveats--pitfalls"><span class="octicon octicon-link"></span></a>Caveats &amp; Pitfalls</h2>
 
-<h3>Problems with flyspell-mode</h3>
+<h3>
+<a name="problems-with-flyspell-mode" class="anchor" href="#problems-with-flyspell-mode"><span class="octicon octicon-link"></span></a>Problems with flyspell-mode</h3>
 
 <p>Prelude makes heavy use of the flyspell-mode package for spell
 checking of various things. The proper operation of flyspell depends
@@ -515,28 +678,31 @@ on the presence of the <code>aspell</code> program and an <code>en</code> dictio
 system. You can install <code>aspell</code> and the dictionary on OS X with
 <code>homebrew</code> like this:</p>
 
-<div class="highlight"><pre><span class="nv">$ </span>brew install aspell --with-lang<span class="o">=</span>en
+<div class="highlight"><pre>brew install aspell --with-lang<span class="o">=</span>en
 </pre></div>
 
 <p>On Linux distros - just use your distro's package manager.</p>
 
-<h3>Ugly colors in the terminal Emacs version</h3>
+<h3>
+<a name="ugly-colors-in-the-terminal-emacs-version" class="anchor" href="#ugly-colors-in-the-terminal-emacs-version"><span class="octicon octicon-link"></span></a>Ugly colors in the terminal Emacs version</h3>
 
 <p>If your Emacs looks considerably uglier in a terminal (compared to the
 GUI version) try adding this to your <code>.bashrc</code> or <code>.zshrc</code>:</p>
 
-<div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>xterm-256color
+<div class="highlight"><pre><span class="nb">export </span><span class="nv">TERM</span><span class="o">=</span>xterm-256color
 </pre></div>
 
 <p>Source the <code>.bashrc</code> file and start Emacs again.</p>
 
-<h3>MELPA error on initial startup</h3>
+<h3>
+<a name="melpa-error-on-initial-startup" class="anchor" href="#melpa-error-on-initial-startup"><span class="octicon octicon-link"></span></a>MELPA error on initial startup</h3>
 
 <p>If you get some http connection error related to the MELPA repo
 just do a manual <code>M-x package-refresh-contents</code> and restart Emacs
 afterwards.</p>
 
-<h3>No arrow navigation in editor buffers</h3>
+<h3>
+<a name="no-arrow-navigation-in-editor-buffers" class="anchor" href="#no-arrow-navigation-in-editor-buffers"><span class="octicon octicon-link"></span></a>No arrow navigation in editor buffers</h3>
 
 <p>This is not a bug - it's a feature! I firmly believe that the one true
 way to use Emacs is by using it the way it was intended to be used (as
@@ -552,13 +718,45 @@ personal Emacs customization to enable them permanently:</p>
 <div class="highlight"><pre><span class="p">(</span><span class="k">setq</span> <span class="nv">prelude-guru</span> <span class="no">nil</span><span class="p">)</span>
 </pre></div>
 
-<h3>Windows compatibility</h3>
+<h3>
+<a name="customized-c-a-behavior" class="anchor" href="#customized-c-a-behavior"><span class="octicon octicon-link"></span></a>Customized C-a behavior</h3>
+
+<p>Prelude overrides <code>C-a</code> to behave as described
+<a href="http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/">here</a>. If
+you don't like that simply add this to your personal config:</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[remap</span> <span class="nv">move-beginning-of-line]</span>
+                <span class="ss">'move-beginning-of-line</span><span class="p">)</span>
+</pre></div>
+
+<h3>
+<a name="poor-ido-matching-performance-on-large-datasets" class="anchor" href="#poor-ido-matching-performance-on-large-datasets"><span class="octicon octicon-link"></span></a>Poor ido matching performance on large datasets</h3>
+
+<p>Prelude swaps the default <code>ido</code> flex matching with the more powerful
+<a href="https://github.com/lewang/flx">ido-flx</a>.</p>
+
+<p>The sorting algorithm <code>flx</code> uses is more complex, but yields better results.</p>
+
+<p>On slower machines, it may be necessary to lower <code>flx-ido-threshhold</code> to
+ensure a smooth experience.</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="k">setq</span> <span class="nv">flx-ido-threshhold</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+
+<p>You can always disable the improved sorting algorithm all together like this:</p>
+
+<div class="highlight"><pre><span class="p">(</span><span class="nv">flx-ido-mode</span> <span class="mi">-1</span><span class="p">)</span>
+</pre></div>
+
+<h3>
+<a name="windows-compatibility" class="anchor" href="#windows-compatibility"><span class="octicon octicon-link"></span></a>Windows compatibility</h3>
 
 <p>While everything in Prelude should work fine in Windows, I test it only
 with Linux &amp; OSX, so there are Windows related problems from time to
 time. This situation will probably improve over time.</p>
 
-<h2>Share the knowledge</h2>
+<h2>
+<a name="share-the-knowledge" class="anchor" href="#share-the-knowledge"><span class="octicon octicon-link"></span></a>Share the knowledge</h2>
 
 <p><a href="http://wikemacs.org">WikEmacs</a> collects useful resources for working
 with GNU Emacs. Please, take the time to peruse and improve them as
@@ -567,23 +765,27 @@ easy, since it bundles
 <a href="http://wikemacs.org/wiki/Mediawiki.el">MediaWiki support</a> + the
 settings required to access WikEmacs right away.</p>
 
-<h2>Known issues</h2>
+<h2>
+<a name="known-issues" class="anchor" href="#known-issues"><span class="octicon octicon-link"></span></a>Known issues</h2>
 
 <p>Check out the project's
 <a href="https://github.com/bbatsov/prelude/issues?sort=created&amp;direction=desc&amp;state=open">issue list</a>
 a list of unresolved issues. By the way - feel free to fix any of them
 and send me a pull request. :-)</p>
 
-<h2>Support</h2>
+<h2>
+<a name="support" class="anchor" href="#support"><span class="octicon octicon-link"></span></a>Support</h2>
 
 <p>Support is available via the Prelude Google Group <a href="mailto:emacs-prelude@googlegroups.com">emacs-prelude@googlegroups.com</a>.</p>
 
-<h2>Contributors</h2>
+<h2>
+<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
 
 <p>Here's a <a href="https://github.com/bbatsov/prelude/contributors">list</a> of all the people who have contributed to the
 development of Emacs Prelude.</p>
 
-<h2>Bugs &amp; Improvements</h2>
+<h2>
+<a name="bugs--improvements" class="anchor" href="#bugs--improvements"><span class="octicon octicon-link"></span></a>Bugs &amp; Improvements</h2>
 
 <p>Bug reports and suggestions for improvements are always
 welcome. GitHub pull requests are even better! :-)</p>
@@ -592,7 +794,7 @@ welcome. GitHub pull requests are even better! :-)</p>
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/bbatsov">bbatsov</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
