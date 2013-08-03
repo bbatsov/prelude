@@ -102,7 +102,10 @@ Will only occur if prelude-whitespace is also enabled."
                                          try-complete-lisp-symbol))
 
 ;; smart pairing for all
-(electric-pair-mode t)
+(require 'smartparens-config)
+(setq sp-base-key-bindings 'paredit)
+(setq sp-cancel-autoskip-on-backward-movement nil)
+(smartparens-global-mode +1)
 
 ;; diminish keeps the modeline tidy
 (require 'diminish)
@@ -134,7 +137,7 @@ Will only occur if prelude-whitespace is also enabled."
 ;; save recent files
 (require 'recentf)
 (setq recentf-save-file (expand-file-name "recentf" prelude-savefile-dir)
-      recentf-max-saved-items 200
+      recentf-max-saved-items 500
       recentf-max-menu-items 15)
 (recentf-mode +1)
 
@@ -152,24 +155,20 @@ Will only occur if prelude-whitespace is also enabled."
              (file-writable-p buffer-file-name))
     (save-buffer)))
 
-(defadvice switch-to-buffer (before save-buffer-now activate)
-  "Invoke `prelude-auto-save-command' before `switch-to-window'."
-  (prelude-auto-save-command))
-(defadvice other-window (before other-window-now activate)
-  "Invoke `prelude-auto-save-command' before `other-window'."
-  (prelude-auto-save-command))
-(defadvice windmove-up (before other-window-now activate)
-  "Invoke `prelude-auto-save-command' before `windmove-up'."
-  (prelude-auto-save-command))
-(defadvice windmove-down (before other-window-now activate)
-  "Invoke `prelude-auto-save-command' before `windmove-down'."
-  (prelude-auto-save-command))
-(defadvice windmove-left (before other-window-now activate)
-  "Invoke `prelude-auto-save-command' before `windmove-left'."
-  (prelude-auto-save-command))
-(defadvice windmove-right (before other-window-now activate)
-  "Invoke `prelude-auto-save-command' before `windmove-right'."
-  (prelude-auto-save-command))
+(defmacro advise-commands (advice-name commands &rest body)
+  "Apply advice named ADVICE-NAME to multiple COMMANDS.
+
+The body of the advice is in BODY."
+  `(progn
+     ,@(mapcar (lambda (command)
+                 `(defadvice ,command (before ,(intern (concat (symbol-name command) "-" advice-name)) activate)
+                    ,@body))
+               commands)))
+
+;; advise all window switching functions
+(advise-commands "auto-save"
+                 (switch-to-buffer other-window windmove-up windmove-down windmove-left windmove-right)
+                 (prelude-auto-save-command))
 
 (add-hook 'mouse-leave-buffer-hook 'prelude-auto-save-command)
 
@@ -193,7 +192,7 @@ Will only occur if prelude-whitespace is also enabled."
    (if mark-active (list (region-beginning) (region-end))
      (message "Copied line")
      (list (line-beginning-position)
-           (line-beginning-position 2)))))
+           (line-end-position)))))
 
 (defadvice kill-region (before smart-cut activate compile)
   "When called interactively with no active region, kill a single line instead."
@@ -210,6 +209,7 @@ Will only occur if prelude-whitespace is also enabled."
 ;; ido-mode
 (require 'ido)
 (require 'ido-ubiquitous)
+(require 'flx-ido)
 (setq ido-enable-prefix nil
       ido-enable-flex-matching t
       ido-create-new-buffer 'always
@@ -218,7 +218,11 @@ Will only occur if prelude-whitespace is also enabled."
       ido-save-directory-list-file (expand-file-name "ido.hist" prelude-savefile-dir)
       ido-default-file-method 'selected-window)
 (ido-mode +1)
-(ido-ubiquitous +1)
+(ido-ubiquitous-mode +1)
+;; smarter fuzzy matching for ido
+(flx-ido-mode +1)
+;; disable ido faces to see flx highlights
+(setq ido-use-faces nil)
 
 ;; smex, remember recently and most frequently used commands
 (require 'smex)
@@ -273,16 +277,6 @@ Will only occur if prelude-whitespace is also enabled."
 (setq bookmark-default-file (expand-file-name "bookmarks" prelude-savefile-dir)
       bookmark-save-flag 1)
 
-;; load yasnippet
-(require 'yasnippet)
-(add-to-list 'yas-snippet-dirs prelude-snippets-dir)
-(add-to-list 'yas-snippet-dirs prelude-personal-snippets-dir)
-(yas-global-mode 1)
-
-;; term-mode does not play well with yasnippet
-(add-hook 'term-mode-hook (lambda ()
-                            (yas-minor-mode -1)))
-
 ;; projectile is a project management mode
 (require 'projectile)
 (setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
@@ -297,13 +291,7 @@ Will only occur if prelude-whitespace is also enabled."
   (interactive)
   (condition-case nil
     (if (projectile-project-root)
-        ;; add project files and buffers when in project
-        (helm-other-buffer '(helm-c-source-projectile-files-list
-                             helm-c-source-projectile-buffers-list
-                             helm-c-source-buffers-list
-                             helm-c-source-recentf
-                             helm-c-source-buffer-not-found)
-                           "*helm prelude*")
+        (helm-projectile)
       ;; otherwise fallback to helm-mini
       (helm-mini))
     ;; fall back to helm mini if an error occurs (usually in projectile-project-root)
