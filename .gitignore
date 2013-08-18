@@ -11,11 +11,13 @@ semanticdb
 url
 ede-projects.el
 .DS_Store
-custom.el
+# I wanna keep that.
+# custom.el
 places
 .smex-items
 savefile/
-/prelude-modules.el
+# I wanna keep this, too
+# /prelude-modules.el
 projectile-bookmarks.eld
 session*
 .cask
