@@ -1,0 +1,3 @@
+[submodule "personal/hyde"]
+	path = personal/hyde
+	url = https://github.com/nibrahim/Hyde.git
