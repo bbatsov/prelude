@@ -38,8 +38,6 @@
  ;; If there is more than one, they won't work right.
  )
 
-(add-to-list 'load-path "~/.emacs.d/personal/hyde")
-(require 'hyde)
 (prelude-require-packages '(autopair twilight-theme))
 (load-theme 'twilight t)
 
