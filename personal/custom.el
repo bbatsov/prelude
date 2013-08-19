@@ -38,7 +38,7 @@
  ;; If there is more than one, they won't work right.
  )
 
-(prelude-require-packages '(autopair twilight-theme))
+(prelude-require-packages '(twilight-theme))
 (load-theme 'twilight t)
 
 
