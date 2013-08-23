@@ -41,6 +41,37 @@
 (prelude-require-packages '(twilight-theme))
 (load-theme 'twilight t)
 
+(setq sql-connection-alist
+      '((sag-db01
+         (sql-product 'mysql)
+         (sql-server "sag-db01.sea.bigfishgames.com")
+         (sql-user (getenv "MYSQL_USER"))
+         (sql-password (getenv "MYSQL_PASSWORD"))
+         (sql-database "wordace")
+         (sql-port 3306))
+        (character-batch
+         (sql-product 'mysql)
+         (sql-server "characterbatch-dbslave.sea.bigfishgames.com")
+         (sql-user (getenv "MYSQL_USER"))
+         (sql-password (getenv "MYSQL_PASSWORD"))
+         (sql-database "")
+         (sql-port 3306))))
 
+(defun sql-connect-preset (name)
+  "Connect to a predefined SQL connection listed in `sql-connection-alist'"
+  (eval `(let ,(cdr (assoc name sql-connection-alist))
+    (flet ((sql-get-login (&rest what)))
+      (sql-product-interactive sql-product)))))
 
-;; custom.el ends here
+(defun sql-connect-preset-by-name (name)
+  "Connect to a DB by entering it's short name"
+  (interactive "sDB Name: ")
+  (sql-connect-preset 'name))
+
+(defun sql-sag-db01 ()
+  (interactive)
+  (sql-connect-preset 'sag-db01))
+
+(global-set-key (kbd "M-s q") 'sql-connect-preset-by-name) ; Connect to a db preset by nameq
+
+;;; custom.el ends here
