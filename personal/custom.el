@@ -38,9 +38,17 @@
  ;; If there is more than one, they won't work right.
  )
 
-(prelude-require-packages '(twilight-theme))
+
+;; Pull in custom packages
+(prelude-require-packages '(jade-mode php-mode twilight-theme))
+
+;; Load my Theme of Choice
 (load-theme 'twilight t)
 
+;; Disable whitespace-mode in certain other major modes
+(add-hook 'php-mode-hook (lambda() (whitespace-mode -1)))
+
+;; Generate a list of DBs I connect to commonly
 (setq sql-connection-alist
       '((sag-db01
          (sql-product 'mysql)
@@ -63,6 +71,7 @@
     (flet ((sql-get-login (&rest what)))
       (sql-product-interactive sql-product)))))
 
+;; Function to load a DB based on its short name
 (defun sql-connect-preset-by-name (name)
   "Connect to a DB by entering it's short name"
   (interactive "sDB Name: ")
