@@ -134,6 +134,7 @@ By default most of the modules that ship with Prelude are not loaded.
 ;; (require 'prelude-scala)
 (require 'prelude-scheme)
 ;; (require 'prelude-scss)
+;; (require 'prelude-web)
 (require 'prelude-xml)
 ```
 
@@ -203,8 +204,9 @@ Keybinding         | Description
 <kbd>C-x M-m</kbd> | Start your default shell.
 <kbd>C-x C-m</kbd> | Alias for `M-x`.
 <kbd>C-h A</kbd>   | Run `apropos` (search in all Emacs symbols).
-<kbd>M-\\</kbd>     | Run `hippie-expand` (a replacement for the default `dabbrev-expand`).
+<kbd>M-/</kbd>     | Run `hippie-expand` (a replacement for the default `dabbrev-expand`).
 <kbd>C-x C-b</kbd> | Open `ibuffer` (a replacement for the default `buffer-list`).
+<kbd>F11</kbd>     | Make the window full screen.
 <kbd>F12</kbd>     | Toggle the Emacs menu bar.
 <kbd>C-x g</kbd>   | Open Magit's status buffer.
 <kbd>C-=</kbd>     | Run `expand-region` (incremental text selection).
@@ -216,8 +218,9 @@ Keybinding         | Description
 -------------------|------------------------------------------------------------
 <kbd>C-c o</kbd>   | Open the currently visited file with an external program.
 <kbd>C-c g</kbd>   | Search in Google for the thing under point (or an interactive query).
-<kbd>C-S-RET</kbd> | Insert an empty line above the current line and indent it properly
-<kbd>S-RET</kbd>   | Insert an empty line and indent it properly (as in most IDEs).
+<kbd>C-c y</kbd>   | Search in YouTube for the thing under point (or an interactive query).
+<kbd>C-S-RET</kbd> or <kbd>M-o</kbd> | Insert an empty line above the current line and indent it properly
+<kbd>S-RET</kbd> or <kbd>M-O</kbd> | Insert an empty line and indent it properly (as in most IDEs).
 <kbd>C-S-up</kbd>  | Move the current line up.
 <kbd>C-S-down</kbd> | Move the current line down.
 <kbd>C-c n</kbd> | Fix indentation in buffer and strip whitespace.
@@ -227,10 +230,32 @@ Keybinding         | Description
 <kbd>C-c e</kbd> | Eval a bit of Emacs Lisp code and replace it with its result.
 <kbd>C-c s</kbd> | Swap two active windows.
 <kbd>C-c d</kbd> | Duplicate the current line (or region).
+<kbd>C-c M-d</kbd> | Duplicate and comment the current line (or region).
 <kbd>C-c r</kbd> | Rename the currently visited file and buffer.
 <kbd>C-c t</kbd> | Open a terminal emulator (`ansi-term`).
 <kbd>C-c k</kbd> | Kill all open buffers except the one you're currently in.
 <kbd>C-c h</kbd> | Open Helm (a useful means of navigating your buffers and project files).
+<kbd>C-c +</kbd> | Increment integer at point.
+<kbd>C-c -</kbd> | Decrement integer at point.
+<kbd>Super-r</kbd> | Recent files
+<kbd>Super-x</kbd> | Expand region
+<kbd>Super-j</kbd> | Join lines
+<kbd>Super-k</kbd> | Kill whole line
+<kbd>Super-m</kbd> | Magit status
+<kbd>Super-o</kbd> | Open line above current line
+
+#### OSX modifier keys
+
+Prelude does not mess by default with the standard mapping of `Command` (to `Super`) and `Option` (to `Meta`).
+
+If you want to swap them add this to your personal config:
+
+```lisp
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
+```
+
+You can also temporarily swap them with `C-c w` (`M-x prelude-swap-meta-and-super`).
 
 #### Projectile
 
@@ -239,6 +264,7 @@ Here's a list of functionality provided by [Projectile](https://github.com/bbats
 Keybinding         | Description
 -------------------|------------------------------------------------------------
 <kbd>C-c p f</kbd> | Display a list of all files in the project. With a prefix argument it will clear the cache first.
+<kbd>C-c p d</kbd> | Display a list of all directories in the project. With a prefix argument it will clear the cache first.
 <kbd>C-c p T</kbd> | Display a list of all test files(specs, features, etc) in the project.
 <kbd>C-c p g</kbd> | Run grep on the files in the project.
 <kbd>C-c p b</kbd> | Display a list of all project buffers currently open.
@@ -247,13 +273,22 @@ Keybinding         | Description
 <kbd>C-c p i</kbd> | Invalidates the project cache (if existing).
 <kbd>C-c p R</kbd> | Regenerates the projects `TAGS` file.
 <kbd>C-c p k</kbd> | Kills all project buffers.
-<kbd>C-c p d</kbd> | Opens the root of the project in `dired`.
+<kbd>C-c p D</kbd> | Opens the root of the project in `dired`.
 <kbd>C-c p e</kbd> | Shows a list of recently visited project files.
 <kbd>C-c p a</kbd> | Runs `ack` on the project. Requires the presence of `ack-and-a-half`.
-<kbd>C-c p l</kbd> | Runs a standard compilation command for your type of project.
+<kbd>C-c p c</kbd> | Runs a standard compilation command for your type of project.
 <kbd>C-c p p</kbd> | Runs a standard test command for your type of project.
 <kbd>C-c p z</kbd> | Adds the currently visited to the cache.
 <kbd>C-c p s</kbd> | Display a list of known projects you can switch to.
+
+Prelude adds some extra keybindings:
+
+Keybinding         | Command
+-------------------|------------------------------------------------------------
+<kbd>Super-f</kbd> | Find file in project
+<kbd>Super-d</kbd> | Find directory in project
+<kbd>Super-g</kbd> | Run grep on project
+<kbd>Super-p</kbd> | Switch projects
 
 If you ever forget any of Projectile's keybindings just do a:
 
@@ -323,7 +358,9 @@ Or you can use another theme altogether by adding something like:
 (load-theme 'solarized-dark t)
 ```
 
-P.S. Solarized is not available by default - you'll have to install it from MELPA first.
+**P.S.** Solarized is not available by default - you'll have to
+  install it from MELPA first (`M-x package-install RET
+  solarized-theme`).
 
 ### Personalizing
 
@@ -334,7 +371,13 @@ If you'd like to add some auto installation of packages in your
 personal config use the following code:
 
 ```lisp
-(prelude-ensure-module-deps '(some-package some-other-package))
+(prelude-require-packages '(some-package some-other-package))
+```
+
+If you require just a single package you can also use:
+
+```lisp
+(prelude-require-package 'some-package)
 ```
 
 #### Disabling whitespace-mode
@@ -427,6 +470,26 @@ you don't like that simply add this to your personal config:
 ```lisp
 (global-set-key [remap move-beginning-of-line]
                 'move-beginning-of-line)
+```
+
+### Poor ido matching performance on large datasets
+
+Prelude swaps the default `ido` flex matching with the more powerful
+[ido-flx](https://github.com/lewang/flx).
+
+The sorting algorithm `flx` uses is more complex, but yields better results.
+
+On slower machines, it may be necessary to lower `flx-ido-threshhold` to
+ensure a smooth experience.
+
+```lisp
+(setq flx-ido-threshhold 1000)
+```
+
+You can always disable the improved sorting algorithm all together like this:
+
+```lisp
+(flx-ido-mode -1)
 ```
 
 ### Windows compatibility

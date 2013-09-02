@@ -32,8 +32,11 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
+(defvar current-user
+      (getenv
+       (if (equal system-type 'windows-nt) "USERNAME" "USER")))
 
-(message "Prelude is powering up... Be patient, Master %s!" (getenv "USER"))
+(message "Prelude is powering up... Be patient, Master %s!" current-user)
 
 (defvar prelude-dir (file-name-directory load-file-name)
   "The root dir of the Emacs Prelude distribution.")
@@ -49,10 +52,6 @@ changes in this directory.  All Emacs Lisp files there are loaded automatically
 by Prelude.")
 (defvar prelude-vendor-dir (expand-file-name "vendor" prelude-dir)
   "This directory houses packages that are not yet available in ELPA (or MELPA).")
-(defvar prelude-snippets-dir (expand-file-name "snippets" prelude-dir)
-  "This folder houses additional yasnippet bundles distributed with Prelude.")
-(defvar prelude-personal-snippets-dir (expand-file-name "snippets" prelude-personal-dir)
-  "This folder houses additional yasnippet bundles added by the users.")
 (defvar prelude-savefile-dir (expand-file-name "savefile" prelude-dir)
   "This folder stores all the automatically generated save/history-files.")
 (defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-dir)
@@ -62,19 +61,24 @@ by Prelude.")
   (make-directory prelude-savefile-dir))
 
 (defun prelude-add-subfolders-to-load-path (parent-dir)
- "Add all first level PARENT-DIR subdirs to the `load-path'."
+ "Add all level PARENT-DIR subdirs to the `load-path'."
  (dolist (f (directory-files parent-dir))
    (let ((name (expand-file-name f parent-dir)))
      (when (and (file-directory-p name)
                 (not (equal f ".."))
                 (not (equal f ".")))
-       (add-to-list 'load-path name)))))
+       (add-to-list 'load-path name)
+       (prelude-add-subfolders-to-load-path name)))))
 
 ;; add Prelude's directories to Emacs's `load-path'
 (add-to-list 'load-path prelude-core-dir)
 (add-to-list 'load-path prelude-modules-dir)
 (add-to-list 'load-path prelude-vendor-dir)
 (prelude-add-subfolders-to-load-path prelude-vendor-dir)
+
+;; reduce the frequency of garbage collection by making it happen on
+;; each 50MB of allocated data (the default is on every 0.76MB)
+(setq gc-cons-threshold 50000000)
 
 ;; the core stuff
 (require 'prelude-packages)
@@ -100,7 +104,7 @@ by Prelude.")
   (message "Loading personal configuration files in %s..." prelude-personal-dir)
   (mapc 'load (directory-files prelude-personal-dir 't "^[^#].*el$")))
 
-(message "Prelude is ready to do thy bidding, Master %s!" (getenv "USER"))
+(message "Prelude is ready to do thy bidding, Master %s!" current-user)
 
 (prelude-eval-after-init
  ;; greet the use with some useful tip

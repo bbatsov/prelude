@@ -60,7 +60,7 @@
 (global-set-key (kbd "C-x M-m") 'shell)
 
 ;; If you want to be able to M-x without meta
-(global-set-key (kbd "C-x C-m") 'execute-extended-command)
+(global-set-key (kbd "C-x C-m") 'smex)
 
 ;; A complementary binding to the apropos-command (C-h a)
 (define-key 'help-command "A" 'apropos)
@@ -95,6 +95,9 @@
 
 ;; replace buffer-menu with ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(unless (fboundp 'toggle-frame-fullscreen)
+  (global-set-key (kbd "<f11>") 'prelude-fullscreen))
 
 ;; toggle menu-bar visibility
 (global-set-key (kbd "<f12>") 'menu-bar-mode)
