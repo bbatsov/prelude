@@ -40,13 +40,19 @@
 
 
 ;; Pull in custom packages
-(prelude-require-packages '(jade-mode php-mode twilight-theme))
+(prelude-require-packages '(jade-mode php-mode twilight-theme ess))
 
 ;; Load my Theme of Choice
 (load-theme 'twilight t)
 
 ;; Disable whitespace-mode in certain other major modes
 (add-hook 'php-mode-hook (lambda() (whitespace-mode -1)))
+
+;; Load ESS
+(require 'ess-site)
+
+;; Fix Python indentation
+(setq python-indent 4)
 
 ;; Generate a list of DBs I connect to commonly
 (setq sql-connection-alist
@@ -82,5 +88,7 @@
   (sql-connect-preset 'sag-db01))
 
 (global-set-key (kbd "M-s q") 'sql-connect-preset-by-name) ; Connect to a db preset by nameq
+
+(provide 'custom)
 
 ;;; custom.el ends here
