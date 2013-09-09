@@ -51,6 +51,9 @@
 ;; Load ESS
 (require 'ess-site)
 
+;; Fix Python indentation
+(setq python-indent 4)
+
 ;; Generate a list of DBs I connect to commonly
 (setq sql-connection-alist
       '((sag-db01
