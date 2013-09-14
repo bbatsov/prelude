@@ -104,7 +104,8 @@ Will only occur if prelude-whitespace is also enabled."
 ;; smart pairing for all
 (require 'smartparens-config)
 (setq sp-base-key-bindings 'paredit)
-(setq sp-cancel-autoskip-on-backward-movement nil)
+(setq sp-autoskip-closing-pair 'always)
+(sp-use-paredit-bindings)
 (smartparens-global-mode +1)
 
 ;; diminish keeps the modeline tidy
@@ -216,7 +217,8 @@ The body of the advice is in BODY."
       ido-use-filename-at-point 'guess
       ido-max-prospects 10
       ido-save-directory-list-file (expand-file-name "ido.hist" prelude-savefile-dir)
-      ido-default-file-method 'selected-window)
+      ido-default-file-method 'selected-window
+      ido-auto-merge-work-directories-length -1)
 (ido-mode +1)
 (ido-ubiquitous-mode +1)
 ;; smarter fuzzy matching for ido

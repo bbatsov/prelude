@@ -39,8 +39,6 @@
 (exec-path-from-shell-initialize)
 
 ;; It's all in the Meta
-(setq mac-command-modifier 'meta)
-(setq mac-option-modifier 'super)
 (setq ns-function-modifier 'hyper)
 
 (defun prelude-swap-meta-and-super ()
@@ -59,6 +57,7 @@ Windows external keyboard from time to time."
       (message "Command is now bound to SUPER and Option is bound to META."))))
 
 (define-key prelude-mode-map (kbd "C-c w") 'prelude-swap-meta-and-super)
+(define-key prelude-mode-map (kbd "s-/") 'hippie-expand)
 
 (menu-bar-mode +1)
 
