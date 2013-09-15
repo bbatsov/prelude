@@ -93,8 +93,6 @@
 ;; use hippie-expand instead of dabbrev
 (global-set-key (kbd "M-/") 'hippie-expand)
 
-(global-set-key (kbd "M-;") 'prelude-smart-comment)
-
 ;; replace buffer-menu with ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
