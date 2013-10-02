@@ -90,7 +90,13 @@ You'd do well to replace `~/.emacs.d` with the value of
 
 ## Updating Prelude
 
-The update procedure is fairly straightforward:
+The update procedure is fairly straightforward and consists of 3 steps:
+
+### Update all bundled packages
+
+Just run <kbd>M-x package-list-packages RET U x</kbd>. Unfortunately this step cannot be automated.
+
+### Update Prelude's code
 
 ```bash
 cd path/to/prelude/installation
@@ -102,7 +108,9 @@ on Unix systems).
 
 Alternatively you can run <kbd>M-x prelude-update</kbd> from Emacs itself.
 
-It's generally a good idea to stop Emacs before you do the update. The
+### Restart Prelude
+
+It's generally a good idea to stop Emacs after you do the update. The
 next time Prelude starts it will install any new dependencies (if
 there are such).
 
@@ -218,11 +226,12 @@ Keybinding         | Description
 -------------------|------------------------------------------------------------
 <kbd>C-c o</kbd>   | Open the currently visited file with an external program.
 <kbd>C-c g</kbd>   | Search in Google for the thing under point (or an interactive query).
+<kbd>C-c G</kbd>   | Search in GitHub for the thing under point (or an interactive query).
 <kbd>C-c y</kbd>   | Search in YouTube for the thing under point (or an interactive query).
 <kbd>C-S-RET</kbd> or <kbd>M-o</kbd> | Insert an empty line above the current line and indent it properly
 <kbd>S-RET</kbd> or <kbd>M-O</kbd> | Insert an empty line and indent it properly (as in most IDEs).
-<kbd>C-S-up</kbd>  | Move the current line up.
-<kbd>C-S-down</kbd> | Move the current line down.
+<kbd>C-S-up</kbd> or <kbd>M-S-up</kbd> | Move the current line or region up.
+<kbd>C-S-down</kbd> or <kbd>M-S-down</kbd>| Move the current line or region down.
 <kbd>C-c n</kbd> | Fix indentation in buffer and strip whitespace.
 <kbd>C-c f</kbd> | Open recently visited file.
 <kbd>C-M-\\</kbd> | Indent region (if selected) or the entire buffer.
@@ -412,6 +421,19 @@ If you're not fond of spellchecking on the fly:
 ```
 
 ## Caveats & Pitfalls
+
+### Updating bundled packages
+
+Currently there is no Emacs Lisp API for updating packages, so you'll
+have to update manually the packages that came with Prelude from time
+to time.
+
+`M-x package-list-packages RET U x`
+
+Generally it's a good idea to do a package update before running
+`prelude-update`, since the latest Prelude code might depend on newer
+versions of the bundled packages than you would currently have
+installed.
 
 ### Problems with flyspell-mode
 

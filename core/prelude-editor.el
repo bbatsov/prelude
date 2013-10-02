@@ -105,8 +105,8 @@ Will only occur if prelude-whitespace is also enabled."
 (require 'smartparens-config)
 (setq sp-base-key-bindings 'paredit)
 (setq sp-autoskip-closing-pair 'always)
+(setq sp-hybrid-kill-entire-symbol nil)
 (sp-use-paredit-bindings)
-(smartparens-global-mode +1)
 
 ;; diminish keeps the modeline tidy
 (require 'diminish)
@@ -284,6 +284,11 @@ The body of the advice is in BODY."
 (setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
 (projectile-global-mode t)
 (diminish 'projectile-mode "Prjl")
+
+;; anzu-mode enhances isearch by showing total matches and current match position
+(require 'anzu)
+(diminish 'anzu-mode)
+(global-anzu-mode)
 
 (require 'helm-misc)
 (require 'helm-projectile)
