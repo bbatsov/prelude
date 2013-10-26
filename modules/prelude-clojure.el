@@ -33,7 +33,7 @@
 ;;; Code:
 
 (require 'prelude-lisp)
-(prelude-ensure-module-deps '(clojure-mode clojure-test-mode nrepl))
+(prelude-ensure-module-deps '(clojure-mode clojure-test-mode cider))
 
 (eval-after-load 'clojure-mode
   '(progn
@@ -47,18 +47,18 @@
      (add-hook 'clojure-mode-hook (lambda ()
                                     (run-hooks 'prelude-clojure-mode-hook)))))
 
-(eval-after-load 'nrepl
+(eval-after-load 'cider
   '(progn
-     (add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
+     (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
-     (defun prelude-nrepl-mode-defaults ()
+     (defun prelude-cider-repl-mode-defaults ()
        (subword-mode +1)
        (run-hooks 'prelude-interactive-lisp-coding-hook))
 
-     (setq prelude-nrepl-mode-hook 'prelude-nrepl-mode-defaults)
+     (setq prelude-cider-repl-mode-hook 'prelude-cider-repl-mode-defaults)
 
-     (add-hook 'nrepl-mode-hook (lambda ()
-                                  (run-hooks 'prelude-nrepl-mode-hook)))))
+     (add-hook 'cider-repl-mode-hook (lambda ()
+                                       (run-hooks 'prelude-cider-repl-mode-hook)))))
 
 (provide 'prelude-clojure)
 

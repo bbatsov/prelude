@@ -90,7 +90,15 @@ You'd do well to replace `~/.emacs.d` with the value of
 
 ## Updating Prelude
 
-The update procedure is fairly straightforward:
+### Manual update
+
+The update procedure is fairly straightforward and consists of 3 steps:
+
+#### Update all bundled packages
+
+Just run <kbd>M-x package-list-packages RET U x</kbd>.
+
+#### Update Prelude's code
 
 ```bash
 cd path/to/prelude/installation
@@ -100,15 +108,19 @@ git pull
 The `path/to/prelude/installation` is usually `~/.emacs.d` (at least
 on Unix systems).
 
-Alternatively you can run <kbd>M-x prelude-update</kbd> from Emacs itself.
+#### Restart Prelude
 
-It's generally a good idea to stop Emacs before you do the update. The
+It's generally a good idea to stop Emacs after you do the update. The
 next time Prelude starts it will install any new dependencies (if
 there are such).
 
+### Automatic update
+
+Simply run <kbd>M-x prelude-update</kbd> from Emacs itself and restart Emacs afterwards.
+
 ## Enabling additional modules
 
-By default most of the modules that ship with Prelude are not loaded.
+By default most of the modules that ship with Prelude are not loaded. For more information on the functionality provided by these modules visit the [docs](modules/doc/README.md).
 
 ```lisp
 ;;; Uncomment the modules you'd like to use and restart Prelude afterwards
@@ -217,12 +229,14 @@ Keybinding         | Description
 Keybinding         | Description
 -------------------|------------------------------------------------------------
 <kbd>C-c o</kbd>   | Open the currently visited file with an external program.
+<kbd>C-c i</kbd>   | Search for a symbol, only for buffers that contain code
 <kbd>C-c g</kbd>   | Search in Google for the thing under point (or an interactive query).
+<kbd>C-c G</kbd>   | Search in GitHub for the thing under point (or an interactive query).
 <kbd>C-c y</kbd>   | Search in YouTube for the thing under point (or an interactive query).
-<kbd>C-S-RET</kbd> or <kbd>M-o</kbd> | Insert an empty line above the current line and indent it properly
-<kbd>S-RET</kbd> or <kbd>M-O</kbd> | Insert an empty line and indent it properly (as in most IDEs).
-<kbd>C-S-up</kbd>  | Move the current line up.
-<kbd>C-S-down</kbd> | Move the current line down.
+<kbd>C-S-RET</kbd> or <kbd>M-O</kbd> or <kbd>Super-o</kbd> | Insert an empty line above the current line and indent it properly.
+<kbd>S-RET</kbd> or <kbd>M-o</kbd> | Insert an empty line and indent it properly (as in most IDEs).
+<kbd>C-S-up</kbd> or <kbd>M-S-up</kbd> | Move the current line or region up.
+<kbd>C-S-down</kbd> or <kbd>M-S-down</kbd>| Move the current line or region down.
 <kbd>C-c n</kbd> | Fix indentation in buffer and strip whitespace.
 <kbd>C-c f</kbd> | Open recently visited file.
 <kbd>C-M-\\</kbd> | Indent region (if selected) or the entire buffer.
@@ -241,8 +255,10 @@ Keybinding         | Description
 <kbd>Super-x</kbd> | Expand region
 <kbd>Super-j</kbd> | Join lines
 <kbd>Super-k</kbd> | Kill whole line
-<kbd>Super-m</kbd> | Magit status
-<kbd>Super-o</kbd> | Open line above current line
+<kbd>Super-m m</kbd> | Magit status
+<kbd>Super-m l</kbd> | Magit log
+<kbd>Super-m f</kbd> | Magit file log
+<kbd>Super-m b</kbd> | Magit blame mode
 
 #### OSX modifier keys
 
@@ -412,6 +428,20 @@ If you're not fond of spellchecking on the fly:
 ```
 
 ## Caveats & Pitfalls
+
+### Updating bundled packages
+
+Generally it's a good idea to do a package update before running
+updating Prelude, since the latest Prelude code might depend on newer
+versions of the bundled packages than you would currently have
+installed.
+
+If you're doing manual Prelude updates you should always do a package update first.
+
+`M-x package-list-packages RET U x`
+
+That's not necessary if you're using `M-x prelude-update`, since it
+will automatically update the installed packages.
 
 ### Problems with flyspell-mode
 
