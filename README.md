@@ -12,6 +12,51 @@ Prelude is compatible **ONLY with GNU Emacs 24.x**. In general you're
 advised to always run Prelude with the latest Emacs - currently
 **24.3**.
 
+**Table of Contents**
+
+- [Fast Forward](#fast-forward)
+- [Installing Emacs 24](#installing-emacs-24)
+- [Installation](#installation)
+	- [Automated](#automated)
+		- [Via Curl](#via-curl)
+		- [Via Wget](#via-wget)
+	- [Manual](#manual)
+- [Updating Prelude](#updating-prelude)
+	- [Manual update](#manual-update)
+		- [Update all bundled packages](#update-all-bundled-packages)
+		- [Update Prelude's code](#update-preludes-code)
+		- [Restart Prelude](#restart-prelude)
+	- [Automatic update](#automatic-update)
+- [Enabling additional modules](#enabling-additional-modules)
+- [Running](#running)
+- [Getting to know Prelude](#getting-to-know-prelude)
+	- [Keymap](#keymap)
+		- [Global](#global)
+		- [Prelude Mode](#prelude-mode)
+		- [OSX modifier keys](#osx-modifier-keys)
+		- [Projectile](#projectile)
+		- [Key-chords](#key-chords)
+			- [Disabling key-chords](#disabling-key-chords)
+- [Automatic package installation](#automatic-package-installation)
+	- [Color Themes](#color-themes)
+	- [Personalizing](#personalizing)
+		- [Disabling whitespace-mode](#disabling-whitespace-mode)
+		- [Disable flyspell-mode](#disable-flyspell-mode)
+- [Caveats & Pitfalls](#caveats--pitfalls)
+	- [Updating bundled packages](#updating-bundled-packages)
+	- [Problems with flyspell-mode](#problems-with-flyspell-mode)
+	- [Ugly colors in the terminal Emacs version](#ugly-colors-in-the-terminal-emacs-version)
+	- [MELPA error on initial startup](#melpa-error-on-initial-startup)
+	- [No arrow navigation in editor buffers](#no-arrow-navigation-in-editor-buffers)
+	- [Customized C-a behavior](#customized-c-a-behavior)
+	- [Poor ido matching performance on large datasets](#poor-ido-matching-performance-on-large-datasets)
+	- [Windows compatibility](#windows-compatibility)
+- [Share the knowledge](#share-the-knowledge)
+- [Known issues](#known-issues)
+- [Support](#support)
+- [Contributors](#contributors)
+- [Bugs & Improvements](#bugs--improvements)
+
 ## Fast Forward
 
 Assuming you're using an Unix-like OS (`*BSD`, `GNU/Linux`, `OS X`, `Solaris`,
