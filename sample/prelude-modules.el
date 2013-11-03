@@ -11,6 +11,7 @@
 ;; (require 'prelude-haskell)
 ;; (require 'prelude-helm)
 (require 'prelude-js)
+;; (require 'prelude-key-chord)
 ;; (require 'prelude-latex)
 (require 'prelude-lisp)
 ;; (require 'prelude-mediawiki)

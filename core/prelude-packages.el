@@ -46,7 +46,7 @@
     epl expand-region flx-ido flycheck gist
     gitconfig-mode gitignore-mode grizzl
     guru-mode projectile ido-ubiquitous
-    key-chord magit move-text rainbow-mode
+    magit move-text rainbow-mode
     smartparens smex undo-tree
     volatile-highlights zenburn-theme)
   "A list of packages to ensure are installed at launch.")

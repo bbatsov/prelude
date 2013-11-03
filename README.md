@@ -357,6 +357,8 @@ If you ever forget any of Projectile's keybindings just do a:
 
 #### Key-chords
 
+**Key-chords are available only when the `prelude-key-chord` module has been enabled.**
+
 Keybinding         | Description
 -------------------|----------------------------------------------
 <kbd>jj</kbd>      | Jump to the beginning of a word(`ace-jump-word-mode`)
