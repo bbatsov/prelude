@@ -72,6 +72,8 @@ Start `ielm' if it's not already running."
 (add-hook 'emacs-lisp-mode-hook (lambda ()
                                   (run-hooks 'prelude-emacs-lisp-mode-hook)))
 
+(add-to-list 'auto-mode-alist '("Cask\\'" . emacs-lisp-mode))
+
 ;; ielm is an interactive Emacs Lisp shell
 (defun prelude-ielm-mode-defaults ()
   "Sensible defaults for `ielm'."
