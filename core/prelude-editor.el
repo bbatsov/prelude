@@ -294,20 +294,6 @@ The body of the advice is in BODY."
 (diminish 'anzu-mode)
 (global-anzu-mode)
 
-(require 'helm-misc)
-(require 'helm-projectile)
-
-(defun helm-prelude ()
-  "Preconfigured `helm'."
-  (interactive)
-  (condition-case nil
-    (if (projectile-project-root)
-        (helm-projectile)
-      ;; otherwise fallback to helm-mini
-      (helm-mini))
-    ;; fall back to helm mini if an error occurs (usually in projectile-project-root)
-    (error (helm-mini))))
-
 ;; shorter aliases for ack-and-a-half commands
 (defalias 'ack 'ack-and-a-half)
 (defalias 'ack-same 'ack-and-a-half-same)

@@ -45,7 +45,7 @@
   '(ace-jump-mode ack-and-a-half anzu dash diminish elisp-slime-nav
     epl expand-region flx-ido flycheck gist
     gitconfig-mode gitignore-mode grizzl
-    guru-mode helm helm-projectile ido-ubiquitous
+    guru-mode projectile ido-ubiquitous
     key-chord magit move-text rainbow-mode
     smartparens smex undo-tree
     volatile-highlights zenburn-theme)

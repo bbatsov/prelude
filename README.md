@@ -293,7 +293,7 @@ Keybinding         | Description
 <kbd>C-c r</kbd> | Rename the currently visited file and buffer.
 <kbd>C-c t</kbd> | Open a terminal emulator (`ansi-term`).
 <kbd>C-c k</kbd> | Kill all open buffers except the one you're currently in.
-<kbd>C-c h</kbd> | Open Helm (a useful means of navigating your buffers and project files).
+<kbd>C-c h</kbd> | Open Helm (available if you've enabled the `prelude-helm` module).
 <kbd>C-c +</kbd> | Increment integer at point.
 <kbd>C-c -</kbd> | Decrement integer at point.
 <kbd>Super-r</kbd> | Recent files
