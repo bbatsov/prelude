@@ -389,7 +389,7 @@ If you're an `evil-mode` user you'll probably do well to disable `key-chord-mode
 The default Prelude installation comes with a bare minimum of
 functionality. It will however install add-ons for various programming
 languages and frameworks on demand. For instance - if you try to open
-a `.clj` file `clojure-mode`, `nrepl.el` and prelude's enhanced Lisp
+a `.clj` file `clojure-mode`, `cider` and Prelude's enhanced Lisp
 configuration will be installed automatically for you.
 
 You can, of course, install anything you wish manually as well.
