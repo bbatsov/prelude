@@ -35,17 +35,27 @@
 (require 'cl)
 (require 'package)
 
-(defcustom prelude-package-user-directory nil
+(defgroup prelude-package nil
+  "Emacs Prelude Package configuration."
+  :prefix "prelude-"
+  :group 'prelude)
+
+(defcustom prelude-use-package-user-directory nil
   "Non-nil values set package-user-dir to be relative to Prelude install path."
   :type 'boolean
-  :group 'prelude)
+  :group 'prelude-package)
+
+(defcustom prelude-package-user-directory (expand-file-name "elpa" prelude-dir)
+  "Variable for package-user-dir to be relative to Prelude install path."
+  :type 'directory
+  :group 'prelude-package)
 
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-(when prelude-package-user-directory
+(when prelude-use-package-user-directory
   ;; set package-user-dir to be relative to Prelude install path
-  (setq package-user-dir (expand-file-name "elpa" prelude-dir)))
+  (setq package-user-dir prelude-package-user-directory))
 (package-initialize)
 
 (defvar prelude-packages
