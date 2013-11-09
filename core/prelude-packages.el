@@ -35,10 +35,17 @@
 (require 'cl)
 (require 'package)
 
+(defcustom prelude-package-user-directory nil
+  "Non-nil values set package-user-dir to be relative to Prelude install path."
+  :type 'boolean
+  :group 'prelude)
+
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;; set package-user-dir to be relative to Prelude install path
-(setq package-user-dir (expand-file-name "elpa" prelude-dir))
+
+(when prelude-package-user-directory
+  ;; set package-user-dir to be relative to Prelude install path
+  (setq package-user-dir (expand-file-name "elpa" prelude-dir)))
 (package-initialize)
 
 (defvar prelude-packages
