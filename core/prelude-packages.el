@@ -34,6 +34,7 @@
 ;;; Code:
 (require 'cl)
 (require 'package)
+
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 ;; set package-user-dir to be relative to Prelude install path
@@ -43,9 +44,9 @@
 (defvar prelude-packages
   '(ace-jump-mode ack-and-a-half anzu dash diminish elisp-slime-nav
     epl expand-region flx-ido flycheck gist
-    git-commit-mode gitconfig-mode gitignore-mode grizzl
-    guru-mode helm helm-projectile ido-ubiquitous
-    key-chord magit move-text rainbow-mode
+    gitconfig-mode gitignore-mode grizzl
+    guru-mode projectile ido-ubiquitous
+    magit move-text rainbow-mode
     smartparens smex undo-tree
     volatile-highlights zenburn-theme)
   "A list of packages to ensure are installed at launch.")
