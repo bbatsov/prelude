@@ -83,10 +83,6 @@ by Prelude.")
 ;; each 50MB of allocated data (the default is on every 0.76MB)
 (setq gc-cons-threshold 50000000)
 
-;; config changes made through the customize UI will be store here
-(setq custom-file (expand-file-name "custom.el" prelude-personal-dir))
-(if (file-exists-p custom-file) (load custom-file))
-
 ;; the core stuff
 (require 'prelude-packages)
 (require 'prelude-ui)
@@ -103,7 +99,10 @@ by Prelude.")
 (when (file-exists-p prelude-modules-file)
   (load prelude-modules-file))
 
-;; load the personal settings
+;; config changes made through the customize UI will be store here
+(setq custom-file (expand-file-name "custom.el" prelude-personal-dir))
+
+;; load the personal settings (this includes `custom-file')
 (when (file-exists-p prelude-personal-dir)
   (message "Loading personal configuration files in %s..." prelude-personal-dir)
   (mapc 'load (directory-files prelude-personal-dir 't "^[^#].*el$")))
