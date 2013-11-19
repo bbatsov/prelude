@@ -423,7 +423,7 @@ Doesn't mess with special buffers."
     "Press <f12> to toggle the menu bar."
     "Explore the Tools->Prelude menu to find out about some of Prelude extensions to Emacs."
     "Access the official Emacs manual by pressing <C-h r>."
-    "Visit WikEmacs at http://wikemacs.org to find out even more about Emacs."))
+    "Visit the EmacsWiki at http://emacswiki.org to find out even more about Emacs."))
 
 (defun prelude-tip-of-the-day ()
   "Display a random entry from `prelude-tips'."
