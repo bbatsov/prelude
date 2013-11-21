@@ -1,4 +1,4 @@
-;;; prelude-key-chord.el --- Helm setup
+;;; prelude-key-chord.el --- Key chord setup
 ;;
 ;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
@@ -11,7 +11,7 @@
 
 ;;; Commentary:
 
-;; Some config for Helm.
+;; Configure key-chord key bindings.
 
 ;;; License:
 
