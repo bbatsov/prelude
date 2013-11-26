@@ -32,7 +32,7 @@
 
 ;;; Code:
 
-(prelude-ensure-module-deps '(mediawiki))
+(prelude-require-packages '(mediawiki))
 
 (eval-after-load 'mediawiki
   '(progn
