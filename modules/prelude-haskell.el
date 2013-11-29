@@ -33,7 +33,7 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-ensure-module-deps '(haskell-mode))
+(prelude-require-packages '(haskell-mode))
 
 (eval-after-load 'haskell-mode
   '(progn

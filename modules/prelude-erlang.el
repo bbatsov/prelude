@@ -32,7 +32,7 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-ensure-module-deps '(erlang))
+(prelude-require-packages '(erlang))
 
 (defcustom wrangler-path nil
   "The location of wrangler elisp directory."

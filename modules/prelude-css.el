@@ -34,7 +34,7 @@
 
 (eval-after-load 'css-mode
   '(progn
-     (prelude-ensure-module-deps '(rainbow-mode))
+     (prelude-require-packages '(rainbow-mode))
 
      (defun prelude-css-mode-defaults ()
        (setq css-indent-offset 2)

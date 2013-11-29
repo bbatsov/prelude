@@ -32,7 +32,7 @@
 
 ;;; Code:
 
-(prelude-ensure-module-deps '(auctex))
+(prelude-require-packages '(auctex))
 (require 'smartparens-latex)
 
 ;; AUCTeX configuration
@@ -58,7 +58,8 @@
 
 (defun prelude-latex-mode-defaults ()
   (turn-on-auto-fill)
-  (abbrev-mode +1))
+  (abbrev-mode +1)
+  (smartparens-mode +1))
 
 (setq prelude-latex-mode-hook 'prelude-latex-mode-defaults)
 

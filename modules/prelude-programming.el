@@ -32,7 +32,7 @@
 
 ;;; Code:
 
-(prelude-ensure-module-deps '(guru-mode))
+(prelude-require-packages '(guru-mode))
 
 (defun prelude-ido-goto-symbol (&optional symbol-list)
   "Refresh imenu and jump to a place in the buffer using Ido."

@@ -33,7 +33,7 @@
 ;;; Code:
 
 (require 'prelude-css)
-(prelude-ensure-module-deps '(scss-mode))
+(prelude-require-packages '(scss-mode))
 
 (defun prelude-scss-mode-defaults ()
   (prelude-css-mode-defaults)
