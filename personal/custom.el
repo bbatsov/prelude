@@ -89,6 +89,12 @@
 
 (global-set-key (kbd "M-s q") 'sql-connect-preset-by-name) ; Connect to a db preset by nameq
 
+;; Hacky work-around key rebindings for smartparens until I figure out something better.
+(global-set-key (kbd "C-c )") 'sp-forward-slurp-sexp)
+(global-set-key (kbd "C-c (") 'sp-backward-slurp-sexp)
+(global-set-key (kbd "C-x )") 'sp-forward-barf-sexp)
+(global-set-key (kbd "C-x (") 'sp-bakcward-barf-sexp)
+
 (provide 'custom)
 
 ;;; custom.el ends here
