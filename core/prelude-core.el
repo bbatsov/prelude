@@ -472,7 +472,8 @@ With a prefix ARG updates all installed packages."
   (when (y-or-n-p "Do you want to update Prelude's packages? ")
     (if arg
         (epl-upgrade)
-      (epl-upgrade prelude-packages))
+      (epl-upgrade (-filter (lambda (p) (memq (epl-package-name p) prelude-packages))
+                            (epl-installed-packages))))
     (message "Update finished. Restart Emacs to complete the process.")))
 
 (defun thing-at-point-goto-end-of-integer ()
