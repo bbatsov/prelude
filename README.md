@@ -443,6 +443,12 @@ If you require just a single package you can also use:
 (prelude-require-package 'some-package)
 ```
 
+#### Preloading personal config
+
+Sometimes you might want to load code before Prelude has started loading. Prelude will automatically preload all
+Emacs Lisp files in your `personal/preload` directory. Note that at this point you can't using anything from
+Prelude, except a few variables like `prelude-dir`, etc (since nothing is yet loaded).
+
 #### Disabling whitespace-mode
 
 Although `whitespace-mode` is awesome some people might find it too
