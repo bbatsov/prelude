@@ -463,6 +463,15 @@ Doesn't mess with special buffers."
     (prelude-recompile-init)
     (message "Update finished. Restart Emacs to complete the process.")))
 
+(defun prelude-update-packages ()
+  "Update Prelude's packages.
+
+This includes package installed via `prelude-require-package'."
+  (interactive)
+  (when (y-or-n-p "Do you want to update Prelude's packages? ")
+    (epl-upgrade prelude-packages)
+    (message "Update finished. Restart Emacs to complete the process.")))
+
 (defun thing-at-point-goto-end-of-integer ()
   "Go to end of integer at point."
   (let ((inhibit-changing-match-data t))
