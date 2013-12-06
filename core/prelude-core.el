@@ -463,13 +463,16 @@ Doesn't mess with special buffers."
     (prelude-recompile-init)
     (message "Update finished. Restart Emacs to complete the process.")))
 
-(defun prelude-update-packages ()
+(defun prelude-update-packages (&optional arg)
   "Update Prelude's packages.
+This includes package installed via `prelude-require-package'.
 
-This includes package installed via `prelude-require-package'."
-  (interactive)
+With a prefix ARG updates all installed packages."
+  (interactive "P")
   (when (y-or-n-p "Do you want to update Prelude's packages? ")
-    (epl-upgrade prelude-packages)
+    (if arg
+        (epl-upgrade)
+      (epl-upgrade prelude-packages))
     (message "Update finished. Restart Emacs to complete the process.")))
 
 (defun thing-at-point-goto-end-of-integer ()
