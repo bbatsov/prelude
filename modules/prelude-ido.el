@@ -31,7 +31,7 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-package '(flx-ido ido-ubiquitous smex))
+(prelude-require-packages '(flx-ido ido-ubiquitous smex))
 
 (require 'ido)
 (require 'ido-ubiquitous)
