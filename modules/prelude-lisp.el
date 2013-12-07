@@ -39,10 +39,10 @@
 (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
 
 ;; wrap keybindings
-(define-key lisp-mode-shared-map (kbd "M-(") (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "(")))
+(define-key lisp-mode-shared-map (kbd "M-(") (prelude-wrap-with "("))
 ;; FIXME: Pick terminal-friendly binding.
-;;(define-key lisp-mode-shared-map (kbd "M-[") (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "[")))
-(define-key lisp-mode-shared-map (kbd "M-\"") (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "\"")))
+;;(define-key lisp-mode-shared-map (kbd "M-[") (prelude-wrap-with "["))
+(define-key lisp-mode-shared-map (kbd "M-\"") (prelude-wrap-with "\""))
 
 ;; a great lisp coding hook
 (defun prelude-lisp-coding-defaults ()

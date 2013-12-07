@@ -564,5 +564,11 @@ This follows freedesktop standards, should work in X servers."
                            (t (error "Unknown shell")))))
     (find-file-other-window (expand-file-name shell-init-file (getenv "HOME")))))
 
+(defun prelude-wrap-with (s)
+  "Create a wrapper function for smartparens using S."
+  `(lambda (&optional arg)
+     (interactive "P")
+     (sp-wrap-with-pair ,s)))
+
 (provide 'prelude-core)
 ;;; prelude-core.el ends here
