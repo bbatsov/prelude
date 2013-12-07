@@ -111,7 +111,8 @@ Will only occur if prelude-whitespace is also enabled."
 (show-smartparens-global-mode +1)
 
 (define-key prog-mode-map (kbd "M-(") (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "(")))
-(define-key prog-mode-map (kbd "M-[") (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "[")))
+;; FIXME: pick terminal friendly binding
+;; (define-key prog-mode-map (kbd "M-[") (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "[")))
 (define-key prog-mode-map (kbd "M-\"") (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "\"")))
 
 ;; disable annoying blink-matching-paren

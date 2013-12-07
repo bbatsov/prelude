@@ -40,7 +40,8 @@
 
 ;; wrap keybindings
 (define-key lisp-mode-shared-map (kbd "M-(") (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "(")))
-(define-key lisp-mode-shared-map (kbd "M-[") (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "[")))
+;; FIXME: Pick terminal-friendly binding.
+;;(define-key lisp-mode-shared-map (kbd "M-[") (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "[")))
 (define-key lisp-mode-shared-map (kbd "M-\"") (lambda (&optional arg) (interactive "P") (sp-wrap-with-pair "\"")))
 
 ;; a great lisp coding hook
