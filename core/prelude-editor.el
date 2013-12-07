@@ -101,6 +101,9 @@ Will only occur if prelude-whitespace is also enabled."
                                          try-complete-lisp-symbol-partially
                                          try-complete-lisp-symbol))
 
+;; smart tab behavior - indent or complete
+(setq tab-always-indent 'complete)
+
 ;; smart pairing for all
 (require 'smartparens-config)
 (setq sp-base-key-bindings 'paredit)
