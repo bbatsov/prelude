@@ -42,7 +42,9 @@
 (package-initialize)
 
 (defvar prelude-packages
-  '(ace-jump-mode ack-and-a-half anzu dash diminish elisp-slime-nav
+  '(ace-jump-mode ack-and-a-half anzu
+    browse-kill-ring
+    dash diminish elisp-slime-nav
     epl expand-region flycheck gist
     gitconfig-mode gitignore-mode grizzl
     guru-mode projectile

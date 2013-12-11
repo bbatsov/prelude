@@ -299,6 +299,9 @@ The body of the advice is in BODY."
 ;; clean up obsolete buffers automatically
 (require 'midnight)
 
+;; smarter kill-ring navigation
+(global-set-key (kbd "s-y") 'browse-kill-ring)
+
 ;; automatically indenting yanked text if in programming-modes
 (defvar yank-indent-modes
   '(LaTeX-mode TeX-mode)
