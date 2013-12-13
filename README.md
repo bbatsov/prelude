@@ -366,6 +366,8 @@ Keybinding         | Description
 <kbd>jl</kbd>      | Jump to the beginning of a line(`ace-jump-line-mode`)
 <kbd>JJ</kbd>      | Jump back to previous buffer(`prelude-switch-to-previous-buffer`)
 <kbd>uu</kbd>      | View edits as a tree(`undo-tree-visualize`)
+<kbd>xx</kbd>      | Executed extended command(`execute-extended-command`)
+<kbd>yy</kbd>      | Browse the kill ring(`browse-kill-ring`)
 
 ##### Disabling key-chords
 
