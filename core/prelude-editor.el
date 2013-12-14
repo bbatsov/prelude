@@ -300,6 +300,8 @@ The body of the advice is in BODY."
 (require 'midnight)
 
 ;; smarter kill-ring navigation
+(require 'browse-kill-ring)
+(browse-kill-ring-default-keybindings)
 (global-set-key (kbd "s-y") 'browse-kill-ring)
 
 ;; automatically indenting yanked text if in programming-modes
