@@ -112,6 +112,7 @@
   'prelude-exchange-point-and-mark)
 
 (global-set-key (kbd "C-c j") 'ace-jump-mode)
+(global-set-key (kbd "s-.") 'ace-jump-mode)
 
 (provide 'prelude-global-keybindings)
 
