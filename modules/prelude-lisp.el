@@ -47,7 +47,8 @@
 ;; a great lisp coding hook
 (defun prelude-lisp-coding-defaults ()
   (smartparens-strict-mode +1)
-  (rainbow-delimiters-mode +1))
+  (rainbow-delimiters-mode +1)
+  (global-prettify-symbols-mode))
 
 (setq prelude-lisp-coding-hook 'prelude-lisp-coding-defaults)
 
