@@ -78,9 +78,10 @@ PROMPT sets the `read-string prompt."
        (interactive)
        (prelude-search ,search-engine-url ,search-engine-prompt)))
 
-(prelude-install-search-engine "google"  "http://www.google.com/search?q="              "Google: ")
-(prelude-install-search-engine "youtube" "http://www.youtube.com/results?search_query=" "Search YouTube: ")
-(prelude-install-search-engine "github"  "https://github.com/search?q="                 "Search GitHub: ")
+(prelude-install-search-engine "google"     "http://www.google.com/search?q="              "Google: ")
+(prelude-install-search-engine "youtube"    "http://www.youtube.com/results?search_query=" "Search YouTube: ")
+(prelude-install-search-engine "github"     "https://github.com/search?q="                 "Search GitHub: ")
+(prelude-install-search-engine "duckduckgo" "https://duckduckgo.com/?t=lm&q="              "Search DuckDuckGo: ")
 
 (defun prelude-indent-rigidly-and-copy-to-clipboard (begin end arg)
   "Indent region between BEGIN and END by ARG columns and copy to clipboard."
