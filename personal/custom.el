@@ -51,7 +51,7 @@
 ;; Load ESS
 (require 'ess-site)
 
-;; Use IPython
+;; Use IPython as my python interpreter
 (setq
  python-shell-interpreter "ipython"
  python-shell-interpreter-args ""
@@ -64,6 +64,20 @@
  python-shell-completion-string-code
  "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
+;; Setup ERC
+(setq erc-autojoin-channels-alist '(("freenode.net"
+                                     "#emacs" "#clojure" "#julia")))
+
+(setq erc-nick "gastove")
+(when (file-exists-p (expand-file-name "~/.ercpass"))
+  (load "~/.ercpass")
+  (require 'erc-services)
+  (erc-services-mode 1)
+  (setq erc-prompt-for-nickserv-password nil)
+  (setq erc-nickerv-passwords
+        '((freenode (erc-nick . ,erc-pass)))))
+
+;; For SQL hackery -- needs more work
 ;; Generate a list of DBs I connect to commonly
 (setq sql-connection-alist
       '((sag-db01
