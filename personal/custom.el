@@ -74,8 +74,8 @@
   (require 'erc-services)
   (erc-services-mode 1)
   (setq erc-prompt-for-nickserv-password nil)
-  (setq erc-nickerv-passwords
-        '((freenode (erc-nick . ,erc-pass)))))
+  (setq erc-nickserv-passwords
+        '((freenode ((erc-nick . ,erc-pass))))))
 
 ;; For SQL hackery -- needs more work
 ;; Generate a list of DBs I connect to commonly
