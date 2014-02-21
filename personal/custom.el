@@ -38,10 +38,8 @@
  ;; If there is more than one, they won't work right.
  )
 
-
 ;; Pull in custom packages
-(prelude-require-packages
- '(ahg jade-mode php-mode twilight-theme ess twittering-mode))
+(prelude-require-packages '(ahg jade-mode php-mode twilight-theme ess twittering-mode))
 
 ;; Load my Theme of Choice
 (load-theme 'twilight t)
@@ -68,6 +66,10 @@
 ;; Tweak Mac Keyboard Behavior
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
+
+;; Configure Twittering Mode
+(setq twittering-icon-mode t)
+(setq twittering-use-master-password t)
 
 ;; Setup ERC
 (setq erc-autojoin-channels-alist '(("freenode.net"
