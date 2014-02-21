@@ -40,7 +40,8 @@
 
 
 ;; Pull in custom packages
-(prelude-require-packages '(jade-mode php-mode twilight-theme ess))
+(prelude-require-packages
+ '(jade-mode php-mode twilight-theme ess twittering-mode))
 
 ;; Load my Theme of Choice
 (load-theme 'twilight t)
@@ -63,6 +64,10 @@
  "';'.join(module_completion('''%s'''))\n"
  python-shell-completion-string-code
  "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+
+;; Tweak Mac Keyboard Behavior
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
 
 ;; Setup ERC
 (setq erc-autojoin-channels-alist '(("freenode.net"
@@ -112,12 +117,6 @@
   (sql-connect-preset 'sag-db01))
 
 (global-set-key (kbd "M-s q") 'sql-connect-preset-by-name) ; Connect to a db preset by nameq
-
-;; Hacky work-around key rebindings for smartparens until I figure out something better.
-(global-set-key (kbd "C-c )") 'sp-forward-slurp-sexp)
-(global-set-key (kbd "C-c (") 'sp-backward-slurp-sexp)
-(global-set-key (kbd "C-x )") 'sp-forward-barf-sexp)
-(global-set-key (kbd "C-x (") 'sp-bakcward-barf-sexp)
 
 (provide 'custom)
 
