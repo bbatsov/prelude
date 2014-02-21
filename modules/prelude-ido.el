@@ -1,4 +1,4 @@
-;;; prelude-key-chord.el --- Key chord setup
+;;; prelude-ido.el --- Ido setup
 ;;
 ;; Copyright © 2011-2013 Bozhidar Batsov
 ;;
@@ -11,7 +11,7 @@
 
 ;;; Commentary:
 
-;; Configure key-chord key bindings.
+;; Ido-related config.
 
 ;;; License:
 
@@ -31,20 +31,34 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-package 'key-chord)
+(prelude-require-packages '(flx-ido ido-ubiquitous smex))
 
-(require 'key-chord)
+(require 'ido)
+(require 'ido-ubiquitous)
+(require 'flx-ido)
 
-(key-chord-define-global "jj" 'ace-jump-word-mode)
-(key-chord-define-global "jl" 'ace-jump-line-mode)
-(key-chord-define-global "jk" 'ace-jump-char-mode)
-(key-chord-define-global "JJ" 'prelude-switch-to-previous-buffer)
-(key-chord-define-global "uu" 'undo-tree-visualize)
-(key-chord-define-global "xx" 'execute-extended-command)
-(key-chord-define-global "yy" 'browse-kill-ring)
+(setq ido-enable-prefix nil
+      ido-enable-flex-matching t
+      ido-create-new-buffer 'always
+      ido-use-filename-at-point 'guess
+      ido-max-prospects 10
+      ido-save-directory-list-file (expand-file-name "ido.hist" prelude-savefile-dir)
+      ido-default-file-method 'selected-window
+      ido-auto-merge-work-directories-length -1)
+(ido-mode +1)
+(ido-ubiquitous-mode +1)
 
-(key-chord-mode +1)
+;;; smarter fuzzy matching for ido
+(flx-ido-mode +1)
+;; disable ido faces to see flx highlights
+(setq ido-use-faces nil)
 
-(provide 'prelude-key-chord)
+;;; smex, remember recently and most frequently used commands
+(require 'smex)
+(setq smex-save-file (expand-file-name ".smex-items" prelude-savefile-dir))
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
 
-;;; prelude-key-chord.el ends here
+(provide 'prelude-ido)
+;;; prelude-ido.el ends here

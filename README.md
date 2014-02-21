@@ -366,6 +366,8 @@ Keybinding         | Description
 <kbd>jl</kbd>      | Jump to the beginning of a line(`ace-jump-line-mode`)
 <kbd>JJ</kbd>      | Jump back to previous buffer(`prelude-switch-to-previous-buffer`)
 <kbd>uu</kbd>      | View edits as a tree(`undo-tree-visualize`)
+<kbd>xx</kbd>      | Executed extended command(`execute-extended-command`)
+<kbd>yy</kbd>      | Browse the kill ring(`browse-kill-ring`)
 
 ##### Disabling key-chords
 
@@ -442,6 +444,12 @@ If you require just a single package you can also use:
 ```lisp
 (prelude-require-package 'some-package)
 ```
+
+#### Preloading personal config
+
+Sometimes you might want to load code before Prelude has started loading. Prelude will automatically preload all
+Emacs Lisp files in your `personal/preload` directory. Note that at this point you can't using anything from
+Prelude, except a few variables like `prelude-dir`, etc (since nothing is yet loaded).
 
 #### Disabling whitespace-mode
 
@@ -526,13 +534,18 @@ afterwards.
 This is not a bug - it's a feature! I firmly believe that the one true
 way to use Emacs is by using it the way it was intended to be used (as
 far as navigation is concerned at least). That's why I've disabled all
-movement commands with arrows (and keys like page up, page down, etc) - to prevent you from being tempted to
-use them.
+movement commands with arrows (and keys like page up, page down,
+etc) - to prevent you from being tempted to use them.
 
-If you'd still like to use the arrow keys just invoke `M-x
-guru-mode` to enable them for the duration of your
-current Emacs session or add the following snippet to your
-personal Emacs customization to enable them permanently:
+If you'd like to be able to use the arrow keys (but still be reminded of
+the alternatives) put this in your personal config:
+
+```lisp
+(setq guru-warn-only t)
+```
+
+To disable `guru-mode` completely add the following snippet to your
+personal Emacs config:
 
 ```lisp
 (setq prelude-guru nil)
