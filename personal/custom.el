@@ -41,7 +41,7 @@
 
 ;; Pull in custom packages
 (prelude-require-packages
- '(jade-mode php-mode twilight-theme ess twittering-mode))
+ '(ahg jade-mode php-mode twilight-theme ess twittering-mode))
 
 ;; Load my Theme of Choice
 (load-theme 'twilight t)
