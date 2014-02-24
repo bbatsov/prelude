@@ -70,6 +70,7 @@
 ;; Configure Twittering Mode
 (setq twittering-icon-mode t)
 (setq twittering-use-master-password t)
+(setq twittering-use-icon-storage t)
 
 ;; Setup ERC
 (setq erc-autojoin-channels-alist '(("freenode.net"
