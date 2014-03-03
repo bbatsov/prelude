@@ -72,6 +72,11 @@
 (setq twittering-use-master-password t)
 (setq twittering-use-icon-storage t)
 
+;; Tweak projectile
+(setq projectile-enable-caching t)
+(setq projectile-remember-window-configs t)
+
+
 ;; Setup ERC
 (setq erc-autojoin-channels-alist '(("freenode.net"
                                      "#emacs" "#clojure" "#julia")))
