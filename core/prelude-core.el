@@ -71,21 +71,17 @@ PROMPT sets the `read-string prompt."
                 (buffer-substring (region-beginning) (region-end))
               (read-string prompt))))))
 
-(defun prelude-google ()
-  "Googles a query or region if any."
-  (interactive)
-  (prelude-search "http://www.google.com/search?q=" "Google: "))
+(defmacro prelude-install-search-engine (search-engine-name search-engine-url search-engine-prompt)
+  "Given some information regarding a search engine, install the interactive command to search through them"
+  `(defun ,(intern (format "prelude-%s" search-engine-name)) ()
+       ,(format "Search %s with a query or region if any." search-engine-name)
+       (interactive)
+       (prelude-search ,search-engine-url ,search-engine-prompt)))
 
-(defun prelude-youtube ()
-  "Search YouTube with a query or region if any."
-  (interactive)
-  (prelude-search "http://www.youtube.com/results?search_query="
-                  "Search YouTube: "))
-
-(defun prelude-github ()
-  "Search GitHub with a query or region if any."
-  (interactive)
-  (prelude-search "https://github.com/search?q=" "Search GitHub: "))
+(prelude-install-search-engine "google"     "http://www.google.com/search?q="              "Google: ")
+(prelude-install-search-engine "youtube"    "http://www.youtube.com/results?search_query=" "Search YouTube: ")
+(prelude-install-search-engine "github"     "https://github.com/search?q="                 "Search GitHub: ")
+(prelude-install-search-engine "duckduckgo" "https://duckduckgo.com/?t=lm&q="              "Search DuckDuckGo: ")
 
 (defun prelude-indent-rigidly-and-copy-to-clipboard (begin end arg)
   "Indent region between BEGIN and END by ARG columns and copy to clipboard."
@@ -405,6 +401,7 @@ Doesn't mess with special buffers."
     "Press <C-c g> to search in Google."
     "Press <C-c G> to search in GitHub."
     "Press <C-c y> to search in YouTube."
+    "Press <C-c U> to search in DuckDuckGo."
     "Press <C-c r> to rename the current buffer and file it's visiting."
     "Press <C-c t> to open a terminal in Emacs."
     "Press <C-c k> to kill all the buffers, but the active one."

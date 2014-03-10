@@ -40,7 +40,7 @@
        "coffee-mode-defaults"
 
        ;; CoffeeScript uses two spaces.
-       (set (make-local-variable 'tab-width) 2)
+       (setq coffee-tab-width 2)
 
        ;; If you don't have js2-mode
        (setq coffee-js-mode 'javascript-mode)
