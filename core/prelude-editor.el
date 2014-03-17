@@ -265,7 +265,6 @@ The body of the advice is in BODY."
 (require 'projectile)
 (setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
 (projectile-global-mode t)
-(diminish 'projectile-mode "Prjl")
 
 ;; anzu-mode enhances isearch by showing total matches and current match position
 (require 'anzu)
