@@ -73,7 +73,6 @@
 (setq twittering-use-icon-storage t)
 
 ;; Tweak projectile
-(setq projectile-enable-caching t)
 (setq projectile-remember-window-configs t)
 
 
