@@ -39,10 +39,10 @@
  )
 
 ;; Pull in custom packages
-(prelude-require-packages '(ahg jade-mode php-mode twilight-theme ess twittering-mode floobits))
+(prelude-require-packages '(ahg jade-mode php-mode twilight-theme ess twittering-mode floobits sublime-themes))
 
 ;; Load my Theme of Choice
-(load-theme 'twilight t)
+(load-theme 'junio t)
 
 ;; Disable whitespace-mode in certain other major modes
 (add-hook 'php-mode-hook (lambda() (whitespace-mode -1)))
