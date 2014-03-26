@@ -58,8 +58,9 @@
        (setq coffee-command "~/dev/coffee")
 
        ;; Compile '.coffee' files on every save
-       (and (file-exists-p (buffer-file-name))
-            (file-exists-p (coffee-compiled-file-name))
+       (and (buffer-file-name)
+            (file-exists-p (buffer-file-name))
+            (file-exists-p (coffee-compiled-file-name (buffer-file-name)))
             (coffee-cos-mode t)))
 
      (setq prelude-coffee-mode-hook 'prelude-coffee-mode-defaults)
