@@ -49,6 +49,7 @@
 (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Podfile\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.podspec\\'" . ruby-mode))
 
 ;; We never want to edit Rubinius bytecode
 (add-to-list 'completion-ignored-extensions ".rbc")
