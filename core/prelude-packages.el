@@ -42,15 +42,30 @@
 (package-initialize)
 
 (defvar prelude-packages
-  '(ace-jump-mode ack-and-a-half anzu
+  '(ace-jump-mode
+    ace-jump-buffer
+    ack-and-a-half
+    anzu
     browse-kill-ring
-    dash diminish elisp-slime-nav
-    epl expand-region flycheck gist
-    gitconfig-mode gitignore-mode grizzl
-    guru-mode projectile
-    magit move-text rainbow-mode
-    smartparens undo-tree
-    volatile-highlights zenburn-theme)
+    dash
+    diminish
+    elisp-slime-nav
+    epl
+    expand-region
+    flycheck
+    gist
+    gitconfig-mode
+    gitignore-mode
+    grizzl
+    guru-mode
+    projectile
+    magit
+    move-text
+    rainbow-mode
+    smartparens
+    undo-tree
+    volatile-highlights
+    zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
