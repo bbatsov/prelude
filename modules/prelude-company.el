@@ -38,8 +38,6 @@
 (setq company-idle-delay 0.3)
 (setq company-tooltip-limit 10)
 (setq company-minimum-prefix-length 2)
-(setq company-echo-delay 0)
-(setq company-auto-complete nil)
 
 (global-company-mode 1)
 
