@@ -49,6 +49,7 @@
     browse-kill-ring
     dash
     diminish
+    easy-kill
     elisp-slime-nav
     epl
     expand-region

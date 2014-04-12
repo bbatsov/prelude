@@ -376,6 +376,10 @@ indent yanked text (with prefix arg don't indent)."
 ;; enable winner-mode to manage window configurations
 (winner-mode +1)
 
+;; easy-kill
+(global-set-key [remap kill-ring-save] 'easy-kill)
+(global-set-key [remap mark-sexp] 'easy-mark)
+
 (provide 'prelude-editor)
 
 ;;; prelude-editor.el ends here
