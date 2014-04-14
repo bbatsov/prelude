@@ -380,6 +380,10 @@ indent yanked text (with prefix arg don't indent)."
 (global-diff-hl-mode +1)
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 
+;; easy-kill
+(global-set-key [remap kill-ring-save] 'easy-kill)
+(global-set-key [remap mark-sexp] 'easy-mark)
+
 (provide 'prelude-editor)
 
 ;;; prelude-editor.el ends here
