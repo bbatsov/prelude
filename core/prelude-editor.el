@@ -376,6 +376,10 @@ indent yanked text (with prefix arg don't indent)."
 ;; enable winner-mode to manage window configurations
 (winner-mode +1)
 
+;; diff-hl
+(global-diff-hl-mode +1)
+(add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+
 (provide 'prelude-editor)
 
 ;;; prelude-editor.el ends here
