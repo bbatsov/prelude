@@ -75,5 +75,11 @@
 ;; use zenburn as the default theme
 (load-theme 'zenburn t)
 
+(require 'desktop)
+(setq desktop-path (list prelude-savefile-dir))
+(setq desktop-dirname prelude-savefile-dir)
+
+(desktop-save-mode +1)
+
 (provide 'prelude-ui)
 ;;; prelude-ui.el ends here
