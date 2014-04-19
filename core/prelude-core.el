@@ -181,7 +181,8 @@ point reaches the beginning or end of the buffer, stop there."
   (interactive)
   (save-excursion
     (goto-char (point-min))
-    (while (re-search-forward "TODO:" nil t)
+    (while (re-search-forward
+            (format "[[:space:]]*%s+[[:space:]]*TODO:" comment-start) nil t)
       (let ((overlay (make-overlay (- (point) 5) (point))))
         (overlay-put overlay
                      'before-string
