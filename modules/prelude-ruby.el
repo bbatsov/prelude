@@ -45,6 +45,7 @@
 (add-to-list 'auto-mode-alist '("Guardfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Capfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.thor\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rabl\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Thorfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Vagrantfile\\'" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . ruby-mode))
