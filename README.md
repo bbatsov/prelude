@@ -1,3 +1,5 @@
+[![Gittip](http://img.shields.io/gittip/bbatsov.svg)](https://www.gittip.com/bbatsov/)
+
 Emacs Prelude
 =============
 
