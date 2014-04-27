@@ -179,7 +179,7 @@ point reaches the beginning or end of the buffer, stop there."
 
 (defun prelude-todo-ov-evaporate (_ov _after _beg _end &optional _length)
   (let ((inhibit-modification-hooks t))
-    (if _after (ov-clear 'todo-ov))))
+    (if _after (ov-reset _ov))))
 
 (defun prelude-annotate-todo ()
   "Put fringe marker on TODO: lines in the curent buffer."
@@ -188,7 +188,6 @@ point reaches the beginning or end of the buffer, stop there."
           'before-string
           (propertize (format "A")
                       'display '(left-fringe right-triangle))
-          'todo-ov t
           'modification-hooks '(prelude-todo-ov-evaporate)))
 
 (defun prelude-copy-file-name-to-clipboard ()
