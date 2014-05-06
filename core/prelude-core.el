@@ -37,17 +37,22 @@
 
 (defun prelude-open-with (arg)
   "Open visited file in default external program.
+When in dired mode, open file under the cursor.
 
 With a prefix ARG always prompt for command to use."
   (interactive "P")
-  (when buffer-file-name
-    (start-process "prelude-open-with-process"
-                   "*prelude-open-with-output*"
-                   (cond
-                    ((and (not arg) (eq system-type 'darwin)) "open")
-                    ((and (not arg) (member system-type '(gnu gnu/linux gnu/kfreebsd))) "xdg-open")
-                    (t (read-shell-command "Open current file with: ")))
-                   (shell-quote-argument buffer-file-name))))
+  (let ((current-file-name
+         (if (eq major-mode 'dired-mode)
+             (dired-get-file-for-visit)
+           buffer-file-name)))
+    (when current-file-name
+        (start-process "prelude-open-with-process"
+                       "*prelude-open-with-output*"
+                       (cond
+                        ((and (not arg) (eq system-type 'darwin)) "open")
+                        ((and (not arg) (member system-type '(gnu gnu/linux gnu/kfreebsd))) "xdg-open")
+                        (t (read-shell-command "Open current file with: ")))
+                       (shell-quote-argument current-file-name)))))
 
 (defun prelude-buffer-mode (buffer-or-name)
   "Retrieve the `major-mode' of BUFFER-OR-NAME."
