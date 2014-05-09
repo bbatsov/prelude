@@ -162,6 +162,7 @@ Will only occur if prelude-whitespace is also enabled."
             (mapcar 'file-truename (list prelude-savefile-dir package-user-dir)))))
 
 (add-to-list 'recentf-exclude 'prelude-recentf-exclude-p)
+(setq recentf-auto-cleanup 'never) ;; disable before we start recentf!
 (recentf-mode +1)
 
 ;; use shift + arrow keys to switch between visible buffers
