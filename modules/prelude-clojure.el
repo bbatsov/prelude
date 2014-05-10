@@ -33,7 +33,7 @@
 ;;; Code:
 
 (require 'prelude-lisp)
-(prelude-require-packages '(clojure-mode clojure-test-mode cider))
+(prelude-require-packages '(clojure-mode clojure-test-mode cider clojure-cheatsheet))
 
 (eval-after-load 'clojure-mode
   '(progn
