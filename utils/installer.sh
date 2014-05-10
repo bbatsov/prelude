@@ -166,7 +166,7 @@ else
 fi
 
 printf  "$CYAN Checking to see if ack is installed... "
-if hash ack 2>&-
+if hash ack 2>&- || hash ack-grep 2>&-
 then
     printf "$GREEN found.$RESET\n"
 else
