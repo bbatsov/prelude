@@ -25,6 +25,7 @@
 ;; (require 'prelude-scala)
 (require 'prelude-scheme)
 (require 'prelude-shell)
+;; (require 'prelude-evil)
 ;; (require 'prelude-scss)
 ;; (require 'prelude-web) ;; Emacs mode for web templates
 (require 'prelude-xml)
