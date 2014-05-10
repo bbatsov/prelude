@@ -613,6 +613,8 @@ and send me a pull request. :-)
 
 Support is available via the Prelude Google Group <emacs-prelude@googlegroups.com>.
 
+There's also a Freenode channel you can visit - `#prelude-emacs`.
+
 ## Contributors
 
 Here's a [list](https://github.com/bbatsov/prelude/contributors) of all the people who have contributed to the
