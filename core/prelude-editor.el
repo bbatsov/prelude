@@ -32,38 +32,6 @@
 
 ;;; Code:
 
-;; customize
-(defgroup prelude nil
-  "Emacs Prelude configuration."
-  :prefix "prelude-"
-  :group 'convenience)
-
-(defcustom prelude-auto-save t
-  "Non-nil values enable Prelude's auto save."
-  :type 'boolean
-  :group 'prelude)
-
-(defcustom prelude-guru t
-  "Non-nil values enable guru-mode."
-  :type 'boolean
-  :group 'prelude)
-
-(defcustom prelude-whitespace t
-  "Non-nil values enable Prelude's whitespace visualization."
-  :type 'boolean
-  :group 'prelude)
-
-(defcustom prelude-clean-whitespace-on-save t
-  "Cleanup whitespace from file before it's saved.
-Will only occur if prelude-whitespace is also enabled."
-  :type 'boolean
-  :group 'prelude)
-
-(defcustom prelude-flyspell t
-  "Non-nil values enable Prelude's flyspell support."
-  :type 'boolean
-  :group 'prelude)
-
 ;; Death to the tabs!  However, tabs historically indent to the next
 ;; 8-character offset; specifying anything else will cause *mass*
 ;; confusion, as it will change the appearance of every existing file.

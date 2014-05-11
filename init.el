@@ -100,6 +100,7 @@ by Prelude.")
 ;; the core stuff
 (require 'prelude-packages)
 (require 'prelude-ui)
+(require 'prelude-custom)
 (require 'prelude-core)
 (require 'prelude-mode)
 (require 'prelude-editor)
