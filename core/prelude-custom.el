@@ -69,7 +69,9 @@ Will only occur if `prelude-whitespace' is also enabled."
   "Path to your personal customization file.
 
 Since Prelude recommends you only put personal customizations in
-the personal folder."
+the personal folder. This can be easily set to the desired buffer
+in lisp by putting `(setq prelude-user-init-file buffer-file-name)'
+in the file that should be accessed with `prelude-find-user-init-file'."
   :type 'string
   :group 'prelude)
 
