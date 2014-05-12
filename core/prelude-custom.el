@@ -64,6 +64,15 @@ Will only occur if prelude-whitespace is also enabled."
   :type 'boolean
   :group 'prelude)
 
+(defcustom prelude-user-init-file (concat user-emacs-directory
+                                          "personal/")
+  "Path to your personal customization file.
+
+Since Prelude recommends you only put personal customizations in
+the personal folder."
+  :type 'string
+  :group 'prelude)
+
 (provide 'prelude-custom)
 
 ;;; prelude-custom.el ends here

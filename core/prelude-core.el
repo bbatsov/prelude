@@ -553,7 +553,7 @@ This follows freedesktop standards, should work in X servers."
 (defun prelude-find-user-init-file ()
   "Edit the `user-init-file', in another window."
   (interactive)
-  (find-file-other-window user-init-file))
+  (find-file-other-window prelude-user-init-file))
 
 (defun prelude-find-shell-init-file ()
   "Edit the shell init file in another window."
