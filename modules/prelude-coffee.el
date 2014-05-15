@@ -55,7 +55,7 @@
        (define-key coffee-mode-map [(meta r)] 'coffee-compile-buffer)
 
        ;; Riding edge.
-       (setq coffee-command "~/dev/coffee")
+       (if (file-exists-p "~/dev/coffee") (setq coffee-command "~/dev/coffee") nil)
 
        ;; Compile '.coffee' files on every save
        (and (buffer-file-name)
