@@ -116,6 +116,8 @@
 (global-set-key (kbd "C-c J") 'ace-jump-buffer)
 (global-set-key (kbd "s->") 'ace-jump-buffer)
 
+(global-set-key [remap other-window] 'ace-window)
+
 (provide 'prelude-global-keybindings)
 
 ;;; prelude-global-keybindings.el ends here
