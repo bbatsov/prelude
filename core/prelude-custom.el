@@ -67,11 +67,12 @@ Will only occur if `prelude-whitespace' is also enabled."
 (defcustom prelude-user-init-file (concat user-emacs-directory
                                           "personal/")
   "Path to your personal customization file.
-
-Since Prelude recommends you only put personal customizations in
-the personal folder. This can be easily set to the desired buffer
+Prelude recommends you only put personal customizations in the
+personal folder.  This variable allows you to specify a specific
+folder as the one that should be visited when running
+`prelude-find-user-init-file'.  This can be easily set to the desired buffer
 in lisp by putting `(setq prelude-user-init-file buffer-file-name)'
-in the file that should be accessed with `prelude-find-user-init-file'."
+in the desired elisp file."
   :type 'string
   :group 'prelude)
 
