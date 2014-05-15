@@ -551,7 +551,7 @@ This follows freedesktop standards, should work in X servers."
     (error "Only X server is supported")))
 
 (defun prelude-find-user-init-file ()
-  "Edit the `user-init-file', in another window."
+  "Edit the `prelude-user-init-file', in another window."
   (interactive)
   (find-file-other-window prelude-user-init-file))
 
