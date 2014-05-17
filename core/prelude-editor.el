@@ -182,6 +182,7 @@ The body of the advice is in BODY."
 (require 'tramp)
 ;; keep in mind known issues with zsh - see emacs wiki
 (setq tramp-default-method "ssh")
+(setq password-cache-expiry nil)         ; caching passwords permanently
 
 (set-default 'imenu-auto-rescan t)
 
