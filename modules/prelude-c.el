@@ -46,7 +46,8 @@
                                 (run-hooks 'prelude-c-mode-common-hook)))
 
 (defun prelude-makefile-mode-defaults ()
-  (setq indent-tabs-mode t))
+  (whitespace-toggle-options '(tabs))
+  (setq indent-tabs-mode t ))
 
 (setq prelude-makefile-mode-hook 'prelude-makefile-mode-defaults)
 
