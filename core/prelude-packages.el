@@ -64,8 +64,10 @@
     projectile
     magit
     move-text
+    operate-on-number
     rainbow-mode
     smartparens
+    smartrep
     undo-tree
     volatile-highlights
     zenburn-theme)

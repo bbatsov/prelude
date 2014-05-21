@@ -297,7 +297,7 @@ indent yanked text (with prefix arg don't indent)."
            (or (derived-mode-p 'prog-mode)
                (member major-mode yank-indent-modes)))
       (let ((transient-mark-mode nil))
-    (yank-advised-indent-function (region-beginning) (region-end)))))
+        (yank-advised-indent-function (region-beginning) (region-end)))))
 
 (defadvice yank-pop (after yank-pop-indent activate)
   "If current mode is one of `yank-indent-modes',
@@ -346,9 +346,9 @@ indent yanked text (with prefix arg don't indent)."
 (require 'compile)
 (setq compilation-ask-about-save nil  ; Just save before compiling
       compilation-always-kill t       ; Just kill old compile processes before
-                                      ; starting the new one
+                                        ; starting the new one
       compilation-scroll-output 'first-error ; Automatically scroll to first
-                                             ; error
+                                        ; error
       )
 
 ;; Colorize output of Compilation Mode, see
@@ -373,6 +373,18 @@ indent yanked text (with prefix arg don't indent)."
 ;; easy-kill
 (global-set-key [remap kill-ring-save] 'easy-kill)
 (global-set-key [remap mark-sexp] 'easy-mark)
+
+;;
+(require 'operate-on-number)
+(smartrep-define-key global-map "C-c ."
+  '(("+" . apply-operation-to-number-at-point)
+    ("-" . apply-operation-to-number-at-point)
+    ("*" . apply-operation-to-number-at-point)
+    ("/" . apply-operation-to-number-at-point)
+    ("^" . apply-operation-to-number-at-point)
+    ("<" . apply-operation-to-number-at-point)
+    (">" . apply-operation-to-number-at-point)
+    ("'" . operate-on-number-at-point)))
 
 (provide 'prelude-editor)
 
