@@ -63,8 +63,6 @@
     (define-key map (kbd "C-c k") 'prelude-kill-other-buffers)
     (define-key map (kbd "C-c TAB") 'prelude-indent-rigidly-and-copy-to-clipboard)
     (define-key map (kbd "C-c h") 'helm-prelude)
-    (define-key map (kbd "C-c +") 'prelude-increment-integer-at-point)
-    (define-key map (kbd "C-c -") 'prelude-decrement-integer-at-point)
     (define-key map (kbd "C-c I") 'prelude-find-user-init-file)
     (define-key map (kbd "C-c S") 'prelude-find-shell-init-file)
     ;; make some use of the Super key
@@ -109,8 +107,7 @@
                          ["Indent rigidly and copy to clipboard" prelude-indent-rigidly-and-copy-to-clipboard]
                          ["Insert date" prelude-insert-date]
                          ["Eval and replace" prelude-eval-and-replace]
-                         ["Increment integer at point" prelude-increment-integer-at-point]
-                         ["Decrement integer at point" prelude-decrement-integer-at-point])
+                         )
 
                         ("Navigation"
                          ["Helm" helm-prelude])
