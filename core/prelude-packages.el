@@ -49,6 +49,7 @@
     anzu
     browse-kill-ring
     dash
+    discover-my-major
     diff-hl
     diminish
     easy-kill
