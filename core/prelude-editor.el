@@ -130,6 +130,8 @@
             (mapcar 'file-truename (list prelude-savefile-dir package-user-dir)))))
 
 (add-to-list 'recentf-exclude 'prelude-recentf-exclude-p)
+;; ignore magit's commit message files
+(add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
 (setq recentf-auto-cleanup 'never) ;; disable before we start recentf!
 (recentf-mode +1)
 
