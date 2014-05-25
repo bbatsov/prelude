@@ -120,7 +120,10 @@
 (require 'recentf)
 (setq recentf-save-file (expand-file-name "recentf" prelude-savefile-dir)
       recentf-max-saved-items 500
-      recentf-max-menu-items 15)
+      recentf-max-menu-items 15
+      ;; disable recentf-cleanup on Emacs start, because it can cause
+      ;; problems with remote files
+      recentf-auto-cleanup 'never)
 
 (defun prelude-recentf-exclude-p (file)
   "A predicate to decide whether to exclude FILE from recentf."
@@ -132,7 +135,7 @@
 (add-to-list 'recentf-exclude 'prelude-recentf-exclude-p)
 ;; ignore magit's commit message files
 (add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
-(setq recentf-auto-cleanup 'never) ;; disable before we start recentf!
+
 (recentf-mode +1)
 
 ;; use shift + arrow keys to switch between visible buffers
