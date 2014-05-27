@@ -32,38 +32,6 @@
 
 ;;; Code:
 
-;; customize
-(defgroup prelude nil
-  "Emacs Prelude configuration."
-  :prefix "prelude-"
-  :group 'convenience)
-
-(defcustom prelude-auto-save t
-  "Non-nil values enable Prelude's auto save."
-  :type 'boolean
-  :group 'prelude)
-
-(defcustom prelude-guru t
-  "Non-nil values enable guru-mode."
-  :type 'boolean
-  :group 'prelude)
-
-(defcustom prelude-whitespace t
-  "Non-nil values enable Prelude's whitespace visualization."
-  :type 'boolean
-  :group 'prelude)
-
-(defcustom prelude-clean-whitespace-on-save t
-  "Cleanup whitespace from file before it's saved.
-Will only occur if prelude-whitespace is also enabled."
-  :type 'boolean
-  :group 'prelude)
-
-(defcustom prelude-flyspell t
-  "Non-nil values enable Prelude's flyspell support."
-  :type 'boolean
-  :group 'prelude)
-
 ;; Death to the tabs!  However, tabs historically indent to the next
 ;; 8-character offset; specifying anything else will cause *mass*
 ;; confusion, as it will change the appearance of every existing file.
@@ -76,6 +44,9 @@ Will only occur if prelude-whitespace is also enabled."
 ;; meaning) of any files you load.
 (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
 (setq-default tab-width 8)            ;; but maintain correct appearance
+
+;; Newline at end of file
+(setq require-final-newline t)
 
 ;; delete the selection with a keypress
 (delete-selection-mode t)
@@ -152,7 +123,22 @@ Will only occur if prelude-whitespace is also enabled."
 (require 'recentf)
 (setq recentf-save-file (expand-file-name "recentf" prelude-savefile-dir)
       recentf-max-saved-items 500
-      recentf-max-menu-items 15)
+      recentf-max-menu-items 15
+      ;; disable recentf-cleanup on Emacs start, because it can cause
+      ;; problems with remote files
+      recentf-auto-cleanup 'never)
+
+(defun prelude-recentf-exclude-p (file)
+  "A predicate to decide whether to exclude FILE from recentf."
+  (let ((file-dir (file-truename (file-name-directory file))))
+    (-any-p (lambda (dir)
+              (string-prefix-p dir file-dir))
+            (mapcar 'file-truename (list prelude-savefile-dir package-user-dir)))))
+
+(add-to-list 'recentf-exclude 'prelude-recentf-exclude-p)
+;; ignore magit's commit message files
+(add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
+
 (recentf-mode +1)
 
 ;; use shift + arrow keys to switch between visible buffers
@@ -320,7 +306,7 @@ indent yanked text (with prefix arg don't indent)."
            (or (derived-mode-p 'prog-mode)
                (member major-mode yank-indent-modes)))
       (let ((transient-mark-mode nil))
-    (yank-advised-indent-function (region-beginning) (region-end)))))
+        (yank-advised-indent-function (region-beginning) (region-end)))))
 
 (defadvice yank-pop (after yank-pop-indent activate)
   "If current mode is one of `yank-indent-modes',
@@ -369,9 +355,9 @@ indent yanked text (with prefix arg don't indent)."
 (require 'compile)
 (setq compilation-ask-about-save nil  ; Just save before compiling
       compilation-always-kill t       ; Just kill old compile processes before
-                                      ; starting the new one
+                                        ; starting the new one
       compilation-scroll-output 'first-error ; Automatically scroll to first
-                                             ; error
+                                        ; error
       )
 
 ;; Colorize output of Compilation Mode, see
@@ -396,6 +382,18 @@ indent yanked text (with prefix arg don't indent)."
 ;; easy-kill
 (global-set-key [remap kill-ring-save] 'easy-kill)
 (global-set-key [remap mark-sexp] 'easy-mark)
+
+;;
+(require 'operate-on-number)
+(smartrep-define-key global-map "C-c ."
+  '(("+" . apply-operation-to-number-at-point)
+    ("-" . apply-operation-to-number-at-point)
+    ("*" . apply-operation-to-number-at-point)
+    ("/" . apply-operation-to-number-at-point)
+    ("^" . apply-operation-to-number-at-point)
+    ("<" . apply-operation-to-number-at-point)
+    (">" . apply-operation-to-number-at-point)
+    ("'" . operate-on-number-at-point)))
 
 (provide 'prelude-editor)
 

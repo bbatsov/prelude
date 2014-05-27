@@ -65,10 +65,13 @@
 ;; A complementary binding to the apropos-command (C-h a)
 (define-key 'help-command "A" 'apropos)
 
-(global-set-key (kbd "C-h C-f") 'find-function)
-(global-set-key (kbd "C-h C-k") 'find-function-on-key)
-(global-set-key (kbd "C-h C-v") 'find-variable)
-(global-set-key (kbd "C-h C-l") 'find-library)
+;; A quick major mode help with discover-my-major
+(define-key 'help-command (kbd "C-m") 'discover-my-major)
+
+(define-key 'help-command (kbd "C-f") 'find-function)
+(define-key 'help-command (kbd "C-k") 'find-function-on-key)
+(define-key 'help-command (kbd "C-v") 'find-variable)
+(define-key 'help-command (kbd "C-l") 'find-library)
 
 ;; a complement to the zap-to-char command, that doesn't eat up the target character
 (autoload 'zap-up-to-char "misc" "Kill up to, but not including ARGth occurrence of CHAR.")
@@ -115,6 +118,8 @@
 (global-set-key (kbd "s-.") 'ace-jump-mode)
 (global-set-key (kbd "C-c J") 'ace-jump-buffer)
 (global-set-key (kbd "s->") 'ace-jump-buffer)
+
+(global-set-key [remap other-window] 'ace-window)
 
 (provide 'prelude-global-keybindings)
 

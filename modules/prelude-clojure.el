@@ -49,6 +49,8 @@
 
 (eval-after-load 'cider
   '(progn
+     (setq nrepl-log-messages t)
+
      (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 
      (defun prelude-cider-repl-mode-defaults ()

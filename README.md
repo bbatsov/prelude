@@ -1,3 +1,6 @@
+[![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
+[![Gittip](http://img.shields.io/gittip/bbatsov.svg)](https://www.gittip.com/bbatsov/)
+
 Emacs Prelude
 =============
 
@@ -51,7 +54,6 @@ advised to always run Prelude with the latest Emacs - currently
 	- [Customized C-a behavior](#customized-c-a-behavior)
 	- [Poor ido matching performance on large datasets](#poor-ido-matching-performance-on-large-datasets)
 	- [Windows compatibility](#windows-compatibility)
-- [Share the knowledge](#share-the-knowledge)
 - [Known issues](#known-issues)
 - [Support](#support)
 - [Contributors](#contributors)
@@ -182,7 +184,6 @@ By default most of the modules that ship with Prelude are not loaded. For more i
 (require 'prelude-js)
 ;; (require 'prelude-latex)
 (require 'prelude-lisp)
-;; (require 'prelude-markdown)
 ;; (require 'prelude-mediawiki)
 (require 'prelude-org)
 (require 'prelude-perl)
@@ -278,6 +279,7 @@ Keybinding         | Description
 <kbd>C-c g</kbd>   | Search in Google for the thing under point (or an interactive query).
 <kbd>C-c G</kbd>   | Search in GitHub for the thing under point (or an interactive query).
 <kbd>C-c y</kbd>   | Search in YouTube for the thing under point (or an interactive query).
+<kbd>C-c U</kbd>   | Search in Duckduckgo for the thing under point (or an interactive query).
 <kbd>C-S-RET</kbd> or <kbd>Super-o</kbd> | Insert an empty line above the current line and indent it properly.
 <kbd>S-RET</kbd> or <kbd>M-o</kbd> | Insert an empty line and indent it properly (as in most IDEs).
 <kbd>C-S-up</kbd> or <kbd>M-S-up</kbd> | Move the current line or region up.
@@ -288,14 +290,28 @@ Keybinding         | Description
 <kbd>C-c u</kbd> | Open URL in your default browser.
 <kbd>C-c e</kbd> | Eval a bit of Emacs Lisp code and replace it with its result.
 <kbd>C-c s</kbd> | Swap two active windows.
+<kbd>C-c D</kbd> | Delete current file and buffer.
 <kbd>C-c d</kbd> | Duplicate the current line (or region).
 <kbd>C-c M-d</kbd> | Duplicate and comment the current line (or region).
 <kbd>C-c r</kbd> | Rename the currently visited file and buffer.
 <kbd>C-c t</kbd> | Open a terminal emulator (`ansi-term`).
 <kbd>C-c k</kbd> | Kill all open buffers except the one you're currently in.
+<kbd>C-c TAB</kbd> | Indent and copy region to clipboard
 <kbd>C-c h</kbd> | Open Helm (available if you've enabled the `prelude-helm` module).
-<kbd>C-c +</kbd> | Increment integer at point.
-<kbd>C-c -</kbd> | Decrement integer at point.
+<kbd>C-c I</kbd> | Open user's init file.
+<kbd>C-c S</kbd> | Open shell's init file.
+<kbd>C-h C-m</kbd> | Display key bindings of current major mode and descriptions of every binding.
+<kbd>C-c . +</kbd> | Increment integer at point. Default is +1.
+<kbd>C-c . -</kbd> | Decrement integer at point. Default is -1.
+<kbd>C-c . *</kbd> | Multiply integer at point. Default is *2.
+<kbd>C-c . /</kbd> | Divide integer at point. Default is /2.
+<kbd>C-c . \</kbd> | Modulo integer at point. Default is modulo 2.
+<kbd>C-c . ^</kbd> | Power to the integer at point. Default is ^2.
+<kbd>C-c . <</kbd> | Left-shift integer at point. Default is 1 position to the left.
+<kbd>C-c . ></kbd> | Right-shift integer at point. Default is 1 position to the right.
+<kbd>C-c . #</kbd> | Convert integer at point to specified base. Default is 10.
+<kbd>C-c . %</kbd> | Replace integer at point with another specified integer.
+<kbd>C-c . '</kbd> | Perform arithmetic operations on integer at point. User specifies the operator.
 <kbd>Super-r</kbd> | Recent files
 <kbd>Super-x</kbd> | Expand region
 <kbd>Super-j</kbd> | Join lines
@@ -304,6 +320,9 @@ Keybinding         | Description
 <kbd>Super-m l</kbd> | Magit log
 <kbd>Super-m f</kbd> | Magit file log
 <kbd>Super-m b</kbd> | Magit blame mode
+
+**Note**: For various arithmetic operations, the prefix `C-c .` only needs to be pressed once for the first operation.
+For subsequent operations, only the appropriate operations (i.e. `+`, `-`, `*`, `/`... needs to be pressed).
 
 #### OSX modifier keys
 
@@ -385,6 +404,11 @@ If you're an `evil-mode` user you'll probably do well to disable `key-chord-mode
 ```lisp
 (key-chord-mode -1)
 ```
+
+#### vim emulation
+
+If you want to use vim inside of emacs enable the `prelude-evil` module which provides
+support for `evil-mode`.
 
 ## Automatic package installation
 
@@ -588,13 +612,6 @@ While everything in Prelude should work fine in Windows, I test it only
 with Linux & OSX, so there are Windows related problems from time to
 time. This situation will probably improve over time.
 
-## Share the knowledge
-
-[EmacsWiki](http://emacswiki.org) collects useful resources for working
-with GNU Emacs. Please, take the time to peruse and improve them as
-you accumulate knowledge about Emacs. Prelude makes this especially
-easy, since it bundles
-
 ## Known issues
 
 Check out the project's
@@ -606,6 +623,8 @@ and send me a pull request. :-)
 
 Support is available via the Prelude Google Group <emacs-prelude@googlegroups.com>.
 
+There's also a Freenode channel you can visit - `#prelude-emacs`.
+
 ## Contributors
 
 Here's a [list](https://github.com/bbatsov/prelude/contributors) of all the people who have contributed to the
@@ -616,5 +635,11 @@ development of Emacs Prelude.
 Bug reports and suggestions for improvements are always
 welcome. GitHub pull requests are even better! :-)
 
+I'm also accepting financial contributions via [gittip](https://www.gittip.com/bbatsov).
+
+[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/bbatsov)
+
 Cheers,<br/>
 [Bozhidar](https://twitter.com/bbatsov)
+
+[badge-license]: https://img.shields.io/badge/license-GPL_3-green.svg
