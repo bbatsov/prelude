@@ -54,7 +54,6 @@ advised to always run Prelude with the latest Emacs - currently
 	- [Customized C-a behavior](#customized-c-a-behavior)
 	- [Poor ido matching performance on large datasets](#poor-ido-matching-performance-on-large-datasets)
 	- [Windows compatibility](#windows-compatibility)
-- [Share the knowledge](#share-the-knowledge)
 - [Known issues](#known-issues)
 - [Support](#support)
 - [Contributors](#contributors)
