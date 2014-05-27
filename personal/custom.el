@@ -39,7 +39,7 @@
  )
 
 ;; Pull in custom packages
-(prelude-require-packages '(ahg jade-mode php-mode twilight-theme ess twittering-mode floobits sublime-themes))
+(prelude-require-packages '(ahg jade-mode php-mode twilight-theme ess twittering-mode floobits sublime-themes company))
 
 ;; Load my Theme of Choice
 (load-theme 'junio t)
@@ -75,6 +75,8 @@
 ;; Tweak projectile
 (setq projectile-remember-window-configs t)
 
+;; Company-mode everywhere
+(add-hook 'global-init-hook 'global-company-mode)
 
 ;; Setup ERC
 (setq erc-autojoin-channels-alist '(("freenode.net"
@@ -88,6 +90,18 @@
   (setq erc-prompt-for-nickserv-password nil)
   (setq erc-nickserv-passwords
         '((freenode ((erc-nick . ,erc-pass))))))
+
+(defun start-irc-work ()
+  "Connect to the UA IRC Server"
+  (interactive)
+  (load "~/.ercpass")
+  (erc-tls :server "dev.urbanairship.com"
+           :port 6697
+           :nick "gastove"
+           :full-name "Ross Donaldson"
+           :password work-erc-pass)
+  (setq erc-autojoin-channels-alist '(("#ops")))
+  )
 
 ;; For SQL hackery -- needs more work
 ;; Generate a list of DBs I connect to commonly
