@@ -643,6 +643,10 @@ development of Emacs Prelude.
 Bug reports and suggestions for improvements are always
 welcome. GitHub pull requests are even better! :-)
 
+I'm also accepting financial contributions via [gittip](https://www.gittip.com/bbatsov).
+
+[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/bbatsov)
+
 Cheers,<br/>
 [Bozhidar](https://twitter.com/bbatsov)
 
