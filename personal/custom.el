@@ -107,18 +107,11 @@
 ;; Generate a list of DBs I connect to commonly
 (setq sql-connection-alist
       '((sag-db01
-         (sql-product 'mysql)
-         (sql-server "sag-db01.sea.bigfishgames.com")
-         (sql-user (getenv "MYSQL_USER"))
-         (sql-password (getenv "MYSQL_PASSWORD"))
-         (sql-database "wordace")
-         (sql-port 3306))
-        (character-batch
-         (sql-product 'mysql)
-         (sql-server "characterbatch-dbslave.sea.bigfishgames.com")
-         (sql-user (getenv "MYSQL_USER"))
-         (sql-password (getenv "MYSQL_PASSWORD"))
-         (sql-database "")
+         (sql-product 'psql)
+         (sql-server (getenv "YAVIN_SERVER"))
+         (sql-user (getenv "YAVIN_USER"))
+         (sql-password (getenv "YAVIN_PASSWORD"))
+         (sql-database "yavin")
          (sql-port 3306))))
 
 (defun sql-connect-preset (name)
