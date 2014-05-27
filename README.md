@@ -613,13 +613,6 @@ While everything in Prelude should work fine in Windows, I test it only
 with Linux & OSX, so there are Windows related problems from time to
 time. This situation will probably improve over time.
 
-## Share the knowledge
-
-[EmacsWiki](http://emacswiki.org) collects useful resources for working
-with GNU Emacs. Please, take the time to peruse and improve them as
-you accumulate knowledge about Emacs. Prelude makes this especially
-easy, since it bundles
-
 ## Known issues
 
 Check out the project's
