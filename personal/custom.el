@@ -89,7 +89,7 @@
   (erc-services-mode 1)
   (setq erc-prompt-for-nickserv-password nil)
   (setq erc-nickserv-passwords
-        '((freenode ((erc-nick . ,erc-pass))))))
+        `((freenode ((,erc-nick . ,erc-pass))))))
 
 (defun start-irc-work ()
   "Connect to the UA IRC Server"
