@@ -143,6 +143,12 @@
   )
 (global-set-key (kbd "C-c m") 'markdown-preview-file)
 
+;; Support for Babel Mode code blocks
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (emacs-lisp .t)))
+
 (provide 'custom)
 
 ;;; custom.el ends here
