@@ -33,13 +33,12 @@
 ;;; Code:
 
 (require 'prelude-lisp)
-(prelude-require-packages '(clojure-mode clojure-test-mode cider))
+(prelude-require-packages '(clojure-mode cider))
 
 (eval-after-load 'clojure-mode
   '(progn
      (defun prelude-clojure-mode-defaults ()
        (subword-mode +1)
-       (clojure-test-mode +1)
        (run-hooks 'prelude-lisp-coding-hook))
 
      (setq prelude-clojure-mode-hook 'prelude-clojure-mode-defaults)
