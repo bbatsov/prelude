@@ -51,6 +51,8 @@ Start `ielm' if it's not already running."
   (prelude-start-or-switch-to 'ielm "*ielm*"))
 
 (define-key emacs-lisp-mode-map (kbd "C-c C-z") 'prelude-visit-ielm)
+(define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-defun)
+(define-key emacs-lisp-mode-map (kbd "C-c C-b") 'eval-buffer)
 
 (defun prelude-conditional-emacs-lisp-checker ()
   "Don't check doc style in Emacs Lisp test files."
