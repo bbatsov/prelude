@@ -68,6 +68,7 @@
     move-text
     operate-on-number
     rainbow-mode
+    smart-shift
     smartparens
     smartrep
     undo-tree
