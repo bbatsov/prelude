@@ -383,16 +383,19 @@ indent yanked text (with prefix arg don't indent)."
 (global-set-key [remap kill-ring-save] 'easy-kill)
 (global-set-key [remap mark-sexp] 'easy-mark)
 
-;;
+;; operate-on-number
 (require 'operate-on-number)
 (smartrep-define-key global-map "C-c ."
   '(("+" . apply-operation-to-number-at-point)
     ("-" . apply-operation-to-number-at-point)
     ("*" . apply-operation-to-number-at-point)
     ("/" . apply-operation-to-number-at-point)
+    ("\\" . apply-operation-to-number-at-point)
     ("^" . apply-operation-to-number-at-point)
     ("<" . apply-operation-to-number-at-point)
     (">" . apply-operation-to-number-at-point)
+    ("#" . apply-operation-to-number-at-point)
+    ("%" . apply-operation-to-number-at-point)
     ("'" . operate-on-number-at-point)))
 
 (provide 'prelude-editor)
