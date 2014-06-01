@@ -111,9 +111,6 @@
                          ["Eval and replace" prelude-eval-and-replace]
                          )
 
-                        ("Navigation"
-                         ["Helm" helm-prelude])
-
                         ("Windows"
                          ["Swap windows" prelude-swap-windows])
 
