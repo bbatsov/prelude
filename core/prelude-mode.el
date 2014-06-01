@@ -62,7 +62,6 @@
     (define-key map (kbd "C-c t") 'prelude-visit-term-buffer)
     (define-key map (kbd "C-c k") 'prelude-kill-other-buffers)
     (define-key map (kbd "C-c TAB") 'prelude-indent-rigidly-and-copy-to-clipboard)
-    (define-key map (kbd "C-c h") 'helm-prelude)
     (define-key map (kbd "C-c I") 'prelude-find-user-init-file)
     (define-key map (kbd "C-c S") 'prelude-find-shell-init-file)
     ;; make some use of the Super key
@@ -111,9 +110,6 @@
                          ["Insert date" prelude-insert-date]
                          ["Eval and replace" prelude-eval-and-replace]
                          )
-
-                        ("Navigation"
-                         ["Helm" helm-prelude])
 
                         ("Windows"
                          ["Swap windows" prelude-swap-windows])
