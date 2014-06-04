@@ -17,6 +17,7 @@
 ;; (require 'prelude-css)
 (require 'prelude-emacs-lisp)
 ;; (require 'prelude-erlang)
+;; (require 'prelude-go)
 ;; (require 'prelude-haskell)
 (require 'prelude-js)
 ;; (require 'prelude-latex)
