@@ -251,12 +251,12 @@ there's a region, all lines that region covers will be duplicated."
         (setq end (point))))
     (goto-char (+ origin (* (length region) arg) arg))))
 
-(defun prelude-rename-file-and-buffer ()
-  "Renames current buffer and file it is visiting."
+(defun prelude-rename-buffer-and-file ()
+  "Rename current buffer and if the buffer is visiting a file, rename it too."
   (interactive)
   (let ((filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
-        (message "Buffer is not visiting a file!")
+        (rename-buffer (read-from-minibuffer "New name: " (buffer-name)))
       (let ((new-name (read-file-name "New name: " filename)))
         (cond
          ((vc-backend filename) (vc-rename-file filename new-name))
@@ -434,7 +434,7 @@ Doesn't mess with special buffers."
     "Press <C-c G> to search in GitHub."
     "Press <C-c y> to search in YouTube."
     "Press <C-c U> to search in DuckDuckGo."
-    "Press <C-c r> to rename the current buffer and file it's visiting."
+    "Press <C-c r> to rename the current buffer and the file it's visiting if any."
     "Press <C-c t> to open a terminal in Emacs."
     "Press <C-c k> to kill all the buffers, but the active one."
     "Press <C-x g> or <s-m> to run magit-status."

@@ -58,7 +58,7 @@
     (define-key map (kbd "C-c D") 'prelude-delete-file-and-buffer)
     (define-key map (kbd "C-c d") 'prelude-duplicate-current-line-or-region)
     (define-key map (kbd "C-c M-d") 'prelude-duplicate-and-comment-current-line-or-region)
-    (define-key map (kbd "C-c r") 'prelude-rename-file-and-buffer)
+    (define-key map (kbd "C-c r") 'prelude-rename-buffer-and-file)
     (define-key map (kbd "C-c t") 'prelude-visit-term-buffer)
     (define-key map (kbd "C-c k") 'prelude-kill-other-buffers)
     (define-key map (kbd "C-c TAB") 'prelude-indent-rigidly-and-copy-to-clipboard)
@@ -89,7 +89,7 @@
                         ("Files"
                          ["Open with..." prelude-open-with]
                          ["Delete file and buffer" prelude-delete-file-and-buffer]
-                         ["Rename file and buffer" prelude-rename-file-and-buffer]
+                         ["Rename buffer and file" prelude-rename-buffer-and-file]
                          ["Copy file name to clipboard" prelude-copy-file-name-to-clipboard])
 
                         ("Buffers"

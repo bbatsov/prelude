@@ -294,7 +294,7 @@ Keybinding         | Description
 <kbd>C-c D</kbd> | Delete current file and buffer.
 <kbd>C-c d</kbd> | Duplicate the current line (or region).
 <kbd>C-c M-d</kbd> | Duplicate and comment the current line (or region).
-<kbd>C-c r</kbd> | Rename the currently visited file and buffer.
+<kbd>C-c r</kbd> | Rename the current buffer and its visiting file if any.
 <kbd>C-c t</kbd> | Open a terminal emulator (`ansi-term`).
 <kbd>C-c k</kbd> | Kill all open buffers except the one you're currently in.
 <kbd>C-c TAB</kbd> | Indent and copy region to clipboard
