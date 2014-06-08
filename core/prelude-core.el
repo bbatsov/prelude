@@ -469,11 +469,6 @@ Doesn't mess with special buffers."
     (when after-init-time
       (eval form))))
 
-(defun prelude-exchange-point-and-mark ()
-  "Identical to `exchange-point-and-mark' but will not activate the region."
-  (interactive)
-  (exchange-point-and-mark (not (region-active-p))))
-
 (require 'epl)
 
 (defun prelude-update ()
