@@ -472,8 +472,7 @@ Doesn't mess with special buffers."
 (defun prelude-exchange-point-and-mark ()
   "Identical to `exchange-point-and-mark' but will not activate the region."
   (interactive)
-  (exchange-point-and-mark)
-  (deactivate-mark nil))
+  (exchange-point-and-mark (not (region-active-p))))
 
 (require 'epl)
 
