@@ -105,12 +105,15 @@
 
 ;; For SQL hackery -- needs more work
 ;; Generate a list of DBs I connect to commonly
+
+(load "~/.emacs-dbs")
+
 (setq sql-connection-alist
       '((sag-db01
          (sql-product 'psql)
-         (sql-server (getenv "YAVIN_SERVER"))
-         (sql-user (getenv "YAVIN_USER"))
-         (sql-password (getenv "YAVIN_PASSWORD"))
+         (sql-server yavin-server)
+         (sql-user yavin-user)
+         (sql-password yavin-password)
          (sql-database "yavin")
          (sql-port 3306))))
 
