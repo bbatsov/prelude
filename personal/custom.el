@@ -110,7 +110,7 @@
 
 (setq sql-connection-alist
       '((yavin
-         (sql-product 'psql)
+         (sql-product 'postgres)
          (sql-server yavin-server)
          (sql-user yavin-user)
          (sql-password yavin-password)
@@ -131,7 +131,7 @@
 
 (defun sql-yavin ()
   (interactive)
-  (sql-connect-preset 'sag-db01))
+  (sql-connect-preset 'yavin))
 
 (global-set-key (kbd "M-s q") 'sql-connect-preset-by-name) ; Connect to a db preset by nameq
 
