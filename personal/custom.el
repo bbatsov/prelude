@@ -109,7 +109,7 @@
 (load "~/.emacs-dbs")
 
 (setq sql-connection-alist
-      '((sag-db01
+      '((yavin
          (sql-product 'psql)
          (sql-server yavin-server)
          (sql-user yavin-user)
@@ -129,7 +129,7 @@
   (interactive "sDB Name: ")
   (sql-connect-preset 'name))
 
-(defun sql-sag-db01 ()
+(defun sql-yavin ()
   (interactive)
   (sql-connect-preset 'sag-db01))
 
