@@ -78,6 +78,9 @@
 ;; Company-mode everywhere
 (add-hook 'global-init-hook 'global-company-mode)
 
+;; Smartparens all the time
+(add-hook 'global-init-hook 'smartparens-mode)
+
 ;; Setup ERC
 (setq erc-autojoin-channels-alist '(("freenode.net"
                                      "#emacs" "#clojure" "#julia")))
@@ -120,8 +123,8 @@
 (defun sql-connect-preset (name)
   "Connect to a predefined SQL connection listed in `sql-connection-alist'"
   (eval `(let ,(cdr (assoc name sql-connection-alist))
-    (flet ((sql-get-login (&rest what)))
-      (sql-product-interactive sql-product)))))
+           (flet ((sql-get-login (&rest what)))
+             (sql-product-interactive sql-product)))))
 
 ;; Function to load a DB based on its short name
 (defun sql-connect-preset-by-name (name)
