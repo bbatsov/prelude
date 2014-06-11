@@ -110,11 +110,6 @@
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-;; make C-x C-x usable with transient-mark-mode
-(define-key global-map
-  [remap exchange-point-and-mark]
-  'prelude-exchange-point-and-mark)
-
 (global-set-key (kbd "C-c j") 'ace-jump-mode)
 (global-set-key (kbd "s-.") 'ace-jump-mode)
 (global-set-key (kbd "C-c J") 'ace-jump-buffer)
