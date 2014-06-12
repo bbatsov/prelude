@@ -131,9 +131,7 @@ ln -s path/to/local/repo ~/.emacs.d
 cd ~/.emacs.d
 ```
 
-You'd do well to replace `~/.emacs.d` with the value of
-`user-emacs-directory` for your OS. You can check the value by doing
-`C-h v user-emacs-directory` inside Emacs.
+Note that on Windows, the `.emacs.d` directory is usually located at `C:\Users\your_user_name\AppData\Roaming\.emacs.d`, and you should adjust the command appropriately.
 
 ## Updating Prelude
 
