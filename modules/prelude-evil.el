@@ -62,6 +62,13 @@
 (evil-ex-define-cmd "linum" 'linum-mode)
 (evil-ex-define-cmd "Align" 'align-regexp)
 
+(defun prelude-yank-to-end-of-line ()
+  "Yank to end of line."
+  (interactive)
+  (evil-yank (point) (point-at-eol)))
+
+(define-key evil-normal-state-map
+  (kbd "Y") 'prelude-yank-to-end-of-line)
 
 ;; Scrolling
 (defun prelude-evil-scroll-down-other-window ()
