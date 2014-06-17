@@ -36,7 +36,7 @@
 ;;; evil-visualstar enables searching visual selection with *
 ;;; evil-numbers enables vim style numeric incrementing and decrementing
 
-(prelude-require-packages '(evil goto-chg surround evil-visualstar evil-numbers))
+(prelude-require-packages '(evil goto-chg evil-surround evil-visualstar evil-numbers))
 
 (setq evil-mode-line-format 'before)
 
@@ -47,7 +47,7 @@
 (setq evil-motion-state-cursor '("gray" box))
 
 (evil-mode 1)
-(global-surround-mode 1)
+(global-evil-surround-mode 1)
 
 (define-key evil-normal-state-map (kbd "C-A")
   'evil-numbers/inc-at-pt)
