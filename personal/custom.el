@@ -65,7 +65,8 @@
  "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
 ;; Enable virtualenvwrapper.el
-
+(venv-initialize-interactive-shells)
+(setq venv-location "~/.python_virtualenvs/")
 
 ;; Tweak Mac Keyboard Behavior
 (setq mac-command-modifier 'meta)
