@@ -121,8 +121,7 @@
          (sql-server yavin-server)
          (sql-user yavin-user)
          (sql-password yavin-password)
-         (sql-database "yavin")
-         (sql-port 3306))))
+         (sql-database "yavin"))))
 
 (defun sql-connect-preset (name)
   "Connect to a predefined SQL connection listed in `sql-connection-alist'"
