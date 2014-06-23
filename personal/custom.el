@@ -39,7 +39,7 @@
  )
 
 ;; Pull in custom packages
-(prelude-require-packages '(ahg jade-mode php-mode twilight-theme ess twittering-mode floobits sublime-themes company))
+(prelude-require-packages '(ahg jade-mode php-mode twilight-theme ess twittering-mode floobits sublime-themes company virtualenvwrapper))
 
 ;; Load my Theme of Choice
 (load-theme 'junio t)
@@ -50,6 +50,7 @@
 ;; Load ESS
 (require 'ess-site)
 
+;; Python Configs
 ;; Use IPython as my python interpreter
 (setq
  python-shell-interpreter "ipython"
@@ -62,6 +63,9 @@
  "';'.join(module_completion('''%s'''))\n"
  python-shell-completion-string-code
  "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+
+;; Enable virtualenvwrapper.el
+
 
 ;; Tweak Mac Keyboard Behavior
 (setq mac-command-modifier 'meta)
