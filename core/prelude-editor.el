@@ -280,6 +280,11 @@ The body of the advice is in BODY."
 (browse-kill-ring-default-keybindings)
 (global-set-key (kbd "s-y") 'browse-kill-ring)
 
+(defadvice exchange-point-and-mark (before deactivate-mark activate compile)
+  "When called with no active region, do not activate mark."
+  (interactive
+   (list (not (region-active-p)))))
+
 ;; automatically indenting yanked text if in programming-modes
 (defvar yank-indent-modes
   '(LaTeX-mode TeX-mode)
@@ -383,16 +388,19 @@ indent yanked text (with prefix arg don't indent)."
 (global-set-key [remap kill-ring-save] 'easy-kill)
 (global-set-key [remap mark-sexp] 'easy-mark)
 
-;;
+;; operate-on-number
 (require 'operate-on-number)
 (smartrep-define-key global-map "C-c ."
   '(("+" . apply-operation-to-number-at-point)
     ("-" . apply-operation-to-number-at-point)
     ("*" . apply-operation-to-number-at-point)
     ("/" . apply-operation-to-number-at-point)
+    ("\\" . apply-operation-to-number-at-point)
     ("^" . apply-operation-to-number-at-point)
     ("<" . apply-operation-to-number-at-point)
     (">" . apply-operation-to-number-at-point)
+    ("#" . apply-operation-to-number-at-point)
+    ("%" . apply-operation-to-number-at-point)
     ("'" . operate-on-number-at-point)))
 
 (provide 'prelude-editor)

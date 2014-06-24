@@ -20,25 +20,35 @@ make_prelude_dirs () {
     mkdir -p "$PRELUDE_INSTALL_DIR/savefile"
 }
 
-colors () {
-    # Reset
-    RESET='\e[0m'
-    RED='\e[0;31m'          # Red
-    GREEN='\e[0;32m'        # Green
-    YELLOW='\e[0;33m'       # Yellow
-    BLUE='\e[0;34m'         # Blue
-    PURPLE='\e[0;35m'       # Purple
-    CYAN='\e[0;36m'         # Cyan
-    WHITE='\e[0;37m'        # White
-
-    # Bold
-    BRED='\e[1;31m'         # Red
-    BGREEN='\e[1;32m'       # Green
-    BYELLOW='\e[1;33m'      # Yellow
-    BBLUE='\e[1;34m'        # Blue
-    BPURPLE='\e[1;35m'      # Purple
-    BCYAN='\e[1;36m'        # Cyan
-    BWHITE='\e[1;37m'       # White
+colors_ () {
+    case "$SHELL" in
+    *zsh)
+        autoload colors && colors
+        eval RESET='$reset_color'
+        for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE
+        do
+            eval $COLOR='$fg_no_bold[${(L)COLOR}]'
+            eval B$COLOR='$fg_bold[${(L)COLOR}]'
+        done
+        ;;
+    *)
+        RESET='\e[0m'           # Reset
+        RED='\e[0;31m'          # Red
+        GREEN='\e[0;32m'        # Green
+        YELLOW='\e[0;33m'       # Yellow
+        BLUE='\e[0;34m'         # Blue
+        PURPLE='\e[0;35m'       # Magenta
+        CYAN='\e[0;36m'         # Cyan
+        WHITE='\e[0;37m'        # White
+        BRED='\e[1;31m'         # Bold Red
+        BGREEN='\e[1;32m'       # Bold Green
+        BYELLOW='\e[1;33m'      # Bold Yellow
+        BBLUE='\e[1;34m'        # Bold Blue
+        BPURPLE='\e[1;35m'      # Bold Magenta
+        BCYAN='\e[1;36m'        # Bold Cyan
+        BWHITE='\e[1;37m'       # Bold White
+        ;;
+    esac
 }
 
 # Commandline args:
@@ -85,7 +95,7 @@ do
             shift 2
             ;;
         -c | --colors)
-            colors
+            colors_
             shift 1
             ;;
         -s | --source)
@@ -105,7 +115,6 @@ do
             exit 0
             ;;
         -v | --verbose)
-            echo "prelude verbose $PRELUDE_VERBOSE"
             PRELUDE_VERBOSE='true';
             shift 1
             ;;
@@ -118,20 +127,21 @@ done
 
 VERBOSE_COLOR=$BBLUE
 
-[ -z $PRELUDE_URL ] && PRELUDE_URL="https://github.com/bbatsov/prelude.git"
+[ -z "$PRELUDE_URL" ] && PRELUDE_URL="https://github.com/bbatsov/prelude.git"
 [ -z "$PRELUDE_INSTALL_DIR" ] && PRELUDE_INSTALL_DIR="$HOME/.emacs.d"
 
 if [ x$PRELUDE_VERBOSE != x ]
 then
-    printf "$PRELUDE_VERBOSE\n"
     printf "$VERBOSE_COLOR"
+    printf "PRELUDE_VERBOSE = $PRELUDE_VERBOSE\n"
     printf "INSTALL_DIR = $PRELUDE_INSTALL_DIR\n"
     printf "SOURCE_URL  = $PRELUDE_URL\n"
-    if [ -n $PRELUDE_SKIP_BC ]
+    printf "$RESET"
+    if [ -n "$PRELUDE_SKIP_BC" ]
     then
         printf "Skipping bytecompilation.\n"
     fi
-    if [ -n $PRELUDE_INTO ]
+    if [ -n "$PRELUDE_INTO" ]
     then
         printf "Replacing existing config (if one exists).\n"
     fi
@@ -184,17 +194,18 @@ then
     # Existing file/directory found -> backup
     printf " Backing up the existing config to $PRELUDE_INSTALL_DIR.pre-prelude.tar.\n"
     tar -cf "$PRELUDE_INSTALL_DIR.pre-prelude.tar" "$PRELUDE_INSTALL_DIR" > /dev/null 2>&1
+    PRELUDE_INSTALL_DIR_ORIG="$PRELUDE_INSTALL_DIR"
     # Overwrite existing?
-    if [ -n $PRELUDE_INTO ]
-    then
-        # Replace existing config
-        install_prelude
-        make_prelude_dirs
-    else
-        # Install into existing config
-        PRELUDE_INSTALL_DIR="$PRELUDE_INSTALL_DIR/prelude"
-        install_prelude
-    fi
+    [ -n "$PRELUDE_INTO" ] || PRELUDE_INSTALL_DIR="$PRELUDE_INSTALL_DIR/prelude"
+    # Clear destination directory for git clone to work
+    rm -fr "$PRELUDE_INSTALL_DIR"
+    mkdir "$PRELUDE_INSTALL_DIR"
+    # Replace existing config
+    install_prelude
+    make_prelude_dirs
+    # Reinstate files that weren't replaced
+    tar --skip-old-files -xf "$PRELUDE_INSTALL_DIR_ORIG.pre-prelude.tar" "$PRELUDE_INSTALL_DIR" > /dev/null 2>&1
+    [ -n "$PRELUDE_INTO" ] || cp "$PRELUDE_INSTALL_DIR/sample/prelude-modules.el" "$PRELUDE_INSTALL_DIR"
 elif [ -e "$PRELUDE_INSTALL_DIR" ]
 then
     # File exist but not a regular file or directory
@@ -210,16 +221,16 @@ else
     cp "$PRELUDE_INSTALL_DIR/sample/prelude-modules.el" "$PRELUDE_INSTALL_DIR"
 fi
 
-if [ -z $PRELUDE_SKIP_BC ];
+if [ -z "$PRELUDE_SKIP_BC" ];
 then
     if which emacs 2>&1 > /dev/null
     then
         printf " Bytecompiling Prelude.\n"
         if [ x$PRELUDE_VERBOSE != x ]
         then
-            emacs -batch -f batch-byte-compile "$PRELUDE_INSTALL_DIR/core/*.el"
+            emacs -batch -f batch-byte-compile "$PRELUDE_INSTALL_DIR/core"/*.el
         else
-            emacs -batch -f batch-byte-compile "$PRELUDE_INSTALL_DIR/core/*.el" > /dev/null 2>&1
+            emacs -batch -f batch-byte-compile "$PRELUDE_INSTALL_DIR/core"/*.el > /dev/null 2>&1
         fi
     else
         printf "$YELLOW Emacs not found.$RESET Skipping bytecompilation.\n"

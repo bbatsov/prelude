@@ -49,16 +49,25 @@
 (eval-after-load 'web-mode
   '(progn
      (defun prelude-web-mode-defaults ()
-       ;; Customizations
-       (setq web-mode-markup-indent-offset 4)
-       (setq web-mode-css-indent-offset 2)
-       (setq web-mode-code-indent-offset 4)
-       (setq web-mode-disable-autocompletion t)
-       (local-set-key (kbd "RET") 'newline-and-indent))
+       ;; make web-mode play nice with smartparens
+       (setq web-mode-enable-auto-pairing nil)
+       (sp-with-modes '(web-mode)
+         (sp-local-pair "%" "%"
+                        :unless '(sp-in-string-p)
+                        :post-handlers '(((lambda (&rest _ignored)
+                                            (just-one-space)
+                                            (save-excursion (insert " ")))
+                                          "SPC" "=" "#")))
+         (sp-local-pair "<% "  " %>" :insert "C-c %")
+         (sp-local-pair "<%= " " %>" :insert "C-c =")
+         (sp-local-pair "<%# " " %>" :insert "C-c #")
+         (sp-local-tag "%" "<% "  " %>")
+         (sp-local-tag "=" "<%= " " %>")
+         (sp-local-tag "#" "<%# " " %>")))
      (setq prelude-web-mode-hook 'prelude-web-mode-defaults)
 
      (add-hook 'web-mode-hook (lambda ()
-                                 (run-hooks 'prelude-web-mode-hook)))))
+                                (run-hooks 'prelude-web-mode-hook)))))
 
 (provide 'prelude-web)
 ;;; prelude-web.el ends here

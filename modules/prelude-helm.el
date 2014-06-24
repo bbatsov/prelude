@@ -49,7 +49,11 @@
     (error (helm-mini))))
 
 (eval-after-load 'prelude-mode
-  '(define-key prelude-mode-map (kbd "C-c h") 'helm-prelude))
+  '(progn
+     (define-key prelude-mode-map (kbd "C-c h") 'helm-prelude)
+     (easy-menu-add-item nil '("Tools" "Prelude")
+                         '("Navigation"
+                           ["Helm" helm-prelude]))))
 
 (push "Press <C-c h> to navigate a project in Helm." prelude-tips)
 

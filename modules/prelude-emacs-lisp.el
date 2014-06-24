@@ -39,7 +39,9 @@
   "Recompile your elc when saving an elisp file."
   (add-hook 'after-save-hook
             (lambda ()
-              (when (file-exists-p (byte-compile-dest-file buffer-file-name))
+              (when (and
+                     (string-prefix-p prelude-dir (file-truename buffer-file-name))
+                     (file-exists-p (byte-compile-dest-file buffer-file-name)))
                 (emacs-lisp-byte-compile)))
             nil
             t))
@@ -51,6 +53,8 @@ Start `ielm' if it's not already running."
   (prelude-start-or-switch-to 'ielm "*ielm*"))
 
 (define-key emacs-lisp-mode-map (kbd "C-c C-z") 'prelude-visit-ielm)
+(define-key emacs-lisp-mode-map (kbd "C-c C-c") 'eval-defun)
+(define-key emacs-lisp-mode-map (kbd "C-c C-b") 'eval-buffer)
 
 (defun prelude-conditional-emacs-lisp-checker ()
   "Don't check doc style in Emacs Lisp test files."
