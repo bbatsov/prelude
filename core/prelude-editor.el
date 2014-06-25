@@ -155,19 +155,20 @@
              (file-writable-p buffer-file-name))
     (save-buffer)))
 
-(defmacro advise-commands (advice-name commands &rest body)
+(defmacro advise-commands (advice-name commands class &rest body)
   "Apply advice named ADVICE-NAME to multiple COMMANDS.
 
 The body of the advice is in BODY."
   `(progn
      ,@(mapcar (lambda (command)
-                 `(defadvice ,command (before ,(intern (concat (symbol-name command) "-" advice-name)) activate)
+                 `(defadvice ,command (,class ,(intern (concat (symbol-name command) "-" advice-name)) activate)
                     ,@body))
                commands)))
 
 ;; advise all window switching functions
 (advise-commands "auto-save"
                  (switch-to-buffer other-window windmove-up windmove-down windmove-left windmove-right)
+                 before
                  (prelude-auto-save-command))
 
 (add-hook 'mouse-leave-buffer-hook 'prelude-auto-save-command)
@@ -302,8 +303,8 @@ The body of the advice is in BODY."
   (if (<= (- end beg) prelude-yank-indent-threshold)
       (indent-region beg end nil)))
 
-(defadvice yank (after yank-indent activate)
-  "If current mode is one of 'prelude-yank-indent-modes,
+(advise-commands "indent" (yank yank-pop) after
+  "If current mode is one of `prelude-yank-indent-modes',
 indent yanked text (with prefix arg don't indent)."
   (if (and (not (ad-get-arg 0))
            (not (member major-mode prelude-indent-sensitive-modes))
@@ -311,16 +312,6 @@ indent yanked text (with prefix arg don't indent)."
                (member major-mode prelude-yank-indent-modes)))
       (let ((transient-mark-mode nil))
         (yank-advised-indent-function (region-beginning) (region-end)))))
-
-(defadvice yank-pop (after yank-pop-indent activate)
-  "If current mode is one of `prelude-yank-indent-modes',
-indent yanked text (with prefix arg don't indent)."
-  (when (and (not (ad-get-arg 0))
-             (not (member major-mode prelude-indent-sensitive-modes))
-             (or (derived-mode-p 'prog-mode)
-                 (member major-mode prelude-yank-indent-modes)))
-    (let ((transient-mark-mode nil))
-      (yank-advised-indent-function (region-beginning) (region-end)))))
 
 ;; abbrev config
 (add-hook 'text-mode-hook 'abbrev-mode)
