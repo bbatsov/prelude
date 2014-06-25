@@ -113,16 +113,15 @@
 
 ;; For SQL hackery -- needs more work
 ;; Generate a list of DBs I connect to commonly
-
-(load "~/.emacs-dbs")
-
-(setq sql-connection-alist
-      '((yavin
-         (sql-product 'postgres)
-         (sql-server yavin-server)
-         (sql-user yavin-user)
-         (sql-password yavin-password)
-         (sql-database "yavin"))))
+(when (file-exists-p (expand-file-name "~/.emacs-dbs"))
+  (load "~/.emacs-dbs")
+  (setq sql-connection-alist
+        '((yavin
+           (sql-product 'postgres)
+           (sql-server yavin-server)
+           (sql-user yavin-user)
+           (sql-password yavin-password)
+           (sql-database "yavin")))))
 
 (defun sql-connect-preset (name)
   "Connect to a predefined SQL connection listed in `sql-connection-alist'"
