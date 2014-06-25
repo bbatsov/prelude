@@ -273,7 +273,8 @@ there's a region, all lines that region covers will be duplicated."
   "Cleanup a region if selected, otherwise the whole buffer."
   (interactive)
   (call-interactively 'untabify)
-  (call-interactively 'indent-region)
+  (unless (member major-mode prelude-indent-sensitive-modes)
+    (call-interactively 'indent-region))
   (whitespace-cleanup))
 
 (defun prelude-eval-and-replace ()
