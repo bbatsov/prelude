@@ -113,6 +113,11 @@ This functions should be added to the hooks of major modes for programming."
 ;;
 ;; (the final optional t sets the *append* argument)
 
+;; smart curly braces
+(sp-pair "{" nil :post-handlers
+         '(((lambda (&rest _ignored)
+              (prelude-smart-open-line-above)) "RET")))
+
 (defun prelude-prog-mode-defaults ()
   "Default coding hook, useful with any programming language."
   (when (and (executable-find ispell-program-name)
@@ -121,9 +126,6 @@ This functions should be added to the hooks of major modes for programming."
   (when prelude-guru
     (guru-mode +1))
   (smartparens-mode +1)
-  (sp-pair "{" nil :post-handlers
-           '(((lambda (&rest _ignored)
-                (prelude-smart-open-line-above)) "RET")))
   (prelude-enable-whitespace)
   (prelude-local-comment-auto-fill)
   (prelude-font-lock-comment-annotations))
