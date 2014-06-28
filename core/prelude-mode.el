@@ -64,6 +64,9 @@
     (define-key map (kbd "C-c TAB") 'prelude-indent-rigidly-and-copy-to-clipboard)
     (define-key map (kbd "C-c I") 'prelude-find-user-init-file)
     (define-key map (kbd "C-c S") 'prelude-find-shell-init-file)
+    (define-key map (kbd "C-c [") 'smart-shift-left)
+    (define-key map (kbd "C-c ]") 'smart-shift-right)
+
     ;; make some use of the Super key
     (define-key map [?\s-d] 'projectile-find-dir)
     (define-key map [?\s-p] 'projectile-switch-project)
@@ -101,6 +104,8 @@
                          ["Insert empty line" prelude-insert-empty-line]
                          ["Move line up" prelude-move-line-up]
                          ["Move line down" prelude-move-line-down]
+                         ["Shift left" smart-shift-left]
+                         ["Shift right" smart-shift-right]
                          ["Indent buffer" prelude-indent-buffer]
                          ["Indent buffer or region" prelude-indent-buffer-or-region]
                          ["Untabify buffer" prelude-untabify-buffer]
