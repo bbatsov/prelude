@@ -84,7 +84,6 @@
            slime-autodoc-use-multiline-p t)
 
      (define-key slime-mode-map (kbd "TAB") 'slime-indent-and-complete-symbol)
-     (define-key slime-mode-map (kbd "C-c i") 'slime-inspect)
      (define-key slime-mode-map (kbd "C-c C-s") 'slime-selector)))
 
 (provide 'prelude-common-lisp)
