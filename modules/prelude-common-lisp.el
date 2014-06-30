@@ -68,23 +68,15 @@
 (add-hook 'lisp-mode-hook (lambda () (run-hooks 'prelude-lisp-coding-hook)))
 (add-hook 'slime-repl-mode-hook (lambda () (run-hooks 'prelude-interactive-lisp-coding-hook)))
 
-(defun prelude-start-slime ()
-  "Start SLIME unless it's already running."
-  (unless (and (fboundp 'slime-connected-p) (slime-connected-p))
-    (save-excursion (slime))))
-
-;; start slime automatically when we open a lisp file
-(add-hook 'slime-mode-hook 'prelude-start-slime)
-
 (eval-after-load "slime"
   '(progn
      (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol
            slime-fuzzy-completion-in-place t
            slime-enable-evaluate-in-emacs t
-           slime-autodoc-use-multiline-p t)
+           slime-autodoc-use-multiline-p t
+           slime-auto-start 'always)
 
      (define-key slime-mode-map (kbd "TAB") 'slime-indent-and-complete-symbol)
-     (define-key slime-mode-map (kbd "C-c i") 'slime-inspect)
      (define-key slime-mode-map (kbd "C-c C-s") 'slime-selector)))
 
 (provide 'prelude-common-lisp)
