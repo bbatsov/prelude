@@ -158,23 +158,6 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key [remap move-beginning-of-line]
                 'prelude-move-beginning-of-line)
 
-(defun prelude-indent-buffer ()
-  "Indent the currently visited buffer."
-  (interactive)
-  (indent-region (point-min) (point-max)))
-
-(defun prelude-indent-buffer-or-region ()
-  "Indent a region if selected, otherwise the whole buffer."
-  (interactive)
-  (save-excursion
-    (if (region-active-p)
-        (progn
-          (indent-region (region-beginning) (region-end))
-          (message "Indented selected region."))
-      (progn
-        (prelude-indent-buffer)
-        (message "Indented buffer.")))))
-
 (defun prelude-indent-defun ()
   "Indent the current defun."
   (interactive)
@@ -286,43 +269,12 @@ there's a region, all lines that region covers will be duplicated."
     (cond ((search-forward "<?xml" nil t) (nxml-mode))
           ((search-forward "<html" nil t) (html-mode)))))
 
-(defun prelude-untabify-buffer ()
-  "Remove all tabs from the current buffer."
-  (interactive)
-  (untabify (point-min) (point-max)))
-
-(defun prelude-untabify-buffer-or-region ()
-  "Untabify a region if selected, otherwise the whole buffer."
-  (interactive)
-  (save-excursion
-    (if (region-active-p)
-        (progn
-          (untabify (region-beginning) (region-end))
-          (message "Untabify selected region."))
-      (progn
-        (prelude-untabify-buffer)
-        (message "Untabify buffer.")))))
-
-(defun prelude-cleanup-buffer ()
-  "Perform a bunch of operations on the whitespace content of a buffer."
-  (interactive)
-  (prelude-untabify-buffer)
-  (prelude-indent-buffer)
-  (whitespace-cleanup))
-
 (defun prelude-cleanup-buffer-or-region ()
   "Cleanup a region if selected, otherwise the whole buffer."
   (interactive)
-  (save-excursion
-    (if (region-active-p)
-        (progn
-          (untabify (region-beginning) (region-end))
-          (indent-region (region-beginning) (region-end))
-          (message "Cleanup selected region."))
-      (progn
-        (prelude-untabify-buffer)
-        (prelude-indent-buffer)
-        (message "Cleanup buffer."))))
+  (call-interactively 'untabify)
+  (unless (member major-mode prelude-indent-sensitive-modes)
+    (call-interactively 'indent-region))
   (whitespace-cleanup))
 
 (defun prelude-eval-and-replace ()
