@@ -223,7 +223,7 @@ fi
 
 if [ -z "$PRELUDE_SKIP_BC" ];
 then
-    if which emacs 2>&1 > /dev/null
+    if which emacs > /dev/null 2>&1
     then
         printf " Bytecompiling Prelude.\n"
         if [ x$PRELUDE_VERBOSE != x ]
