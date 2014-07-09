@@ -76,6 +76,23 @@ in the desired elisp file."
   :type 'string
   :group 'prelude)
 
+(defcustom prelude-indent-sensitive-modes
+  '(coffee-mode python-mode slim-mode haml-mode)
+  "Modes for which auto-indenting is suppressed."
+  :type 'list
+  :group 'prelude)
+
+(defcustom prelude-yank-indent-modes '(LaTeX-mode TeX-mode)
+  "Modes in which to indent regions that are yanked (or yank-popped).
+Only modes that don't derive from `prog-mode' should be listed here."
+  :type 'list
+  :group 'prelude)
+
+(defcustom prelude-yank-indent-threshold 1000
+  "Threshold (# chars) over which indentation does not automatically occur."
+  :type 'number
+  :group 'prelude)
+
 (provide 'prelude-custom)
 
 ;;; prelude-custom.el ends here

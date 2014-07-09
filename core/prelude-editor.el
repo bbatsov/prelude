@@ -155,19 +155,20 @@
              (file-writable-p buffer-file-name))
     (save-buffer)))
 
-(defmacro advise-commands (advice-name commands &rest body)
+(defmacro advise-commands (advice-name commands class &rest body)
   "Apply advice named ADVICE-NAME to multiple COMMANDS.
 
 The body of the advice is in BODY."
   `(progn
      ,@(mapcar (lambda (command)
-                 `(defadvice ,command (before ,(intern (concat (symbol-name command) "-" advice-name)) activate)
+                 `(defadvice ,command (,class ,(intern (concat (symbol-name command) "-" advice-name)) activate)
                     ,@body))
                commands)))
 
 ;; advise all window switching functions
 (advise-commands "auto-save"
                  (switch-to-buffer other-window windmove-up windmove-down windmove-left windmove-right)
+                 before
                  (prelude-auto-save-command))
 
 (add-hook 'mouse-leave-buffer-hook 'prelude-auto-save-command)
@@ -285,43 +286,32 @@ The body of the advice is in BODY."
   (interactive
    (list (not (region-active-p)))))
 
+(defmacro with-region-or-buffer (func)
+  "When called with no active region, call FUNC on current buffer."
+  `(defadvice ,func (before with-region-or-buffer activate compile)
+     (interactive
+      (if mark-active
+          (list (region-beginning) (region-end))
+        (list (point-min) (point-max))))))
+
+(with-region-or-buffer indent-region)
+(with-region-or-buffer untabify)
+
 ;; automatically indenting yanked text if in programming-modes
-(defvar yank-indent-modes
-  '(LaTeX-mode TeX-mode)
-  "Modes in which to indent regions that are yanked (or yank-popped).
-Only modes that don't derive from `prog-mode' should be listed here.")
-
-(defvar yank-indent-blacklisted-modes
-  '(python-mode slim-mode haml-mode)
-  "Modes for which auto-indenting is suppressed.")
-
-(defvar yank-advised-indent-threshold 1000
-  "Threshold (# chars) over which indentation does not automatically occur.")
-
 (defun yank-advised-indent-function (beg end)
   "Do indentation, as long as the region isn't too large."
-  (if (<= (- end beg) yank-advised-indent-threshold)
+  (if (<= (- end beg) prelude-yank-indent-threshold)
       (indent-region beg end nil)))
 
-(defadvice yank (after yank-indent activate)
-  "If current mode is one of 'yank-indent-modes,
+(advise-commands "indent" (yank yank-pop) after
+  "If current mode is one of `prelude-yank-indent-modes',
 indent yanked text (with prefix arg don't indent)."
   (if (and (not (ad-get-arg 0))
-           (not (member major-mode yank-indent-blacklisted-modes))
+           (not (member major-mode prelude-indent-sensitive-modes))
            (or (derived-mode-p 'prog-mode)
-               (member major-mode yank-indent-modes)))
+               (member major-mode prelude-yank-indent-modes)))
       (let ((transient-mark-mode nil))
         (yank-advised-indent-function (region-beginning) (region-end)))))
-
-(defadvice yank-pop (after yank-pop-indent activate)
-  "If current mode is one of `yank-indent-modes',
-indent yanked text (with prefix arg don't indent)."
-  (when (and (not (ad-get-arg 0))
-             (not (member major-mode yank-indent-blacklisted-modes))
-             (or (derived-mode-p 'prog-mode)
-                 (member major-mode yank-indent-modes)))
-    (let ((transient-mark-mode nil))
-      (yank-advised-indent-function (region-beginning) (region-end)))))
 
 ;; abbrev config
 (add-hook 'text-mode-hook 'abbrev-mode)
