@@ -41,7 +41,6 @@
 ;; Pull in custom packages
 (prelude-require-packages '(ahg
                             jade-mode
-                            php-mode
                             twilight-theme
                             ess
                             twittering-mode
