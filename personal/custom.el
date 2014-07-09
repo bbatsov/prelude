@@ -39,7 +39,18 @@
  )
 
 ;; Pull in custom packages
-(prelude-require-packages '(ahg jade-mode php-mode twilight-theme ess twittering-mode floobits sublime-themes company virtualenvwrapper))
+(prelude-require-packages '(ahg
+                            jade-mode
+                            php-mode
+                            twilight-theme
+                            ess
+                            twittering-mode
+                            floobits
+                            sublime-themes
+                            company
+                            virtualenvwrapper
+                            org
+                            protobuf-mode))
 
 ;; Load my Theme of Choice
 (load-theme 'junio t)
