@@ -35,6 +35,11 @@
 (prelude-require-packages '(auctex))
 (require 'smartparens-latex)
 
+(eval-after-load "company"
+  '(progn
+     (prelude-require-packages '(company-auctex))
+     (company-auctex-init)))
+
 ;; AUCTeX configuration
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
@@ -57,6 +62,7 @@
           ("HTML Viewer" "open %o"))))
 
 (defun prelude-latex-mode-defaults ()
+  "Default Prelude hook for `LaTeX-mode'."
   (turn-on-auto-fill)
   (abbrev-mode +1)
   (smartparens-mode +1))
