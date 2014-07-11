@@ -82,13 +82,11 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 
-;; Configure Twittering Mode
-(setq twittering-icon-mode t)
-(setq twittering-use-master-password t)
-(setq twittering-use-icon-storage t)
-
-;; Tweak projectile
+;; Configure projectile
 (setq projectile-remember-window-configs t)
+(setq projectile-switch-project-action 'projectile-dired)
+
+(load "./twittering.el") ;; twittering
 
 ;; Company-mode everywhere
 (add-hook 'global-init-hook 'global-company-mode)
@@ -167,6 +165,13 @@
  'org-babel-load-languages
  '((python . t)
    (emacs-lisp .t)))
+
+;; Config org export backends
+(setq org-export-backends
+      `(beamer
+        ascii
+        markdown
+        deck))
 
 (provide 'custom)
 
