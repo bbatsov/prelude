@@ -86,7 +86,10 @@
 (setq projectile-remember-window-configs t)
 (setq projectile-switch-project-action 'projectile-dired)
 
-(load "./twittering.el") ;; twittering
+;; Twittering-mode configs
+(setq twittering-icon-mode t)
+(setq twittering-use-master-password t)
+(setq twittering-use-icon-storage t)
 
 ;; Company-mode everywhere
 (add-hook 'global-init-hook 'global-company-mode)
