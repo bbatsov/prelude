@@ -76,7 +76,7 @@
 
 (add-hook 'venv-postactivate-hook
           (lambda ()
-            (let ((env-bin-path (concat (getenv "VIRTUAL_ENV") "bin/postactivate-emacs")))
+            (let ((env-bin-path (concat (getenv "VIRTUAL_ENV") "bin/postactivate.el")))
               (when (file-exists-p env-bin-path)
                 (load env-bin-path)))))
 
