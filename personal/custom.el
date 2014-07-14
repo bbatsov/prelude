@@ -71,8 +71,7 @@
           (lambda ()
             (hack-local-variables)
             (when (boundp 'project-venv-name)
-              (venv-workon project-venv-name)
-              (venv-cdvirtualenv))))
+              (venv-workon project-venv-name))))
 
 (add-hook 'venv-postactivate-hook
           (lambda ()
