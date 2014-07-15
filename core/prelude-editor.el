@@ -176,6 +176,12 @@ The body of the advice is in BODY."
 (when (version<= "24.4" emacs-version)
   (add-hook 'focus-out-hook 'prelude-auto-save-command))
 
+(defadvice set-buffer-major-mode (after set-major-mode activate compile)
+  "Set buffer major mode according to `auto-mode-alist'."
+  (let* ((name (buffer-name buffer))
+         (mode (assoc-default name auto-mode-alist 'string-match)))
+    (with-current-buffer buffer (if mode (funcall mode)))))
+
 ;; highlight the current line
 (global-hl-line-mode +1)
 
