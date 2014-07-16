@@ -38,6 +38,8 @@
 
 (prelude-require-packages '(evil goto-chg evil-surround evil-visualstar evil-numbers))
 
+(require 'evil-visualstar)
+
 (setq evil-mode-line-format 'before)
 
 (setq evil-emacs-state-cursor  '("red" box))
