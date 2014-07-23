@@ -359,14 +359,8 @@ Keybinding         | Description
 <kbd>C-c p z</kbd> | Adds the currently visited to the cache.
 <kbd>C-c p s</kbd> | Display a list of known projects you can switch to.
 
-Prelude adds some extra keybindings:
-
-Keybinding         | Command
--------------------|------------------------------------------------------------
-<kbd>Super-f</kbd> | Find file in project
-<kbd>Super-d</kbd> | Find directory in project
-<kbd>Super-g</kbd> | Run grep on project
-<kbd>Super-p</kbd> | Switch projects
+Prelude adds an extra keymap prefix `S-p` (`S` stands for
+`Super`), so you can use `S-p` instead of `C-c p`.
 
 If you ever forget any of Projectile's keybindings just do a:
 

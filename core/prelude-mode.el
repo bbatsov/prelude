@@ -63,12 +63,10 @@
     (define-key map (kbd "C-c TAB") 'prelude-indent-rigidly-and-copy-to-clipboard)
     (define-key map (kbd "C-c I") 'prelude-find-user-init-file)
     (define-key map (kbd "C-c S") 'prelude-find-shell-init-file)
+    ;; extra prefix for projectile
+    (define-key map (kbd "s-p") 'projectile-command-map)
     ;; make some use of the Super key
-    (define-key map [?\s-d] 'projectile-find-dir)
-    (define-key map [?\s-p] 'projectile-switch-project)
-    (define-key map [?\s-f] 'projectile-find-file)
-    (define-key map [?\s-g] 'projectile-grep)
-
+    (define-key map (kbd "s-g") 'god-local-mode)
     (define-key map (kbd "s-r") 'prelude-recentf-ido-find-file)
     (define-key map (kbd "s-j") 'prelude-top-join-line)
     (define-key map (kbd "s-k") 'prelude-kill-whole-line)
