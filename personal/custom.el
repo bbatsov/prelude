@@ -191,9 +191,9 @@
 
 Requires a local, global install of jsl from npm -- i.e., npm install -g jsl"
   :command ("/usr/local/bin/jsl" source-inplace)
-  :error-patterns
-  ((error line-start "E" (file-name) "L" line ":" (message) line-end))
-  :modes (js2-mode))
+  :error-patterns ((error line-start "E" (file-name) "L" line ":" (message) line-end))
+  :modes (js2-mode)
+  :predicate (lambda () (boundp 'use-ua-js)))
 
 (add-to-list 'flycheck-checkers 'javavascript-jsl-checker)
 
