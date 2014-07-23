@@ -183,6 +183,20 @@
         markdown
         deck))
 
+;;; JavaScripts
+;; Flycheck for jsl
+(flycheck-define-checker javascript-jsl-checker
+  "A syntax checker for JavaScript based on jsl. See: https://www.npmjs.org/package/jsl
+
+Requires a local, global install of jsl from npm -- i.e., npm install -g jsl"
+  :command ("/usr/local/bin/jsl" source-inplace)
+  :error-patterns
+  ((error line-start "E" (file-name) "L" line ":" (message) line-end))
+  :modes (js2-mode))
+
+(add-to-list 'flycheck-checkers 'javavascript-jsl-checker)
+
+(add-hook 'js2-mode-hook (lambda () flycheck-select-checker 'javascript-jsl-checker))
 (provide 'custom)
 
 ;;; custom.el ends here
