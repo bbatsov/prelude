@@ -88,6 +88,7 @@
 ;;; Projectile
 (setq projectile-remember-window-configs t)
 (setq projectile-switch-project-action 'projectile-dired)
+(global-set-key (kbd "s-p") 'projectile-switch-projec)
 
 ;;; Twittering-mode
 (setq twittering-icon-mode t)
