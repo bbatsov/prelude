@@ -371,9 +371,9 @@ Doesn't mess with special buffers."
 (defun prelude-create-scratch-buffer ()
   "Create a new scratch buffer."
   (interactive)
-  (let ((buf (get-buffer-create (generate-new-buffer-name "*scratch*"))))
-    (set-buffer-major-mode buf)
-    (switch-to-buffer buf)))
+  (let ((buf (generate-new-buffer "*scratch*")))
+    (switch-to-buffer buf)
+    (funcall initial-major-mode)))
 
 (defvar prelude-tips
   '("Press <C-c o> to open a file with external program."
