@@ -38,8 +38,6 @@
 (require 'utop)
 (require 'merlin)
 
-(add-hook 'tuareg-mode-hook 'tuareg-imenu-set-imenu)
-
 (setq auto-mode-alist
       (append '(("\\.ml[ily]?\\'" . tuareg-mode)
                 ("\\.topml\\'" . tuareg-mode))
