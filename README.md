@@ -286,7 +286,7 @@ Keybinding         | Description
 <kbd>C-c n</kbd> | Fix indentation in buffer and strip whitespace.
 <kbd>C-c f</kbd> | Open recently visited file.
 <kbd>C-M-\\</kbd> | Indent region (if selected) or the entire buffer.
-<kbd>C-c u</kbd> | Open URL in your default browser.
+<kbd>C-c u</kbd> | Open a new buffer containing the contents of URL.
 <kbd>C-c e</kbd> | Eval a bit of Emacs Lisp code and replace it with its result.
 <kbd>C-c s</kbd> | Swap two active windows.
 <kbd>C-c D</kbd> | Delete current file and buffer.
