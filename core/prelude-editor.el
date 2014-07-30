@@ -298,6 +298,17 @@ The body of the advice is in BODY."
 (with-region-or-buffer indent-region)
 (with-region-or-buffer untabify)
 
+(defmacro with-region-or-line (func)
+  "When called with no active region, call FUNC on current line."
+  `(defadvice ,func (before with-region-or-line activate compile)
+     (interactive
+      (if mark-active
+          (list (region-beginning) (region-end))
+        (list (line-beginning-position)
+              (line-beginning-position 2))))))
+
+(with-region-or-line comment-or-uncomment-region)
+
 ;; automatically indenting yanked text if in programming-modes
 (defun yank-advised-indent-function (beg end)
   "Do indentation, as long as the region isn't too large."
