@@ -46,6 +46,11 @@
 (add-hook 'tuareg-mode-hook 'utop-setup-ocaml-buffer)
 (add-hook 'tuareg-mode-hook 'merlin-mode)
 
+(add-hook 'tuareg-mode-hook (lambda ()
+                              (progn
+                                (define-key tuareg-mode-map (kbd "C-c C-s")
+                                  'utop))))
+
 ;; Setup merlin completions company is used by default in prelude
 (add-to-list 'company-backends 'merlin-company-backend)
 
