@@ -203,7 +203,7 @@ checked 1; NOT OK
        :error-patterns ((error line-start "E " (file-name) " L" line ": " (message) line-end))
        :modes (js-mode js2-mode js3-mode)
        :predicate (lambda () (boundp 'use-ua-js)))
-     (add-to-list 'flycheck-checkers 'javavascript-jsl-checker)
+     (add-to-list 'flycheck-checkers 'javascript-jsl-checker)
      (add-hook 'js-mode-hook (lambda () (flycheck-select-checker 'javascript-jsl-checker))))
   )
 
