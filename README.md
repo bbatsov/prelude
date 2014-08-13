@@ -249,7 +249,6 @@ extensions to keybindings.
 
 Keybinding         | Description
 -------------------|------------------------------------------------------------
-<kbd>C-M-h</kbd>   | Kill the previous word(`backward-kill-word`). (as in Bash/Zsh)
 <kbd>C-x \\</kbd>   | `align-regexp`
 <kbd>C-+</kbd>     | Increase font size(`text-scale-increase`).
 <kbd>C--</kbd>     | Decrease font size(`text-scale-decrease`).
@@ -303,7 +302,7 @@ Keybinding         | Description
 <kbd>C-c . -</kbd> | Decrement integer at point. Default is -1.
 <kbd>C-c . *</kbd> | Multiply integer at point. Default is *2.
 <kbd>C-c . /</kbd> | Divide integer at point. Default is /2.
-<kbd>C-c . \</kbd> | Modulo integer at point. Default is modulo 2.
+<kbd>C-c . \\</kbd> | Modulo integer at point. Default is modulo 2.
 <kbd>C-c . ^</kbd> | Power to the integer at point. Default is ^2.
 <kbd>C-c . <</kbd> | Left-shift integer at point. Default is 1 position to the left.
 <kbd>C-c . ></kbd> | Right-shift integer at point. Default is 1 position to the right.
