@@ -249,7 +249,6 @@ extensions to keybindings.
 
 Keybinding         | Description
 -------------------|------------------------------------------------------------
-<kbd>C-M-h</kbd>   | Kill the previous word(`backward-kill-word`). (as in Bash/Zsh)
 <kbd>C-x \\</kbd>   | `align-regexp`
 <kbd>C-+</kbd>     | Increase font size(`text-scale-increase`).
 <kbd>C--</kbd>     | Decrease font size(`text-scale-decrease`).
