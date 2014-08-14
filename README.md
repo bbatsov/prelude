@@ -310,7 +310,6 @@ Keybinding         | Description
 <kbd>C-c . %</kbd> | Replace integer at point with another specified integer.
 <kbd>C-c . '</kbd> | Perform arithmetic operations on integer at point. User specifies the operator.
 <kbd>Super-r</kbd> | Recent files
-<kbd>Super-x</kbd> | Expand region
 <kbd>Super-j</kbd> | Join lines
 <kbd>Super-k</kbd> | Kill whole line
 <kbd>Super-m m</kbd> | Magit status
