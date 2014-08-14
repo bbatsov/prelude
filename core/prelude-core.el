@@ -380,7 +380,7 @@ Doesn't mess with special buffers."
 (defvar prelude-tips
   '("Press <C-c o> to open a file with external program."
     "Press <C-c p f> or <s-f> to navigate a project's files with ido."
-    "Press <C-c p g> or <s-g> to run grep on a project."
+    "Press <C-c p g> to run grep on a project."
     "Press <C-c p s> or <s-p> to switch between projects."
     "Press <C-=> to expand the selected region."
     "Press <C-c g> to search in Google."
