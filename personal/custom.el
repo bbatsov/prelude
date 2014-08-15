@@ -30,7 +30,7 @@
                             org
                             protobuf-mode
                             jedi
-                            ensime-emacs))
+                            ensime))
 
 ;;; Color Theme
 (load-theme 'junio t)
