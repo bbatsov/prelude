@@ -29,7 +29,8 @@
                             virtualenvwrapper
                             org
                             protobuf-mode
-                            jedi))
+                            jedi
+                            ensime-emacs))
 
 ;;; Color Theme
 (load-theme 'junio t)
@@ -206,6 +207,8 @@ checked 1; NOT OK
      (add-to-list 'flycheck-checkers 'javascript-jsl-checker)
      (add-hook 'js-mode-hook (lambda () (flycheck-select-checker 'javascript-jsl-checker))))
   )
+
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 (provide 'custom)
 
