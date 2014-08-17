@@ -98,7 +98,8 @@
                                   "/jsx-configs.el"
                                   "/work.el"            ;; Contains work erc configs too.
                                   "/python-configs.el"
-                                  "/erc-configs.el"))
+                                  "/erc-configs.el"
+                                  "/jsx-configs.el"))
 
 (mapc
  (lambda (rmd-file-name)
