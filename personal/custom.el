@@ -45,44 +45,6 @@
 ;; Load ESS
 (require 'ess-site)
 
-;;; Python Configs
-;; Use IPython as my python interpreter
-(setq
- python-shell-interpreter "ipython"
- python-shell-interpreter-args ""
- python-shell-prompt-regexp "In \\[[0-9]+\\]: "
- python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
- python-shell-completion-setup-code
- "from IPython.core.completerlib import module_completion"
- python-shell-completion-module-string-code
- "';'.join(module_completion('''%s'''))\n"
- python-shell-completion-string-code
- "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
-
-;; Enable virtualenvwrapper.el
-(venv-initialize-interactive-shells)
-(setq venv-location "~/.python_virtualenvs/")
-
-;; Jedi-Mode
-(add-hook 'python-mode-hook (lambda () (company-mode -1)))
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
-
-;; Virtualenvs
-(add-hook 'python-mode-hook
-          (lambda ()
-            (hack-local-variables)
-            (when (boundp 'project-venv-name)
-              (venv-workon project-venv-name))))
-
-(add-hook 'venv-postactivate-hook
-          (lambda ()
-            (let ((env-bin-path (concat (getenv "VIRTUAL_ENV") "bin/postactivate.el")))
-              (when (file-exists-p env-bin-path)
-                (load env-bin-path)))))
-
-(setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
-
 ;;; Tweak Mac Keyboard Behavior
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
@@ -148,7 +110,8 @@
 (defvar load-personal-config-list)
 (setq load-personal-config-list '("/jsl-checker.el"
                                   "/jsx-configs.el"
-                                  "/work.el"))
+                                  "/work.el"
+                                  "/python-configs.el"))
 
 (mapc
  (lambda (rmd-file-name)
