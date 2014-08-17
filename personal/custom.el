@@ -65,20 +65,6 @@
 ;; Smartparens all the time
 (add-hook 'global-init-hook 'smartparens-mode)
 
-;;; ERC
-;; Setup ERC
-(setq erc-autojoin-channels-alist '(("freenode.net"
-                                     "#emacs" "#clojure")))
-;; Regular IRC
-(setq erc-nick "gastove")
-(when (file-exists-p (expand-file-name "~/.ercpass"))
-  (load "~/.ercpass")
-  (require 'erc-services)
-  (erc-services-mode 1)
-  (setq erc-prompt-for-nickserv-password nil)
-  (setq erc-nickserv-passwords
-        `((freenode ((,erc-nick . ,erc-pass))))))
-
 ;;; Support for Marked.app -- assumes you're on a Mac,
 ;;; and have Marked.app installed.
 (defun markdown-preview-file ()
@@ -110,8 +96,9 @@
 (defvar load-personal-config-list)
 (setq load-personal-config-list '("/jsl-checker.el"
                                   "/jsx-configs.el"
-                                  "/work.el"
-                                  "/python-configs.el"))
+                                  "/work.el"            ;; Contains work erc configs too.
+                                  "/python-configs.el"
+                                  "/erc-configs.el"))
 
 (mapc
  (lambda (rmd-file-name)
