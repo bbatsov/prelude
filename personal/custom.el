@@ -39,6 +39,7 @@
 ;; Disable whitespace-mode in certain other major modes
 (add-hook 'php-mode-hook (lambda() (whitespace-mode -1)))
 (add-hook 'org-mode-hook (lambda() (whitespace-mode -1)))
+(add-hook 'markdown-mode-hook (lambda () (whitespace-mode -1)))
 
 ;;; ESS:
 ;; Load ESS
@@ -146,7 +147,8 @@
 
 (defvar load-personal-config-list)
 (setq load-personal-config-list '("/jsl-checker.el"
-                                  "/jsx-configs.el"))
+                                  "/jsx-configs.el"
+                                  "/work.el"))
 
 (mapc
  (lambda (rmd-file-name)
