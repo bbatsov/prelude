@@ -11,7 +11,8 @@
     (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 
     (defun my-web-mode-hook ()
-      (setq web-mode-enable-auto-pairing nil))
+      (setq web-mode-enable-auto-pairing nil)
+      (setq web-mode-code-indent-offset 4))
 
     (add-hook 'web-mode-hook  'my-web-mode-hook)
 
