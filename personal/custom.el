@@ -116,49 +116,6 @@
   (setq erc-nickserv-passwords
         `((freenode ((,erc-nick . ,erc-pass))))))
 
-;; Work IRC
-(defun start-irc-work ()
-  "Connect to the UA IRC Server"
-  (interactive)
-  (load "~/.ercpass")
-  (erc-tls :server "dev.urbanairship.com"
-           :port 6697
-           :nick "gastove"
-           :full-name "Ross Donaldson"
-           :password work-erc-pass)
-  (setq erc-autojoin-channels-alist '(("#ops"))))
-
-;;; Work SQL Functions
-;; Generate a list of DBs I connect to commonly
-(when (file-exists-p (expand-file-name "~/.emacs-dbs"))
-  (load "~/.emacs-dbs")
-  (setq sql-connection-alist
-        '((yavin
-           (sql-product 'postgres)
-           (sql-server yavin-server)
-           (sql-user yavin-user)
-           (sql-password yavin-password)
-           (sql-database "yavin")))))
-
-(defun sql-connect-preset (name)
-  "Connect to a predefined SQL connection listed in `sql-connection-alist'"
-  (eval `(let ,(cdr (assoc name sql-connection-alist))
-           (flet ((sql-get-login (&rest what)))
-             (sql-product-interactive sql-product)))))
-
-;; Function to load a DB based on its short name
-(defun sql-connect-preset-by-name (name)
-  "Connect to a DB by entering it's short name"
-  (interactive "sDB Name: ")
-  (sql-connect-preset 'name))
-
-(defun sql-yavin ()
-  (interactive)
-  (sql-connect-preset 'yavin))
-
-(global-set-key (kbd "M-s q") 'sql-connect-preset-by-name) ; Connect to a db preset by nameq
-
-
 ;;; Support for Marked.app -- assumes you're on a Mac,
 ;;; and have Marked.app installed.
 (defun markdown-preview-file ()
@@ -184,27 +141,6 @@
         ascii
         markdown
         deck))
-
-;;; JavaScripts
-;; Flycheck for jsl
-;; (eval-after-load "flycheck"
-;;   '(progn
-;;      (flycheck-define-checker javascript-jsl-checker
-;;        "A syntax checker for JavaScript based on jsl. See: https://www.npmjs.org/package/jsl
-
-;; Requires a local, global install of jsl from npm -- i.e., npm install -g jsl.
-
-;; Sample checker output:
-;; $ jsl index.js
-;; E ./index.js L56: \"){\n\" should match \") {\"
-;; 1 error
-;; checked 1; NOT OK
-;; "
-;;        :command ("/usr/local/bin/jsl" source-inplace)
-;;        :error-patterns ((error line-start "E " (file-name) " L" line ": " (message) line-end))
-;;        :modes (js-mode js2-mode js3-mode)
-;;        :predicate (lambda () (boundp 'use-ua-js)))
-;;      (add-to-list 'flycheck-checkers 'javascript-jsl-checker)))
 
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
