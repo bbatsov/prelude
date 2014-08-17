@@ -30,7 +30,22 @@
                             org
                             protobuf-mode
                             jedi
-                            ensime))
+                            ensime
+                            web-mode))
+
+;; Pull in all my personal bits and bobs from external files
+(defvar load-personal-config-list)
+(setq load-personal-config-list '("/jsl-checker.el"
+                                  "/jsx-configs.el"
+                                  "/work.el"            ;; Contains work erc configs too.
+                                  "/python-configs.el"
+                                  "/erc-configs.el"
+                                  "/jsx-configs.el"
+                                  "/web-mode-configs.el"))
+
+(mapc (lambda (rmd-file-name)
+        (load (concat prelude-personal-dir rmd-file-name)))
+      load-personal-config-list)
 
 ;;; Color Theme
 (load-theme 'junio t)
@@ -93,18 +108,7 @@
 
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
-(defvar load-personal-config-list)
-(setq load-personal-config-list '("/jsl-checker.el"
-                                  "/jsx-configs.el"
-                                  "/work.el"            ;; Contains work erc configs too.
-                                  "/python-configs.el"
-                                  "/erc-configs.el"
-                                  "/jsx-configs.el"))
 
-(mapc
- (lambda (rmd-file-name)
-   (load (concat prelude-personal-dir rmd-file-name)))
- load-personal-config-list)
 
 (provide 'custom)
 
