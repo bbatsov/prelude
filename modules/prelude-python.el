@@ -37,7 +37,12 @@
 
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
-  (subword-mode +1))
+  (subword-mode +1)
+  (setq-local electric-layout-rules
+	      '((?: . (lambda ()
+                        (if (python-info-statement-starts-block-p)
+                            'after)))))
+  (electric-layout-mode +1))
 
 (setq prelude-python-mode-hook 'prelude-python-mode-defaults)
 
