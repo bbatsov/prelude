@@ -256,6 +256,9 @@ The body of the advice is in BODY."
 (defalias 'ack-find-file 'ack-and-a-half-find-file)
 (defalias 'ack-find-file-same 'ack-and-a-half-find-file-same)
 
+;; ignore errors, useful when some files aren't accessible
+(ack-and-a-half-arguments (quote ("2> /dev/null"))
+
 ;; dired - reuse current buffer by pressing 'a'
 (put 'dired-find-alternate-file 'disabled nil)
 
