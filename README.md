@@ -249,7 +249,6 @@ extensions to keybindings.
 
 Keybinding         | Description
 -------------------|------------------------------------------------------------
-<kbd>C-M-h</kbd>   | Kill the previous word(`backward-kill-word`). (as in Bash/Zsh)
 <kbd>C-x \\</kbd>   | `align-regexp`
 <kbd>C-+</kbd>     | Increase font size(`text-scale-increase`).
 <kbd>C--</kbd>     | Decrease font size(`text-scale-decrease`).
@@ -259,6 +258,7 @@ Keybinding         | Description
 <kbd>C-x m</kbd>   | Start `eshell`.
 <kbd>C-x M-m</kbd> | Start your default shell.
 <kbd>C-x C-m</kbd> | Alias for `M-x`.
+<kbd>M-X</kbd>     | Like `M-x` but limited to commands that are relevant to the active major mode.
 <kbd>C-h A</kbd>   | Run `apropos` (search in all Emacs symbols).
 <kbd>C-h C-m</kbd> | Display key bindings of current major mode and descriptions of every binding.
 <kbd>M-/</kbd>     | Run `hippie-expand` (a replacement for the default `dabbrev-expand`).
@@ -303,15 +303,15 @@ Keybinding         | Description
 <kbd>C-c . -</kbd> | Decrement integer at point. Default is -1.
 <kbd>C-c . *</kbd> | Multiply integer at point. Default is *2.
 <kbd>C-c . /</kbd> | Divide integer at point. Default is /2.
-<kbd>C-c . \</kbd> | Modulo integer at point. Default is modulo 2.
+<kbd>C-c . \\</kbd> | Modulo integer at point. Default is modulo 2.
 <kbd>C-c . ^</kbd> | Power to the integer at point. Default is ^2.
 <kbd>C-c . <</kbd> | Left-shift integer at point. Default is 1 position to the left.
 <kbd>C-c . ></kbd> | Right-shift integer at point. Default is 1 position to the right.
 <kbd>C-c . #</kbd> | Convert integer at point to specified base. Default is 10.
 <kbd>C-c . %</kbd> | Replace integer at point with another specified integer.
 <kbd>C-c . '</kbd> | Perform arithmetic operations on integer at point. User specifies the operator.
+<kbd>Super-g</kbd> | Toggle between God mode and non-God mode
 <kbd>Super-r</kbd> | Recent files
-<kbd>Super-x</kbd> | Expand region
 <kbd>Super-j</kbd> | Join lines
 <kbd>Super-k</kbd> | Kill whole line
 <kbd>Super-m m</kbd> | Magit status
@@ -344,7 +344,8 @@ Keybinding         | Description
 <kbd>C-c p f</kbd> | Display a list of all files in the project. With a prefix argument it will clear the cache first.
 <kbd>C-c p d</kbd> | Display a list of all directories in the project. With a prefix argument it will clear the cache first.
 <kbd>C-c p T</kbd> | Display a list of all test files(specs, features, etc) in the project.
-<kbd>C-c p g</kbd> | Run grep on the files in the project.
+<kbd>C-c p s g</kbd> | Run grep on the files in the project.
+<kbd>M-- C-c p s g</kbd> | Run grep on `projectile-grep-default-files` in the project.
 <kbd>C-c p b</kbd> | Display a list of all project buffers currently open.
 <kbd>C-c p o</kbd> | Runs `multi-occur` on all project buffers currently open.
 <kbd>C-c p r</kbd> | Runs interactive query-replace on all files in the projects.
@@ -353,11 +354,13 @@ Keybinding         | Description
 <kbd>C-c p k</kbd> | Kills all project buffers.
 <kbd>C-c p D</kbd> | Opens the root of the project in `dired`.
 <kbd>C-c p e</kbd> | Shows a list of recently visited project files.
+<kbd>C-c p s a</kbd> | Runs `ack` on the project. Requires the presence of `ack-and-a-half`.
+<kbd>C-c p s s</kbd> | Runs `ag` on the project. Requires the presence of `ag.el`.
 <kbd>C-c p a</kbd> | Runs `ack` on the project. Requires the presence of `ack-and-a-half`.
 <kbd>C-c p c</kbd> | Runs a standard compilation command for your type of project.
 <kbd>C-c p p</kbd> | Runs a standard test command for your type of project.
 <kbd>C-c p z</kbd> | Adds the currently visited to the cache.
-<kbd>C-c p s</kbd> | Display a list of known projects you can switch to.
+<kbd>C-c p p</kbd> | Display a list of known projects you can switch to.
 
 Prelude adds an extra keymap prefix `S-p` (`S` stands for
 `Super`), so you can use `S-p` instead of `C-c p`.
