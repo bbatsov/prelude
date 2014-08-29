@@ -106,9 +106,12 @@
         markdown
         deck))
 
+;; Hide org emphasis marks
+(setq org-hide-emphasis-markers t)
+
+;;; Scala
+;; Ensime
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-
-
 
 (provide 'custom)
 
