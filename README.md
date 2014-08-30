@@ -296,7 +296,6 @@ Keybinding         | Description
 <kbd>C-c t</kbd> | Open a terminal emulator (`ansi-term`).
 <kbd>C-c k</kbd> | Kill all open buffers except the one you're currently in.
 <kbd>C-c TAB</kbd> | Indent and copy region to clipboard
-<kbd>C-c h</kbd> | Open Helm (available if you've enabled the `prelude-helm` module).
 <kbd>C-c I</kbd> | Open user's init file.
 <kbd>C-c S</kbd> | Open shell's init file.
 <kbd>C-c . +</kbd> | Increment integer at point. Default is +1.
@@ -368,6 +367,14 @@ Prelude adds an extra keymap prefix `S-p` (`S` stands for
 If you ever forget any of Projectile's keybindings just do a:
 
 <kbd>C-c p C-h</kbd>
+
+#### Helm
+
+Helm is setup according to this guide: [A Package in a league of its own: Helm](http://tuhdo.github.io/helm-intro.html).
+
+You can learn Helm usage and key bindings following the guide. <kbd>C-c h</kbd>
+is Prelude's default prefix key for Helm. If you don't remember any key binding,
+append <kbd>C-h</kbd> after <kbd>C-c h</kbd> for a list of key bindings in Helm.
 
 #### Key-chords
 
