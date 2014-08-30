@@ -206,7 +206,7 @@ After you've uncommented a module you should either restart Emacs or evaluate th
 ## Running
 
 Nothing fancy here. Just start Emacs as usual. Personally I run Emacs
-in daemon mode:
+in [daemon mode](http://www.emacswiki.org/emacs/EmacsAsDaemon):
 
 ```bash
 emacs --daemon
@@ -232,6 +232,7 @@ alias vi='emacsclient -t'
 
 The last two aliases are helpful if you're used to editing files from
 the command line using `vi(m)`.
+For better ways of running Emacs as daemon visit [Archlinux Wiki](https://wiki.archlinux.org/index.php/Emacs#As_a_daemon).
 
 ## Getting to know Prelude
 
@@ -254,9 +255,9 @@ Keybinding         | Description
 <kbd>C--</kbd>     | Decrease font size(`text-scale-decrease`).
 <kbd>C-x O</kbd>   | Go back to previous window (the inverse of `other-window` (`C-x o`)).
 <kbd>C-^</kbd>     | Join two lines into one(`prelude-top-join-line`).
-<kbd>C-x p</kbd>   | Start `proced` (manage processes from Emacs; works only in Linux).
-<kbd>C-x m</kbd>   | Start `eshell`.
-<kbd>C-x M-m</kbd> | Start your default shell.
+<kbd>C-x p</kbd>   | Start [`proced`](http://www.masteringemacs.org/articles/2014/07/08/displaying-interacting-processes-proced/) (manage processes from Emacs; works only in Linux).
+<kbd>C-x m</kbd>   | Start [`eshell`](http://www.masteringemacs.org/articles/2010/12/13/complete-guide-mastering-eshell/).
+<kbd>C-x M-m</kbd> | Start your [default shell](http://www.masteringemacs.org/articles/2010/11/01/running-shells-in-emacs-overview/).
 <kbd>C-x C-m</kbd> | Alias for `M-x`.
 <kbd>M-X</kbd>     | Like `M-x` but limited to commands that are relevant to the active major mode.
 <kbd>C-h A</kbd>   | Run `apropos` (search in all Emacs symbols).
@@ -265,8 +266,8 @@ Keybinding         | Description
 <kbd>C-x C-b</kbd> | Open `ibuffer` (a replacement for the default `buffer-list`).
 <kbd>F11</kbd>     | Make the window full screen.
 <kbd>F12</kbd>     | Toggle the Emacs menu bar.
-<kbd>C-x g</kbd>   | Open Magit's status buffer.
-<kbd>C-=</kbd>     | Run `expand-region` (incremental text selection).
+<kbd>C-x g</kbd>   | Open [Magit](http://www.masteringemacs.org/articles/2013/12/06/introduction-magit-emacs-mode-git/)'s status buffer.
+<kbd>C-=</kbd>     | Run [`expand-region`](http://emacsrocks.com/e09.html) (incremental text selection).
 <kbd>C-a</kbd>     | Run `prelude-move-beginning-of-line`. Read [this](http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/) for details.
 
 #### Prelude Mode
@@ -296,7 +297,7 @@ Keybinding         | Description
 <kbd>C-c t</kbd> | Open a terminal emulator (`ansi-term`).
 <kbd>C-c k</kbd> | Kill all open buffers except the one you're currently in.
 <kbd>C-c TAB</kbd> | Indent and copy region to clipboard
-<kbd>C-c h</kbd> | Open Helm (available if you've enabled the `prelude-helm` module).
+<kbd>C-c h</kbd> | Open [Helm](https://tuhdo.github.io/helm-intro.html) (available if you've enabled the `prelude-helm` module).
 <kbd>C-c I</kbd> | Open user's init file.
 <kbd>C-c S</kbd> | Open shell's init file.
 <kbd>C-c . +</kbd> | Increment integer at point. Default is +1.
@@ -310,12 +311,12 @@ Keybinding         | Description
 <kbd>C-c . #</kbd> | Convert integer at point to specified base. Default is 10.
 <kbd>C-c . %</kbd> | Replace integer at point with another specified integer.
 <kbd>C-c . '</kbd> | Perform arithmetic operations on integer at point. User specifies the operator.
-<kbd>Super-g</kbd> | Toggle between God mode and non-God mode
+<kbd>Super-g</kbd> | Toggle between [God mode](https://github.com/chrisdone/god-mode) and non-God mode
 <kbd>Super-r</kbd> | Recent files
 <kbd>Super-j</kbd> | Join lines
 <kbd>Super-k</kbd> | Kill whole line
-<kbd>Super-m m</kbd> | Magit status
-<kbd>Super-m l</kbd> | Magit log
+<kbd>Super-m m</kbd> | [Magit status](https://magit.github.io/master/magit.html#Status)
+<kbd>Super-m l</kbd> | [Magit log](https://magit.github.io/master/magit.html#History)
 <kbd>Super-m f</kbd> | Magit file log
 <kbd>Super-m b</kbd> | Magit blame mode
 
@@ -371,11 +372,11 @@ If you ever forget any of Projectile's keybindings just do a:
 
 #### Key-chords
 
-**Key-chords are available only when the `prelude-key-chord` module has been enabled.**
+**[Key-chords](http://emacsrocks.com/e07.html) are available only when the `prelude-key-chord` module has been enabled.**
 
 Keybinding         | Description
 -------------------|----------------------------------------------
-<kbd>jj</kbd>      | Jump to the beginning of a word(`ace-jump-word-mode`)
+<kbd>jj</kbd>      | Jump to the beginning of a word([`ace-jump-word-mode`](http://emacsrocks.com/e10.html))
 <kbd>jk</kbd>      | Jump to a character(`ace-jump-char-mode`)
 <kbd>jl</kbd>      | Jump to the beginning of a line(`ace-jump-line-mode`)
 <kbd>JJ</kbd>      | Jump back to previous buffer(`prelude-switch-to-previous-buffer`)
