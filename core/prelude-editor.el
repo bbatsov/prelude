@@ -245,10 +245,13 @@ The body of the advice is in BODY."
 (setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
 (projectile-global-mode t)
 
-;; anzu-mode enhances isearch by showing total matches and current match position
+;; anzu-mode enhances isearch & query-replace by showing total matches and current match position
 (require 'anzu)
 (diminish 'anzu-mode)
 (global-anzu-mode)
+
+(global-set-key (kbd "M-%") 'anzu-query-replace)
+(global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
 
 ;; shorter aliases for ack-and-a-half commands
 (defalias 'ack 'ack-and-a-half)
