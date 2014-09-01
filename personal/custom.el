@@ -108,6 +108,7 @@
 
 ;; Hide org emphasis marks
 (setq org-hide-emphasis-markers t)
+(setq org-startup-indented t)
 
 ;;; Scala
 ;; Ensime
