@@ -84,58 +84,9 @@
 ;;; Save current position to mark ring
 (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
 
-(defvar prelude-global-helm-mode-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "M-x") 'helm-M-x)
-    (define-key map (kbd "M-y") 'helm-show-kill-ring)
-    (define-key map (kbd "C-x b") 'helm-mini)
-    (define-key map (kbd "C-x C-f") 'helm-find-files)
-    (define-key map (kbd "C-h C-f") 'helm-apropos)
-    (define-key map (kbd "C-h r") 'helm-info-emacs)
-    (define-key map (kbd "C-h C-l") 'helm-locate-library)
-    map)
-  "Keymap for Helm to replace standard Prelude's commands")
-
-(define-minor-mode prelude-global-helm-minor-mode
-  "Minor mode to replace Prelude default commands with \\{prelude-global-helm-map}"
-  :keymap prelude-global-helm-mode-map
-  (progn
-    ;; show minibuffer history with Helm
-    (define-key minibuffer-local-map (kbd "M-l") 'helm-minibuffer-history)
-    (define-key global-map [remap find-tag] 'helm-etags-select)
-    (define-key global-map [remap list-buffers] 'helm-mini)
-
-    ;; shell history.
-    (define-key shell-mode-map (kbd "M-l") 'helm-comint-input-ring)
-
-    ;; use helm to list eshell history
-    (add-hook 'eshell-mode-hook
-              #'(lambda ()
-                  (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history)))))
-
-(define-globalized-minor-mode prelude-global-helm-global-mode prelude-global-helm-minor-mode prelude-global-helm-global-mode-on)
-
-(defun prelude-global-helm-global-mode-on ()
-  "Turn on `prelude-global-helm-minor-mode'"
-  (prelude-global-helm-minor-mode +1)
-  )
-
-(defun prelude-global-helm-global-mode-off ()
-  "Turn off `prelude-global-helm-minor-mode'"
-  (prelude-global-helm-minor-mode -1))
-
-(helm-mode 1)
-
 ;; PACKAGE: helm-projectile
-
 (require 'helm-projectile)
-(setq projectile-completion-system 'helm)
-
 (push "Press <C-c p h> to navigate a project in Helm." prelude-tips)
-
-;; PACKAGE: helm-descbinds
-(require 'helm-descbinds)
-(helm-descbinds-mode)
 
 (provide 'prelude-helm)
 
