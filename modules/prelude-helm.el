@@ -11,7 +11,7 @@
 
 ;;; Commentary:
 
-;; Some config for Helm that follows thiks guide: http://tuhdo.github.io/helm-intro.html
+;; Some config for Helm that follows this guide: http://tuhdo.github.io/helm-intro.html
 
 ;;; License:
 
@@ -36,9 +36,9 @@
 
 (require 'helm)
 
-;; must set before helm-config,  otherwise helm use default
+;; must set before helm-config, otherwise helm use default
 ;; prefix "C-x c", which is inconvenient because you can
-;; accidentially pressed "C-x C-c"
+;; accidentally pressed "C-x C-c"
 (setq helm-command-prefix-key "C-c h")
 
 (require 'helm-config)
@@ -47,11 +47,11 @@
 
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebihnd tab to do persistent action
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+(define-key helm-map (kbd "C-z") 'helm-select-action) ; list actions using C-z
 
-(define-key helm-grep-mode-map (kbd "<return>")  'helm-grep-mode-jump-other-window)
-(define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
-(define-key helm-grep-mode-map (kbd "p")  'helm-grep-mode-jump-other-window-backward)
+(define-key helm-grep-mode-map (kbd "<return>") 'helm-grep-mode-jump-other-window)
+(define-key helm-grep-mode-map (kbd "n") 'helm-grep-mode-jump-other-window-forward)
+(define-key helm-grep-mode-map (kbd "p") 'helm-grep-mode-jump-other-window-backward)
 
 (when (executable-find "curl")
   (setq  helm-google-suggest-use-curl-p t))
@@ -64,7 +64,7 @@
  helm-split-window-in-side-p t ;; open helm buffer inside current window, not occupy whole other window
  helm-buffers-favorite-modes (append helm-buffers-favorite-modes
                                      '(picture-mode artist-mode))
- helm-candidate-number-limit 500 ; limit the number of displayed canidates
+ helm-candidate-number-limit 500 ; limit the number of displayed candidates
  helm-ff-file-name-history-use-recentf t
  helm-move-to-line-cycle-in-source t ; move to end or beginning of source
                                         ; when reaching top or bottom of source.
