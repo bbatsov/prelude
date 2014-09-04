@@ -38,6 +38,7 @@ advised to always run Prelude with the latest Emacs - currently
 		- [Prelude Mode](#prelude-mode)
 		- [OSX modifier keys](#osx-modifier-keys)
 		- [Projectile](#projectile)
+		- [Helm](#helm)
 		- [Key-chords](#key-chords)
 			- [Disabling key-chords](#disabling-key-chords)
 - [Automatic package installation](#automatic-package-installation)
