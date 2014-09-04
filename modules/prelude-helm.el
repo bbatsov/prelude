@@ -53,8 +53,10 @@
 (define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
 (define-key helm-grep-mode-map (kbd "p")  'helm-grep-mode-jump-other-window-backward)
 
+(when (executable-find "curl")
+  (setq  helm-google-suggest-use-curl-p t))
+
 (setq
- helm-google-suggest-use-curl-p t
  helm-scroll-amount 4 ; scroll 4 lines other window using M-<next>/M-<prior>
  helm-quick-update t ; do not display invisible candidates
  helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
