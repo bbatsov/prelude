@@ -34,7 +34,8 @@
 
 ;;; Code:
 (require 'prelude-helm)
-(require 'helm-descbinds)
+(prelude-require-packages '(helm-descbinds))
+(require 'helm-eshell)
 
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)

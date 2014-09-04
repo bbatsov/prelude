@@ -32,7 +32,7 @@
 
 ;;; Code:
 
-(prelude-require-packages '(helm helm-projectile helm-descbinds))
+(prelude-require-packages '(helm helm-projectile))
 
 (require 'helm)
 
@@ -42,7 +42,6 @@
 (setq helm-command-prefix-key "C-c h")
 
 (require 'helm-config)
-(require 'helm-eshell)
 (require 'helm-files)
 (require 'helm-grep)
 
