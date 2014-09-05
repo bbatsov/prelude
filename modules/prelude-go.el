@@ -84,7 +84,8 @@
      (let ((oracle (executable-find "oracle")))
        (when oracle
          (setq go-oracle-command oracle)
-         (autoload 'go-oracle-mode "oracle")
+         (go-projectile-tools-add-path)
+         (autoload 'go-oracle-mode "oracle.el")
          (add-hook 'go-mode-hook 'go-oracle-mode)))))
 
 (provide 'prelude-go)
