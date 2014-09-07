@@ -52,7 +52,6 @@
 
 ;;; Whitespace Mode
 ;; Disable whitespace-mode in certain other major modes
-(add-hook 'php-mode-hook (lambda() (whitespace-mode -1)))
 (add-hook 'org-mode-hook (lambda() (whitespace-mode -1)))
 (add-hook 'markdown-mode-hook (lambda () (whitespace-mode -1)))
 
