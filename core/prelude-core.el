@@ -48,7 +48,7 @@ With a prefix ARG always prompt for command to use."
             buffer-file-name))
          (open (pcase system-type
                  (`darwin "open")
-                 ((pred (string-prefix-p "gnu")) "xdg-open")))
+                 ((or `gnu `gnu/linux `gnu/kfreebsd) "xdg-open")))
          (program (if (or arg (not open))
                       (read-shell-command "Open current file with: ")
                     open)))
