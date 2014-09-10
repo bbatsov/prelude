@@ -79,6 +79,9 @@
 
 ;; Smartparens all the time
 (add-hook 'global-init-hook 'smartparens-mode)
+(sp-local-pair 'org-mode "~" "~")
+(sp-local-pair 'org-mode "/" "/")
+(sp-local-pair 'org-mode "*" "*")
 
 ;;; Support for Marked.app -- assumes you're on a Mac,
 ;;; and have Marked.app installed.
