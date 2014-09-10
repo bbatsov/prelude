@@ -42,7 +42,7 @@
 
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
 ;; Note: this must be placed before require `helm-config'
-(defvar helm-command-prefix-key "C-c h")
+(setq helm-command-prefix-key "C-c h")
 
 (require 'helm-config)
 
