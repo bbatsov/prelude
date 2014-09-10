@@ -31,7 +31,8 @@
                             protobuf-mode
                             jedi
                             ensime
-                            web-mode))
+                            web-mode
+                            thrift))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
@@ -107,6 +108,7 @@
 
 ;; Hide org emphasis marks
 (setq org-hide-emphasis-markers t)
+(setq org-startup-indented t)
 
 ;;; Scala
 ;; Ensime
