@@ -78,7 +78,7 @@
 (add-hook 'global-init-hook 'global-company-mode)
 
 ;; Smartparens all the time
-(add-hook 'global-init-hook 'smartparens-mode)
+(smartparens-global-mode t)
 (sp-local-pair 'org-mode "~" "~")
 (sp-local-pair 'org-mode "/" "/")
 (sp-local-pair 'org-mode "*" "*")
