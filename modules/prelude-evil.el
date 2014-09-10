@@ -75,6 +75,23 @@
 (define-key evil-normal-state-map
   (kbd "Y") 'prelude-yank-to-end-of-line)
 
+(defun prelude-shift-left-visual ()
+  "Shift left and restore visual selection."
+  (interactive)
+  (evil-shift-left (region-beginning) (region-end))
+  (evil-normal-state)
+  (evil-visual-restore))
+
+(defun prelude-shift-right-visual ()
+  "Shift right and restore visual selection."
+  (interactive)
+  (evil-shift-right (region-beginning) (region-end))
+  (evil-normal-state)
+  (evil-visual-restore))
+
+(define-key evil-visual-state-map (kbd ">") 'prelude-shift-right-visual)
+(define-key evil-visual-state-map (kbd "<") 'prelude-shift-left-visual)
+
 ;; Scrolling
 (defun prelude-evil-scroll-down-other-window ()
   (interactive)
