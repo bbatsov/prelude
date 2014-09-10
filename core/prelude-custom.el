@@ -77,7 +77,7 @@ in the desired elisp file."
   :group 'prelude)
 
 (defcustom prelude-indent-sensitive-modes
-  '(coffee-mode python-mode slim-mode haml-mode)
+  '(conf-mode coffee-mode haml-mode python-mode slim-mode yaml-mode)
   "Modes for which auto-indenting is suppressed."
   :type 'list
   :group 'prelude)

@@ -100,7 +100,6 @@ This functions should be added to the hooks of major modes for programming."
 
 ;; show the name of the current function definition in the modeline
 (require 'which-func)
-(add-to-list 'which-func-modes 'ruby-mode)
 (which-function-mode 1)
 
 ;; in Emacs 24 programming major modes generally derive from a common

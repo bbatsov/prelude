@@ -38,6 +38,7 @@ advised to always run Prelude with the latest Emacs - currently
 		- [Prelude Mode](#prelude-mode)
 		- [OSX modifier keys](#osx-modifier-keys)
 		- [Projectile](#projectile)
+		- [Helm](#helm)
 		- [Key-chords](#key-chords)
 			- [Disabling key-chords](#disabling-key-chords)
 - [Automatic package installation](#automatic-package-installation)
@@ -266,6 +267,8 @@ Keybinding         | Description
 <kbd>F11</kbd>     | Make the window full screen.
 <kbd>F12</kbd>     | Toggle the Emacs menu bar.
 <kbd>C-x g</kbd>   | Open Magit's status buffer.
+<kbd>M-Z</kbd>     | Zap up to char.
+<kbd>C-c J</kbd> or <kbd>Super-></kbd>   | Switch between buffers with [`ace-jump-buffer`](https://github.com/waymondo/ace-jump-buffer)
 <kbd>C-=</kbd>     | Run `expand-region` (incremental text selection).
 <kbd>C-a</kbd>     | Run `prelude-move-beginning-of-line`. Read [this](http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/) for details.
 
@@ -372,9 +375,38 @@ If you ever forget any of Projectile's keybindings just do a:
 
 Helm is setup according to this guide: [A Package in a league of its own: Helm](http://tuhdo.github.io/helm-intro.html).
 
-You can learn Helm usage and key bindings following the guide. <kbd>C-c h</kbd>
-is Prelude's default prefix key for Helm. If you don't remember any key binding,
-append <kbd>C-h</kbd> after <kbd>C-c h</kbd> for a list of key bindings in Helm.
+You can learn Helm usage and key bindings following the guide. <kbd>C-c h</kbd> is Prelude's default prefix key for Helm.
+If you don't remember any key binding, append <kbd>C-h</kbd> after <kbd>C-c h</kbd> for a list of key bindings in Helm.
+
+If you love Helm and want to use Helm globally with enhanced `helm-find-files`, `helm-buffer-lists`..., you will have to also add `(require 'prelude-helm-everywhere)`.
+When `prelude-helm-everywhere` is activated, Helm enables these global key bindings:
+
+Key binding        | Description
+-------------------|----------------------------------------------
+<kbd>M-x</kbd>     | Run [helm-M-x](http://tuhdo.github.io/helm-intro.html#sec-3), an interactive version of <kbd>M-x</kdb>.
+<kbd>M-y</kbd>     | Run [helm-show-kill-ring](http://tuhdo.github.io/helm-intro.html#sec-4), shows the content of `kill-ring`.
+<kbd>C-x b </kbd>  | Run [helm-mini](http://tuhdo.github.io/helm-intro.html#sec-5), an interactive version of `C-x b` with more features.
+<kbd>C-x C-f</kbd> | Run [helm-find-files](http://tuhdo.github.io/helm-intro.html#sec-6), an interactive version of `find-file` with more features.
+<kbd>C-h f </kbd>  | Run [helm-apropos](http://tuhdo.github.io/helm-intro.html#sec-13), an interactive version of `apropos-command`.
+<kbd>C-h r</kbd>   | Run [helm-info-emacs](http://tuhdo.github.io/helm-intro.html#sec-14), an interactive version of `info-emacs-manual`.
+<kbd>C-h C-l </kbd>| Run `helm-locate-library` that can search for locations of any file loaded into Emacs.
+
+This key binding is activated in `shell-mode`:
+
+Key Binding        | Description
+-------------------|----------------------------------------------
+<kbd>C-c C-l</kbd>     | Run `helm-comint-input-ring` that shows `shell` history using Helm interface.
+
+This key bindings is activated in `eshell-mode`:
+
+Key Binding        | Description
+-------------------|----------------------------------------------
+<kbd>C-c C-l</kbd>     | Run `helm-eshell-history` that shows `eshell` history using Helm interface.
+
+If you prefer Ido in everywhere, you should not add `prelude-helm-everywhere`, so you can use Helm along with Ido and Prelude's default commands.
+
+You can always reactivate Helm with `(prelude-global-helm-global-mode-on)`.
+
 
 #### Key-chords
 

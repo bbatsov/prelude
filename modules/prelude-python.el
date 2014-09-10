@@ -33,6 +33,12 @@
 
 ;;; Code:
 
+(prelude-require-package 'anaconda-mode)
+
+(when (boundp 'company-backends)
+  (prelude-require-package 'company-anaconda)
+  (add-to-list 'company-backends 'company-anaconda))
+
 (require 'prelude-programming)
 
 ;; Copy pasted from ruby-mode.el
@@ -45,8 +51,8 @@
              buffer-file-coding-system)))
     (if coding-system
         (symbol-name
-              (or (coding-system-get coding-system 'mime-charset)
-                  (coding-system-change-eol-conversion coding-system nil)))
+         (or (coding-system-get coding-system 'mime-charset)
+             (coding-system-change-eol-conversion coding-system nil)))
       "ascii-8bit")))
 
 (defun prelude-python--insert-coding-comment (encoding)
@@ -77,10 +83,15 @@
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
+  (anaconda-mode)
+  (eldoc-mode)
   (setq-local electric-layout-rules
-	      '((?: . (lambda ()
+              '((?: . (lambda ()
                         (if (python-info-statement-starts-block-p)
                             'after)))))
+  (when (fboundp #'python-imenu-create-flat-index)
+    (setq-local imenu-create-index-function
+                #'python-imenu-create-flat-index))
   (electric-layout-mode +1)
   (add-hook 'after-save-hook 'prelude-python-mode-set-encoding nil 'local))
 
@@ -88,6 +99,7 @@
 
 (add-hook 'python-mode-hook (lambda ()
                               (run-hooks 'prelude-python-mode-hook)))
+
 (provide 'prelude-python)
 
 ;;; prelude-python.el ends here
