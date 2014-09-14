@@ -490,14 +490,7 @@ With a prefix argument ARG, find the `user-init-file' instead."
     (require 'imenu nil t))
   (cond
    ((not symbol-list)
-    (let ((ido-mode ido-mode)
-          (ido-enable-flex-matching
-           (if (boundp 'ido-enable-flex-matching)
-               ido-enable-flex-matching t))
-          name-and-pos symbol-names position)
-      (unless ido-mode
-        (ido-mode 1)
-        (setq ido-enable-flex-matching t))
+    (let (name-and-pos symbol-names position)
       (while (progn
                (imenu--cleanup)
                (setq imenu--index-alist nil)
