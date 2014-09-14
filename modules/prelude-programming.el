@@ -34,10 +34,6 @@
 
 (prelude-require-packages '(guru-mode))
 
-;; add a shortcut for prelude-ido-goto-symbol
-(eval-after-load 'prelude-mode
-  ')
-
 (defun prelude-local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t))
 
