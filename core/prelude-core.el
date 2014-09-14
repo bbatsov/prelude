@@ -496,7 +496,7 @@ With a prefix argument ARG, find the `user-init-file' instead."
                (setq imenu--index-alist nil)
                (prelude-ido-goto-symbol (imenu--make-index-alist))
                (setq selected-symbol
-                     (ido-completing-read "Symbol? " symbol-names))
+                     (ido-completing-read "Symbol? " (reverse symbol-names)))
                (string= (car imenu--rescan-item) selected-symbol)))
       (unless (and (boundp 'mark-active) mark-active)
         (push-mark nil t nil))
