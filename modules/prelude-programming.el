@@ -117,6 +117,9 @@ This functions should be added to the hooks of major modes for programming."
          '(((lambda (&rest _ignored)
               (prelude-smart-open-line-above)) "RET")))
 
+;; enlist a more liberal guru
+(setq guru-warn-only t)
+
 (defun prelude-prog-mode-defaults ()
   "Default coding hook, useful with any programming language."
   (when (and (executable-find ispell-program-name)
