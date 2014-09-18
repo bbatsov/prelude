@@ -87,8 +87,9 @@
   (eldoc-mode)
   (setq-local electric-layout-rules
               '((?: . (lambda ()
-                        (if (python-info-statement-starts-block-p)
-                            'after)))))
+                        (and (zerop (first (syntax-ppss)))
+                             (python-info-statement-starts-block-p)
+                             'after)))))
   (when (fboundp #'python-imenu-create-flat-index)
     (setq-local imenu-create-index-function
                 #'python-imenu-create-flat-index))
