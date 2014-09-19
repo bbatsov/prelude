@@ -486,8 +486,6 @@ With a prefix argument ARG, find the `user-init-file' instead."
 (defun prelude-ido-goto-symbol (&optional symbol-list)
   "Refresh imenu and jump to a place in the buffer using Ido."
   (interactive)
-  (unless (featurep 'imenu)
-    (require 'imenu nil t))
   (cond
    ((not symbol-list)
     (let (name-and-pos symbol-names position)
