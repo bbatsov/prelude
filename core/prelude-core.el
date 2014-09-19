@@ -483,7 +483,7 @@ With a prefix argument ARG, find the `user-init-file' instead."
      (interactive "P")
      (sp-wrap-with-pair ,s)))
 
-(defun prelude-ido-goto-symbol (&optional symbol-list)
+(defun prelude-goto-symbol (&optional symbol-list)
   "Refresh imenu and jump to a place in the buffer using Ido."
   (interactive)
   (cond
@@ -492,9 +492,9 @@ With a prefix argument ARG, find the `user-init-file' instead."
       (while (progn
                (imenu--cleanup)
                (setq imenu--index-alist nil)
-               (prelude-ido-goto-symbol (imenu--make-index-alist))
+               (prelude-goto-symbol (imenu--make-index-alist))
                (setq selected-symbol
-                     (ido-completing-read "Symbol? " (reverse symbol-names)))
+                     (completing-read "Symbol? " (reverse symbol-names)))
                (string= (car imenu--rescan-item) selected-symbol)))
       (unless (and (boundp 'mark-active) mark-active)
         (push-mark nil t nil))
@@ -510,7 +510,7 @@ With a prefix argument ARG, find the `user-init-file' instead."
       (let (name position)
         (cond
          ((and (listp symbol) (imenu--subalist-p symbol))
-          (prelude-ido-goto-symbol symbol))
+          (prelude-goto-symbol symbol))
          ((listp symbol)
           (setq name (car symbol))
           (setq position (cdr symbol)))
