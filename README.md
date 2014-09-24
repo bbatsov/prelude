@@ -360,7 +360,7 @@ Keybinding         | Description
 <kbd>C-c p s s</kbd> | Runs `ag` on the project. Requires the presence of `ag.el`.
 <kbd>C-c p a</kbd> | Runs `ack` on the project. Requires the presence of `ack-and-a-half`.
 <kbd>C-c p c</kbd> | Runs a standard compilation command for your type of project.
-<kbd>C-c p p</kbd> | Runs a standard test command for your type of project.
+<kbd>C-c p P</kbd> | Runs a standard test command for your type of project.
 <kbd>C-c p z</kbd> | Adds the currently visited to the cache.
 <kbd>C-c p p</kbd> | Display a list of known projects you can switch to.
 
@@ -591,7 +591,7 @@ afterwards.
 
 This is not a bug - it's a feature! I firmly believe that the one true
 way to use Emacs is by using it the way it was intended to be used (as
-far as navigation is concerned at least). 
+far as navigation is concerned at least).
 
 If you'd like to be take this a step further and disable the arrow key navigation
 completely put this in your personal config:
