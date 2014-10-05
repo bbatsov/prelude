@@ -64,7 +64,8 @@ Windows external keyboard from time to time."
 (define-key prelude-mode-map (kbd "C-c w") 'prelude-swap-meta-and-super)
 (define-key prelude-mode-map (kbd "s-/") 'hippie-expand)
 
-(menu-bar-mode +1)
+(when window-system 
+  (menu-bar-mode +1))
 
 (provide 'prelude-osx)
 ;;; prelude-osx.el ends here
