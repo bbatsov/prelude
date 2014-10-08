@@ -35,17 +35,8 @@
 
 (prelude-require-packages '(helm helm-projectile))
 
-(require 'helm)
-(require 'helm-grep)
-(require 'helm-files)
-
-;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
-;; Note: this must be placed before require `helm-config'. If `helm-projectile' is
-;; available, it must also be set before `helm-projectile', since `helm-projectile'
-;; loads `helm-config'
-(setq helm-command-prefix-key "C-c h")
-
 (require 'helm-config)
+(require 'helm-grep)
 (require 'helm-projectile)
 
 (when (executable-find "curl")
