@@ -61,5 +61,8 @@
 (helm-descbinds-mode)
 (helm-mode 1)
 
+;; enable Helm version of Projectile with replacment commands
+(helm-projectile-on)
+
 (provide 'prelude-helm-everywhere)
 ;; prelude-helm-everywhere.el ends here.
