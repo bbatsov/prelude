@@ -36,7 +36,6 @@
 (prelude-require-packages '(helm helm-projectile))
 
 (require 'helm-config)
-(require 'helm-grep)
 (require 'helm-projectile)
 
 (when (executable-find "curl")
@@ -61,10 +60,6 @@
 (define-key helm-command-map (kbd "g")     'helm-do-grep)
 (define-key helm-command-map (kbd "C-c w") 'helm-wikipedia-suggest)
 (define-key helm-command-map (kbd "SPC")   'helm-all-mark-rings)
-
-(define-key helm-grep-mode-map (kbd "RET") 'helm-grep-mode-jump-other-window)
-(define-key helm-grep-mode-map (kbd "n")   'helm-grep-mode-jump-other-window-forward)
-(define-key helm-grep-mode-map (kbd "p")   'helm-grep-mode-jump-other-window-backward)
 
 (push "Press <C-c p h> to navigate a project in Helm." prelude-tips)
 
