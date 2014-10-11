@@ -475,10 +475,10 @@ line:
 (disable-theme 'zenburn)
 ```
 
-Or you can use another theme altogether by adding something like:
+Or you can use another theme altogether by adding something in `personal/preload` like:
 
 ```lisp
-(load-theme 'solarized-dark t)
+(setq prelude-theme 'solarized-dark)
 ```
 
 **P.S.** Solarized is not available by default - you'll have to
