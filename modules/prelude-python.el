@@ -80,6 +80,9 @@
           (when (buffer-modified-p)
             (basic-save-buffer-1)))))))
 
+(when (fboundp 'exec-path-from-shell-copy-env)
+  (exec-path-from-shell-copy-env "PYTHONPATH"))
+
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
