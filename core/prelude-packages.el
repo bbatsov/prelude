@@ -159,6 +159,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.slim\\'" slim-mode slim-mode)
     ("\\.swift\\'" swift-mode swift-mode)
     ("\\.textile\\'" textile-mode textile-mode)
+    ("\\.thrift\\'" thrift thrift-mode)
     ("\\.yml\\'" yaml-mode yaml-mode)
     ("\\.yaml\\'" yaml-mode yaml-mode)
     ("Dockerfile\\'" dockerfile-mode dockerfile-mode)))
