@@ -96,7 +96,8 @@
   (when (fboundp #'python-imenu-create-flat-index)
     (setq-local imenu-create-index-function
                 #'python-imenu-create-flat-index))
-  (electric-layout-mode +1)
+  (add-hook 'post-self-insert-hook
+            #'electric-layout-post-self-insert-function nil 'local)
   (add-hook 'after-save-hook 'prelude-python-mode-set-encoding nil 'local))
 
 (setq prelude-python-mode-hook 'prelude-python-mode-defaults)
