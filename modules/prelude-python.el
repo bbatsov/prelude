@@ -39,6 +39,7 @@
   (prelude-require-package 'company-anaconda)
   (add-to-list 'company-backends 'company-anaconda))
 
+(require 'electric)
 (require 'prelude-programming)
 
 ;; Copy pasted from ruby-mode.el
