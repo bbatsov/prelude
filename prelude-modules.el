@@ -6,6 +6,7 @@
 (require 'prelude-css)
 (require 'prelude-emacs-lisp)
 (require 'prelude-erc)
+(require 'prelude-go)
 (require 'prelude-helm)
 (require 'prelude-helm-everywhere)
 (require 'prelude-js)
