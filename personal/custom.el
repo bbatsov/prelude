@@ -74,8 +74,12 @@
 (setq twittering-use-master-password t)
 (setq twittering-use-icon-storage t)
 
-;; Company-mode everywhere
+;;; Company-mode
+;; errwhrr
 (add-hook 'global-init-hook 'global-company-mode)
+
+;; go backend
+(requie 'company-go)
 
 ;; Smartparens all the time
 (smartparens-global-mode t)
