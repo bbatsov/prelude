@@ -81,6 +81,10 @@
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
 
+;;; Go Configs
+(let ((go-path (getenv "GOPATH")))
+  (load (concat go-path "/src/code.google.com/p/go.tools/cmd/oracle/oracle.el")))
+
 ;; Smartparens all the time
 (smartparens-global-mode t)
 (sp-local-pair 'org-mode "~" "~")
