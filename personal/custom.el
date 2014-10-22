@@ -77,6 +77,9 @@
 ;;; Company-mode
 ;; errwhrr
 (add-hook 'global-init-hook 'global-company-mode)
+(add-hook 'go-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (company-mode)))
 
 ;; Smartparens all the time
 (smartparens-global-mode t)
