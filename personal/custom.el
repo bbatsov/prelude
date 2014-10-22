@@ -78,9 +78,6 @@
 ;; errwhrr
 (add-hook 'global-init-hook 'global-company-mode)
 
-;; go backend
-(require 'company-go)
-
 ;; Smartparens all the time
 (smartparens-global-mode t)
 (sp-local-pair 'org-mode "~" "~")
