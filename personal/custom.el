@@ -79,7 +79,7 @@
 (add-hook 'global-init-hook 'global-company-mode)
 
 ;; go backend
-(requie 'company-go)
+(require 'company-go)
 
 ;; Smartparens all the time
 (smartparens-global-mode t)
