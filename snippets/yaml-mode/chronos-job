@@ -3,23 +3,22 @@
 # name: chronos-job
 # key: chronos
 # binding: direct-keybinding
+# expand-env: ((yas-indent-line 'fixed))
 # --
 # Chronos configuration for `(buffer-name)`
 ---
 name: $1
-
 command: "$0"
-
-owner: $(2:default ross@urbanairship.com)
-
+owner: ${2:ross@urbanairship.com}
 cpus: 0.1
-
 disk: 256
+mem: $3
+uris: [$4]
+highPriority: ${5:false}
+runAsUser: ${6:root}
 
-mem: $2
-
-uris: [$3]
-
-highPriority: $(4:default false)
-
-runAsUser: $(5:default root)
+`(let ((curpath (file-name-directory (buffer-file-name))))
+  (if (string-match ".+\/schedule/" curpath)
+      "schedule: "
+    "parents:\n  -"
+    ))`$7
