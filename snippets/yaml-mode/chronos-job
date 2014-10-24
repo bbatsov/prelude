@@ -17,7 +17,7 @@ uris: ["$6"]
 highPriority: ${7:false}
 runAsUser: ${8:root}
 `(let ((curpath (file-name-directory (buffer-file-name))))
-  (if (string-match ".+\/schedule/" curpath)
+  (if (string-match ".+\/scheduled/" curpath)
       "schedule: "
     "parents:\n  -"
     ))`$9
