@@ -5,9 +5,21 @@
 # binding: direct-keybinding
 # --
 # Chronos configuration for `(buffer-name)`
+---
 name: $1
-cpus: 0.1
-disk: 256
-mem: $2
-uris: [$3]
+
 command: "$0"
+
+owner: $(2:default ross@urbanairship.com)
+
+cpus: 0.1
+
+disk: 256
+
+mem: $2
+
+uris: [$3]
+
+highPriority: $(4:default false)
+
+runAsUser: $(5:default root)
