@@ -1,0 +1,13 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# contributor: Ross Donaldson <ross@urbanairship.com>
+# name: chronos-job
+# key: chronos
+# binding: direct-keybinding
+# --
+# Chronos configuration for `(buffer-name)`
+name: $1
+cpus: 0.1
+disk: 256
+mem: $2
+uris: [$3]
+command: "$0"
