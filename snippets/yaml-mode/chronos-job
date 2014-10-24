@@ -10,15 +10,14 @@
 name: $1
 command: "$0"
 owner: ${2:ross@urbanairship.com}
-cpus: 0.1
-disk: 256
-mem: $3
-uris: [$4]
-highPriority: ${5:false}
-runAsUser: ${6:root}
-
+cpus: ${3:0.1}
+disk: ${4:512}
+mem: ${5:512}
+uris: ["$6"]
+highPriority: ${7:false}
+runAsUser: ${8:root}
 `(let ((curpath (file-name-directory (buffer-file-name))))
   (if (string-match ".+\/schedule/" curpath)
       "schedule: "
     "parents:\n  -"
-    ))`$7
+    ))`$9
