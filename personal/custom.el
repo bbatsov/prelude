@@ -102,6 +102,9 @@
   )
 (global-set-key (kbd "C-c m") 'markdown-preview-file)
 
+;;; yasnippet
+(yas-global-mode 1)
+
 ;;; Org Mode
 ;; Support for Babel Mode code blocks
 (org-babel-do-load-languages
