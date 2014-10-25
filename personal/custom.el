@@ -81,8 +81,9 @@
                           (company-mode)))
 
 ;;; Go Configs
-(let ((go-path (getenv "GOPATH")))
-  (load (concat go-path "/src/code.google.com/p/go.tools/cmd/oracle/oracle.el")))
+;; Totally re-enable these if you ever do Go again.
+;; (let ((go-path (getenv "GOPATH")))
+;;   (load (concat go-path "/src/code.google.com/p/go.tools/cmd/oracle/oracle.el")))
 
 ;; Smartparens all the time
 (smartparens-global-mode t)
