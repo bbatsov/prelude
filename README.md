@@ -234,6 +234,14 @@ alias vi='emacsclient -t'
 The last two aliases are helpful if you're used to editing files from
 the command line using `vi(m)`.
 
+Also you can open a file with cursor on choosen line:
+
+```bash
+emacsclient somefile:1234
+```
+
+This will open file 'somefile' and set cursor on line 1234.
+
 ## Getting to know Prelude
 
 Certainly the best way to understand how Prelude enhances the default
