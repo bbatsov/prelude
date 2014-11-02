@@ -105,6 +105,9 @@
 ;;; yasnippet
 (yas-global-mode 1)
 
+;; Tell yas to use system autocomplete instead of an f'ed-up X window:
+(setq yas-prompt-functions '(yas-completing-prompt))
+
 ;;; Org Mode
 ;; Support for Babel Mode code blocks
 (org-babel-do-load-languages
@@ -122,7 +125,11 @@
 
 ;; Hide org emphasis marks
 (setq org-hide-emphasis-markers t)
+
+;; Start indented
 (setq org-startup-indented t)
+
+;; Stop folding. Just... stop.
 (setq org-startup-folded nil)
 
 ;;; Scala
