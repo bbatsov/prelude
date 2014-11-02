@@ -3,4 +3,4 @@
 # key: R
 # binding: direct-keybinding
 # --
-R${}/${`(format-time-string "%Y-%m-%dT%H:00:00Z")`}/P${0:T1D}
+R${}/${`(format-time-string "%Y-%m-%dT%H:00:00Z")`}/P${0:T24H}

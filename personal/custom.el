@@ -18,9 +18,7 @@
  )
 
 ;; Pull in custom packages
-(prelude-require-packages '(ahg
-                            jade-mode
-                            twilight-theme
+(prelude-require-packages '(jade-mode
                             ess
                             twittering-mode
                             floobits
@@ -32,7 +30,8 @@
                             jedi
                             ensime
                             web-mode
-                            thrift))
+                            thrift
+                            ag))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
@@ -82,8 +81,9 @@
                           (company-mode)))
 
 ;;; Go Configs
-(let ((go-path (getenv "GOPATH")))
-  (load (concat go-path "/src/code.google.com/p/go.tools/cmd/oracle/oracle.el")))
+;; Totally re-enable these if you ever do Go again.
+;; (let ((go-path (getenv "GOPATH")))
+;;   (load (concat go-path "/src/code.google.com/p/go.tools/cmd/oracle/oracle.el")))
 
 ;; Smartparens all the time
 (smartparens-global-mode t)
