@@ -31,7 +31,8 @@
                             ensime
                             web-mode
                             thrift
-                            ag))
+                            ag
+                            malabar-mode))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
@@ -107,6 +108,9 @@
 
 ;; Tell yas to use system autocomplete instead of an f'ed-up X window:
 (setq yas-prompt-functions '(yas-completing-prompt))
+
+;;; Malabar Mode for the Jabbas
+(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 
 ;;; Org Mode
 ;; Support for Babel Mode code blocks
