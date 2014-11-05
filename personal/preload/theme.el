@@ -1,3 +1,3 @@
 ;;; Color Theme
 (disable-theme 'zenburn)
-(setq prelude-theme 'twilight)
+(setq prelude-theme 'junio)
