@@ -114,8 +114,7 @@
 (global-set-key (kbd "s-.") 'ace-jump-mode)
 (global-set-key (kbd "C-c J") 'ace-jump-buffer)
 (global-set-key (kbd "s->") 'ace-jump-buffer)
-
-(global-set-key [remap other-window] 'ace-window)
+(global-set-key (kbd "s-w") 'ace-window)
 
 (provide 'prelude-global-keybindings)
 

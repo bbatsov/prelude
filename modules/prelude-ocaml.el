@@ -13,6 +13,23 @@
 
 ;; tuareg is the preferred ocaml mode for Emacs
 
+;; These setups for ocaml assume that you are using the OPAM package
+;; manager (http://opam.ocaml.org/).
+
+;; Because of the apparent complexity of getting emacs environment
+;; variables setup to use opam correctly, it is instead easier to use
+;; opam itself to execute any necessary commands.
+
+;; Also, the standard OCaml toplevel usage has been replaced in favor
+;; of UTOP, the universal toplevel, and we assume that you are using
+;; the Jane Street Core libraries rather than the regular OCaml
+;; standard libraries
+
+;; The minimum required setup for using Prelude's OCaml setup would be
+;; to install OPAM, and then, minimally `opam install core utop'.  A
+;; good getting started guide is available at
+;; https://github.com/realworldocaml/book/wiki/Installation-Instructions
+
 ;;; License:
 
 ;; This program is free software; you can redistribute it and/or
@@ -49,12 +66,14 @@
 (add-hook 'tuareg-mode-hook (lambda ()
                               (progn
                                 (define-key tuareg-mode-map (kbd "C-c C-s")
-                                  'utop))))
+                                  'utop)
+                                (setq compile-command
+                                      "opam config exec \"corebuild \""))))
 
 ;; Setup merlin completions company is used by default in prelude
 (add-to-list 'company-backends 'merlin-company-backend)
 
-;; But merlin also offers support for autocomplete, uncomment this next line
+;; Merlin also offers support for autocomplete, uncomment this next line
 ;; to activate it.
 ;; (setq merlin-use-auto-complete-mode t)
 
