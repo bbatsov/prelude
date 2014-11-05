@@ -111,6 +111,12 @@
 (setq yas-prompt-functions '(yas-completing-prompt))
 
 ;;; Malabar Mode for the Jabbas
+ ;;; Malabar Mode for the Jabbas
++(require 'cedet)
++(require 'semantic)
++(load "semantic/loaddefs.el")
++(semantic-mode 1);;
++(require 'malabar-mode)
 (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 
 ;;; Org Mode
