@@ -32,7 +32,8 @@
                             web-mode
                             thrift
                             ag
-                            malabar-mode))
+                            malabar-mode
+                            polymode))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
@@ -128,6 +129,9 @@
         markdown
         deck))
 
+;; polymode
+(add-to-list 'auto-mode-alist '("\\.org" . poly-org-mode))
+
 ;; Hide org emphasis marks
 (setq org-hide-emphasis-markers t)
 
@@ -140,6 +144,10 @@
 ;;; Scala
 ;; Ensime
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+;;; Polymode for markdown
+(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown" . poly-markdown-mode))
 
 (provide 'custom)
 
