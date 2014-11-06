@@ -13,7 +13,7 @@ Emacs power users.
 
 Prelude is compatible **ONLY with GNU Emacs 24.x**. In general you're
 advised to always run Prelude with the latest Emacs - currently
-**24.3**.
+**24.4**.
 
 **Table of Contents**
 
@@ -51,7 +51,7 @@ advised to always run Prelude with the latest Emacs - currently
 	- [Problems with flyspell-mode](#problems-with-flyspell-mode)
 	- [Ugly colors in the terminal Emacs version](#ugly-colors-in-the-terminal-emacs-version)
 	- [MELPA error on initial startup](#melpa-error-on-initial-startup)
-	- [No arrow navigation in editor buffers](#no-arrow-navigation-in-editor-buffers)
+	- [Warnings on arrow navigation in editor buffers](#warnings-on-navigation-in-editor-buffers)
 	- [Customized C-a behavior](#customized-c-a-behavior)
 	- [Poor ido matching performance on large datasets](#poor-ido-matching-performance-on-large-datasets)
 	- [Windows compatibility](#windows-compatibility)
@@ -360,7 +360,7 @@ Keybinding         | Description
 <kbd>C-c p s s</kbd> | Runs `ag` on the project. Requires the presence of `ag.el`.
 <kbd>C-c p a</kbd> | Runs `ack` on the project. Requires the presence of `ack-and-a-half`.
 <kbd>C-c p c</kbd> | Runs a standard compilation command for your type of project.
-<kbd>C-c p p</kbd> | Runs a standard test command for your type of project.
+<kbd>C-c p P</kbd> | Runs a standard test command for your type of project.
 <kbd>C-c p z</kbd> | Adds the currently visited to the cache.
 <kbd>C-c p p</kbd> | Display a list of known projects you can switch to.
 
@@ -475,10 +475,10 @@ line:
 (disable-theme 'zenburn)
 ```
 
-Or you can use another theme altogether by adding something like:
+Or you can use another theme altogether by adding something in `personal/preload` like:
 
 ```lisp
-(load-theme 'solarized-dark t)
+(setq prelude-theme 'solarized-dark)
 ```
 
 **P.S.** Solarized is not available by default - you'll have to
@@ -587,19 +587,17 @@ If you get some http connection error related to the MELPA repo
 just do a manual `M-x package-refresh-contents` and restart Emacs
 afterwards.
 
-### No arrow navigation in editor buffers
+### Warnings on arrow navigation in editor buffers
 
 This is not a bug - it's a feature! I firmly believe that the one true
 way to use Emacs is by using it the way it was intended to be used (as
-far as navigation is concerned at least). That's why I've disabled all
-movement commands with arrows (and keys like page up, page down,
-etc) - to prevent you from being tempted to use them.
+far as navigation is concerned at least).
 
-If you'd like to be able to use the arrow keys (but still be reminded of
-the alternatives) put this in your personal config:
+If you'd like to be take this a step further and disable the arrow key navigation
+completely put this in your personal config:
 
 ```lisp
-(setq guru-warn-only t)
+(setq guru-warn-only nil)
 ```
 
 To disable `guru-mode` completely add the following snippet to your

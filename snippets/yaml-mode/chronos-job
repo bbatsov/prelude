@@ -1,0 +1,25 @@
+# -*- mode: snippet; require-final-newline: t -*-
+# contributor: Ross Donaldson <ross@urbanairship.com>
+# name: chronos-job
+# key: chronos
+# binding: direct-keybinding
+# expand-env: ((yas-indent-line 'fixed))
+# --
+# Chronos configuration for `(buffer-name)`
+---
+name: $1
+command: "$2"
+owner: ${3:ross@urbanairship.com}
+cpus: ${4:0.1}
+disk: ${5:512}
+mem: ${6:512}
+uris: ["${7:$$(yas-choose-value '("http://pulp.prod.urbanairship/repos/dump/" "http://nexus.prod.urbanairship.com/"))}"]
+highPriority: ${8:false}
+runAsUser: ${9:root}
+async:${10:false}
+disabled:${11:false}
+`(let ((curpath (file-name-directory (buffer-file-name))))
+  (if (string-match ".+\/scheduled/" curpath)
+      "schedule: "
+    "parents:\n  -"
+    ))`$0

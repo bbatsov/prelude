@@ -15,12 +15,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(helm-ff-directory ((t (:background "gray0" :foreground "DarkRed"))))
+ '(helm-selection ((t (:background "gray14")))))
 
 ;; Pull in custom packages
-(prelude-require-packages '(ahg
-                            jade-mode
-                            twilight-theme
+(prelude-require-packages '(jade-mode
                             ess
                             twittering-mode
                             floobits
@@ -32,7 +31,10 @@
                             jedi
                             ensime
                             web-mode
-                            thrift))
+                            thrift
+                            ag
+                            malabar-mode
+                            polymode))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
@@ -74,8 +76,17 @@
 (setq twittering-use-master-password t)
 (setq twittering-use-icon-storage t)
 
-;; Company-mode everywhere
+;;; Company-mode
+;; errwhrr
 (add-hook 'global-init-hook 'global-company-mode)
+(add-hook 'go-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (company-mode)))
+
+;;; Go Configs
+;; Totally re-enable these if you ever do Go again.
+;; (let ((go-path (getenv "GOPATH")))
+;;   (load (concat go-path "/src/code.google.com/p/go.tools/cmd/oracle/oracle.el")))
 
 ;; Smartparens all the time
 (smartparens-global-mode t)
@@ -94,13 +105,29 @@
   )
 (global-set-key (kbd "C-c m") 'markdown-preview-file)
 
+;;; yasnippet
+(yas-global-mode 1)
+
+;; Tell yas to use system autocomplete instead of an f'ed-up X window:
+(setq yas-prompt-functions '(yas-completing-prompt))
+
+;;; Malabar Mode for the Jabbas
+ ;;; Malabar Mode for the Jabbas
+(require 'cedet)
+(require 'semantic)
+(load "semantic/loaddefs.el")
+(semantic-mode 1);;
+(require 'malabar-mode)
+(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
+
 ;;; Org Mode
 ;; Support for Babel Mode code blocks
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)
    (emacs-lisp .t)
-   (clojure . t)))
+   (clojure . t)
+   (bash . t)))
 
 ;; Config org export backends
 (setq org-export-backends
@@ -109,14 +136,26 @@
         markdown
         deck))
 
+;; polymode
+(add-to-list 'auto-mode-alist '("\\.org" . poly-org-mode))
+
 ;; Hide org emphasis marks
 (setq org-hide-emphasis-markers t)
+
+;; Start indented
 (setq org-startup-indented t)
+(setq org-startup-folded nil)
+
+;; Stop folding. Just... stop.
 (setq org-startup-folded nil)
 
 ;;; Scala
 ;; Ensime
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+;;; Polymode for markdown
+(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown" . poly-markdown-mode))
 
 (provide 'custom)
 

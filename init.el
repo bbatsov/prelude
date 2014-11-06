@@ -99,8 +99,8 @@ by Prelude.")
 
 ;; the core stuff
 (require 'prelude-packages)
+(require 'prelude-custom)  ;; Needs to be loaded before core, editor and ui
 (require 'prelude-ui)
-(require 'prelude-custom)  ;; Needs to be loaded before core and editor
 (require 'prelude-core)
 (require 'prelude-mode)
 (require 'prelude-editor)
