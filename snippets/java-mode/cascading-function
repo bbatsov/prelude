@@ -1,4 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
+# contributor: Ross Donaldson <gastove@gmail.com>
 # name: cascading-function
 # key: cfunc
 # binding: direct-keybinding
