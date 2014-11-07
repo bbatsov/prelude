@@ -1,4 +1,5 @@
 # -*- mode: snippet; require-final-newline: t -*-
+# contributor: Ross Donaldson <gastove@gmail.com>
 # name: package
 # key: pkg
 # binding: direct-keybinding
