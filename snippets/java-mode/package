@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: t -*-
+# name: package
+# key: pkg
+# binding: direct-keybinding
+# --
+package ${1:`(string-join (cons "com" (cdr (butlast (split-string (car (last (split-string (file-name-directory (buffer-file-name)) "com"))) "\/")))) ".")`};
+$0
