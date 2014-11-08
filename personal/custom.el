@@ -74,9 +74,6 @@
         (load (concat prelude-personal-dir rmd-file-name)))
       load-personal-config-list)
 
-;;; Color Theme
-(load-theme 'junio t)
-
 ;;; Whitespace Mode
 ;; Disable whitespace-mode in certain other major modes
 (add-hook 'org-mode-hook (lambda() (whitespace-mode -1)))
