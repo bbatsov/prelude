@@ -1,4 +1,4 @@
-# -*- mode: snippet; require-final-newline: t -*-
+# -*- mode: snippet; require-final-newline: nil -*-
 # contributor: Ross Donaldson <ross@urbanairship.com>
 # name: chronos-job
 # key: chronos
@@ -9,17 +9,17 @@
 ---
 name: $1
 command: "$2"
-owner: ${3:ross@urbanairship.com}
-cpus: ${4:0.1}
-disk: ${5:512}
-mem: ${6:512}
-uris: ["${7:$$(yas-choose-value '("http://pulp.prod.urbanairship/repos/dump/" "http://nexus.prod.urbanairship.com/"))}"]
-highPriority: ${8:false}
-runAsUser: ${9:root}
-async: ${10:false}
-disabled: ${11:false}
+owner: ${0:ross@urbanairship.com}
+cpus: ${3:0.1}
+disk: ${4:512}
+mem: ${5:512}
+uris: ["${6:$$(yas-choose-value '("http://pulp.prod.urbanairship/repos/dump/" "http://nexus.prod.urbanairship.com/"))}"]
+highPriority: ${7:false}
+runAsUser: ${8:root}
+async: ${9:false}
+disabled: ${10:false}
 `(let ((curpath (file-name-directory (buffer-file-name))))
   (if (string-match ".+\/scheduled/" curpath)
       "schedule: "
     "parents:\n  -"
-    ))`$0
+    ))`$11
