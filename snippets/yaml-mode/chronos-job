@@ -16,8 +16,8 @@ mem: ${6:512}
 uris: ["${7:$$(yas-choose-value '("http://pulp.prod.urbanairship/repos/dump/" "http://nexus.prod.urbanairship.com/"))}"]
 highPriority: ${8:false}
 runAsUser: ${9:root}
-async:${10:false}
-disabled:${11:false}
+async: ${10:false}
+disabled: ${11:false}
 `(let ((curpath (file-name-directory (buffer-file-name))))
   (if (string-match ".+\/scheduled/" curpath)
       "schedule: "
