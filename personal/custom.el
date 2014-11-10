@@ -57,7 +57,9 @@
                             thrift
                             ag
                             malabar-mode
-                            polymode))
+                            polymode
+			    badger-theme
+                            helm-ag))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
