@@ -1,3 +1,6 @@
 ;;; Color Theme
 (disable-theme 'zenburn)
-(setq prelude-theme 'junio)
+(setq prelude-theme 'badger)
+
+(provide 'theme)
+;;; theme.el ends here
