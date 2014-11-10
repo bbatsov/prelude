@@ -79,8 +79,6 @@
 (add-hook 'org-mode-hook (lambda() (whitespace-mode -1)))
 (add-hook 'markdown-mode-hook (lambda () (whitespace-mode -1)))
 
-
-
 ;;; Tweak Mac Keyboard Behavior
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
@@ -101,6 +99,10 @@
 (add-hook 'go-mode-hook (lambda ()
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
+(setq company-idle-delay .3)
+(setq company-minimum-prefix-length 1)
+(setq company-tooltip-limit 20)
+(global-set-key (kbd "TAB") 'company-complete)
 
 ;;; Go Configs
 ;; Totally re-enable these if you ever do Go again.
