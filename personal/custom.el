@@ -66,6 +66,7 @@
                                   "/work.el"            ;; Contains work erc configs too.
                                   "/python-configs.el"
                                   "/erc-configs.el"
+                                  "/ess-configs.el"
                                   "/jsx-configs.el"
                                   "/web-mode-configs.el"))
 
@@ -73,32 +74,10 @@
         (load (concat prelude-personal-dir rmd-file-name)))
       load-personal-config-list)
 
-;;; Color Theme
-;(load-theme 'junio t)
-
 ;;; Whitespace Mode
 ;; Disable whitespace-mode in certain other major modes
 (add-hook 'org-mode-hook (lambda() (whitespace-mode -1)))
 (add-hook 'markdown-mode-hook (lambda () (whitespace-mode -1)))
-
-;;; ESS:
-;; Load ESS
-(require 'ess-site)
-
-(add-to-list 'ess-style-alist
-             '(my-RRR (ess-indent-level . 2)
-                      (ess-first-continued-statement-offset . 2)
-                      ;; (ess-first-continued-statement-offset . 0)
-                      (ess-continued-statement-offset . 0)
-                      ;; (ess-continued-statement-offset . 4)
-                      (ess-brace-offset . 0)
-                      (ess-arg-function-offset . 4)
-                      (ess-arg-function-offset-new-line . '(4))
-                      (ess-expression-offset . 4)
-                      (ess-else-offset . 0)
-                      (ess-close-brace-offset . 0)))
-(setq ess-default-style 'my-RRR)
-
 
 ;;; Tweak Mac Keyboard Behavior
 (setq mac-command-modifier 'meta)
@@ -120,6 +99,10 @@
 (add-hook 'go-mode-hook (lambda ()
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
+(setq company-idle-delay .3)
+(setq company-minimum-prefix-length 1)
+(setq company-tooltip-limit 20)
+(global-set-key (kbd "TAB") 'company-complete)
 
 ;;; Go Configs
 ;; Totally re-enable these if you ever do Go again.
