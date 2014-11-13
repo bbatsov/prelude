@@ -149,7 +149,7 @@
  '((python . t)
    (emacs-lisp .t)
    (clojure . t)
-   (bash . t)))
+   ))
 
 ;; Config org export backends
 (setq org-export-backends
