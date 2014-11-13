@@ -9,6 +9,6 @@
   (kbd "<escape>") 'evil-normal-state)
 
 ;;; Set certain modes to certain states
-(evil-set-initial-state 'git-commit-mode insert)
+(evil-set-initial-state 'git-commit-mode 'insert)
 (provide 'evil)
 ;;; evil.el ends here
