@@ -133,7 +133,6 @@
 (setq yas-prompt-functions '(yas-completing-prompt))
 
 ;;; Malabar Mode for the Jabbas
- ;;; Malabar Mode for the Jabbas
 (require 'cedet)
 (require 'semantic)
 (load "semantic/loaddefs.el")
