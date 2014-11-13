@@ -64,6 +64,7 @@
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
 (setq load-personal-config-list '("/jsl-checker.el"
+                                  "/evil.el"
                                   "/jsx-configs.el"
                                   "/work.el"            ;; Contains work erc configs too.
                                   "/python-configs.el"
