@@ -105,7 +105,6 @@
 (setq company-idle-delay .3)
 (setq company-minimum-prefix-length 1)
 (setq company-tooltip-limit 20)
-(global-set-key (kbd "TAB") 'company-complete)
 
 ;;; Go Configs
 ;; Totally re-enable these if you ever do Go again.
