@@ -6,7 +6,9 @@
 (define-key evil-insert-state-map
   (read-kbd-macro evil-toggle-key) 'evil-normal-state)
 (define-key evil-insert-state-map
-  (kbd "ESC") 'evil-normal-state)
+  (kbd "<escape>") 'evil-normal-state)
 
+;;; Set certain modes to certain states
+(evil-set-initial-state 'git-commit-mode insert)
 (provide 'evil)
 ;;; evil.el ends here
