@@ -64,6 +64,7 @@
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
 (setq load-personal-config-list '("/jsl-checker.el"
+                                  "/evil.el"
                                   "/jsx-configs.el"
                                   "/work.el"            ;; Contains work erc configs too.
                                   "/python-configs.el"
@@ -135,7 +136,6 @@
 (setq yas-prompt-functions '(yas-completing-prompt))
 
 ;;; Malabar Mode for the Jabbas
- ;;; Malabar Mode for the Jabbas
 (require 'cedet)
 (require 'semantic)
 (load "semantic/loaddefs.el")

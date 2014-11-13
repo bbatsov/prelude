@@ -78,18 +78,6 @@
 ;; set different dictionaries by different servers/channels
 ;;(setq erc-spelling-dictionaries '(("#emacs" "american")))
 
-;; TODO - replace this with use of notify.el
-;; Notify my when someone mentions my nick.
-(defun call-libnotify (matched-type nick msg)
-  (let* ((cmsg  (split-string (clean-message msg)))
-         (nick   (first (split-string nick "!")))
-         (msg    (mapconcat 'identity (rest cmsg) " ")))
-    (shell-command-to-string
-     (format "notify-send -u critical '%s says:' '%s'" nick msg))))
-
-(when (eq system-type 'linux)
-  (add-hook 'erc-text-matched-hook 'call-libnotify))
-
 (defvar erc-notify-nick-alist nil
   "Alist of nicks and the last time they tried to trigger a
 notification")
@@ -114,20 +102,6 @@ that can occur between two notifications.  The default is
           (> (abs (- cur-time last-time)) delay))
       (push (cons nick cur-time) erc-notify-nick-alist)
       t)))
-
-;; private message notification
-(defun erc-notify-on-private-msg (proc parsed)
-  (let ((nick (car (erc-parse-user (erc-response.sender parsed))))
-        (target (car (erc-response.command-args parsed)))
-        (msg (erc-response.contents parsed)))
-    (when (and (erc-current-nick-p target)
-               (not (erc-is-message-ctcp-and-not-action-p msg))
-               (erc-notify-allowed-p nick))
-      (shell-command-to-string
-       (format "notify-send -u critical '%s says:' '%s'" nick msg))
-      nil)))
-
-(add-hook 'erc-server-PRIVMSG-functions 'erc-notify-on-private-msg)
 
 ;; autoaway setup
 (setq erc-auto-discard-away t)
