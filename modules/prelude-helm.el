@@ -43,8 +43,7 @@
 
 ;; See https://github.com/bbatsov/prelude/pull/670 for a detailed
 ;; discussion of these options.
-(setq helm-quick-update                     t
-      helm-split-window-in-side-p           t
+(setq helm-split-window-in-side-p           t
       helm-buffers-fuzzy-matching           t
       helm-move-to-line-cycle-in-source     t
       helm-ff-search-library-in-sexp        t
