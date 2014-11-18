@@ -64,7 +64,7 @@
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
 (setq load-personal-config-list '("/jsl-checker.el"
-                                  "/evil.el"
+                                  ;;"/evil.el"      ;; Disable for now, fucks w/ cider
                                   "/jsx-configs.el"
                                   "/work.el"            ;; Contains work erc configs too.
                                   "/python-configs.el"
@@ -143,6 +143,10 @@
 (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 
 ;;; Org Mode
+;; I can't believe I'm doing this
+(require 'package)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+
 ;; Support for Babel Mode code blocks
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -166,10 +170,15 @@
 
 ;; Start indented
 (setq org-startup-indented t)
-(setq org-startup-folded nil)
 
 ;; Stop folding. Just... stop.
 (setq org-startup-folded nil)
+
+;; Fontify inside code blocks
+(setq org-src-fontify-natively t)
+
+;; org-mime for composing emails
+(require 'org-mime)
 
 ;;; Scala
 ;; Ensime
