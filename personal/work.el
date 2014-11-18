@@ -5,13 +5,12 @@
 (defun start-irc-work ()
   "Connect to the UA IRC Server"
   (interactive)
-  (load "~/.ercpass")
+  (add-to-list 'erc-autojoin-channels-alist '("dev.urbanairship.com" "#ops"))
+  ;; (load "~/.ercpass")
   (erc-tls :server "dev.urbanairship.com"
            :port 6697
-           :nick "gastove"
-           :full-name "Ross Donaldson"
-           :password work-erc-pass)
-  (setq erc-autojoin-channels-alist '(("#ops"))))
+           :nick erc-nick
+))
 
 ;;; Work SQL Functions
 ;; Generate a list of DBs I connect to commonly
