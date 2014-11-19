@@ -92,7 +92,7 @@
 ;;; Projectile
 (setq projectile-remember-window-configs t)
 (setq projectile-switch-project-action 'projectile-dired)
-(global-set-key (kbd "s-p") 'projectile-switch-projec)
+(global-set-key (kbd "s-p") 'projectile-switch-project)
 
 ;;; Twittering-mode
 (setq twittering-icon-mode t)
@@ -105,9 +105,10 @@
 (add-hook 'go-mode-hook (lambda ()
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
-(setq company-idle-delay .3)
-(setq company-minimum-prefix-length 1)
-(setq company-tooltip-limit 20)
+;; Not convinced this is helping.
+;; (setq company-idle-delay .3)
+;; (setq company-minimum-prefix-length 1)
+;; (setq company-tooltip-limit 20)
 
 ;;; Go Configs
 ;; Totally re-enable these if you ever do Go again.
