@@ -59,7 +59,10 @@
                             malabar-mode
                             polymode
 			    badger-theme
-                            helm-ag))
+                            helm-ag
+                            wgrep
+                            wgrep-ag
+                            wgrep-helm))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
