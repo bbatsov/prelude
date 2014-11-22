@@ -41,6 +41,9 @@
  '(helm-selection ((t (:background "gray14"))))
  '(helm-source-header ((t (:background "DarkOrange4" :foreground "white" :weight bold :height 1.3 :family "Sans Serif")))))
 
+(require 'package)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+
 ;; Pull in custom packages
 (prelude-require-packages '(jade-mode
                             ess
@@ -56,9 +59,11 @@
                             web-mode
                             thrift
                             ag
+                            jabber
                             malabar-mode
+                            org-plus-contrib
                             polymode
-			    badger-theme
+                            badger-theme
                             helm-ag
                             wgrep
                             wgrep-ag
@@ -79,6 +84,16 @@
 (mapc (lambda (rmd-file-name)
         (load (concat prelude-personal-dir rmd-file-name)))
       load-personal-config-list)
+
+;; Gchat!
+(setq jabber-account-list
+      '(("gastove@gmail.com"
+         (:network-server . "talk.google.com")
+         (:connection-type . ssl))))
+
+(setq jabber-history-enabled t
+      jabber-vcard-avatars-retrieve nil
+      jabber-chat-buffer-show-avatar nil)
 
 ;;; Whitespace Mode
 ;; Disable whitespace-mode in certain other major modes
