@@ -59,12 +59,16 @@ With a prefix ARG always prompt for command to use."
   (with-current-buffer buffer-or-name
     major-mode))
 
+(defvar prelude-term-buffer-name "ansi"
+  "The default `ansi-term' name used by `prelude-visit-term-buffer'.
+This variable can be set via .dir-locals.el to provide multi-term support.")
+
 (defun prelude-visit-term-buffer ()
   "Create or visit a terminal buffer."
   (interactive)
   (prelude-start-or-switch-to (lambda ()
-                                (ansi-term (getenv "SHELL")))
-                              "*ansi-term*"))
+                                (ansi-term (getenv "SHELL") (concat prelude-term-buffer-name "-term")))
+                              (format "*%s-term*" prelude-term-buffer-name)))
 
 (defun prelude-search (query-url prompt)
   "Open the search url constructed with the QUERY-URL.
