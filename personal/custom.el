@@ -39,7 +39,9 @@
  ;; If there is more than one, they won't work right.
  '(helm-ff-directory ((t (:background "gray0" :foreground "DarkRed"))))
  '(helm-selection ((t (:background "gray14"))))
- '(helm-source-header ((t (:background "DarkOrange4" :foreground "white" :weight bold :height 1.3 :family "Sans Serif")))))
+ '(helm-source-header ((t (:background "DarkOrange4" :foreground "white" :weight bold :height 1.3 :family "Sans Serif"))))
+ '(jabber-chat-prompt-foreign ((t (:foreground "steel blue" :weight bold))))
+ '(jabber-chat-prompt-local ((t (:foreground "light gray" :weight bold)))))
 
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
