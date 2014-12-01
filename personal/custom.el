@@ -93,7 +93,18 @@
 
 (setq jabber-history-enabled t
       jabber-vcard-avatars-retrieve nil
-      jabber-chat-buffer-show-avatar nil)
+      jabber-chat-buffer-show-avatar nil
+      jabber-roster-show-bindings nil
+      jabber-show-offline-contacts nil
+      jabber-auto-reconnect t
+      jabber-roster-show-title nil
+      jabber-alert-presence-message-function 'jabber-presence-only-chat-open-message
+      jabber-use-global-history t
+      jabber-global-history-filename (locate-user-emacs-file "var/jabber.log"))
+
+;; Send periodic keepalive packets
+(add-hook 'jabber-post-connect-hooks 'jabber-keepalive-start)
+
 
 ;;; Whitespace Mode
 ;; Disable whitespace-mode in certain other major modes
