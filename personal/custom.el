@@ -46,8 +46,6 @@
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
-;; poot
-
 ;; Pull in custom packages
 (prelude-require-packages '(jade-mode
                             ess
