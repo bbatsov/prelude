@@ -9,6 +9,7 @@
    (quote
     ("ad9fc392386f4859d28fe4ef3803585b51557838dbc072762117adad37e83585" "132ccc75b7fdcd9f5979329620a1151953a8f65efad06b988deed7cba9338eab" "fc6e906a0e6ead5747ab2e7c5838166f7350b958d82e410257aeeb2820e8a07a" "1f3304214265481c56341bcee387ef1abb684e4efbccebca0e120be7b1a13589" default)))
  '(fci-rule-color "#383838")
+ '(org-agenda-files (quote ("~/Code/astromech/notes.org")))
  '(safe-local-variable-values (quote ((project-venv-name . "mashboard"))))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
@@ -98,14 +99,14 @@
       jabber-chat-buffer-show-avatar nil
       jabber-roster-show-bindings nil
       jabber-show-offline-contacts nil
-      jabber-auto-reconnect t
+ ;     jabber-auto-reconnect t
       jabber-roster-show-title nil
       jabber-alert-presence-message-function 'jabber-presence-only-chat-open-message
       jabber-use-global-history t
       jabber-global-history-filename (locate-user-emacs-file "var/jabber.log"))
 
 ;; Send periodic keepalive packets
-(add-hook 'jabber-post-connect-hooks 'jabber-keepalive-start)
+;(add-hook 'jabber-post-connect-hooks 'jabber-keepalive-start)
 
 
 ;;; Whitespace Mode

@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: section
+# key: sec
+# binding: direct-keybinding
+# --
+${1:Section}
+${1:$(make-string (string-width yas-text) ?\-)}
+
+$0
