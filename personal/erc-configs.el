@@ -1,7 +1,8 @@
 ;;; Code:
 ;; Setup ERC
 (setq erc-autojoin-channels-alist '(("freenode.net"
-                                     "#emacs" "#clojure")))
+                                     "#emacs" "#clojure"))
+      erc-nick "gastove")
 
 (provide 'erc-configs)
 
