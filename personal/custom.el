@@ -70,6 +70,7 @@
                             helm-ag
                             wgrep
                             wgrep-ag
+                            pcre2el
                             wgrep-helm))
 
 ;; Pull in all my personal bits and bobs from external files
@@ -88,11 +89,21 @@
         (load (concat prelude-personal-dir rmd-file-name)))
       load-personal-config-list)
 
+;; PCRE Regexes
+(rxt-global-mode)
+
 ;; Gchat!
 (setq jabber-account-list
       '(("gastove@gmail.com"
          (:network-server . "talk.google.com")
-         (:connection-type . ssl))))
+         (:connection-type . ssl)
+         (:port . 5223))))
+
+;; (setq jabber-username "gastove"
+;;       jabber-server "gmail.com"
+;;       jabber-network-server "talk.google.com"
+;;       jabber-port 5223
+;;       jabber-connection-type 'ssl)
 
 (setq jabber-history-enabled t
       jabber-vcard-avatars-retrieve nil
