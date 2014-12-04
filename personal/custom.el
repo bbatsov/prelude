@@ -91,7 +91,14 @@
 (setq jabber-account-list
       '(("gastove@gmail.com"
          (:network-server . "talk.google.com")
-         (:connection-type . ssl))))
+         (:connection-type . ssl)
+         (:port . 5223))))
+
+;; (setq jabber-username "gastove"
+;;       jabber-server "gmail.com"
+;;       jabber-network-server "talk.google.com"
+;;       jabber-port 5223
+;;       jabber-connection-type 'ssl)
 
 (setq jabber-history-enabled t
       jabber-vcard-avatars-retrieve nil
