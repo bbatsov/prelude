@@ -69,6 +69,7 @@
                             helm-ag
                             wgrep
                             wgrep-ag
+                            pcre2el
                             wgrep-helm))
 
 ;; Pull in all my personal bits and bobs from external files
@@ -86,6 +87,9 @@
 (mapc (lambda (rmd-file-name)
         (load (concat prelude-personal-dir rmd-file-name)))
       load-personal-config-list)
+
+;; PCRE Regexes
+(rxt-global-mode)
 
 ;; Gchat!
 (setq jabber-account-list
