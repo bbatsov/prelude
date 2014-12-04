@@ -112,7 +112,7 @@
       jabber-global-history-filename (locate-user-emacs-file "var/jabber.log"))
 
 ;; Send periodic keepalive packets
-(add-hook 'jabber-post-connect-hooks 'jabber-keepalive-start)
+;(add-hook 'jabber-post-connect-hooks 'jabber-keepalive-start)
 
 
 ;;; Whitespace Mode
