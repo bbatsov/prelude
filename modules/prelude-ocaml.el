@@ -49,7 +49,7 @@
 
 ;;; Code:
 
-(prelude-require-packages '(tuareg utop merlin))
+(prelude-require-packages '(tuareg utop merlin flycheck-ocaml))
 
 (require 'tuareg)
 (require 'utop)
@@ -60,15 +60,22 @@
                 ("\\.topml\\'" . tuareg-mode))
               auto-mode-alist))
 
-(add-hook 'tuareg-mode-hook 'utop-setup-ocaml-buffer)
-(add-hook 'tuareg-mode-hook 'merlin-mode)
+(with-eval-after-load 'merlin
+  ;; Disable Merlin's own error checking
+  (setq merlin-error-after-save nil)
+
+  ;; Enable Flycheck checker
+  (flycheck-ocaml-setup))
+
+(add-hook 'tuareg-mode-hook #'utop-setup-ocaml-buffer)
+(add-hook 'tuareg-mode-hook #'merlin-mode)
 
 (add-hook 'tuareg-mode-hook (lambda ()
                               (progn
                                 (define-key tuareg-mode-map (kbd "C-c C-s")
                                   'utop)
                                 (setq compile-command
-                                      "opam config exec \"corebuild \""))))
+                                      "opam config exec corebuild "))))
 
 ;; Setup merlin completions company is used by default in prelude
 (add-to-list 'company-backends 'merlin-company-backend)
@@ -77,7 +84,7 @@
 ;; to activate it.
 ;; (setq merlin-use-auto-complete-mode t)
 
-(setq utop-command "opam config exec \"utop -emacs\""
+(setq utop-command "opam config exec utop -- -emacs"
       merlin-error-after-save nil)
 
 (provide 'prelude-ocaml)
