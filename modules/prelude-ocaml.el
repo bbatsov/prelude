@@ -49,7 +49,7 @@
 
 ;;; Code:
 
-(prelude-require-packages '(tuareg utop merlin))
+(prelude-require-packages '(tuareg utop merlin flycheck-ocaml))
 
 (require 'tuareg)
 (require 'utop)
@@ -60,8 +60,15 @@
                 ("\\.topml\\'" . tuareg-mode))
               auto-mode-alist))
 
-(add-hook 'tuareg-mode-hook 'utop-setup-ocaml-buffer)
-(add-hook 'tuareg-mode-hook 'merlin-mode)
+(with-eval-after-load 'merlin
+  ;; Disable Merlin's own error checking
+  (setq merlin-error-after-save nil)
+
+  ;; Enable Flycheck checker
+  (flycheck-ocaml-setup))
+
+(add-hook 'tuareg-mode-hook #'utop-setup-ocaml-buffer)
+(add-hook 'tuareg-mode-hook #'merlin-mode)
 
 (add-hook 'tuareg-mode-hook (lambda ()
                               (progn
