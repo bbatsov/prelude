@@ -71,7 +71,8 @@
                             wgrep
                             wgrep-ag
                             pcre2el
-                            wgrep-helm))
+                            wgrep-helm
+                            clj-refactor))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
@@ -120,6 +121,16 @@
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
 
+;; COLORS
+(require 'color)
+(let ((bg (face-attribute 'default :background)))
+  (custom-set-faces
+   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+   `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
+   `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
+   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
+
 ;; Not convinced this is helping.
 ;; (setq company-idle-delay .3)
 ;; (setq company-minimum-prefix-length 1)
@@ -161,7 +172,9 @@
 (require 'malabar-mode)
 (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 
-
+;;; Clojure
+;; Enable refactoring support
+(cljr-add-keybindings-with-prefix "C-c C-m")
 
 ;;; Scala
 ;; Ensime
