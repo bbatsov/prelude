@@ -71,7 +71,8 @@
                             wgrep
                             wgrep-ag
                             pcre2el
-                            wgrep-helm))
+                            wgrep-helm
+                            clj-refactor))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
@@ -83,6 +84,7 @@
                                   "/erc-configs.el"
                                   "/ess-configs.el"
                                   "/jsx-configs.el"
+                                  "/jabber-configs.el"
                                   "/web-mode-configs.el"))
 
 (mapc (lambda (rmd-file-name)
@@ -92,38 +94,11 @@
 ;; PCRE Regexes
 (rxt-global-mode)
 
-;; Gchat!
-(setq jabber-account-list
-      '(("gastove@gmail.com"
-         (:network-server . "talk.google.com")
-         (:connection-type . ssl)
-         (:port . 5223))))
-
-;; (setq jabber-username "gastove"
-;;       jabber-server "gmail.com"
-;;       jabber-network-server "talk.google.com"
-;;       jabber-port 5223
-;;       jabber-connection-type 'ssl)
-
-(setq jabber-history-enabled t
-      jabber-vcard-avatars-retrieve nil
-      jabber-chat-buffer-show-avatar nil
-      jabber-roster-show-bindings nil
-      jabber-show-offline-contacts nil
- ;     jabber-auto-reconnect t
-      jabber-roster-show-title nil
-      jabber-alert-presence-message-function 'jabber-presence-only-chat-open-message
-      jabber-use-global-history t
-      jabber-global-history-filename (locate-user-emacs-file "var/jabber.log"))
-
-;; Send periodic keepalive packets
-;(add-hook 'jabber-post-connect-hooks 'jabber-keepalive-start)
-
-
 ;;; Whitespace Mode
 ;; Disable whitespace-mode in certain other major modes
-(add-hook 'org-mode-hook (lambda() (whitespace-mode -1)))
+(add-hook 'org-mode-hook (lambda () (whitespace-mode -1)))
 (add-hook 'markdown-mode-hook (lambda () (whitespace-mode -1)))
+(add-hook 'rst-mode-hook (lambda () (whitespace-mode -1)))
 
 ;;; Tweak Mac Keyboard Behavior
 (setq mac-command-modifier 'meta)
@@ -145,6 +120,17 @@
 (add-hook 'go-mode-hook (lambda ()
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
+
+;; COLORS
+(require 'color)
+(let ((bg (face-attribute 'default :background)))
+  (custom-set-faces
+   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+   `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
+   `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
+   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
+
 ;; Not convinced this is helping.
 ;; (setq company-idle-delay .3)
 ;; (setq company-minimum-prefix-length 1)
@@ -186,43 +172,9 @@
 (require 'malabar-mode)
 (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 
-;;; Org Mode
-;; I can't believe I'm doing this
-(require 'package)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-
-;; Support for Babel Mode code blocks
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((python . t)
-   (emacs-lisp .t)
-   (clojure . t)
-   ))
-
-;; Config org export backends
-(setq org-export-backends
-      `(beamer
-        ascii
-        markdown
-        deck))
-
-;; polymode
-(add-to-list 'auto-mode-alist '("\\.org" . poly-org-mode))
-
-;; Hide org emphasis marks
-(setq org-hide-emphasis-markers t)
-
-;; Start indented
-(setq org-startup-indented t)
-
-;; Stop folding. Just... stop.
-(setq org-startup-folded nil)
-
-;; Fontify inside code blocks
-(setq org-src-fontify-natively t)
-
-;; org-mime for composing emails
-(require 'org-mime)
+;;; Clojure
+;; Enable refactoring support
+(cljr-add-keybindings-with-prefix "C-c C-m")
 
 ;;; Scala
 ;; Ensime
