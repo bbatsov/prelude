@@ -1,5 +1,8 @@
 ;;; Org Mode
 
+;; Make sure auto-fill-mode is on. Pretty much always need it.
+(add-hook 'org-mode-hook (lambda () (turn-on-auto-fill)))
+
 ;; Support for Babel Mode code blocks
 ;; NOTE: requires the addition of the org elpa repo!
 
