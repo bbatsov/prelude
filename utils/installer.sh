@@ -175,14 +175,6 @@ else
     printf "$RED not found. Install aspell to benefit from flyspell-mode!$RESET\n"
 fi
 
-printf  "$CYAN Checking to see if ack is installed... "
-if hash ack 2>&- || hash ack-grep 2>&-
-then
-    printf "$GREEN found.$RESET\n"
-else
-    printf "$RED not found. You'll need it to use ack-and-a-half!$RESET\n"
-fi
-
 ### Check emacs version
 if [ $(emacs --version 2>/dev/null | sed -n 's/.*[^0-9.]\([0-9]*\.[0-9.]*\).*/\1/p;q' | sed 's/\..*//g') -lt 24 ]
 then
