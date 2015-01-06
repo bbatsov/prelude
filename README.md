@@ -638,11 +638,11 @@ Prelude swaps the default `ido` flex matching with the more powerful
 
 The sorting algorithm `flx` uses is more complex, but yields better results.
 
-On slower machines, it may be necessary to lower `flx-ido-threshhold` to
+On slower machines, it may be necessary to lower `flx-ido-threshold` to
 ensure a smooth experience.
 
 ```lisp
-(setq flx-ido-threshhold 1000)
+(setq flx-ido-threshold 1000)
 ```
 
 You can always disable the improved sorting algorithm all together like this:
