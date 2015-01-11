@@ -33,8 +33,8 @@ advised to always run Prelude with the latest Emacs - currently
 - [Enabling additional modules](#enabling-additional-modules)
 - [Running](#running)
 - [Getting to know Prelude](#getting-to-know-prelude)
-	- [Keymap](#keymap)
-		- [Global](#global)
+	- [Global keybindings](#global-keybindings)
+	- [What's included?](#whats-included)
 		- [Prelude Mode](#prelude-mode)
 		- [OSX modifier keys](#osx-modifier-keys)
 		- [Projectile](#projectile)
@@ -253,13 +253,11 @@ which collects some of the additional functionality added by
 Prelude. It also adds an additional keymap that binds many of those
 extensions to keybindings.
 
-### Keymap
-
-#### Global
+#### Global keybindings
 
 Keybinding         | Description
 -------------------|------------------------------------------------------------
-<kbd>C-x \\</kbd>   | `align-regexp`
+<kbd>C-x \\</kbd>  | `align-regexp`
 <kbd>C-+</kbd>     | Increase font size(`text-scale-increase`).
 <kbd>C--</kbd>     | Decrease font size(`text-scale-decrease`).
 <kbd>C-x O</kbd>   | Go back to previous window (the inverse of `other-window` (`C-x o`)).
@@ -270,16 +268,242 @@ Keybinding         | Description
 <kbd>C-x C-m</kbd> | Alias for `M-x`.
 <kbd>M-X</kbd>     | Like `M-x` but limited to commands that are relevant to the active major mode.
 <kbd>C-h A</kbd>   | Run `apropos` (search in all Emacs symbols).
-<kbd>C-h C-m</kbd> | Display key bindings of current major mode and descriptions of every binding.
 <kbd>M-/</kbd>     | Run `hippie-expand` (a replacement for the default `dabbrev-expand`).
 <kbd>C-x C-b</kbd> | Open `ibuffer` (a replacement for the default `buffer-list`).
 <kbd>F11</kbd>     | Make the window full screen.
 <kbd>F12</kbd>     | Toggle the Emacs menu bar.
-<kbd>C-x g</kbd>   | Open Magit's status buffer.
 <kbd>M-Z</kbd>     | Zap up to char.
-<kbd>C-c J</kbd> or <kbd>Super-></kbd>   | Switch between buffers with [`ace-jump-buffer`](https://github.com/waymondo/ace-jump-buffer)
-<kbd>C-=</kbd>     | Run `expand-region` (incremental text selection).
 <kbd>C-a</kbd>     | Run `prelude-move-beginning-of-line`. Read [this](http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/) for details.
+
+### What's included?
+List of included packages in prelude, descriptions are mostly copied
+form original source.
+
+#### Ace jump mode
+A minor mode of Emacs which help you to move the
+cursor within Emacs. You can move your cursor to **ANY** position (
+across window and frame ) in emacs by using only **3 times key
+press**.
+
+For keybindings refer to [Key-chords](#key-chords) section
+
+[[Github](https://github.com/winterTTr/ace-jump-mode)] [[Demo](http://emacsrocks.com/e10.html)]
+
+#### Ace jump buffer
+An extension for `ace-jump-mode` and the native `bs` buffer menu
+that lets you hop to Emacs buffers in two key strokes.
+
+Binded to <kbd>C-c J</kbd> and <kbd>Super-></kbd>
+
+[[Github](https://github.com/waymondo/ace-jump-buffer)]
+
+#### Ace window
+Quickly switch windows using `ace-jump-mode`. Also check
+out Xah Lee's article on this subject which suggests another workflow
+[Emacs: Effective Windows Management](http://ergoemacs.org/emacs/emacs_effective_windows_management.html)
+
+Binded to <kbd>Super-w</kbd>
+
+[[Github](https://github.com/abo-abo/ace-window)] [[Demo](http://oremacs.com/download/ace-window.gif)]
+
+#### Anzu
+A minor mode which displays current match and total matches information in the mode-line
+in various search modes.
+
+Binded to <kbd>M-%</kbd> and <kbd>C-M-%</kbd>
+
+[[Github](https://github.com/syohex/emacs-anzu)] [[Demo](https://github.com/syohex/emacs-anzu#screenshot)]
+
+#### Browse kill ring
+Are you tired of using the endless keystrokes of `C-y M-y M-y M-y
+...` to get at that bit of text you killed thirty-seven kills ago?
+Ever wish you could just look through everything you've killed
+recently to find out if you killed that piece of text that you think
+you killed, but you're not quite sure? If so, then
+`browse-kill-ring` is the Emacs extension for you.
+
+For keybindings refer to [Key-chords](#key-chords) section
+
+[[Github](https://github.com/browse-kill-ring/browse-kill-ring)]
+
+#### Discover my major
+Discover key bindings and their meaning for the current Emacs major
+mode.
+
+Binded to <kbd>C-h C-m</kbd>
+
+[[Github](https://github.com/steckerhalter/discover-my-major)] [[Demo 1](https://camo.githubusercontent.com/b4e0f7edaad75278e969f33900e208c8dd977b4d/68747470733a2f2f7261772e6769746875622e636f6d2f737465636b657268616c7465722f646973636f7665722d6d792d6d616a6f722f6d61737465722f7061636b6167652d6d656e752d6d6f64652e706e67)] [[Demo 2](https://camo.githubusercontent.com/282f25dcf0292d87f0b0919e66b7227cecd0bea1/68747470733a2f2f7261772e6769746875622e636f6d2f737465636b657268616c7465722f646973636f7665722d6d792d6d616a6f722f6d61737465722f6769742d636f6d6d69742d6d6f64652e706e67)]
+
+#### Diff hl
+Highlights uncommitted changes on the left side of the window, allows you to jump between
+and revert them selectively.
+
+[[Github](https://github.com/dgutov/diff-hl)] [[Demo](https://github.com/dgutov/diff-hl#screenshots)]
+
+#### Diminish
+Lets you fight modeline clutter by removing or abbreviating minor mode
+indicators.
+
+[[Source code](http://www.eskimo.com/~seldon/diminish.el)]
+
+#### Easy kill
+Simple yet powerful killing and marking mode for Emacs.
+
+Keybinding         | Description
+-------------------|------------------------------------------------------------
+<kbd>M-w w</kbd>   | Save word at point
+<kbd>M-w s</kbd>   | Save sexp at point
+<kbd>M-w d</kbd>   | Save defun at point
+<kbd>M-w D</kbd>   | Save current defun name
+<kbd>M-w b</kbd>   | Save `buffer-file-name` or `default-directory`. `-` changes the kill to the directory name, `+` to full name and `0` to basename.
+
+You can expand/shrink selection selection with `+`, `-` or append it to last kill with `@`. For more bindings and documentation visit Github repository.
+
+[[Github](https://github.com/leoliu/easy-kill)]
+
+#### Expand region
+Expand region increases the selected region by semantic units.
+
+Binded to <kbd>C-=</kbd>
+
+[[Github](https://github.com/magnars/expand-region.el)] [[Demo](http://emacsrocks.com/e09.html)]
+
+#### Flycheck
+Flycheck is a modern on-the-fly syntax checking extension for GNU Emacs 24. It uses various syntax checking and linting tools to check the contents of buffers, and reports warnings and errors directly in the buffer, or in an optional error list.
+
+Keybinding         | Description
+-------------------|------------------------------------------------------------
+<kbd>M-g n</kbd> or <kbd>C-c ! n</kbd>  | Next error
+<kbd>M-g p</kbd> or <kbd>C-c ! p</kbd>  | Previous error
+<kbd>C-c ! l</kbd>   | List all errors in the current buffer in a separate buffer.
+
+[[Website](http://www.flycheck.org/en/latest/)] [[Github](https://github.com/flycheck/flycheck)] [[Demo](https://raw.githubusercontent.com/flycheck/flycheck/master/doc/images/screencast.gif)]
+
+#### Gist
+Yet another Emacs paste mode, this one for Gist.
+
+`gist-list` - Lists your gists in a new buffer. Use arrow keys to browse, RET to open one in the other buffer.
+
+`gist-region-or-buffer` - Post either the current region, or if mark is not set, the current buffer as a new paste at ist.github.com. Copies the URL into the kill ring. With a prefix argument, makes a private paste.
+
+[[Github](https://github.com/defunkt/gist.el)]
+
+#### Git time machine
+Step through historic versions of git controlled file using everyone's favourite editor.
+
+Visit a git-controlled file and issue `M-x git-timemachine`
+
+Keybinding         | Description
+-------------------|------------------------------------------------------------
+<kbd>p</kbd>       | Visit previous historic version
+<kbd>n</kbd>       | Visit next historic version
+<kbd>w</kbd>       | Copy the abbreviated hash of the current historic version
+<kbd>q</kbd>       | Exit the time machine
+
+[[Github](https://github.com/pidu/git-timemachine)]
+[[Demo](https://github.com/pidu/git-timemachine/blob/master/timemachine.gif)]
+[[Blog post](http://emacsredux.com/blog/2014/07/22/travel-back-and-forward-in-git-history/)]
+
+#### God Mode (no more RSI)
+This is a global minor mode for entering Emacs commands without modifier keys. It's similar to Vim's separation of commands and insertion mode.
+
+In the example below you can see how much effort is reduced:
+```
+Before: C-p C-k C-n M-^ ) C-j C-y M-r C-x z z M-2 M-g M-g C-x C-s
+After:    p   k   n g ^ )   j   y g r     . .   2   g   g   x   s
+```
+
+Toggle between God mode and non-God mode with <kbd>Super-g</kbd>
+
+[[Github](https://github.com/chrisdone/god-mode)] [[Blog post from auther](http://chrisdone.com/posts/god-mode)]
+
+#### Guru mode
+Learn to use Emacs the way it was meant to be used (the Emacs guru way). Guru mode disables some common keybindings and suggests the use of the established Emacs alternatives instead. For more info take a look at [Warnings on arrow navigation in editor buffers](https://github.com/bbatsov/prelude#warnings-on-arrow-navigation-in-editor-buffers)
+
+[[Github](https://github.com/bbatsov/guru-mode)] [[Demo](http://batsov.com/images/articles/guru-mode.png)] [[Blog post from auther](http://batsov.com/articles/2012/09/09/guru-mode/)]
+
+#### Projectile
+Projectile is a project interaction library for Emacs and provides easy project management and navigation.
+Here's **some** of functionality provided by Projectile (for more info and binding please visit the original repository):
+
+Keybinding         | Description
+-------------------|------------------------------------------------------------
+<kbd>C-c p f</kbd> | Display a list of all files in the project. With a prefix argument it will clear the cache first.
+<kbd>C-c p d</kbd> | Display a list of all directories in the project. With a prefix argument it will clear the cache first.
+<kbd>C-c p T</kbd> | Display a list of all test files(specs, features, etc) in the project.
+<kbd>C-c p s g</kbd> | Run grep on the files in the project.
+<kbd>M-- C-c p s g</kbd> | Run grep on `projectile-grep-default-files` in the project.
+<kbd>C-c p b</kbd> | Display a list of all project buffers currently open.
+<kbd>C-c p o</kbd> | Runs `multi-occur` on all project buffers currently open.
+<kbd>C-c p r</kbd> | Runs interactive query-replace on all files in the projects.
+<kbd>C-c p R</kbd> | Regenerates the projects `TAGS` file.
+<kbd>C-c p k</kbd> | Kills all project buffers.
+<kbd>C-c p e</kbd> | Shows a list of recently visited project files.
+<kbd>C-c p s s</kbd> | Runs `ag` on the project. Requires the presence of `ag.el`.
+<kbd>C-c p c</kbd> | Runs a standard compilation command for your type of project.
+<kbd>C-c p P</kbd> | Runs a standard test command for your type of project.
+<kbd>C-c p p</kbd> | Display a list of known projects you can switch to.
+
+Prelude adds an extra keymap prefix `S-p` (`S` stands for `Super`), so you can use `S-p` instead of `C-c p`.
+
+If you ever forget any of Projectile's keybindings just do a:
+
+<kbd>C-c p C-h</kbd>
+
+[[Github](https://github.com/bbatsov/projectile)] [[Demo](https://tuhdo.github.io/static/helm-projectile/helm-projectile-find-files-1.gif)] [[Exploring large projects with Projectile and Helm Projectile](https://tuhdo.github.io/helm-projectile.html)]
+
+#### Magit
+Magit is an interface to the version control system Git, implemented as an Emacs extension.
+
+Keybinding           | Description
+---------------------|------------------------------------------------------------
+<kbd>C-x g</kbd>     | Open Magit's status buffer.
+<kbd>Super-m m</kbd> | Magit status
+<kbd>Super-m l</kbd> | Magit log
+<kbd>Super-m f</kbd> | Magit file log
+<kbd>Super-m b</kbd> | Magit blame mode
+
+[[Website](https://magit.github.io/)] [[Github](https://github.com/magit/magit)] [[Demo](http://www.masteringemacs.org/static/uploads/Screenshot-from-2013-12-06-114511.png)] [[Magit User Manual](https://magit.github.io/master/magit.html)] [[An introduction to Magit](http://www.masteringemacs.org/article/introduction-magit-emacs-mode-git)]
+
+#### Move text
+It allows you to move the current line up/down, if a region is marked, it will move the region instead.
+
+Keybinding           | Description
+---------------------|------------------------------------------------------------
+<kbd>C-S-up</kbd> or <kbd>M-S-up</kbd> | Move the current line or region up.
+<kbd>C-S-down</kbd> or <kbd>M-S-down</kbd>| Move the current line or region down.
+
+[[Source code](http://www.emacswiki.org/emacs/move-text.el)]
+
+#### Operate on number
+Manipulate integer at point.
+
+Keybinding           | Description
+---------------------|------------------------------------------------------------
+<kbd>C-c . +</kbd> | Increment integer at point. Default is +1.
+<kbd>C-c . -</kbd> | Decrement integer at point. Default is -1.
+<kbd>C-c . *</kbd> | Multiply integer at point. Default is *2.
+<kbd>C-c . /</kbd> | Divide integer at point. Default is /2.
+<kbd>C-c . \\</kbd> | Modulo integer at point. Default is modulo 2.
+<kbd>C-c . ^</kbd> | Power to the integer at point. Default is ^2.
+<kbd>C-c . <</kbd> | Left-shift integer at point. Default is 1 position to the left.
+<kbd>C-c . ></kbd> | Right-shift integer at point. Default is 1 position to the right.
+<kbd>C-c . #</kbd> | Convert integer at point to specified base. Default is 10.
+<kbd>C-c . %</kbd> | Replace integer at point with another specified integer.
+<kbd>C-c . '</kbd> | Perform arithmetic operations on integer at point. User specifies the operator.
+
+[[Github](https://github.com/knu/operate-on-number.el)]
+
+#### Smartparens
+Smartparens is minor mode for Emacs that *deals with parens pairs and tries to be smart about it*. It started as a unification effort to combine functionality of several existing packages in a single, compatible and extensible way to deal with parentheses, delimiters, tags and the like. Some of these packages include [autopair](https://github.com/capitaomorte/autopair), [textmate](http://code.google.com/p/emacs-textmate/), [wrap-region](https://github.com/rejeep/wrap-region), [electric-pair-mode](http://www.emacswiki.org/emacs/ElectricPair), [paredit](http://emacswiki.org/emacs/ParEdit) and others. With the basic features found in other packages it also brings many improvements as well as completely new features. [Here's](https://github.com/Fuco1/smartparens/wiki#what-is-this-package-about?) a highlight of some features.
+
+[[Github](https://github.com/Fuco1/smartparens)] [[Documentation](https://github.com/Fuco1/smartparens/wiki)] [[Video introduction](https://www.youtube.com/watch?v=ykjRUr7FgoI&list=PLP6Xwp2WTft7rAMgVPOTI2OE_PQlKGPy7)] [[Demo](http://emacsredux.com/images/articles/show-smartparens-mode.gif)]
+
+#### Undo tree
+See Emacs undo history as tree and move between branches. This package makes easier to [undo in region](https://github.com/emacsmirror/undo-tree/blob/master/undo-tree.el#L593). Also saves undo history persistently.
+For keybindings refer to [Key-chords](#key-chords) section.
+
+[[Github](https://github.com/emacsmirror/undo-tree)] [[Demo](http://www.emacswiki.org/pics/static/UndoTreeScreenshot)]
 
 #### Prelude Mode
 
@@ -293,8 +517,6 @@ Keybinding         | Description
 <kbd>C-c U</kbd>   | Search in Duckduckgo for the thing under point (or an interactive query).
 <kbd>C-S-RET</kbd> or <kbd>Super-o</kbd> | Insert an empty line above the current line and indent it properly.
 <kbd>S-RET</kbd> or <kbd>M-o</kbd> | Insert an empty line and indent it properly (as in most IDEs).
-<kbd>C-S-up</kbd> or <kbd>M-S-up</kbd> | Move the current line or region up.
-<kbd>C-S-down</kbd> or <kbd>M-S-down</kbd>| Move the current line or region down.
 <kbd>C-c n</kbd> | Fix indentation in buffer and strip whitespace.
 <kbd>C-c f</kbd> | Open recently visited file.
 <kbd>C-M-\\</kbd> | Indent region (if selected) or the entire buffer.
@@ -310,25 +532,9 @@ Keybinding         | Description
 <kbd>C-c TAB</kbd> | Indent and copy region to clipboard
 <kbd>C-c I</kbd> | Open user's init file.
 <kbd>C-c S</kbd> | Open shell's init file.
-<kbd>C-c . +</kbd> | Increment integer at point. Default is +1.
-<kbd>C-c . -</kbd> | Decrement integer at point. Default is -1.
-<kbd>C-c . *</kbd> | Multiply integer at point. Default is *2.
-<kbd>C-c . /</kbd> | Divide integer at point. Default is /2.
-<kbd>C-c . \\</kbd> | Modulo integer at point. Default is modulo 2.
-<kbd>C-c . ^</kbd> | Power to the integer at point. Default is ^2.
-<kbd>C-c . <</kbd> | Left-shift integer at point. Default is 1 position to the left.
-<kbd>C-c . ></kbd> | Right-shift integer at point. Default is 1 position to the right.
-<kbd>C-c . #</kbd> | Convert integer at point to specified base. Default is 10.
-<kbd>C-c . %</kbd> | Replace integer at point with another specified integer.
-<kbd>C-c . '</kbd> | Perform arithmetic operations on integer at point. User specifies the operator.
-<kbd>Super-g</kbd> | Toggle between God mode and non-God mode
 <kbd>Super-r</kbd> | Recent files
 <kbd>Super-j</kbd> | Join lines
 <kbd>Super-k</kbd> | Kill whole line
-<kbd>Super-m m</kbd> | Magit status
-<kbd>Super-m l</kbd> | Magit log
-<kbd>Super-m f</kbd> | Magit file log
-<kbd>Super-m b</kbd> | Magit blame mode
 
 **Note**: For various arithmetic operations, the prefix `C-c .` only needs to be pressed once for the first operation.
 For subsequent operations, only the appropriate operations (i.e. `+`, `-`, `*`, `/`... needs to be pressed).
@@ -345,40 +551,6 @@ If you want to swap them add this to your personal config:
 ```
 
 You can also temporarily swap them with `C-c w` (`M-x prelude-swap-meta-and-super`).
-
-#### Projectile
-
-Here's a list of functionality provided by [Projectile](https://github.com/bbatsov/projectile):
-
-Keybinding         | Description
--------------------|------------------------------------------------------------
-<kbd>C-c p f</kbd> | Display a list of all files in the project. With a prefix argument it will clear the cache first.
-<kbd>C-c p d</kbd> | Display a list of all directories in the project. With a prefix argument it will clear the cache first.
-<kbd>C-c p T</kbd> | Display a list of all test files(specs, features, etc) in the project.
-<kbd>C-c p s g</kbd> | Run grep on the files in the project.
-<kbd>M-- C-c p s g</kbd> | Run grep on `projectile-grep-default-files` in the project.
-<kbd>C-c p b</kbd> | Display a list of all project buffers currently open.
-<kbd>C-c p o</kbd> | Runs `multi-occur` on all project buffers currently open.
-<kbd>C-c p r</kbd> | Runs interactive query-replace on all files in the projects.
-<kbd>C-c p i</kbd> | Invalidates the project cache (if existing).
-<kbd>C-c p R</kbd> | Regenerates the projects `TAGS` file.
-<kbd>C-c p k</kbd> | Kills all project buffers.
-<kbd>C-c p D</kbd> | Opens the root of the project in `dired`.
-<kbd>C-c p e</kbd> | Shows a list of recently visited project files.
-<kbd>C-c p s a</kbd> | Runs `ack` on the project. Requires the presence of `ack-and-a-half`.
-<kbd>C-c p s s</kbd> | Runs `ag` on the project. Requires the presence of `ag.el`.
-<kbd>C-c p a</kbd> | Runs `ack` on the project. Requires the presence of `ack-and-a-half`.
-<kbd>C-c p c</kbd> | Runs a standard compilation command for your type of project.
-<kbd>C-c p P</kbd> | Runs a standard test command for your type of project.
-<kbd>C-c p z</kbd> | Adds the currently visited to the cache.
-<kbd>C-c p p</kbd> | Display a list of known projects you can switch to.
-
-Prelude adds an extra keymap prefix `S-p` (`S` stands for
-`Super`), so you can use `S-p` instead of `C-c p`.
-
-If you ever forget any of Projectile's keybindings just do a:
-
-<kbd>C-c p C-h</kbd>
 
 #### Helm
 
@@ -419,7 +591,6 @@ You can always reactivate Helm with `(prelude-global-helm-global-mode-on)`.
 **NOTICE**: In `helm-M-x`, you have to pass prefix argument *AFTER* you run `helm-M-x`,
 because your prefix argument will be displayed in the modeline when in `helm-M-x`
 buffer. Passing prefix argument **BEFORE** =helm-M-x= **has no effect**.
-
 
 #### Key-chords
 
