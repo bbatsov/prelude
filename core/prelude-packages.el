@@ -52,7 +52,6 @@
     diff-hl
     diminish
     easy-kill
-    elisp-slime-nav
     epl
     expand-region
     flycheck
