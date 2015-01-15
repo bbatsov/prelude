@@ -35,7 +35,7 @@
 
 (require 'prelude-lisp)
 
-(prelude-require-packages '(elisp-slime-nav))
+(prelude-require-packages '(elisp-slime-nav rainbow-mode))
 
 (defun prelude-recompile-elc-on-save ()
   "Recompile your elc when saving an elisp file."
