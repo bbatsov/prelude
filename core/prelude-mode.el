@@ -87,8 +87,7 @@
                         ("Files"
                          ["Open with..." prelude-open-with]
                          ["Delete file and buffer" prelude-delete-file-and-buffer]
-                         ["Rename buffer and file" prelude-rename-buffer-and-file]
-                         ["Copy file name to clipboard" prelude-copy-file-name-to-clipboard])
+                         ["Rename buffer and file" prelude-rename-buffer-and-file])
 
                         ("Buffers"
                          ["Clean up buffer or region" prelude-cleanup-buffer-or-region]
