@@ -75,7 +75,7 @@
   "A list of packages to ensure are installed at launch.")
 
 (when (version<= "24.4" emacs-version)
-  (add-to-list 'prelude-packages '(magit-filenotify)))
+  (add-to-list 'prelude-packages 'magit-filenotify))
 
 (defun prelude-packages-installed-p ()
   "Check if all packages in `prelude-packages' are installed."
