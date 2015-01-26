@@ -477,6 +477,9 @@ With a prefix argument ARG, find the `user-init-file' instead."
      (interactive "P")
      (sp-wrap-with-pair ,s)))
 
+;; needed for prelude-goto-symbol
+(require 'imenu)
+
 (defun prelude-goto-symbol (&optional symbol-list)
   "Refresh imenu and jump to a place in the buffer using Ido."
   (interactive)
