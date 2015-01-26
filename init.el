@@ -39,12 +39,14 @@
 (message "Prelude is powering up... Be patient, Master %s!" current-user)
 
 (when (version< emacs-version "24.1")
-  (let (fallbackfile versionmessage)
-    (setq fallbackfile (concat
-			(file-name-as-directory
-			 (concat (file-name-directory load-file-name)
-				 "fallback")) "init.el"))
-    (setq versionmessage (format "Prelude requires at least GNU Emacs 24.1, but you're running %s" emacs-version))
+  (let ((fallbackfile (concat
+                       (file-name-as-directory
+                        (concat (file-name-directory load-file-name)
+                                "fallback")) "init.el"))
+        (versionmessage
+         (format
+          "Prelude requires at least GNU Emacs 24.1, but you're running %s"
+          emacs-version)))
     (if (file-readable-p fallbackfile)
 	(progn
 	  (message (concat versionmessage
