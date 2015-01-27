@@ -113,8 +113,10 @@ by Prelude.")
 (message "Loading Prelude's modules...")
 
 ;; the modules
-(when (file-exists-p prelude-modules-file)
-  (load prelude-modules-file))
+(if (file-exists-p prelude-modules-file)
+    (load prelude-modules-file)
+  (message "Missing modules file %s" prelude-modules-file)
+  (message "You can get started by copying the bundled example file"))
 
 ;; config changes made through the customize UI will be store here
 (setq custom-file (expand-file-name "custom.el" prelude-personal-dir))
