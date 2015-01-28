@@ -1,6 +1,15 @@
 ;; This is a catch all file for emacs configuration.
 ;; If there isn't a specific area for it, then it gets blopped in
-;; here.
+;; here. You might find what you're looking for at:
+
+;; frontside/javascript.el
+;; frontside/ruby.el
+;; frontside/web.el
+
+
+(custom-set-variables
+ '(projectile-switch-project-action (quote projectile-dired)))
+
 
 (prelude-require-packages '(pcre2el))
 
