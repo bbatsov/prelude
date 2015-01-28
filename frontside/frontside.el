@@ -2,7 +2,7 @@
 ;; If there isn't a specific area for it, then it gets blopped in
 ;; here.
 
-(prelude-require-packages '(bundler rspec-mode mocha-snippets pcre2el json-mode))
+(prelude-require-packages '(pcre2el))
 
 ;;(disable-theme 'zenburn)
 (prelude-require-packages '(frame-fns frame-cmds))
