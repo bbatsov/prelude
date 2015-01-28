@@ -72,7 +72,8 @@
                             wgrep-ag
                             pcre2el
                             wgrep-helm
-                            clj-refactor))
+                            clj-refactor
+                            perspective))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
@@ -94,11 +95,17 @@
 ;; PCRE Regexes
 (rxt-global-mode)
 
-;;; Whitespace Mode
-;; Disable whitespace-mode in certain other major modes
-(add-hook 'org-mode-hook (lambda () (whitespace-mode -1)))
-(add-hook 'markdown-mode-hook (lambda () (whitespace-mode -1)))
-(add-hook 'rst-mode-hook (lambda () (whitespace-mode -1)))
+;;; Whitespace and Auto-Fill
+;; Disable whitespace-mode and enable auto-fill in prose-writing major modes
+
+(defun text-settings ()
+  (whitespace-mode -1)
+  (abbrev-mode -1)
+  (turn-on-auto-fill))
+
+(add-hook 'org-mode-hook 'text-settings)
+(add-hook 'markdown-mode-hook 'text-settings)
+(add-hook 'rst-mode-hook 'text-settings)
 
 ;;; Tweak Mac Keyboard Behavior
 (setq mac-command-modifier 'meta)
@@ -107,7 +114,6 @@
 ;;; Projectile
 (setq projectile-remember-window-configs t)
 (setq projectile-switch-project-action 'projectile-dired)
-(global-set-key (kbd "s-p") 'projectile-switch-project)
 
 ;;; Twittering-mode
 (setq twittering-icon-mode t)
