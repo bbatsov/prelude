@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: nexus-uri
+# key: nexus
+# binding: direct-keybinding
+# --
+"http://nexus.prod.urbanairship.com/service/local/artifact/maven/redirect?r=releases&g=com.urbanairship.$1&a=$1$2&v=$3&c=shaded&e=jar"$0
