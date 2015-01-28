@@ -1,6 +1,24 @@
 [![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
 [![Gratipay](http://img.shields.io/gratipay/bbatsov.svg)](https://gratipay.com/bbatsov/)
 
+Frontside Emacs
+=============
+
+Frontside emacs is the emacs configuration used by
+[The Frontside](http://frontside.io). It is a fork of
+[Emacs Prelude](https://github.com/bbatsov/prelude) that has been
+lovingly customized to our style of development.
+
+Customizations are found in `frontside/*.el` and are organized by
+functionality. For example, our javascript configuration
+
+
+#### Install
+
+From your home directory: `git clone git@github.com:thefrontside/.emacs.d`
+
+
+
 Emacs Prelude
 =============
 
