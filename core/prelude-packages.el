@@ -1,6 +1,6 @@
 ;;; prelude-packages.el --- Emacs Prelude: default package selection.
 ;;
-;; Copyright © 2011-2013 Bozhidar Batsov
+;; Copyright © 2011-2014 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -45,7 +45,6 @@
   '(ace-jump-mode
     ace-jump-buffer
     ace-window
-    ack-and-a-half
     anzu
     browse-kill-ring
     dash
@@ -53,7 +52,6 @@
     diff-hl
     diminish
     easy-kill
-    elisp-slime-nav
     epl
     expand-region
     flycheck
@@ -69,7 +67,6 @@
     magit
     move-text
     operate-on-number
-    rainbow-mode
     smartparens
     smartrep
     undo-tree
@@ -152,6 +149,10 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.ml\\'" tuareg tuareg-mode)
     ("\\.pp\\'" puppet-mode puppet-mode)
     ("\\.php\\'" php-mode php-mode)
+    ("\\.proto\\'" protobuf-mode protobuf-mode)
+    ("\\.pyd\\'" cython-mode cython-mode)
+    ("\\.pyi\\'" cython-mode cython-mode)
+    ("\\.pyx\\'" cython-mode cython-mode)
     ("PKGBUILD\\'" pkgbuild-mode pkgbuild-mode)
     ("\\.rs\\'" rust-mode rust-mode)
     ("\\.sass\\'" sass-mode sass-mode)

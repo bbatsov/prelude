@@ -1,6 +1,6 @@
 ;;; prelude-common-lisp.el --- Emacs Prelude: lisp-mode and SLIME config.
 ;;
-;; Copyright © 2011-2013 Bozhidar Batsov
+;; Copyright © 2011-2014 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -34,18 +34,13 @@
 
 (require 'prelude-lisp)
 
+(prelude-require-package 'slime)
+
 ;; the SBCL configuration file is in Common Lisp
 (add-to-list 'auto-mode-alist '("\\.sbclrc\\'" . lisp-mode))
 
 ;; Open files with .cl extension in lisp-mode
 (add-to-list 'auto-mode-alist '("\\.cl\\'" . lisp-mode))
-
-;; Common Lisp support depends on SLIME being installed with Quicklisp
-(cond ((file-exists-p (expand-file-name "~/quicklisp/slime-helper.el"))
-       (load (expand-file-name "~/quicklisp/slime-helper.el")))
-      ((file-exists-p (expand-file-name "~/.quicklisp/slime-helper.el"))
-       (load (expand-file-name "~/.quicklisp/slime-helper.el")))
-      (t (message "%s" "SLIME is not installed. Use Quicklisp to install it.")))
 
 ;; a list of alternative Common Lisp implementations that can be
 ;; used with SLIME. Note that their presence render

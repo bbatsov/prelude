@@ -13,6 +13,7 @@ following links.
 -   Emacs-Lisp
 -   ERC
 -   Erlang
+-   Elixir
 -   Haskell
 -   JS
 -   Latex

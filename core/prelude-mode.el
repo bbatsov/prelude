@@ -1,6 +1,6 @@
 ;;; prelude-mode.el --- Emacs Prelude: minor mode
 ;;
-;; Copyright © 2011-2013 Bozhidar Batsov
+;; Copyright © 2011-2014 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -87,8 +87,7 @@
                         ("Files"
                          ["Open with..." prelude-open-with]
                          ["Delete file and buffer" prelude-delete-file-and-buffer]
-                         ["Rename buffer and file" prelude-rename-buffer-and-file]
-                         ["Copy file name to clipboard" prelude-copy-file-name-to-clipboard])
+                         ["Rename buffer and file" prelude-rename-buffer-and-file])
 
                         ("Buffers"
                          ["Clean up buffer or region" prelude-cleanup-buffer-or-region]

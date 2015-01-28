@@ -1,17 +1,16 @@
-;;; prelude-scss.el --- Emacs Prelude: scss support
+;;; prelude-elixir.el --- Emacs Prelude: Elixir programming support.
 ;;
-;; Copyright © 2011-2014 Bozhidar Batsov
+;; Copyright © 2014 Samuel Tonini
 ;;
-;; Author: Bozhidar Batsov <bozhidar@batsov.com>
-;; URL: http://www.batsov.com/emacs-prelude
+;; Author: Samuel Tonini <tonini.samuel@gmail.com>
 ;; Version: 1.0.0
-;; Keywords: convenience
+;; Keywords: convenience elixir
 
 ;; This file is not part of GNU Emacs.
 
 ;;; Commentary:
 
-;; Some basic configuration for scss-mode.
+;; Some basic configuration for Elixir development.
 
 ;;; License:
 
@@ -32,18 +31,10 @@
 
 ;;; Code:
 
-(require 'prelude-css)
-(prelude-require-packages '(scss-mode))
+(require 'prelude-programming)
 
-;; turn off annoying auto-compile on save
-(setq scss-compile-at-save nil)
+(prelude-require-packages '(elixir-mode alchemist))
 
-(defun prelude-scss-mode-defaults ()
-  (prelude-css-mode-defaults))
+(provide 'prelude-elixir)
 
-(setq prelude-scss-mode-hook 'prelude-scss-mode-defaults)
-
-(add-hook 'scss-mode-hook (lambda () (run-hooks 'prelude-scss-mode-hook)))
-
-(provide 'prelude-scss)
-;;; prelude-scss.el ends here
+;;; prelude-elixir.el ends here
