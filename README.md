@@ -10,7 +10,8 @@ Frontside emacs is the emacs configuration used by
 lovingly customized to our style of development.
 
 Customizations are found in `frontside/*.el` and are organized by
-functionality. For example, our javascript configuration
+functionality. For example, our javascript configuration is found in
+`frontside/javascript.el`
 
 
 #### Install
