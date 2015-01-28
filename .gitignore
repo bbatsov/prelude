@@ -24,3 +24,7 @@ session*
 tramp
 /var/pcache
 /srecode-map.el
+/jabber-history/
+/jabber-avatar-cache/
+/ac-comphist.dat
+/.python-environments/
