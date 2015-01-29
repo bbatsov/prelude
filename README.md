@@ -15,6 +15,8 @@ functionality. For example, our javascript configuration is found in
 
 From your home directory: `git clone git@github.com:thefrontside/.emacs.d`
 
+(and now back to your regularly scheduled Prelude README...)
+
 
 [![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
 [![Gratipay](http://img.shields.io/gratipay/bbatsov.svg)](https://gratipay.com/bbatsov/)
