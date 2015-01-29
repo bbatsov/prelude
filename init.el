@@ -50,6 +50,16 @@
   "The home of Prelude's core functionality.")
 (defvar prelude-modules-dir (expand-file-name  "modules" prelude-dir)
   "This directory houses all of the built-in Prelude modules.")
+(defvar prelude-frontside-dir (expand-file-name "frontside" prelude-dir)
+  "This directory houses all Frontside specific configurations.")
+(defvar prelude-frontside-personal-dir (expand-file-name current-user prelude-frontside-dir)
+  "This directory contains all Frontside user specific information.
+
+Users can put their personal configurations into this directory, and it will
+only be evaluated when Emacs is initializing on their machine.  So if your
+username is 'bilbo4', then all of the elisp files found in the directory
+'frontside/bilbo4' will be loaded and evaluated.  If your username is anything
+else, these files will be ignored.")
 (defvar prelude-personal-dir (expand-file-name "personal" prelude-dir)
   "This directory is for your personal configuration.
 
@@ -122,9 +132,13 @@ by Prelude.")
 (setq custom-file (expand-file-name "custom.el" prelude-personal-dir))
 
 ;;; the frontside configuration
-(let ((frontside-dir (expand-file-name "frontside/" user-emacs-directory)))
-  (message "Loading Frontside configuration files in %s..." frontside-dir)
-  (mapc 'load (directory-files frontside-dir 't "^[^#.].*el$")))
+(message "Loading Frontside configuration files in %s..." prelude-frontside-dir)
+(mapc 'load (directory-files prelude-frontside-dir 't "^[^#.].*el$"))
+
+;;; frontside personal configuration
+(when (file-exists-p prelude-frontside-personal-dir)
+  (message "Loading Frontside personal configuration files in %s..." prelude-frontside-personal-dir)
+  (mapc 'load (directory-files prelude-frontside-personal-dir 't "^[^#.].*el$")))
 
 ;; load the personal settings (this includes `custom-file')
 (when (file-exists-p prelude-personal-dir)
