@@ -7,4 +7,6 @@
 
 (custom-set-variables
  ;; don't indent like crazy.
- '(ruby-deep-arglist nil))
+ '(ruby-deep-arglist nil)
+ ;; who uses rake to run rspec. honestly
+ '(rspec-use-rake-when-possible nil))
