@@ -38,25 +38,25 @@
 
 (message "Prelude is powering up... Be patient, Master %s!" current-user)
 
+;; Check for required version. If Emacs version is not high enough looking
+;; for a file 'fallback/init.el' and execute it as a fallback
 (when (version< emacs-version "24.1")
-  (let ((fallbackfile (concat
+  (let ((fallback-file (concat
                        (file-name-as-directory
                         (concat (file-name-directory load-file-name)
-                                "fallback")) "init.el"))
-        (versionmessage
+                                "fallback"))
+                       "init.el"))
+        (version-message
          (format
           "Prelude requires at least GNU Emacs 24.1, but you're running %s"
           emacs-version)))
-    (if (file-readable-p fallbackfile)
-	(progn
-	  (message (concat versionmessage
-			   (format ". Executing fallback %s" fallbackfile)))
-	  (load fallbackfile)
-	  (error "Fallback to old init.el done"))
-      (error versionmessage)
-      )
-    )
-  )
+    (if (file-readable-p fallback-file)
+        (progn
+          (message (concat version-message
+                           (format ". Executing fallback %s" fallback-file)))
+          (load fallback-file)
+          (error "Fallback to old init.el done"))
+      (error version-message))))
 
 ;; Always load newest byte code
 (setq load-prefer-newer t)
