@@ -11,7 +11,7 @@
  '(projectile-switch-project-action (quote projectile-dired)))
 
 
-(prelude-require-packages '(pcre2el))
+(prelude-require-packages '(pcre2el ag))
 
 ;;(disable-theme 'zenburn)
 (prelude-require-packages '(frame-fns frame-cmds))
