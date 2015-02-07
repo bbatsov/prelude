@@ -71,7 +71,8 @@
     smartrep
     undo-tree
     volatile-highlights
-    zenburn-theme)
+    zenburn-theme
+    zop-to-char)
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
