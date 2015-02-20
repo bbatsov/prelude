@@ -6,10 +6,10 @@
 ;; that much extra information.
 ;;
 ;; see:
-;;  https://github.com/Bruce-Connor/smart-mode-line
+;;  https://github.com/Bruce-Connor/smart-mode-line/
 ;;  https://github.com/Bruce-Connor/rich-minority
 (prelude-require-packages '(smart-mode-line rich-minority pcre2el))
 (sml/setup)
 
 (custom-set-variables
- '(rm-blacklist (rxt-pcre-to-elisp  "(guru|drag|yas|FlyC|company|ws|Pre|Sp/s)")))
+ '(rm-blacklist (rxt-pcre-to-elisp  "(guru|drag|yas|FlyC|company|ws|Pre|Sp/s|SP|Projectile|MRev)")))
