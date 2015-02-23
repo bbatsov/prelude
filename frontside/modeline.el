@@ -9,7 +9,9 @@
 ;;  https://github.com/Bruce-Connor/smart-mode-line/
 ;;  https://github.com/Bruce-Connor/rich-minority
 (prelude-require-packages '(smart-mode-line rich-minority pcre2el))
+(setq sml/no-confirm-load-theme t)
 (sml/setup)
 
-(custom-set-variables
- '(rm-blacklist (rxt-pcre-to-elisp  "(guru|drag|yas|FlyC|company|ws|Pre|Sp/s|SP|Projectile|MRev)")))
+(add-hook 'after-init-hook (lambda ()
+                             (custom-set-variables
+                              '(rm-blacklist (rxt-pcre-to-elisp  "(guru|drag|yas|FlyC|company|ws|Pre|Sp/s|SP|Projectile|MRev)")))))
