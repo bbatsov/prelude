@@ -76,9 +76,9 @@
 
 (define-key 'help-command (kbd "C-i") 'info-display-manual)
 
-;; a complement to the zap-to-char command, that doesn't eat up the target character
-(autoload 'zap-up-to-char "misc" "Kill up to, but not including ARGth occurrence of CHAR.")
-(global-set-key (kbd "M-Z") 'zap-up-to-char)
+;; replace zap-to-char functionaity with the more powerful zop-to-char
+(global-set-key (kbd "M-z") 'zop-up-to-char)
+(global-set-key (kbd "M-Z") 'zop-to-char)
 
 ;; kill lines backward
 (global-set-key (kbd "C-<backspace>") (lambda ()
