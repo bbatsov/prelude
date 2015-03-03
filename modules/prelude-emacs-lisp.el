@@ -1,6 +1,6 @@
 ;;; prelude-emacs-lisp.el --- Emacs Prelude: Nice config for Elisp programming.
 ;;
-;; Copyright © 2011-2014 Bozhidar Batsov
+;; Copyright © 2011-2015 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
