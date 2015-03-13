@@ -298,6 +298,7 @@ The body of the advice is in BODY."
   (interactive
    (list (not (region-active-p)))))
 
+(require 'tabify)
 (defmacro with-region-or-buffer (func)
   "When called with no active region, call FUNC on current buffer."
   `(defadvice ,func (before with-region-or-buffer activate compile)

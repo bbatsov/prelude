@@ -285,6 +285,7 @@ there's a region, all lines that region covers will be duplicated."
   (interactive)
   (byte-recompile-directory prelude-dir 0))
 
+(require 'ido)
 (defun prelude-sudo-edit (&optional arg)
   "Edit currently visited file as root.
 
