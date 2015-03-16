@@ -74,7 +74,8 @@
 (erc-truncate-mode +1)
 
 ;; enable spell checking
-(erc-spelling-mode 1)
+(when prelude-flyspell
+  (erc-spelling-mode 1))
 ;; set different dictionaries by different servers/channels
 ;;(setq erc-spelling-dictionaries '(("#emacs" "american")))
 
