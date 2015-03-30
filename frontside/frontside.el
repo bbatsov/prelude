@@ -42,8 +42,9 @@
 ;; make the default search use Ag
 (define-key projectile-mode-map (kbd "s-g") 'projectile-ag)
 
-(define-key prelude-mode-map (kbd "s-/") 'comment-or-uncomment-region)
-(define-key prelude-mode-map (kbd "C-c /") 'comment-or-uncomment-region)
+(prelude-require-package 'comment-dwim-2)
+(define-key prelude-mode-map (kbd "s-/") 'comment-dwim-2)
+(define-key prelude-mode-map (kbd "C-c /") 'comment-dwim-2)
 
 ;; smart parens configuration
 (require 'smartparens-config)
