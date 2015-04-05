@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: comment-block
+# key: /**
+# binding: direct-keybinding
+# expand-env: ((yas-indent-line 'fixed))
+# --
+/**
+ * $0
+ */
