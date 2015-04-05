@@ -18,10 +18,15 @@
 (venv-initialize-interactive-shells)
 (setq venv-location "~/.python_virtualenvs/")
 
+;; Not sure I dig Jedi at the moment. Can't figure out how to get it
+;; to place nice with my themes, so it's a bit eye-scalding. Will
+;; re-enable later if I figure out the visuals.
 ;; Jedi-Mode
-(add-hook 'python-mode-hook (lambda () (company-mode -1)))
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
+;; (require 'jedi)
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:complete-on-dot t)
+;; (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
+
 
 ;; Virtualenvs
 (add-hook 'python-mode-hook
