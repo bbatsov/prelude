@@ -180,7 +180,13 @@
 
 ;;; Clojure
 ;; Enable refactoring support
-(cljr-add-keybindings-with-prefix "C-c C-m")
+(require 'clj-refactor)
+(add-hook 'clojure-mode-hook
+          (lambda ()
+            (clj-refactor-mode 1)
+            (add-hook 'cider-connected-hook #'cljr-update-artifact-cache)
+            (add-hook 'cider-connected-hook #'cljr-warm-ast-cache)
+            (cljr-add-keybindings-with-prefix "s-r")))
 
 ;;; Scala
 ;; Ensime
