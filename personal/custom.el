@@ -74,7 +74,8 @@
                             pcre2el
                             wgrep-helm
                             clj-refactor
-                            perspective))
+                            perspective
+                            column-enforce-mode))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)

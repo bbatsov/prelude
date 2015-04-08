@@ -26,6 +26,8 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook
           (lambda ()
+            (whitespace-mode -1)
+            (column-enforce-mode)
             (if (bound-and-true-p anaconda-mode)
                 (anaconda-mode))
             (setq jedi:complete-on-dot t)
