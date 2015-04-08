@@ -54,6 +54,7 @@
                             floobits
                             sublime-themes
                             company
+                            company-jedi
                             virtualenvwrapper
                             org
                             protobuf-mode
