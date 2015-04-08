@@ -22,11 +22,14 @@
 ;; to place nice with my themes, so it's a bit eye-scalding. Will
 ;; re-enable later if I figure out the visuals.
 ;; Jedi-Mode
-;; (require 'jedi)
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (setq jedi:complete-on-dot t)
-;; (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
-
+(require 'jedi)
+(add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (if (bound-and-true-p anaconda-mode)
+                (anaconda-mode))
+            (setq jedi:complete-on-dot t)
+            (add-to-list 'company-backends 'company-jedi)))
 
 ;; Virtualenvs
 (add-hook 'python-mode-hook
