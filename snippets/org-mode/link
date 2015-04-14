@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: link
+# key: link
+# binding: direct-keybinding
+# --
+[[$1][$2]]$0
