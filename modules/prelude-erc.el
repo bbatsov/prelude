@@ -1,6 +1,6 @@
 ;;; prelude-erc.el --- Emacs Prelude: ERC mode configuration.
 ;;
-;; Copyright © 2011-2014 Bozhidar Batsov
+;; Copyright © 2011-2015 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -74,7 +74,8 @@
 (erc-truncate-mode +1)
 
 ;; enable spell checking
-(erc-spelling-mode 1)
+(when prelude-flyspell
+  (erc-spelling-mode 1))
 ;; set different dictionaries by different servers/channels
 ;;(setq erc-spelling-dictionaries '(("#emacs" "american")))
 
