@@ -105,6 +105,12 @@
   (abbrev-mode -1)
   (turn-on-auto-fill))
 
+;; Don't clean up whitespace in markdown mode only
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (make-local-variable 'prelude-clean-whitespace-on-save)
+            (setq-local prelude-clean-whitespace-on-save nil)))
+
 (add-hook 'org-mode-hook 'text-settings)
 (add-hook 'markdown-mode-hook 'text-settings)
 (add-hook 'rst-mode-hook 'text-settings)
