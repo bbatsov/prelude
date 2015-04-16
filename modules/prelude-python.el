@@ -87,8 +87,8 @@
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
-  (anaconda-mode)
-  (eldoc-mode)
+  (anaconda-mode 1)
+  (eldoc-mode 1)
   (which-function-mode -1)
   (setq-local electric-layout-rules
               '((?: . (lambda ()
