@@ -62,6 +62,7 @@
     god-mode
     grizzl
     guru-mode
+    highlight-symbol
     ov
     projectile
     magit

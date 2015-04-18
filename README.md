@@ -282,6 +282,8 @@ Keybinding         | Description
 <kbd>C-c J</kbd> or <kbd>Super-></kbd>   | Switch between buffers with [`ace-jump-buffer`](https://github.com/waymondo/ace-jump-buffer)
 <kbd>C-=</kbd>     | Run `expand-region` (incremental text selection).
 <kbd>C-a</kbd>     | Run `prelude-move-beginning-of-line`. Read [this](http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/) for details.
+<kbd>M-n</kbd>     | Jump to next highlighting symbol
+<kbd>M-p</kbd>     | Jump to previous highlighting symbol
 
 #### Prelude Mode
 
