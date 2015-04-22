@@ -102,6 +102,9 @@
 ;; PCRE Regexes
 (rxt-global-mode)
 
+;; Magit warnings OFF
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 ;;; Whitespace and Auto-Fill
 ;; Disable whitespace-mode and enable auto-fill in prose-writing major modes
 
@@ -139,6 +142,7 @@
 (add-hook 'go-mode-hook (lambda ()
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
+
 
 ;; COLORS
 (require 'color)
