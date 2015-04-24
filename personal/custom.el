@@ -7,7 +7,7 @@
    ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
  '(custom-safe-themes
    (quote
-    ("ad9fc392386f4859d28fe4ef3803585b51557838dbc072762117adad37e83585" "132ccc75b7fdcd9f5979329620a1151953a8f65efad06b988deed7cba9338eab" "fc6e906a0e6ead5747ab2e7c5838166f7350b958d82e410257aeeb2820e8a07a" "1f3304214265481c56341bcee387ef1abb684e4efbccebca0e120be7b1a13589" default)))
+    ("9122dfb203945f6e84b0de66d11a97de6c9edf28b3b5db772472e4beccc6b3c5" "ad9fc392386f4859d28fe4ef3803585b51557838dbc072762117adad37e83585" "132ccc75b7fdcd9f5979329620a1151953a8f65efad06b988deed7cba9338eab" "fc6e906a0e6ead5747ab2e7c5838166f7350b958d82e410257aeeb2820e8a07a" "1f3304214265481c56341bcee387ef1abb684e4efbccebca0e120be7b1a13589" default)))
  '(fci-rule-color "#383838")
  '(org-agenda-files (quote ("~/Code/astromech/notes.org")))
  '(safe-local-variable-values (quote ((project-venv-name . "mashboard"))))
@@ -38,6 +38,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(company-scrollbar-bg ((t (:background "#303030"))))
+ '(company-scrollbar-fg ((t (:background "#232323"))))
+ '(company-tooltip ((t (:inherit default :background "#1c1c1c"))))
+ '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
+ '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
  '(helm-ff-directory ((t (:background "gray0" :foreground "DarkRed"))))
  '(helm-selection ((t (:background "gray14"))))
  '(helm-source-header ((t (:background "DarkOrange4" :foreground "white" :weight bold :height 1.3 :family "Sans Serif"))))
@@ -54,6 +59,7 @@
                             floobits
                             sublime-themes
                             company
+                            company-jedi
                             virtualenvwrapper
                             org
                             protobuf-mode
@@ -73,7 +79,8 @@
                             pcre2el
                             wgrep-helm
                             clj-refactor
-                            perspective))
+                            perspective
+                            column-enforce-mode))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
@@ -95,6 +102,9 @@
 ;; PCRE Regexes
 (rxt-global-mode)
 
+;; Magit warnings OFF
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 ;;; Whitespace and Auto-Fill
 ;; Disable whitespace-mode and enable auto-fill in prose-writing major modes
 
@@ -102,6 +112,12 @@
   (whitespace-mode -1)
   (abbrev-mode -1)
   (turn-on-auto-fill))
+
+;; Don't clean up whitespace in markdown mode only
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (make-local-variable 'prelude-clean-whitespace-on-save)
+            (setq-local prelude-clean-whitespace-on-save nil)))
 
 (add-hook 'org-mode-hook 'text-settings)
 (add-hook 'markdown-mode-hook 'text-settings)
@@ -126,6 +142,7 @@
 (add-hook 'go-mode-hook (lambda ()
                           (set (make-local-variable 'company-backends) '(company-go))
                           (company-mode)))
+
 
 ;; COLORS
 (require 'color)
@@ -180,7 +197,13 @@
 
 ;;; Clojure
 ;; Enable refactoring support
-(cljr-add-keybindings-with-prefix "C-c C-m")
+(require 'clj-refactor)
+(add-hook 'clojure-mode-hook
+          (lambda ()
+            (clj-refactor-mode 1)
+            (add-hook 'cider-connected-hook #'cljr-update-artifact-cache)
+            (add-hook 'cider-connected-hook #'cljr-warm-ast-cache)
+            (cljr-add-keybindings-with-prefix "s-r")))
 
 ;;; Scala
 ;; Ensime

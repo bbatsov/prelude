@@ -1,6 +1,6 @@
 ;;; prelude-yaml.el --- Emacs Prelude: YAML programming support.
 ;;
-;; Copyright © 2011-2014 Bozhidar Batsov
+;; Copyright © 2011-2015 Bozhidar Batsov
 ;;
 ;; Author: ToBeReplaced
 ;; URL: http://batsov.com/prelude
