@@ -157,9 +157,9 @@
    `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
 
 ;; Not convinced this is helping.
-;; (setq company-idle-delay .3)
+(setq company-idle-delay .4)
 ;; (setq company-minimum-prefix-length 1)
-;; (setq company-tooltip-limit 20)
+(setq company-tooltip-limit 20)
 
 ;;; Go Configs
 ;; Totally re-enable these if you ever do Go again.
