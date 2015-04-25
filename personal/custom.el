@@ -106,8 +106,10 @@
 (setq magit-last-seen-setup-instructions "1.4.0")
 
 ;;; Whitespace and Auto-Fill
-;; Disable whitespace-mode and enable auto-fill in prose-writing major modes
+;; Set auto-fill to 80 characters by default instead of 70
+(setq-default fill-column 80)
 
+;; Disable whitespace-mode and enable auto-fill in prose-writing major modes
 (defun text-settings ()
   (whitespace-mode -1)
   (abbrev-mode -1)
