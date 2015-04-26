@@ -80,7 +80,8 @@
                             wgrep-helm
                             clj-refactor
                             perspective
-                            column-enforce-mode))
+                            column-enforce-mode
+                            smart-mode-line))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
@@ -101,6 +102,9 @@
 
 ;; PCRE Regexes
 (rxt-global-mode)
+
+;;; Smart Mode Line
+(sml/setup)
 
 ;; Magit warnings OFF
 (setq magit-last-seen-setup-instructions "1.4.0")
