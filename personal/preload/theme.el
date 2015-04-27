@@ -1,6 +1,7 @@
 ;;; Color Theme
 (disable-theme 'zenburn)
-(setq prelude-theme 'badger)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(setq prelude-theme 'rhombus)
 
 (provide 'theme)
 ;;; theme.el ends here
