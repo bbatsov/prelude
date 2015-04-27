@@ -80,6 +80,7 @@
                             wgrep-helm
                             clj-refactor
                             perspective
+                            persp-projectile
                             column-enforce-mode
                             smart-mode-line))
 
@@ -105,6 +106,7 @@
 
 ;;; Smart Mode Line
 (sml/setup)
+(which-function-mode -1)
 
 ;; Magit warnings OFF
 (setq magit-last-seen-setup-instructions "1.4.0")
@@ -136,7 +138,9 @@
 ;;; Projectile
 (setq projectile-remember-window-configs t)
 (setq projectile-switch-project-action 'projectile-dired)
-
+(persp-mode)
+(require 'persp-projectile)
+(define-key projectile-mode-map (kbd "C-c p p") 'projectile-persp-switch-project)
 ;;; Twittering-mode
 (setq twittering-icon-mode t)
 (setq twittering-use-master-password t)
