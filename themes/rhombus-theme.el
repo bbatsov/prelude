@@ -70,7 +70,7 @@
 
     ;; Other People's Good Ideas
     ("rhombus-link"           . "#8ACDAA")
-    ("rhombus-warn"           . "#9e3564")
+    ("rhombus-warn"           . "#1789d6")
     ("rhombus-succ"           . "#809a4d")
     ("rhombus-hl"             . "#1D1D1D")))
 
@@ -237,15 +237,15 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(sml/line-number ((t (:foreground ,rhombus-purple :weight normal))))
    `(sml/col-number ((t (:foreground ,rhombus-violet-2 :weight normal))))
    `(sml/read-only ((t (:foreground ,rhombus-charcoal))))
-   `(sml/outside-modified ((t (:foreground ,rhombus-red))))
+   `(sml/outside-modified ((t (:foreground ,rhombus-dark-red))))
    `(sml/modified ((t (:foreground ,rhombus-red))))
    `(sml/remote ((t (:foreground ,rhombus-charcoal))))
    `(sml/numbers-separator ((t (:foreground ,rhombus-charcoal))))
    `(sml/client ((t (:foreground ,rhombus-succ))))
    `(sml/not-modified ((t (:foreground ,rhombus-yellow))))
-   `(sml/git  ((t (:foreground ,rhombus-light-blue))))
-   `(sml/vc-edited  ((t (:foreground ,rhombus-blue))))
-   `(sml/modes ((t (:foreground ,rhombus-pink))))
+   `(sml/git  ((t (:foreground ,rhombus-light-brown))))
+   `(sml/vc-edited  ((t (:foreground ,rhombus-warn))))
+   `(sml/modes ((t (:foreground ,rhombus-violet+1))))
    `(sml/position-percentage ((t (:foreground ,rhombus-charcoal))))
 
    `(flyspell-incorrect ((t (:underline (:color ,rhombus-red :style wave)))))
@@ -294,7 +294,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(helm-ff-file ((t (:foreground ,rhombus-fg :background ,rhombus-bg+1 :weight normal))))
    `(helm-ff-executable ((t (:foreground ,rhombus-violet :background ,rhombus-bg+1 :weight normal))))
    `(helm-ff-invalid-symlink ((t (:foreground ,rhombus-warn :background ,rhombus-bg+1 :weight bold))))
-   `(helm-ff-symlink ((t (:foreground ,rhombus-light-blue :background ,rhombus-bg+1 :weight bold))))
+   `(helm-ff-symlink ((t (:foreground ,rhombus-purple :background ,rhombus-bg+1 :weight bold))))
    `(helm-ff-prefix ((t (:foreground ,rhombus-bg :background ,rhombus-orange :weight normal))))
    ;;   `(helm-grep-cmd-line ((t (:foreground ,zenburn-cyan :background ,zenburn-bg))))
    ;;   `(helm-grep-file ((t (:foreground ,zenburn-fg :background ,zenburn-bg))))
@@ -310,10 +310,13 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(magit-item-highlight ((t (:background ,rhombus-bg+1))))
    `(magit-section-title ((t (:foreground ,rhombus-orange :weight bold))))
    `(magit-process-ok ((t (:foreground ,rhombus-succ :weight bold))))
-   ;; `(magit-process-ng ((t (:foreground ,zenburn-red :weight bold))))
-   `(magit-branch ((t (:foreground ,rhombus-light-blue :weight bold))))
-   ;; `(magit-log-author ((t (:foreground ,zenburn-orange))))
-   ;; `(magit-log-sha1 ((t (:foreground, zenburn-orange))))
+   `(magit-process-ng ((t (:foreground ,rhombus-warn :weight bold))))
+   `(magit-branch ((t (:foreground ,rhombus-violet :weight bold))))
+   `(magit-log-author ((t (:foreground ,rhombus-purple))))
+   `(magit-log-sha1 ((t (:foreground, rhombus-yellow))))
+
+   ;; Perspective
+   `(persp-selected-face ((t (:foreground ,rhombus-light-brown :inherit mode-line))))
 
    ;; >>>>> whitespace-mode
    ;; `(whitespace-space ((t (:background ,zenburn-bg+1 :foreground ,zenburn-bg+1))))
