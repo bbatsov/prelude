@@ -157,7 +157,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(font-lock-builtin-face ((t (:foreground ,rhombus-dull-red))))
    `(font-lock-preprocessor-face ((t (:foreground ,rhombus-off-white))))
    `(font-lock-string-face ((t (:foreground ,rhombus-grey))))
-   `(font-lock-doc-face ((t (:foreground ,rhombus-off-white))))
+   `(font-lock-doc-face ((t (:foreground ,rhombus-dark-brown))))
 
 
    ;; >>>>> eshell
