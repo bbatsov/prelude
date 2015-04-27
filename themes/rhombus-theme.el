@@ -35,7 +35,7 @@
 
 ;; Rhombus Color Palette
 (defvar rhombus-colors-alist
-  '(("rhombus-fg"             . "#F0E0FF")
+  '(("rhombus-fg"             . "#FFF5EB")
     ("rhombus-fg+1"           . "#FBF9F3")
     ("rhombus-bg"             . "#000000")
     ("rhombus-bg+1"           . "#171717")
@@ -179,14 +179,14 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(org-archived ((t (:foreground ,rhombus-fg :weight bold))))
    `(org-checkbox ((t (:foreground ,rhombus-fg+1 :foreground ,rhombus-olive
                                    :box (:line-width 1 :style released-button)))))
-   `(org-done ((t (:foreground ,rhombus-olive :strike-through t))))
-   `(org-todo ((t (:foreground ,rhombus-red))))
+   `(org-done ((t (:foreground ,rhombus-dark-brown :strike-through t))))
+   `(org-todo ((t (:foreground ,rhombus-light-brown))))
    `(org-formula ((t (:foreground ,rhombus-violet))))
    `(org-headline-done ((t (:strike-through t :foreground ,rhombus-charcoal))))
    `(org-hide ((t (:foreground ,rhombus-bg))))
-   `(org-level-1 ((t (:foreground ,rhombus-blue))))
-   `(org-level-2 ((t (:foreground ,rhombus-violet))))
-   `(org-level-3 ((t (:foreground ,rhombus-orange))))
+   `(org-level-1 ((t (:foreground ,rhombus-dark-red))))
+   `(org-level-2 ((t (:foreground ,rhombus-orange))))
+   `(org-level-3 ((t (:foreground ,rhombus-orange-1))))
    `(org-level-4 ((t (:foreground ,rhombus-yellow))))
    `(org-level-5 ((t (:foreground ,rhombus-grey))))
    `(org-level-6 ((t (:foreground ,rhombus-green))))
