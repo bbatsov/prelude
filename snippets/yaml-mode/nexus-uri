@@ -3,4 +3,4 @@
 # key: nexus
 # binding: direct-keybinding
 # --
-"http://nexus.prod.urbanairship.com/service/local/artifact/maven/redirect?r=releases&g=com.urbanairship.$1&a=$1$2&v=$3&c=shaded&e=jar"$0
+"http://nexus.prod.urbanairship.com/service/local/repositories/releases/content/${1:com}/${2:urbanairship}/$3/$4/$3-$4-shaded.jar"$0
