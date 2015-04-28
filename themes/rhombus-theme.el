@@ -70,8 +70,8 @@
 
     ;; Other People's Good Ideas
     ("rhombus-link"           . "#8ACDAA")
-    ("rhombus-warn"           . "#1789d6")
-    ("rhombus-succ"           . "#809a4d")
+    ("rhombus-warn"           . "#Fff59f")
+    ("rhombus-succ"           . "#9d5717")
     ("rhombus-hl"             . "#1D1D1D")))
 
 ;; Testing utility. Leave commented; C-x C-e to unbind the alist so eval-buffer
@@ -329,6 +329,28 @@ Also bind `class' to ((class color) (min-colors 89))."
    ;; `(whitespace-indentation ((t (:background ,zenburn-yellow :foreground ,zenburn-red))))
    ;; `(whitespace-empty ((t (:background ,zenburn-yellow))))
    ;; `(whitespace-space-after-tab ((t (:background ,zenburn-yellow :foreground ,zenburn-red))))
+
+   ;; >>>>> erc
+   `(erc-action-face ((t (:inherit erc-default-face))))
+   `(erc-bold-face ((t (:weight bold))))
+   `(erc-current-nick-face ((t (:foreground ,rhombus-red :weight bold))))
+   `(erc-dangerous-host-face ((t (:inherit font-lock-warning-face))))
+   `(erc-default-face ((t (:foreground ,rhombus-fg))))
+   `(erc-direct-msg-face ((t (:inherit erc-default))))
+   `(erc-error-face ((t (:inherit font-lock-warning-face))))
+   `(erc-fool-face ((t (:inherit erc-default))))
+   `(erc-highlight-face ((t (:inherit hover-highlight))))
+   `(erc-input-face ((t (:foreground ,rhombus-orange-1))))
+   `(erc-keyword-face ((t (:foreground ,rhombus-purple :weight bold))))
+   `(erc-nick-default-face ((t (:foreground ,rhombus-orange :weight bold))))
+   `(erc-my-nick-face ((t (:foreground ,rhombus-red :weight bold))))
+   `(erc-nick-msg-face ((t (:inherit erc-default))))
+   `(erc-notice-face ((t (:foreground ,rhombus-violet-2))))
+   `(erc-pal-face ((t (:foreground ,rhombus-orange :weight bold))))
+   `(erc-prompt-face ((t (:foreground ,rhombus-orange :background ,rhombus-bg :weight bold))))
+   `(erc-timestamp-face ((t (:foreground ,rhombus-charcoal))))
+   `(erc-underline-face ((t (:underline t))))
+
    ))
 
 ;;; Footer
