@@ -174,7 +174,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(eshell-ls-symlink ((t (:foreground ,rhombus-link :weight bold))))
 
    ;; >>>>> Org mode
-   `(org-document-info-keyword ((t (:foreground ,rhombus-olive))))
+   `(org-document-info-keyword ((t (:foreground ,rhombus-purple))))
    `(org-document-title ((t (:foreground ,rhombus-grey :height 1.50))))
    `(org-archived ((t (:foreground ,rhombus-fg :weight bold))))
    `(org-checkbox ((t (:foreground ,rhombus-fg+1 :foreground ,rhombus-olive
@@ -193,7 +193,6 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(org-level-7 ((t (:foreground ,rhombus-dark-brown))))
    `(org-level-8 ((t (:foreground ,rhombus-teal))))
    `(org-link ((t (:foreground ,rhombus-link :underline t))))
-
    `(org-agenda-date ((t (:foreground ,rhombus-blue))))
    `(org-deadline-announce ((t (:foreground ,rhombus-dark-red))))
    `(org-date ((t (:foreground ,rhombus-link :underline t))))
@@ -214,7 +213,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(org-column-title ((t (:background ,"black" :foreground ,rhombus-olive :underline t))))
    `(org-mode-line-clock ((t (:foreground ,rhombus-yellow))))
    `(org-footnote ((t (:foreground ,rhombus-link :underline t))))
-   `(org-code ((t (:foreground ,rhombus-olive))))
+   `(org-code ((t (:foreground ,rhombus-purple))))
    `(org-verbatim ((t (:inherit org-code))))
 
    ;; >>>>> elpy and ipython
