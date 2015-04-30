@@ -62,7 +62,7 @@
 
     ;; Backup-dancing colors
     ("rhombus-olive"          . "#24992c")
-    ("rhombus-green"          . "#24992c")
+    ("rhombus-green"          . "#006400")
     ("rhombus-blue"           . "#1789d6")
     ("rhombus-light-blue"     . "#9ce9f1")
     ("rhombus-teal"           . "#65A399")
@@ -310,14 +310,17 @@ Also bind `class' to ((class color) (min-colors 89))."
    ;;   `(helm-mu-contacts-address-face ((t (:foreground ,rhombus-fg-1 :background ,rhombus-bg))))
    ;;   `(helm-mu-contacts-name-face ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
 
+
    ;; >>>>> Magit, if I ever want to tweak it
-   `(magit-item-highlight ((t (:background ,rhombus-bg+1))))
+   `(magit-item-highlight ((t (:background ,rhombus-violet-2))))
    `(magit-section-title ((t (:foreground ,rhombus-orange :weight bold))))
    `(magit-process-ok ((t (:foreground ,rhombus-succ :weight bold))))
    `(magit-process-ng ((t (:foreground ,rhombus-warn :weight bold))))
    `(magit-branch ((t (:foreground ,rhombus-violet :weight bold))))
    `(magit-log-author ((t (:foreground ,rhombus-purple))))
-   `(magit-log-sha1 ((t (:foreground, rhombus-yellow))))
+   `(magit-log-sha1 ((t (:foreground ,rhombus-yellow))))
+   `(magit-diff-add ((t (:background ,rhombus-green))))
+   `(magit-diff-remove ((t (:background ,rhombus-dull-red))))
 
    ;; Perspective
    `(persp-selected-face ((t (:foreground ,rhombus-light-brown :inherit mode-line))))

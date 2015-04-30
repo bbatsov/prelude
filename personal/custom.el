@@ -90,7 +90,8 @@
                                   "/ess-configs.el"
                                   "/jsx-configs.el"
                                   "/jabber-configs.el"
-                                  "/web-mode-configs.el"))
+                                  "/web-mode-configs.el"
+                                  "/flip-tables.el"))
 
 (mapc (lambda (rmd-file-name)
         (load (concat prelude-personal-dir rmd-file-name)))
