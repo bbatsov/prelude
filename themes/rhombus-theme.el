@@ -54,6 +54,7 @@
     ("rhombus-violet-2"       . "#433F4F")
     ("rhombus-violet+1"       . "#Ff87c1")
     ("rhombus-red-violet"     . "#9e3564")
+    ("rhombus-pink"           . "#D82e88")
     ("rhombus-off-white"      . "#FFE0B2")
     ("rhombus-charcoal"       . "#656868")
     ("rhombus-grey"           . "#Bbbbbb")
@@ -61,12 +62,9 @@
     ("rhombus-light-brown"    . "#Fff59f")
 
     ;; Backup-dancing colors
-    ("rhombus-olive"          . "#24992c")
     ("rhombus-green"          . "#006400")
     ("rhombus-blue"           . "#1789d6")
-    ("rhombus-light-blue"     . "#9ce9f1")
     ("rhombus-teal"           . "#65A399")
-    ("rhombus-pink"           . "#D82e88")
     ("rhombus-sand"           . "#C7B299")
 
     ;; Other People's Good Ideas
@@ -127,7 +125,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    ;; This face is used for displaying an active region
    `(region ((t (:background ,rhombus-bg+1))))
 
-   `(show-paren-match-face ((t (:background ,rhombus-olive :foreground ,"black" ))))
+   `(show-paren-match-face ((t (:background ,rhombus-green :foreground ,"black" ))))
 
    ;; >>>>> mode-line
    `(mode-line    ((,class (:foreground ,rhombus-charcoal
@@ -166,7 +164,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(c-annotation-face ((t (:inherit font-lock-constant-face))))
 
    ;; >>>>> eshell
-   `(eshell-prompt ((t (:foreground ,rhombus-olive))))
+   `(eshell-prompt ((t (:foreground ,rhombus-green))))
    `(eshell-ls-archive ((t (:foreground ,rhombus-orange :weight bold))))
    `(eshell-ls-backup ((t (:inherit font-lock-comment-face))))
    `(eshell-ls-clutter ((t (:inherit font-lock-comment-face))))
@@ -182,15 +180,15 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(org-document-info-keyword ((t (:foreground ,rhombus-purple))))
    `(org-document-title ((t (:foreground ,rhombus-grey :height 1.50))))
    `(org-archived ((t (:foreground ,rhombus-fg :weight bold))))
-   `(org-checkbox ((t (:foreground ,rhombus-fg+1 :foreground ,rhombus-olive
+   `(org-checkbox ((t (:foreground ,rhombus-fg+1 :foreground ,rhombus-sand
                                    :box (:line-width 1 :style released-button)))))
    `(org-done ((t (:foreground ,rhombus-dark-brown :strike-through t))))
    `(org-todo ((t (:foreground ,rhombus-light-brown))))
    `(org-formula ((t (:foreground ,rhombus-violet))))
    `(org-headline-done ((t (:strike-through t :foreground ,rhombus-charcoal))))
    `(org-hide ((t (:foreground ,rhombus-bg))))
-   `(org-level-1 ((t (:foreground ,rhombus-dark-red))))
-   `(org-level-2 ((t (:foreground ,rhombus-orange))))
+   `(org-level-1 ((t (:foreground ,rhombus-violet))))
+   `(org-level-2 ((t (:foreground ,rhombus-violet+1))))
    `(org-level-3 ((t (:foreground ,rhombus-orange-1))))
    `(org-level-4 ((t (:foreground ,rhombus-yellow))))
    `(org-level-5 ((t (:foreground ,rhombus-grey))))
@@ -200,7 +198,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(org-link ((t (:foreground ,rhombus-link :underline t))))
    `(org-agenda-date ((t (:foreground ,rhombus-blue))))
    `(org-deadline-announce ((t (:foreground ,rhombus-dark-red))))
-   `(org-date ((t (:foreground ,rhombus-link :underline t))))
+   `(org-date ((t (:foreground ,rhombus-purple :underline t))))
    `(org-agenda-date-today  ((t (:foreground ,rhombus-grey :weight light :slant italic))))
    `(org-agenda-structure  ((t (:inherit font-lock-comment-face))))
    ;; `(org-scheduled ((t (:foreground ,rhombus-green+4))))x
@@ -209,16 +207,15 @@ Also bind `class' to ((class color) (min-colors 89))."
    ;; `(org-sexp-date ((t (:foreground ,rhombus-blue+1 :underline t))))
    ;; `(org-time-grid ((t (:foreground ,rhombus-orange))))
    ;; `(org-upcoming-deadline ((t (:inherit font-lock-keyword-face))))
-
-   `(org-special-keyword ((t (:foreground ,rhombus-olive :weight normal))))
-   `(org-table ((t (:foreground ,rhombus-olive))))
+   `(org-special-keyword ((t (:foreground ,rhombus-charcoal :weight normal))))
+   `(org-table ((t (:foreground ,rhombus-green))))
    `(org-tag ((t (:bold t :foreground ,rhombus-orange :strike-through nil))))
    `(org-warning ((t (:bold t :foreground ,rhombus-pink :weight bold))))
    `(org-column ((t (:background ,"black"))))
-   `(org-column-title ((t (:background ,"black" :foreground ,rhombus-olive :underline t))))
+   `(org-column-title ((t (:background ,"black" :foreground ,rhombus-green :underline t))))
    `(org-mode-line-clock ((t (:foreground ,rhombus-yellow))))
    `(org-footnote ((t (:foreground ,rhombus-link :underline t))))
-   `(org-code ((t (:foreground ,rhombus-purple))))
+   `(org-code ((t (:foreground ,rhombus-orange))))
    `(org-verbatim ((t (:inherit org-code))))
 
    ;; >>>>> elpy and ipython
@@ -230,7 +227,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(ac-selection-face ((t (:background ,rhombus-violet :foreground ,"black"))))
    `(popup-tip-face ((t (:background ,rhombus-sand :foreground ,"black"))))
    `(popup-scroll-bar-foreground-face ((t (:background ,rhombus-violet-1))))
-   `(popup-scroll-bar-background-face ((t (:background ,rhombus-olive))))
+   `(popup-scroll-bar-background-face ((t (:background ,rhombus-green))))
    `(popup-isearch-match ((t (:background ,rhombus-yellow :foreground ,"black"))))
 
    ;; >>>>> smart-mode-line
