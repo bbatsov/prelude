@@ -15,7 +15,6 @@
 
 ;;(disable-theme 'zenburn)
 (prelude-require-packages '(frame-fns frame-cmds))
-(global-set-key (kbd "<s-return>") 'toggle-frame-maximized)
 
 ;; YAS snippets everywhere bro.
 (prelude-require-package 'yasnippet)
