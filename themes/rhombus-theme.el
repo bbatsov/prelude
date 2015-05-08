@@ -64,9 +64,10 @@
 
     ;; Backup-dancing colors
     ("rhombus-green"          . "#006400")
-    ("rhombus-blue"           . "#1789d6")
+    ("rhombus-blue"           . "#6495ed")
     ("rhombus-teal"           . "#65A399")
     ("rhombus-sand"           . "#C7B299")
+
 
     ;; Other People's Good Ideas
     ("rhombus-link"           . "#8ACDAA")
