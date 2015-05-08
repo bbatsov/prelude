@@ -77,7 +77,8 @@
                             perspective
                             persp-projectile
                             column-enforce-mode
-                            smart-mode-line))
+                            smart-mode-line
+                            rich-minority))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
@@ -103,6 +104,12 @@
 ;;; Smart Mode Line
 (sml/setup)
 (which-function-mode -1)
+(rich-minority-mode 1)
+(setq rm-blacklist '(" yas"
+                     " Helm"
+                     " company"
+                     " guru"
+                     " Pre"))
 
 ;; Magit warnings OFF
 (setq magit-last-seen-setup-instructions "1.4.0")
