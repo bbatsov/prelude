@@ -110,7 +110,8 @@
                      " company"
                      " guru"
                      " Pre"))
-
+(setq sml/shorten-directory t)
+(setq sml/shorten-modes t)
 ;; Magit warnings OFF
 (setq magit-last-seen-setup-instructions "1.4.0")
 
