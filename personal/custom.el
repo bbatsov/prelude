@@ -259,8 +259,7 @@
 (defun insert-iso-date ()
   (interactive)
   (insert (format-time-string "%Y-%m-%d" (current-time))))
-(global-set-key (kbd "C-c C-d") 'insert-iso-date)
-
+(global-set-key (kbd "C-x j") 'insert-iso-date)
 
 (provide 'custom)
 
