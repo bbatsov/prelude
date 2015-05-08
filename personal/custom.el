@@ -255,6 +255,13 @@
 
 (global-set-key (kbd "C-x |") 'toggle-window-split)
 
+;;; Put in a nicely formatted Today
+(defun insert-iso-date ()
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d" (current-time))))
+(global-set-key (kbd "C-c C-d") 'insert-iso-date)
+
+
 (provide 'custom)
 
 ;;; custom.el ends here
