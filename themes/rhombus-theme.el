@@ -44,6 +44,7 @@
     ("rhombus-dark-red"       . "#9e1200")
     ("rhombus-dull-red"       . "#9e4d4a")
     ("rhombus-red"            . "#Ff2600")
+    ("rhombus-bronze"         . "#D79600")
     ("rhombus-orange"         . "#fa9a4b")
     ("rhombus-orange-1"       . "#D84c00")
     ("rhombus-orange+1"       . "#Ff5d00")
@@ -114,10 +115,10 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(highlight ((t (:background ,rhombus-hl))))
 
    ;; “lazy matches” for Isearch and Query Replace (matches other than the current one).
-   `(lazy-highlight ((t (:background ,rhombus-dull-red :foreground ,"black" :weight extra-bold))))
+   `(lazy-highlight ((t (:background ,rhombus-bronze :foreground ,"black" :weight extra-bold))))
 
    ;; This face is used to highlight the current Isearch match
-   `(isearch ((t (:background ,rhombus-orange :foreground ,"black" :weight extra-bold))))
+   `(isearch ((t (:background ,rhombus-dull-red :foreground ,"black" :weight extra-bold))))
 
    `(success ((t (:foreground ,rhombus-succ :weight bold))))
    `(warning ((t (:foreground ,rhombus-warn :weight bold))))
@@ -128,9 +129,9 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(show-paren-match-face ((t (:background ,rhombus-green :foreground ,"black" ))))
 
    ;; >>>>> mode-line
-   `(mode-line    ((,class (:foreground ,rhombus-charcoal
-                                        :background ,"black"
-                                        ;; :box (:line-width -1 :style released-button)
+   `(mode-line    ((,class (:foreground ,rhombus-violet-1
+                                        :background ,rhombus-bg+1
+                                        ;:box (:style released-button :line-width -1)
                                         ))
                    (t :inverse-video nil)))
 
@@ -138,7 +139,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(mode-line-buffer-id ((t (:foreground ,rhombus-grey))))
    `(minibuffer-prompt ((t (:foreground ,rhombus-violet))))
 
-   ;;`(mode-line-highlight ((t (:foreground ,rhombus-lime))))
+   `(mode-line-highlight ((t (:foreground ,rhombus-red))))
 
    ;; linum
    `(linum ((t (:foreground ,rhombus-charcoal :background ,"black"))))
@@ -153,7 +154,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(font-lock-comment-delimiter-face ((t (:foreground ,rhombus-violet-2 :weight light :slant italic))))
    `(font-lock-type-face ((t (:foreground ,rhombus-pink))))
    `(font-lock-constant-face ((t (:foreground ,rhombus-purple))))
-   `(font-lock-builtin-face ((t (:foreground ,rhombus-dull-red))))
+   `(font-lock-builtin-face ((t (:foreground ,rhombus-bronze))))
    `(font-lock-preprocessor-face ((t (:foreground ,rhombus-off-white))))
    `(font-lock-string-face ((t (:foreground ,rhombus-grey))))
    `(font-lock-doc-face ((t (:foreground ,rhombus-dark-brown))))
@@ -231,12 +232,12 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(popup-isearch-match ((t (:background ,rhombus-yellow :foreground ,"black"))))
 
    ;; >>>>> smart-mode-line
-   `(sml/global ((t (:background ,"black" :inverse-video nil))))
+   `(sml/global ((t (:background ,rhombus-bg :inverse-video nil))))
    `(sml/folder ((t (:foreground ,rhombus-charcoal))))
    `(sml/filename ((t (:foreground ,rhombus-grey :weight normal))))
    `(sml/prefix   ((t (:foreground ,rhombus-grey :weight normal))))
    `(sml/line-number ((t (:foreground ,rhombus-purple :weight normal))))
-   `(sml/col-number ((t (:foreground ,rhombus-violet-2 :weight normal))))
+   `(sml/col-number ((t (:foreground ,rhombus-violet-1 :weight normal))))
    `(sml/read-only ((t (:foreground ,rhombus-charcoal))))
    `(sml/outside-modified ((t (:foreground ,rhombus-dark-red))))
    `(sml/modified ((t (:foreground ,rhombus-red))))
@@ -244,7 +245,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(sml/numbers-separator ((t (:foreground ,rhombus-charcoal))))
    `(sml/client ((t (:foreground ,rhombus-succ))))
    `(sml/not-modified ((t (:foreground ,rhombus-yellow))))
-   `(sml/git  ((t (:foreground ,rhombus-light-brown))))
+   `(sml/git  ((t (:foreground ,rhombus-bronze))))
    `(sml/vc-edited  ((t (:foreground ,rhombus-warn))))
    `(sml/modes ((t (:foreground ,rhombus-violet+1))))
    `(sml/position-percentage ((t (:foreground ,rhombus-charcoal))))
