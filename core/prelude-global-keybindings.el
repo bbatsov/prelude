@@ -112,10 +112,8 @@
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-(global-set-key (kbd "C-c j") 'ace-jump-mode)
-(global-set-key (kbd "s-.") 'ace-jump-mode)
-(global-set-key (kbd "C-c J") 'ace-jump-buffer)
-(global-set-key (kbd "s->") 'ace-jump-buffer)
+(global-set-key (kbd "C-c j") 'avy-goto-word-1)
+(global-set-key (kbd "s-.") 'avy-goto-word-1)
 (global-set-key (kbd "s-w") 'ace-window)
 
 (provide 'prelude-global-keybindings)

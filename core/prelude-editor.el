@@ -259,6 +259,12 @@ The body of the advice is in BODY."
 (setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
 (projectile-global-mode t)
 
+;; avy allows us to effectively navigate to visible things
+(require 'avy-jump)
+(setq avy-background t)
+(setq avy-goto-char-style 'at)
+(setq avy-goto-word-style 'at)
+
 ;; anzu-mode enhances isearch & query-replace by showing total matches and current match position
 (require 'anzu)
 (diminish 'anzu-mode)
