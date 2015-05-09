@@ -50,6 +50,7 @@
     ("rhombus-orange+1"       . "#Ff5d00")
     ("rhombus-yellow"         . "#D6d300")
     ("rhombus-purple"         . "#932092")
+    ("rhombus-berry"          . "#3D002E")
     ("rhombus-violet"         . "#A630db")
     ("rhombus-violet-1"       . "#635770")
     ("rhombus-violet-2"       . "#433F4F")
@@ -71,7 +72,7 @@
 
     ;; Other People's Good Ideas
     ("rhombus-link"           . "#8ACDAA")
-    ("rhombus-warn"           . "#Fff59f")
+    ("rhombus-warn"           . "#Ff2600")
     ("rhombus-succ"           . "#9d5717")
     ("rhombus-hl"             . "#1D1D1D")))
 
@@ -116,10 +117,10 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(highlight ((t (:background ,rhombus-hl))))
 
    ;; “lazy matches” for Isearch and Query Replace (matches other than the current one).
-   `(lazy-highlight ((t (:background ,rhombus-bronze :foreground ,"black" :weight extra-bold))))
+   `(lazy-highlight ((t (:background ,rhombus-dull-red :foreground ,"black" :weight extra-bold))))
 
    ;; This face is used to highlight the current Isearch match
-   `(isearch ((t (:background ,rhombus-dull-red :foreground ,"black" :weight extra-bold))))
+   `(isearch ((t (:background ,rhombus-bronze :foreground ,"black" :weight extra-bold))))
 
    `(success ((t (:foreground ,rhombus-succ :weight bold))))
    `(warning ((t (:foreground ,rhombus-warn :weight bold))))
@@ -130,13 +131,11 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(show-paren-match-face ((t (:background ,rhombus-green :foreground ,"black" ))))
 
    ;; >>>>> mode-line
-   `(mode-line    ((,class (:foreground ,rhombus-violet-1
-                                        :background ,rhombus-bg+1
-                                        ;:box (:style released-button :line-width -1)
-                                        ))
+   `(mode-line    ((,class (:foreground ,rhombus-violet
+                                        :background ,rhombus-berry))
                    (t :inverse-video nil)))
 
-   `(mode-line-inactive ((t (:background ,rhombus-bg+1 :foreground ,"black" :box nil))))
+   `(mode-line-inactive ((t (:background ,rhombus-bg+1 :foreground ,rhombus-violet-2 :box nil))))
    `(mode-line-buffer-id ((t (:foreground ,rhombus-grey))))
    `(minibuffer-prompt ((t (:foreground ,rhombus-violet))))
 
@@ -253,21 +252,21 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(sml/position-percentage ((t (:foreground ,rhombus-charcoal))))
 
    ;; >>>>> FlyCheck
-   ;; `(flycheck-error
-   ;;   ((((supports :underline (:style wave)))
-   ;;     (:underline (:style wave :color ,zenburn-red-1) :inherit unspecified))
-   ;;    (t (:foreground ,zenburn-red-1 :weight bold :underline t))))
-   ;; `(flycheck-warning
-   ;;   ((((supports :underline (:style wave)))
-   ;;     (:underline (:style wave :color ,zenburn-yellow) :inherit unspecified))
-   ;;    (t (:foreground ,zenburn-yellow :weight bold :underline t))))
-   ;; `(flycheck-info
-   ;;   ((((supports :underline (:style wave)))
-   ;;     (:underline (:style wave :color ,zenburn-cyan) :inherit unspecified))
-   ;;    (t (:foreground ,zenburn-cyan :weight bold :underline t))))
-   ;; `(flycheck-fringe-error ((t (:foreground ,zenburn-red-1 :weight bold))))
-   ;; `(flycheck-fringe-warning ((t (:foreground ,zenburn-yellow :weight bold))))
-   ;; `(flycheck-fringe-info ((t (:foreground ,zenburn-cyan :weight bold))))
+   `(flycheck-error
+     ((((supports :underline (:style wave)))
+       (:underline (:style wave :color ,rhombus-red) :inherit unspecified))
+      (t (:foreground ,rhombus-red :weight bold :underline t))))
+   `(flycheck-warning
+     ((((supports :underline (:style wave)))
+       (:underline (:style wave :color ,rhombus-yellow) :inherit unspecified))
+      (t (:foreground ,rhombus-yellow :weight bold :underline t))))
+   `(flycheck-info
+     ((((supports :underline (:style wave)))
+       (:underline (:style wave :color ,rhombus-light-brown) :inherit unspecified))
+      (t (:foreground ,rhombus-light-brown :weight bold :underline t))))
+   `(flycheck-fringe-error ((t (:foreground ,rhombus-red :weight bold))))
+   `(flycheck-fringe-warning ((t (:foreground ,rhombus-yellow :weight bold))))
+   `(flycheck-fringe-info ((t (:foreground ,rhombus-light-brown :weight bold))))
 
    ;; >>>>> FlySpell
    `(flyspell-incorrect ((t (:underline (:color ,rhombus-red :style wave)))))
@@ -282,12 +281,12 @@ Also bind `class' to ((class color) (min-colors 89))."
 
    ;; >>>>> Helm
    `(helm-header
-     ((t (:foreground ,rhombus-dark-brown
+     ((t (:foreground ,rhombus-charcoal
                       :background ,rhombus-bg
                       :underline nil
                       :box nil))))
    `(helm-source-header
-     ((t (:background ,rhombus-light-brown
+     ((t (:background ,rhombus-berry
                       :foreground ,rhombus-fg
                       :weight bold
                       :underline nil
@@ -296,11 +295,11 @@ Also bind `class' to ((class color) (min-colors 89))."
                       :family "Sans Serif"))))
    `(helm-selection ((t (:background ,rhombus-hl :underline nil))))
    `(helm-selection-line ((t (:background ,rhombus-bg+1))))
-   `(helm-visible-mark ((t (:foreground ,rhombus-bg :background ,rhombus-yellow))))
-   ;;   `(helm-candidate-number ((t (:foreground ,rhombus-green+4 :background ,rhombus-bg-1))))
-   ;;   `(helm-separator ((t (:foreground ,rhombus-red :background ,rhombus-bg))))
-   ;;   `(helm-time-zone-current ((t (:foreground ,rhombus-green+2 :background ,rhombus-bg))))
-   ;;   `(helm-time-zone-home ((t (:foreground ,rhombus-red :background ,rhombus-bg))))
+   `(helm-visible-mark ((t (:foreground ,rhombus-bg :background ,rhombus-orange-1))))
+   `(helm-candidate-number ((t (:foreground ,rhombus-green :background ,rhombus-bg))))
+   `(helm-separator ((t (:foreground ,rhombus-red :background ,rhombus-bg))))
+   `(helm-time-zone-current ((t (:foreground ,rhombus-green :background ,rhombus-bg))))
+   `(helm-time-zone-home ((t (:foreground ,rhombus-red :background ,rhombus-bg))))
    ;;   `(helm-bookmark-addressbook ((t (:foreground ,rhombus-orange :background ,rhombus-bg))))
    ;;   `(helm-bookmark-directory ((t (:foreground nil :background nil :inherit helm-ff-directory))))
    ;;   `(helm-bookmark-file ((t (:foreground nil :background nil :inherit helm-ff-file))))
@@ -312,24 +311,24 @@ Also bind `class' to ((class color) (min-colors 89))."
    ;;   `(helm-buffer-process ((t (:foreground ,rhombus-cyan :background ,rhombus-bg))))
    ;;   `(helm-buffer-saved-out ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
    ;;   `(helm-buffer-size ((t (:foreground ,rhombus-fg-1 :background ,rhombus-bg))))
-   `(helm-ff-directory ((t (:background ,rhombus-bg+1 :foreground ,rhombus-orange-1))))
+   `(helm-ff-directory ((t (:background ,rhombus-bg+1 :foreground ,rhombus-dark-brown))))
    `(helm-ff-file ((t (:foreground ,rhombus-fg :background ,rhombus-bg+1 :weight normal))))
-   `(helm-ff-executable ((t (:foreground ,rhombus-violet :background ,rhombus-bg+1 :weight normal))))
+   `(helm-ff-executable ((t (:foreground ,rhombus-violet :background ,rhombus-orange :weight normal))))
    `(helm-ff-invalid-symlink ((t (:foreground ,rhombus-warn :background ,rhombus-bg+1 :weight bold))))
    `(helm-ff-symlink ((t (:foreground ,rhombus-purple :background ,rhombus-bg+1 :weight bold))))
-   `(helm-ff-prefix ((t (:foreground ,rhombus-bg :background ,rhombus-orange :weight normal))))
-   ;;   `(helm-grep-cmd-line ((t (:foreground ,rhombus-cyan :background ,rhombus-bg))))
-   ;;   `(helm-grep-file ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
-   ;;   `(helm-grep-finish ((t (:foreground ,rhombus-green+2 :background ,rhombus-bg))))
-   ;;   `(helm-grep-lineno ((t (:foreground ,rhombus-fg-1 :background ,rhombus-bg))))
-   ;;   `(helm-grep-match ((t (:foreground nil :background nil :inherit helm-match))))
-   ;;   `(helm-grep-running ((t (:foreground ,rhombus-red :background ,rhombus-bg))))
+   `(helm-ff-prefix ((t (:foreground ,rhombus-bg :background ,rhombus-red-violet :weight normal))))
+   `(helm-grep-cmd-line ((t (:foreground ,rhombus-orange :background ,rhombus-bg))))
+   `(helm-grep-file ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
+   `(helm-grep-finish ((t (:foreground ,rhombus-green :background ,rhombus-bg))))
+   `(helm-grep-lineno ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
+   `(helm-grep-match ((t (:foreground nil :background nil :inherit helm-match))))
+   `(helm-grep-running ((t (:foreground ,rhombus-blue :background ,rhombus-bg))))
    ;;   `(helm-moccur-buffer ((t (:foreground ,rhombus-cyan :background ,rhombus-bg))))
    ;;   `(helm-mu-contacts-address-face ((t (:foreground ,rhombus-fg-1 :background ,rhombus-bg))))
    ;;   `(helm-mu-contacts-name-face ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
 
 
-   ;; >>>>> Magit, if I ever want to tweak it
+   ;; >>>>> Magit
    `(magit-item-highlight ((t (:background ,rhombus-violet-2))))
    `(magit-section-title ((t (:foreground ,rhombus-orange :weight bold))))
    `(magit-process-ok ((t (:foreground ,rhombus-succ :weight bold))))
