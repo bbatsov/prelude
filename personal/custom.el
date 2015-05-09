@@ -185,17 +185,6 @@
 (sp-local-pair 'org-mode "/" "/")
 (sp-local-pair 'org-mode "*" "*")
 
-;;; Support for Marked.app -- assumes you're on a Mac,
-;;; and have Marked.app installed.
-(defun markdown-preview-file ()
-  "run Marked on the current file and revert the buffer"
-  (interactive)
-  (shell-command
-   (format "open -a /Applications/Marked.app %s"
-           (shell-quote-argument (buffer-file-name))))
-  )
-(global-set-key (kbd "C-c m") 'markdown-preview-file)
-
 ;;; yasnippet
 (yas-global-mode 1)
 

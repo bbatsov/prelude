@@ -56,6 +56,17 @@ If no region is selected and current line is not blank
 
 (global-set-key (kbd "M-;") `comment-dwim-line)
 
+;;-----------------------Marked.app Support for Markdown------------------------
+;; Assumes you're on a Mac, and have Marked.app installed
+
+(defun markdown-preview-file ()
+  "Run Marked on the current file and revert the buffer."
+  (interactive)
+  (shell-command
+   (format "open -a /Applications/Marked.app %s"
+           (shell-quote-argument (buffer-file-name)))))
+(global-set-key (kbd "C-c m") 'markdown-preview-file)
+
 (provide 'custom-fns)
 
 ;;; custom-fns.el ends here
