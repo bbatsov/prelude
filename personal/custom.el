@@ -90,7 +90,8 @@
                                   "/jabber-configs.el"
                                   "/web-mode-configs.el"
                                   "/flip-tables.el"
-                                  "/custom-fns.el"))
+                                  "/custom-fns.el"
+                                  "/mu4e-configs.el"))
 
 (mapc (lambda (rmd-file-name)
         (load (concat prelude-personal-dir rmd-file-name)))
@@ -99,7 +100,7 @@
 ;; PCRE Regexes
 (rxt-global-mode)
 
-;;; Smart Mode Line
+;;; Smart Mode Line and rich-minority-mode
 (sml/setup)
 (which-function-mode -1)
 (rich-minority-mode 1)
@@ -110,6 +111,10 @@
                      " Pre"))
 (setq sml/shorten-directory t)
 (setq sml/shorten-modes t)
+
+;; Make sure I notice when I'm in
+(add-to-list 'rm-text-properties '(" Sp/s" 'face 'font-lock-warning-face))
+
 ;; Magit warnings OFF
 (setq magit-last-seen-setup-instructions "1.4.0")
 

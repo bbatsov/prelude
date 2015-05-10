@@ -220,6 +220,17 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(org-code ((t (:foreground ,rhombus-orange))))
    `(org-verbatim ((t (:inherit org-code))))
 
+   ;; >>>>> mu4e
+   `(mu4e-cited-1-face ((t (:foreground ,rhombus-blue    :slant italic))))
+   `(mu4e-cited-2-face ((t (:foreground ,rhombus-green :slant italic))))
+   `(mu4e-cited-3-face ((t (:foreground ,rhombus-blue  :slant italic))))
+   `(mu4e-cited-4-face ((t (:foreground ,rhombus-green   :slant italic))))
+   `(mu4e-cited-5-face ((t (:foreground ,rhombus-blue  :slant italic))))
+   `(mu4e-cited-6-face ((t (:foreground ,rhombus-green :slant italic))))
+   `(mu4e-cited-7-face ((t (:foreground ,rhombus-blue    :slant italic))))
+   `(mu4e-replied-face ((t (:foreground ,rhombus-bg+1))))
+   `(mu4e-trashed-face ((t (:foreground ,rhombus-bg+1 :strike-through t))))
+
    ;; >>>>> elpy and ipython
    `(highlight-indentation-face ((t (:background ,rhombus-bg))))
    `(comint-highlight-prompt ((t (:inherit eshell-prompt))))
