@@ -5,7 +5,7 @@
 # binding: direct-keybinding
 # expand-env: ((yas-indent-line 'fixed))
 # --
-# Chronos configuration for `(buffer-name)`
+# Chronos configuration for ${1:`(buffer-name)`}
 ---
 name: $1
 command: "$2"

@@ -38,9 +38,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(helm-ff-directory ((t (:background "gray0" :foreground "DarkRed"))))
- '(helm-selection ((t (:background "gray14"))))
- '(helm-source-header ((t (:background "DarkOrange4" :foreground "white" :weight bold :height 1.3 :family "Sans Serif"))))
  '(jabber-chat-prompt-foreign ((t (:foreground "steel blue" :weight bold))))
  '(jabber-chat-prompt-local ((t (:foreground "light gray" :weight bold)))))
 
@@ -92,7 +89,9 @@
                                   "/jsx-configs.el"
                                   "/jabber-configs.el"
                                   "/web-mode-configs.el"
-                                  "/flip-tables.el"))
+                                  "/flip-tables.el"
+                                  "/custom-fns.el"
+                                  "/mu4e-configs.el"))
 
 (mapc (lambda (rmd-file-name)
         (load (concat prelude-personal-dir rmd-file-name)))
@@ -101,7 +100,7 @@
 ;; PCRE Regexes
 (rxt-global-mode)
 
-;;; Smart Mode Line
+;;; Smart Mode Line and rich-minority-mode
 (sml/setup)
 (which-function-mode -1)
 (rich-minority-mode 1)
@@ -116,6 +115,10 @@
 (setq sml/shorten-modes t)
 
 (add-to-list 'sml/replacer-regexp-list '("src/main/") t)
+
+;; Make sure I notice when I'm in
+(add-to-list 'rm-text-properties '(" Sp/s" 'face 'font-lock-warning-face))
+
 ;; Magit warnings OFF
 (setq magit-last-seen-setup-instructions "1.4.0")
 
@@ -162,15 +165,15 @@
                           (company-mode)))
 
 
-;; COLORS
-(require 'color)
-(let ((bg (face-attribute 'default :background)))
-  (custom-set-faces
-   `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
-   `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
-   `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
-   `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
-   `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
+;; Disabling this; I think I've done this better in Rhombus
+;; (require 'color)
+;; (let ((bg (face-attribute 'default :background)))
+;;   (custom-set-faces
+;;    `(company-tooltip ((t (:inherit default :background ,(color-lighten-name bg 2)))))
+;;    `(company-scrollbar-bg ((t (:background ,(color-lighten-name bg 10)))))
+;;    `(company-scrollbar-fg ((t (:background ,(color-lighten-name bg 5)))))
+;;    `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+;;    `(company-tooltip-common ((t (:inherit font-lock-constant-face))))))
 
 ;; Not convinced this is helping.
 (setq company-idle-delay .4)
@@ -187,17 +190,6 @@
 (sp-local-pair 'org-mode "~" "~")
 (sp-local-pair 'org-mode "/" "/")
 (sp-local-pair 'org-mode "*" "*")
-
-;;; Support for Marked.app -- assumes you're on a Mac,
-;;; and have Marked.app installed.
-(defun markdown-preview-file ()
-  "run Marked on the current file and revert the buffer"
-  (interactive)
-  (shell-command
-   (format "open -a /Applications/Marked.app %s"
-           (shell-quote-argument (buffer-file-name))))
-  )
-(global-set-key (kbd "C-c m") 'markdown-preview-file)
 
 ;;; yasnippet
 (yas-global-mode 1)
@@ -230,41 +222,6 @@
 ;;; Polymode for markdown
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown" . poly-markdown-mode))
-
-;;; A handy-dandy function for rotating windows
-(defun toggle-window-split ()
-  (interactive)
-  (if (= (count-windows) 2)
-      (let* ((this-win-buffer (window-buffer))
-             (next-win-buffer (window-buffer (next-window)))
-             (this-win-edges (window-edges (selected-window)))
-             (next-win-edges (window-edges (next-window)))
-             (this-win-2nd (not (and (<= (car this-win-edges)
-                                         (car next-win-edges))
-                                     (<= (cadr this-win-edges)
-                                         (cadr next-win-edges)))))
-             (splitter
-              (if (= (car this-win-edges)
-                     (car (window-edges (next-window))))
-                  'split-window-horizontally
-                'split-window-vertically)))
-        (delete-other-windows)
-        (let ((first-win (selected-window)))
-          (funcall splitter)
-          (if this-win-2nd (other-window 1))
-          (set-window-buffer (selected-window) this-win-buffer)
-          (set-window-buffer (next-window) next-win-buffer)
-          (select-window first-win)
-          (if this-win-2nd (other-window 1))))))
-
-(global-set-key (kbd "C-x |") 'toggle-window-split)
-
-;;; Put in a nicely formatted Today
-(defun insert-iso-date ()
-  (interactive)
-  (insert (format-time-string "%Y-%m-%d" (current-time))))
-(global-set-key (kbd "C-c C-d") 'insert-iso-date)
-
 
 (provide 'custom)
 
