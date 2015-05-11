@@ -20,19 +20,27 @@
 ;; Make mu4e the default user agent
 (setq mail-user-agent 'mu4e-user-agent)
 
+;; mu4e mail dirs
+(require 'mu4e-maildirs-extension)
+(mu4e-maildirs-extension)
+
 ;; shortcuts
 (setq mu4e-maildir-shortcuts
-    '( ("/INBOX"               . ?i)
-       ("/[Gmail].Sent Mail"   . ?s)))
+      '(("/gastove@gmail.com/INBOX"               . ?i)
+        ("/gastove@gmail.com/[Gmail].Important"   . ?I)
+        ("/gastove@gmail.com/[Gmail].Sent Mail"   . ?s)))
 
 ;; something about ourselves
 (setq
  user-mail-address "gastove@gmail.com"
  user-full-name  "Ross Donaldson"
-   mu4e-compose-signature
-    (concat
-      "Cheers,\n"
-      "Ross\n"))
+ mu4e-compose-signature
+ (concat
+  "Cheers,\n"
+  "Ross\n"))
+
+;; ISO date format
+(setq mu4e-headers-date-format "%Y-%m-%d")
 
 ;; show images
 (setq mu4e-show-images t)
@@ -52,16 +60,16 @@
 
 ;; spell check
 (add-hook 'mu4e-compose-mode-hook
-        (defun my-do-compose-stuff ()
-           "My settings for message composition."
-           ;;(set-fill-column 80)
-           ;; (flyspell-mode)
-           ))
+          (defun my-do-compose-stuff ()
+            "My settings for message composition."
+            ;;(set-fill-column 80)
+            ;; (flyspell-mode)
+            ))
 
 ;; add option to view html message in a browser
 ;; `aV` in view to activate
 (add-to-list 'mu4e-view-actions
-  '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+             '("ViewInBrowser" . mu4e-action-view-in-browser) t)
 
 ;; fetch mail every 10 mins
 (setq mu4e-update-interval 600)
