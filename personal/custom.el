@@ -75,7 +75,8 @@
                             persp-projectile
                             column-enforce-mode
                             smart-mode-line
-                            rich-minority))
+                            rich-minority
+                            mu4e-maildirs-extension))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)

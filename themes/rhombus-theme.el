@@ -220,6 +220,19 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(org-code ((t (:foreground ,rhombus-orange))))
    `(org-verbatim ((t (:inherit org-code))))
 
+   ;; >>>>> message-mode
+   `(message-cited-text ((t (:inherit font-lock-comment-face))))
+   `(message-header-name ((t (:foreground ,rhombus-purple))))
+   `(message-header-other ((t (:foreground ,rhombus-violet))))
+   `(message-header-to ((t (:foreground ,rhombus-pink :weight bold))))
+   `(message-header-from ((t (:foreground ,rhombus-violet-2 :weight bold))))
+   `(message-header-cc ((t (:foreground ,rhombus-yellow :weight bold))))
+   `(message-header-newsgroups ((t (:foreground ,rhombus-yellow :weight bold))))
+   `(message-header-subject ((t (:foreground ,rhombus-orange :weight bold))))
+   `(message-header-xheader ((t (:foreground ,rhombus-green))))
+   `(message-mml ((t (:foreground ,rhombus-yellow :weight bold))))
+   `(message-separator ((t (:inherit font-lock-comment-face))))
+
    ;; >>>>> mu4e
    `(mu4e-cited-1-face ((t (:foreground ,rhombus-blue    :slant italic))))
    `(mu4e-cited-2-face ((t (:foreground ,rhombus-green :slant italic))))
@@ -228,8 +241,9 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(mu4e-cited-5-face ((t (:foreground ,rhombus-blue  :slant italic))))
    `(mu4e-cited-6-face ((t (:foreground ,rhombus-green :slant italic))))
    `(mu4e-cited-7-face ((t (:foreground ,rhombus-blue    :slant italic))))
-   `(mu4e-replied-face ((t (:foreground ,rhombus-bg+1))))
-   `(mu4e-trashed-face ((t (:foreground ,rhombus-bg+1 :strike-through t))))
+   `(mu4e-replied-face ((t (:foreground ,rhombus-violet-2))))
+   `(mu4e-trashed-face ((t (:foreground ,rhombus-dull-red :strike-through t))))
+   `(mu4e-header-highlight-face ((t (:background ,rhombus-hl :underline t))))
 
    ;; >>>>> elpy and ipython
    `(highlight-indentation-face ((t (:background ,rhombus-bg))))
