@@ -105,13 +105,17 @@
 (sml/setup)
 (which-function-mode -1)
 (rich-minority-mode 1)
-(setq rm-blacklist '(" yas"
+(setq rm-blacklist '(" MRev"
+                     " yas"
                      " Helm"
                      " company"
                      " guru"
                      " Pre"))
+
 (setq sml/shorten-directory t)
 (setq sml/shorten-modes t)
+
+(add-to-list 'sml/replacer-regexp-list '("src/main/") t)
 ;; Magit warnings OFF
 (setq magit-last-seen-setup-instructions "1.4.0")
 
