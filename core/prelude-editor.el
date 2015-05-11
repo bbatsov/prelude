@@ -260,10 +260,10 @@ The body of the advice is in BODY."
 (projectile-global-mode t)
 
 ;; avy allows us to effectively navigate to visible things
-(require 'avy-jump)
+(require 'avy)
 (setq avy-background t)
-(setq avy-goto-char-style 'at)
-(setq avy-goto-word-style 'at)
+(setq avy-style 'at-full)
+(setq avy-style 'at-full)
 
 ;; anzu-mode enhances isearch & query-replace by showing total matches and current match position
 (require 'anzu)
