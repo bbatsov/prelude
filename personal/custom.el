@@ -115,7 +115,14 @@
 (setq sml/shorten-directory t)
 (setq sml/shorten-modes t)
 
-(add-to-list 'sml/replacer-regexp-list '("src/main/") t)
+;; Java and scala package names are infinite and terrible; shorten them.
+(add-to-list 'sml/replacer-regexp-list '("^~/Code/" ":CODE:") t)
+(add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/main/java/" ":SMJ:") t)
+(add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/test/java/" ":STJ:") t)
+(add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/main/scala/" ":SMS:") t)
+(add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/test/scala/" ":STS:") t)
+(add-to-list 'sml/replacer-regexp-list '("^:SM[JS]:com/urbanairship/\\(.*\\)/" ":M:\\1:") t)
+(add-to-list 'sml/replacer-regexp-list '("^:ST[JS]:com/urbanairship/\\(.*\\)/" ":T:\\1:") t)
 
 ;; Make sure I notice when I'm in
 (add-to-list 'rm-text-properties '(" Sp/s" 'face 'font-lock-warning-face))
