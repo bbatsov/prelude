@@ -4,14 +4,24 @@
 ;; Borrowed, gratefully, from http://kirang.in/2014/11/13/emacs-as-email-client-with-offlineimap-and-mu4e-on-osx/
 ;;; Code:
 
+;; If I want multiple accounts, need to manage these:
+;; (setq mu4e-sent-folder "/Account1/Saved Items" ;; check
+;;      mu4e-drafts-folder "/Account1/Drafts"     ;; check
+;;      user-mail-address "my.address@account1.tld" ;; check
+;;      smtpmail-default-smtp-server "smtp.account1.tld" ;; check
+;;      smtpmail-local-domain "account1.tld"
+;;      smtpmail-smtp-server "smtp.account1.tld" ;; check
+;;      smtpmail-stream-type starttls
+;;      smtpmail-smtp-service 25)
+
 ;; Re-enable C-x m for email (nerfs eshell, which I never use)
 (global-set-key (kbd "C-x m") 'compose-mail)
 
 (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
 (require 'mu4e)
 (setq mu4e-maildir "~/.Mail")
-(setq mu4e-drafts-folder "/[Gmail].Drafts")
-(setq mu4e-sent-folder   "/[Gmail].Sent Mail")
+(setq mu4e-drafts-folder "/gastove@gmail.com/[Gmail].Drafts")
+(setq mu4e-sent-folder   "/gastove@gmail.com/[Gmail].Sent Mail")
 ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
 (setq mu4e-sent-messages-behavior 'delete)
 ;; allow for updating mail using 'U' in the main view:
@@ -59,12 +69,12 @@
 (setq mu4e-html2text-command "textutil -stdin -format html -convert txt -stdout")
 
 ;; spell check
-(add-hook 'mu4e-compose-mode-hook
-          (defun my-do-compose-stuff ()
-            "My settings for message composition."
-            ;;(set-fill-column 80)
-            ;; (flyspell-mode)
-            ))
+;; (add-hook 'mu4e-compose-mode-hook
+;;           (defun my-do-compose-stuff ()
+;;             "My settings for message composition."
+;;             ;;(set-fill-column 80)
+;;             ;; (flyspell-mode)
+;;             ))
 
 ;; add option to view html message in a browser
 ;; `aV` in view to activate
