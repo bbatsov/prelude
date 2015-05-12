@@ -66,7 +66,8 @@
 ;;   - html2markdown | grep -v '&nbsp_place_holder;' (Requires html2text pypi)
 ;;   - w3m -dump -cols 80 -T text/html
 ;;   - view in browser (provided below)
-(setq mu4e-html2text-command "textutil -stdin -format html -convert txt -stdout")
+;; (setq mu4e-html2text-command "textutil -stdin -format html -convert txt -stdout")
+(setq mu4e-html2text-command "pandoc -f html -t plain")
 
 ;; spell check
 ;; (add-hook 'mu4e-compose-mode-hook
