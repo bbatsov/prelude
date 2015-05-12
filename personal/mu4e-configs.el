@@ -67,8 +67,9 @@
 ;;   - w3m -dump -cols 80 -T text/html
 ;;   - view in browser (provided below)
 ;; (setq mu4e-html2text-command "textutil -stdin -format html -convert txt -stdout")
-(setq mu4e-html2text-command "pandoc -f html -t plain")
-
+;(setq mu4e-html2text-command "pandoc -f html -t plain")
+(require 'mu4e-contrib)
+(setq mu4e-html2text-command 'mu4e-shr2text)
 ;; spell check
 ;; (add-hook 'mu4e-compose-mode-hook
 ;;           (defun my-do-compose-stuff ()
