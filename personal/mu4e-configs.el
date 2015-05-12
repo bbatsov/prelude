@@ -93,8 +93,8 @@
       smtpmail-smtp-service 587)
 
 ;; Tweak bookmarked querries
-(add-to-list 'mu4e-bookmarks '("flag:unread AND date:today..now" "Today's Unreads" ?h))
 (add-to-list 'mu4e-bookmarks '("to:ross.donaldson@urbanairship.com OR to:ross@urbanairship.com AND flag:unread AND date:today..now" "Today's work unreads" ?i))
+(add-to-list 'mu4e-bookmarks '("flag:unread AND date:today..now" "Today's Unreads" ?h))
 
 ;; Switch accounts
 
