@@ -127,8 +127,13 @@
 ;; Make sure I notice when I'm in
 (add-to-list 'rm-text-properties '(" Sp/s" 'face 'font-lock-warning-face))
 
-;; Magit warnings OFF
+;;; Magit warnings OFF
 (setq magit-last-seen-setup-instructions "1.4.0")
+
+;;; wgrep-ag support
+(autoload 'wgrep-ag-setup "wgrep-ag")
+(add-hook 'ag-mode-hook 'wgrep-ag-setup)
+(add-hook 'helm-ag-mode-hook 'wgrep-ag-setup)
 
 ;;; Whitespace and Auto-Fill
 ;; Set auto-fill to 80 characters by default instead of 70
