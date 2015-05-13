@@ -76,7 +76,8 @@
                             column-enforce-mode
                             smart-mode-line
                             rich-minority
-                            mu4e-maildirs-extension))
+                            mu4e-maildirs-extension
+                            bookmark+))
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
@@ -235,6 +236,9 @@
 ;;; Polymode for markdown
 (add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown" . poly-markdown-mode))
+
+;;----------------------------------Bookmark+-----------------------------------
+(setq bookmark-default-file "~/Dropbox/org-docs/bookmarks.org")
 
 (provide 'custom)
 
