@@ -1,0 +1,22 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(#1=(#("SPORTS!" 0 7
+      (bmkp-full-record #1#))
+    (filename . "   - no file -")
+    (location . "http://1.bp.blogspot.com/-ogDuk2V_blA/UmuchUtlQWI/AAAAAAAAOeY/XLUCK7J01dU/s1600/sports.gif")
+    (handler . bmkp-jump-url-browse))
+#1=(#("regexp-dance" 0 12
+      (bmkp-full-record #1#))
+    (filename . "   - no file -")
+    (location . "http://www.reactiongifs.com/r/bbym.gif")
+    (handler . bmkp-jump-url-browse))
+#1=(#("catte dance" 0 11
+      (bmkp-full-record #1#))
+    (time 21843 52851 383191 594000)
+    (visits . 0)
+    (filename . "   - no file -")
+    (location . "http://i.imgur.com/TFec7NH.gif")
+    (handler . bmkp-jump-url-browse))
+)
