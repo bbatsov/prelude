@@ -238,7 +238,7 @@
 (add-to-list 'auto-mode-alist '("\\.markdown" . poly-markdown-mode))
 
 ;;----------------------------------Bookmark+-----------------------------------
-(setq bookmark-default-file "~/Dropbox/org-docs/bookmarks.org")
+(require 'bookmark+)
 
 (provide 'custom)
 
