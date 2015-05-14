@@ -95,13 +95,19 @@
       smtpmail-smtp-service 587)
 
 ;; Tweak bookmarked querries
-(add-to-list 'mu4e-bookmarks `(,(concat "flag:unread "
-                                        "AND date:today..now "
-                                        "NOT maildir:/ross@urbanairship.com/Githubs "
-                                        "NOT maildir:'/ross@urbanairship.com/Sales Deals' "
-                                        "AND to:ross.donaldson@urbanairship.com")
+(add-to-list 'mu4e-bookmarks `(,(string-join
+                                 '("flag:unread"
+                                   "AND date:today..now"
+                                   "NOT maildir:/ross@urbanairship.com/Githubs"
+                                   "NOT maildir:'/ross@urbanairship.com/Sales Deals'"
+                                   "AND to:ross.donaldson@urbanairship.com")
+                                 " ")
                                "Today's work unreads" ?i))
-(add-to-list 'mu4e-bookmarks '("flag:unread AND m:/gastove@gmail.com/INBOX AND date:today..now" "Today's Personal Unreads" ?h))
+(add-to-list 'mu4e-bookmarks `(,(string-join
+                                 '("flag:unread"
+                                   "AND m:/gastove@gmail.com/INBOX"
+                                   "AND date:today..now")
+                                 " ") "Today's Personal Unreads" ?h))
 
 ;; Switch accounts
 
