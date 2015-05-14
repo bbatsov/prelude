@@ -7,7 +7,7 @@
 ;; > In-Progress states: TODO, DOING, BLOCKED
 ;; > Finished states:    DONE, IMPOSSIBLE, CANCELLED
 (setq org-todo-keywords
-      '((type "TODO" "DOING" "BLOCKED" "|" "CANCELLED" "IMPOSSIBLE" "DONE")))
+      '((type "TODO" "DOING" "BLOCKED" "|" "DONE" "CANCELLED" "IMPOSSIBLE")))
 
 (setq org-todo-keyword-faces
      '(("TODO" . org-todo)
