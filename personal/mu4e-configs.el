@@ -97,10 +97,9 @@
 ;; Tweak bookmarked querries
 (add-to-list 'mu4e-bookmarks `(,(concat "flag:unread "
                                         "AND date:today..now "
-                                        "NOT maildir:ross@urbanairship.com/Githubs "
-                                        "NOT maildir:'ross@urbanairship.com/Sales Deals' "
-                                        "AND to:ross.donaldson@urbanairship.com "
-                                        "OR to:ross@urbanairship.com")
+                                        "NOT maildir:/ross@urbanairship.com/Githubs "
+                                        "NOT maildir:'/ross@urbanairship.com/Sales Deals' "
+                                        "AND to:ross.donaldson@urbanairship.com")
                                "Today's work unreads" ?i))
 (add-to-list 'mu4e-bookmarks '("flag:unread AND date:today..now" "Today's Unreads" ?h))
 
