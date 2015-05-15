@@ -499,6 +499,13 @@ Or you can use another theme altogether by adding something in `personal/preload
   install it from MELPA first (`M-x package-install RET
   solarized-theme`).
 
+Finally, if you don't want any theme at all, you can add this to your
+`personal/preload`:
+
+```lisp
+(setq prelude-theme nil)
+```
+
 ### Personalizing
 
 Fork the official Prelude repo and add your own touch to it. You're advised to avoid changing stuff outside of the
