@@ -285,6 +285,10 @@ there's a region, all lines that region covers will be duplicated."
   (interactive)
   (byte-recompile-directory prelude-dir 0))
 
+(defun prelude-find-alternate-file-as-root (filename)
+  "Wraps `find-alternate-file' with opening a file as root."
+  (find-alternate-file (concat "/sudo:root@localhost:" filename)))
+
 (require 'ido)
 (defun prelude-sudo-edit (&optional arg)
   "Edit currently visited file as root.
@@ -296,15 +300,16 @@ buffer is not visiting a file."
   (if (or arg (not buffer-file-name))
       (find-file (concat "/sudo:root@localhost:"
                          (ido-read-file-name "Find file(as root): ")))
-    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+    (prelude-find-alternate-file-as-root buffer-file-name)))
 
-(defadvice ido-find-file (after find-file-sudo activate)
+(defun prelude-reopen-as-root ()
   "Find file as root if necessary."
   (unless (or (tramp-tramp-file-p buffer-file-name)
               (equal major-mode 'dired-mode)
               (not (file-exists-p (file-name-directory buffer-file-name)))
               (file-writable-p buffer-file-name))
-    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+    (prelude-find-alternate-file-as-root buffer-file-name)))
+(add-hook 'find-file-hook 'prelude-reopen-as-root)
 
 (defun prelude-start-or-switch-to (function buffer-name)
   "Invoke FUNCTION if there is no buffer with BUFFER-NAME.
