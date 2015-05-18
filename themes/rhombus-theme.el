@@ -262,7 +262,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(sml/folder ((t (:foreground ,rhombus-charcoal))))
    `(sml/filename ((t (:foreground ,rhombus-grey :weight normal))))
    `(sml/prefix   ((t (:foreground ,rhombus-grey :weight normal))))
-   `(sml/line-number ((t (:foreground ,rhombus-purple :weight normal))))
+   `(sml/line-number ((t (:foreground ,rhombus-blue :weight normal))))
    `(sml/col-number ((t (:foreground ,rhombus-violet-1 :weight normal))))
    `(sml/read-only ((t (:foreground ,rhombus-charcoal))))
    `(sml/outside-modified ((t (:foreground ,rhombus-dark-red))))
