@@ -240,6 +240,11 @@
 ;;----------------------------------Bookmark+-----------------------------------
 (require 'bookmark+)
 
+;;-----------------------------------Sauron-------------------------------------
+(require 'sauron)
+(setq sauron-modules '(sauron-jabber))
+(setq sauron-separate-frame nil)
+
 (provide 'custom)
 
 ;;; custom.el ends here
