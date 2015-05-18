@@ -185,7 +185,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(org-checkbox ((t (:foreground ,rhombus-fg+1 :foreground ,rhombus-sand
                                    :box (:line-width 1 :style released-button)))))
    `(org-done ((t (:foreground ,rhombus-dark-brown :strike-through t))))
-   `(org-todo ((t (:foreground ,rhombus-light-brown))))
+   `(org-todo ((t (:foreground ,rhombus-light-brown :bolt t))))
    `(org-formula ((t (:foreground ,rhombus-violet))))
    `(org-headline-done ((t (:strike-through t :foreground ,rhombus-charcoal))))
    `(org-hide ((t (:foreground ,rhombus-bg))))
@@ -234,14 +234,16 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(message-separator ((t (:inherit font-lock-comment-face))))
 
    ;; >>>>> mu4e
-   `(mu4e-cited-1-face ((t (:foreground ,rhombus-blue    :slant italic))))
-   `(mu4e-cited-2-face ((t (:foreground ,rhombus-green :slant italic))))
-   `(mu4e-cited-3-face ((t (:foreground ,rhombus-blue  :slant italic))))
-   `(mu4e-cited-4-face ((t (:foreground ,rhombus-green   :slant italic))))
-   `(mu4e-cited-5-face ((t (:foreground ,rhombus-blue  :slant italic))))
-   `(mu4e-cited-6-face ((t (:foreground ,rhombus-green :slant italic))))
-   `(mu4e-cited-7-face ((t (:foreground ,rhombus-blue    :slant italic))))
-   `(mu4e-replied-face ((t (:foreground ,rhombus-violet-2))))
+   `(mu4e-cited-1-face ((t (:foreground ,rhombus-violet :slant italic))))
+   `(mu4e-cited-2-face ((t (:foreground ,rhombus-violet-1 :slant italic))))
+   `(mu4e-cited-3-face ((t (:foreground ,rhombus-violet :slant italic))))
+   `(mu4e-cited-4-face ((t (:foreground ,rhombus-violet-1   :slant italic))))
+   `(mu4e-cited-5-face ((t (:foreground ,rhombus-violet  :slant italic))))
+   `(mu4e-cited-6-face ((t (:foreground ,rhombus-violet-1 :slant italic))))
+   `(mu4e-cited-7-face ((t (:foreground ,rhombus-violet    :slant italic))))
+   `(mu4e-unread-face ((t (:foreground ,rhombus-orange :bold t))))
+   `(mu4e-replied-face ((t (:foreground ,rhombus-dark-brown))))
+   `(mu4e-moved-face ((t (:foreground ,rhombus-bronze))))
    `(mu4e-trashed-face ((t (:foreground ,rhombus-dull-red :strike-through t))))
    `(mu4e-header-highlight-face ((t (:background ,rhombus-hl :underline t))))
 
@@ -276,7 +278,43 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(sml/modes ((t (:foreground ,rhombus-violet+1))))
    `(sml/position-percentage ((t (:foreground ,rhombus-charcoal))))
 
-   ;; >>>>> FlyCheck
+   ;;-------------------------------Jabber-Mode--------------------------------
+   `(jabber-roster-user-away ((t (:foreground ,rhombus-dark-brown))))
+   `(jabber-roster-user-online ((t (:foreground ,rhombus-green))))
+   `(jabber-roster-user-dnd ((t (:foreground ,rhombus-red))))
+   `(jabber-rare-time-face ((t (:foreground ,rhombus-charcoal))))
+   `(jabber-chat-prompt-local ((t (:foreground ,rhombus-orange))))
+   `(jabber-chat-text-local ((t (:foreground ,rhombus-orange-1))))
+   `(jabber-chat-prompt-foreign ((t (:foreground ,rhombus-purple))))
+   `(jabber-activity-face((t (:foreground ,rhombus-red))))
+   `(jabber-activity-personal-face ((t (:foreground ,rhombus-blue))))
+   `(jabber-title-small ((t (:height 1.1 :weight bold))))
+   `(jabber-title-medium ((t (:height 1.2 :weight bold))))
+   `(jabber-title-large ((t (:height 1.3 :weight bold))))
+
+
+   ;;-----------------------------------Erc-------------------------------------
+   `(erc-action-face ((t (:inherit erc-default-face))))
+   `(erc-bold-face ((t (:weight bold))))
+   `(erc-current-nick-face ((t (:foreground ,rhombus-red :weight bold))))
+   `(erc-dangerous-host-face ((t (:inherit font-lock-warning-face))))
+   `(erc-default-face ((t (:foreground ,rhombus-fg))))
+   `(erc-direct-msg-face ((t (:inherit erc-default))))
+   `(erc-error-face ((t (:inherit font-lock-warning-face))))
+   `(erc-fool-face ((t (:inherit erc-default))))
+   `(erc-highlight-face ((t (:inherit hover-highlight))))
+   `(erc-input-face ((t (:foreground ,rhombus-orange-1))))
+   `(erc-keyword-face ((t (:foreground ,rhombus-purple :weight bold))))
+   `(erc-nick-default-face ((t (:foreground ,rhombus-orange :weight bold))))
+   `(erc-my-nick-face ((t (:foreground ,rhombus-red :weight bold))))
+   `(erc-nick-msg-face ((t (:inherit erc-default))))
+   `(erc-notice-face ((t (:foreground ,rhombus-violet-2))))
+   `(erc-pal-face ((t (:foreground ,rhombus-orange :weight bold))))
+   `(erc-prompt-face ((t (:foreground ,rhombus-orange :background ,rhombus-bg :weight bold))))
+   `(erc-timestamp-face ((t (:foreground ,rhombus-charcoal))))
+   `(erc-underline-face ((t (:underline t))))
+
+   ;;--------------------------------FlyCheck-----------------------------------
    `(flycheck-error
      ((((supports :underline (:style wave)))
        (:underline (:style wave :color ,rhombus-red) :inherit unspecified))
@@ -378,27 +416,6 @@ Also bind `class' to ((class color) (min-colors 89))."
    ;; `(whitespace-indentation ((t (:background ,rhombus-yellow :foreground ,rhombus-red))))
    ;; `(whitespace-empty ((t (:background ,rhombus-yellow))))
    ;; `(whitespace-space-after-tab ((t (:background ,rhombus-yellow :foreground ,rhombus-red))))
-
-   ;; >>>>> erc
-   `(erc-action-face ((t (:inherit erc-default-face))))
-   `(erc-bold-face ((t (:weight bold))))
-   `(erc-current-nick-face ((t (:foreground ,rhombus-red :weight bold))))
-   `(erc-dangerous-host-face ((t (:inherit font-lock-warning-face))))
-   `(erc-default-face ((t (:foreground ,rhombus-fg))))
-   `(erc-direct-msg-face ((t (:inherit erc-default))))
-   `(erc-error-face ((t (:inherit font-lock-warning-face))))
-   `(erc-fool-face ((t (:inherit erc-default))))
-   `(erc-highlight-face ((t (:inherit hover-highlight))))
-   `(erc-input-face ((t (:foreground ,rhombus-orange-1))))
-   `(erc-keyword-face ((t (:foreground ,rhombus-purple :weight bold))))
-   `(erc-nick-default-face ((t (:foreground ,rhombus-orange :weight bold))))
-   `(erc-my-nick-face ((t (:foreground ,rhombus-red :weight bold))))
-   `(erc-nick-msg-face ((t (:inherit erc-default))))
-   `(erc-notice-face ((t (:foreground ,rhombus-violet-2))))
-   `(erc-pal-face ((t (:foreground ,rhombus-orange :weight bold))))
-   `(erc-prompt-face ((t (:foreground ,rhombus-orange :background ,rhombus-bg :weight bold))))
-   `(erc-timestamp-face ((t (:foreground ,rhombus-charcoal))))
-   `(erc-underline-face ((t (:underline t))))
 
    ))
 
