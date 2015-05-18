@@ -2,8 +2,15 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("SPORTS!" 0 7
+(#1=(#("im da bes" 0 9
       (bmkp-full-record #1#))
+    (filename . "   - no file -")
+    (location . "https://38.media.tumblr.com/tumblr_m1ie2julm11qcv34vo1_500.gif")
+    (handler . bmkp-jump-url-browse))
+#1=(#("SPORTS!" 0 7
+      (bmkp-full-record #1#))
+    (time 21843 54494 6767 446000)
+    (visits . 3)
     (filename . "   - no file -")
     (location . "http://1.bp.blogspot.com/-ogDuk2V_blA/UmuchUtlQWI/AAAAAAAAOeY/XLUCK7J01dU/s1600/sports.gif")
     (handler . bmkp-jump-url-browse))
