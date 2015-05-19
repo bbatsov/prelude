@@ -92,7 +92,8 @@
       smtpmail-stream-type 'starttls
       smtpmail-default-smtp-server "smtp.gmail.com"
       smtpmail-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-service 587)
+      smtpmail-smtp-service 587
+      smtpmail-smtp-user "gastove")
 
 ;; Tweak bookmarked querries
 (add-to-list 'mu4e-bookmarks `(,(string-join
@@ -115,11 +116,13 @@
   '(("gastove@gmail.com"
      (mu4e-drafts-folder "/gastove@gmail.com/[Gmail].Drafts")
      (mu4e-sent-folder   "/gastove@gmail.com/[Gmail].Sent Mail")
-     (user-mail-address "gastove@gmail.com"))
+     (user-mail-address "gastove@gmail.com")
+     (smtpmail-smtp-user "gastove"))
     ("ross@urbanairship.com"
      (mu4e-drafts-folder "/ross@urbanairship.com/[Gmail].Drafts")
      (mu4e-sent-folder   "/ross@urbanairship.com/[Gmail].Sent Mail")
-     (user-mail-address "ross@urbanairship.com"))))
+     (user-mail-address "ross@urbanairship.com")
+     (smtpmail-smtp-user "ross.donaldson@urbanairship.com"))))
 
 (defun my-mu4e-set-account ()
   "Set the account for composing a message."
