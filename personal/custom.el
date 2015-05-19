@@ -241,8 +241,19 @@
 
 ;;-----------------------------------Sauron-------------------------------------
 (require 'sauron)
-(setq sauron-modules '(sauron-jabber))
+;; 1: On OSX, there's no dbus, so don't try to load it.
+;; 2: On Ubuntu, there _is_ dbus, so use it to get mu new mail updates from cron
+(if (eq system-type 'darwin)
+    (setq sauron-modules '(sauron-jabber sauron-erc sauron-org sauron-twittering sauron-notifications))
+  (setq sauron-dbus-cookie 1))
+
 (setq sauron-separate-frame nil)
+
+(add-hook 'sauron-event-block-functions
+          (lambda (origin prio msg &optional props)
+            (and
+             (eq 'twittering origin)
+             (string-match "^[[:digit:]]* new tweets" msg))))
 
 (provide 'custom)
 
