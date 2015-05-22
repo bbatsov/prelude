@@ -405,7 +405,7 @@ Doesn't mess with special buffers."
 (defun prelude-tip-of-the-day ()
   "Display a random entry from `prelude-tips'."
   (interactive)
-  (unless (window-minibuffer-p)
+  (when (and prelude-tips (not (window-minibuffer-p)))
     ;; pick a new random seed
     (random t)
     (message
