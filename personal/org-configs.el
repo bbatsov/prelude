@@ -1,7 +1,9 @@
 ;;; Org Mode
 
 ;; Make sure auto-fill-mode is on. Pretty much always need it.
-(add-hook 'org-mode-hook (lambda () (turn-on-auto-fill)))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (turn-on-auto-fill)))
 
 ;; TODO Keyword states:
 ;; > In-Progress states: TODO, DOING, BLOCKED
@@ -11,12 +13,12 @@
         (sequence "BLOCKED(b)" "|" "UNBLOCKED (u)" "CANCELLED(c)" "IMPOSSIBLE(i)")))
 
 (setq org-todo-keyword-faces
-     '(("TODO" . org-todo)
-       ("DOING" . org-todo)
-       ("BLOCKED" . org-warning)
-       ("CANCELLED" . org-done)
-       ("IMPOSSIBLE" . org-done)
-       ("DONE" . org-done)))
+      '(("TODO" . org-todo)
+        ("DOING" . org-todo)
+        ("BLOCKED" . org-warning)
+        ("CANCELLED" . org-done)
+        ("IMPOSSIBLE" . org-done)
+        ("DONE" . org-done)))
 
 ;; Support for Babel Mode code blocks
 ;; NOTE: requires the addition of the org elpa repo!
@@ -25,15 +27,26 @@
  'org-babel-load-languages
  '((python . t)
    (emacs-lisp .t)
-   (clojure . t)
-   ))
+   (clojure . t)))
+
+;; Smartparens pairs!
+(sp-local-pair 'org-mode "~" "~" :wrap "C-~")
+(sp-local-pair 'org-mode "/" "/")
+(sp-local-pair 'org-mode "*" "*" :wrap "C-*")
 
 ;; Config org export backends
 (setq org-export-backends
       `(beamer
         ascii
         markdown
-        deck))
+        deck
+        html))
+
+;; Export defaults: no table of contents, no numbered headers, don't convert ^
+;; or _ to superscripts
+(setq org-export-with-section-numbers nil
+      org-export-with-sub-superscripts nil
+      org-export-with-toc nil)
 
 ;; polymode
 (add-to-list 'auto-mode-alist '("\\.org" . poly-org-mode))
