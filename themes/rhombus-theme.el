@@ -178,7 +178,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(eshell-ls-special ((t (:foreground ,rhombus-blue :weight bold))))
    `(eshell-ls-symlink ((t (:foreground ,rhombus-link :weight bold))))
 
-   ;; >>>>> Org mode
+   ;;------------------------------- Org Mode ----------------------------------
    `(org-document-info-keyword ((t (:foreground ,rhombus-purple))))
    `(org-document-title ((t (:foreground ,rhombus-grey :height 1.50))))
    `(org-archived ((t (:foreground ,rhombus-fg :weight bold))))
@@ -203,21 +203,21 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(org-date ((t (:foreground ,rhombus-purple :underline t))))
    `(org-agenda-date-today  ((t (:foreground ,rhombus-grey :weight light :slant italic))))
    `(org-agenda-structure  ((t (:inherit font-lock-comment-face))))
-   ;; `(org-scheduled ((t (:foreground ,rhombus-green+4))))x
-   ;; `(org-scheduled-previously ((t (:foreground ,rhombus-red-4))))
-   ;; `(org-scheduled-today ((t (:foreground ,rhombus-blue+1))))
-   ;; `(org-sexp-date ((t (:foreground ,rhombus-blue+1 :underline t))))
-   ;; `(org-time-grid ((t (:foreground ,rhombus-orange))))
-   ;; `(org-upcoming-deadline ((t (:inherit font-lock-keyword-face))))
+   `(org-scheduled ((t (:foreground ,rhombus-green))))
+   `(org-scheduled-previously ((t (:foreground ,rhombus-red))))
+   `(org-scheduled-today ((t (:foreground ,rhombus-blue))))
+   `(org-sexp-date ((t (:foreground ,rhombus-blue :underline t))))
+   `(org-time-grid ((t (:foreground ,rhombus-orange))))
+   `(org-upcoming-deadline ((t (:inherit font-lock-keyword-face))))
    `(org-special-keyword ((t (:foreground ,rhombus-charcoal :weight normal))))
-   `(org-table ((t (:foreground ,rhombus-green))))
+   `(org-table ((t (:foreground ,rhombus-orange))))
    `(org-tag ((t (:bold t :foreground ,rhombus-orange :strike-through nil))))
    `(org-warning ((t (:bold t :foreground ,rhombus-pink :weight bold))))
    `(org-column ((t (:background ,"black"))))
    `(org-column-title ((t (:background ,"black" :foreground ,rhombus-green :underline t))))
    `(org-mode-line-clock ((t (:foreground ,rhombus-yellow))))
    `(org-footnote ((t (:foreground ,rhombus-link :underline t))))
-   `(org-code ((t (:foreground ,rhombus-orange))))
+   `(org-code ((t (:foreground ,rhombus-orange+1))))
    `(org-verbatim ((t (:inherit org-code))))
 
    ;; >>>>> message-mode
