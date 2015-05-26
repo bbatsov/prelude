@@ -13,4 +13,21 @@
  ;; don't indent like crazy.
  '(ruby-deep-arglist nil)
  ;; who uses rake to run rspec. honestly
- '(rspec-use-rake-when-possible nil))
+ '(rspec-use-rake-when-possible nil)
+ ;;;;
+ ;; # When using rspec snippets:
+ ;;
+ ;; describe do
+ ;;   it "is awesome" { true }
+ ;; end
+ ;;
+ ;; # instead of
+ ;;
+ ;; RSpec.describe do
+ ;;  RSpec.before do
+ ;;    self.gag_with_four_fingers
+ ;;  end
+ ;;  RSpec.it "is so terrible why would you" { true }
+ ;; end
+ ;;
+ '(rspec-expose-dsl-globally t))
