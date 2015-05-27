@@ -237,7 +237,8 @@
     (setq sauron-modules '(sauron-jabber sauron-erc sauron-org sauron-twittering sauron-notifications))
   (setq sauron-dbus-cookie 1))
 
-(setq sauron-separate-frame nil)
+(setq sauron-separate-frame nil
+      sauron-nick-insensitivity 300)
 
 (add-hook 'sauron-event-block-functions
           (lambda (origin prio msg &optional props)
