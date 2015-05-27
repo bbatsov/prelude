@@ -48,6 +48,18 @@
       org-export-with-sub-superscripts nil
       org-export-with-toc nil)
 
+;; Refiling defaults
+(setq org-refile-targets '((org-agenda-files :maxlevel . 3))
+      org-refile-allow-creating-parent-nodes 'confirm)
+
+;; For reasons I can't grok at all, Prelude seems to disable some org keyboard
+;; shortcuts. Let's fix that.
+(defun org-bindings ()
+  (define-key prelude-mode-map (kbd "C-c /") 'org-sparse-tree)
+  (define-key prelude-mode-map (kbd "C-S <RET>") 'org-insert-todo-heading-respect-content))
+
+(add-hook 'org-mode-hook 'org-bindings)
+
 ;; polymode
 (add-to-list 'auto-mode-alist '("\\.org" . poly-org-mode))
 
