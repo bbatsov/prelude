@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("im da bes" 0 9
+(#1=(#("koalafications" 0 14
+      (bmkp-full-record #1#))
+    (filename . "   - no file -")
+    (location . "http://weknowmemes.com/wp-content/uploads/2012/05/i-have-all-the-koalafications.jpg")
+    (handler . bmkp-jump-url-browse))
+#1=(#("im da bes" 0 9
       (bmkp-full-record #1#))
     (filename . "   - no file -")
     (location . "https://38.media.tumblr.com/tumblr_m1ie2julm11qcv34vo1_500.gif")
@@ -21,8 +26,8 @@
     (handler . bmkp-jump-url-browse))
 #1=(#("catte dance" 0 11
       (bmkp-full-record #1#))
-    (time 21843 52851 383191 594000)
-    (visits . 0)
+    (time 21850 37475 443288 0)
+    (visits . 1)
     (filename . "   - no file -")
     (location . "http://i.imgur.com/TFec7NH.gif")
     (handler . bmkp-jump-url-browse))
