@@ -56,7 +56,7 @@
 ;; shortcuts. Let's fix that.
 (defun org-bindings ()
   (define-key prelude-mode-map (kbd "C-c /") 'org-sparse-tree)
-  (define-key prelude-mode-map (kbd "C-S <RET>") 'org-insert-todo-heading-respect-content))
+  (define-key prelude-mode-map (kbd "C-S-RET") 'org-insert-todo-heading-respect-content))
 
 (add-hook 'org-mode-hook 'org-bindings)
 
