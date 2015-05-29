@@ -259,6 +259,12 @@ The body of the advice is in BODY."
 (setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
 (projectile-global-mode t)
 
+;; avy allows us to effectively navigate to visible things
+(require 'avy)
+(setq avy-background t)
+(setq avy-style 'at-full)
+(setq avy-style 'at-full)
+
 ;; anzu-mode enhances isearch & query-replace by showing total matches and current match position
 (require 'anzu)
 (diminish 'anzu-mode)
@@ -298,6 +304,7 @@ The body of the advice is in BODY."
   (interactive
    (list (not (region-active-p)))))
 
+(require 'tabify)
 (defmacro with-region-or-buffer (func)
   "When called with no active region, call FUNC on current buffer."
   `(defadvice ,func (before with-region-or-buffer activate compile)
