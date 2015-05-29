@@ -1,6 +1,7 @@
 ;;; Org Mode
 
 ;; Make sure auto-fill-mode is on. Pretty much always need it.
+(require 'org)
 (add-hook 'org-mode-hook
           (lambda ()
             (turn-on-auto-fill)))
@@ -56,7 +57,7 @@
 ;; shortcuts. Let's fix that.
 (defun org-bindings ()
   (define-key prelude-mode-map (kbd "C-c /") 'org-sparse-tree)
-  (define-key prelude-mode-map (kbd "C-S-RET") 'org-insert-todo-heading-respect-content))
+  (define-key prelude-mode-map [(control shift return)] 'org-insert-todo-heading-respect-content))
 
 (add-hook 'org-mode-hook 'org-bindings)
 
@@ -77,3 +78,7 @@
 
 ;; org-mime for composing emails
 (require 'org-mime)
+
+(provide 'org-configs)
+
+;;; org-configs ends her
