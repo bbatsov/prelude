@@ -1,4 +1,8 @@
-(prelude-require-packages '(bundler rspec-mode))
+(prelude-require-packages '(bundler rspec-mode rvm))
+
+;;use rvm
+(require 'rvm)
+(rvm-use-default)
 
 ;; rspec-mode makes you explicitly require snippets nowadays
 (eval-after-load 'rspec-mode
@@ -30,4 +34,6 @@
  ;;  RSpec.it "is so terrible why would you" { true }
  ;; end
  ;;
- '(rspec-expose-dsl-globally t))
+ '(rspec-expose-dsl-globally t)
+ ;; Turn off insane utf-8 comment insertion in Ruby files
+ '(ruby-insert-encoding-magic-comment nil))
