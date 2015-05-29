@@ -101,7 +101,7 @@
                                    "AND date:today..now"
                                    "NOT maildir:/ross@urbanairship.com/Githubs"
                                    "NOT maildir:'/ross@urbanairship.com/Sales Deals'"
-                                   "AND to:ross.donaldson@urbanairship.com")
+                                   "AND m:/ross@urbanairship.com/INBOX")
                                  " ")
                                "Today's work unreads" ?i))
 (add-to-list 'mu4e-bookmarks `(,(string-join
@@ -109,6 +109,14 @@
                                    "AND m:/gastove@gmail.com/INBOX"
                                    "AND date:today..now")
                                  " ") "Today's Personal Unreads" ?h))
+(add-to-list 'mu4e-bookmarks `(,(string-join
+                                 '("flag:unread"
+                                   "AND m:/gastove@gmail.com/INBOX"
+                                   "AND date:today..now"
+                                   "OR flag:unread"
+                                   "AND m:/ross@urbanairship.com/INBOX"
+                                   "AND date:today..now")
+                                 " ") "Today's Unreads" ?u))
 
 ;; Switch accounts
 
