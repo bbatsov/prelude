@@ -36,11 +36,10 @@
 
 ;; Config org export backends
 (setq org-export-backends
-      `(beamer
-        ascii
+      `(ascii
+        html
         markdown
-        deck
-        html))
+        deck))
 
 ;; Export defaults: no table of contents, no numbered headers, don't convert ^
 ;; or _ to superscripts
