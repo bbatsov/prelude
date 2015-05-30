@@ -220,6 +220,7 @@
 
 ;;; Scala
 ;; Ensime
+(require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 ;;; Polymode for markdown

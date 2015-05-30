@@ -61,8 +61,15 @@
   ;; default to SBCL on Linux and Windows
   (setq slime-default-lisp 'sbcl))
 
+;; Add fancy slime contribs
+(setq slime-contribs '(slime-fancy))
+
 (add-hook 'lisp-mode-hook (lambda () (run-hooks 'prelude-lisp-coding-hook)))
-(add-hook 'slime-repl-mode-hook (lambda () (run-hooks 'prelude-interactive-lisp-coding-hook)))
+;; rainbow-delimeters messes up colors in slime-repl, and doesn't seem to work
+;; anyway, so we won't use prelude-lisp-coding-defaults.
+(add-hook 'slime-repl-mode-hook (lambda ()
+                                  (smartparens-strict-mode +1)
+                                  (whitespace-mode -1)))
 
 (eval-after-load "slime"
   '(progn
