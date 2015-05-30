@@ -39,7 +39,7 @@
 (setq org-export-backends
       `(beamer
         ascii
-        markdown
+        md
         deck
         html))
 
