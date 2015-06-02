@@ -139,6 +139,10 @@
 (add-hook 'ag-mode-hook 'wgrep-ag-setup)
 (add-hook 'helm-ag-mode-hook 'wgrep-ag-setup)
 
+;;; Helm
+(setq helm-split-window-in-side-p t
+      helm-split-window-default-side 'below)
+
 ;;; Whitespace and Auto-Fill
 ;; Set auto-fill to 80 characters by default instead of 70
 (setq-default fill-column 80)
