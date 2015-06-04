@@ -13,7 +13,7 @@ owner: ${0:ross@urbanairship.com}
 cpus: ${3:0.1}
 disk: ${4:512}
 mem: ${5:512}
-uris: ["http://nexus.prod.urbanairship.com/service/local/artifact/maven/redirect?r=releases&g=com.urbanairship.$6&a=$6-$7&v=$8&c=shaded&e=jar"]
+uris: ["http://nexus.prod.urbanairship.com/service/local/repositories/releases/content/com/urbanairship/$6/$7/$8/$7-$8-shaded.jar"]
 highPriority: ${9:false}
 runAsUser: ${10:root}
 async: ${11:false}
