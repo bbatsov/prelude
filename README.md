@@ -70,7 +70,7 @@ can skip the whole manual and just type in your favorite shell the
 following command:
 
 ```bash
-curl -L http://git.io/epre | sh
+curl -L https://git.io/epre | sh
 ```
 
 You can now power up your Emacs, sit back and enjoy Prelude,
