@@ -18,4 +18,8 @@ new windows will each be 180 columns wide, and sit just below the threshold.
 
 ;; recaculate split-width-threshold with every change
 (add-hook 'window-configuration-change-hook
- 'frontside-windowing-adjust-split-width-threshold)
+          'frontside-windowing-adjust-split-width-threshold)
+
+;; disable window-system in terminal mode
+(unless window-system
+  (menu-bar-mode -1))
