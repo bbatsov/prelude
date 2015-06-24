@@ -2,7 +2,19 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("hubble-thrift" 0 13
+(#1=(#("InitialEdgesGenerator.java" 0 26
+      (bmkp-full-record #1#))
+    (filename . "~/Code/scooby/scooby-prod-jobs/src/main/java/com/urbanairship/scooby/jobs/idresolution/v1/initialize/InitialEdgesGenerator.java")
+    (buffer-name . "InitialEdgesGenerator.java")
+    (front-context-string . "    public stati")
+    (rear-context-string . "gesGenerator {\n\n")
+    (front-context-region-string)
+    (rear-context-region-string)
+    (visits . 0)
+    (time . #2=(21897 39599 839928 241000))
+    (created . #2#)
+    (position . 1731))
+#1=(#("hubble-thrift" 0 13
       (bmkp-full-record #1#))
     (filename . "   - no file -")
     (location . "https://atlassian.prod.urbanairship.com/stash/projects/CD/repos/hubble-thrift/browse")
@@ -48,8 +60,8 @@
     (handler . bmkp-jump-url-browse))
 #1=(#("SPORTS!" 0 7
       (bmkp-full-record #1#))
-    (time 21864 40307 761840 172000)
-    (visits . 4)
+    (time 21896 26166 317040 307000)
+    (visits . 5)
     (filename . "   - no file -")
     (location . "http://1.bp.blogspot.com/-ogDuk2V_blA/UmuchUtlQWI/AAAAAAAAOeY/XLUCK7J01dU/s1600/sports.gif")
     (handler . bmkp-jump-url-browse))
