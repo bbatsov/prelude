@@ -198,6 +198,7 @@
 
 ;; Smartparens all the time
 (smartparens-global-mode t)
+(add-to-list sp-ignore-modes-list )
 
 ;;; yasnippet
 (yas-global-mode 1)
@@ -260,6 +261,13 @@
         ("America/New_York" "Eastern")
         ("Atlantic/Reykjavik" "Iceland")
         ("Europe/Paris" "Paris, France")))
+
+;;----------------------------------NXML Mode-----------------------------------
+(push 'nxml-mode sp-ignore-modes-list)
+(add-hook 'nxml-mode-hook
+          (lambda ()
+            ()
+            (define-key prelude-mode-map (kbd "C-c C-i") 'nxml-balanced-close-start-tag-inline)))
 
 (provide 'custom)
 
