@@ -1,5 +1,22 @@
+* Colophon
+
+This is my emacs init file -- yes, really. No, I'm not sure I believe it
+either. Glad we're on the same page.
+
+The secret (for me, as an Emacs Prelude user) is this one-liner:
+
+#+BEGIN_EXAMPLE
+(org-babel-load-file (expand-file-name "init.org" prelude-personal-dir))
+#+END_EXAMPLE
+
+Aaaaand that's it. Everything in here that's in a Babel emacs lisp source block
+is now config; everything else is just for the meat-computer in the chair.
+
+Pretty neat, hey?
+
 * Core
-** Packages
+
+** Package Management
 *** Org Melpa Repo
 #+BEGIN_SRC emacs-lisp
 (require 'package)
@@ -43,35 +60,11 @@
                             ggtags
                             org-bullets))
 #+END_SRC
+** System
 *** ENV variables
 #+BEGIN_SRC emacs-lisp
 ;; Env Variables
 (exec-path-from-shell-copy-env "NOMAD_ENV")
-#+END_SRC
-*** Flip Tables
-#+BEGIN_SRC emacs-lisp
-(defvar load-personal-config-list)
-(setq load-personal-config-list '("/flip-tables.el"))
-(mapc (lambda (rmd-file-name)
-        (load (concat prelude-personal-dir rmd-file-name)))
-      load-personal-config-list)
-
-;; Old:
-;;(setq load-personal-config-list '(
-;;                                "/jsl-checker.el"
-;;                                  "/evil.el"      ;; Disable for now, fucks w/ cider
-;;                                  "/jsx-configs.el"
-;;                                  "/work.el"            ;; Contains work erc configs too.
-;;                                  "/python-configs.el"
-;;                                  "/erc-configs.el"
-;;                                  "/ess-configs.el"
-;;                                  "/jsx-configs.el"
-;;                                  "/jabber-configs.el"
-;;                                  "/web-mode-configs.el"
-;;                                  "/flip-tables.el"
-;;                                  "/custom-fns.el"
-;;                                  "/mu4e-configs.el"
-;;))
 #+END_SRC
 *** OSX Modifier Keys
 #+BEGIN_SRC emacs-lisp
@@ -79,11 +72,17 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 #+END_SRC
-*** PCRE Regex Support
+*** WGrep
 #+BEGIN_SRC emacs-lisp
-;; PCRE Regexes
-(rxt-global-mode)
+;;; wgrep-ag support
+(autoload 'wgrep-ag-setup "wgrep-ag")
+(add-hook 'ag-mode-hook 'wgrep-ag-setup)
+(add-hook 'helm-ag-mode-hook 'wgrep-ag-setup)
 #+END_SRC
+
+** Emacs
+Tweaks and modifications to Emacs' core UI.
+
 *** Smart Mode Line
 #+BEGIN_SRC emacs-lisp
 (sml/setup)
@@ -112,67 +111,7 @@
 (add-to-list 'rm-text-properties '(" Sp/s" 'face 'font-lock-warning-face))
 #+END_SRC
 
-*** Magit
-Magit has a long warning it shows these days; I've seen it. Turn it off.
-#+BEGIN_SRC emacs-lisp
-(setq magit-last-seen-setup-instructions "1.4.0")
-#+END_SRC
-
-*** WGrep
-#+BEGIN_SRC emacs-lisp
-;;; wgrep-ag support
-(autoload 'wgrep-ag-setup "wgrep-ag")
-(add-hook 'ag-mode-hook 'wgrep-ag-setup)
-(add-hook 'helm-ag-mode-hook 'wgrep-ag-setup)
-#+END_SRC
-
-*** Helm
-#+BEGIN_SRC emacs-lisp
-(setq helm-split-window-in-side-p t
-      helm-split-window-default-side 'below)
-#+END_SRC
-
-** Text Settings
-#+BEGIN_SRC emacs-lisp
-;;; Whitespace and Auto-Fill
-;; Set auto-fill to 80 characters by default instead of 70
-(setq-default fill-column 80)
-
-;; Disable whitespace-mode and enable auto-fill in prose-writing major modes
-(defun text-settings ()
-  (whitespace-mode -1)
-  (abbrev-mode -1)
-  (turn-on-auto-fill))
-
-;; Don't clean up whitespace in markdown mode only
-(add-hook 'markdown-mode-hook
-          (lambda ()
-            (make-local-variable 'prelude-clean-whitespace-on-save)
-            (setq-local prelude-clean-whitespace-on-save nil)))
-
-(add-hook 'org-mode-hook 'text-settings)
-(add-hook 'markdown-mode-hook 'text-settings)
-(add-hook 'rst-mode-hook 'text-settings)
-#+END_SRC
-
-** Projectile
-#+BEGIN_SRC emacs-lisp
-;;; Projectile
-(setq projectile-remember-window-configs t)
-(setq projectile-switch-project-action 'projectile-dired)
-(persp-mode)
-(require 'persp-projectile)
-(define-key projectile-mode-map (kbd "C-c p p") 'projectile-persp-switch-project)
-#+END_SRC
-
-** Twittering Mode
-#+BEGIN_SRC emacs-lisp
-(setq twittering-icon-mode t)
-(setq twittering-use-master-password t)
-(setq twittering-use-icon-storage t)
-#+END_SRC
-
-** Company Mode
+*** Company Mode
 
 #+BEGIN_SRC emacs-lisp
 ;;; Company-mode
@@ -188,25 +127,26 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
 (setq company-tooltip-limit 20)
 #+END_SRC
 
+*** Timezones
+
+#+BEGIN_SRC emacs-lisp
+(setq display-time-world-list
+      '(("America/Los_Angeles" "Pacific")
+        ("America/Denver" "Mountain")
+        ("America/Mexico_City" "Central")
+        ("America/New_York" "Eastern")
+        ("Atlantic/Reykjavik" "Iceland")
+        ("Europe/Paris" "Paris, France")))
+#+END_SRC
+
+* Languages
+
 ** Go
 #+BEGIN_SRC emacs-lisp
 ;;; Go Configs
 ;; Totally re-enable these if you ever do Go again.
 ;; (let ((go-path (getenv "GOPATH")))
 ;;   (load (concat go-path "/src/code.google.com/p/go.tools/cmd/oracle/oracle.el")))
-#+END_SRC
-
-** Smart Parens
-
-#+BEGIN_SRC emacs-lisp
-(smartparens-global-mode t)
-#+END_SRC
-
-** Yasnippet
-#+BEGIN_SRC emacs-lisp
-(yas-global-mode 1)
-;; Tell yas to use system autocomplete instead of an f'ed-up X window:
-(setq yas-prompt-functions '(yas-completing-prompt))
 #+END_SRC
 
 ** Malabar Mode
@@ -240,40 +180,27 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 #+END_SRC
 
-** Bookmark+
+** Text Settings
 #+BEGIN_SRC emacs-lisp
-(require 'bookmark+)
-#+END_SRC
+;;; Whitespace and Auto-Fill
+;; Set auto-fill to 80 characters by default instead of 70
+(setq-default fill-column 80)
 
-** Sauron
-#+BEGIN_SRC emacs-lisp
-(require 'sauron)
-;; 1: On OSX, there's no dbus, so don't try to load it.
-;; 2: On Ubuntu, there _is_ dbus, so use it to get mu new mail updates from cron
-(if (eq system-type 'darwin)
-    (setq sauron-modules '(sauron-jabber sauron-erc sauron-org sauron-twittering sauron-notifications))
-  (setq sauron-dbus-cookie 1))
+;; Disable whitespace-mode and enable auto-fill in prose-writing major modes
+(defun text-settings ()
+  (whitespace-mode -1)
+  (abbrev-mode -1)
+  (turn-on-auto-fill))
 
-(setq sauron-separate-frame nil
-      sauron-nick-insensitivity 300)
+;; Don't clean up whitespace in markdown mode only
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (make-local-variable 'prelude-clean-whitespace-on-save)
+            (setq-local prelude-clean-whitespace-on-save nil)))
 
-(add-hook 'sauron-event-block-functions
-          (lambda (origin prio msg &optional props)
-            (and
-             (eq 'twittering origin)
-             (string-match "^[[:digit:]]* new tweets" msg))))
-#+END_SRC
-
-** Timezones
-
-#+BEGIN_SRC emacs-lisp
-(setq display-time-world-list
-      '(("America/Los_Angeles" "Pacific")
-        ("America/Denver" "Mountain")
-        ("America/Mexico_City" "Central")
-        ("America/New_York" "Eastern")
-        ("Atlantic/Reykjavik" "Iceland")
-        ("Europe/Paris" "Paris, France")))
+(add-hook 'org-mode-hook 'text-settings)
+(add-hook 'markdown-mode-hook 'text-settings)
+(add-hook 'rst-mode-hook 'text-settings)
 #+END_SRC
 
 ** NXML Mode
@@ -285,80 +212,149 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
             (define-key prelude-mode-map (kbd "C-c C-i") 'nxml-balanced-close-start-tag-inline)))
 #+END_SRC
 
-
-* Functions
-
-** Rotate Windows
+** JSX
 #+BEGIN_SRC emacs-lisp
-(defun toggle-window-split ()
-  (interactive)
-  (if (= (count-windows) 2)
-      (let* ((this-win-buffer (window-buffer))
-             (next-win-buffer (window-buffer (next-window)))
-             (this-win-edges (window-edges (selected-window)))
-             (next-win-edges (window-edges (next-window)))
-             (this-win-2nd (not (and (<= (car this-win-edges)
-                                         (car next-win-edges))
-                                     (<= (cadr this-win-edges)
-                                         (cadr next-win-edges)))))
-             (splitter
-              (if (= (car this-win-edges)
-                     (car (window-edges (next-window))))
-                  'split-window-horizontally
-                'split-window-vertically)))
-        (delete-other-windows)
-        (let ((first-win (selected-window)))
-          (funcall splitter)
-          (if this-win-2nd (other-window 1))
-          (set-window-buffer (selected-window) this-win-buffer)
-          (set-window-buffer (next-window) next-win-buffer)
-          (select-window first-win)
-          (if this-win-2nd (other-window 1))))))
+;; Syntax Highlighting
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+(defadvice web-mode-highlight-part (around tweak-jsx activate)
+  (if (equal web-mode-content-type "jsx")
+      (let ((web-mode-enable-part-face nil))
+        ad-do-it)
+    ad-do-it))
 
-(global-set-key (kbd "C-x |") 'toggle-window-split)
+;; Linting
+(eval-after-load "flycheck"
+  '(progn
+     (flycheck-define-checker jsxhint-checker
+      "A JSX syntax and style checker based on JSXHint."
+
+      :command ("jsxhint" source)
+      :error-patterns
+      ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
+      :modes (web-mode))))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (equal web-mode-content-type "jsx")
+              ;; enable flycheck
+              (flycheck-select-checker 'jsxhint-checker)
+              (flycheck-mode))))
+#+END_SRC
+** Python
+#+BEGIN_SRC emacs-lisp
+;; Use IPython as my python interpreter
+(setq
+ python-shell-interpreter "ipython"
+ python-shell-interpreter-args ""
+ python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+ python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+ python-shell-completion-setup-code
+ "from IPython.core.completerlib import module_completion"
+ python-shell-completion-module-string-code
+ "';'.join(module_completion('''%s'''))\n"
+ python-shell-completion-string-code
+ "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+
+;; Enable virtualenvwrapper.el
+(venv-initialize-interactive-shells)
+(setq venv-location "~/.python_virtualenvs/")
+
+;; Not sure I dig Jedi at the moment. Can't figure out how to get it
+;; to place nice with my themes, so it's a bit eye-scalding. Will
+;; re-enable later if I figure out the visuals.
+;; Jedi-Mode
+(require 'jedi)
+(add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (whitespace-mode -1)
+            (column-enforce-mode)
+            (if (bound-and-true-p anaconda-mode)
+                (anaconda-mode))
+            (setq jedi:complete-on-dot t)
+            (add-to-list 'company-backends 'company-jedi)))
+
+;; Virtualenvs
+(add-hook 'python-mode-hook
+          (lambda ()
+            (hack-local-variables)
+            (when (boundp 'project-venv-name)
+              (venv-workon project-venv-name))))
+
+(add-hook 'venv-postactivate-hook
+          (lambda ()
+            (let ((env-bin-path (concat (getenv "VIRTUAL_ENV") "bin/postactivate.el")))
+              (when (file-exists-p env-bin-path)
+                (load env-bin-path)))))
+
+(setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
+#+END_SRC
+** web-mode
+#+BEGIN_SRC emacs-lisp
+(eval-after-load "web-mode"
+  '(progn
+
+    (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
+    (defun my-web-mode-hook ()
+      (setq web-mode-enable-auto-pairing nil)
+      (setq web-mode-code-indent-offset 4))
+
+    (add-hook 'web-mode-hook  'my-web-mode-hook)
+
+    (defun sp-web-mode-is-code-context (id action context)
+      (when (and (eq action 'insert)
+                 (not (or (get-text-property (point) 'part-side)
+                          (get-text-property (point) 'block-side))))
+
+        t))
+
+    (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))))
 #+END_SRC
 
-** Insert ISO Date
-#+BEGIN_SRC emacs-lisp
-(defun insert-iso-date ()
-  (interactive)
-  (insert (format-time-string "%Y-%m-%d" (current-time))))
+* Tools
+Things I use directly.
+** Big
 
-(global-set-key (kbd "C-x j") 'insert-iso-date)
+*** Magit
+Magit has a long warning it shows these days; I've seen it. Turn it off.
+#+BEGIN_SRC emacs-lisp
+(setq magit-last-seen-setup-instructions "1.4.0")
 #+END_SRC
 
-** comment-dwim
+*** Helm
 #+BEGIN_SRC emacs-lisp
-(defun comment-dwim-line (&optional arg)
-  "Replacement for the `comment-dwim' command.
-
-If no region is selected and current line is not blank
-        and we are not at the end of the line, then comment
-        current line.  Replaces default behaviour of
-        `comment-dwim', when it inserts comment at the end of the
-        line.  With an argument, passes ARG to `comment-dwim'"
-  (interactive "*P")
-  (comment-normalize-vars)
-  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
-      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
-    (comment-dwim arg)))
-
-(global-set-key (kbd "M-;") `comment-dwim-line)
+(setq helm-split-window-in-side-p t
+      helm-split-window-default-side 'below)
+#+END_SRC
+*** Twittering Mode
+#+BEGIN_SRC emacs-lisp
+(setq twittering-icon-mode t)
+(setq twittering-use-master-password t)
+(setq twittering-use-icon-storage t)
 #+END_SRC
 
-** Marked.app
-Assumes you're on a Mac, and have Marked.app installed.
+*** Projectile
 #+BEGIN_SRC emacs-lisp
-(defun markdown-preview-file ()
-  "Run Marked on the current file and revert the buffer."
-  (interactive)
-  (shell-command
-   (format "open -a /Applications/Marked.app %s"
-           (shell-quote-argument (buffer-file-name)))))
-(global-set-key (kbd "C-c m") 'markdown-preview-file)
+;;; Projectile
+(setq projectile-remember-window-configs t)
+(setq projectile-switch-project-action 'projectile-dired)
+(persp-mode)
+(require 'persp-projectile)
+(define-key projectile-mode-map (kbd "C-c p p") 'projectile-persp-switch-project)
 #+END_SRC
 
-* ERC
+*** Bookmark+
+#+BEGIN_SRC emacs-lisp
+(require 'bookmark+)
+#+END_SRC
+
+*** ERC
 #+BEGIN_SRC emacs-lisp
 ;;; Code:
 ;; Setup ERC
@@ -368,35 +364,20 @@ Assumes you're on a Mac, and have Marked.app installed.
 
 #+END_SRC
 
-* ESS
+*** Org Mode Configs
 #+BEGIN_SRC emacs-lisp
-(require 'ess-site)
+;; For reasons I can't grok at all, Prelude seems to disable some org keyboard
+;; shortcuts. Let's fix that.
+(defun org-bindings ()
+  (define-key prelude-mode-map (kbd "C-c /") 'org-sparse-tree)
+  (define-key prelude-mode-map [(control shift return)] 'org-insert-todo-heading-respect-content))
 
-(add-to-list 'ess-style-alist
-             '(my-RRR (ess-indent-level . 2)
-                      (ess-first-continued-statement-offset . 2)
-                      ;; (ess-first-continued-statement-offset . 0)
-                      (ess-continued-statement-offset . 0)
-                      ;; (ess-continued-statement-offset . 4)
-                      (ess-brace-offset . 0)
-                      (ess-arg-function-offset . 4)
-                      (ess-arg-function-offset-new-line . '(4))
-                      (ess-expression-offset . 4)
-                      (ess-else-offset . 0)
-                      (ess-close-brace-offset . 0)))
-
-(setq ess-default-style 'my-RRR)
-#+END_SRC
-
-* Org
-#+BEGIN_SRC emacs-lisp
 ;; Make sure auto-fill-mode is on. Pretty much always need it.
-;;(require 'org)
-(require 'org-bullets)
 (add-hook 'org-mode-hook
           (lambda ()
             (turn-on-auto-fill)
-            (org-bullets-mode 1)))
+            (org-bullets-mode 1)
+            (org-bindings)))
 
 ;; TODO Keyword states:
 ;; > In-Progress states: TODO, DOING, BLOCKED
@@ -427,7 +408,8 @@ Assumes you're on a Mac, and have Marked.app installed.
 
 ;; Smartparens pairs!
 (sp-local-pair 'org-mode "~" "~" :wrap "C-~")
-(sp-local-pair 'org-mode "/" "/")
+;; This one turns out to pretty much be a pain in the ass:
+;; (sp-local-pair 'org-mode "/" "/")
 (sp-local-pair 'org-mode "*" "*" :wrap "C-*")
 
 ;; Config org export backends
@@ -448,13 +430,9 @@ Assumes you're on a Mac, and have Marked.app installed.
 (setq org-refile-targets '((org-agenda-files :maxlevel . 3))
       org-refile-allow-creating-parent-nodes 'confirm)
 
-;; For reasons I can't grok at all, Prelude seems to disable some org keyboard
-;; shortcuts. Let's fix that.
-(defun org-bindings ()
-  (define-key prelude-mode-map (kbd "C-c /") 'org-sparse-tree)
-  (define-key prelude-mode-map [(control shift return)] 'org-insert-todo-heading-respect-content))
 
-(add-hook 'org-mode-hook 'org-bindings)
+
+;; (add-hook 'org-mode-hook 'org-bindings)
 
 ;; Hide org emphasis marks
 (setq org-hide-emphasis-markers t)
@@ -463,7 +441,7 @@ Assumes you're on a Mac, and have Marked.app installed.
 (setq org-startup-indented t)
 
 ;; Stop folding. Just... stop.
-(setq org-startup-folded nil)
+(setq org-startup-folded t)
 
 ;; Fontify inside code blocks
 (setq org-src-fontify-natively t)
@@ -472,7 +450,7 @@ Assumes you're on a Mac, and have Marked.app installed.
 (require 'org-mime)
 
 #+END_SRC
-* Jabber
+*** Jabber
 #+BEGIN_SRC emacs-lisp
 ;; Gchat!
 (setq jabber-account-list
@@ -498,34 +476,7 @@ Assumes you're on a Mac, and have Marked.app installed.
             (if word-wrap nil (toggle-word-wrap))
             (if truncate-lines (toggle-truncate-lines))))
 #+END_SRC
-* JSX
-#+BEGIN_SRC emacs-lisp
-;; Syntax Highlighting
-(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
-(defadvice web-mode-highlight-part (around tweak-jsx activate)
-  (if (equal web-mode-content-type "jsx")
-      (let ((web-mode-enable-part-face nil))
-        ad-do-it)
-    ad-do-it))
-
-;; Linting
-(eval-after-load "flycheck"
-  '(progn
-     (flycheck-define-checker jsxhint-checker
-      "A JSX syntax and style checker based on JSXHint."
-
-      :command ("jsxhint" source)
-      :error-patterns
-      ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
-      :modes (web-mode))))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (equal web-mode-content-type "jsx")
-              ;; enable flycheck
-              (flycheck-select-checker 'jsxhint-checker)
-              (flycheck-mode))))
-#+END_SRC
-* mu4e
+*** mu4e
 #+BEGIN_SRC emacs-lisp
 ;;; mu4e-configs.el --- My mu4e configs
 ;;
@@ -682,84 +633,162 @@ Assumes you're on a Mac, and have Marked.app installed.
 
 (add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
 #+END_SRC
-* Python
+*** ESS
 #+BEGIN_SRC emacs-lisp
-;; Use IPython as my python interpreter
-(setq
- python-shell-interpreter "ipython"
- python-shell-interpreter-args ""
- python-shell-prompt-regexp "In \\[[0-9]+\\]: "
- python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
- python-shell-completion-setup-code
- "from IPython.core.completerlib import module_completion"
- python-shell-completion-module-string-code
- "';'.join(module_completion('''%s'''))\n"
- python-shell-completion-string-code
- "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+(require 'ess-site)
+(add-to-list 'ess-style-alist
+             '(my-RRR (ess-indent-level . 2)
+                      (ess-first-continued-statement-offset . 2)
+                      ;; (ess-first-continued-statement-offset . 0)
+                      (ess-continued-statement-offset . 0)
+                      ;; (ess-continued-statement-offset . 4)
+                      (ess-brace-offset . 0)
+                      (ess-arg-function-offset . 4)
+                      (ess-arg-function-offset-new-line . '(4))
+                      (ess-expression-offset . 4)
+                      (ess-else-offset . 0)
+                      (ess-close-brace-offset . 0)))
 
-;; Enable virtualenvwrapper.el
-(venv-initialize-interactive-shells)
-(setq venv-location "~/.python_virtualenvs/")
-
-;; Not sure I dig Jedi at the moment. Can't figure out how to get it
-;; to place nice with my themes, so it's a bit eye-scalding. Will
-;; re-enable later if I figure out the visuals.
-;; Jedi-Mode
-(require 'jedi)
-(add-hook 'python-mode-hook 'jedi:setup)
-(add-hook 'python-mode-hook
-          (lambda ()
-            (whitespace-mode -1)
-            (column-enforce-mode)
-            (if (bound-and-true-p anaconda-mode)
-                (anaconda-mode))
-            (setq jedi:complete-on-dot t)
-            (add-to-list 'company-backends 'company-jedi)))
-
-;; Virtualenvs
-(add-hook 'python-mode-hook
-          (lambda ()
-            (hack-local-variables)
-            (when (boundp 'project-venv-name)
-              (venv-workon project-venv-name))))
-
-(add-hook 'venv-postactivate-hook
-          (lambda ()
-            (let ((env-bin-path (concat (getenv "VIRTUAL_ENV") "bin/postactivate.el")))
-              (when (file-exists-p env-bin-path)
-                (load env-bin-path)))))
-
-(setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
+(setq ess-default-style 'my-RRR)
 #+END_SRC
-* web-mode
+
+** Small
+
+*** Flip Tables
 #+BEGIN_SRC emacs-lisp
-(eval-after-load "web-mode"
-  '(progn
+(defvar load-personal-config-list)
+(setq load-personal-config-list '("/flip-tables.el"))
+(mapc (lambda (rmd-file-name)
+        (load (concat prelude-personal-dir rmd-file-name)))
+      load-personal-config-list)
 
-    (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-
-    (defun my-web-mode-hook ()
-      (setq web-mode-enable-auto-pairing nil)
-      (setq web-mode-code-indent-offset 4))
-
-    (add-hook 'web-mode-hook  'my-web-mode-hook)
-
-    (defun sp-web-mode-is-code-context (id action context)
-      (when (and (eq action 'insert)
-                 (not (or (get-text-property (point) 'part-side)
-                          (get-text-property (point) 'block-side))))
-
-        t))
-
-    (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))))
+;; Old:
+;;(setq load-personal-config-list '(
+;;                                "/jsl-checker.el"
+;;                                  "/evil.el"      ;; Disable for now, fucks w/ cider
+;;                                  "/jsx-configs.el"
+;;                                  "/work.el"            ;; Contains work erc configs too.
+;;                                  "/python-configs.el"
+;;                                  "/erc-configs.el"
+;;                                  "/ess-configs.el"
+;;                                  "/jsx-configs.el"
+;;                                  "/jabber-configs.el"
+;;                                  "/web-mode-configs.el"
+;;                                  "/flip-tables.el"
+;;                                  "/custom-fns.el"
+;;                                  "/mu4e-configs.el"
+;;))
 #+END_SRC
-* work
+*** PCRE Regex Support
+#+BEGIN_SRC emacs-lisp
+;; PCRE Regexes
+(rxt-global-mode)
+#+END_SRC
+*** Smart Parens
+
+#+BEGIN_SRC emacs-lisp
+(smartparens-global-mode t)
+#+END_SRC
+
+*** Yasnippet
+#+BEGIN_SRC emacs-lisp
+(yas-global-mode 1)
+;; Tell yas to use system autocomplete instead of an f'ed-up X window:
+(setq yas-prompt-functions '(yas-completing-prompt))
+#+END_SRC
+
+*** Sauron
+#+BEGIN_SRC emacs-lisp
+(require 'sauron)
+;; 1: On OSX, there's no dbus, so don't try to load it.
+;; 2: On Ubuntu, there _is_ dbus, so use it to get mu new mail updates from cron
+(if (eq system-type 'darwin)
+    (setq sauron-modules '(sauron-jabber sauron-erc sauron-org sauron-twittering sauron-notifications))
+  (setq sauron-dbus-cookie 1))
+
+(setq sauron-separate-frame nil
+      sauron-nick-insensitivity 300)
+
+(add-hook 'sauron-event-block-functions
+          (lambda (origin prio msg &optional props)
+            (and
+             (eq 'twittering origin)
+             (string-match "^[[:digit:]]* new tweets" msg))))
+#+END_SRC
+
+* Functions
+
+** Rotate Windows
+#+BEGIN_SRC emacs-lisp
+(defun toggle-window-split ()
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((this-win-buffer (window-buffer))
+             (next-win-buffer (window-buffer (next-window)))
+             (this-win-edges (window-edges (selected-window)))
+             (next-win-edges (window-edges (next-window)))
+             (this-win-2nd (not (and (<= (car this-win-edges)
+                                         (car next-win-edges))
+                                     (<= (cadr this-win-edges)
+                                         (cadr next-win-edges)))))
+             (splitter
+              (if (= (car this-win-edges)
+                     (car (window-edges (next-window))))
+                  'split-window-horizontally
+                'split-window-vertically)))
+        (delete-other-windows)
+        (let ((first-win (selected-window)))
+          (funcall splitter)
+          (if this-win-2nd (other-window 1))
+          (set-window-buffer (selected-window) this-win-buffer)
+          (set-window-buffer (next-window) next-win-buffer)
+          (select-window first-win)
+          (if this-win-2nd (other-window 1))))))
+
+(global-set-key (kbd "C-x |") 'toggle-window-split)
+#+END_SRC
+
+** Insert ISO Date
+#+BEGIN_SRC emacs-lisp
+(defun insert-iso-date ()
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d" (current-time))))
+
+(global-set-key (kbd "C-x j") 'insert-iso-date)
+#+END_SRC
+
+** comment-dwim
+#+BEGIN_SRC emacs-lisp
+(defun comment-dwim-line (&optional arg)
+  "Replacement for the `comment-dwim' command.
+
+If no region is selected and current line is not blank
+        and we are not at the end of the line, then comment
+        current line.  Replaces default behaviour of
+        `comment-dwim', when it inserts comment at the end of the
+        line.  With an argument, passes ARG to `comment-dwim'"
+  (interactive "*P")
+  (comment-normalize-vars)
+  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    (comment-dwim arg)))
+
+(global-set-key (kbd "M-;") `comment-dwim-line)
+#+END_SRC
+
+** Marked.app
+Assumes you're on a Mac, and have Marked.app installed.
+#+BEGIN_SRC emacs-lisp
+(defun markdown-preview-file ()
+  "Run Marked on the current file and revert the buffer."
+  (interactive)
+  (shell-command
+   (format "open -a /Applications/Marked.app %s"
+           (shell-quote-argument (buffer-file-name)))))
+(global-set-key (kbd "C-c m") 'markdown-preview-file)
+#+END_SRC
+
+* Work
 #+BEGIN_SRC emacs-lisp
 ;;; work.el -- All my work configs in one place.
 
