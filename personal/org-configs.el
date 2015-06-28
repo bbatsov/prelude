@@ -1,10 +1,12 @@
 ;;; Org Mode
 
 ;; Make sure auto-fill-mode is on. Pretty much always need it.
-(require 'org)
+;;(require 'org)
+(require 'org-bullets)
 (add-hook 'org-mode-hook
           (lambda ()
-            (turn-on-auto-fill)))
+            (turn-on-auto-fill)
+            (org-bullets-mode 1)))
 
 ;; TODO Keyword states:
 ;; > In-Progress states: TODO, DOING, BLOCKED
@@ -23,12 +25,15 @@
 
 ;; Support for Babel Mode code blocks
 ;; NOTE: requires the addition of the org elpa repo!
-
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)
-   (emacs-lisp .t)
-   (clojure . t)))
+   (emacs-lisp . t)
+   (java . t)
+   (sh . t)
+   (R . t)
+   (scala . t)
+   (sql . t)))
 
 ;; Smartparens pairs!
 (sp-local-pair 'org-mode "~" "~" :wrap "C-~")
@@ -60,9 +65,6 @@
   (define-key prelude-mode-map [(control shift return)] 'org-insert-todo-heading-respect-content))
 
 (add-hook 'org-mode-hook 'org-bindings)
-
-;; polymode
-(add-to-list 'auto-mode-alist '("\\.org" . poly-org-mode))
 
 ;; Hide org emphasis marks
 (setq org-hide-emphasis-markers t)
