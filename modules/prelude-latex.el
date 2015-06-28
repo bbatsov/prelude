@@ -54,6 +54,8 @@
 ;; AUCTeX configuration
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
+(setq TeX-close-quote "")
+(setq TeX-open-quote "")
 
 (setq-default TeX-master nil)
 
