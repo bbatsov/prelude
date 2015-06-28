@@ -24,41 +24,43 @@ Pretty neat, hey?
 #+END_SRC
 *** Prelude Requires
 #+BEGIN_SRC emacs-lisp
-(prelude-require-packages '(jade-mode
-                            ess
-                            twittering-mode
-                            floobits
-                            sublime-themes
-                            company
-                            company-jedi
-                            virtualenvwrapper
-                            org
-                            protobuf-mode
-                            jedi
-                            ensime
-                            web-mode
-                            thrift
-                            ag
-                            jabber
-                            malabar-mode
-                            org-plus-contrib
-                            badger-theme
-                            helm-ag
-                            wgrep
-                            wgrep-ag
-                            pcre2el
-                            wgrep-helm
-                            clj-refactor
-                            perspective
-                            persp-projectile
-                            column-enforce-mode
-                            smart-mode-line
-                            rich-minority
-                            mu4e-maildirs-extension
-                            bookmark+
-                            sauron
-                            ggtags
-                            org-bullets))
+  (prelude-require-packages '(jade-mode
+                              ess
+                              emoji-cheat-sheet-plus
+                              twittering-mode
+                              unicode-fonts
+                              floobits
+                              sublime-themes
+                              company
+                              company-jedi
+                              virtualenvwrapper
+                              org
+                              protobuf-mode
+                              jedi
+                              ensime
+                              web-mode
+                              thrift
+                              ag
+                              jabber
+                              malabar-mode
+                              org-plus-contrib
+                              badger-theme
+                              helm-ag
+                              wgrep
+                              wgrep-ag
+                              pcre2el
+                              wgrep-helm
+                              clj-refactor
+                              perspective
+                              persp-projectile
+                              column-enforce-mode
+                              smart-mode-line
+                              rich-minority
+                              mu4e-maildirs-extension
+                              bookmark+
+                              sauron
+                              ggtags
+                              org-bullets))
 #+END_SRC
 ** System
 *** ENV variables
@@ -83,32 +85,38 @@ Pretty neat, hey?
 ** Emacs
 Tweaks and modifications to Emacs' core UI.
 
+*** Fonts
+Unicode fonts -- because they are Very Good.
+#+BEGIN_SRC emacs-lisp
+(unicode-fonts-setup)
+#+END_SRC
+
 *** Smart Mode Line
 #+BEGIN_SRC emacs-lisp
-(sml/setup)
-(which-function-mode -1)
-(rich-minority-mode 1)
-(setq rm-blacklist '(" MRev"
-                     " yas"
-                     " Helm"
-                     " company"
-                     " guru"
-                     " Pre"))
+  (sml/setup)
+  (which-function-mode -1)
+  (rich-minority-mode 1)
+  (setq rm-blacklist '(" MRev"
+                       " yas"
+                       " Helm"
+                       " company"
+                       " guru"
+                       " Pre"))
 
-(setq sml/shorten-directory t)
-(setq sml/shorten-modes t)
+  (setq sml/shorten-directory t)
+  (setq sml/shorten-modes t)
 
-;; Java and scala package names are infinite and terrible; shorten them.
-(add-to-list 'sml/replacer-regexp-list '("^~/Code/" ":CODE:") t)
-(add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/main/java/" ":SMJ:") t)
-(add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/test/java/" ":STJ:") t)
-(add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/main/scala/" ":SMS:") t)
-(add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/test/scala/" ":STS:") t)
-(add-to-list 'sml/replacer-regexp-list '("^:SM[JS]:com/urbanairship/\\(.*\\)/" ":M:\\1:") t)
-(add-to-list 'sml/replacer-regexp-list '("^:ST[JS]:com/urbanairship/\\(.*\\)/" ":T:\\1:") t)
+  ;; Java and scala package names are infinite and terrible; shorten them.
+  (add-to-list 'sml/replacer-regexp-list '("^~/Code/" ":CODE:") t)
+  (add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/main/java/" ":SMJ:") t)
+  (add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/test/java/" ":STJ:") t)
+  (add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/main/scala/" ":SMS:") t)
+  (add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/test/scala/" ":STS:") t)
+  (add-to-list 'sml/replacer-regexp-list '("^:SM[JS]:com/urbanairship/\\(.*\\)/" ":M:\\1:") t)
+  (add-to-list 'sml/replacer-regexp-list '("^:ST[JS]:com/urbanairship/\\(.*\\)/" ":T:\\1:") t)
 
-;; Make sure I notice when I'm in
-(add-to-list 'rm-text-properties '(" Sp/s" 'face 'font-lock-warning-face))
+  ;; Make sure I notice when I'm in
+  (add-to-list 'rm-text-properties '(" Sp/s" 'face 'font-lock-warning-face))
 #+END_SRC
 
 *** Company Mode
@@ -154,12 +162,12 @@ Malabar Mode... is like two thirds of a pretty nice Java integration for
 Emacs. The author /claims/ to be working on a v2. Not... sure how that's going for
 him yet :P
 #+BEGIN_SRC emacs-lisp
-(require 'cedet)
-(require 'semantic)
-(load "semantic/loaddefs.el")
-(semantic-mode 1);;
-(require 'malabar-mode)
-(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
+;; (require 'cedet)
+;; (require 'semantic)
+;; (load "semantic/loaddefs.el")
+;; (semantic-mode 1);;
+;; (require 'malabar-mode)
+;; (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 #+END_SRC
 
 ** Clojure
@@ -184,25 +192,26 @@ him yet :P
 
 ** Text Settings
 #+BEGIN_SRC emacs-lisp
-;;; Whitespace and Auto-Fill
-;; Set auto-fill to 80 characters by default instead of 70
-(setq-default fill-column 80)
+  ;;; Whitespace and Auto-Fill
+  ;; Set auto-fill to 80 characters by default instead of 70
+  (setq-default fill-column 80)
 
-;; Disable whitespace-mode and enable auto-fill in prose-writing major modes
-(defun text-settings ()
-  (whitespace-mode -1)
-  (abbrev-mode -1)
-  (turn-on-auto-fill))
+  ;; Disable whitespace-mode and enable auto-fill in prose-writing major modes
+  (defun text-settings ()
+    (whitespace-mode -1)
+    (abbrev-mode -1)
+    (turn-on-auto-fill)
+    (emoji-cheat-sheet-plus-display-mode))
 
-;; Don't clean up whitespace in markdown mode only
-(add-hook 'markdown-mode-hook
-          (lambda ()
-            (make-local-variable 'prelude-clean-whitespace-on-save)
-            (setq-local prelude-clean-whitespace-on-save nil)))
+  ;; Don't clean up whitespace in markdown mode only
+  (add-hook 'markdown-mode-hook
+            (lambda ()
+              (make-local-variable 'prelude-clean-whitespace-on-save)
+              (setq-local prelude-clean-whitespace-on-save nil)))
 
-(add-hook 'org-mode-hook 'text-settings)
-(add-hook 'markdown-mode-hook 'text-settings)
-(add-hook 'rst-mode-hook 'text-settings)
+  (add-hook 'org-mode-hook 'text-settings)
+  (add-hook 'markdown-mode-hook 'text-settings)
+  (add-hook 'rst-mode-hook 'text-settings)
 #+END_SRC
 
 ** NXML Mode
@@ -366,117 +375,118 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
 
 #+END_SRC
 
-*** Org Mode Configs
+*** Org Mode
 #+BEGIN_SRC emacs-lisp
-;; For reasons I can't grok at all, Prelude seems to disable some org keyboard
-;; shortcuts. Let's fix that.
-(defun org-bindings ()
-  (define-key prelude-mode-map (kbd "C-c /") 'org-sparse-tree)
-  (define-key prelude-mode-map [(control shift return)] 'org-insert-todo-heading-respect-content))
+  ;; For reasons I can't grok at all, Prelude seems to disable some org keyboard
+  ;; shortcuts. Let's fix that.
+  (defun org-bindings ()
+    (define-key prelude-mode-map (kbd "C-c /") 'org-sparse-tree)
+    (define-key prelude-mode-map [(control shift return)] 'org-insert-todo-heading-respect-content))
 
-;; Make sure auto-fill-mode is on. Pretty much always need it.
-(add-hook 'org-mode-hook
-          (lambda ()
-            (turn-on-auto-fill)
-            (org-bullets-mode 1)
-            (org-bindings)))
+  ;; Make sure auto-fill-mode is on. Pretty much always need it.
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (turn-on-auto-fill)
+              (org-bullets-mode 1)
+              (org-bindings)))
 
-;; TODO Keyword states:
-;; > In-Progress states: TODO, DOING, BLOCKED
-;; > Finished states:    DONE, IMPOSSIBLE, CANCELLED
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "DOING(o)" "|" "DONE(d)")
-        (sequence "BLOCKED(b)" "|" "UNBLOCKED (u)" "CANCELLED(c)" "IMPOSSIBLE(i)")))
+  ;; TODO Keyword states:
+  ;; > In-Progress states: TODO, DOING, BLOCKED
+  ;; > Finished states:    DONE, IMPOSSIBLE, CANCELLED
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "DOING(o)" "|" "DONE(d)")
+          (sequence "BLOCKED(b)" "|" "UNBLOCKED (u)" "CANCELLED(c)" "IMPOSSIBLE(i)")))
 
-(setq org-todo-keyword-faces
-      '(("TODO" . org-todo)
-        ("DOING" . org-todo)
-        ("BLOCKED" . org-warning)
-        ("CANCELLED" . org-done)
-        ("IMPOSSIBLE" . org-done)
-        ("DONE" . org-done)))
+  (setq org-todo-keyword-faces
+        '(("TODO" . org-todo)
+          ("DOING" . org-todo)
+          ("BLOCKED" . org-warning)
+          ("CANCELLED" . org-done)
+          ("IMPOSSIBLE" . org-done)
+          ("DONE" . org-done)))
 
-;; Support for Babel Mode code blocks
-;; NOTE: requires the addition of the org elpa repo!
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((python . t)
-   (emacs-lisp . t)
-   (java . t)
-   (sh . t)
-   (R . t)
-   (scala . t)
-   (sql . t)))
+  ;; Support for Babel Mode code blocks
+  ;; NOTE: requires the addition of the org elpa repo!
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (emacs-lisp . t)
+     (java . t)
+     (sh . t)
+     (R . t)
+     (scala . t)
+     (sql . t)))
 
-;; Smartparens pairs!
-(sp-local-pair 'org-mode "~" "~" :wrap "C-~")
-;; This one turns out to pretty much be a pain in the ass:
-;; (sp-local-pair 'org-mode "/" "/")
-(sp-local-pair 'org-mode "*" "*" :wrap "C-*")
+  ;; Smartparens pairs!
+  (sp-local-pair 'org-mode "~" "~" :wrap "C-~")
+  ;; This one turns out to pretty much be a pain in the ass:
+  ;; (sp-local-pair 'org-mode "/" "/")
+  (sp-local-pair 'org-mode "*" "*" :wrap "C-*")
 
-;; Config org export backends
-(setq org-export-backends
-      `(beamer
-        ascii
-        md
-        deck
-        html))
+  ;; Config org export backends
+  (setq org-export-backends
+        `(beamer
+          ascii
+          md
+          deck
+          html))
 
-;; Export defaults: no table of contents, no numbered headers, don't convert ^
-;; or _ to superscripts
-(setq org-export-with-section-numbers nil
-      org-export-with-sub-superscripts nil
-      org-export-with-toc nil)
+  ;; Export defaults: no table of contents, no numbered headers, don't convert ^
+  ;; or _ to superscripts
+  (setq org-export-with-section-numbers nil
+        org-export-with-sub-superscripts nil
+        org-export-with-toc nil)
 
-;; Refiling defaults
-(setq org-refile-targets '((org-agenda-files :maxlevel . 3))
-      org-refile-allow-creating-parent-nodes 'confirm)
+  ;; Refiling defaults
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3))
+        org-refile-allow-creating-parent-nodes 'confirm)
 
 
 
-;; (add-hook 'org-mode-hook 'org-bindings)
+  ;; (add-hook 'org-mode-hook 'org-bindings)
 
-;; Hide org emphasis marks
-(setq org-hide-emphasis-markers t)
+  ;; Hide org emphasis marks
+  (setq org-hide-emphasis-markers t)
 
-;; Start indented
-(setq org-startup-indented t)
+  ;; Start indented
+  (setq org-startup-indented t)
 
-;; Stop folding. Just... stop.
-(setq org-startup-folded t)
+  ;; Stop folding. Just... stop.
+  (setq org-startup-folded t)
 
-;; Fontify inside code blocks
-(setq org-src-fontify-natively t)
+  ;; Fontify inside code blocks
+  (setq org-src-fontify-natively t)
 
-;; org-mime for composing emails
-(require 'org-mime)
+  ;; org-mime for composing emails
+  (require 'org-mime)
 
 #+END_SRC
 *** Jabber
 #+BEGIN_SRC emacs-lisp
-;; Gchat!
-(setq jabber-account-list
-      '(("gastove@gmail.com"
-         (:network-server . "talk.google.com")
-         (:connection-type . ssl)
-         (:port . 5223))))
+  ;; Gchat!
+  (setq jabber-account-list
+        '(("gastove@gmail.com"
+           (:network-server . "talk.google.com")
+           (:connection-type . ssl)
+           (:port . 5223))))
 
-(setq jabber-history-enabled t
-      jabber-vcard-avatars-retrieve nil
-      jabber-chat-buffer-show-avatar nil
-      jabber-roster-show-bindings nil
-      jabber-show-offline-contacts nil
-      jabber-auto-reconnect t
-      jabber-roster-show-title nil
-      jabber-alert-presence-message-function 'jabber-presence-only-chat-open-message
-      jabber-use-global-history t
-      jabber-global-history-filename (locate-user-emacs-file "var/jabber.log"))
+  (setq jabber-history-enabled t
+        jabber-vcard-avatars-retrieve nil
+        jabber-chat-buffer-show-avatar nil
+        jabber-roster-show-bindings nil
+        jabber-show-offline-contacts nil
+        jabber-auto-reconnect t
+        jabber-roster-show-title nil
+        jabber-alert-presence-message-function 'jabber-presence-only-chat-open-message
+        jabber-use-global-history t
+        jabber-global-history-filename (locate-user-emacs-file "var/jabber.log"))
 
-(add-hook 'jabber-chat-mode-hook
-          (lambda ()
-            (turn-on-flyspell)
-            (if word-wrap nil (toggle-word-wrap))
-            (if truncate-lines (toggle-truncate-lines))))
+  (add-hook 'jabber-chat-mode-hook
+            (lambda ()
+              (turn-on-flyspell)
+              (emoji-cheat-sheet-plus-display-mode)
+              (if word-wrap nil (toggle-word-wrap))
+              (if truncate-lines (toggle-truncate-lines))))
 #+END_SRC
 *** mu4e
 #+BEGIN_SRC emacs-lisp
@@ -656,6 +666,13 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
 
 ** Small
 
+*** Pandoc Mode
+A handy little utility for interacting with Pandoc.
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'markdown-mode-hook 'pandoc-mode)
+  (add-hook 'org-mode-hook 'pandoc-mode)
+  (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings)
+#+END_SRC
 *** Flip Tables
 #+BEGIN_SRC emacs-lisp
 (defvar load-personal-config-list)
