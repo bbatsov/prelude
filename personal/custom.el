@@ -65,7 +65,6 @@
                             jabber
                             malabar-mode
                             org-plus-contrib
-                            polymode
                             badger-theme
                             helm-ag
                             wgrep
@@ -81,7 +80,11 @@
                             mu4e-maildirs-extension
                             bookmark+
                             sauron
-                            ggtags))
+                            ggtags
+                            org-bullets))
+
+;; Env Variables
+(exec-path-from-shell-copy-env "NOMAD_ENV")
 
 ;; Pull in all my personal bits and bobs from external files
 (defvar load-personal-config-list)
@@ -198,7 +201,6 @@
 
 ;; Smartparens all the time
 (smartparens-global-mode t)
-(add-to-list sp-ignore-modes-list )
 
 ;;; yasnippet
 (yas-global-mode 1)
@@ -228,10 +230,6 @@
 ;; Ensime
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-
-;;; Polymode for markdown
-(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown" . poly-markdown-mode))
 
 ;;----------------------------------Bookmark+-----------------------------------
 (require 'bookmark+)
