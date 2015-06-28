@@ -1,9 +1,12 @@
 * Core
+** Packages
+*** Org Melpa Repo
 #+BEGIN_SRC emacs-lisp
 (require 'package)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-
-;; Pull in custom packages
+#+END_SRC
+*** Prelude Requires
+#+BEGIN_SRC emacs-lisp
 (prelude-require-packages '(jade-mode
                             ess
                             twittering-mode
@@ -39,16 +42,24 @@
                             sauron
                             ggtags
                             org-bullets))
-
+#+END_SRC
+*** ENV variables
+#+BEGIN_SRC emacs-lisp
 ;; Env Variables
 (exec-path-from-shell-copy-env "NOMAD_ENV")
-
-;; Pull in all my personal bits and bobs from external files
+#+END_SRC
+*** Flip Tables
+#+BEGIN_SRC emacs-lisp
 (defvar load-personal-config-list)
+(setq load-personal-config-list '("/flip-tables.el"))
+(mapc (lambda (rmd-file-name)
+        (load (concat prelude-personal-dir rmd-file-name)))
+      load-personal-config-list)
 
-(setq load-personal-config-list '(
+;; Old:
+;;(setq load-personal-config-list '(
 ;;                                "/jsl-checker.el"
-                                  ;;"/evil.el"      ;; Disable for now, fucks w/ cider
+;;                                  "/evil.el"      ;; Disable for now, fucks w/ cider
 ;;                                  "/jsx-configs.el"
 ;;                                  "/work.el"            ;; Contains work erc configs too.
 ;;                                  "/python-configs.el"
@@ -57,19 +68,24 @@
 ;;                                  "/jsx-configs.el"
 ;;                                  "/jabber-configs.el"
 ;;                                  "/web-mode-configs.el"
-                                  "/flip-tables.el"
+;;                                  "/flip-tables.el"
 ;;                                  "/custom-fns.el"
 ;;                                  "/mu4e-configs.el"
-))
-
-(mapc (lambda (rmd-file-name)
-        (load (concat prelude-personal-dir rmd-file-name)))
-      load-personal-config-list)
-
+;;))
+#+END_SRC
+*** OSX Modifier Keys
+#+BEGIN_SRC emacs-lisp
+;;; Tweak Mac Keyboard Behavior
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
+#+END_SRC
+*** PCRE Regex Support
+#+BEGIN_SRC emacs-lisp
 ;; PCRE Regexes
 (rxt-global-mode)
-
-;;; Smart Mode Line and rich-minority-mode
+#+END_SRC
+*** Smart Mode Line
+#+BEGIN_SRC emacs-lisp
 (sml/setup)
 (which-function-mode -1)
 (rich-minority-mode 1)
@@ -94,19 +110,30 @@
 
 ;; Make sure I notice when I'm in
 (add-to-list 'rm-text-properties '(" Sp/s" 'face 'font-lock-warning-face))
+#+END_SRC
 
-;;; Magit warnings OFF
+*** Magit
+Magit has a long warning it shows these days; I've seen it. Turn it off.
+#+BEGIN_SRC emacs-lisp
 (setq magit-last-seen-setup-instructions "1.4.0")
+#+END_SRC
 
+*** WGrep
+#+BEGIN_SRC emacs-lisp
 ;;; wgrep-ag support
 (autoload 'wgrep-ag-setup "wgrep-ag")
 (add-hook 'ag-mode-hook 'wgrep-ag-setup)
 (add-hook 'helm-ag-mode-hook 'wgrep-ag-setup)
+#+END_SRC
 
-;;; Helm
+*** Helm
+#+BEGIN_SRC emacs-lisp
 (setq helm-split-window-in-side-p t
       helm-split-window-default-side 'below)
+#+END_SRC
 
+** Text Settings
+#+BEGIN_SRC emacs-lisp
 ;;; Whitespace and Auto-Fill
 ;; Set auto-fill to 80 characters by default instead of 70
 (setq-default fill-column 80)
@@ -126,22 +153,28 @@
 (add-hook 'org-mode-hook 'text-settings)
 (add-hook 'markdown-mode-hook 'text-settings)
 (add-hook 'rst-mode-hook 'text-settings)
+#+END_SRC
 
-;;; Tweak Mac Keyboard Behavior
-(setq mac-command-modifier 'meta)
-(setq mac-option-modifier 'super)
-
+** Projectile
+#+BEGIN_SRC emacs-lisp
 ;;; Projectile
 (setq projectile-remember-window-configs t)
 (setq projectile-switch-project-action 'projectile-dired)
 (persp-mode)
 (require 'persp-projectile)
 (define-key projectile-mode-map (kbd "C-c p p") 'projectile-persp-switch-project)
-;;; Twittering-mode
+#+END_SRC
+
+** Twittering Mode
+#+BEGIN_SRC emacs-lisp
 (setq twittering-icon-mode t)
 (setq twittering-use-master-password t)
 (setq twittering-use-icon-storage t)
+#+END_SRC
 
+** Company Mode
+
+#+BEGIN_SRC emacs-lisp
 ;;; Company-mode
 ;; errwhrr
 (add-hook 'global-init-hook 'global-company-mode)
@@ -153,21 +186,31 @@
 (setq company-idle-delay .4)
 (setq company-minimum-prefix-length 2)
 (setq company-tooltip-limit 20)
+#+END_SRC
 
+** Go
+#+BEGIN_SRC emacs-lisp
 ;;; Go Configs
 ;; Totally re-enable these if you ever do Go again.
 ;; (let ((go-path (getenv "GOPATH")))
 ;;   (load (concat go-path "/src/code.google.com/p/go.tools/cmd/oracle/oracle.el")))
+#+END_SRC
 
-;; Smartparens all the time
+** Smart Parens
+
+#+BEGIN_SRC emacs-lisp
 (smartparens-global-mode t)
+#+END_SRC
 
-;;; yasnippet
+** Yasnippet
+#+BEGIN_SRC emacs-lisp
 (yas-global-mode 1)
-
 ;; Tell yas to use system autocomplete instead of an f'ed-up X window:
 (setq yas-prompt-functions '(yas-completing-prompt))
+#+END_SRC
 
+** Malabar Mode
+#+BEGIN_SRC emacs-lisp
 ;;; Malabar Mode for the Jabbas
 ;; (require 'cedet)
 ;; (require 'semantic)
@@ -175,7 +218,10 @@
 ;; (semantic-mode 1);;
 ;; (require 'malabar-mode)
 ;; (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
+#+END_SRC
 
+** Clojure
+#+BEGIN_SRC emacs-lisp
 ;;; Clojure
 ;; Enable refactoring support
 (require 'clj-refactor)
@@ -186,15 +232,21 @@
             (add-hook 'cider-connected-hook #'cljr-warm-ast-cache)
             (cljr-add-keybindings-with-prefix "s-r")))
 
-;;; Scala
-;; Ensime
+#+END_SRC
+
+** Scala
+#+BEGIN_SRC emacs-lisp
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+#+END_SRC
 
-;;----------------------------------Bookmark+-----------------------------------
+** Bookmark+
+#+BEGIN_SRC emacs-lisp
 (require 'bookmark+)
+#+END_SRC
 
-;;-----------------------------------Sauron-------------------------------------
+** Sauron
+#+BEGIN_SRC emacs-lisp
 (require 'sauron)
 ;; 1: On OSX, there's no dbus, so don't try to load it.
 ;; 2: On Ubuntu, there _is_ dbus, so use it to get mu new mail updates from cron
@@ -210,8 +262,11 @@
             (and
              (eq 'twittering origin)
              (string-match "^[[:digit:]]* new tweets" msg))))
+#+END_SRC
 
-;;----------------------------------Timezones-----------------------------------
+** Timezones
+
+#+BEGIN_SRC emacs-lisp
 (setq display-time-world-list
       '(("America/Los_Angeles" "Pacific")
         ("America/Denver" "Mountain")
@@ -219,8 +274,10 @@
         ("America/New_York" "Eastern")
         ("Atlantic/Reykjavik" "Iceland")
         ("Europe/Paris" "Paris, France")))
+#+END_SRC
 
-;;----------------------------------NXML Mode-----------------------------------
+** NXML Mode
+#+BEGIN_SRC emacs-lisp
 (push 'nxml-mode sp-ignore-modes-list)
 (add-hook 'nxml-mode-hook
           (lambda ()
@@ -230,8 +287,9 @@
 
 
 * Functions
+
+** Rotate Windows
 #+BEGIN_SRC emacs-lisp
-;;-----------------A Handy-Dandy function for Rotating Windows------------------
 (defun toggle-window-split ()
   (interactive)
   (if (= (count-windows) 2)
@@ -258,15 +316,19 @@
           (if this-win-2nd (other-window 1))))))
 
 (global-set-key (kbd "C-x |") 'toggle-window-split)
+#+END_SRC
 
-;;------------------------------------Today-------------------------------------
+** Insert ISO Date
+#+BEGIN_SRC emacs-lisp
 (defun insert-iso-date ()
   (interactive)
   (insert (format-time-string "%Y-%m-%d" (current-time))))
 
 (global-set-key (kbd "C-x j") 'insert-iso-date)
+#+END_SRC
 
-;;; Tweak commenting behavior
+** comment-dwim
+#+BEGIN_SRC emacs-lisp
 (defun comment-dwim-line (&optional arg)
   "Replacement for the `comment-dwim' command.
 
@@ -282,10 +344,11 @@ If no region is selected and current line is not blank
     (comment-dwim arg)))
 
 (global-set-key (kbd "M-;") `comment-dwim-line)
+#+END_SRC
 
-;;-----------------------Marked.app Support for Markdown------------------------
-;; Assumes you're on a Mac, and have Marked.app installed
-
+** Marked.app
+Assumes you're on a Mac, and have Marked.app installed.
+#+BEGIN_SRC emacs-lisp
 (defun markdown-preview-file ()
   "Run Marked on the current file and revert the buffer."
   (interactive)
@@ -293,7 +356,6 @@ If no region is selected and current line is not blank
    (format "open -a /Applications/Marked.app %s"
            (shell-quote-argument (buffer-file-name)))))
 (global-set-key (kbd "C-c m") 'markdown-preview-file)
-
 #+END_SRC
 
 * ERC
@@ -324,8 +386,8 @@ If no region is selected and current line is not blank
                       (ess-close-brace-offset . 0)))
 
 (setq ess-default-style 'my-RRR)
-
 #+END_SRC
+
 * Org
 #+BEGIN_SRC emacs-lisp
 ;; Make sure auto-fill-mode is on. Pretty much always need it.
