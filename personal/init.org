@@ -150,14 +150,16 @@ Tweaks and modifications to Emacs' core UI.
 #+END_SRC
 
 ** Malabar Mode
+Malabar Mode... is like two thirds of a pretty nice Java integration for
+Emacs. The author /claims/ to be working on a v2. Not... sure how that's going for
+him yet :P
 #+BEGIN_SRC emacs-lisp
-;;; Malabar Mode for the Jabbas
-;; (require 'cedet)
-;; (require 'semantic)
-;; (load "semantic/loaddefs.el")
-;; (semantic-mode 1);;
-;; (require 'malabar-mode)
-;; (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
+(require 'cedet)
+(require 'semantic)
+(load "semantic/loaddefs.el")
+(semantic-mode 1);;
+(require 'malabar-mode)
+(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 #+END_SRC
 
 ** Clojure
