@@ -31,3 +31,4 @@ tramp
 /.python-environments/
 !*.org
 /personal/customize.el
+/personal/init.el
