@@ -30,3 +30,4 @@ tramp
 /ac-comphist.dat
 /.python-environments/
 !*.org
+/personal/customize.el
