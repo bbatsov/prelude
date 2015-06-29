@@ -5,7 +5,7 @@
 # binding: direct-keybinding
 # expand-env: ((yas-indent-line 'fixed))
 # --
-# Chronos configuration for ${1:`(buffer-name)`}
+# Chronos configuration for ${1:`(first (split-string (buffer-name) "\\."))`}
 ---
 name: $1
 command: "$2"
@@ -13,7 +13,6 @@ owner: ${0:ross@urbanairship.com}
 cpus: ${3:0.1}
 disk: ${4:512}
 mem: ${5:512}
-uris: ["http://nexus.prod.urbanairship.com/service/local/repositories/releases/content/com/urbanairship/$6/$7/$8/$7-$8-shaded.jar"]
 highPriority: ${9:false}
 runAsUser: ${10:root}
 async: ${11:false}
