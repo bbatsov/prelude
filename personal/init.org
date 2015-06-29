@@ -34,7 +34,6 @@ Pretty neat, hey?
                               company
                               company-jedi
                               virtualenvwrapper
-                              org
                               protobuf-mode
                               jedi
                               ensime
@@ -60,6 +59,8 @@ Pretty neat, hey?
                               bookmark+
                               sauron
                               ggtags
+                              ox-gfm
+                              ox-pandoc
                               org-bullets))
 #+END_SRC
 ** System
@@ -428,6 +429,8 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
         `(beamer
           ascii
           md
+          pandoc
+          gfm
           deck
           html))
 
