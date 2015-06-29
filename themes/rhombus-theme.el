@@ -39,6 +39,7 @@
     ("rhombus-fg+1"           . "#FBF9F3")
     ("rhombus-bg"             . "#000000")
     ("rhombus-bg+1"           . "#171717")
+    ("rhombus-bg+2"           . "#424242")
 
     ;; The Main Pallette
     ("rhombus-dark-red"       . "#9e1200")
@@ -102,10 +103,12 @@ Also bind `class' to ((class color) (min-colors 89))."
    ;; `(link-visited ((t (:foreground ,rhombus-grey-2 :underline t :weight normal))))
 
    ;; ordinary text. Its background color is used as the frame's background color.
-   `(default ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
+   `(default ((t (:foreground ,rhombus-fg :background ,rhombus-bg :font "DejaVu Sans Mono"))))
 
    ;;The :background attribute of this face specifies the color of the text cursor
    `(cursor ((t (:background ,rhombus-grey))))
+
+   `(shadow ((t (:foreground ,rhombus-charcoal))))
 
    ;; The face for displaying control characters and escape sequences
    `(escape-glyph ((t (:foreground ,rhombus-grey :bold t))))
@@ -128,7 +131,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    ;; This face is used for displaying an active region
    `(region ((t (:background ,rhombus-bg+1))))
 
-   `(show-paren-match-face ((t (:background ,rhombus-green :foreground ,"black" ))))
+   `(show-paren-match-face ((t (:background ,rhombus-orange-1 :foreground ,"black" ))))
 
    ;; >>>>> mode-line
    `(mode-line    ((,class (:foreground ,rhombus-violet
@@ -292,6 +295,28 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(jabber-title-medium ((t (:height 1.2 :weight bold))))
    `(jabber-title-large ((t (:height 1.3 :weight bold))))
 
+   ;;--------------------------------- dired -----------------------------------
+   `(dired-directory ((t (:foreground ,rhombus-dark-brown :weight normal))))
+   `(dired-flagged ((t (:foreground ,rhombus-warn))))
+   `(dired-header ((t (:foreground ,rhombus-bg+1 :background ,rhombus-berry))))
+   `(dired-ignored ((t (:inherit shadow))))
+   `(dired-mark ((t (:foreground ,rhombus-bronze :weight bold))))
+   `(dired-marked ((t (:foreground ,rhombus-orange :weight bold))))
+   `(dired-perm-write ((t (:foreground ,rhombus-fg+1 :underline t))))
+   `(dired-symlink ((t (:foreground ,rhombus-purple :background ,rhombus-bg+1 :weight bold))))
+   `(dired-warning ((t (:inherit warning :underline t))))
+
+   ;;------------------------------ dired-async --------------------------------
+   ;; `(dired-async-message ((,class (:background ,(if (eq variant 'light) yellow-l yellow) ))))
+   ;; `(dired-async-mode-message
+     ;; ((,class (:background ,(if (eq variant 'light) red-l red) ))))
+
+   ;;------------------------------- dired-efap --------------------------------
+   ;; `(dired-efap-face ((,class (:box nil
+                                    ;; :background ,base02
+                                    ;; :foreground ,base1
+                                    ;; :underline ,s-line
+                                    ;; :weight bold))))
 
    ;;-----------------------------------Erc-------------------------------------
    `(erc-action-face ((t (:inherit erc-default-face))))
@@ -342,7 +367,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
    `(company-tooltip-common ((t (:inherit font-lock-constant-face))))
 
-   ;; >>>>> Helm
+   ;;---------------------------------- helm -----------------------------------
    `(helm-header
      ((t (:foreground ,rhombus-charcoal
                       :background ,rhombus-bg
@@ -374,11 +399,12 @@ Also bind `class' to ((class color) (min-colors 89))."
    ;;   `(helm-buffer-process ((t (:foreground ,rhombus-cyan :background ,rhombus-bg))))
    ;;   `(helm-buffer-saved-out ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
    ;;   `(helm-buffer-size ((t (:foreground ,rhombus-fg-1 :background ,rhombus-bg))))
-   `(helm-ff-directory ((t (:background ,rhombus-bg+1 :foreground ,rhombus-dark-brown))))
+   `(helm-ff-directory ((t (:inherit 'dired-directory))))
+   `(helm-ff-dotted-directory ((nil (:foreground nil :background nil :inherit 'helm-ff-directory))))
    `(helm-ff-file ((t (:foreground ,rhombus-fg :background ,rhombus-bg+1 :weight normal))))
    `(helm-ff-executable ((t (:foreground ,rhombus-violet :background ,rhombus-orange :weight normal))))
    `(helm-ff-invalid-symlink ((t (:foreground ,rhombus-warn :background ,rhombus-bg+1 :weight bold))))
-   `(helm-ff-symlink ((t (:foreground ,rhombus-purple :background ,rhombus-bg+1 :weight bold))))
+   `(helm-ff-symlink ((t (:inherit dired-symlink))))
    `(helm-ff-prefix ((t (:foreground ,rhombus-bg :background ,rhombus-red-violet :weight normal))))
    `(helm-grep-cmd-line ((t (:foreground ,rhombus-orange :background ,rhombus-bg))))
    `(helm-grep-file ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
