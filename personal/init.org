@@ -58,6 +58,7 @@ Pretty neat, hey?
                               mu4e-maildirs-extension
                               bookmark+
                               sauron
+                              dired+
                               ggtags
                               ox-gfm
                               ox-pandoc
