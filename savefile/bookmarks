@@ -2,18 +2,15 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("hubble-thrift" 0 13
+(#1=(#("no fucks dance" 0 14
       (bmkp-full-record #1#))
     (filename . "   - no file -")
-    (location . "https://atlassian.prod.urbanairship.com/stash/projects/CD/repos/hubble-thrift/browse")
-    (handler . bmkp-jump-url-browse))
-#1=(#("flaming panda costume" 0 21
-      (bmkp-full-record #1#))
-    (filename . "   - no file -")
-    (location . "http://i.imgur.com/AXqjUTK.gif")
+    (location . "http://bukk.it/nofucks-dance.gif")
     (handler . bmkp-jump-url-browse))
 #1=(#("skipping a cat across water" 0 27
       (bmkp-full-record #1#))
+    (time 21873 14031 766984 0)
+    (visits . 0)
     (filename . "   - no file -")
     (location . "http://i.imgur.com/Z7jBZLa.gif")
     (handler . bmkp-jump-url-browse))
@@ -38,6 +35,8 @@
     (handler . bmkp-jump-url-browse))
 #1=(#("koalafications" 0 14
       (bmkp-full-record #1#))
+    (time 21873 14068 788270 0)
+    (visits . 0)
     (filename . "   - no file -")
     (location . "http://weknowmemes.com/wp-content/uploads/2012/05/i-have-all-the-koalafications.jpg")
     (handler . bmkp-jump-url-browse))
@@ -48,8 +47,8 @@
     (handler . bmkp-jump-url-browse))
 #1=(#("SPORTS!" 0 7
       (bmkp-full-record #1#))
-    (time 21864 40307 761840 172000)
-    (visits . 4)
+    (time 21873 13607 830378 0)
+    (visits . 5)
     (filename . "   - no file -")
     (location . "http://1.bp.blogspot.com/-ogDuk2V_blA/UmuchUtlQWI/AAAAAAAAOeY/XLUCK7J01dU/s1600/sports.gif")
     (handler . bmkp-jump-url-browse))
