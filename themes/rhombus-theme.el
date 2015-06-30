@@ -296,14 +296,14 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(jabber-title-large ((t (:height 1.3 :weight bold))))
 
    ;;--------------------------------- dired -----------------------------------
-   `(dired-directory ((t (:foreground ,rhombus-dark-brown :weight normal))))
+   `(dired-directory ((t (:foreground ,rhombus-violet :weight normal))))
    `(dired-flagged ((t (:foreground ,rhombus-warn))))
    `(dired-header ((t (:foreground ,rhombus-bg+1 :background ,rhombus-berry))))
    `(dired-ignored ((t (:inherit shadow))))
    `(dired-mark ((t (:foreground ,rhombus-bronze :weight bold))))
    `(dired-marked ((t (:foreground ,rhombus-orange :weight bold))))
    `(dired-perm-write ((t (:foreground ,rhombus-fg+1 :underline t))))
-   `(dired-symlink ((t (:foreground ,rhombus-purple :background ,rhombus-bg+1 :weight bold))))
+   `(dired-symlink ((t (:foreground ,rhombus-blue :background ,rhombus-bg+1 :weight bold))))
    `(dired-warning ((t (:inherit warning :underline t))))
 
    ;;------------------------------ dired-async --------------------------------
@@ -317,6 +317,33 @@ Also bind `class' to ((class color) (min-colors 89))."
                                     ;; :foreground ,base1
                                     ;; :underline ,s-line
                                     ;; :weight bold))))
+
+   ;;-------------------------------- dired+ -----------------------------------
+   `(diredp-display-msg ((t (:foreground ,rhombus-orange-1))))
+   `(diredp-compressed-file-suffix ((t (:foreground ,rhombus-light-brown))))
+   `(diredp-date-time ((t (:foreground ,rhombus-purple))))
+   `(diredp-deletion ((t (:foreground ,rhombus-warn))))
+   `(diredp-deletion-file-name ((t (:foreground ,rhombus-red))))
+   `(diredp-dir-heading ((t (:foreground ,rhombus-blue :background ,rhombus-bg))))
+   `(diredp-dir-priv ((t (:inherit `dired-directory))))
+   `(diredp-exec-priv ((t (:foreground ,rhombus-red))))
+   `(diredp-executable-tag ((t (:foreground ,rhombus-green))))
+
+   `(diredp-file-name ((t (:foreground ,rhombus-fg :background ,rhombus-bg+1 :weight normal))))
+   `(diredp-file-suffix ((t (:foreground ,rhombus-charcoal))))
+   `(diredp-flag-mark ((t (:foreground ,rhombus-orange))))
+   `(diredp-flag-mark-line ((t (:foreground ,rhombus-orange))))
+   `(diredp-ignored-file-name ((t (:foreground ,rhombus-red))))
+   `(diredp-link-priv ((t (:foreground ,rhombus-yellow))))
+   `(diredp-mode-line-flagged ((t (:foreground ,rhombus-yellow))))
+   `(diredp-mode-line-marked ((t (:foreground ,rhombus-orange))))
+   `(diredp-no-priv ((t (:foreground ,rhombus-fg))))
+   `(diredp-number ((t (:foreground ,rhombus-pink))))
+   `(diredp-other-priv ((t (:foreground ,rhombus-yellow))))
+   `(diredp-rare-priv ((t (:foreground ,rhombus-red))))
+   `(diredp-read-priv ((t (:foreground ,rhombus-green))))
+   `(diredp-symlink ((t (:inherit `dired-symlink))))
+   `(diredp-write-priv ((t (:foreground ,rhombus-yellow))))
 
    ;;-----------------------------------Erc-------------------------------------
    `(erc-action-face ((t (:inherit erc-default-face))))
@@ -401,7 +428,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    ;;   `(helm-buffer-size ((t (:foreground ,rhombus-fg-1 :background ,rhombus-bg))))
    `(helm-ff-directory ((t (:inherit 'dired-directory))))
    `(helm-ff-dotted-directory ((nil (:foreground nil :background nil :inherit 'helm-ff-directory))))
-   `(helm-ff-file ((t (:foreground ,rhombus-fg :background ,rhombus-bg+1 :weight normal))))
+   `(helm-ff-file ((t (:inherit `diredp-file-name))))
    `(helm-ff-executable ((t (:foreground ,rhombus-violet :background ,rhombus-orange :weight normal))))
    `(helm-ff-invalid-symlink ((t (:foreground ,rhombus-warn :background ,rhombus-bg+1 :weight bold))))
    `(helm-ff-symlink ((t (:inherit dired-symlink))))
