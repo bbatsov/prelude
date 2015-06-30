@@ -309,17 +309,17 @@ Also bind `class' to ((class color) (min-colors 89))."
    ;;------------------------------ dired-async --------------------------------
    ;; `(dired-async-message ((,class (:background ,(if (eq variant 'light) yellow-l yellow) ))))
    ;; `(dired-async-mode-message
-     ;; ((,class (:background ,(if (eq variant 'light) red-l red) ))))
+   ;; ((,class (:background ,(if (eq variant 'light) red-l red) ))))
 
    ;;------------------------------- dired-efap --------------------------------
    ;; `(dired-efap-face ((,class (:box nil
-                                    ;; :background ,base02
-                                    ;; :foreground ,base1
-                                    ;; :underline ,s-line
-                                    ;; :weight bold))))
+   ;; :background ,base02
+   ;; :foreground ,base1
+   ;; :underline ,s-line
+   ;; :weight bold))))
 
    ;;-------------------------------- dired+ -----------------------------------
-   `(diredp-display-msg ((t (:foreground ,rhombus-orange-1))))
+   `(diredp-display-msg ((t (:foreground ,rhombus-blue))))
    `(diredp-compressed-file-suffix ((t (:foreground ,rhombus-light-brown))))
    `(diredp-date-time ((t (:foreground ,rhombus-purple))))
    `(diredp-deletion ((t (:foreground ,rhombus-warn))))
@@ -331,8 +331,8 @@ Also bind `class' to ((class color) (min-colors 89))."
 
    `(diredp-file-name ((t (:foreground ,rhombus-fg :background ,rhombus-bg+1 :weight normal))))
    `(diredp-file-suffix ((t (:foreground ,rhombus-charcoal))))
-   `(diredp-flag-mark ((t (:foreground ,rhombus-orange))))
-   `(diredp-flag-mark-line ((t (:foreground ,rhombus-orange))))
+   `(diredp-flag-mark ((t (:foreground ,rhombus-orange-1))))
+   `(diredp-flag-mark-line ((t (:foreground ,rhombus-orange-1))))
    `(diredp-ignored-file-name ((t (:foreground ,rhombus-red))))
    `(diredp-link-priv ((t (:foreground ,rhombus-yellow))))
    `(diredp-mode-line-flagged ((t (:foreground ,rhombus-yellow))))
@@ -438,11 +438,10 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(helm-grep-finish ((t (:foreground ,rhombus-green :background ,rhombus-bg))))
    `(helm-grep-lineno ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
    `(helm-grep-match ((t (:foreground nil :background nil :inherit helm-match))))
-   `(helm-grep-running ((t (:foreground ,rhombus-blue :background ,rhombus-bg))))
-   ;;   `(helm-moccur-buffer ((t (:foreground ,rhombus-cyan :background ,rhombus-bg))))
-   ;;   `(helm-mu-contacts-address-face ((t (:foreground ,rhombus-fg-1 :background ,rhombus-bg))))
-   ;;   `(helm-mu-contacts-name-face ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
-
+   `(helm-grep-running ((t (:foreground ,rhombus-green :background ,rhombus-bg))))
+   `(helm-moccur-buffer ((t (:foreground ,rhombus-blue :background ,rhombus-bg))))
+   `(helm-mu-contacts-address-face ((t (:foreground ,rhombus-fg-1 :background ,rhombus-bg))))
+   `(helm-mu-contacts-name-face ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
 
    ;; >>>>> Magit
    `(magit-item-highlight ((t (:background ,rhombus-violet-2))))
