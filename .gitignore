@@ -32,3 +32,4 @@ tramp
 !*.org
 /personal/customize.el
 /personal/init.el
+/ensime/
