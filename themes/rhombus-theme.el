@@ -440,7 +440,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(helm-grep-match ((t (:foreground nil :background nil :inherit helm-match))))
    `(helm-grep-running ((t (:foreground ,rhombus-green :background ,rhombus-bg))))
    `(helm-moccur-buffer ((t (:foreground ,rhombus-blue :background ,rhombus-bg))))
-   `(helm-mu-contacts-address-face ((t (:foreground ,rhombus-fg-1 :background ,rhombus-bg))))
+   `(helm-mu-contacts-address-face ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
    `(helm-mu-contacts-name-face ((t (:foreground ,rhombus-fg :background ,rhombus-bg))))
 
    ;; >>>>> Magit
@@ -458,16 +458,16 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(persp-selected-face ((t (:foreground ,rhombus-light-brown :inherit mode-line))))
 
    ;; >>>>> whitespace-mode
-   ;; `(whitespace-space ((t (:background ,rhombus-bg+1 :foreground ,rhombus-bg+1))))
-   ;; `(whitespace-hspace ((t (:background ,rhombus-bg+1 :foreground ,rhombus-bg+1))))
-   ;; `(whitespace-tab ((t (:background ,rhombus-red-1))))
-   ;; `(whitespace-newline ((t (:foreground ,rhombus-bg+1))))
-   ;; `(whitespace-trailing ((t (:background ,rhombus-red))))
-   ;; `(whitespace-line ((t (:background ,rhombus-bg :foreground ,rhombus-magenta))))
-   ;; `(whitespace-space-before-tab ((t (:background ,rhombus-orange :foreground ,rhombus-orange))))
-   ;; `(whitespace-indentation ((t (:background ,rhombus-yellow :foreground ,rhombus-red))))
-   ;; `(whitespace-empty ((t (:background ,rhombus-yellow))))
-   ;; `(whitespace-space-after-tab ((t (:background ,rhombus-yellow :foreground ,rhombus-red))))
+   `(whitespace-space ((t (:background ,rhombus-bg+1 :foreground ,rhombus-bg+1))))
+   `(whitespace-hspace ((t (:background ,rhombus-bg+1 :foreground ,rhombus-bg+1))))
+   `(whitespace-tab ((t (:background ,rhombus-red))))
+   `(whitespace-newline ((t (:foreground ,rhombus-bg+1))))
+   `(whitespace-trailing ((t (:background ,rhombus-red))))
+   `(whitespace-line ((t (:background ,rhombus-bg :foreground ,rhombus-blue))))
+   `(whitespace-space-before-tab ((t (:background ,rhombus-orange :foreground ,rhombus-orange))))
+   `(whitespace-indentation ((t (:background ,rhombus-yellow :foreground ,rhombus-red))))
+   `(whitespace-empty ((t (:background ,rhombus-yellow))))
+   `(whitespace-space-after-tab ((t (:background ,rhombus-yellow :foreground ,rhombus-red))))
 
    ))
 
