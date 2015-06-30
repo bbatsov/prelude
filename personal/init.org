@@ -1,0 +1,745 @@
+* Core
+#+BEGIN_SRC emacs-lisp
+(require 'package)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+
+;; Pull in custom packages
+(prelude-require-packages '(jade-mode
+                            ess
+                            twittering-mode
+                            floobits
+                            sublime-themes
+                            company
+                            company-jedi
+                            virtualenvwrapper
+                            org
+                            protobuf-mode
+                            jedi
+                            ensime
+                            web-mode
+                            thrift
+                            ag
+                            jabber
+                            malabar-mode
+                            org-plus-contrib
+                            badger-theme
+                            helm-ag
+                            wgrep
+                            wgrep-ag
+                            pcre2el
+                            wgrep-helm
+                            clj-refactor
+                            perspective
+                            persp-projectile
+                            column-enforce-mode
+                            smart-mode-line
+                            rich-minority
+                            mu4e-maildirs-extension
+                            bookmark+
+                            sauron
+                            ggtags
+                            org-bullets))
+
+;; Env Variables
+(exec-path-from-shell-copy-env "NOMAD_ENV")
+
+;; Pull in all my personal bits and bobs from external files
+(defvar load-personal-config-list)
+
+(setq load-personal-config-list '(
+;;                                "/jsl-checker.el"
+                                  ;;"/evil.el"      ;; Disable for now, fucks w/ cider
+;;                                  "/jsx-configs.el"
+;;                                  "/work.el"            ;; Contains work erc configs too.
+;;                                  "/python-configs.el"
+;;                                  "/erc-configs.el"
+;;                                  "/ess-configs.el"
+;;                                  "/jsx-configs.el"
+;;                                  "/jabber-configs.el"
+;;                                  "/web-mode-configs.el"
+                                  "/flip-tables.el"
+;;                                  "/custom-fns.el"
+;;                                  "/mu4e-configs.el"
+))
+
+(mapc (lambda (rmd-file-name)
+        (load (concat prelude-personal-dir rmd-file-name)))
+      load-personal-config-list)
+
+;; PCRE Regexes
+(rxt-global-mode)
+
+;;; Smart Mode Line and rich-minority-mode
+(sml/setup)
+(which-function-mode -1)
+(rich-minority-mode 1)
+(setq rm-blacklist '(" MRev"
+                     " yas"
+                     " Helm"
+                     " company"
+                     " guru"
+                     " Pre"))
+
+(setq sml/shorten-directory t)
+(setq sml/shorten-modes t)
+
+;; Java and scala package names are infinite and terrible; shorten them.
+(add-to-list 'sml/replacer-regexp-list '("^~/Code/" ":CODE:") t)
+(add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/main/java/" ":SMJ:") t)
+(add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/test/java/" ":STJ:") t)
+(add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/main/scala/" ":SMS:") t)
+(add-to-list 'sml/replacer-regexp-list '("^:CODE:\\(?:.*\\)\\{1,2\\}/src/test/scala/" ":STS:") t)
+(add-to-list 'sml/replacer-regexp-list '("^:SM[JS]:com/urbanairship/\\(.*\\)/" ":M:\\1:") t)
+(add-to-list 'sml/replacer-regexp-list '("^:ST[JS]:com/urbanairship/\\(.*\\)/" ":T:\\1:") t)
+
+;; Make sure I notice when I'm in
+(add-to-list 'rm-text-properties '(" Sp/s" 'face 'font-lock-warning-face))
+
+;;; Magit warnings OFF
+(setq magit-last-seen-setup-instructions "1.4.0")
+
+;;; wgrep-ag support
+(autoload 'wgrep-ag-setup "wgrep-ag")
+(add-hook 'ag-mode-hook 'wgrep-ag-setup)
+(add-hook 'helm-ag-mode-hook 'wgrep-ag-setup)
+
+;;; Helm
+(setq helm-split-window-in-side-p t
+      helm-split-window-default-side 'below)
+
+;;; Whitespace and Auto-Fill
+;; Set auto-fill to 80 characters by default instead of 70
+(setq-default fill-column 80)
+
+;; Disable whitespace-mode and enable auto-fill in prose-writing major modes
+(defun text-settings ()
+  (whitespace-mode -1)
+  (abbrev-mode -1)
+  (turn-on-auto-fill))
+
+;; Don't clean up whitespace in markdown mode only
+(add-hook 'markdown-mode-hook
+          (lambda ()
+            (make-local-variable 'prelude-clean-whitespace-on-save)
+            (setq-local prelude-clean-whitespace-on-save nil)))
+
+(add-hook 'org-mode-hook 'text-settings)
+(add-hook 'markdown-mode-hook 'text-settings)
+(add-hook 'rst-mode-hook 'text-settings)
+
+;;; Tweak Mac Keyboard Behavior
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'super)
+
+;;; Projectile
+(setq projectile-remember-window-configs t)
+(setq projectile-switch-project-action 'projectile-dired)
+(persp-mode)
+(require 'persp-projectile)
+(define-key projectile-mode-map (kbd "C-c p p") 'projectile-persp-switch-project)
+;;; Twittering-mode
+(setq twittering-icon-mode t)
+(setq twittering-use-master-password t)
+(setq twittering-use-icon-storage t)
+
+;;; Company-mode
+;; errwhrr
+(add-hook 'global-init-hook 'global-company-mode)
+(add-hook 'go-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (company-mode)))
+
+;; Not convinced this is helping.
+(setq company-idle-delay .4)
+(setq company-minimum-prefix-length 2)
+(setq company-tooltip-limit 20)
+
+;;; Go Configs
+;; Totally re-enable these if you ever do Go again.
+;; (let ((go-path (getenv "GOPATH")))
+;;   (load (concat go-path "/src/code.google.com/p/go.tools/cmd/oracle/oracle.el")))
+
+;; Smartparens all the time
+(smartparens-global-mode t)
+
+;;; yasnippet
+(yas-global-mode 1)
+
+;; Tell yas to use system autocomplete instead of an f'ed-up X window:
+(setq yas-prompt-functions '(yas-completing-prompt))
+
+;;; Malabar Mode for the Jabbas
+;; (require 'cedet)
+;; (require 'semantic)
+;; (load "semantic/loaddefs.el")
+;; (semantic-mode 1);;
+;; (require 'malabar-mode)
+;; (add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
+
+;;; Clojure
+;; Enable refactoring support
+(require 'clj-refactor)
+(add-hook 'clojure-mode-hook
+          (lambda ()
+            (clj-refactor-mode 1)
+            (add-hook 'cider-connected-hook #'cljr-update-artifact-cache)
+            (add-hook 'cider-connected-hook #'cljr-warm-ast-cache)
+            (cljr-add-keybindings-with-prefix "s-r")))
+
+;;; Scala
+;; Ensime
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+;;----------------------------------Bookmark+-----------------------------------
+(require 'bookmark+)
+
+;;-----------------------------------Sauron-------------------------------------
+(require 'sauron)
+;; 1: On OSX, there's no dbus, so don't try to load it.
+;; 2: On Ubuntu, there _is_ dbus, so use it to get mu new mail updates from cron
+(if (eq system-type 'darwin)
+    (setq sauron-modules '(sauron-jabber sauron-erc sauron-org sauron-twittering sauron-notifications))
+  (setq sauron-dbus-cookie 1))
+
+(setq sauron-separate-frame nil
+      sauron-nick-insensitivity 300)
+
+(add-hook 'sauron-event-block-functions
+          (lambda (origin prio msg &optional props)
+            (and
+             (eq 'twittering origin)
+             (string-match "^[[:digit:]]* new tweets" msg))))
+
+;;----------------------------------Timezones-----------------------------------
+(setq display-time-world-list
+      '(("America/Los_Angeles" "Pacific")
+        ("America/Denver" "Mountain")
+        ("America/Mexico_City" "Central")
+        ("America/New_York" "Eastern")
+        ("Atlantic/Reykjavik" "Iceland")
+        ("Europe/Paris" "Paris, France")))
+
+;;----------------------------------NXML Mode-----------------------------------
+(push 'nxml-mode sp-ignore-modes-list)
+(add-hook 'nxml-mode-hook
+          (lambda ()
+            ()
+            (define-key prelude-mode-map (kbd "C-c C-i") 'nxml-balanced-close-start-tag-inline)))
+#+END_SRC
+
+
+* Functions
+#+BEGIN_SRC emacs-lisp
+;;-----------------A Handy-Dandy function for Rotating Windows------------------
+(defun toggle-window-split ()
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((this-win-buffer (window-buffer))
+             (next-win-buffer (window-buffer (next-window)))
+             (this-win-edges (window-edges (selected-window)))
+             (next-win-edges (window-edges (next-window)))
+             (this-win-2nd (not (and (<= (car this-win-edges)
+                                         (car next-win-edges))
+                                     (<= (cadr this-win-edges)
+                                         (cadr next-win-edges)))))
+             (splitter
+              (if (= (car this-win-edges)
+                     (car (window-edges (next-window))))
+                  'split-window-horizontally
+                'split-window-vertically)))
+        (delete-other-windows)
+        (let ((first-win (selected-window)))
+          (funcall splitter)
+          (if this-win-2nd (other-window 1))
+          (set-window-buffer (selected-window) this-win-buffer)
+          (set-window-buffer (next-window) next-win-buffer)
+          (select-window first-win)
+          (if this-win-2nd (other-window 1))))))
+
+(global-set-key (kbd "C-x |") 'toggle-window-split)
+
+;;------------------------------------Today-------------------------------------
+(defun insert-iso-date ()
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d" (current-time))))
+
+(global-set-key (kbd "C-x j") 'insert-iso-date)
+
+;;; Tweak commenting behavior
+(defun comment-dwim-line (&optional arg)
+  "Replacement for the `comment-dwim' command.
+
+If no region is selected and current line is not blank
+        and we are not at the end of the line, then comment
+        current line.  Replaces default behaviour of
+        `comment-dwim', when it inserts comment at the end of the
+        line.  With an argument, passes ARG to `comment-dwim'"
+  (interactive "*P")
+  (comment-normalize-vars)
+  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    (comment-dwim arg)))
+
+(global-set-key (kbd "M-;") `comment-dwim-line)
+
+;;-----------------------Marked.app Support for Markdown------------------------
+;; Assumes you're on a Mac, and have Marked.app installed
+
+(defun markdown-preview-file ()
+  "Run Marked on the current file and revert the buffer."
+  (interactive)
+  (shell-command
+   (format "open -a /Applications/Marked.app %s"
+           (shell-quote-argument (buffer-file-name)))))
+(global-set-key (kbd "C-c m") 'markdown-preview-file)
+
+#+END_SRC
+
+* ERC
+#+BEGIN_SRC emacs-lisp
+;;; Code:
+;; Setup ERC
+(setq erc-autojoin-channels-alist '(("freenode.net"
+                                     "#emacs" "#clojure"))
+      erc-nick "gastove")
+
+#+END_SRC
+
+* ESS
+#+BEGIN_SRC emacs-lisp
+(require 'ess-site)
+
+(add-to-list 'ess-style-alist
+             '(my-RRR (ess-indent-level . 2)
+                      (ess-first-continued-statement-offset . 2)
+                      ;; (ess-first-continued-statement-offset . 0)
+                      (ess-continued-statement-offset . 0)
+                      ;; (ess-continued-statement-offset . 4)
+                      (ess-brace-offset . 0)
+                      (ess-arg-function-offset . 4)
+                      (ess-arg-function-offset-new-line . '(4))
+                      (ess-expression-offset . 4)
+                      (ess-else-offset . 0)
+                      (ess-close-brace-offset . 0)))
+
+(setq ess-default-style 'my-RRR)
+
+#+END_SRC
+* Org
+#+BEGIN_SRC emacs-lisp
+;; Make sure auto-fill-mode is on. Pretty much always need it.
+;;(require 'org)
+(require 'org-bullets)
+(add-hook 'org-mode-hook
+          (lambda ()
+            (turn-on-auto-fill)
+            (org-bullets-mode 1)))
+
+;; TODO Keyword states:
+;; > In-Progress states: TODO, DOING, BLOCKED
+;; > Finished states:    DONE, IMPOSSIBLE, CANCELLED
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "DOING(o)" "|" "DONE(d)")
+        (sequence "BLOCKED(b)" "|" "UNBLOCKED (u)" "CANCELLED(c)" "IMPOSSIBLE(i)")))
+
+(setq org-todo-keyword-faces
+      '(("TODO" . org-todo)
+        ("DOING" . org-todo)
+        ("BLOCKED" . org-warning)
+        ("CANCELLED" . org-done)
+        ("IMPOSSIBLE" . org-done)
+        ("DONE" . org-done)))
+
+;; Support for Babel Mode code blocks
+;; NOTE: requires the addition of the org elpa repo!
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (emacs-lisp . t)
+   (java . t)
+   (sh . t)
+   (R . t)
+   (scala . t)
+   (sql . t)))
+
+;; Smartparens pairs!
+(sp-local-pair 'org-mode "~" "~" :wrap "C-~")
+(sp-local-pair 'org-mode "/" "/")
+(sp-local-pair 'org-mode "*" "*" :wrap "C-*")
+
+;; Config org export backends
+(setq org-export-backends
+      `(beamer
+        ascii
+        md
+        deck
+        html))
+
+;; Export defaults: no table of contents, no numbered headers, don't convert ^
+;; or _ to superscripts
+(setq org-export-with-section-numbers nil
+      org-export-with-sub-superscripts nil
+      org-export-with-toc nil)
+
+;; Refiling defaults
+(setq org-refile-targets '((org-agenda-files :maxlevel . 3))
+      org-refile-allow-creating-parent-nodes 'confirm)
+
+;; For reasons I can't grok at all, Prelude seems to disable some org keyboard
+;; shortcuts. Let's fix that.
+(defun org-bindings ()
+  (define-key prelude-mode-map (kbd "C-c /") 'org-sparse-tree)
+  (define-key prelude-mode-map [(control shift return)] 'org-insert-todo-heading-respect-content))
+
+(add-hook 'org-mode-hook 'org-bindings)
+
+;; Hide org emphasis marks
+(setq org-hide-emphasis-markers t)
+
+;; Start indented
+(setq org-startup-indented t)
+
+;; Stop folding. Just... stop.
+(setq org-startup-folded nil)
+
+;; Fontify inside code blocks
+(setq org-src-fontify-natively t)
+
+;; org-mime for composing emails
+(require 'org-mime)
+
+#+END_SRC
+* Jabber
+#+BEGIN_SRC emacs-lisp
+;; Gchat!
+(setq jabber-account-list
+      '(("gastove@gmail.com"
+         (:network-server . "talk.google.com")
+         (:connection-type . ssl)
+         (:port . 5223))))
+
+(setq jabber-history-enabled t
+      jabber-vcard-avatars-retrieve nil
+      jabber-chat-buffer-show-avatar nil
+      jabber-roster-show-bindings nil
+      jabber-show-offline-contacts nil
+      jabber-auto-reconnect t
+      jabber-roster-show-title nil
+      jabber-alert-presence-message-function 'jabber-presence-only-chat-open-message
+      jabber-use-global-history t
+      jabber-global-history-filename (locate-user-emacs-file "var/jabber.log"))
+
+(add-hook 'jabber-chat-mode-hook
+          (lambda ()
+            (turn-on-flyspell)
+            (if word-wrap nil (toggle-word-wrap))
+            (if truncate-lines (toggle-truncate-lines))))
+#+END_SRC
+* JSX
+#+BEGIN_SRC emacs-lisp
+;; Syntax Highlighting
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+(defadvice web-mode-highlight-part (around tweak-jsx activate)
+  (if (equal web-mode-content-type "jsx")
+      (let ((web-mode-enable-part-face nil))
+        ad-do-it)
+    ad-do-it))
+
+;; Linting
+(eval-after-load "flycheck"
+  '(progn
+     (flycheck-define-checker jsxhint-checker
+      "A JSX syntax and style checker based on JSXHint."
+
+      :command ("jsxhint" source)
+      :error-patterns
+      ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
+      :modes (web-mode))))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (equal web-mode-content-type "jsx")
+              ;; enable flycheck
+              (flycheck-select-checker 'jsxhint-checker)
+              (flycheck-mode))))
+#+END_SRC
+* mu4e
+#+BEGIN_SRC emacs-lisp
+;;; mu4e-configs.el --- My mu4e configs
+;;
+;;; Commentary:
+;; Borrowed, gratefully, from http://kirang.in/2014/11/13/emacs-as-email-client-with-offlineimap-and-mu4e-on-osx/
+;;; Code:
+
+;; If I want multiple accounts, need to manage these:
+;; (setq mu4e-sent-folder "/Account1/Saved Items" ;; check
+;;      mu4e-drafts-folder "/Account1/Drafts"     ;; check
+;;      user-mail-address "my.address@account1.tld" ;; check
+;;      smtpmail-default-smtp-server "smtp.account1.tld" ;; check
+;;      smtpmail-local-domain "account1.tld"
+;;      smtpmail-smtp-server "smtp.account1.tld" ;; check
+;;      smtpmail-stream-type starttls
+;;      smtpmail-smtp-service 25)
+
+;; Re-enable C-x m for email (nerfs eshell, which I never use)
+(global-set-key (kbd "C-x m") 'compose-mail)
+
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+(require 'mu4e)
+(setq mu4e-maildir "~/.Mail")
+(setq mu4e-drafts-folder "/gastove@gmail.com/[Gmail].Drafts")
+(setq mu4e-sent-folder   "/gastove@gmail.com/[Gmail].Sent Mail")
+;; don't save message to Sent Messages, Gmail/IMAP takes care of this
+(setq mu4e-sent-messages-behavior 'delete)
+;; allow for updating mail using 'U' in the main view:
+(setq mu4e-get-mail-command "offlineimap")
+
+;; Make mu4e the default user agent
+(setq mail-user-agent 'mu4e-user-agent)
+
+;; mu4e mail dirs
+(require 'mu4e-maildirs-extension)
+(mu4e-maildirs-extension)
+
+;; shortcuts
+(setq mu4e-maildir-shortcuts
+      '(("/gastove@gmail.com/INBOX"               . ?i)
+        ("/gastove@gmail.com/[Gmail].Important"   . ?I)
+        ("/gastove@gmail.com/[Gmail].Sent Mail"   . ?s)))
+
+;; something about ourselves
+(setq
+ user-mail-address "gastove@gmail.com"
+ user-full-name  "Ross Donaldson"
+ mu4e-compose-signature
+ (concat
+  "Cheers,\n"
+  "Ross\n"))
+
+;; ISO date format
+(setq mu4e-headers-date-format "%Y-%m-%d")
+
+;; show images
+(setq mu4e-show-images t)
+
+;; use imagemagick, if available
+(when (fboundp 'imagemagick-register-types)
+  (imagemagick-register-types))
+
+;; convert html emails properly
+;; Possible options:
+;;   - html2text -utf8 -width 72
+;;   - textutil -stdin -format html -convert txt -stdout
+;;   - html2markdown | grep -v '&nbsp_place_holder;' (Requires html2text pypi)
+;;   - w3m -dump -cols 80 -T text/html
+;;   - view in browser (provided below)
+;; (setq mu4e-html2text-command "textutil -stdin -format html -convert txt -stdout")
+                                        ;(setq mu4e-html2text-command "pandoc -f html -t plain")
+(require 'mu4e-contrib)
+(setq mu4e-html2text-command 'mu4e-shr2text)
+;; spell check
+;; (add-hook 'mu4e-compose-mode-hook
+;;           (defun my-do-compose-stuff ()
+;;             "My settings for message composition."
+;;             ;;(set-fill-column 80)
+;;             ;; (flyspell-mode)
+;;             ))
+
+;; add option to view html message in a browser
+;; `aV` in view to activate
+(add-to-list 'mu4e-view-actions
+             '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+
+;; fetch mail every 10 mins
+(setq mu4e-update-interval 600)
+
+
+;; configuration for sending mail
+(setq message-send-mail-function 'smtpmail-send-it
+      smtpmail-stream-type 'starttls
+      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587
+      smtpmail-smtp-user "gastove")
+
+;; Tweak bookmarked querries
+(add-to-list 'mu4e-bookmarks `(,(string-join
+                                 '("flag:unread"
+                                   "AND date:today..now"
+                                   "NOT maildir:/ross@urbanairship.com/Githubs"
+                                   "NOT maildir:'/ross@urbanairship.com/Sales Deals'"
+                                   "AND m:/ross@urbanairship.com/INBOX")
+                                 " ")
+                               "Today's work unreads" ?i))
+(add-to-list 'mu4e-bookmarks `(,(string-join
+                                 '("flag:unread"
+                                   "AND m:/gastove@gmail.com/INBOX"
+                                   "AND date:today..now")
+                                 " ") "Today's Personal Unreads" ?h))
+(add-to-list 'mu4e-bookmarks `(,(string-join
+                                 '("flag:unread"
+                                   "AND m:/gastove@gmail.com/INBOX"
+                                   "AND date:today..now"
+                                   "OR flag:unread"
+                                   "AND m:/ross@urbanairship.com/INBOX"
+                                   "AND date:today..now")
+                                 " ") "Today's Unreads" ?u))
+
+;; Switch accounts
+
+(defvar my-mu4e-account-alist
+  '(("gastove@gmail.com"
+     (mu4e-drafts-folder "/gastove@gmail.com/[Gmail].Drafts")
+     (mu4e-sent-folder   "/gastove@gmail.com/[Gmail].Sent Mail")
+     (user-mail-address "gastove@gmail.com")
+     (smtpmail-smtp-user "gastove"))
+    ("ross@urbanairship.com"
+     (mu4e-drafts-folder "/ross@urbanairship.com/[Gmail].Drafts")
+     (mu4e-sent-folder   "/ross@urbanairship.com/[Gmail].Sent Mail")
+     (user-mail-address "ross@urbanairship.com")
+     (smtpmail-smtp-user "ross.donaldson@urbanairship.com"))))
+
+(defun my-mu4e-set-account ()
+  "Set the account for composing a message."
+  (let* ((account
+          (if mu4e-compose-parent-message
+              (let ((maildir (mu4e-message-field mu4e-compose-parent-message :maildir)))
+                (string-match "/\\(.*?\\)/" maildir)
+                (match-string 1 maildir))
+            (completing-read (format "Compose with account: (%s) "
+                                     (mapconcat #'(lambda (var) (car var))
+                                                my-mu4e-account-alist "/"))
+                             (mapcar #'(lambda (var) (car var)) my-mu4e-account-alist)
+                             nil t nil nil (caar my-mu4e-account-alist))))
+         (account-vars (cdr (assoc account my-mu4e-account-alist))))
+    (if account-vars
+        (mapc #'(lambda (var)
+                  (set (car var) (cadr var)))
+              account-vars)
+      (error "No email account found"))))
+
+(add-hook 'mu4e-compose-pre-hook 'my-mu4e-set-account)
+#+END_SRC
+* Python
+#+BEGIN_SRC emacs-lisp
+;; Use IPython as my python interpreter
+(setq
+ python-shell-interpreter "ipython"
+ python-shell-interpreter-args ""
+ python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+ python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+ python-shell-completion-setup-code
+ "from IPython.core.completerlib import module_completion"
+ python-shell-completion-module-string-code
+ "';'.join(module_completion('''%s'''))\n"
+ python-shell-completion-string-code
+ "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+
+;; Enable virtualenvwrapper.el
+(venv-initialize-interactive-shells)
+(setq venv-location "~/.python_virtualenvs/")
+
+;; Not sure I dig Jedi at the moment. Can't figure out how to get it
+;; to place nice with my themes, so it's a bit eye-scalding. Will
+;; re-enable later if I figure out the visuals.
+;; Jedi-Mode
+(require 'jedi)
+(add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (whitespace-mode -1)
+            (column-enforce-mode)
+            (if (bound-and-true-p anaconda-mode)
+                (anaconda-mode))
+            (setq jedi:complete-on-dot t)
+            (add-to-list 'company-backends 'company-jedi)))
+
+;; Virtualenvs
+(add-hook 'python-mode-hook
+          (lambda ()
+            (hack-local-variables)
+            (when (boundp 'project-venv-name)
+              (venv-workon project-venv-name))))
+
+(add-hook 'venv-postactivate-hook
+          (lambda ()
+            (let ((env-bin-path (concat (getenv "VIRTUAL_ENV") "bin/postactivate.el")))
+              (when (file-exists-p env-bin-path)
+                (load env-bin-path)))))
+
+(setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
+#+END_SRC
+* web-mode
+#+BEGIN_SRC emacs-lisp
+(eval-after-load "web-mode"
+  '(progn
+
+    (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.[gj]sp\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
+    (defun my-web-mode-hook ()
+      (setq web-mode-enable-auto-pairing nil)
+      (setq web-mode-code-indent-offset 4))
+
+    (add-hook 'web-mode-hook  'my-web-mode-hook)
+
+    (defun sp-web-mode-is-code-context (id action context)
+      (when (and (eq action 'insert)
+                 (not (or (get-text-property (point) 'part-side)
+                          (get-text-property (point) 'block-side))))
+
+        t))
+
+    (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))))
+#+END_SRC
+* work
+#+BEGIN_SRC emacs-lisp
+;;; work.el -- All my work configs in one place.
+
+;;; Code:
+;; Work IRC
+(defun start-irc-work ()
+  "Connect to the UA IRC Server"
+  (interactive)
+  (add-to-list 'erc-autojoin-channels-alist '("dev.urbanairship.com" "#ops"))
+  ;; (load "~/.ercpass")
+  (erc-tls :server "dev.urbanairship.com"
+           :port 6697
+           :nick erc-nick
+))
+
+;;; Work SQL Functions
+;; Generate a list of DBs I connect to commonly
+(when (file-exists-p (expand-file-name "~/.emacs-dbs"))
+  (load "~/.emacs-dbs")
+  (setq sql-connection-alist
+        '((yavin
+           (sql-product 'postgres)
+           (sql-server yavin-server)
+           (sql-user yavin-user)
+           (sql-password yavin-password)
+           (sql-database "yavin")))))
+
+(defun sql-connect-preset (name)
+  "Connect to a predefined SQL connection listed in `sql-connection-alist'"
+  (eval `(let ,(cdr (assoc name sql-connection-alist))
+           (flet ((sql-get-login (&rest what)))
+             (sql-product-interactive sql-product)))))
+
+;; Function to load a DB based on its short name
+(defun sql-connect-preset-by-name (name)
+  "Connect to a DB by entering it's short name"
+  (interactive "sDB Name: ")
+  (sql-connect-preset 'name))
+
+(defun sql-yavin ()
+  (interactive)
+  (sql-connect-preset 'yavin))
+
+(global-set-key (kbd "M-s q") 'sql-connect-preset-by-name) ; Connect to a db preset by nameq
+#+END_SRC
