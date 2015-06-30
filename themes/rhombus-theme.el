@@ -38,7 +38,7 @@
   '(("rhombus-fg"             . "#FFF5EB")
     ("rhombus-fg+1"           . "#FBF9F3")
     ("rhombus-bg"             . "#000000")
-    ("rhombus-bg+1"           . "#171717")
+    ("rhombus-bg+1"           . "#363636")
     ("rhombus-bg+2"           . "#424242")
 
     ;; The Main Pallette
@@ -463,7 +463,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(whitespace-tab ((t (:background ,rhombus-red))))
    `(whitespace-newline ((t (:foreground ,rhombus-bg+1))))
    `(whitespace-trailing ((t (:background ,rhombus-red))))
-   `(whitespace-line ((t (:background ,rhombus-bg :foreground ,rhombus-blue))))
+   `(whitespace-line ((t (:background ,rhombus-bg+1))))
    `(whitespace-space-before-tab ((t (:background ,rhombus-orange :foreground ,rhombus-orange))))
    `(whitespace-indentation ((t (:background ,rhombus-yellow :foreground ,rhombus-red))))
    `(whitespace-empty ((t (:background ,rhombus-yellow))))
