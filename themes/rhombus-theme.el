@@ -463,10 +463,10 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(whitespace-tab ((t (:background ,rhombus-red))))
    `(whitespace-newline ((t (:foreground ,rhombus-bg+1))))
    `(whitespace-trailing ((t (:background ,rhombus-red))))
-   `(whitespace-line ((t (:background ,rhombus-bg+1))))
+   `(whitespace-line ((t (:background ,rhombus-bg+2))))
    `(whitespace-space-before-tab ((t (:background ,rhombus-orange :foreground ,rhombus-orange))))
    `(whitespace-indentation ((t (:background ,rhombus-yellow :foreground ,rhombus-red))))
-   `(whitespace-empty ((t (:background ,rhombus-yellow))))
+   `(whitespace-empty ((t (:background ,rhombus-bronze))))
    `(whitespace-space-after-tab ((t (:background ,rhombus-yellow :foreground ,rhombus-red))))
 
    ))
