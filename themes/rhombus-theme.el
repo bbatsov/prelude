@@ -38,8 +38,8 @@
   '(("rhombus-fg"             . "#FFF5EB")
     ("rhombus-fg+1"           . "#FBF9F3")
     ("rhombus-bg"             . "#000000")
-    ("rhombus-bg+1"           . "#363636")
-    ("rhombus-bg+2"           . "#424242")
+    ("rhombus-bg+1"           . "#171717")
+    ("rhombus-bg+2"           . "#363636")
 
     ;; The Main Pallette
     ("rhombus-dark-red"       . "#9e1200")
