@@ -24,6 +24,8 @@ From your home directory: `git clone git@github.com:thefrontside/.emacs.d`
 Emacs Prelude
 =============
 
+[![Join the chat at https://gitter.im/bbatsov/prelude](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bbatsov/prelude?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Prelude is an Emacs distribution that aims to enhance the default
 Emacs experience.  Prelude alters a lot of the default settings,
 bundles a plethora of additional packages and adds its own core
@@ -40,41 +42,41 @@ advised to always run Prelude with the latest Emacs - currently
 - [Fast Forward](#fast-forward)
 - [Installing Emacs 24](#installing-emacs-24)
 - [Installation](#installation)
-	- [Automated](#automated)
-		- [Via Curl](#via-curl)
-		- [Via Wget](#via-wget)
-	- [Manual](#manual)
+    - [Automated](#automated)
+        - [Via Curl](#via-curl)
+        - [Via Wget](#via-wget)
+    - [Manual](#manual)
 - [Updating Prelude](#updating-prelude)
-	- [Manual update](#manual-update)
-		- [Update all bundled packages](#update-all-bundled-packages)
-		- [Update Prelude's code](#update-preludes-code)
-		- [Restart Prelude](#restart-prelude)
-	- [Automatic update](#automatic-update)
+    - [Manual update](#manual-update)
+        - [Update all bundled packages](#update-all-bundled-packages)
+        - [Update Prelude's code](#update-preludes-code)
+        - [Restart Prelude](#restart-prelude)
+    - [Automatic update](#automatic-update)
 - [Enabling additional modules](#enabling-additional-modules)
 - [Running](#running)
 - [Getting to know Prelude](#getting-to-know-prelude)
-	- [Keymap](#keymap)
-		- [Global](#global)
-		- [Prelude Mode](#prelude-mode)
-		- [OSX modifier keys](#osx-modifier-keys)
-		- [Projectile](#projectile)
-		- [Helm](#helm)
-		- [Key-chords](#key-chords)
-			- [Disabling key-chords](#disabling-key-chords)
+    - [Keymap](#keymap)
+        - [Global](#global)
+        - [Prelude Mode](#prelude-mode)
+        - [OSX modifier keys](#osx-modifier-keys)
+        - [Projectile](#projectile)
+        - [Helm](#helm)
+        - [Key-chords](#key-chords)
+            - [Disabling key-chords](#disabling-key-chords)
 - [Automatic package installation](#automatic-package-installation)
-	- [Color Themes](#color-themes)
-	- [Personalizing](#personalizing)
-		- [Disabling whitespace-mode](#disabling-whitespace-mode)
-		- [Disable flyspell-mode](#disable-flyspell-mode)
+    - [Color Themes](#color-themes)
+    - [Personalizing](#personalizing)
+        - [Disabling whitespace-mode](#disabling-whitespace-mode)
+        - [Disable flyspell-mode](#disable-flyspell-mode)
 - [Caveats & Pitfalls](#caveats--pitfalls)
-	- [Updating bundled packages](#updating-bundled-packages)
-	- [Problems with flyspell-mode](#problems-with-flyspell-mode)
-	- [Ugly colors in the terminal Emacs version](#ugly-colors-in-the-terminal-emacs-version)
-	- [MELPA error on initial startup](#melpa-error-on-initial-startup)
-	- [Warnings on arrow navigation in editor buffers](#warnings-on-navigation-in-editor-buffers)
-	- [Customized C-a behavior](#customized-c-a-behavior)
-	- [Poor ido matching performance on large datasets](#poor-ido-matching-performance-on-large-datasets)
-	- [Windows compatibility](#windows-compatibility)
+    - [Updating bundled packages](#updating-bundled-packages)
+    - [Problems with flyspell-mode](#problems-with-flyspell-mode)
+    - [Ugly colors in the terminal Emacs version](#ugly-colors-in-the-terminal-emacs-version)
+    - [MELPA error on initial startup](#melpa-error-on-initial-startup)
+    - [Warnings on arrow navigation in editor buffers](#warnings-on-navigation-in-editor-buffers)
+    - [Customized C-a behavior](#customized-c-a-behavior)
+    - [Poor ido matching performance on large datasets](#poor-ido-matching-performance-on-large-datasets)
+    - [Windows compatibility](#windows-compatibility)
 - [Known issues](#known-issues)
 - [Support](#support)
 - [Contributors](#contributors)
@@ -88,7 +90,7 @@ can skip the whole manual and just type in your favorite shell the
 following command:
 
 ```bash
-curl -L http://git.io/epre | sh
+curl -L https://git.io/epre | sh
 ```
 
 You can now power up your Emacs, sit back and enjoy Prelude,
@@ -296,8 +298,8 @@ Keybinding         | Description
 <kbd>F11</kbd>     | Make the window full screen.
 <kbd>F12</kbd>     | Toggle the Emacs menu bar.
 <kbd>C-x g</kbd>   | Open Magit's status buffer.
+<kbd>C-x M-g</kbd> | Open Magit's popup of popups.
 <kbd>M-Z</kbd>     | Zap up to char.
-<kbd>C-c J</kbd> or <kbd>Super-></kbd>   | Switch between buffers with [`ace-jump-buffer`](https://github.com/waymondo/ace-jump-buffer)
 <kbd>C-=</kbd>     | Run `expand-region` (incremental text selection).
 <kbd>C-a</kbd>     | Run `prelude-move-beginning-of-line`. Read [this](http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/) for details.
 
@@ -447,9 +449,9 @@ buffer. Passing prefix argument **BEFORE** =helm-M-x= **has no effect**.
 
 Keybinding         | Description
 -------------------|----------------------------------------------
-<kbd>jj</kbd>      | Jump to the beginning of a word(`ace-jump-word-mode`)
-<kbd>jk</kbd>      | Jump to a character(`ace-jump-char-mode`)
-<kbd>jl</kbd>      | Jump to the beginning of a line(`ace-jump-line-mode`)
+<kbd>jj</kbd>      | Jump to the beginning of a word(`avy-goto-word-1`)
+<kbd>jk</kbd>      | Jump to a character(`avy-goto-char`)
+<kbd>jl</kbd>      | Jump to the beginning of a line(`avy-goto-line`)
 <kbd>JJ</kbd>      | Jump back to previous buffer(`prelude-switch-to-previous-buffer`)
 <kbd>uu</kbd>      | View edits as a tree(`undo-tree-visualize`)
 <kbd>xx</kbd>      | Executed extended command(`execute-extended-command`)
@@ -517,6 +519,13 @@ Or you can use another theme altogether by adding something in `personal/preload
 **P.S.** Solarized is not available by default - you'll have to
   install it from MELPA first (`M-x package-install RET
   solarized-theme`).
+
+Finally, if you don't want any theme at all, you can add this to your
+`personal/preload`:
+
+```lisp
+(setq prelude-theme nil)
+```
 
 ### Personalizing
 

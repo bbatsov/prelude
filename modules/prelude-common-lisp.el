@@ -1,6 +1,6 @@
 ;;; prelude-common-lisp.el --- Emacs Prelude: lisp-mode and SLIME config.
 ;;
-;; Copyright © 2011-2014 Bozhidar Batsov
+;; Copyright © 2011-2015 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -54,14 +54,22 @@
         (sbcl ("sbcl" "--noinform") :coding-system utf-8-unix)))
 
 ;; select the default value from slime-lisp-implementations
-(if (eq system-type 'darwin)
+(if (and (eq system-type 'darwin)
+         (executable-find "ccl"))
     ;; default to Clozure CL on OS X
     (setq slime-default-lisp 'ccl)
   ;; default to SBCL on Linux and Windows
   (setq slime-default-lisp 'sbcl))
 
+;; Add fancy slime contribs
+(setq slime-contribs '(slime-fancy))
+
 (add-hook 'lisp-mode-hook (lambda () (run-hooks 'prelude-lisp-coding-hook)))
-(add-hook 'slime-repl-mode-hook (lambda () (run-hooks 'prelude-interactive-lisp-coding-hook)))
+;; rainbow-delimeters messes up colors in slime-repl, and doesn't seem to work
+;; anyway, so we won't use prelude-lisp-coding-defaults.
+(add-hook 'slime-repl-mode-hook (lambda ()
+                                  (smartparens-strict-mode +1)
+                                  (whitespace-mode -1)))
 
 (eval-after-load "slime"
   '(progn

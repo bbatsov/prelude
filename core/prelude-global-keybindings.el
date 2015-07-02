@@ -1,6 +1,6 @@
 ;;; prelude-global-keybindings.el --- Emacs Prelude: some useful keybindings.
 ;;
-;; Copyright © 2011-2014 Bozhidar Batsov
+;; Copyright © 2011-2015 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -109,13 +109,12 @@
 (global-set-key (kbd "<f12>") 'menu-bar-mode)
 
 (global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 
-(global-set-key (kbd "C-c j") 'ace-jump-mode)
-(global-set-key (kbd "s-.") 'ace-jump-mode)
-(global-set-key (kbd "C-c J") 'ace-jump-buffer)
-(global-set-key (kbd "s->") 'ace-jump-buffer)
+(global-set-key (kbd "C-c j") 'avy-goto-word-or-subword-1)
+(global-set-key (kbd "s-.") 'avy-goto-word-or-subword-1)
 (global-set-key (kbd "s-w") 'ace-window)
 
 (provide 'prelude-global-keybindings)

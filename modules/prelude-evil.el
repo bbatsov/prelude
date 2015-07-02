@@ -1,6 +1,6 @@
 ;;; prelude-evil.el --- Emacs Prelude: evil-mode configuration.
 ;;
-;; Copyright © 2011-2014 Bozhidar Batsov
+;; Copyright © 2011-2015 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://batsov.com/prelude
@@ -122,8 +122,8 @@
 
 (setq evil-shift-width 2)
 
-;;; enable ace-jump mode with evil-mode
-(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+;;; enable avy with evil-mode
+(define-key evil-normal-state-map (kbd "SPC") 'avy-goto-word-1)
 
 ;;; snagged from Eric S. Fraga
 ;;; http://lists.gnu.org/archive/html/emacs-orgmode/2012-05/msg00153.html
