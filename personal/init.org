@@ -738,6 +738,30 @@ A handy little utility for interacting with Pandoc.
              (string-match "^[[:digit:]]* new tweets" msg))))
 #+END_SRC
 
+*** GGTags
+Provides considerably better definition lookup in a lot of languages; p. good
+for the Jabbas, Shell, and a bunch of things I don't have to read like C.
+#+BEGIN_SRC emacs-lisp
+  ;; C, C++, and Java
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+                (ggtags-mode 1))))
+
+  ;; Python
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (ggtags-mode 1)))
+
+  ;; Shell
+  (add-hook 'sh-mode-hook
+            (lambda ()
+              (ggtags-mode 1)))
+
+  (add-hook 'lisp-mode-hook
+            (lambda ()
+              (ggtags-mode 1)))
+#+END_SRC
 * Functions
 
 ** Rotate Windows
