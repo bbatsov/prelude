@@ -105,6 +105,7 @@
 ;; make ido choices appear vertically.
 (prelude-require-package 'ido-vertical-mode)
 (ido-vertical-mode)
+(setq ido-vertical-define-keys 'C-n-and-C-p-only)
 
 ;; Line numbers always on in prog-mode
 (add-hook 'prog-mode-hook 'linum-mode)
