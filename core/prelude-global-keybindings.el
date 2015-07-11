@@ -89,12 +89,7 @@
 (global-set-key [remap kill-whole-line] 'prelude-kill-whole-line)
 
 ;; Activate occur easily inside isearch
-(define-key isearch-mode-map (kbd "C-o")
-  (lambda () (interactive)
-    (let ((case-fold-search isearch-case-fold-search))
-      (occur (if isearch-regexp
-                 isearch-string
-               (regexp-quote isearch-string))))))
+(define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
 
 ;; use hippie-expand instead of dabbrev
 (global-set-key (kbd "M-/") 'hippie-expand)
