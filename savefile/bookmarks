@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(#1=(#("InitialEdgesGenerator.java" 0 26
+(#1=(#("where the hell is this bear" 0 27
+      (bmkp-full-record #1#))
+    (filename . "   - no file -")
+    (location . "http://bukk.it/wheretf.jpg")
+    (handler . bmkp-jump-url-browse))
+#1=(#("InitialEdgesGenerator.java" 0 26
       (bmkp-full-record #1#))
     (filename . "~/Code/scooby/scooby-prod-jobs/src/main/java/com/urbanairship/scooby/jobs/idresolution/v1/initialize/InitialEdgesGenerator.java")
     (buffer-name . "InitialEdgesGenerator.java")
@@ -33,16 +38,16 @@
       (bmkp-full-record #1#))
     (annotation)
     (tags)
-    (filename . "~/Dropbox/org-docs/cotidienne.org")
-    (buffer-name . "cotidienne.org")
-    (front-context-string . "** TODO Find tha")
-    (rear-context-string . "Puppet Theater\n\n")
+    (filename . "~/Code/astromech/notes.org")
+    (buffer-name . "notes.org")
+    (front-context-string . "** TODO Feature ")
+    (rear-context-string . " environments\n\n\n")
     (front-context-region-string)
     (rear-context-region-string)
     (visits . 0)
-    (time . #2=(21867 30881 550154 0))
+    (time . #2=(21914 50784 635568 793000))
     (created . #2#)
-    (position . 746))
+    (position . 1793))
 #1=(#("mesos-exec" 0 10
       (bmkp-full-record #1#))
     (filename . "   - no file -")
