@@ -780,11 +780,10 @@ for the Jabbas, Shell, and a bunch of things I don't have to read like C.
             (lambda ()
               (ggtags-mode 1)))
 
-  ;; Scala (for non-ensime projects)
-  (add-hook 'scala-mode-hook
-            (lambda ()
-              (ggtags-mode 1)))
 #+END_SRC
+
+#+RESULTS:
+| lambda | nil | (ggtags-mode 1) |
 
 * Functions
 
