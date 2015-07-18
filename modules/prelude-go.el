@@ -78,14 +78,7 @@
      (setq prelude-go-mode-hook 'prelude-go-mode-defaults)
 
      (add-hook 'go-mode-hook (lambda ()
-                               (run-hooks 'prelude-go-mode-hook)))
-
-     ;; Enable go-oracle-mode if available
-     (let ((oracle (executable-find "oracle")))
-       (when oracle
-         (setq go-oracle-command oracle)
-         (autoload 'go-oracle-mode "oracle")
-         (add-hook 'go-mode-hook 'go-oracle-mode)))))
+                               (run-hooks 'prelude-go-mode-hook)))))
 
 (provide 'prelude-go)
 ;;; prelude-go.el ends here
