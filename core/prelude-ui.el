@@ -73,7 +73,8 @@
 
 (require 'smart-mode-line)
 (setq sml/no-confirm-load-theme t)
-(setq sml/theme 'respectful)
+;; delegate theming to the currently active theme
+(setq sml/theme nil)
 (add-hook 'after-init-hook #'sml/setup)
 
 (provide 'prelude-ui)
