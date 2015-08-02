@@ -24,47 +24,54 @@ Pretty neat, hey?
 #+END_SRC
 *** Prelude Requires
 #+BEGIN_SRC emacs-lisp
-  (prelude-require-packages '(jade-mode
-                              ess
-                              emoji-cheat-sheet-plus
-                              twittering-mode
-                              unicode-fonts
-                              floobits
-                              sublime-themes
+  (prelude-require-packages '(ag
+                              badger-theme
+                              bookmark+
+                              clj-refactor
+                              column-enforce-mode
                               company
                               company-jedi
-                              virtualenvwrapper
-                              protobuf-mode
-                              jedi
-                              ensime
-                              web-mode
-                              thrift
-                              ag
-                              jabber
-                              malabar-mode
-                              org-plus-contrib
-                              badger-theme
-                              helm-ag
-                              wgrep
-                              wgrep-ag
-                              pcre2el
-                              wgrep-helm
-                              clj-refactor
-                              perspective
-                              persp-projectile
-                              column-enforce-mode
-                              smart-mode-line
-                              rich-minority
-                              mu4e-maildirs-extension
-                              bookmark+
-                              sauron
+                              company-tern
                               dired+
-                              pandoc-mode
+                              editorconfig
+                              emoji-cheat-sheet-plus
+                              ensime
+                              ess
+                              floobits
                               ggtags
+                              helm-ag
+                              jabber
+                              jade-mode
+                              jedi
+                              malabar-mode
+                              mu4e-maildirs-extension
+                              org-bullets
+                              org-plus-contrib
                               ox-gfm
                               ox-pandoc
-                              org-bullets))
+                              pandoc-mode
+                              pcre2el
+                              persp-projectile
+                              perspective
+                              protobuf-mode
+                              rich-minority
+                              sauron
+                              smart-mode-line
+                              sublime-themes
+                              tern
+                              thrift
+                              twittering-mode
+                              unicode-fonts
+                              virtualenvwrapper
+                              web-mode
+                              wgrep
+                              wgrep-ag
+                              wgrep-helm))
 #+END_SRC
+
+#+RESULTS:
+| ag | badger-theme | bookmark+ | clj-refactor | column-enforce-mode | company | company-jedi | company-tern | dired+ | editorconfig | emoji-cheat-sheet-plus | ensime | ess | floobits | ggtags | helm-ag | jabber | jade-mode | jedi | malabar-mode | mu4e-maildirs-extension | org-bullets | org-plus-contrib | ox-gfm | ox-pandoc | pandoc-mode | pcre2el | persp-projectile | perspective | protobuf-mode | rich-minority | sauron | smart-mode-line | sublime-themes | tern | thrift | twittering-mode | unicode-fonts | virtualenvwrapper | web-mode | wgrep | wgrep-ag | wgrep-helm |
+
 ** System
 *** ENV variables
 #+BEGIN_SRC emacs-lisp
@@ -99,7 +106,6 @@ Unicode fonts -- because they are Very Good.
 #+BEGIN_SRC emacs-lisp
   (sml/setup)
   (which-function-mode -1)
-  (rich-minority-mode 1)
   (setq rm-blacklist '(" MRev"
                        " yas"
                        " Helm"
@@ -229,32 +235,40 @@ him yet :P
 #+END_SRC
 
 ** JSX
+:PROPERTIES:
+:ORDERED:  t
+:END:
 #+BEGIN_SRC emacs-lisp
-;; Syntax Highlighting
-(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
-(defadvice web-mode-highlight-part (around tweak-jsx activate)
-  (if (equal web-mode-content-type "jsx")
-      (let ((web-mode-enable-part-face nil))
-        ad-do-it)
-    ad-do-it))
+  ;; Syntax Highlighting
+  (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+  (defadvice web-mode-highlight-part (around tweak-jsx activate)
+    (if (equal web-mode-content-type "jsx")
+        (let ((web-mode-enable-part-face nil))
+          ad-do-it)
+      ad-do-it))
 
-;; Linting
-(eval-after-load "flycheck"
-  '(progn
-     (flycheck-define-checker jsxhint-checker
-      "A JSX syntax and style checker based on JSXHint."
+  ;; Linting
+  (eval-after-load "flycheck"
+    '(progn
+       (flycheck-define-checker jsxhint-checker
+         "A JSX syntax and style checker based on JSXHint."
 
-      :command ("jsxhint" source)
-      :error-patterns
-      ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
-      :modes (web-mode))))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (equal web-mode-content-type "jsx")
-              ;; enable flycheck
-              (flycheck-select-checker 'jsxhint-checker)
-              (flycheck-mode))))
+         :command ("jsxhint" source)
+         :error-patterns
+         ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
+         :modes (web-mode))))
+
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (add-hook 'web-mode-hook (lambda ()
+                             (tern-mode t)
+                             (subword-mode)))
+
+  (add-to-list 'company-backends 'company-tern)
 #+END_SRC
+
+#+RESULTS:
+| company-tern | company-anaconda | (company-auctex-macros company-auctex-symbols company-auctex-environments) | company-auctex-bibs | company-auctex-labels | company-bbdb | company-nxml | company-css | company-eclim | company-semantic | company-clang | company-xcode | company-cmake | company-capf | (company-dabbrev-code company-gtags company-etags company-keywords) | company-oddmuse | company-files | company-dabbrev |
+
 ** Python
 #+BEGIN_SRC emacs-lisp
 ;; Use IPython as my python interpreter
@@ -343,11 +357,11 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
   (setq magit-last-seen-setup-instructions "1.4.0"
         magit-branch-read-upstream-first t
         magit-branch-arguments nil
-        magit-push-arguments '("--set-upstream"))
+        magit-push-arguments '("--set-upstream")
+        magit-push-always-verify nil)
 #+END_SRC
 
 #+RESULTS:
-: t
 
 *** Helm
 #+BEGIN_SRC emacs-lisp
@@ -506,7 +520,8 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
   ;;; mu4e-configs.el --- My mu4e configs
   ;;
   ;;; Commentary:
-  ;; Borrowed, gratefully, from http://kirang.in/2014/11/13/emacs-as-email-client-with-offlineimap-and-mu4e-on-osx/
+  ;; Borrowed, gratefully, from
+  ;; http://kirang.in/2014/11/13/emacs-as-email-client-with-offlineimap-and-mu4e-on-osx/
   ;;; Code:
 
   ;; If I want multiple accounts, need to manage these:
