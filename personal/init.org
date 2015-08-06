@@ -516,104 +516,96 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
 #+BEGIN_SRC emacs-lisp
   ;;; mu4e-configs.el --- My mu4e configs
   ;;
-  ;;; Commentary:
-  ;; Borrowed, gratefully, from
+  ;; Reference:
   ;; http://kirang.in/2014/11/13/emacs-as-email-client-with-offlineimap-and-mu4e-on-osx/
-  ;;; Code:
-
-  ;; If I want multiple accounts, need to manage these:
-  ;; (setq mu4e-sent-folder "/Account1/Saved Items" ;; check
-  ;;      mu4e-drafts-folder "/Account1/Drafts"     ;; check
-  ;;      user-mail-address "my.address@account1.tld" ;; check
-  ;;      smtpmail-default-smtp-server "smtp.account1.tld" ;; check
-  ;;      smtpmail-local-domain "account1.tld"
-  ;;      smtpmail-smtp-server "smtp.account1.tld" ;; check
-  ;;      smtpmail-stream-type starttls
-  ;;      smtpmail-smtp-service 25)
 
   ;; Re-enable C-x m for email (nerfs eshell, which I never use)
   (global-set-key (kbd "C-x m") 'compose-mail)
 
+  ;; Load mu4e
   (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu4e")
+
+  ;; Requirements and setup
   (require 'mu4e)
-  (setq mu4e-maildir "~/.Mail")
-  (setq mu4e-drafts-folder "/gastove@gmail.com/[Gmail].Drafts")
-  (setq mu4e-sent-folder   "/gastove@gmail.com/[Gmail].Sent Mail")
-  ;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-  (setq mu4e-sent-messages-behavior 'delete)
-  ;; allow for updating mail using 'U' in the main view:
-  (setq mu4e-get-mail-command "offlineimap")
+  (require 'mu4e-maildirs-extension) ;; Get a maildirs view in the mu4e-summary
+  (require 'mu4e-contrib) ;; For nicely formatted HTML emails
 
-  ;; Make mu4e the default user agent
-  (setq mail-user-agent 'mu4e-user-agent)
 
-  ;; mu4e mail dirs
-  (require 'mu4e-maildirs-extension)
-  (mu4e-maildirs-extension)
+  ;; Basic mu4e configuration
+  (setq mu4e-maildir "~/.Mail"
+        mu4e-drafts-folder "/gastove@gmail.com/[Gmail].Drafts"
+        mu4e-sent-folder   "/gastove@gmail.com/[Gmail].Sent Mail"
 
-  ;; shortcuts
-  (setq mu4e-maildir-shortcuts
-        '(("/gastove@gmail.com/INBOX"               . ?i)
-          ("/gastove@gmail.com/[Gmail].Important"   . ?I)
-          ("/gastove@gmail.com/[Gmail].Sent Mail"   . ?s)))
+        ;; don't save message to Sent Messages, Gmail/IMAP/Offlineimap takes care of this
+        mu4e-sent-messages-behavior 'delete
 
-  ;; something about ourselves
-  (setq user-mail-address "gastove@gmail.com"
+        ;; allow for updating mail using 'U' in the main view:
+        mu4e-get-mail-command "offlineimap"
+
+        ;; Make mu4e the default user agent
+        mail-user-agent 'mu4e-user-agent
+
+        ;; fetch mail every 10 mins
+        mu4e-update-interval 600
+
+        ;; Name, main email address
+        user-mail-address "gastove@gmail.com"
         user-full-name  "Ross Donaldson"
+
+        ;; Signature
         mu4e-compose-signature (concat "Cheers,\n"
-                                       "Ross\n"))
+                                       "Ross\n")
 
-  ;; ISO date format
-  (setq mu4e-headers-date-format "%Y-%m-%d")
+        ;; ISO date format for headers
+        mu4e-headers-date-format "%Y-%m-%d"
 
-  ;; show images
+        ;; Convert HTML emails to nicely readable text
+        mu4e-html2text-command 'mu4e-shr2text)
+
+
+  ;; show images. unclear if this works.
   (setq mu4e-show-images t)
 
   ;; use imagemagick, if available
   (when (fboundp 'imagemagick-register-types)
     (imagemagick-register-types))
 
-  ;; convert html emails properly
-  ;; Possible options:
-  ;;   - html2text -utf8 -width 72
-  ;;   - textutil -stdin -format html -convert txt -stdout
-  ;;   - html2markdown | grep -v '&nbsp_place_holder;' (Requires html2text pypi)
-  ;;   - w3m -dump -cols 80 -T text/html
-  ;;   - view in browser (provided below)
-  ;; (setq mu4e-html2text-command "textutil -stdin -format html -convert txt -stdout")
-                                          ;(setq mu4e-html2text-command "pandoc -f html -t plain")
-  (require 'mu4e-contrib)
-  (setq mu4e-html2text-command 'mu4e-shr2text)
 
-  ;; Message Composition settings
-  (add-hook 'mu4e-compose-mode-hook
-            (lambda ()
-              (auto-fill-mode -1)
-              ))
+  ;; Get a view of unread messages by maildir in the summary view
+  (mu4e-maildirs-extension)
 
   ;; add option to view html message in a browser
   ;; `aV` in view to activate
   (add-to-list 'mu4e-view-actions
                '("ViewInBrowser" . mu4e-action-view-in-browser) t)
 
-  ;; fetch mail every 10 mins
-  (setq mu4e-update-interval 600)
 
 
   ;; configuration for sending mail
   (setq message-send-mail-function
+        ;; Send via postfix
         'sendmail-send-it
-        ;; smtpmail-stream-type 'starttls
-        smtpmail-default-smtp-server "smtp.gmail.com"
-        smtpmail-smtp-server "smtp.gmail.com"
-        smtpmail-smtp-service 587
-        smtpmail-smtp-user "gastove"
-        smtpmail-mail-address "gastove@gmail.com"
-        mail-specify-envelope-from t
-        mail-envelope-from 'header
-        )
 
-  ;; Tweak bookmarked querries
+        ;; By default, the gnus composer (which mu4e uses also) doesn't correctly
+        ;; write FROM headers. Let's fix that. (Required to correctly dispatch to
+        ;; multiple sending accounts with postfix.)
+        mail-specify-envelope-from t
+        mail-envelope-from 'header)
+
+  ;; Message Composition settings
+  (add-hook 'mu4e-compose-mode-hook
+            (lambda ()
+              (auto-fill-mode -1)))
+
+  ;; The mu4e interface
+  ;; Single-character shortcuts
+  (setq mu4e-maildir-shortcuts
+        '(("/gastove@gmail.com/INBOX"               . ?i)
+          ("/gastove@gmail.com/[Gmail].Important"   . ?I)
+          ("/gastove@gmail.com/[Gmail].Sent Mail"   . ?s)))
+
+
+  ;; Tweak bookmarked queries
   (add-to-list 'mu4e-bookmarks `(,(string-join
                                    '("flag:unread"
                                      "AND date:today..now"
@@ -637,20 +629,15 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
                                    " ") "Today's Unreads" ?u))
 
   ;; Switch accounts
-
   (defvar my-mu4e-account-alist
     '(("gastove@gmail.com"
        (mu4e-drafts-folder "/gastove@gmail.com/[Gmail].Drafts")
        (mu4e-sent-folder   "/gastove@gmail.com/[Gmail].Sent Mail")
-       (smtpmail-mail-address "gastove@gmail.com")
-       (user-mail-address "gastove@gmail.com")
-       (smtpmail-smtp-user "gastove"))
+       (user-mail-address "gastove@gmail.com"))
       ("ross@urbanairship.com"
        (mu4e-drafts-folder "/ross@urbanairship.com/[Gmail].Drafts")
        (mu4e-sent-folder   "/ross@urbanairship.com/[Gmail].Sent Mail")
-       (smtpmail-mail-address "ross.donaldson@urbanairship.com")
-       (user-mail-address "ross@urbanairship.com")
-       (smtpmail-smtp-user "ross@urbanairship.com"))))
+       (user-mail-address "ross@urbanairship.com"))))
 
   (defun my-mu4e-set-account ()
     "Set the account for composing a message."
