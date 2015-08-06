@@ -266,9 +266,6 @@ him yet :P
   (add-to-list 'company-backends 'company-tern)
 #+END_SRC
 
-#+RESULTS:
-| company-tern | company-anaconda | (company-auctex-macros company-auctex-symbols company-auctex-environments) | company-auctex-bibs | company-auctex-labels | company-bbdb | company-nxml | company-css | company-eclim | company-semantic | company-clang | company-xcode | company-cmake | company-capf | (company-dabbrev-code company-gtags company-etags company-keywords) | company-oddmuse | company-files | company-dabbrev |
-
 ** Python
 #+BEGIN_SRC emacs-lisp
 ;; Use IPython as my python interpreter
