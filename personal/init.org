@@ -358,10 +358,10 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
         magit-branch-read-upstream-first t
         magit-branch-arguments nil
         magit-push-arguments '("--set-upstream")
-        magit-push-always-verify nil)
+        magit-push-always-verify nil
+        magit-revert-buffers t)
 #+END_SRC
-
-#+RESULTS:
+: t
 
 *** Helm
 #+BEGIN_SRC emacs-lisp
@@ -532,7 +532,7 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
   (require 'mu4e)
   (require 'mu4e-maildirs-extension) ;; Get a maildirs view in the mu4e-summary
   (require 'mu4e-contrib) ;; For nicely formatted HTML emails
-
+  (require 'org-mu4e)    ;; Save mu4e messages as org links
 
   ;; Basic mu4e configuration
   (setq mu4e-maildir "~/.Mail"
