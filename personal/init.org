@@ -69,9 +69,6 @@ Pretty neat, hey?
                               wgrep-helm))
 #+END_SRC
 
-#+RESULTS:
-| ag | badger-theme | bookmark+ | clj-refactor | column-enforce-mode | company | company-jedi | company-tern | dired+ | editorconfig | emoji-cheat-sheet-plus | ensime | ess | floobits | ggtags | helm-ag | jabber | jade-mode | jedi | malabar-mode | mu4e-maildirs-extension | org-bullets | org-plus-contrib | ox-gfm | ox-pandoc | pandoc-mode | pcre2el | persp-projectile | perspective | protobuf-mode | rich-minority | sauron | smart-mode-line | sublime-themes | tern | thrift | twittering-mode | unicode-fonts | virtualenvwrapper | web-mode | wgrep | wgrep-ag | wgrep-helm |
-
 ** System
 *** ENV variables
 #+BEGIN_SRC emacs-lisp
