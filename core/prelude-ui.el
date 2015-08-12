@@ -67,10 +67,6 @@
                                             (abbreviate-file-name (buffer-file-name))
                                           "%b"))))
 
-;; use zenburn as the default theme
-(when prelude-theme
-  (load-theme prelude-theme t))
-
 (require 'smart-mode-line)
 (setq sml/no-confirm-load-theme t)
 ;; delegate theming to the currently active theme
