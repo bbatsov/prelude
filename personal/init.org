@@ -145,16 +145,16 @@ Unicode fonts -- because they are Very Good.
 *** Timezones
 
 #+BEGIN_SRC emacs-lisp
-  (setq display-time-world-list
-        '(("America/Los_Angeles" "Pacific")
-          ("America/Denver" "Mountain")
-          ("America/Mexico_City" "Central")
-          ("America/New_York" "Eastern")
-          ("Atlantic/Reykjavik" "Iceland")
-          ("UTC" "UTC")
-          ("Europe/Paris" "Paris, France")))
+    (setq display-time-world-list
+          '(("America/Los_Angeles" "Pacific")
+            ("America/Denver" "Mountain")
+            ("America/Mexico_City" "Central")
+            ("America/New_York" "Eastern")
+            ("Atlantic/Reykjavik" "Iceland")
+            ("UTC" "UTC")
+            ("Europe/Paris" "Paris, France")
+            ("Asia/Irkutsk" "Baikal")))
 #+END_SRC
-
 * Languages
 
 ** Go
