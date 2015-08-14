@@ -69,9 +69,6 @@ Pretty neat, hey?
                               wgrep-helm))
 #+END_SRC
 
-#+RESULTS:
-| ag | badger-theme | bookmark+ | clj-refactor | column-enforce-mode | company | company-jedi | company-tern | dired+ | editorconfig | emoji-cheat-sheet-plus | ensime | ess | floobits | ggtags | helm-ag | jabber | jade-mode | jedi | malabar-mode | mu4e-maildirs-extension | org-bullets | org-plus-contrib | ox-gfm | ox-pandoc | pandoc-mode | pcre2el | persp-projectile | perspective | protobuf-mode | rich-minority | sauron | smart-mode-line | sublime-themes | tern | thrift | twittering-mode | unicode-fonts | virtualenvwrapper | web-mode | wgrep | wgrep-ag | wgrep-helm |
-
 ** System
 *** ENV variables
 #+BEGIN_SRC emacs-lisp
@@ -265,9 +262,6 @@ him yet :P
 
   (add-to-list 'company-backends 'company-tern)
 #+END_SRC
-
-#+RESULTS:
-| company-tern | company-anaconda | (company-auctex-macros company-auctex-symbols company-auctex-environments) | company-auctex-bibs | company-auctex-labels | company-bbdb | company-nxml | company-css | company-eclim | company-semantic | company-clang | company-xcode | company-cmake | company-capf | (company-dabbrev-code company-gtags company-etags company-keywords) | company-oddmuse | company-files | company-dabbrev |
 
 ** Python
 #+BEGIN_SRC emacs-lisp
