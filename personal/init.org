@@ -557,7 +557,11 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
         mu4e-headers-date-format "%Y-%m-%d"
 
         ;; Convert HTML emails to nicely readable text
-        mu4e-html2text-command 'mu4e-shr2text)
+        mu4e-html2text-command 'mu4e-shr2text
+
+        ;; If the same email is in two different folders, don't show it twice
+        ;; in search results
+        mu4e-headers-skip-duplicates t)
 
 
   ;; show images. unclear if this works.
