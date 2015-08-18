@@ -155,6 +155,9 @@ Unicode fonts -- because they are Very Good.
             ("Europe/Paris" "Paris, France")
             ("Asia/Irkutsk" "Baikal")))
 #+END_SRC
+
+#+RESULTS:
+
 * Languages
 
 ** Go
@@ -231,7 +234,14 @@ him yet :P
             (define-key prelude-mode-map (kbd "C-c C-i") 'nxml-balanced-close-start-tag-inline)))
 #+END_SRC
 
-** JSX
+** JavaScript
+
+*** TypeScript
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.ts$" . typescript-mode))
+#+END_SRC
+
+*** JSX
 :PROPERTIES:
 :ORDERED:  t
 :END:
@@ -406,7 +416,8 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
   (add-hook 'org-mode-hook
             (lambda ()
               (turn-on-auto-fill)
-              (org-bullets-mode 1)
+;; This is now borked? Need to figure this out :P
+;              (org-bullets-mode 1)
               (org-bindings)))
 
   ;; TODO Keyword states:
