@@ -194,6 +194,7 @@ The body of the advice is in BODY."
 
 ;; note - this should be after volatile-highlights is required
 ;; add the ability to cut the current line, without marking it
+(require 'rect)
 (defadvice kill-region (before smart-cut activate compile)
   "When called interactively with no active region, kill a single line instead."
   (interactive
