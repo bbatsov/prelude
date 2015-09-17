@@ -1,4 +1,4 @@
-
+(global-set-key (kbd "C-c C-b") #'pop-tag-mark)
 
 (setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
