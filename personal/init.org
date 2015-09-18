@@ -910,3 +910,29 @@ Assumes you're on a Mac, and have Marked.app installed.
              (sql-port wildwood-port)
              (sql-database "wildwood")
              (sql-password wildwood-password)))))
+
+  (defun sql-connect-preset (name)
+    "Connect to a predefined SQL connection listed in `sql-connection-alist'"
+    (eval `(let ,(cdr (assoc name sql-connection-alist))
+             (flet ((sql-get-login (&rest what)))
+               (sql-product-interactive sql-product)))))
+
+  ;; Function to load a DB based on its short name
+  (defun sql-connect-preset-by-name (name)
+    "Connect to a DB by entering it's short name"
+    (interactive "sDB Name: ")
+    (sql-connect-preset 'name))
+
+  (defun sql-yavin ()
+    (interactive)
+    (sql-connect-preset 'yavin))
+
+  (defun sql-wildwood ()
+    (interactive)
+    (sql-connect-preset 'wildwood))
+
+  (global-set-key (kbd "M-s q") 'sql-connect-preset-by-name) ; Connect to a db preset by nameq
+#+END_SRC
+
+#+RESULTS:
+: sql-connect-preset-by-name
