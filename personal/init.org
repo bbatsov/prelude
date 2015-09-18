@@ -611,7 +611,8 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
   ;; Message Composition settings
   (add-hook 'mu4e-compose-mode-hook
             (lambda ()
-              (auto-fill-mode -1)))
+              (auto-fill-mode -1)
+              (whitespace-mode -1)))
 
   ;; The mu4e interface
   ;; Single-character shortcuts
@@ -867,10 +868,13 @@ Assumes you're on a Mac, and have Marked.app installed.
   "Run Marked on the current file and revert the buffer."
   (interactive)
   (shell-command
-   (format "open -a /Applications/Marked.app %s"
+   (format "open -a '/Applications/Marked 2.app' %s"
            (shell-quote-argument (buffer-file-name)))))
 (global-set-key (kbd "C-c m") 'markdown-preview-file)
 #+END_SRC
+
+#+RESULTS:
+: markdown-preview-file
 
 * Work
 #+BEGIN_SRC emacs-lisp

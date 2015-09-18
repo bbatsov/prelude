@@ -134,8 +134,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(show-paren-match-face ((t (:background ,rhombus-orange-1 :foreground ,"black" ))))
 
    ;; >>>>> mode-line
-   `(mode-line    ((,class (:foreground ,rhombus-violet
-                                        :background ,rhombus-berry))
+   `(mode-line    ((,class (:foreground ,rhombus-violet :background ,rhombus-berry))
                    (t :inverse-video nil)))
 
    `(mode-line-inactive ((t (:background ,rhombus-bg+1 :foreground ,rhombus-violet-2 :box nil))))
