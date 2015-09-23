@@ -98,6 +98,11 @@ Only modes that don't derive from `prog-mode' should be listed here."
   :type 'symbol
   :group 'prelude)
 
+(defcustom prelude-shell (getenv "SHELL")
+  "The default shell to run with `prelude-visit-term-buffer'"
+  :type 'string
+  :group 'prelude)
+
 (provide 'prelude-custom)
 
 ;;; prelude-custom.el ends here
