@@ -230,11 +230,11 @@ him yet :P
 
 ** NXML Mode
 #+BEGIN_SRC emacs-lisp
-(push 'nxml-mode sp-ignore-modes-list)
-(add-hook 'nxml-mode-hook
-          (lambda ()
-            ()
-            (define-key prelude-mode-map (kbd "C-c C-i") 'nxml-balanced-close-start-tag-inline)))
+  (push 'nxml-mode sp-ignore-modes-list)
+  (add-hook 'nxml-mode-hook
+            (lambda ()
+              (flyspell-mode-off)
+              (define-key prelude-mode-map (kbd "C-c C-i") 'nxml-balanced-close-start-tag-inline)))
 #+END_SRC
 
 ** JavaScript
