@@ -248,7 +248,7 @@ there's a region, all lines that region covers will be duplicated."
       (if (vc-backend filename)
           (vc-delete-file filename)
         (when (y-or-n-p (format "Are you sure you want to delete %s? " filename))
-          (delete-file filename)
+          (delete-file filename delete-by-moving-to-trash)
           (message "Deleted file %s" filename)
           (kill-buffer))))))
 
