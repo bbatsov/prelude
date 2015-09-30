@@ -141,8 +141,6 @@
             (mapcar 'file-truename (list prelude-savefile-dir package-user-dir)))))
 
 (add-to-list 'recentf-exclude 'prelude-recentf-exclude-p)
-;; ignore magit's commit message files
-(add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
 
 (recentf-mode +1)
 
@@ -196,10 +194,11 @@ The body of the advice is in BODY."
 
 ;; note - this should be after volatile-highlights is required
 ;; add the ability to cut the current line, without marking it
+(require 'rect)
 (defadvice kill-region (before smart-cut activate compile)
   "When called interactively with no active region, kill a single line instead."
   (interactive
-   (if mark-active (list (region-beginning) (region-end))
+   (if mark-active (list (region-beginning) (region-end) rectangle-mark-mode)
      (list (line-beginning-position)
            (line-beginning-position 2)))))
 
