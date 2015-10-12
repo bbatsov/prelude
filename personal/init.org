@@ -474,10 +474,8 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
         org-export-with-toc nil)
 
   ;; Refiling defaults
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 3))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 5))
         org-refile-allow-creating-parent-nodes 'confirm)
-
-
 
   ;; (add-hook 'org-mode-hook 'org-bindings)
 
@@ -497,6 +495,10 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
   (require 'org-mime)
 
 #+END_SRC
+
+#+RESULTS:
+: org-mime
+
 *** Jabber
 #+BEGIN_SRC emacs-lisp
   ;; Gchat!
@@ -521,7 +523,7 @@ Magit has a long warning it shows these days; I've seen it. Turn it off.
             (lambda ()
               (turn-on-flyspell)
               (emoji-cheat-sheet-plus-display-mode)
-              (if word-wrap nil (toggle-word-wrap))
+              (toggle-word-wrap 1)
               (if truncate-lines (toggle-truncate-lines))))
 #+END_SRC
 *** mu4e
