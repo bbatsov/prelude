@@ -92,6 +92,13 @@ Pretty neat, hey?
 (add-hook 'ag-mode-hook 'wgrep-ag-setup)
 (add-hook 'helm-ag-mode-hook 'wgrep-ag-setup)
 #+END_SRC
+*** Dired+
+#+BEGIN_SRC emacs-lisp
+  (require 'dired+)
+  (setq diredp-hide-details-initially-flag nil)
+#+END_SRC
+
+#+RESULTS:
 
 ** Emacs
 Tweaks and modifications to Emacs' core UI.
