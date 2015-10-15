@@ -67,7 +67,7 @@ This variable can be set via .dir-locals.el to provide multi-term support.")
   "Create or visit a terminal buffer."
   (interactive)
   (prelude-start-or-switch-to (lambda ()
-                                (ansi-term (getenv "SHELL") (concat prelude-term-buffer-name "-term")))
+                                (ansi-term prelude-shell (concat prelude-term-buffer-name "-term")))
                               (format "*%s-term*" prelude-term-buffer-name)))
 
 (defun prelude-search (query-url prompt)
