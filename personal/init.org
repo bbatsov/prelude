@@ -291,7 +291,7 @@ him yet :P
    python-shell-completion-string-code
    "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
-  (elpy-enable)
+  (elpy-enable)                   ;
   ;; Enable virtualenvwrapper.el
   ;; (venv-initialize-interactive-shells)    ;
   ;; (setq venv-location "~/.python_virtualenvs/")
@@ -311,7 +311,7 @@ him yet :P
   ;;             (setq jedi:complete-on-dot t)
   ;;             (add-to-list 'company-backends 'company-jedi)))
 
-  ;; ;; Virtualenvs
+  ;; ;; ;; Virtualenvs
   ;; (add-hook 'python-mode-hook
   ;;           (lambda ()
   ;;             (hack-local-variables)
@@ -324,8 +324,11 @@ him yet :P
   ;;               (when (file-exists-p env-bin-path)
   ;;                 (load env-bin-path)))))
 
-  ;; (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
+  ;; (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format)) ;
 #+END_SRC
+
+#+RESULTS:
+
 ** web-mode
 #+BEGIN_SRC emacs-lisp
 (eval-after-load "web-mode"
@@ -782,9 +785,9 @@ for the Jabbas, Shell, and a bunch of things I don't have to read like C.
                 (ggtags-mode 1))))
 
   ;; Python
-  ;; (add-hook 'python-mode-hook
-  ;;           (lambda ()
-  ;;             (ggtags-mode 1)))
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (ggtags-mode 1)))
 
   ;; Shell
   (add-hook 'sh-mode-hook
