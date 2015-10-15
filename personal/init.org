@@ -899,7 +899,7 @@ Assumes you're on a Mac, and have Marked.app installed.
     (erc-tls :server "dev.urbanairship.com"
              :port 6697
              :nick erc-nick
-  ))
+             ))
 
   ;;; Work SQL Functions
   ;; Generate a list of DBs I connect to commonly
@@ -938,7 +938,8 @@ Assumes you're on a Mac, and have Marked.app installed.
 
   (defun sql-wildwood ()
     (interactive)
-    (sql-connect-preset 'wildwood))
+    (let ((default-directory "/ssh:wildwood:"))
+      (sql-connect-preset 'wildwood)))
 
   (global-set-key (kbd "M-s q") 'sql-connect-preset-by-name) ; Connect to a db preset by nameq
 #+END_SRC
