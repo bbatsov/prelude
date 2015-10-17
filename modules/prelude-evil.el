@@ -113,12 +113,12 @@
 (evil-add-hjkl-bindings magit-log-mode-map 'emacs)
 (evil-add-hjkl-bindings magit-commit-mode-map 'emacs)
 (evil-add-hjkl-bindings magit-branch-manager-mode-map 'emacs
-  "K" 'magit-discard-item
-  "L" 'magit-key-mode-popup-logging)
+  "K" 'magit-discard
+  "L" 'magit-log-popup)
 (evil-add-hjkl-bindings magit-status-mode-map 'emacs
-  "K" 'magit-discard-item
-  "l" 'magit-key-mode-popup-logging
-  "h" 'magit-toggle-diff-refine-hunk)
+  "K" 'magit-discard
+  "l" 'magit-log-popup
+  "h" 'magit-diff-toggle-refine-hunk)
 
 (setq evil-shift-width 2)
 
