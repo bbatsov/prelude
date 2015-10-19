@@ -69,16 +69,6 @@
 (setq twittering-icon-mode t)
 (setq twittering-use-icon-storage t)
 
-
-
-;; Karma running
-(defun karma-run ()
-  "Run Javascript tests against current Karma Server"
-  (interactive)
-  (compile "karma run"))
-(key-chord-define-global "kk" 'karma-run)
-
-
 ;; setup multiterm
 (setq multi-term-program "/bin/zsh")
 (add-hook 'term-mode-hook
