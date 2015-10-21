@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: t -*-
+# contributor: Ross Donaldson <gastove@gmail.com>
+# name: package
+# key: pkg
+# binding: direct-keybinding
+# --
+package ${1:`(string-join (butlast (split-string (car (last (split-string (file-name-directory (buffer-file-name)) "src\/main\/java\/"))) "\/")) ".")`};
+$0

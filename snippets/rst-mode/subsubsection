@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: subsubsection
+# key: subsubsec
+# binding: direct-keybinding
+# --
+${1:Sub-Sub-Section}
+${1:$(make-string (string-width yas-text) ?\~)}
+
+$0

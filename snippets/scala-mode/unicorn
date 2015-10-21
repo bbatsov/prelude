@@ -1,0 +1,13 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: unicorn-job
+# key: unicorn
+# binding: direct-keybinding
+# --
+import com.twitter.scalding._
+import com.urbanairship.unicorn.UnicornJob
+
+class `(first (split-string (buffer-name) "\\."))`(args: Args) extends UnicornJob(args) {
+
+  $0
+
+}

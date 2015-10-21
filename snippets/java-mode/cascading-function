@@ -1,0 +1,37 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# contributor: Ross Donaldson <gastove@gmail.com>
+# name: cascading-function
+# key: cfunc
+# binding: direct-keybinding
+# --
+package ${1:`(string-join (butlast (split-string (car (last (split-string (file-name-directory (buffer-file-name)) "src\/main\/java\/"))) "\/")) ".")`};
+
+import cascading.flow.FlowProcess;
+import cascading.operation.BaseOperation;
+import cascading.operation.Function;
+import cascading.operation.FunctionCall;
+import cascading.tuple.Fields;
+import cascading.tuple.Tuple;
+import cascading.tuple.TupleEntry;
+
+public class ${2:`(file-name-base
+(or (buffer-file-name)
+(buffer-name)))`} extends BaseOperation implements Function {
+
+public $2(Fields fieldDeclaration) {
+super(1, fieldDeclaration);
+}
+
+@Override
+public void operate(FlowProcess flowProcess, FunctionCall functionCall) {
+final TupleEntry arguments = functionCall.getArguments();
+
+$0
+
+final Tuple result = new Tuple();
+result.add(open);
+functionCall.getOutputCollector().add(result);
+
+}
+
+}

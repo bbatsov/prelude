@@ -1,0 +1,11 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: maven-pom-dependency
+# key: dep
+# binding: direct-keybinding
+# --
+<dependency>
+<groupId>$1</groupId>
+<artifactId>$2</artifactId>
+${3:<version>${4:version-number}</version>}
+</dependency>
+$0

@@ -11,13 +11,25 @@ semanticdb
 url
 ede-projects.el
 .DS_Store
-custom.el
+# I wanna keep that.
+# custom.el
 places
 .smex-items
-savefile/
-/prelude-modules.el
+savefile/*
+!savefile/bookmarks
+# I wanna keep this, too
+# /prelude-modules.el
 projectile-bookmarks.eld
 session*
 .cask
 tramp
 /var/pcache
+/srecode-map.el
+/jabber-history/
+/jabber-avatar-cache/
+/ac-comphist.dat
+/.python-environments/
+!*.org
+/personal/customize.el
+/personal/init.el
+/ensime/

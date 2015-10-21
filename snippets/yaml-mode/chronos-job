@@ -1,0 +1,24 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# contributor: Ross Donaldson <ross@urbanairship.com>
+# name: chronos-job
+# key: chronos
+# binding: direct-keybinding
+# expand-env: ((yas-indent-line 'fixed))
+# --
+# Chronos configuration for ${1:`(first (split-string (buffer-name) "\\."))`}
+---
+name: $1
+command: "$2"
+owner: ${0:ross@urbanairship.com}
+cpus: ${3:0.1}
+disk: ${4:512}
+mem: ${5:512}
+highPriority: ${9:false}
+runAsUser: ${10:root}
+async: ${11:false}
+disabled: ${12:false}
+`(let ((curpath (file-name-directory (buffer-file-name))))
+  (if (string-match ".+\/scheduled/" curpath)
+      "schedule: "
+    "parents:\n  -"
+    ))`$13

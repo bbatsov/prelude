@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: nexus-uri
+# key: nexus
+# binding: direct-keybinding
+# --
+"http://nexus.prod.urbanairship.com/service/local/repositories/releases/content/${1:com}/${2:urbanairship}/$3/$4/$3-$4-shaded.jar"$0

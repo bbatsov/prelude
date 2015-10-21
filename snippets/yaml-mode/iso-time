@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: iso-interval
+# key: R
+# binding: direct-keybinding
+# --
+R${}/${`(format-time-string "%Y-%m-%dT%H:00:00\Z")`}/P${0:T24H}
