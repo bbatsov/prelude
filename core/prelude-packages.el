@@ -45,6 +45,7 @@
   '(ace-window
     avy
     anzu
+    beacon
     browse-kill-ring
     dash
     discover-my-major
