@@ -67,7 +67,7 @@
   ;; Enable Flycheck checker
   (flycheck-ocaml-setup))
 
-(add-hook 'tuareg-mode-hook #'utop-setup-ocaml-buffer)
+(add-hook 'tuareg-mode-hook #'utop-minor-mode)
 (add-hook 'tuareg-mode-hook #'merlin-mode)
 
 (add-hook 'tuareg-mode-hook (lambda ()
