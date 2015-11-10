@@ -135,6 +135,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.csv\\'" csv-mode csv-mode)
     ("\\.d\\'" d-mode d-mode)
     ("\\.dart\\'" dart-mode dart-mode)
+    ("\\.elm\\'" elm-mode elm-mode)
     ("\\.ex\\'" elixir-mode elixir-mode)
     ("\\.exs\\'" elixir-mode elixir-mode)
     ("\\.elixir\\'" elixir-mode elixir-mode)
