@@ -262,7 +262,6 @@ The body of the advice is in BODY."
 (require 'avy)
 (setq avy-background t)
 (setq avy-style 'at-full)
-(setq avy-style 'at-full)
 
 ;; anzu-mode enhances isearch & query-replace by showing total matches and current match position
 (require 'anzu)
