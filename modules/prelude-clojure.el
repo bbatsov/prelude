@@ -50,7 +50,7 @@
   '(progn
      (setq nrepl-log-messages t)
 
-     (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+     (add-hook 'cider-mode-hook 'eldoc-mode)
 
      (defun prelude-cider-repl-mode-defaults ()
        (subword-mode +1)
