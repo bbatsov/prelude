@@ -62,6 +62,7 @@
     god-mode
     grizzl
     guru-mode
+    imenu-anywhere
     ov
     projectile
     magit
