@@ -1,6 +1,6 @@
 ;;; prelude-helm-everywhere.el --- Enable Helm everywhere
 ;;
-;; Copyright © 2014-2015 Tu, Do Hoang
+;; Copyright © 2014-2016 Tu, Do Hoang
 ;;
 ;; Author: Tu, Do Hoang (tuhdo1710@gmail.com)
 ;; URL: https://github.com/bbatsov/prelude
