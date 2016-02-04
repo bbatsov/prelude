@@ -1,6 +1,6 @@
 ;;; prelude-python.el --- Emacs Prelude: python.el configuration.
 ;;
-;; Copyright © 2011-2013 Bozhidar Batsov
+;; Copyright © 2011-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -87,8 +87,8 @@
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)
-  (anaconda-mode)
-  (eldoc-mode)
+  (anaconda-mode 1)
+  (eldoc-mode 1)
   (setq-local electric-layout-rules
               '((?: . (lambda ()
                         (and (zerop (first (syntax-ppss)))

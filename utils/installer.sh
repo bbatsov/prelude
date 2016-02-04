@@ -15,8 +15,6 @@ install_prelude () {
 
 make_prelude_dirs () {
     printf " Making the required directories.\n$RESET"
-    mkdir -p "$PRELUDE_INSTALL_DIR/vendor" "$PRELUDE_INSTALL_DIR/personal"
-    mkdir -p "$PRELUDE_INSTALL_DIR/themes"
     mkdir -p "$PRELUDE_INSTALL_DIR/savefile"
 }
 
@@ -149,7 +147,7 @@ then
 fi
 
 # If prelude is already installed
-if [ -d "$PRELUDE_INSTALL_DIR/core/prelude-core.el" ]
+if [ -f "$PRELUDE_INSTALL_DIR/core/prelude-core.el" ]
 then
     printf "\n\n$BRED"
     printf "You already have Prelude installed.$RESET\nYou'll need to remove $PRELUDE_INSTALL_DIR/prelude if you want to install Prelude again.\n"
@@ -173,14 +171,6 @@ then
     printf "$GREEN found.$RESET\n"
 else
     printf "$RED not found. Install aspell to benefit from flyspell-mode!$RESET\n"
-fi
-
-printf  "$CYAN Checking to see if ack is installed... "
-if hash ack 2>&- || hash ack-grep 2>&-
-then
-    printf "$GREEN found.$RESET\n"
-else
-    printf "$RED not found. You'll need it to use ack-and-a-half!$RESET\n"
 fi
 
 ### Check emacs version

@@ -1,6 +1,6 @@
 ;;; prelude-custom.el --- Emacs Prelude: Prelude's customizable variables.
 ;;
-;; Copyright © 2011-2013 Bozhidar Batsov
+;; Copyright © 2011-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -96,6 +96,11 @@ Only modes that don't derive from `prog-mode' should be listed here."
 (defcustom prelude-theme 'zenburn
   "The default color theme, change this in your /personal/preload config."
   :type 'symbol
+  :group 'prelude)
+
+(defcustom prelude-shell (getenv "SHELL")
+  "The default shell to run with `prelude-visit-term-buffer'"
+  :type 'string
   :group 'prelude)
 
 (provide 'prelude-custom)

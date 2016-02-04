@@ -1,17 +1,16 @@
-;;; prelude-haskell.el --- Emacs Prelude: Nice config for Haskell programming.
+;;; prelude-elixir.el --- Emacs Prelude: Elixir programming support.
 ;;
-;; Copyright © 2011-2016 Bozhidar Batsov
+;; Copyright © 2014-2016 Samuel Tonini
 ;;
-;; Author: Bozhidar Batsov <bozhidar@batsov.com>
-;; URL: https://github.com/bbatsov/prelude
+;; Author: Samuel Tonini <tonini.samuel@gmail.com>
 ;; Version: 1.0.0
-;; Keywords: convenience
+;; Keywords: convenience elixir
 
 ;; This file is not part of GNU Emacs.
 
 ;;; Commentary:
 
-;; Nice config for Haskell programming.
+;; Some basic configuration for Elixir development.
 
 ;;; License:
 
@@ -33,21 +32,9 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(haskell-mode))
 
-(eval-after-load 'haskell-mode
-  '(progn
-     (defun prelude-haskell-mode-defaults ()
-       (subword-mode +1)
-       (haskell-doc-mode)
-       (haskell-indentation-mode)
-       (interactive-haskell-mode +1))
+(prelude-require-packages '(elixir-mode alchemist))
 
-     (setq prelude-haskell-mode-hook 'prelude-haskell-mode-defaults)
+(provide 'prelude-elixir)
 
-     (add-hook 'haskell-mode-hook (lambda ()
-                                    (run-hooks 'prelude-haskell-mode-hook)))))
-
-(provide 'prelude-haskell)
-
-;;; prelude-haskell.el ends here
+;;; prelude-elixir.el ends here
