@@ -10,6 +10,8 @@
       company-minimum-prefix-length 1
       company-tooltip-align-annotations t)
 
+(add-hook 'after-init-hook 'global-company-mode)
+
 (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 
 (provide 'personal)
