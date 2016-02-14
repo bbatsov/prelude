@@ -44,6 +44,9 @@
 ;; the blinking cursor is nothing, but an annoyance
 (blink-cursor-mode -1)
 
+;; disable the annoying bell ring
+(setq ring-bell-function 'ignore)
+
 ;; disable startup screen
 (setq inhibit-startup-screen t)
 
