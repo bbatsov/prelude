@@ -2,10 +2,12 @@
 
 ;;; Commentary:
 ;; This package is the root package for jgrillo's personal extensions
-;; of prelude. It is responsible for setting custom config values.
+;; of prelude.  It is responsible for setting custom config values.
 
 ;;; Code:
-(setq visible-bell t
+(require 'company)
+
+(setq ring-bell-function 'ignore
       company-idle-delay 0.2
       company-minimum-prefix-length 1
       company-tooltip-align-annotations t)
