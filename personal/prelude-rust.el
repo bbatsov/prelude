@@ -8,6 +8,8 @@
 (prelude-require-packages
  '(company company-racer racer flycheck flycheck-rust rust-mode toml-mode))
 
+(require 'racer)
+
 ;; configs
 (setq racer-cmd "racer")
 

@@ -1,20 +1,30 @@
 ;;; erc-configs.el -- configs to extend prelude's built-in ERC support
 
 ;;; Commentary:
-;; This package provides configuration values and functions to allow
-;; ERC to authenticate and connect with IRC networks over TLS.
+;; This package provides configuration values to allow ERC to
+;; authenticate and connect with IRC networks over TLS.
 
 ;;; Code:
-(setq erc-prompt-for-password nil
-      erc-default-nicks "jcgrillo")
+(require 'erc)
+(require 'erc-services)
 
-(defun freenode-connect ()
-  "Connect to freenode.irc.net using TLS."
-  (irc-connect )) ;; TODO: implement
+(erc-services-mode 1)
 
-(defun irc-connect ()
-  "Connect to an IRC server using TLS."
-  ) ;; TODO: implement
+(setq erc-prompt-for-password t
+      erc-prompt-for-nickserv-password t
+      erc-default-nicks "jcgrillo"
+      erc-default-port 6697
+      erc-autojoin-channels-alist '(("freenode.net"
+                                     "#clojure"
+                                     "#clojure-web"
+                                     "#clojure-beginners"
+                                     "#python"
+                                     "#emacs"
+                                     "#bostonpython"
+                                     "##java"
+                                     "##rust")
+                                    ("mozilla.org"
+                                     "#rust")))
 
 (provide 'erc-configs)
 ;;; erc-configs.el ends here
