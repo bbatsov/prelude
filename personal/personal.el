@@ -5,7 +5,10 @@
 ;; of prelude.  It is responsible for setting custom config values.
 
 ;;; Code:
+(prelude-require-package 'simpleclip)
+
 (require 'company)
+(require 'simpleclip)
 
 (setq ring-bell-function 'ignore
       company-idle-delay 0.2
@@ -15,6 +18,8 @@
 (add-hook 'after-init-hook 'global-company-mode)
 
 (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
+
+(simpleclip-mode 1)
 
 (provide 'personal)
 ;;; personal.el ends here
