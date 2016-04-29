@@ -47,6 +47,7 @@
     anzu
     beacon
     browse-kill-ring
+    crux
     dash
     discover-my-major
     diff-hl
