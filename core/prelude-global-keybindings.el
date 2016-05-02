@@ -44,9 +44,6 @@
                                 (interactive)
                                 (other-window -1))) ;; back one
 
-;; Indentation help
-(global-set-key (kbd "C-^") 'prelude-top-join-line)
-
 ;; Start proced in a similar manner to dired
 (unless (eq system-type 'darwin)
     (global-set-key (kbd "C-x p") 'proced))
