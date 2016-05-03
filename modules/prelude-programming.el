@@ -60,7 +60,7 @@ This functions should be added to the hooks of major modes for programming."
 ;; smart curly braces
 (sp-pair "{" nil :post-handlers
          '(((lambda (&rest _ignored)
-              (prelude-smart-open-line-above)) "RET")))
+              (crux-smart-open-line-above)) "RET")))
 
 ;; enlist a more liberal guru
 (setq guru-warn-only t)

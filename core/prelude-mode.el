@@ -88,31 +88,31 @@
   (easy-menu-add-item nil '("Tools")
                       '("Prelude"
                         ("Files"
-                         ["Open with..." prelude-open-with]
-                         ["Delete file and buffer" prelude-delete-file-and-buffer]
-                         ["Rename buffer and file" prelude-rename-buffer-and-file])
+                         ["Open with..." crux-open-with]
+                         ["Delete file and buffer" crux-delete-file-and-buffer]
+                         ["Rename buffer and file" crux-rename-buffer-and-file])
 
                         ("Buffers"
-                         ["Clean up buffer or region" prelude-cleanup-buffer-or-region]
-                         ["Kill other buffers" prelude-kill-other-buffers])
+                         ["Clean up buffer or region" crux-cleanup-buffer-or-region]
+                         ["Kill other buffers" crux-kill-other-buffers])
 
                         ("Editing"
                          ["Insert empty line" prelude-insert-empty-line]
                          ["Move line up" prelude-move-line-up]
                          ["Move line down" prelude-move-line-down]
                          ["Duplicate line or region" prelude-duplicate-current-line-or-region]
-                         ["Indent rigidly and copy to clipboard" prelude-indent-rigidly-and-copy-to-clipboard]
-                         ["Insert date" prelude-insert-date]
-                         ["Eval and replace" prelude-eval-and-replace]
+                         ["Indent rigidly and copy to clipboard" crux-indent-rigidly-and-copy-to-clipboard]
+                         ["Insert date" crux-insert-date]
+                         ["Eval and replace" crux-eval-and-replace]
                          )
 
                         ("Windows"
-                         ["Swap windows" prelude-swap-windows])
+                         ["Swap windows" crux-swap-windows])
 
                         ("General"
-                         ["Visit term buffer" prelude-visit-term-buffer]
+                         ["Visit term buffer" crux-visit-term-buffer]
                          ["Search in Google" prelude-google]
-                         ["View URL" prelude-view-url]))
+                         ["View URL" crux-view-url]))
                       "Search Files (Grep)...")
 
   (easy-menu-add-item nil '("Tools") '("--") "Search Files (Grep)..."))
