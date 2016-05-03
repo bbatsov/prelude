@@ -265,7 +265,7 @@ Keybinding         | Description
 <kbd>C-+</kbd>     | Increase font size(`text-scale-increase`).
 <kbd>C--</kbd>     | Decrease font size(`text-scale-decrease`).
 <kbd>C-x O</kbd>   | Go back to previous window (the inverse of `other-window` (`C-x o`)).
-<kbd>C-^</kbd>     | Join two lines into one(`prelude-top-join-line`).
+<kbd>C-^</kbd>     | Join two lines into one(`crux-top-join-line`).
 <kbd>C-x p</kbd>   | Start `proced` (manage processes from Emacs; works only in Linux).
 <kbd>C-x m</kbd>   | Start `eshell`.
 <kbd>C-x M-m</kbd> | Start your default shell.
@@ -432,7 +432,7 @@ Keybinding         | Description
 <kbd>jj</kbd>      | Jump to the beginning of a word(`avy-goto-word-1`)
 <kbd>jk</kbd>      | Jump to a character(`avy-goto-char`)
 <kbd>jl</kbd>      | Jump to the beginning of a line(`avy-goto-line`)
-<kbd>JJ</kbd>      | Jump back to previous buffer(`prelude-switch-to-previous-buffer`)
+<kbd>JJ</kbd>      | Jump back to previous buffer(`crux-switch-to-previous-buffer`)
 <kbd>uu</kbd>      | View edits as a tree(`undo-tree-visualize`)
 <kbd>xx</kbd>      | Executed extended command(`execute-extended-command`)
 <kbd>yy</kbd>      | Browse the kill ring(`browse-kill-ring`)
