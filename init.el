@@ -51,6 +51,8 @@
 ;; Always load newest byte code
 (setq load-prefer-newer t)
 
+(defvar current-user-emacs-dir (expand-file-name "~/.emacs.d")
+  "The emacs.d dir that is different for every user.")
 (defvar prelude-dir (file-name-directory load-file-name)
   "The root dir of the Emacs Prelude distribution.")
 (defvar prelude-core-dir (expand-file-name "core" prelude-dir)
@@ -67,7 +69,7 @@ by Prelude.")
   "This directory is for your personal configuration, that you want loaded before Prelude.")
 (defvar prelude-vendor-dir (expand-file-name "vendor" prelude-dir)
   "This directory houses packages that are not yet available in ELPA (or MELPA).")
-(defvar prelude-savefile-dir (expand-file-name "savefile" prelude-dir)
+(defvar prelude-savefile-dir (expand-file-name "savefile" current-user-emacs-dir)
   "This folder stores all the automatically generated save/history-files.")
 (defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-personal-dir)
   "This file contains a list of modules that will be loaded by Prelude.")
