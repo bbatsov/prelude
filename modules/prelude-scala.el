@@ -33,10 +33,10 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(scala-mode2))
+(prelude-require-packages '(ensime))
 
 (defun prelude-scala-mode-defaults ()
-  (subword-mode +1))
+  (ensime-mode))
 
 (setq prelude-scala-mode-hook 'prelude-scala-mode-defaults)
 
