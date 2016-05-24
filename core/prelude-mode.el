@@ -58,7 +58,7 @@
     (define-key map (kbd "C-c d") 'prelude-duplicate-current-line-or-region)
     (define-key map (kbd "C-c M-d") 'prelude-duplicate-and-comment-current-line-or-region)
     (define-key map (kbd "C-c r") 'prelude-rename-buffer-and-file)
-    (define-key map (kbd "C-c t") 'prelude-visit-term-buffer)
+    ;(define-key map (kbd "C-c t") 'prelude-visit-term-buffer)
     (define-key map (kbd "C-c k") 'prelude-kill-other-buffers)
     (define-key map (kbd "C-c TAB") 'prelude-indent-rigidly-and-copy-to-clipboard)
     (define-key map (kbd "C-c I") 'prelude-find-user-init-file)
