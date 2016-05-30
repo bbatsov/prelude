@@ -1,6 +1,6 @@
 ;;; prelude-clojure.el --- Emacs Prelude: Clojure programming configuration.
 ;;
-;; Copyright © 2011-2015 Bozhidar Batsov
+;; Copyright © 2011-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://batsov.com/prelude

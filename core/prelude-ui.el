@@ -1,6 +1,6 @@
 ;;; prelude-ui.el --- Emacs Prelude: UI optimizations and tweaks.
 ;;
-;; Copyright © 2011-2015 Bozhidar Batsov
+;; Copyright © 2011-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -44,6 +44,9 @@
 ;; the blinking cursor is nothing, but an annoyance
 (blink-cursor-mode -1)
 
+;; disable the annoying bell ring
+(setq ring-bell-function 'ignore)
+
 ;; disable startup screen
 (setq inhibit-startup-screen t)
 
@@ -80,6 +83,10 @@
 ;; show the cursor when moving after big movements in the window
 (require 'beacon)
 (beacon-mode +1)
+
+;; show available keybindings after you start typing
+(require 'which-key)
+(which-key-mode +1)
 
 (provide 'prelude-ui)
 ;;; prelude-ui.el ends here

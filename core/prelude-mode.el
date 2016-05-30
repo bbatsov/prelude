@@ -1,6 +1,6 @@
 ;;; prelude-mode.el --- Emacs Prelude: minor mode
 ;;
-;; Copyright © 2011-2015 Bozhidar Batsov
+;; Copyright © 2011-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -32,50 +32,53 @@
 
 ;;; Code:
 (require 'easymenu)
+(require 'imenu-anywhere)
+(require 'crux)
 
 (defvar prelude-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-c o") 'prelude-open-with)
+    (define-key map (kbd "C-c o") 'crux-open-with)
     (define-key map (kbd "C-c g") 'prelude-google)
     (define-key map (kbd "C-c G") 'prelude-github)
     (define-key map (kbd "C-c y") 'prelude-youtube)
     (define-key map (kbd "C-c U") 'prelude-duckduckgo)
     ;; mimic popular IDEs binding, note that it doesn't work in a terminal session
-    (define-key map [(shift return)] 'prelude-smart-open-line)
-    (define-key map (kbd "M-o") 'prelude-smart-open-line)
-    (define-key map [(control shift return)] 'prelude-smart-open-line-above)
+    (define-key map (kbd "C-a") 'crux-move-beginning-of-line)
+    (define-key map [(shift return)] 'crux-smart-open-line)
+    (define-key map (kbd "M-o") 'crux-smart-open-line)
+    (define-key map [(control shift return)] 'crux-smart-open-line-above)
     (define-key map [(control shift up)]  'move-text-up)
     (define-key map [(control shift down)]  'move-text-down)
     (define-key map [(meta shift up)]  'move-text-up)
     (define-key map [(meta shift down)]  'move-text-down)
-    (define-key map (kbd "C-c n") 'prelude-cleanup-buffer-or-region)
-    (define-key map (kbd "C-c f")  'prelude-recentf-ido-find-file)
-    (define-key map (kbd "C-M-z") 'prelude-indent-defun)
-    (define-key map (kbd "C-c u") 'prelude-view-url)
-    (define-key map (kbd "C-c e") 'prelude-eval-and-replace)
-    (define-key map (kbd "C-c s") 'prelude-swap-windows)
-    (define-key map (kbd "C-c D") 'prelude-delete-file-and-buffer)
-    (define-key map (kbd "C-c d") 'prelude-duplicate-current-line-or-region)
-    (define-key map (kbd "C-c M-d") 'prelude-duplicate-and-comment-current-line-or-region)
-    (define-key map (kbd "C-c r") 'prelude-rename-buffer-and-file)
-    (define-key map (kbd "C-c t") 'prelude-visit-term-buffer)
-    (define-key map (kbd "C-c k") 'prelude-kill-other-buffers)
-    (define-key map (kbd "C-c TAB") 'prelude-indent-rigidly-and-copy-to-clipboard)
-    (define-key map (kbd "C-c I") 'prelude-find-user-init-file)
-    (define-key map (kbd "C-c S") 'prelude-find-shell-init-file)
-    (define-key map (kbd "C-c i") 'prelude-goto-symbol)
+    (define-key map (kbd "C-c n") 'crux-cleanup-buffer-or-region)
+    (define-key map (kbd "C-c f")  'crux-recentf-ido-find-file)
+    (define-key map (kbd "C-M-z") 'crux-indent-defun)
+    (define-key map (kbd "C-c u") 'crux-view-url)
+    (define-key map (kbd "C-c e") 'crux-eval-and-replace)
+    (define-key map (kbd "C-c s") 'crux-swap-windows)
+    (define-key map (kbd "C-c D") 'crux-delete-file-and-buffer)
+    (define-key map (kbd "C-c d") 'crux-duplicate-current-line-or-region)
+    (define-key map (kbd "C-c M-d") 'crux-duplicate-and-comment-current-line-or-region)
+    (define-key map (kbd "C-c r") 'crux-rename-buffer-and-file)
+    (define-key map (kbd "C-c t") 'crux-visit-term-buffer)
+    (define-key map (kbd "C-c k") 'crux-kill-other-buffers)
+    (define-key map (kbd "C-c TAB") 'crux-indent-rigidly-and-copy-to-clipboard)
+    (define-key map (kbd "C-c I") 'crux-find-user-init-file)
+    (define-key map (kbd "C-c S") 'crux-find-shell-init-file)
+    (define-key map (kbd "C-c i") 'imenu-anywhere)
     ;; extra prefix for projectile
     (define-key map (kbd "s-p") 'projectile-command-map)
     ;; make some use of the Super key
     (define-key map (kbd "s-g") 'god-local-mode)
-    (define-key map (kbd "s-r") 'prelude-recentf-ido-find-file)
-    (define-key map (kbd "s-j") 'prelude-top-join-line)
-    (define-key map (kbd "s-k") 'prelude-kill-whole-line)
+    (define-key map (kbd "s-r") 'crux-recentf-ido-find-file)
+    (define-key map (kbd "s-j") 'crux-top-join-line)
+    (define-key map (kbd "s-k") 'crux-kill-whole-line)
     (define-key map (kbd "s-m m") 'magit-status)
     (define-key map (kbd "s-m l") 'magit-log)
     (define-key map (kbd "s-m f") 'magit-log-buffer-file)
     (define-key map (kbd "s-m b") 'magit-blame)
-    (define-key map (kbd "s-o") 'prelude-smart-open-line-above)
+    (define-key map (kbd "s-o") 'crux-smart-open-line-above)
 
     map)
   "Keymap for Prelude mode.")
@@ -85,31 +88,31 @@
   (easy-menu-add-item nil '("Tools")
                       '("Prelude"
                         ("Files"
-                         ["Open with..." prelude-open-with]
-                         ["Delete file and buffer" prelude-delete-file-and-buffer]
-                         ["Rename buffer and file" prelude-rename-buffer-and-file])
+                         ["Open with..." crux-open-with]
+                         ["Delete file and buffer" crux-delete-file-and-buffer]
+                         ["Rename buffer and file" crux-rename-buffer-and-file])
 
                         ("Buffers"
-                         ["Clean up buffer or region" prelude-cleanup-buffer-or-region]
-                         ["Kill other buffers" prelude-kill-other-buffers])
+                         ["Clean up buffer or region" crux-cleanup-buffer-or-region]
+                         ["Kill other buffers" crux-kill-other-buffers])
 
                         ("Editing"
                          ["Insert empty line" prelude-insert-empty-line]
                          ["Move line up" prelude-move-line-up]
                          ["Move line down" prelude-move-line-down]
                          ["Duplicate line or region" prelude-duplicate-current-line-or-region]
-                         ["Indent rigidly and copy to clipboard" prelude-indent-rigidly-and-copy-to-clipboard]
-                         ["Insert date" prelude-insert-date]
-                         ["Eval and replace" prelude-eval-and-replace]
+                         ["Indent rigidly and copy to clipboard" crux-indent-rigidly-and-copy-to-clipboard]
+                         ["Insert date" crux-insert-date]
+                         ["Eval and replace" crux-eval-and-replace]
                          )
 
                         ("Windows"
-                         ["Swap windows" prelude-swap-windows])
+                         ["Swap windows" crux-swap-windows])
 
                         ("General"
-                         ["Visit term buffer" prelude-visit-term-buffer]
+                         ["Visit term buffer" crux-visit-term-buffer]
                          ["Search in Google" prelude-google]
-                         ["View URL" prelude-view-url]))
+                         ["View URL" crux-view-url]))
                       "Search Files (Grep)...")
 
   (easy-menu-add-item nil '("Tools") '("--") "Search Files (Grep)..."))
