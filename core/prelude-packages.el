@@ -166,7 +166,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("PKGBUILD\\'" pkgbuild-mode pkgbuild-mode)
     ("\\.rs\\'" rust-mode rust-mode)
     ("\\.sass\\'" sass-mode sass-mode)
-    ("\\.scala\\'" scala-mode2 scala-mode)
+    ("\\.scala\\'" scala-mode scala-mode)
     ("\\.scss\\'" scss-mode scss-mode)
     ("\\.slim\\'" slim-mode slim-mode)
     ("\\.styl\\'" stylus-mode stylus-mode)
