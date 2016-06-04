@@ -48,10 +48,6 @@
 ;; Newline at end of file
 (setq require-final-newline t)
 
-;; overwrite settings when .editorconfig file is present
-(require 'editorconfig)
-(editorconfig-mode 1)
-
 ;; delete the selection with a keypress
 (delete-selection-mode t)
 
@@ -437,6 +433,10 @@ and file 'filename' will be opened and cursor set on line 'linenumber'"
                                (cons (string-to-number (match-string 2 name))
                                      (string-to-number (or (match-string 3 name) ""))))
                             fn))) files)))
+
+;; use settings from .editorconfig file when present
+(require 'editorconfig)
+(editorconfig-mode 1)
 
 (provide 'prelude-editor)
 
