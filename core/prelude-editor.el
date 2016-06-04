@@ -48,6 +48,10 @@
 ;; Newline at end of file
 (setq require-final-newline t)
 
+;; overwrite settings when .editorconfig file is present
+(require 'editorconfig)
+(editorconfig-mode 1)
+
 ;; delete the selection with a keypress
 (delete-selection-mode t)
 
