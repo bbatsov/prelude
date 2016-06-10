@@ -1,6 +1,6 @@
 ;;; prelude-clojure.el --- Emacs Prelude: Clojure programming configuration.
 ;;
-;; Copyright © 2011-2015 Bozhidar Batsov
+;; Copyright © 2011-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://batsov.com/prelude
@@ -50,7 +50,7 @@
   '(progn
      (setq nrepl-log-messages t)
 
-     (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+     (add-hook 'cider-mode-hook 'eldoc-mode)
 
      (defun prelude-cider-repl-mode-defaults ()
        (subword-mode +1)

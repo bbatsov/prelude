@@ -1,6 +1,6 @@
 ;;; prelude-global-keybindings.el --- Emacs Prelude: some useful keybindings.
 ;;
-;; Copyright © 2011-2015 Bozhidar Batsov
+;; Copyright © 2011-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -45,8 +45,7 @@
                                 (other-window -1))) ;; back one
 
 ;; Indentation help
-(global-set-key (kbd "C-^") 'prelude-top-join-line)
-
+(global-set-key (kbd "C-^") 'crux-top-join-line)
 ;; Start proced in a similar manner to dired
 (unless (eq system-type 'darwin)
     (global-set-key (kbd "C-x p") 'proced))
@@ -86,7 +85,7 @@
                                         (kill-line 0)
                                         (indent-according-to-mode)))
 
-(global-set-key [remap kill-whole-line] 'prelude-kill-whole-line)
+(global-set-key [remap kill-whole-line] 'crux-kill-whole-line)
 
 ;; Activate occur easily inside isearch
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)

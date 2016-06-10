@@ -1,6 +1,6 @@
 ;;; prelude-ocaml.el --- Emacs Prelude: decent Perl coding settings.
 ;;
-;; Copyright © 2014-2015 Geoff Shannon
+;; Copyright © 2014-2016 Geoff Shannon
 ;;
 ;; Author: Geoff Shannon <geoffpshannon@gmail.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -67,7 +67,7 @@
   ;; Enable Flycheck checker
   (flycheck-ocaml-setup))
 
-(add-hook 'tuareg-mode-hook #'utop-setup-ocaml-buffer)
+(add-hook 'tuareg-mode-hook #'utop-minor-mode)
 (add-hook 'tuareg-mode-hook #'merlin-mode)
 
 (add-hook 'tuareg-mode-hook (lambda ()

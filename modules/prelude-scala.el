@@ -1,6 +1,6 @@
 ;;; prelude-scala.el --- Emacs Prelude: scala-mode configuration.
 ;;
-;; Copyright © 2011-2015 Bozhidar Batsov
+;; Copyright © 2011-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -33,10 +33,11 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(scala-mode2))
+(prelude-require-packages '(scala-mode ensime))
 
 (defun prelude-scala-mode-defaults ()
-  (subword-mode +1))
+  (subword-mode +1)
+  (ensime-mode +1))
 
 (setq prelude-scala-mode-hook 'prelude-scala-mode-defaults)
 

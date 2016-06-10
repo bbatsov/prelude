@@ -1,6 +1,6 @@
 ;;; init.el --- Prelude's configuration entry point.
 ;;
-;; Copyright (c) 2011 Bozhidar Batsov
+;; Copyright (c) 2011-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://batsov.com/prelude
@@ -38,8 +38,8 @@
 
 (message "Prelude is powering up... Be patient, Master %s!" current-user)
 
-(when (version< emacs-version "24.1")
-  (error "Prelude requires at least GNU Emacs 24.1, but you're running %s" emacs-version))
+(when (version< emacs-version "24.4")
+  (error "Prelude requires at least GNU Emacs 24.4, but you're running %s" emacs-version))
 
 ;; Always load newest byte code
 (setq load-prefer-newer t)

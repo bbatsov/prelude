@@ -1,6 +1,6 @@
 ;;; prelude-web.el --- Emacs Prelude: web template support
 ;;
-;; Copyright © 2011-2015 Bozhidar Batsov
+;; Copyright © 2011-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://www.batsov.com/emacs-prelude
@@ -57,9 +57,6 @@
                                      (just-one-space)
                                      (save-excursion (insert " ")))
                                    "SPC" "=" "#")))
-  (sp-local-pair "<% "  " %>" :insert "C-c %")
-  (sp-local-pair "<%= " " %>" :insert "C-c =")
-  (sp-local-pair "<%# " " %>" :insert "C-c #")
   (sp-local-tag "%" "<% "  " %>")
   (sp-local-tag "=" "<%= " " %>")
   (sp-local-tag "#" "<%# " " %>"))

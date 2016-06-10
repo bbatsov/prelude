@@ -1,6 +1,6 @@
 ;;; prelude-custom.el --- Emacs Prelude: Prelude's customizable variables.
 ;;
-;; Copyright © 2011-2015 Bozhidar Batsov
+;; Copyright © 2011-2016 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
@@ -70,7 +70,7 @@ Will only occur if `prelude-whitespace' is also enabled."
 Prelude recommends you only put personal customizations in the
 personal folder.  This variable allows you to specify a specific
 folder as the one that should be visited when running
-`prelude-find-user-init-file'.  This can be easily set to the desired buffer
+`crux-find-user-init-file'.  This can be easily set to the desired buffer
 in lisp by putting `(setq prelude-user-init-file load-file-name)'
 in the desired elisp file."
   :type 'string
@@ -96,6 +96,11 @@ Only modes that don't derive from `prog-mode' should be listed here."
 (defcustom prelude-theme 'zenburn
   "The default color theme, change this in your /personal/preload config."
   :type 'symbol
+  :group 'prelude)
+
+(defcustom prelude-shell (getenv "SHELL")
+  "The default shell to run with `crux-visit-term-buffer'"
+  :type 'string
   :group 'prelude)
 
 (provide 'prelude-custom)
