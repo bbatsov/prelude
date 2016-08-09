@@ -32,6 +32,8 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
+(package-initialize)
+
 (defvar current-user
       (getenv
        (if (equal system-type 'windows-nt) "USERNAME" "USER")))
