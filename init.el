@@ -64,6 +64,12 @@ by Prelude.")
   "This folder stores all the automatically generated save/history-files.")
 (defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-dir)
   "This files contains a list of modules that will be loaded by Prelude.")
+(defvar prelude-package-archives nil
+  "A list of additional package archives.")
+(defvar prelude-pinned-packages nil
+  "A list of packages that will be pinned to a specific repo before Prelude installs packages.")
+(defvar prelude-pinned-packages-file (expand-file-name "prelude-pinned-packages.el" prelude-dir)
+  "This file contains a list of packages that will be pinned to a specific repo before Prelude installs packages.")
 
 (unless (file-exists-p prelude-savefile-dir)
   (make-directory prelude-savefile-dir))
@@ -94,6 +100,12 @@ by Prelude.")
 (when (file-exists-p prelude-personal-preload-dir)
   (message "Loading personal configuration files in %s..." prelude-personal-preload-dir)
   (mapc 'load (directory-files prelude-personal-preload-dir 't "^[^#].*el$")))
+
+;; preload the pinned packages
+(if (file-exists-p prelude-pinned-packages-file)
+    (load prelude-pinned-packages-file)
+  (message "Missing pinned packages file %s" prelude-pinned-packages-file)
+  (message "You can get started by copying the bundled example file"))
 
 (message "Loading Prelude's core...")
 

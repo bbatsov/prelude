@@ -37,6 +37,11 @@
 
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
+
+(setq package-archives (nconc package-archives prelude-package-archives))
+
+(setq package-pinned-packages prelude-pinned-packages)
+
 ;; set package-user-dir to be relative to Prelude install path
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
 (package-initialize)
