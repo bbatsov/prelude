@@ -18,7 +18,7 @@ advised to always run Prelude with the latest Emacs - currently
 **25.1**.
 
 You can support the development of Prelude via
-[Salt](https://salt.bountysource.com/teams/prelude) and
+[Salt](https://bountysource.com/teams/prelude) and
 [Gratipay](https://www.gratipay.com/prelude).
 
 [![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png)](https://gratipay.com/prelude)
