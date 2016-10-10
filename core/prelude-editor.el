@@ -197,7 +197,12 @@ The body of the advice is in BODY."
 ;; note - this should be after volatile-highlights is required
 ;; add the ability to cut the current line, without marking it
 (require 'rect)
-(crux-with-region-or-line kill-region)
+(defadvice kill-region (before smart-cut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+   (if mark-active (list (region-beginning) (region-end) rectangle-mark-mode)
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
 
 ;; tramp, for sudo access
 (require 'tramp)
