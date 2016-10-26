@@ -108,10 +108,12 @@
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 
 ;; saveplace remembers your location in a file when saving files
-(require 'saveplace)
 (setq save-place-file (expand-file-name "saveplace" prelude-savefile-dir))
 ;; activate it for all buffers
-(setq-default save-place t)
+(if (< emacs-major-version 25)
+    (progn (require 'saveplace)
+           (setq-default save-place t))
+  (save-place-mode 1))
 
 ;; savehist keeps track of some history
 (require 'savehist)
