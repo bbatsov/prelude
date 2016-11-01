@@ -38,6 +38,7 @@ You can support the development of Prelude via
         - [Update Prelude's code](#update-preludes-code)
         - [Restart Prelude](#restart-prelude)
     - [Automatic update](#automatic-update)
+- [Pinning packages](#pinning-packages)
 - [Enabling additional modules](#enabling-additional-modules)
 - [Running](#running)
 - [Getting to know Prelude](#getting-to-know-prelude)
@@ -173,6 +174,32 @@ there are such).
 ### Automatic update
 
 Simply run <kbd>M-x prelude-update</kbd> from Emacs itself and restart Emacs afterwards.
+
+## Pinning packages
+
+By default, Prelude will install packages from the melpa and gnu package
+repositories. This can occasionally cause package integration to break when you
+update your changes. To prevent this, you can customize two variables:
+`prelude-package-archives` and `prelude-pinned-packages`.
+
+```lisp
+(add-to-list 'prelude-package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+
+(setq prelude-pinned-packages
+      '(
+        (ensime . "melpa-stable")
+        ))
+```
+
+You'll need to adjust your `prelude-pinned-packages.el` file before starting
+emacs with prelude for the first time. You first need to copy the
+`prelude-pinned-packages.el` file available in the sample directory to the root
+of `path/to/prelude/installation` and then adjust it to suit your preferences.
+
+If you already have an older installation of prelude or have already started it
+for the first time, you can delete all the packages in the `elpa` folder in
+`path/to/prelude/installation` and restart Emacs to reinstall packages.
 
 ## Enabling additional modules
 
