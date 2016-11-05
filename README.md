@@ -174,6 +174,15 @@ there are such).
 
 Simply run <kbd>M-x prelude-update</kbd> from Emacs itself and restart Emacs afterwards.
 
+## Pinning packages
+
+By default, Prelude will install packages from the melpa and gnu package
+repositories. Occasionally package integration can break when upgrading packages.
+This can be avoided by pinning packages to stable versions in other repositories.
+To do so, copy `prelude-pinned-packages.el` from the sample directory to
+Prelude's root directory and adjust the [variables](https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html)
+inside accordingly.
+
 ## Enabling additional modules
 
 By default most of the modules that ship with Prelude are not loaded. For more information on the functionality provided by these modules visit the [docs](modules/doc/README.md).

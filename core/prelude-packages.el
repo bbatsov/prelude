@@ -43,6 +43,14 @@
   (add-to-list 'package-archives
                '("melpa" . "https://melpa.org/packages/") t))
 
+;; load the pinned packages
+(let ((prelude-pinned-packages-file (expand-file-name "prelude-pinned-packages.el" prelude-dir)))
+  (if (file-exists-p prelude-pinned-packages-file)
+      (load prelude-pinned-packages-file)
+    (message "Missing pinned packages file %s" prelude-pinned-packages-file)
+    (message "You can get started by copying the bundled example file"))
+  )
+
 ;; set package-user-dir to be relative to Prelude install path
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
 (package-initialize)
