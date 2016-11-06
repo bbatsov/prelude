@@ -44,6 +44,7 @@
     (set-keymap-parent newmap oldmap)
     (define-key newmap (kbd "C-c +") nil)
     (define-key newmap (kbd "C-c -") nil)
+    (define-key newmap (kbd "C-a") nil)
     (make-local-variable 'minor-mode-overriding-map-alist)
     (push `(prelude-mode . ,newmap) minor-mode-overriding-map-alist))
 )
