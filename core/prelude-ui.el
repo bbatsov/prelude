@@ -60,6 +60,9 @@
 (column-number-mode t)
 (size-indication-mode t)
 
+;; show keystrokes fast
+(setq echo-keystrokes 0.02)
+
 ;; enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
 
