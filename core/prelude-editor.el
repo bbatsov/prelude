@@ -431,6 +431,10 @@ and file 'filename' will be opened and cursor set on line 'linenumber'"
                                      (string-to-number (or (match-string 3 name) ""))))
                             fn))) files)))
 
+;; use settings from .editorconfig file when present
+(require 'editorconfig)
+(editorconfig-mode 1)
+
 (provide 'prelude-editor)
 
 ;;; prelude-editor.el ends here
