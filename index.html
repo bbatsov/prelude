@@ -38,19 +38,23 @@ library to the mix. The final product offers an easy to use Emacs
 configuration for Emacs newcomers and lots of additional power for
 Emacs power users.</p>
 
-<p>Prelude is compatible <strong>ONLY with GNU Emacs 24.x</strong>. In general you're
+<p>Prelude is compatible <strong>ONLY with GNU Emacs 24.x+</strong>. In general you're
 advised to always run Prelude with the latest Emacs - currently
-<strong>24.3</strong>.</p>
+<strong>25.1</strong>.</p>
+
+You can support the development of Prelude via
+<a href="https://bountysource.com/teams/prelude">Salt</a> and
+<a href="https://www.gratipay.com/prelude">Gratipay</a>.
 
 <h2>
 <a name="fast-forward" class="anchor" href="#fast-forward"><span class="octicon octicon-link"></span></a>Fast Forward</h2>
 
 <p>Assuming you're using an Unix-like OS (<code>*BSD</code>, <code>GNU/Linux</code>, <code>OS X</code>, <code>Solaris</code>,
-etc), you already have Emacs 24 installed, as well as <code>git</code> &amp; <code>curl</code> you
+etc), you already have Emacs 24.4+ installed, as well as <code>git</code> &amp; <code>curl</code> you
 can skip the whole manual and just type in your favorite shell the
 following command:</p>
 
-<div class="highlight highlight-bash"><pre>curl -L http://git.io/epre | sh
+<div class="highlight highlight-bash"><pre>curl -L https://git.io/epre | sh
 </pre></div>
 
 <p>You can now power up your Emacs, sit back and enjoy Prelude,
@@ -77,9 +81,9 @@ or back up your existing <code>.emacs.d</code> directory manually.</p>
 By default most of the modules that ship with Prelude are not loaded.</p>
 
 <h2>
-<a name="installing-emacs-24" class="anchor" href="#installing-emacs-24"><span class="octicon octicon-link"></span></a>Installing Emacs 24</h2>
+<a name="installing-emacs-24" class="anchor" href="#installing-emacs-24"><span class="octicon octicon-link"></span></a>Installing Emacs</h2>
 
-<p>Obviously to use the Emacs Prelude you have to install Emacs 24
+<p>Obviously to use the Emacs Prelude you have to install Emacs
 first. Have a look at the <a href="http://wikemacs.org/wiki/Installing_Emacs">WikEmacs articles on installing Emacs</a>.</p>
 
 <h2>
@@ -149,6 +153,16 @@ next time Prelude starts it will install any new dependencies (if
 there are such).</p>
 
 <h2>
+<a name="pinning-packages" class="anchor" href="#pinning-packages"><span class="octicon octicon-link"></span></a>Pinning Packages</h2>
+
+<p>By default, Prelude will install packages from the melpa and gnu package
+repositories. Occasionally package integration can break when upgrading packages.
+This can be avoided by pinning packages to stable versions in other repositories.
+To do so, copy `prelude-pinned-packages.el` from the sample directory to
+Prelude's root directory and adjust the <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html">variables</a>
+inside accordingly.</p>
+
+<h2>
 <a name="enabling-additional-modules" class="anchor" href="#enabling-additional-modules"><span class="octicon octicon-link"></span></a>Enabling additional modules</h2>
 
 <p>By default most of the modules that ship with Prelude are not loaded.</p>
@@ -163,6 +177,7 @@ there are such).</p>
 <span class="p">(</span><span class="nb">require</span> <span class="ss">'prelude-emacs-lisp</span><span class="p">)</span>
 <span class="p">(</span><span class="nb">require</span> <span class="ss">'prelude-erc</span><span class="p">)</span>
 <span class="c1">;; (require 'prelude-erlang)</span>
+<span class="c1">;; (require 'prelude-elixir)</span>
 <span class="c1">;; (require 'prelude-haskell)</span>
 <span class="p">(</span><span class="nb">require</span> <span class="ss">'prelude-js</span><span class="p">)</span>
 <span class="c1">;; (require 'prelude-latex)</span>
@@ -217,6 +232,13 @@ emacsclient -c
 <p>The last two aliases are helpful if you're used to editing files from
 the command line using <code>vi(m)</code>.</p>
 
+<p>Also you can open a file with cursor on choosen line:</p>
+
+<div class="highlight highlight-bash"><pre>emacsclient somefile:1234
+</pre></div>
+
+<p>This will open file 'somefile' and set cursor on line 1234.</p>
+
 <h2>
 <a name="getting-to-know-prelude" class="anchor" href="#getting-to-know-prelude"><span class="octicon octicon-link"></span></a>Getting to know Prelude</h2>
 
@@ -262,7 +284,7 @@ extensions to keybindings.</p>
 </tr>
 <tr>
 <td><kbd>C-^</kbd></td>
-<td>Join two lines into one(<code>prelude-top-join-line</code>).</td>
+<td>Join two lines into one(<code>crux-top-join-line</code>).</td>
 </tr>
 <tr>
 <td><kbd>C-x p</kbd></td>
@@ -279,6 +301,10 @@ extensions to keybindings.</p>
 <tr>
 <td><kbd>C-x C-m</kbd></td>
 <td>Alias for <code>M-x</code>.</td>
+</tr>
+<tr>
+<td><kbd>M-X</kbd></td>
+<td>Like <code>M-x</code> but limited to commands that are relevant to the active major mode.</td>
 </tr>
 <tr>
 <td><kbd>C-h A</kbd></td>
@@ -305,12 +331,20 @@ extensions to keybindings.</p>
 <td>Open Magit's status buffer.</td>
 </tr>
 <tr>
+<td><kbd>C-x M-g</kbd></td>
+<td>Open Magit's popup of popups.</td>
+</tr>
+<tr>
+<td><kbd>M-z</kbd></td>
+<td>Zap up to char.</td>
+</tr>
+<tr>
 <td><kbd>C-=</kbd></td>
 <td>Run <code>expand-region</code> (incremental text selection).</td>
 </tr>
 <tr>
 <td><kbd>C-a</kbd></td>
-<td>Run <code>prelude-move-beginning-of-line</code>. Read <a href="http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/">this</a> for details.</td>
+<td>Run <code>crux-move-beginning-of-line</code>. Read <a href="http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/">this</a> for details.</td>
 </tr>
 </tbody>
 </table><h4>
@@ -588,19 +622,19 @@ extensions to keybindings.</p>
 <tbody>
 <tr>
 <td><kbd>jj</kbd></td>
-<td>Jump to the beginning of a word(<code>ace-jump-word-mode</code>)</td>
+<td>Jump to the beginning of a word(<code>avy-goto-word-1</code>)</td>
 </tr>
 <tr>
 <td><kbd>jk</kbd></td>
-<td>Jump to a character(<code>ace-jump-char-mode</code>)</td>
+<td>Jump to a character(<code>avy-goto-char</code>)</td>
 </tr>
 <tr>
 <td><kbd>jl</kbd></td>
-<td>Jump to the beginning of a line(<code>ace-jump-line-mode</code>)</td>
+<td>Jump to the beginning of a line(<code>avy-goto-line</code>)</td>
 </tr>
 <tr>
 <td><kbd>JJ</kbd></td>
-<td>Jump back to previous buffer(<code>prelude-switch-to-previous-buffer</code>)</td>
+<td>Jump back to previous buffer(<code>crux-switch-to-previous-buffer</code>)</td>
 </tr>
 <tr>
 <td><kbd>uu</kbd></td>
@@ -637,17 +671,18 @@ configuration will be installed automatically for you.</p>
 <h3>
 <a name="color-themes" class="anchor" href="#color-themes"><span class="octicon octicon-link"></span></a>Color Themes</h3>
 
-<p>Emacs 24 ships with a new theming facility that effectively renders
-the old color-theme package obsolete. Emacs 24 provides a dozen of
+<p>Emacs provides a dozen of
 built-in themes you can use out-of-the-box by invoking the <code>M-x
 load-theme</code> command.</p>
 
 <p><a href="https://github.com/bbatsov/zenburn-emacs">Zenburn</a> is the default color theme in Prelude, but you can change it
-at your discretion. Why Zenburn? I (and lots of hackers around the
-world) find it pretty neat for some reason. Personally I find the
-default theme pretty tiresome for the eyes, that's why I took that
-"controversial" decision to replace it. You can, of course, easily go
-back to the default (or select another theme entirely).</p>
+<a href="https://github.com/bbatsov/zenburn-emacs">Zenburn</a> is the default
+color theme in Prelude, but you can change it at your discretion. Why
+Zenburn? I (and lots of hackers around the world) find it pretty neat
+for some reason. Personally I find the default theme pretty tiresome
+for the eyes, that's why I took that "controversial" decision to
+replace it. You can, of course, easily go back to the default (or
+select another theme entirely).</p>
 
 <p>To disable Zenburn just put in your personal config the following
 line:</p>
@@ -655,14 +690,19 @@ line:</p>
 <div class="highlight highlight-lisp"><pre><span class="p">(</span><span class="nv">disable-theme</span> <span class="ss">'zenburn</span><span class="p">)</span>
 </pre></div>
 
-<p>Or you can use another theme altogether by adding something like:</p>
+<p>Or you can use another theme altogether by adding something in <code>personal/preload</code> like:</p>
 
-<div class="highlight highlight-lisp"><pre><span class="p">(</span><span class="nv">load-theme</span> <span class="ss">'solarized-dark</span> <span class="no">t</span><span class="p">)</span>
+<div class="highlight highlight-lisp"><pre><span class="p">(</span><span class="nv">setq</span> <span class="nv">prelude-theme</span> <span class="ss">'solarized-dark</span> <span class="no">t</span><span class="p">)</span>
 </pre></div>
 
 <p><strong>P.S.</strong> Solarized is not available by default - you'll have to
   install it from MELPA first (<code>M-x package-install RET
   solarized-theme</code>).</p>
+
+<p>Finally, if you don't want any theme at all, you can add this to your
+<code>personal/preload</code>:</p>
+<div class="highlight highlight-lisp"><pre><span class="p">(</span><span class="nv">setq</span> <span class="nv">prelude-theme</span> <span class="ss">nil</span> <span class="no">t</span><span class="p">)</span>
+</pre></div>
 
 <h3>
 <a name="personalizing" class="anchor" href="#personalizing"><span class="octicon octicon-link"></span></a>Personalizing</h3>
@@ -760,18 +800,14 @@ just do a manual <code>M-x package-refresh-contents</code> and restart Emacs
 afterwards.</p>
 
 <h3>
-<a name="no-arrow-navigation-in-editor-buffers" class="anchor" href="#no-arrow-navigation-in-editor-buffers"><span class="octicon octicon-link"></span></a>No arrow navigation in editor buffers</h3>
+<a name="no-arrow-navigation-in-editor-buffers" class="anchor" href="#no-arrow-navigation-in-editor-buffers"><span class="octicon octicon-link"></span></a>Warnings on arrow navigation in editor buffers</h3>
 
 <p>This is not a bug - it's a feature! I firmly believe that the one true
 way to use Emacs is by using it the way it was intended to be used (as
-far as navigation is concerned at least). That's why I've disabled all
-movement commands with arrows (and keys like page up, page down, etc) - to prevent you from being tempted to
-use them.</p>
+far as navigation is concerned at least).</p>
 
-<p>If you'd still like to use the arrow keys just invoke <code>M-x
-guru-mode</code> to disable them for the duration of your
-current Emacs session or add the following snippet to your
-personal Emacs customization to disable them permanently:</p>
+<p>If you'd like to be take this a step further and disable the arrow key navigation
+completely put this in your personal config:</p>
 
 <div class="highlight highlight-lisp"><pre><span class="p">(</span><span class="k">setq</span> <span class="nv">prelude-guru</span> <span class="no">nil</span><span class="p">)</span>
 </pre></div>
@@ -795,10 +831,10 @@ you don't like that simply add this to your personal config:</p>
 
 <p>The sorting algorithm <code>flx</code> uses is more complex, but yields better results.</p>
 
-<p>On slower machines, it may be necessary to lower <code>flx-ido-threshhold</code> to
+<p>On slower machines, it may be necessary to lower <code>flx-ido-threshold</code> to
 ensure a smooth experience.</p>
 
-<div class="highlight highlight-lisp"><pre><span class="p">(</span><span class="k">setq</span> <span class="nv">flx-ido-threshhold</span> <span class="mi">1000</span><span class="p">)</span>
+<div class="highlight highlight-lisp"><pre><span class="p">(</span><span class="k">setq</span> <span class="nv">flx-ido-threshold</span> <span class="mi">1000</span><span class="p">)</span>
 </pre></div>
 
 <p>You can always disable the improved sorting algorithm all together like this:</p>
@@ -810,7 +846,7 @@ ensure a smooth experience.</p>
 <a name="windows-compatibility" class="anchor" href="#windows-compatibility"><span class="octicon octicon-link"></span></a>Windows compatibility</h3>
 
 <p>While everything in Prelude should work fine in Windows, I test it only
-with Linux &amp; OSX, so there are Windows related problems from time to
+with Linux &amp; OS X, so there are Windows related problems from time to
 time. This situation will probably improve over time.</p>
 
 <h2>
