@@ -1,0 +1,3 @@
+[submodule "vendor/rinari"]
+	path = vendor/rinari
+	url = git://github.com/eschulte/rinari.git
