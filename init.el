@@ -112,6 +112,7 @@ by Prelude.")
 (require 'prelude-mode)
 (require 'prelude-editor)
 (require 'prelude-global-keybindings)
+(require 'prelude-server)
 
 ;; OSX specific settings
 (when (eq system-type 'darwin)
