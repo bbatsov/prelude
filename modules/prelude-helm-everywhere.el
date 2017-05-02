@@ -62,6 +62,10 @@
 
 (substitute-key-definition 'find-tag 'helm-etags-select global-map)
 (setq projectile-completion-system 'helm)
+
+;;; Save current position to mark ring
+(add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
+
 (helm-descbinds-mode)
 (helm-mode 1)
 
