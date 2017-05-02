@@ -270,6 +270,9 @@ The body of the advice is in BODY."
 (global-set-key (kbd "M-%") 'anzu-query-replace)
 (global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
 
+;; ignore errors, useful when some files aren't accessible
+(ack-and-a-half-arguments (quote ("2> /dev/null"))
+
 ;; dired - reuse current buffer by pressing 'a'
 (put 'dired-find-alternate-file 'disabled nil)
 
