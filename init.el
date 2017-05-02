@@ -105,11 +105,11 @@ by Prelude.")
 (message "Loading Prelude's core...")
 
 ;; the core stuff
+(require 'prelude-mode)
 (require 'prelude-packages)
 (require 'prelude-custom)  ;; Needs to be loaded before core, editor and ui
 (require 'prelude-ui)
 (require 'prelude-core)
-(require 'prelude-mode)
 (require 'prelude-editor)
 (require 'prelude-global-keybindings)
 
