@@ -33,12 +33,14 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(js2-mode json-mode))
+(prelude-require-packages '(js2-mode json-mode jsx-mode))
 
 (require 'js2-mode)
+(require 'jsx-mode)
 
 (add-to-list 'auto-mode-alist '("\\.js\\'"    . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.pac\\'"   . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'"   . jsx-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 
 (eval-after-load 'js2-mode
