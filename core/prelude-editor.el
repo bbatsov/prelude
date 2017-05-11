@@ -51,6 +51,9 @@
 ;; delete the selection with a keypress
 (delete-selection-mode t)
 
+;; set the default directory
+(setq default-directory (getenv "HOME"))
+
 ;; store all backup and autosave files in the tmp dir
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
