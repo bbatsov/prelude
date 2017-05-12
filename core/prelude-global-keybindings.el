@@ -87,6 +87,9 @@
 
 (global-set-key [remap kill-whole-line] 'crux-kill-whole-line)
 
+;; toggle comment on current line
+(global-set-key (kbd "s-;") 'comment-or-uncomment-region)
+
 ;; Activate occur easily inside isearch
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
 
