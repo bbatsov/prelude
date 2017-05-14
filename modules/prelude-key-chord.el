@@ -43,6 +43,12 @@
 (key-chord-define-global "xx" 'execute-extended-command)
 (key-chord-define-global "yy" 'browse-kill-ring)
 
+;; don't work in the minibuffer
+(defun disable-key-chord-mode ()
+  (set (make-local-variable 'input-method-function) nil))
+
+(add-hook 'minibuffer-setup-hook #'disable-key-chord-mode)
+
 (defvar key-chord-tips '("Press <jj> quickly to jump to the beginning of a visible word."
                          "Press <jl> quickly to jump to a visible line."
                          "Press <jk> quickly to jump to a visible character."
