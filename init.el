@@ -133,6 +133,10 @@ by Prelude.")
   (message "Loading personal configuration files in %s..." prelude-personal-dir)
   (mapc 'load (directory-files prelude-personal-dir 't "^[^#\.].*el$")))
 
+;; use zenburn as the default theme
+(when prelude-theme
+  (load-theme prelude-theme t))
+
 (message "Prelude is ready to do thy bidding, Master %s!" current-user)
 
 (prelude-eval-after-init
