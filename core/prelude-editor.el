@@ -380,6 +380,7 @@ indent yanked text (with prefix arg don't indent)."
 (prelude-global-mode t)
 
 ;; sensible undo
+(require 'undo-tree)
 (global-undo-tree-mode)
 (diminish 'undo-tree-mode)
 
