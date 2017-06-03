@@ -1,3 +1,23 @@
+Frontside Emacs
+=============
+
+Frontside emacs is the emacs configuration used by
+[The Frontside](http://frontside.io). It is a fork of
+[Emacs Prelude](https://github.com/bbatsov/prelude) that has been
+lovingly customized to our style of development.
+
+Customizations are found in `frontside/*.el` and are organized by
+functionality. For example, our javascript configuration is found in
+[frontside/javascript.el](frontside/javascript.el)
+
+
+#### Install
+
+From your home directory: `git clone git@github.com:thefrontside/.emacs.d`
+
+(and now back to your regularly scheduled Prelude README...)
+
+
 [![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
 [![Gratipay Team](https://img.shields.io/gratipay/team/prelude.svg?maxAge=2592000)](https://gratipay.com/prelude/)
 
