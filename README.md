@@ -152,7 +152,7 @@ The update procedure is fairly straightforward and consists of 3 steps:
 
 #### Update all bundled packages
 
-Just run <kbd>M-x package-list-packages RET U x</kbd>.
+Just run <kbd>M-x prelude-update-packages RET U x</kbd>.
 
 #### Update Prelude's code
 
