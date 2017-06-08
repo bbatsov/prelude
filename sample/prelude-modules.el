@@ -1,7 +1,11 @@
+;;; prelude-modules --- List of available prelude modules
+;;;
+;;; Commentary:
 ;;; Uncomment the modules you'd like to use and restart Prelude afterwards
+;;;
+;;; Code:
 
-;; Emacs IRC client
-(require 'prelude-erc)
+(require 'prelude-erc) ;; Emacs IRC client
 (require 'prelude-ido) ;; Super charges Emacs completion for C-x C-f and more
 ;; (require 'prelude-helm) ;; Interface for narrowing and search
 ;; (require 'prelude-helm-everywhere) ;; Enable Helm everywhere
@@ -36,3 +40,6 @@
 ;; (require 'prelude-web) ;; Emacs mode for web templates
 (require 'prelude-xml)
 ;; (require 'prelude-yaml)
+
+(provide 'prelude-modules)
+;;; prelude-modules ends here
