@@ -129,6 +129,8 @@ that can occur between two notifications.  The default is
   "Connect to IRC?"
   (interactive)
   (when (y-or-n-p "Do you want to start IRC? ")
+    (persp-new "IRC")
+    (persp-switch "IRC")
     (mapcar 'connect-to-erc my-fav-irc)))
 
 (defun filter-server-buffers ()
@@ -140,10 +142,12 @@ that can occur between two notifications.  The default is
 (defun stop-irc ()
   "Disconnects from all irc servers."
   (interactive)
+  (persp-switch "IRC")
   (dolist (buffer (filter-server-buffers))
     (message "Server buffer: %s" (buffer-name buffer))
     (with-current-buffer buffer
-      (erc-quit-server bye-irc-message))))
+      (erc-quit-server bye-irc-message)))
+  (persp-kill "IRC"))
 
 (provide 'prelude-erc)
 
