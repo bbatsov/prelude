@@ -74,7 +74,6 @@
         (helm-descbinds . "melpa-stable")
         (helm-projectile . "melpa-stable")
         (ido-completing-read+ . "melpa-stable")
-        (ido-ubiquitous . "melpa-stable")
         (imenu-anywhere . "melpa-stable")
         (inf-ruby . "melpa-stable")
         (js2-mode . "melpa-stable")
