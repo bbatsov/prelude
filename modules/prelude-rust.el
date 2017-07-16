@@ -35,6 +35,7 @@
 ;; * rustc (Rust Compiler)
 ;; * cargo (Rust Package Manager)
 ;; * racer (Rust Completion Tool)
+;; * rustfmt (Rust Tool for formatting code)
 
 (prelude-require-packages '(rust-mode
                             racer
