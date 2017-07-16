@@ -78,8 +78,6 @@
            slime-enable-evaluate-in-emacs t
            slime-autodoc-use-multiline-p t
            slime-auto-start 'always)
-     (set (make-local-variable 'tab-always-indent)
-          'complete)
      (define-key slime-mode-map (kbd "C-c C-s") 'slime-selector)))
 
 (provide 'prelude-common-lisp)
