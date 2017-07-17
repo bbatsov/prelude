@@ -42,6 +42,8 @@
                             flycheck-rust
                             cargo))
 
+(setq rust-format-on-save t)
+
 (eval-after-load 'rust-mode
   '(progn
      (add-hook 'rust-mode-hook 'racer-mode)
@@ -58,7 +60,6 @@
        (subword-mode +1))
 
      (setq prelude-rust-mode-hook 'prelude-rust-mode-defaults)
-     (setq rust-format-on-save t)
 
      (add-hook 'rust-mode-hook (lambda ()
                                (run-hooks 'prelude-rust-mode-hook)))))
