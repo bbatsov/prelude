@@ -48,15 +48,12 @@
   '(progn
      (add-hook 'rust-mode-hook 'racer-mode)
      (add-hook 'racer-mode-hook 'eldoc-mode)
-     (add-hook 'racer-mode-hook 'company-mode)
      (add-hook 'rust-mode-hook 'cargo-minor-mode)
      (add-hook 'rust-mode-hook 'flycheck-rust-setup)
      (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
 
      (defun prelude-rust-mode-defaults ()
-       (local-set-key (kbd "TAB") 'company-indent-or-complete-common)
-       (local-set-ket (kbd "C-c C-d") 'racer-describe)
-       (setq-local company-tooltip-align-annotations t)
+       (local-set-key (kbd "C-c C-d") 'racer-describe)
        ;; CamelCase aware editing operations
        (subword-mode +1))
 
