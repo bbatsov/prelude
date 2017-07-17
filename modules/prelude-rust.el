@@ -55,6 +55,7 @@
 
      (defun prelude-rust-mode-defaults ()
        (local-set-key (kbd "TAB") 'company-indent-or-complete-common)
+       (local-set-ket (kbd "C-c C-d") 'racer-describe)
        (setq-local company-tooltip-align-annotations t)
        ;; CamelCase aware editing operations
        (subword-mode +1))
