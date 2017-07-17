@@ -31,7 +31,7 @@
 
 (require 'prelude-programming)
 
-;; You may need installing the following packages on your systems:
+;; You may need installing the following packages on your system:
 ;; * rustc (Rust Compiler)
 ;; * cargo (Rust Package Manager)
 ;; * racer (Rust Completion Tool)
