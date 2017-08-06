@@ -114,10 +114,16 @@ that can occur between two notifications.  The default is
 
 
 (defvar my-fav-irc '( "irc.freenode.net" )
-  "Stores the list of IRC servers that you want to connect to with start-irc.") 
+  "Stores the list of IRC servers that you want to connect to with start-irc.")
 
 (defvar bye-irc-message "Asta la vista"
-  "Message string to be sent while quitting IRC.") 
+  "Message string to be sent while quitting IRC.")
+
+(defcustom new-irc-persp nil
+  "True (t) means start IRC in new perspective."
+  :type 'boolean
+  :require 'prelude-erc
+  :group 'prelude)
 
 (defun connect-to-erc (server)
   "Connects securely to IRC SERVER over TLS at port 6697."
@@ -129,8 +135,9 @@ that can occur between two notifications.  The default is
   "Connect to IRC?"
   (interactive)
   (when (y-or-n-p "Do you want to start IRC? ")
-    (persp-new "IRC")
-    (persp-switch "IRC")
+    (if new-irc-persp
+        (progn (persp-new "IRC")
+               (persp-switch "IRC")))
     (mapcar 'connect-to-erc my-fav-irc)))
 
 (defun filter-server-buffers ()
@@ -142,12 +149,14 @@ that can occur between two notifications.  The default is
 (defun stop-irc ()
   "Disconnects from all irc servers."
   (interactive)
-  (persp-switch "IRC")
+  (if new-irc-persp
+      (persp-switch "IRC"))
   (dolist (buffer (filter-server-buffers))
     (message "Server buffer: %s" (buffer-name buffer))
     (with-current-buffer buffer
       (erc-quit-server bye-irc-message)))
-  (persp-kill "IRC"))
+  (if new-irc-persp
+      (persp-kill "IRC")))
 
 (provide 'prelude-erc)
 
