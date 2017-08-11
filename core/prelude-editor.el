@@ -285,8 +285,7 @@ The body of the advice is in BODY."
 (require 'dired-x)
 
 ;; ediff - don't start another frame
-;; (require 'ediff)
-(setq-default ediff-window-setup-function 'ediff-setup-windows-plain)
+(custom-set-variables '(ediff-window-setup-function 'ediff-setup-windows-plain))
 
 ;; clean up obsolete buffers automatically
 (require 'midnight)
