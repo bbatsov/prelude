@@ -23,3 +23,7 @@ tramp
 /var/pcache
 .emacs.desktop
 .emacs.desktop.lock
+personal/
+bookmarks
+anaconda-mode
+abbrev_defs
