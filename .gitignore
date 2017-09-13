@@ -24,3 +24,7 @@ tramp
 .emacs.desktop
 .emacs.desktop.lock
 network-security.data
+personal/
+bookmarks
+anaconda-mode
+abbrev_defs
