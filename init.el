@@ -125,7 +125,7 @@ by Prelude.")
   (message "Missing modules file %s" prelude-modules-file)
   (message "You can get started by copying the bundled example file from sample/prelude-modules.el"))
 
-;; config changes made through the customize UI will be store here
+;; config changes made through the customize UI will be stored here
 (setq custom-file (expand-file-name "custom.el" prelude-personal-dir))
 
 ;; load the personal settings (this includes `custom-file')
