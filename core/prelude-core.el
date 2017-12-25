@@ -68,7 +68,7 @@ PROMPT sets the `read-string prompt."
     (if _after (ov-reset _ov))))
 
 (defun prelude-annotate-todo ()
-  "Put fringe marker on TODO: lines in the curent buffer."
+  "Put fringe marker on TODO: lines in the current buffer."
   (interactive)
   (ov-set (format "[[:space:]]*%s+[[:space:]]*TODO:" comment-start)
           'before-string

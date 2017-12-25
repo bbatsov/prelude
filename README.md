@@ -136,6 +136,8 @@ wget --no-check-certificate https://github.com/bbatsov/prelude/raw/master/utils/
 
 ### Manual
 
+Make sure you do not have any `~/.emacs` file present.
+
 ```bash
 git clone git://github.com/bbatsov/prelude.git path/to/local/repo
 ln -s path/to/local/repo ~/.emacs.d
