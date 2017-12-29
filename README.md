@@ -139,6 +139,8 @@ wget --no-check-certificate https://github.com/bbatsov/prelude/raw/master/utils/
 
 ### Manual
 
+Make sure you do not have any `~/.emacs` file present.
+
 ```bash
 git clone git://github.com/bbatsov/prelude.git path/to/local/repo
 ln -s path/to/local/repo ~/.emacs.d
@@ -257,7 +259,7 @@ alias vi='emacsclient -t'
 The last two aliases are helpful if you're used to editing files from
 the command line using `vi(m)`.
 
-Also you can open a file with cursor on choosen line:
+You can also open a file with the cursor positioned directly on a specific line:
 
 ```bash
 emacsclient somefile:1234
@@ -695,10 +697,12 @@ and send me a pull request. :-)
 
 ## Support
 
-Support is available via the Prelude Google Group <emacs-prelude@googlegroups.com>.
+Support is available via several channels:
 
-There's also a Freenode channel you can visit - `#prelude-emacs`.
-
+* Prelude's Google Group <emacs-prelude@googlegroups.com>
+* Prelude's Freenode channel (`#prelude-emacs`)
+* [Gitter](https://gitter.im/bbatsov/prelude)
+.
 ## Contributors
 
 Here's a [list](https://github.com/bbatsov/prelude/contributors) of all the people who have contributed to the
