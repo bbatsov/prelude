@@ -73,7 +73,7 @@ You can support the development of Prelude via
 
 ## Fast Forward
 
-Assuming you're using an Unix-like OS (`*BSD`, `GNU/Linux`, `OS X`, `Solaris`,
+Assuming you're using an Unix-like OS (`*BSD`, `GNU/Linux`, `macOS`, `Solaris`,
 etc), you already have Emacs 24.4+ installed, as well as `git` & `curl` you
 can skip the whole manual and just type in your favorite shell the
 following command:
