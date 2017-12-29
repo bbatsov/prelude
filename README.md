@@ -1,5 +1,6 @@
 [![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
-[![Gratipay Team](https://img.shields.io/gratipay/team/prelude.svg?maxAge=2592000)](https://gratipay.com/prelude/)
+[![Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/bbatsov/donate)
+[![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/bbatsov)
 
 Emacs Prelude
 =============
@@ -18,10 +19,12 @@ advised to always run Prelude with the latest Emacs - currently
 **25.2**.
 
 You can support the development of Prelude via
-[Salt](https://bountysource.com/teams/prelude) and
-[Gratipay](https://www.gratipay.com/prelude).
+[Salt](https://bountysource.com/teams/prelude),
+[Patreon](https://www.patreon.com/bbatsov) and
+[Liberapay](https://liberapay.com/bbatsov/donate).
 
-[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.1.3/dist/gratipay.png)](https://gratipay.com/prelude)
+[![Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/bbatsov/donate)
+[![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/bbatsov)
 
 **Table of Contents**
 
