@@ -694,10 +694,12 @@ and send me a pull request. :-)
 
 ## Support
 
-Support is available via the Prelude Google Group <emacs-prelude@googlegroups.com>.
+Support is available via several channels:
 
-There's also a Freenode channel you can visit - `#prelude-emacs`.
-
+* Prelude's Google Group <emacs-prelude@googlegroups.com>
+* Prelude's Freenode channel (`#prelude-emacs`)
+* [Gitter](https://gitter.im/bbatsov/prelude)
+.
 ## Contributors
 
 Here's a [list](https://github.com/bbatsov/prelude/contributors) of all the people who have contributed to the
