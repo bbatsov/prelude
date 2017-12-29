@@ -370,6 +370,11 @@ If you want to swap them add this to your personal config:
 
 You can also temporarily swap them with `C-c w` (`M-x prelude-swap-meta-and-super`).
 
+**Note**: I'd highly recommend to all macOS users to consider
+[remapping Return to
+Control](http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/)
+instead. That's an epic productivity boost and it's not as crazy as it sounds!
+
 #### Projectile
 
 Here's a list of functionality provided by [Projectile](https://github.com/bbatsov/projectile):
