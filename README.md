@@ -47,7 +47,7 @@ You can support the development of Prelude via
     - [Keymap](#keymap)
         - [Global](#global)
         - [Prelude Mode](#prelude-mode)
-        - [OSX modifier keys](#osx-modifier-keys)
+        - [macOS modifier keys](#macos-modifier-keys)
         - [Projectile](#projectile)
         - [Helm](#helm)
         - [Key-chords](#key-chords)
@@ -357,7 +357,7 @@ Keybinding         | Description
 **Note**: For various arithmetic operations, the prefix `C-c .` only needs to be pressed once for the first operation.
 For subsequent operations, only the appropriate operations (i.e. `+`, `-`, `*`, `/`... needs to be pressed).
 
-#### OSX modifier keys
+#### macOS modifier keys
 
 Prelude does not mess by default with the standard mapping of `Command` (to `Super`) and `Option` (to `Meta`).
 
