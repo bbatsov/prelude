@@ -256,7 +256,7 @@ alias vi='emacsclient -t'
 The last two aliases are helpful if you're used to editing files from
 the command line using `vi(m)`.
 
-Also you can open a file with cursor on choosen line:
+You can also open a file with the cursor positioned directly on a specific line:
 
 ```bash
 emacsclient somefile:1234
