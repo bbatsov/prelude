@@ -403,7 +403,9 @@ Keybinding         | Description
 <kbd>C-c p p</kbd> | Display a list of known projects you can switch to.
 
 Prelude adds an extra keymap prefix `S-p` (`S` stands for
-`Super`), so you can use `S-p` instead of `C-c p`.
+`Super`), so you can use `S-p` instead of `C-c p`. By default on Windows keyboard
+`Super` is mapped to the `Windows` key and on macOS keyboards `Super` is mapped
+to the `Command` key.
 
 If you ever forget any of Projectile's keybindings just do a:
 
