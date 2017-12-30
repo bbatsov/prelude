@@ -540,8 +540,10 @@ Finally, if you don't want any theme at all, you can add this to your
 
 ### Personalizing
 
-Fork the official Prelude repo and add your own touch to it. You're advised to avoid changing stuff outside of the
-personal folder to avoid having to deal with git merge conflicts in the future.
+**Fork** (instead of cloning) the official Prelude repo and add your
+own touch to it. You're advised to **avoid changing stuff outside of
+the personal folder** to avoid having to deal with git merge conflicts
+in the future.
 
 If you'd like to add some auto installation of packages in your
 personal config use the following code:
