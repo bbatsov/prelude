@@ -47,14 +47,10 @@
 
 ;; swiper provides enhanced buffer search
 
-(require 'swiper)
-
 (global-set-key "\C-s" 'swiper)
 
 
 ;; counsel supercharges a lot of commands with some ivy magic
-
-(require 'counsel)
 
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
