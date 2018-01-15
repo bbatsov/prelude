@@ -537,7 +537,7 @@ line:
 Or you can use another theme altogether by adding something in `personal/preload` like:
 
 ```lisp
-(prelude-require-package 'solarized)
+(prelude-require-package 'solarized-theme)
 (setq prelude-theme 'solarized-dark)
 ```
 
