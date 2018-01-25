@@ -1,7 +1,7 @@
 ;;; Uncomment the modules you'd like to use and restart Prelude afterwards
 
-;; Emacs IRC client
-(require 'prelude-erc)
+
+;; (require 'prelude-erc) ;; Emacs IRC client
 ;; (require 'prelude-ido) ;; Super charges Emacs completion for C-x C-f and more
 (require 'prelude-ivy) ;; A mighty modern alternative to ido
 ;; (require 'prelude-helm) ;; Interface for narrowing and search
