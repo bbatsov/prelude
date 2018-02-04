@@ -1,0 +1,19 @@
+Windows Registry Editor Version 5.00
+;; Search and replace C:\\path\\to\\emacs with the right path on your system
+
+;; If emacs isn't running and server isn't running, will open directly in emacs
+;; If emacs is running with server, opens using emacsclientw (C-# when done)
+
+;; To automatically start server, add to ~/.emacs, remove semicolons:
+;; (cond ((eq system-type 'windows-nt)
+;;        (require 'server)
+;;        (unless (server-running-p)
+;;          (server-start))))
+
+[HKEY_CLASSES_ROOT\*\shell\openwemacs]
+@="Edit with emacs"
+"icon"="C:\\emacs\\bin\\emacsclientw.exe"
+
+[HKEY_CLASSES_ROOT\*\shell\openwemacs\command]
+@="C:\\emacs\\bin\\emacsclientw.exe -n -c -a \"\" \"%1\""
+"icon"="C:\\emacs\\bin\\emacsclientw.exe"
