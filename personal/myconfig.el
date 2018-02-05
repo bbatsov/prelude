@@ -19,6 +19,9 @@
 (add-to-list 'default-frame-alist '(font . "Roboto Mono Medium 10"))
 (add-to-list 'default-frame-alist '(cursor-color . "#ff69b4"))
 
-;; cool looking mode line?
-;; (require 'smart-mode-line)
-;; (sml/setup)
+
+;; C:\Program Files\Git\bin\bash.exe
+(setq explicit-shell-file-name
+      "C:/Program Files/Git/bin/bash.exe")
+(setq shell-file-name explicit-shell-file-name)
+(add-to-list 'exec-path "C:/Program Files/Git/bin")
