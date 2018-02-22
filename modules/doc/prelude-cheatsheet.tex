@@ -1,0 +1,348 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.5cm,landscape,a3paper]{geometry}
+\pagestyle{empty}
+
+\usepackage{textcomp}
+\usepackage{multicol}
+\usepackage{menukeys}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{xpatch}
+\usepackage{xparse}
+\usepackage{calc}
+\usepackage{tcolorbox}
+
+\pagecolor{black}
+
+\definecolor{heading}{HTML}{5DCACB}
+\definecolor{command}{HTML}{D8DA78}
+\renewcommand\section[1]{\bigskip\par\textbf{\color{heading}\large#1}\smallskip}
+\renewcommand\subsection[1]{\smallskip\par\textbf{\color{heading}#1}}
+\newcommand\humanreadable[1]{{\par\color{orange}\small\sffamily#1}}
+\newcommand\meta[1]{\textlangle\textit{#1}\textrangle}
+\newcommand\keyify[1]{\color{pink}\ttfamily#1}
+\newlist{keylist}{description}{1}
+\setlist[keylist]{
+  topsep      = 1pt,
+  labelindent = 1pt,
+  itemsep     = -1ex,
+  labelwidth  = \widthof{xxxxxxxxxxxxxx},
+  font        = \keyify,
+  leftmargin  = !,
+  before      = \color{command}\sffamily
+}
+
+\setlength\parindent{0em}
+\setlength\parsep{0ex}
+\renewcommand\baselinestretch{1.2}
+
+\begin{document}
+\begin{multicols}{4}
+
+  \setlength{\columnsep}{1cm}
+  \begin{center}
+    \LARGE\color{heading}\textbf{Emacs Prelude Cheat Sheet}
+  \end{center}
+
+  \section{Getting Help in Emacs}
+  \begin{keylist}
+  \item[C-h k \meta{key}] \humanreadable{describe function bound to \meta{key}}
+  \item[C-h b] \humanreadable{list key-bindings for focused buffer}
+  \item[C-h m] \humanreadable{describe mode}
+  \item[C-h l] \humanreadable{show the keys you have pressed}
+  \item[C-h f] \humanreadable{describe function}
+  \end{keylist}
+
+  \section{Global}
+  \begin{keylist}
+  \item[C-x \textbackslash] align-regexp
+  \item[C-+] text-scale-increase
+  \item[C--] text-scale-decrease
+  \item[C-x O] \humanreadable{go to previous window}
+  \item[C-x m] eshell
+  \item[C-x M] \humanreadable{start a new eshell if one is active}
+  \item[C-x M-m] shell
+  \item[C-x C-m] smex
+  \item[C-h A] apropos
+  \item[C-h C-f] find-function
+  \item[C-h C-k] find-function-on-key
+  \item[C-h C-v] find-variable
+  \item[C-h C-l] find-library
+  \item[C-h C-i] info-display-manual
+  \item[C-<backspace>] \humanreadable{kill line backward and indent}
+  \item[C-o] (isearch-mode) isearch-occur
+  \item[M-/] hippie-expand
+  \item[C-x C-b] ibuffer
+  \item[<f11>] prelude-fullscreen
+  \item[<f12>] menu-bar-mode
+  \item[C-x g] magit-status
+  \item[C-x M-g] magit-dispatch-popup
+  \end{keylist}
+
+  \subsection{prelude}
+
+  \humanreadable{Keybindings defined in prelude mode}
+  \begin{keylist}
+  \item[C-c o] crux-open-with
+  \item[C-c g] prelude-google
+  \item[C-c G] prelude-github
+  \item[C-c y] prelude-youtube
+  \item[C-c U] prelude-duckduckgo
+  \item[C-a] crux-move-beginning-of-line
+  \item[S-<return>] crux-smart-open-line
+  \item[M-o] crux-smart-open-line
+  \item[C-S-<return>] crux-smart-open-line-above
+  \item[C-S-<up>] move-text-up
+  \item[C-S-<down>] move-text-down
+  \item[M-S-<up>] move-text-up
+  \item[M-S-<down>] move-text-down
+  \item[C-c n] crux-cleanup-buffer-or-region
+  \item[C-c f] crux-recentf-ido-find-file
+  \item[C-M-z] crux-indent-defun
+  \item[C-c u] crux-view-url
+  \item[C-c e] crux-eval-and-replace
+  \item[C-c s] crux-swap-windows
+  \item[C-c w] prelude-swap-meta-and-super
+  \item[C-c D] crux-delete-file-and-buffer
+  \item[C-c d] crux-duplicate-current-line-or-region
+  \item[C-c M-d] crux-duplicate-and-comment-current-
+    line-or-region
+  \item[C-c r] crux-rename-buffer-and-file
+  \item[C-c t] crux-visit-term-buffer
+  \item[C-c k] crux-kill-other-buffers
+  \item[C-c TAB] crux-indent-rigidly-and-copy-
+    to-clipboard
+  \item[C-c I] crux-find-user-init-file
+  \item[C-c S] crux-find-shell-init-file
+  \item[C-c i] imenu-anywhere
+  \item[s-p] projectile-command-map
+  \item[s-g] god-local-mode
+  \item[s-r] crux-recentf-ido-find-file
+  \item[s-j] crux-top-join-line
+  \item[s-k] crux-kill-whole-line
+  \item[s-m m] magit-status
+  \item[s-m l] magit-log
+  \item[s-m f] magit-log-buffer-file
+  \item[s-m b] magit-blame
+  \item[s-o] crux-smart-open-line-above
+  \end{keylist}
+
+  \subsection{ace-window}
+  \humanreadable{Quickly switch windows in Emacs}
+  \begin{keylist}
+  \item[s-w] ace-window
+  \end{keylist}
+
+  \subsection{avy}
+
+  \humanreadable{Effectively navigate to visible things}
+  \begin{keylist}
+  \item[C-c j] avy-goto-word-or-subword-1
+  \item[s-.] avy-goto-word-or-subword-1
+  \end{keylist}
+  \subsection{anzu}
+
+  \humanreadable{Enhances isearch \& query-replace by showing total matches and current match position}
+  \begin{keylist}
+  \item[M-\%] anzu-query-replace
+  \item[s-.] anzu-query-replace-regexp
+  \end{keylist}
+
+  \subsection{browse-kill-ring}
+
+  \humanreadable{Smarter kill-ring navigation}
+  \begin{keylist}
+  \item[s-y] browse-kill-ring
+  \end{keylist}
+
+  \subsection{crux}
+
+  \humanreadable{A Collection of Ridiculously Useful eXtensions for Emacs.}
+  \begin{keylist}
+  \item[C-\^] crux-top-join-line
+  \item[s-k] crux-kill-whole-line
+  \end{keylist}
+
+  \subsection{discover-my-major}
+  \humanreadable{A quick major mode help with discover-my-major.}
+  \begin{keylist}
+  \item[C-h C-m] discover-my-major
+  \end{keylist}
+
+  \subsection{easy-kill}
+  \humanreadable{Kill \& Mark Things Easily in Emacs.}
+  \begin{keylist}
+  \item[M-w] easy-kill
+  \item[C-M-SPC] easy-mark
+  \item[C-M-@] easy-mark
+  \end{keylist}
+
+  \subsection{expand-region}
+  \humanreadable{Increase selected region by semantic units.}
+  \begin{keylist}
+  \item[C-=] er/expand-region
+  \end{keylist}
+
+  \subsection{flycheck}
+  \humanreadable{On the fly syntax checking.}
+  \begin{keylist}
+  \item[C-t C-n] flycheck-next-error
+  \item[C-t C-p] flycheck-previous-error
+  \end{keylist}
+
+  \subsection{projectile}
+  \humanreadable{Project Interaction Library for Emacs.}
+  \begin{keylist}
+  \item[C-c p f] projectile-find-file
+  \item[C-c p p] projectile-switch-project
+  \item[C-c p d] projectile-find-dir
+  \item[C-c p r] projectile-replace
+  \item[C-c p T] projectile-find-test-file
+  \item[C-c p s g] projectile-grep
+  \item[C-c p s s] projectile-ag
+  \end{keylist}
+
+  \subsection{operate-on-number}
+  \humanreadable{Operate on number at point with arithmetic functions.}
+  \begin{keylist}
+  \item[C-c . +] apply-operation-to-number-at-point
+  \item[C-c . -] apply-operation-to-number-at-point
+  \item[C-c . *] apply-operation-to-number-at-point
+  \item[C-c . /] apply-operation-to-number-at-point
+  \item[C-c . \textbackslash] apply-operation-to-number-at-point
+  \item[C-c . \textasciicircum] apply-operation-to-number-at-point
+  \item[C-c . <] apply-operation-to-number-at-point
+  \item[C-c . >] apply-operation-to-number-at-point
+  \item[C-c . \#] apply-operation-to-number-at-point
+  \item[C-c . \%] apply-operation-to-number-at-point
+  \item[C-c . '] operate-on-number-at-point
+  \end{keylist}
+
+  \subsection{zop-to-char}
+  \humanreadable{A more powerful alternative to zap-to-char.}
+  \begin{keylist}
+  \item[M-z] zop-up-to-char
+  \item[M-Z] zop-to-char
+  \end{keylist}
+
+  \section{Modules}
+  \subsection{prelude-ido}
+  \begin{keylist}
+  \item[M-x] smex
+  \item[M-X] smex-major-mode-commands
+  \end{keylist}
+
+  \subsection{prelude-ivy}
+  \begin{keylist}
+  \item[C-c C-r] ivy-resume
+  \item[<f6>] ivy-resume
+  \item[C-s] swiper
+  \item[M-x] counsel-M-x
+  \item[<f1> f] counsel-describe-function
+  \item[<f1> v] counsel-describe-variable
+  \item[<f1> l] counsel-find-library
+  \item[<f1> i] counsel-info-lookup-symbol
+  \item[<f1> u] counsel-unicode-char
+  \item[C-c g] counsel-git
+  \item[C-c j] counsel-git-grep
+  \item[C-c k] counsel-ag
+  \item[C-x l] counsel-locate
+  \item[C-r] (minibuffer) counsel-minibuffer-history
+  \end{keylist}
+
+  \subsection{prelude-helm}
+  \begin{keylist}
+  \item[C-c h o] helm-occur
+  \item[C-c h g] helm-do-grep
+  \item[C-c h C-c w] helm-wikipedia-suggest
+  \item[C-c h SPC] helm-all-mark-rings
+  \item[C-c p h] helm-projectile
+  \end{keylist}
+
+  \subsection{prelude-helm-everywhere}
+  \begin{keylist}
+  \item[M-x] helm-M-x
+  \item[C-c C-m] helm-M-x
+  \item[M-y] helm-show-kill-ring
+  \item[C-x b] helm-mini
+  \item[C-x C-b] helm-buffers-list
+  \item[C-x C-f] helm-find-files
+  \item[C-h f] helm-apropos
+  \item[C-h r] helm-info-emacs
+  \item[C-h C-l] helm-locate-library
+  \item[C-c f] (prelude-mode) helm-recentf
+  \item[C-c C-l] (minibuffer-local)  help-minibuffer-history
+  \item[C-o] (isearch-mode) helm-occur-from-isearch
+  \item[C-c C-l] (shell-mode) helm-comint-input-ring
+  \end{keylist}
+
+  \subsection{prelude-key-chord}
+  \begin{keylist}
+  \item[jj] avy-goto-word-1
+  \item[jl] avy-goto-line
+  \item[jk] avy-goto-char
+  \item[JJ] crux-switch-to-previous-buffer
+  \item[uu] undo-tree-visualize
+  \item[xx] execute-extended-command
+  \item[yy] browse-kill-ring
+  \end{keylist}
+
+  \subsection{prelude-evil}
+  \begin{keylist}
+  \item[C-A] (normal-state) evil-numbers/inc-at-pt
+  \item[C-S-A] (normal-state) evil-numbers/dec-at-pt
+  \item[>] (visual-state) prelude-shift-right-visual
+  \item[<] prelude-shift-left-visual
+  \item[C-S-d] prelude-evil-scroll-down-other-window
+  \item[C-S-u] prelude-evil-scroll-up-other-window
+  \item[K] (magit-branch-manager-mode)\\
+    (emacs-state) magit-discard
+  \item[L] (magit-branch-manager-mode)\\
+    (emacs-state) magit-log-popup
+  \item[K] (magit-status-mode) (emacs-state) magit-discard
+  \item[l] (magit-status-mode) (emacs-state)\\
+    magit-log-popup
+  \item[h] (magit-status-mode) (emacs-state)\\
+    magit-diff-toggle-refine-hunk
+  \end{keylist}
+
+  \subsection{prelude-emacs-lisp}
+  \begin{keylist}
+  \item[C-c C-z] prelude-visit-ielm
+  \item[C-c C-c] eval-defun
+  \item[C-c C-b] eval-buffer
+  \end{keylist}
+
+  \subsection{prelude-go}
+  \begin{keylist}
+  \item[C-c a] go-test-current-project
+  \item[C-c m] go-test-current-file
+  \item[C-c .] go-test-current-test
+  \item[C-c b] go-run
+  \item[C-c h] godoc-at-point
+  \end{keylist}
+
+  \subsection{prelude-ocaml}
+  \begin{keylist}
+  \item[C-c C-s] utop
+  \end{keylist}
+
+  \subsection{prelude-org}
+  \begin{keylist}
+  \item[C-c l] org-store-link
+  \item[C-c a] org-agenda
+  \item[C-c b] org-iswitchb
+  \end{keylist}
+
+  \subsection{prelude-rust}
+  \begin{keylist}
+  \item[C-c C-d] racer-describe
+  \end{keylist}
+
+\end{multicols}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

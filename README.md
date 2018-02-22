@@ -52,6 +52,7 @@ You can support the development of Prelude via
         - [Helm](#helm)
         - [Key-chords](#key-chords)
             - [Disabling key-chords](#disabling-key-chords)
+    - [Cheatsheet](#cheatsheet)
 - [Automatic package installation](#automatic-package-installation)
     - [Color Themes](#color-themes)
     - [Personalizing](#personalizing)
@@ -486,6 +487,21 @@ If you're an `evil-mode` user you'll probably do well to disable `key-chord-mode
 
 If you want to use vim inside of emacs enable the `prelude-evil` module which provides
 support for `evil-mode`.
+
+### Cheatsheet
+
+Use `C-h k <key>` (`<key>` are the ones listed on the left) or `C-h f <function>` (`<function>` are the ones listed on the right) to see the detailed explanation.
+
+![cheatsheet](/modules/doc/cheatsheet.png)
+
+#### PDF generation
+
+Install [latex](https://www.latex-project.org/get/)
+
+``` bash
+cd modules/doc
+pdflatex prelude-cheatsheet.tex
+```
 
 ## Automatic package installation
 
