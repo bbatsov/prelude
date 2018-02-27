@@ -86,6 +86,9 @@ by Prelude.")
 (defvar prelude-personal-load-dir (expand-file-name "load" prelude-personal-dir)
   "This folder stores all the other personal files.")
 
+;; create dirs
+(unless (file-exists-p prelude-personal-dir)
+  (make-directory prelude-personal-dir))
 (unless (file-exists-p prelude-savefile-dir)
   (make-directory prelude-savefile-dir))
 
@@ -113,7 +116,8 @@ by Prelude.")
 
 ;; preload the personal settings from `prelude-personal-preload-dir'
 (when (file-exists-p prelude-personal-preload-dir)
-  (message "Loading personal configuration files in %s..." prelude-personal-preload-dir)
+  (message "Pre-loading personal configuration files in %s..."
+           prelude-personal-preload-dir)
   (mapc 'load (directory-files prelude-personal-preload-dir 't "^[^#\.].*el$")))
 
 (message "Loading Prelude's core...")
@@ -144,7 +148,8 @@ by Prelude.")
 
 ;; load the personal settings
 (when (file-exists-p prelude-personal-load-dir)
-  (message "Loading personal configuration files in %s..." prelude-personal-load-dir)
+  (message "Loading personal configuration files in %s..."
+           prelude-personal-load-dir)
   (mapc 'load (directory-files prelude-personal-load-dir 't "^[^#\.].*el$")))
 
 ;; load custom file

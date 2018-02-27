@@ -57,6 +57,9 @@
 (setq auto-save-file-name-transforms
       `((".*" ,prelude-autosave-dir t)))
 
+;; avoid creating dir "~/.emacs.d/auto-save-list/"
+(setq auto-save-list-file-prefix nil)
+
 ;; autosave the undo-tree history
 (setq undo-tree-history-directory-alist
       `((".*" . ,prelude-autosave-dir)))
