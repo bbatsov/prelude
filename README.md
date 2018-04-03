@@ -483,7 +483,7 @@ If you're an `evil-mode` user you'll probably do well to disable `key-chord-mode
 
 #### vim emulation
 
-If you want to use vim inside of emacs enable the `prelude-evil` module which provides
+If you want to use vim keybindings inside of Emacs enable the `prelude-evil` module which provides
 support for `evil-mode`.
 
 ### Cheatsheet
