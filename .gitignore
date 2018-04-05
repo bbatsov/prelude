@@ -25,5 +25,5 @@ tramp
 .emacs.desktop.lock
 network-security.data
 prelude-cheatsheet.el
-prelude-cheatsheet.aux
-prelude-cheatsheet.log
+/modules/doc/*.aux
+/modules/doc/*.log
