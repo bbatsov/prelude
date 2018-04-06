@@ -12,15 +12,16 @@
 \usepackage{calc}
 \usepackage{tcolorbox}
 
-\pagecolor{black}
+\definecolor{default}{HTML}{333333}
+\definecolor{heading}{HTML}{000000}
+\definecolor{command}{HTML}{666666}
+\definecolor{key}{HTML}{268BD2}
 
-\definecolor{heading}{HTML}{5DCACB}
-\definecolor{command}{HTML}{D8DA78}
 \renewcommand\section[1]{\bigskip\par\textbf{\color{heading}\large#1}\smallskip}
 \renewcommand\subsection[1]{\smallskip\par\textbf{\color{heading}#1}}
-\newcommand\humanreadable[1]{{\par\color{orange}\small\sffamily#1}}
+\newcommand\humanreadable[1]{{\par\color{default}\small\sffamily#1}}
 \newcommand\meta[1]{\textlangle\textit{#1}\textrangle}
-\newcommand\keyify[1]{\color{pink}\ttfamily#1}
+\newcommand\keyify[1]{\color{key}\ttfamily#1}
 \newlist{keylist}{description}{1}
 \setlist[keylist]{
   topsep      = 1pt,
