@@ -494,11 +494,20 @@ Use `C-h k <key>` (`<key>` are the ones listed on the left) or `C-h f <function>
 
 #### PDF generation
 
-Install [latex](https://www.latex-project.org/get/)
+Install [LaTeX](https://www.latex-project.org/get/)
 
 ``` bash
 cd modules/doc
 pdflatex prelude-cheatsheet.tex
+```
+
+#### PNG generation
+
+Install [Poppler](https://poppler.freedesktop.org/)
+
+``` bash
+cd modules/doc
+pdftocairo -png -singlefile prelude-cheatsheet.pdf cheatsheet
 ```
 
 ## Automatic package installation
