@@ -1,4 +1,4 @@
-;;; prelude-osx.el --- Emacs Prelude: OSX specific settings.
+;;; prelude-macos.el --- Emacs Prelude: macOS specific settings.
 ;;
 ;; Copyright © 2011-2018 Bozhidar Batsov
 ;;
@@ -32,7 +32,7 @@
 
 ;;; Code:
 
-;; On OS X Emacs doesn't use the shell PATH if it's not started from
+;; On macOS Emacs doesn't use the shell PATH if it's not started from
 ;; the shell. Let's fix that:
 (prelude-require-packages '(exec-path-from-shell vkill))
 
@@ -42,7 +42,7 @@
 ;; It's all in the Meta
 (setq ns-function-modifier 'hyper)
 
-;; proced-mode doesn't work on OS X so we use vkill instead
+;; proced-mode doesn't work on macOS so we use vkill instead
 (autoload 'vkill "vkill" nil t)
 (global-set-key (kbd "C-x p") 'vkill)
 
@@ -71,5 +71,5 @@ Windows external keyboard from time to time."
     (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend))
 
 
-(provide 'prelude-osx)
-;;; prelude-osx.el ends here
+(provide 'prelude-macos)
+;;; prelude-macos.el ends here

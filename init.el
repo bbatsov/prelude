@@ -113,9 +113,9 @@ by Prelude.")
 (require 'prelude-editor)
 (require 'prelude-global-keybindings)
 
-;; OSX specific settings
+;; macOS specific settings
 (when (eq system-type 'darwin)
-  (require 'prelude-osx))
+  (require 'prelude-macos))
 
 (message "Loading Prelude's modules...")
 
