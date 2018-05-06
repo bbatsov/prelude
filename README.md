@@ -622,7 +622,7 @@ will automatically update the installed packages.
 Prelude makes heavy use of the flyspell-mode package for spell
 checking of various things. The proper operation of flyspell depends
 on the presence of the `aspell` program and an `en` dictionary on your
-system. You can install `aspell` and the dictionary on OS X with
+system. You can install `aspell` and the dictionary on macOS with
 `homebrew` like this:
 
 ```bash
@@ -702,7 +702,7 @@ You can always disable the improved sorting algorithm all together like this:
 ### Windows compatibility
 
 While everything in Prelude should work fine in Windows, I test it only
-with Linux & OS X, so there are Windows related problems from time to
+with GNU/Linux & macOS, so there might be Windows-specific problems from time to
 time. This situation will probably improve over time.
 
 ## Known issues

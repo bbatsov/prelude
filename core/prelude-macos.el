@@ -11,7 +11,7 @@
 
 ;;; Commentary:
 
-;; Some OSX specific stuff.
+;; Some macOS specific stuff.
 
 ;;; License:
 

@@ -56,7 +56,7 @@
 ;; select the default value from slime-lisp-implementations
 (if (and (eq system-type 'darwin)
          (executable-find "ccl"))
-    ;; default to Clozure CL on OS X
+    ;; default to Clozure CL on macOS
     (setq slime-default-lisp 'ccl)
   ;; default to SBCL on Linux and Windows
   (setq slime-default-lisp 'sbcl))

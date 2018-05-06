@@ -62,7 +62,7 @@
 ;; use pdflatex
 (setq TeX-PDF-mode t)
 
-;; sensible defaults for OS X, other OSes should be covered out-of-the-box
+;; sensible defaults for macOS, other OSes should be covered out-of-the-box
 (when (eq system-type 'darwin)
   (setq TeX-view-program-selection
         '((output-dvi "DVI Viewer")
