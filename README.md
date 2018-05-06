@@ -376,38 +376,21 @@ instead. That's an epic productivity boost and it's not as crazy as it sounds!
 
 #### Projectile
 
-Here's a list of functionality provided by [Projectile](https://github.com/bbatsov/projectile):
+[Projectile](https://github.com/bbatsov/projectile) is one of the essential packages bundled with Prelude.
+It provides an easy way to navigate and switch projects. Take a look at its extensive documentation
+to get a feel for everything you can do with Projectile.
 
-Keybinding         | Description
--------------------|------------------------------------------------------------
-<kbd>C-c p f</kbd> | Display a list of all files in the project. With a prefix argument it will clear the cache first.
-<kbd>C-c p d</kbd> | Display a list of all directories in the project. With a prefix argument it will clear the cache first.
-<kbd>C-c p T</kbd> | Display a list of all test files(specs, features, etc) in the project.
-<kbd>C-c p s g</kbd> | Run grep on the files in the project.
-<kbd>C-c p s s</kbd> | Runs `ag` on the project. Requires the presence of `ag.el`.
-<kbd>M-- C-c p s g</kbd> | Run grep on `projectile-grep-default-files` in the project.
-<kbd>C-c p b</kbd> | Display a list of all project buffers currently open.
-<kbd>C-c p o</kbd> | Runs `multi-occur` on all project buffers currently open.
-<kbd>C-c p r</kbd> | Runs interactive query-replace on all files in the projects.
-<kbd>C-c p i</kbd> | Invalidates the project cache (if existing).
-<kbd>C-c p R</kbd> | Regenerates the projects `TAGS` file.
-<kbd>C-c p k</kbd> | Kills all project buffers.
-<kbd>C-c p D</kbd> | Opens the root of the project in `dired`.
-<kbd>C-c p e</kbd> | Shows a list of recently visited project files.
-<kbd>C-c p a</kbd> | Switch between files with the same name but different extensions.
-<kbd>C-c p c</kbd> | Runs a standard compilation command for your type of project.
-<kbd>C-c p P</kbd> | Runs a standard test command for your type of project.
-<kbd>C-c p z</kbd> | Adds the currently visited to the cache.
-<kbd>C-c p p</kbd> | Display a list of known projects you can switch to.
-
-Prelude adds an extra keymap prefix `S-p` (`S` stands for
-`Super`), so you can use `S-p` instead of `C-c p`. By default on Windows keyboard
+Prelude adds an extra keymap prefix `s-p` (`s` stands for
+`Super`) in addition to the standard one `C-c p`. By default on Windows keyboard
 `Super` is mapped to the `Windows` key and on macOS keyboards `Super` is mapped
 to the `Command` key.
 
 If you ever forget any of Projectile's keybindings just do a:
 
-<kbd>C-c p C-h</kbd>
+<kbd>C-c p C-h</kbd> or <kbd>s-p C-h</kbd>
+
+Alternatively you can just press <kbd>s-p</kbd> and wait for a moment
+for `which-key` to kick in and show you the available keybindings.
 
 #### Helm
 
