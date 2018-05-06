@@ -63,6 +63,7 @@ Windows external keyboard from time to time."
 (define-key prelude-mode-map (kbd "C-c w") 'prelude-swap-meta-and-super)
 (define-key prelude-mode-map (kbd "s-/") 'hippie-expand)
 
+;; There's no point in hiding the menu bar on macOS, so let's not do it
 (menu-bar-mode +1)
 
 ;; Enable emoji, and stop the UI from freezing when trying to display them.
