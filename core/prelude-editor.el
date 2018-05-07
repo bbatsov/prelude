@@ -53,13 +53,16 @@
 
 ;; store all backup and autosave files in the tmp dir
 (setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
+      `((".*" . ,prelude-autosave-dir)))
 (setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+      `((".*" ,prelude-autosave-dir t)))
+
+;; avoid creating dir "~/.emacs.d/auto-save-list/"
+(setq auto-save-list-file-prefix nil)
 
 ;; autosave the undo-tree history
 (setq undo-tree-history-directory-alist
-      `((".*" . ,temporary-file-directory)))
+      `((".*" . ,prelude-autosave-dir)))
 (setq undo-tree-auto-save-history t)
 
 ;; revert buffers automatically when underlying files are changed externally

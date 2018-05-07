@@ -14,6 +14,8 @@
 ;; This file simply sets up the default load path and requires
 ;; the various modules defined within Emacs Prelude.
 
+;; 2018-02-09: Modified to handle multiple profiles. (vivodo)
+
 ;;; License:
 
 ;; This program is free software; you can redistribute it and/or
@@ -57,7 +59,15 @@
   "The home of Prelude's core functionality.")
 (defvar prelude-modules-dir (expand-file-name  "modules" prelude-dir)
   "This directory houses all of the built-in Prelude modules.")
-(defvar prelude-personal-dir (expand-file-name "personal" prelude-dir)
+(defvar prelude-share-dir (expand-file-name "share" prelude-dir)
+  "This folder stores all shared stuff.")
+(defvar prelude-utils-dir (expand-file-name "utils" prelude-dir)
+  "This folder stores all utilities.")
+(defvar prelude-profiles-dir (expand-file-name "profiles" prelude-dir)
+  "The directory contains multiple profiles.")
+(defvar prelude-profile-id (concat current-user "@" system-name))
+(defvar prelude-personal-dir
+  (expand-file-name prelude-profile-id prelude-profiles-dir)
   "This directory is for your personal configuration.
 
 Users of Emacs Prelude are encouraged to keep their personal configuration
@@ -67,11 +77,18 @@ by Prelude.")
   "This directory is for your personal configuration, that you want loaded before Prelude.")
 (defvar prelude-vendor-dir (expand-file-name "vendor" prelude-dir)
   "This directory houses packages that are not yet available in ELPA (or MELPA).")
-(defvar prelude-savefile-dir (expand-file-name "savefile" prelude-dir)
+(defvar prelude-savefile-dir (expand-file-name "savefile" prelude-personal-dir)
   "This folder stores all the automatically generated save/history-files.")
-(defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-dir)
+(defvar prelude-autosave-dir (expand-file-name "auto-save" prelude-personal-dir)
+  "This folder stores all temporary files for recovering.")
+(defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-personal-dir)
   "This files contains a list of modules that will be loaded by Prelude.")
+(defvar prelude-personal-load-dir (expand-file-name "load" prelude-personal-dir)
+  "This folder stores all the other personal files.")
 
+;; create dirs
+(unless (file-exists-p prelude-personal-dir)
+  (make-directory prelude-personal-dir))
 (unless (file-exists-p prelude-savefile-dir)
   (make-directory prelude-savefile-dir))
 
@@ -99,7 +116,8 @@ by Prelude.")
 
 ;; preload the personal settings from `prelude-personal-preload-dir'
 (when (file-exists-p prelude-personal-preload-dir)
-  (message "Loading personal configuration files in %s..." prelude-personal-preload-dir)
+  (message "Pre-loading personal configuration files in %s..."
+           prelude-personal-preload-dir)
   (mapc 'load (directory-files prelude-personal-preload-dir 't "^[^#\.].*el$")))
 
 (message "Loading Prelude's core...")
@@ -128,10 +146,16 @@ by Prelude.")
 ;; config changes made through the customize UI will be stored here
 (setq custom-file (expand-file-name "custom.el" prelude-personal-dir))
 
-;; load the personal settings (this includes `custom-file')
-(when (file-exists-p prelude-personal-dir)
-  (message "Loading personal configuration files in %s..." prelude-personal-dir)
-  (mapc 'load (directory-files prelude-personal-dir 't "^[^#\.].*el$")))
+;; load the personal settings
+(when (file-exists-p prelude-personal-load-dir)
+  (message "Loading personal configuration files in %s..."
+           prelude-personal-load-dir)
+  (mapc 'load (directory-files prelude-personal-load-dir 't "^[^#\.].*el$")))
+
+;; load custom file
+(when (file-exists-p custom-file)
+  (message "Loading auto-saved custom-file in %s..." custom-file)
+  (load-file custom-file))
 
 (message "Prelude is ready to do thy bidding, Master %s!" current-user)
 
