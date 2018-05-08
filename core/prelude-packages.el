@@ -75,8 +75,8 @@
     god-mode
     grizzl
     guru-mode
+    hl-todo
     imenu-anywhere
-    ov
     projectile
     magit
     move-text

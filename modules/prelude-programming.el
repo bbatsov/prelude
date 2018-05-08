@@ -35,17 +35,13 @@
 (defun prelude-local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t))
 
-(defun prelude-font-lock-comment-annotations ()
-  "Highlight a bunch of well known comment annotations.
-
-This functions should be added to the hooks of major modes for programming."
-  (font-lock-add-keywords
-   nil '(("\\<\\(\\(FIX\\(ME\\)?\\|TODO\\|OPTIMIZE\\|HACK\\|REFACTOR\\):\\)"
-          1 font-lock-warning-face t))))
-
 ;; show the name of the current function definition in the modeline
 (require 'which-func)
 (which-function-mode 1)
+
+;; font-lock annotations like TODO in source code
+(require 'hl-todo)
+(global-hl-todo-mode 1)
 
 ;; in Emacs 24 programming major modes generally derive from a common
 ;; mode named prog-mode; for others, we'll arrange for our mode
@@ -74,8 +70,7 @@ This functions should be added to the hooks of major modes for programming."
     (guru-mode +1))
   (smartparens-mode +1)
   (prelude-enable-whitespace)
-  (prelude-local-comment-auto-fill)
-  (prelude-font-lock-comment-annotations))
+  (prelude-local-comment-auto-fill))
 
 (setq prelude-prog-mode-hook 'prelude-prog-mode-defaults)
 

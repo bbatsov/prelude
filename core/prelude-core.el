@@ -63,19 +63,6 @@ PROMPT sets the `read-string prompt."
 (prelude-install-search-engine "github"     "https://github.com/search?q="                 "Search GitHub: ")
 (prelude-install-search-engine "duckduckgo" "https://duckduckgo.com/?t=lm&q="              "Search DuckDuckGo: ")
 
-(defun prelude-todo-ov-evaporate (_ov _after _beg _end &optional _length)
-  (let ((inhibit-modification-hooks t))
-    (if _after (ov-reset _ov))))
-
-(defun prelude-annotate-todo ()
-  "Put fringe marker on TODO: lines in the current buffer."
-  (interactive)
-  (ov-set (format "[[:space:]]*%s+[[:space:]]*TODO:" comment-start)
-          'before-string
-          (propertize (format "A")
-                      'display '(left-fringe right-triangle))
-          'modification-hooks '(prelude-todo-ov-evaporate)))
-
 (defun prelude-recompile-init ()
   "Byte-compile all your dotfiles again."
   (interactive)
