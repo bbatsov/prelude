@@ -19,7 +19,6 @@ following links.
 -   Latex
 -   Lisp
 -   Markdown
--   MediaWiki
 -   Org
 -   Perl
 -   [Python](prelude-python.md)

@@ -8,7 +8,6 @@
 ;; (require 'prelude-helm-everywhere) ;; Enable Helm everywhere
 (require 'prelude-company)
 ;; (require 'prelude-key-chord) ;; Binds useful features to key combinations
-;; (require 'prelude-mediawiki)
 ;; (require 'prelude-evil)
 
 ;;; Programming languages support

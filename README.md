@@ -207,7 +207,6 @@ By default most of the modules that ship with Prelude are not loaded. For more i
 (require 'prelude-js)
 ;; (require 'prelude-latex)
 (require 'prelude-lisp)
-;; (require 'prelude-mediawiki)
 (require 'prelude-org)
 (require 'prelude-perl)
 ;; (require 'prelude-python)

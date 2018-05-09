@@ -88,7 +88,6 @@
         (makey . "melpa-stable")
         (markdown-mode . "melpa-stable")
         (marshal . "melpa-stable")
-        (mediawiki . "melpa-stable")
         (merlin . "melpa-stable")
         (operate-on-number . "melpa-stable")
         (pcache . "melpa-stable")

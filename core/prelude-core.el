@@ -94,8 +94,7 @@ PROMPT sets the `read-string prompt."
     "Press <f11> to toggle fullscreen mode."
     "Press <f12> to toggle the menu bar."
     "Explore the Tools->Prelude menu to find out about some of Prelude extensions to Emacs."
-    "Access the official Emacs manual by pressing <C-h r>."
-    "Visit the EmacsWiki at http://emacswiki.org to find out even more about Emacs."))
+    "Access the official Emacs manual by pressing <C-h r>."))
 
 (defun prelude-tip-of-the-day ()
   "Display a random entry from `prelude-tips'."
