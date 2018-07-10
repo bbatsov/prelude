@@ -110,10 +110,7 @@
 ;; saveplace remembers your location in a file when saving files
 (setq save-place-file (expand-file-name "saveplace" prelude-savefile-dir))
 ;; activate it for all buffers
-(if (< emacs-major-version 25)
-    (progn (require 'saveplace)
-           (setq-default save-place t))
-  (save-place-mode 1))
+(save-place-mode 1)
 
 ;; savehist keeps track of some history
 (require 'savehist)
@@ -178,8 +175,7 @@ The body of the advice is in BODY."
 
 (add-hook 'mouse-leave-buffer-hook 'prelude-auto-save-command)
 
-(when (version<= "24.4" emacs-version)
-  (add-hook 'focus-out-hook 'prelude-auto-save-command))
+(add-hook 'focus-out-hook 'prelude-auto-save-command)
 
 (defadvice set-buffer-major-mode (after set-major-mode activate compile)
   "Set buffer major mode according to `auto-mode-alist'."
