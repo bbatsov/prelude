@@ -71,8 +71,6 @@
     git-timemachine
     gitconfig-mode
     gitignore-mode
-    god-mode
-    grizzl
     guru-mode
     hl-todo
     imenu-anywhere
