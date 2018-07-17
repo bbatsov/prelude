@@ -80,7 +80,6 @@
     magit
     move-text
     operate-on-number
-    smart-mode-line
     smartparens
     smartrep
     undo-tree
