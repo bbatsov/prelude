@@ -117,7 +117,7 @@ do
             shift 1
             ;;
         *)
-            printf "Unkown option: $1\n"
+            printf "Unknown option: $1\n"
             shift 1
             ;;
     esac
