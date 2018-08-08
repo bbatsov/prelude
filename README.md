@@ -381,13 +381,13 @@ It provides an easy way to navigate and switch projects. Take a look at its exte
 to get a feel for everything you can do with Projectile.
 
 Prelude adds an extra keymap prefix `s-p` (`s` stands for
-`Super`) in addition to the standard one `C-c C-p`. By default on Windows keyboard
+`Super`) in addition to the standard one `C-c p`. By default on Windows keyboard
 `Super` is mapped to the `Windows` key and on macOS keyboards `Super` is mapped
 to the `Command` key.
 
 If you ever forget any of Projectile's keybindings just do a:
 
-<kbd>C-c C-p C-h</kbd> or <kbd>s-p C-h</kbd>
+<kbd>C-c p C-h</kbd> or <kbd>s-p C-h</kbd>
 
 Alternatively you can just press <kbd>s-p</kbd> and wait for a moment
 for `which-key` to kick in and show you the available keybindings.
