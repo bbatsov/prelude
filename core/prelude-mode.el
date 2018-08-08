@@ -71,7 +71,6 @@
     (define-key map (kbd "s-p") 'projectile-command-map)
     (define-key map (kbd "C-c p") 'projectile-command-map)
     ;; make some use of the Super key
-    (define-key map (kbd "s-g") 'god-local-mode)
     (define-key map (kbd "s-r") 'crux-recentf-ido-find-file)
     (define-key map (kbd "s-j") 'crux-top-join-line)
     (define-key map (kbd "s-k") 'crux-kill-whole-line)

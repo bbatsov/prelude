@@ -344,7 +344,6 @@ Keybinding         | Description
 <kbd>C-c . #</kbd> | Convert integer at point to specified base. Default is 10.
 <kbd>C-c . %</kbd> | Replace integer at point with another specified integer.
 <kbd>C-c . '</kbd> | Perform arithmetic operations on integer at point. User specifies the operator.
-<kbd>Super-g</kbd> | Toggle between God mode and non-God mode
 <kbd>Super-r</kbd> | Recent files
 <kbd>Super-j</kbd> | Join lines
 <kbd>Super-k</kbd> | Kill whole line
