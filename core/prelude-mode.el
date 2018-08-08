@@ -69,6 +69,7 @@
     (define-key map (kbd "C-c i") 'imenu-anywhere)
     ;; extra prefix for projectile
     (define-key map (kbd "s-p") 'projectile-command-map)
+    (define-key map (kbd "C-c p") 'projectile-command-map)
     ;; make some use of the Super key
     (define-key map (kbd "s-g") 'god-local-mode)
     (define-key map (kbd "s-r") 'crux-recentf-ido-find-file)
