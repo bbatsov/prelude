@@ -526,14 +526,11 @@ line:
 Or you can use another theme altogether by adding something in `personal/preload` like:
 
 ```lisp
-(prelude-require-package 'solarized-theme)
 (setq prelude-theme 'solarized-dark)
 ```
 
 **Note** [Solarized](https://github.com/bbatsov/zenburn-emacs) is not
-available by default - you'll have to install it from MELPA first,
-therefore the need for `prelude-require-package`.  Alternatively you
-can manually install the package like this - `M-x package-install RET
+available by default - you'll have to install it from MELPA first by `M-x package-install RET
 solarized-theme`.
 
 Finally, if you don't want any theme at all, you can add this to your
