@@ -526,12 +526,16 @@ line:
 Or you can use another theme altogether by adding something in `personal/preload` like:
 
 ```lisp
-(setq prelude-theme 'solarized-dark)
+(setq prelude-theme 'tango)
 ```
 
-**Note** [Solarized](https://github.com/bbatsov/zenburn-emacs) is not
-available by default - you'll have to install it from MELPA first by `M-x package-install RET
-solarized-theme`.
+**Note** To use a non-built-in theme, like [Solarized](https://github.com/bbatsov/zenburn-emacs),
+you'll have to install it from MELPA first by `M-x package-install RET solarized-theme`. Then add
+
+``` lisp
+(setq prelude-theme 'solarized-dark)
+```
+in `personal/preload`.
 
 Finally, if you don't want any theme at all, you can add this to your
 `personal/preload`:
