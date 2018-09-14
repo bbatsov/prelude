@@ -53,6 +53,8 @@
 
   (defun prelude-rust-mode-defaults ()
     (local-set-key (kbd "C-c C-d") 'racer-describe)
+    ;; Prevent #! from chmodding rust files to be executable
+    (remove-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
     ;; CamelCase aware editing operations
     (subword-mode +1))
 
