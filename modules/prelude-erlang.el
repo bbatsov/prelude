@@ -44,9 +44,8 @@
 
 (when (require 'erlang-start nil t)
 
-  (eval-after-load 'erlang-mode
-    '(progn
-       (flymake-mode)))
+  (with-eval-after-load 'erlang-mode
+    (flymake-mode))
 
   (when (not (null wrangler-path))
     (add-to-list 'load-path wrangler-path)

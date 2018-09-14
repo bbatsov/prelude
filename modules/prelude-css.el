@@ -32,20 +32,19 @@
 
 ;;; Code:
 
-(eval-after-load 'css-mode
-  '(progn
-     (prelude-require-packages '(rainbow-mode))
+(with-eval-after-load 'css-mode
+  (prelude-require-packages '(rainbow-mode))
 
-     (setq css-indent-offset 2)
+  (setq css-indent-offset 2)
 
-     (defun prelude-css-mode-defaults ()
-       (rainbow-mode +1)
-       (run-hooks 'prelude-prog-mode-hook))
+  (defun prelude-css-mode-defaults ()
+    (rainbow-mode +1)
+    (run-hooks 'prelude-prog-mode-hook))
 
-     (setq prelude-css-mode-hook 'prelude-css-mode-defaults)
+  (setq prelude-css-mode-hook 'prelude-css-mode-defaults)
 
-     (add-hook 'css-mode-hook (lambda ()
-                                (run-hooks 'prelude-css-mode-hook)))))
+  (add-hook 'css-mode-hook (lambda ()
+                             (run-hooks 'prelude-css-mode-hook))))
 
 (provide 'prelude-css)
 ;;; prelude-css.el ends here

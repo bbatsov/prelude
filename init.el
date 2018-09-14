@@ -137,9 +137,9 @@ by Prelude.")
 
 ;; Patch security vulnerability in Emacs versions older than 25.3
 (when (version< emacs-version "25.3")
-  (eval-after-load "enriched"
-    '(defun enriched-decode-display-prop (start end &optional param)
-       (list start end))))
+  (with-eval-after-load "enriched"
+    (defun enriched-decode-display-prop (start end &optional param)
+      (list start end))))
 
 (prelude-eval-after-init
  ;; greet the use with some useful tip

@@ -44,23 +44,22 @@
 
 (setq rust-format-on-save t)
 
-(eval-after-load 'rust-mode
-  '(progn
-     (add-hook 'rust-mode-hook 'racer-mode)
-     (add-hook 'racer-mode-hook 'eldoc-mode)
-     (add-hook 'rust-mode-hook 'cargo-minor-mode)
-     (add-hook 'rust-mode-hook 'flycheck-rust-setup)
-     (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
+(with-eval-after-load 'rust-mode
+  (add-hook 'rust-mode-hook 'racer-mode)
+  (add-hook 'racer-mode-hook 'eldoc-mode)
+  (add-hook 'rust-mode-hook 'cargo-minor-mode)
+  (add-hook 'rust-mode-hook 'flycheck-rust-setup)
+  (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
 
-     (defun prelude-rust-mode-defaults ()
-       (local-set-key (kbd "C-c C-d") 'racer-describe)
-       ;; CamelCase aware editing operations
-       (subword-mode +1))
+  (defun prelude-rust-mode-defaults ()
+    (local-set-key (kbd "C-c C-d") 'racer-describe)
+    ;; CamelCase aware editing operations
+    (subword-mode +1))
 
-     (setq prelude-rust-mode-hook 'prelude-rust-mode-defaults)
+  (setq prelude-rust-mode-hook 'prelude-rust-mode-defaults)
 
-     (add-hook 'rust-mode-hook (lambda ()
-                               (run-hooks 'prelude-rust-mode-hook)))))
+  (add-hook 'rust-mode-hook (lambda ()
+                              (run-hooks 'prelude-rust-mode-hook))))
 
 (provide 'prelude-rust)
 ;;; prelude-rust.el ends here
