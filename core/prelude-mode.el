@@ -52,7 +52,7 @@
     (define-key map [(meta shift up)]  'move-text-up)
     (define-key map [(meta shift down)]  'move-text-down)
     (define-key map (kbd "C-c n") 'crux-cleanup-buffer-or-region)
-    (define-key map (kbd "C-c f")  'crux-recentf-ido-find-file)
+    (define-key map (kbd "C-c f")  'crux-recentf-find-file)
     (define-key map (kbd "C-M-z") 'crux-indent-defun)
     (define-key map (kbd "C-c u") 'crux-view-url)
     (define-key map (kbd "C-c e") 'crux-eval-and-replace)
@@ -71,7 +71,7 @@
     (define-key map (kbd "s-p") 'projectile-command-map)
     (define-key map (kbd "C-c p") 'projectile-command-map)
     ;; make some use of the Super key
-    (define-key map (kbd "s-r") 'crux-recentf-ido-find-file)
+    (define-key map (kbd "s-r") 'crux-recentf-find-file)
     (define-key map (kbd "s-j") 'crux-top-join-line)
     (define-key map (kbd "s-k") 'crux-kill-whole-line)
     (define-key map (kbd "s-m m") 'magit-status)
