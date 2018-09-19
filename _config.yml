@@ -1,0 +1,8 @@
+title: Prelude
+description: Prelude is an enhanced Emacs configuration that should make your experience with Emacs both more pleasant and more powerful.
+google_analytics: UA-30626419-1
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
