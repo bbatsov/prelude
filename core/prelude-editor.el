@@ -149,33 +149,8 @@
 
 ;; automatically save buffers associated with files on buffer switch
 ;; and on windows switch
-(defun prelude-auto-save-command ()
-  "Save the current buffer if `prelude-auto-save' is not nil."
-  (when (and prelude-auto-save
-             buffer-file-name
-             (buffer-modified-p (current-buffer))
-             (file-writable-p buffer-file-name))
-    (save-buffer)))
-
-(defmacro advise-commands (advice-name commands class &rest body)
-  "Apply advice named ADVICE-NAME to multiple COMMANDS.
-
-The body of the advice is in BODY."
-  `(progn
-     ,@(mapcar (lambda (command)
-                 `(defadvice ,command (,class ,(intern (concat (symbol-name command) "-" advice-name)) activate)
-                    ,@body))
-               commands)))
-
-;; advise all window switching functions
-(advise-commands "auto-save"
-                 (switch-to-buffer other-window windmove-up windmove-down windmove-left windmove-right)
-                 before
-                 (prelude-auto-save-command))
-
-(add-hook 'mouse-leave-buffer-hook 'prelude-auto-save-command)
-
-(add-hook 'focus-out-hook 'prelude-auto-save-command)
+(require 'super-save)
+(super-save-mode +1)
 
 (defadvice set-buffer-major-mode (after set-major-mode activate compile)
   "Set buffer major mode according to `auto-mode-alist'."
