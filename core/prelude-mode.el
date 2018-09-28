@@ -111,8 +111,7 @@
         ("General"
          ["Visit term buffer" crux-visit-term-buffer]
          ["Search in Google" prelude-google]
-         ["View URL" crux-view-url]))
-      "Search Files (Grep)...")
+         ["View URL" crux-view-url])))
     map)
   "Keymap for Prelude mode.")
 
