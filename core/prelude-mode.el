@@ -79,57 +79,42 @@
     (define-key map (kbd "s-m f") 'magit-log-buffer-file)
     (define-key map (kbd "s-m b") 'magit-blame)
     (define-key map (kbd "s-o") 'crux-smart-open-line-above)
-
+    (easy-menu-define prelude-mode-menu map
+      "Prelude's menu."
+      '("Prelude"
+        ("Files"
+         ["Open with..." crux-open-with]
+         ["Re-open as root" crux-reopen-as-root]
+         ["Delete file and buffer" crux-delete-file-and-buffer]
+         ["Rename buffer and file" crux-rename-buffer-and-file]
+         ["Find init file" crux-find-user-init-file]
+         ["Find custom file" crux-find-user-custom-file]
+         ["Find shell config file" crux-find-shell-init-file])
+        ("Buffers"
+         ["Clean up buffer or region" crux-cleanup-buffer-or-region]
+         ["Kill other buffers" crux-kill-other-buffers])
+        ("Editing"
+         ["Go to beginning of line" crux-move-beginning-of-line]
+         ["Kill line" crux-smart-kill-line]
+         ["Kill whole line" crux-kill-whole-line]
+         ["Insert empty line below" crux-smart-open-line]
+         ["insert empty line above" crux-smart-open-line-above]
+         ["Move up" move-text-up]
+         ["Move down" move-text-down]
+         ["Duplicate line or region" crux-duplicate-current-line-or-region]
+         ["Indent rigidly and copy to clipboard" crux-indent-rigidly-and-copy-to-clipboard]
+         ["Indent defun" crux-indent-defun]
+         ["Insert date" crux-insert-date]
+         ["Eval and replace" crux-eval-and-replace])
+        ("Windows"
+         ["Swap windows" crux-swap-windows])
+        ("General"
+         ["Visit term buffer" crux-visit-term-buffer]
+         ["Search in Google" prelude-google]
+         ["View URL" crux-view-url]))
+      "Search Files (Grep)...")
     map)
   "Keymap for Prelude mode.")
-
-(defun prelude-mode-add-menu ()
-  "Add a menu entry for `prelude-mode' under Tools."
-  (easy-menu-add-item nil '("Tools")
-                      '("Prelude"
-                        ("Files"
-                         ["Open with..." crux-open-with]
-                         ["Re-open as root" crux-reopen-as-root]
-                         ["Delete file and buffer" crux-delete-file-and-buffer]
-                         ["Rename buffer and file" crux-rename-buffer-and-file]
-                         ["Find init file" crux-find-user-init-file]
-                         ["Find custom file" crux-find-user-custom-file]
-                         ["Find shell config file" crux-find-shell-init-file])
-
-                        ("Buffers"
-                         ["Clean up buffer or region" crux-cleanup-buffer-or-region]
-                         ["Kill other buffers" crux-kill-other-buffers])
-
-                        ("Editing"
-                         ["Go to beginning of line" crux-move-beginning-of-line]
-                         ["Kill line" crux-smart-kill-line]
-                         ["Kill whole line" crux-kill-whole-line]
-                         ["Insert empty line below" crux-smart-open-line]
-                         ["insert empty line above" crux-smart-open-line-above]
-                         ["Move up" move-text-up]
-                         ["Move down" move-text-down]
-                         ["Duplicate line or region" crux-duplicate-current-line-or-region]
-                         ["Indent rigidly and copy to clipboard" crux-indent-rigidly-and-copy-to-clipboard]
-                         ["Indent defun" crux-indent-defun]
-                         ["Insert date" crux-insert-date]
-                         ["Eval and replace" crux-eval-and-replace]
-                         )
-
-                        ("Windows"
-                         ["Swap windows" crux-swap-windows])
-
-                        ("General"
-                         ["Visit term buffer" crux-visit-term-buffer]
-                         ["Search in Google" prelude-google]
-                         ["View URL" crux-view-url]))
-                      "Search Files (Grep)...")
-
-  (easy-menu-add-item nil '("Tools") '("--") "Search Files (Grep)..."))
-
-(defun prelude-mode-remove-menu ()
-  "Remove `prelude-mode' menu entry."
-  (easy-menu-remove-item nil '("Tools") "Prelude")
-  (easy-menu-remove-item nil '("Tools") "--"))
 
 ;; define minor mode
 (define-minor-mode prelude-mode
@@ -138,21 +123,7 @@
 \\{prelude-mode-map}"
   :lighter " Pre"
   :keymap prelude-mode-map
-  (if prelude-mode
-      ;; on start
-      (prelude-mode-add-menu)
-    ;; on stop
-    (prelude-mode-remove-menu)))
-
-(define-globalized-minor-mode prelude-global-mode prelude-mode prelude-on)
-
-(defun prelude-on ()
-  "Turn on `prelude-mode'."
-  (prelude-mode +1))
-
-(defun prelude-off ()
-  "Turn off `prelude-mode'."
-  (prelude-mode -1))
+  :global t)
 
 (provide 'prelude-mode)
 ;;; prelude-mode.el ends here

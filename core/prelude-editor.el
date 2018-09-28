@@ -373,7 +373,7 @@ indent yanked text (with prefix arg don't indent)."
 (add-hook 'compilation-filter-hook #'prelude-colorize-compilation-buffer)
 
 ;; enable Prelude's keybindings
-(prelude-global-mode t)
+(prelude-mode t)
 
 ;; sensible undo
 (global-undo-tree-mode)
