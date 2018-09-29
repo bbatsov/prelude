@@ -162,6 +162,9 @@
       (setq mode (car mode)))
     (with-current-buffer buffer (if mode (funcall mode)))))
 
+;; use home row instead of number
+(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+
 ;; highlight the current line
 (global-hl-line-mode +1)
 
