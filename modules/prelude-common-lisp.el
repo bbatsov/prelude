@@ -73,9 +73,9 @@
 
 (with-eval-after-load "slime"
   (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol
-         slime-fuzzy-completion-in-place t
-         slime-enable-evaluate-in-emacs t
-         slime-autodoc-use-multiline-p t)
+        slime-fuzzy-completion-in-place t
+        slime-enable-evaluate-in-emacs t
+        slime-autodoc-use-multiline-p t)
   (define-key slime-mode-map (kbd "C-c C-s") 'slime-selector))
 
 (provide 'prelude-common-lisp)
