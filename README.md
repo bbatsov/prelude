@@ -366,7 +366,7 @@ If you want to swap them add this to your personal config:
 (setq mac-option-modifier 'super)
 ```
 
-You can also temporarily swap them with `C-c w` (`M-x prelude-swap-meta-and-super`).
+You can also temporarily swap them with `C-c w` (`M-x prelude-swap-meta-and-super`). Note that some emacs distributions (like [emacs-mac](https://bitbucket.org/mituharu/emacs-mac.git) come with `Command` [set](https://bitbucket.org/mituharu/emacs-mac/src/7fdbfba85d543f01b81e997e2b03788c35cb3bfa/src/macterm.c?at=master&fileviewer=file-view-default#macterm.c-6147:6169) to `Meta`.
 
 **Note**: I'd highly recommend to all macOS users to consider
 [remapping Return to
