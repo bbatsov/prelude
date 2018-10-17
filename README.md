@@ -529,7 +529,7 @@ Or you can use another theme altogether by adding something in `personal/preload
 (setq prelude-theme 'tango)
 ```
 
-**Note** To use a non-built-in theme, like [Solarized](https://github.com/bbatsov/zenburn-emacs),
+**Note** To use a non-built-in theme, like [Solarized](https://github.com/bbatsov/solarized-emacs),
 you'll have to install it from MELPA first by `M-x package-install RET solarized-theme`. Then add
 
 ``` lisp
