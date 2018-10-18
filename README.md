@@ -359,7 +359,7 @@ For subsequent operations, only the appropriate operations (i.e. `+`, `-`, `*`, 
 
 Prelude does not mess by default with the standard mapping of `Command` (to `Super`) and `Option` (to `Meta`).
 
-If you want to swap them add this to your personal config:
+If you want to swap them add this to your [personal config](#personalizing):
 
 ```lisp
 (setq mac-command-modifier 'meta)
@@ -516,8 +516,8 @@ for the eyes, that's why I took that "controversial" decision to
 replace it. You can, of course, easily go back to the default (or
 select another theme entirely).
 
-To disable Zenburn just put in your personal config the following
-line:
+To disable Zenburn just put in your [personal config](#personalizing)
+the following line:
 
 ```lisp
 (disable-theme 'zenburn)
@@ -545,6 +545,31 @@ Finally, if you don't want any theme at all, you can add this to your
 ```
 
 ### Personalizing
+
+All files you create under the `personal/` directory are yours for
+personalization.  There is no single special personal config file --
+any files you create in the `personal/` directory will be loaded in
+lexicographical order.  The overall loading precedence is:
+
+1.  `personal/preload/*`
+2.  `core/`
+3.  `prelude-modules.el`
+4.  `personal/*`
+
+#### Personalization Example
+
+Suppose you want to configure go-mode to autoformat on each save.  You
+can create a file in `personal/`, let's call this one
+`config-go-mode.el` and add the following to it.
+
+``` emacs-lisp
+(add-hook 'go-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'gofmt-before-save)
+            (setq tab-width 2)))
+```
+
+#### Tips
 
 **Fork** (instead of cloning) the official Prelude repo and add your
 own touch to it. You're advised to **avoid changing stuff outside of
@@ -655,14 +680,14 @@ way to use Emacs is by using it the way it was intended to be used (as
 far as navigation is concerned at least).
 
 If you'd like to be take this a step further and disable the arrow key navigation
-completely put this in your personal config:
+completely put this in your [personal config](#personalizing):
 
 ```lisp
 (setq guru-warn-only nil)
 ```
 
 To disable `guru-mode` completely add the following snippet to your
-personal Emacs config:
+[personal config](#personalizing):
 
 ```lisp
 (setq prelude-guru nil)
@@ -672,7 +697,7 @@ personal Emacs config:
 
 Prelude overrides `C-a` to behave as described
 [here](http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/). If
-you don't like that simply add this to your personal config:
+you don't like that simply add this to your [personal config](#personalizing):
 
 ```lisp
 (global-set-key [remap move-beginning-of-line]
