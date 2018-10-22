@@ -117,6 +117,10 @@ by Prelude.")
 (when (eq system-type 'darwin)
   (require 'prelude-macos))
 
+;; Linux specific settings
+(when (eq system-type 'gnu/linux)
+  (require 'prelude-linux))
+
 (message "Loading Prelude's modules...")
 
 ;; the modules
