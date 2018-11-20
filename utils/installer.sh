@@ -202,7 +202,7 @@ then
     make_prelude_dirs
     # Reinstate files that weren't replaced
     tar --skip-old-files -xf "$PRELUDE_INSTALL_DIR_ORIG.pre-prelude.tar" "$PRELUDE_INSTALL_DIR" > /dev/null 2>&1
-    [ -n "$PRELUDE_INTO" ] && cp "$PRELUDE_INSTALL_DIR/sample/prelude-modules.el" "$PRELUDE_INSTALL_DIR"
+    [ -n "$PRELUDE_INTO" ] && cp "$PRELUDE_INSTALL_DIR/sample/prelude-modules.el" "$PRELUDE_INSTALL_DIR/personal"
 elif [ -e "$PRELUDE_INSTALL_DIR" ]
 then
     # File exist but not a regular file or directory
@@ -215,7 +215,7 @@ else
     # Nothing yet so just install prelude
     install_prelude
     make_prelude_dirs
-    cp "$PRELUDE_INSTALL_DIR/sample/prelude-modules.el" "$PRELUDE_INSTALL_DIR"
+    cp "$PRELUDE_INSTALL_DIR/sample/prelude-modules.el" "$PRELUDE_INSTALL_DIR/personal"
 fi
 
 if [ -z "$PRELUDE_SKIP_BC" ];
