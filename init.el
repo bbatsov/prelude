@@ -69,8 +69,13 @@ by Prelude.")
   "This directory houses packages that are not yet available in ELPA (or MELPA).")
 (defvar prelude-savefile-dir (expand-file-name "savefile" prelude-dir)
   "This folder stores all the automatically generated save/history-files.")
-(defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-dir)
-  "This files contains a list of modules that will be loaded by Prelude.")
+(defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-personal-dir)
+  "This file contains a list of modules that will be loaded by Prelude.")
+(defvar prelude-deprecated-modules-file
+  (expand-file-name "prelude-modules.el" prelude-dir)
+  (format "This file may contain a list of Prelude modules.
+
+This is DEPRECATED, use %s instead." prelude-modules-file))
 
 (unless (file-exists-p prelude-savefile-dir)
   (make-directory prelude-savefile-dir))
@@ -125,9 +130,18 @@ by Prelude.")
 
 ;; the modules
 (if (file-exists-p prelude-modules-file)
-    (load prelude-modules-file)
-  (message "Missing modules file %s" prelude-modules-file)
-  (message "You can get started by copying the bundled example file from sample/prelude-modules.el"))
+    (progn
+      (load prelude-modules-file)
+      (if (file-exists-p prelude-deprecated-modules-file)
+          (message "Loading new modules configuration, ignoring DEPRECATED prelude-module.el")))
+  (if (file-exists-p prelude-deprecated-modules-file)
+      (progn
+        (load prelude-deprecated-modules-file)
+        (message (format "The use of %s is DEPRECATED! Use %s instead!"
+                         prelude-deprecated-modules-file
+                         prelude-modules-file)))
+    (message "Missing modules file %s" prelude-modules-file)
+    (message "You can get started by copying the bundled example file from sample/prelude-modules.el")))
 
 ;; config changes made through the customize UI will be stored here
 (setq custom-file (expand-file-name "custom.el" prelude-personal-dir))
@@ -135,7 +149,7 @@ by Prelude.")
 ;; load the personal settings (this includes `custom-file')
 (when (file-exists-p prelude-personal-dir)
   (message "Loading personal configuration files in %s..." prelude-personal-dir)
-  (mapc 'load (directory-files prelude-personal-dir 't "^[^#\.].*el$")))
+  (mapc 'load (directory-files prelude-personal-dir 't "^[^#\.].*el$|^prelude-modules\.el$")))
 
 (message "Prelude is ready to do thy bidding, Master %s!" current-user)
 

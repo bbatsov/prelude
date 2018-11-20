@@ -104,8 +104,9 @@ Note that the installer will back up any existing `.emacs` file or
 you're doing a manual install make sure you don't have a `.emacs` file
 or back up your existing `.emacs.d` directory manually.
 
-Don't forget to adjust your `prelude-modules.el` file once the installation is done.
-By default most of the modules that ship with Prelude are not loaded.
+Don't forget to adjust your `prelude-modules.el` file in your personal directory
+once the installation is done. By default most of the modules
+that ship with Prelude are not loaded.
 
 ## Installing Emacs
 
@@ -222,8 +223,8 @@ By default most of the modules that ship with Prelude are not loaded. For more i
 You'll need to adjust your `prelude-modules.el` file once the
 installation is done. If you are doing a manual install then you first
 need to copy the `prelude-modules.el` available in the sample
-directory to the root of `path/to/prelude/installation` and then
-adjust that one.
+directory to the `personal` directory under `path/to/prelude/installation`
+and then adjust that one.
 
 After you've uncommented a module you should either restart Emacs or evaluate the module
 `require` expression with <kbd>C-x C-e</kbd>.
@@ -553,7 +554,7 @@ lexicographical order.  The overall loading precedence is:
 
 1.  `personal/preload/*`
 2.  `core/`
-3.  `prelude-modules.el`
+3.  `personal/prelude-modules.el` (or deprecated `prelude-modules.el`)
 4.  `personal/*`
 
 #### Personalization Example
