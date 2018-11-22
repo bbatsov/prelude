@@ -149,7 +149,9 @@ This is DEPRECATED, use %s instead." prelude-modules-file))
 ;; load the personal settings (this includes `custom-file')
 (when (file-exists-p prelude-personal-dir)
   (message "Loading personal configuration files in %s..." prelude-personal-dir)
-  (mapc 'load (directory-files prelude-personal-dir 't "^[^#\.].*el$|^prelude-modules\.el$")))
+  (mapc 'load (delete
+               prelude-modules-file
+               (directory-files prelude-personal-dir 't "^[^#\.].*\\.el$"))))
 
 (message "Prelude is ready to do thy bidding, Master %s!" current-user)
 
