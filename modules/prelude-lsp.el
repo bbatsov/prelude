@@ -37,12 +37,7 @@
                             lsp-ui))
 
 (require 'lsp-ui)
-(require 'company-lsp)
 (require 'lsp-ui-imenu)
-
-(push 'company-lsp company-backends)
-(add-hook 'lsp-mode-hook 'lsp-ui-mode)
-(add-hook 'lsp-after-open-hook 'lsp-ui-enable-imenu)
 
 (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
 (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
