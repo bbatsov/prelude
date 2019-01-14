@@ -50,8 +50,13 @@
 
 ;; set package-user-dir to be relative to Prelude install path
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
-(package-initialize)
-
+;; Package initialize in emacs 27
+(if (or (version< emacs-version "27")
+        (progn
+          (not package--initialized)
+          ;; Used in emacs 27 to speed up initial package loading
+          (setq package-quickstart t)))
+    (package-initialize))
 (defvar prelude-packages
   '(ace-window
     avy
