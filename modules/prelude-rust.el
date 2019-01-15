@@ -57,7 +57,13 @@
     (add-hook 'racer-mode-hook 'eldoc-mode))
 
   (defun prelude-rust-mode-defaults ()
-    (unless (featurep 'prelude-lsp)
+    (if (featurep 'prelude-lsp)
+        (lsp-register-client
+         (make-lsp-client :new-connection (lsp-stdio-connection prelude-rls)
+                          :major-modes '(rust-mode rustic-mode)
+                          :priority 0
+                          :server-id 'prelude-rls
+                          :notification-handlers (lsp-ht ("window/progress" 'lsp-clients--rust-window-progress))))
       (local-set-key (kbd "C-c C-d") 'racer-describe))
 
     ;; Prevent #! from chmodding rust files to be executable

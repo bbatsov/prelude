@@ -98,6 +98,12 @@ Only modes that don't derive from `prog-mode' should be listed here."
   :type 'symbol
   :group 'prelude)
 
+(defcustom prelude-rls '("rls")
+  "Non-nil values specify the rls that lsp-mode of rust use.
+if you want use nightly rls, set it as '(\"rustup\" \"run\" \"nightly\" \"rls\")"
+  :type 'list
+  :group 'prelude)
+
 (provide 'prelude-custom)
 
 ;;; prelude-custom.el ends here
