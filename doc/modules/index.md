@@ -1,4 +1,4 @@
-# Emacs Prelude Modules
+# Modules
 
 Prelude provides extra functionality through modules. Some modules may
 require extra steps to enable all functionality. These steps and the
@@ -11,7 +11,7 @@ following links.
 -   Common-Lisp
 -   CSS
 -   Emacs-Lisp
--   [ERC](prelude-erc.md)
+-   [ERC](erc.md)
 -   Erlang
 -   Elixir
 -   Haskell
@@ -21,7 +21,7 @@ following links.
 -   Markdown
 -   Org
 -   Perl
--   [Python](prelude-python.md)
+-   [Python](python.md)
 -   Ruby
 -   Scala
 -   Scheme

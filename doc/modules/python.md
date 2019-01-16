@@ -1,4 +1,4 @@
-# Prelude Python Quickstart
+# Prelude Python
 
 ## Python Mode
 
