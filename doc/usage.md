@@ -36,7 +36,7 @@ You can also open a file with the cursor positioned directly on a specific line:
 emacsclient somefile:1234
 ```
 
-This will open file 'somefile' and set cursor on line 1234.
+This will open file `somefile` and set cursor on line 1234.
 
 ## Getting to know Prelude
 
@@ -124,8 +124,10 @@ Keybinding         | Description
 <kbd>Super-m f</kbd> | Magit file log
 <kbd>Super-m b</kbd> | Magit blame mode
 
-**Note**: For various arithmetic operations, the prefix `C-c .` only needs to be pressed once for the first operation.
-For subsequent operations, only the appropriate operations (i.e. `+`, `-`, `*`, `/`... needs to be pressed).
+!!! Note
+
+    For various arithmetic operations, the prefix `C-c .` only needs to be pressed once for the first operation.
+    For subsequent operations, only the appropriate operations (i.e. `+`, `-`, `*`, `/`... needs to be pressed).
 
 #### macOS modifier keys
 
@@ -207,14 +209,18 @@ If you prefer Ido in everywhere, you should not add `prelude-helm-everywhere`, s
 
 You can always reactivate Helm with `(prelude-global-helm-global-mode-on)`.
 
-**NOTICE**: In `helm-M-x`, you have to pass prefix argument *AFTER* you run `helm-M-x`,
-because your prefix argument will be displayed in the modeline when in `helm-M-x`
-buffer. Passing prefix argument **BEFORE** =helm-M-x= **has no effect**.
+!!! Note
+
+    In `helm-M-x`, you have to pass prefix argument *AFTER* you run `helm-M-x`,
+    because your prefix argument will be displayed in the modeline when in `helm-M-x`
+    buffer. Passing prefix argument **BEFORE** =helm-M-x= **has no effect**.
 
 
 #### Key-chords
 
-**Key-chords are available only when the `prelude-key-chord` module has been enabled.**
+!!! Note
+
+    Key-chords are available only when the `prelude-key-chord` module has been enabled.
 
 Keybinding         | Description
 -------------------|----------------------------------------------
