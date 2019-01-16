@@ -62,6 +62,10 @@ Don't forget to adjust your `prelude-modules.el` file in your personal directory
 once the installation is done. By default most of the modules
 that ship with Prelude are not loaded.
 
+## User Manual
+
+Check out our [user manual](https://prelude.emacsredux.com) for more information.
+
 ## Known issues
 
 Check out the project's
