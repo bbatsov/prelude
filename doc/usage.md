@@ -140,10 +140,18 @@ If you want to swap them add this to your personal config:
 
 You can also temporarily swap them with `C-c w` (`M-x prelude-swap-meta-and-super`).
 
-**Note**: I'd highly recommend to all macOS users to consider
-[remapping Return to
-Control](http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/)
-instead. That's an epic productivity boost and it's not as crazy as it sounds!
+!!! Tip
+
+    [The Emacs Mac port](https://bitbucket.org/mituharu/emacs-mac.git) comes
+    with `Command`
+    [set](https://bitbucket.org/mituharu/emacs-mac/src/7fdbfba85d543f01b81e997e2b03788c35cb3bfa/src/macterm.c?at=master&fileviewer=file-view-default#macterm.c-6147:6169)
+    to `Meta`.
+
+!!! Tip
+
+    I'd highly recommend to all macOS users to consider
+    [remapping Return to Control](http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/)
+    instead. That's an epic productivity boost and it's not as crazy as it sounds!
 
 #### Projectile
 

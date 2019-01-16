@@ -27,8 +27,10 @@ Or you can use another theme altogether by adding something in `personal/preload
 (setq prelude-theme 'tango)
 ```
 
-**Note** To use a non-built-in theme, like [Solarized](https://github.com/bbatsov/zenburn-emacs),
-you'll have to install it from MELPA first by `M-x package-install RET solarized-theme`. Then add
+!!! Note
+
+    To use a non-built-in theme, like [Solarized](https://github.com/bbatsov/solarized-emacs),
+    you'll have to install it from MELPA first by `M-x package-install RET solarized-theme`. Then add
 
 ``` lisp
 (setq prelude-theme 'solarized-dark)
@@ -51,7 +53,7 @@ lexicographical order.  The overall loading precedence is:
 
 1.  `personal/preload/*`
 2.  `core/`
-3.  `prelude-modules.el`
+3.  `personal/prelude-modules.el` (or deprecated `prelude-modules.el`)
 4.  `personal/*`
 
 #### Personalization Example
