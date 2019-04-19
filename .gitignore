@@ -26,3 +26,12 @@ network-security.data
 prelude-cheatsheet.el
 prelude-cheatsheet.aux
 prelude-cheatsheet.log
+smex-items
+emms/
+ido.last
+bookmarks
+transient
+.lsp-session-v1
+eclipse.jdt.ls
+.mc-lists.el
+workspace
