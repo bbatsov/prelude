@@ -1,5 +1,4 @@
 [![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
-[![Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/bbatsov/donate)
 [![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/bbatsov)
 
 Emacs Prelude
@@ -17,13 +16,8 @@ advised to always run Prelude with the latest Emacs - currently
 **26.1**.
 
 You can support the development of Prelude via
-[PayPal](https://www.paypal.me/bbatsov),
-[Salt](https://bountysource.com/teams/prelude),
-[Patreon](https://www.patreon.com/bbatsov) and
-[Liberapay](https://liberapay.com/bbatsov/donate).
-
-[![Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/bbatsov/donate)
-[![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/bbatsov)
+[PayPal](https://www.paypal.me/bbatsov) and
+[Patreon](https://www.patreon.com/bbatsov).
 
 ## Fast Forward
 
