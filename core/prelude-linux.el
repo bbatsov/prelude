@@ -1,8 +1,8 @@
-;;; prelude-haskell.el --- Emacs Prelude: Nice config for Haskell programming.
+;;; prelude-linux.el --- Emacs Prelude: linux specific settings.
 ;;
 ;; Copyright © 2011-2018 Bozhidar Batsov
 ;;
-;; Author: Bozhidar Batsov <bozhidar@batsov.com>
+;; Author: Stanislav Arnaudov <stanislav_ts@avb.bg>
 ;; URL: https://github.com/bbatsov/prelude
 ;; Version: 1.0.0
 ;; Keywords: convenience
@@ -11,7 +11,7 @@
 
 ;;; Commentary:
 
-;; Nice config for Haskell programming.
+;; Some Linux specific stuff.
 
 ;;; License:
 
@@ -32,21 +32,12 @@
 
 ;;; Code:
 
-(require 'prelude-programming)
-(prelude-require-packages '(haskell-mode))
+;; On Linux Emacs doesn't use the shell PATH if it's not started from
+;; the shell. Let's fix that:
+(prelude-require-packages '(exec-path-from-shell))
 
-(with-eval-after-load 'haskell-mode
-  (defun prelude-haskell-mode-defaults ()
-    (subword-mode +1)
-    (eldoc-mode +1)
-    (haskell-indentation-mode +1)
-    (interactive-haskell-mode +1))
+(require 'exec-path-from-shell)
+(exec-path-from-shell-initialize)
 
-  (setq prelude-haskell-mode-hook 'prelude-haskell-mode-defaults)
-
-  (add-hook 'haskell-mode-hook (lambda ()
-                                 (run-hooks 'prelude-haskell-mode-hook))))
-
-(provide 'prelude-haskell)
-
-;;; prelude-haskell.el ends here
+(provide 'prelude-linux)
+;;; prelude-linux.el ends here

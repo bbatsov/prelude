@@ -149,33 +149,10 @@
 
 ;; automatically save buffers associated with files on buffer switch
 ;; and on windows switch
-(defun prelude-auto-save-command ()
-  "Save the current buffer if `prelude-auto-save' is not nil."
-  (when (and prelude-auto-save
-             buffer-file-name
-             (buffer-modified-p (current-buffer))
-             (file-writable-p buffer-file-name))
-    (save-buffer)))
-
-(defmacro advise-commands (advice-name commands class &rest body)
-  "Apply advice named ADVICE-NAME to multiple COMMANDS.
-
-The body of the advice is in BODY."
-  `(progn
-     ,@(mapcar (lambda (command)
-                 `(defadvice ,command (,class ,(intern (concat (symbol-name command) "-" advice-name)) activate)
-                    ,@body))
-               commands)))
-
-;; advise all window switching functions
-(advise-commands "auto-save"
-                 (switch-to-buffer other-window windmove-up windmove-down windmove-left windmove-right)
-                 before
-                 (prelude-auto-save-command))
-
-(add-hook 'mouse-leave-buffer-hook 'prelude-auto-save-command)
-
-(add-hook 'focus-out-hook 'prelude-auto-save-command)
+(require 'super-save)
+;; add integration with ace-window
+(add-to-list 'super-save-triggers 'ace-window)
+(super-save-mode +1)
 
 (defadvice set-buffer-major-mode (after set-major-mode activate compile)
   "Set buffer major mode according to `auto-mode-alist'."
@@ -315,6 +292,16 @@ The body of the advice is in BODY."
   (if (<= (- end beg) prelude-yank-indent-threshold)
       (indent-region beg end nil)))
 
+(defmacro advise-commands (advice-name commands class &rest body)
+  "Apply advice named ADVICE-NAME to multiple COMMANDS.
+
+The body of the advice is in BODY."
+  `(progn
+     ,@(mapcar (lambda (command)
+                 `(defadvice ,command (,class ,(intern (concat (symbol-name command) "-" advice-name)) activate)
+                    ,@body))
+               commands)))
+
 (advise-commands "indent" (yank yank-pop) after
   "If current mode is one of `prelude-yank-indent-modes',
 indent yanked text (with prefix arg don't indent)."
@@ -373,7 +360,7 @@ indent yanked text (with prefix arg don't indent)."
 (add-hook 'compilation-filter-hook #'prelude-colorize-compilation-buffer)
 
 ;; enable Prelude's keybindings
-(prelude-global-mode t)
+(prelude-mode t)
 
 ;; sensible undo
 (global-undo-tree-mode)
