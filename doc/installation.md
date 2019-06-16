@@ -112,8 +112,11 @@ By default most of the modules that ship with Prelude are not loaded. For more i
 (require 'prelude-xml)
 ```
 
-You'll need to adjust your `prelude-modules.el` file once the
-installation is done. If you are doing a manual install then you first
+You'll need to adjust your `prelude-modules.el` file once the installation is done.
+
+In case of an automated installation, you'll find this file in the `personal` directory of your Emacs installation.
+
+If you are doing a manual install then you first
 need to copy the `prelude-modules.el` available in the sample
 directory to the root of `path/to/prelude/installation` and then
 adjust that one.
