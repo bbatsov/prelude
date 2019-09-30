@@ -36,8 +36,10 @@
 ;; the shell. Let's fix that:
 (prelude-require-packages '(exec-path-from-shell))
 
-(require 'exec-path-from-shell)
-(exec-path-from-shell-initialize)
+;; don't reinitialize the environment if using terminal emacs
+(when (display-graphic-p)
+  (require 'exec-path-from-shell)
+  (exec-path-from-shell-initialize))
 
 (provide 'prelude-linux)
 ;;; prelude-linux.el ends here
