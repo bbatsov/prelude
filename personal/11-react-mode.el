@@ -1,3 +1,4 @@
+(prelude-require-packages '(rjsx js-doc flycheck web-mode))
 (add-to-list 'auto-mode-alist '("components\\/.*\\/.js\\'" . rjsx-mode))
 
 (require 'flycheck)

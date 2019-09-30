@@ -1,1 +1,1 @@
-(prelude-require-packages '(org-pomodoro ag helm-ag dumb-jump))
+(prelude-require-packages '(ag helm-ag))
