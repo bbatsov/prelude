@@ -58,6 +58,7 @@ To use a module you simple have to require it. No new concepts. No magic.
 - [ERC](erc.md)
 - Erlang
 - Elixir
+- Go
 - Haskell
 - JavaScript
 - LaTeX
