@@ -75,7 +75,8 @@
   ;; rainbow-delimeters messes up colors in slime-repl, and doesn't seem to work
   ;; anyway, so we won't use prelude-lisp-coding-defaults.
   (add-hook 'slime-repl-mode-hook (lambda ()
-                                    (smartparens-strict-mode +1)
+                                    (when prelude-smartparens-strict
+                                      (smartparens-strict-mode +1))
                                     (whitespace-mode -1)))
 
   (define-key slime-mode-map (kbd "C-c C-s") 'slime-selector))

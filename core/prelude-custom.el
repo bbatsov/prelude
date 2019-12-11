@@ -64,6 +64,11 @@ Will only occur if `prelude-whitespace' is also enabled."
   :type 'boolean
   :group 'prelude)
 
+(defcustom prelude-smartparens-strict t
+  "Non-nil values enable smartparens-strict for lisps."
+  :type 'boolean
+  :group 'prelude)
+
 (defcustom prelude-user-init-file (expand-file-name "personal/"
                                                     user-emacs-directory)
   "Path to your personal customization file.
