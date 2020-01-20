@@ -1,6 +1,6 @@
 ;;; prelude-ui.el --- Emacs Prelude: UI optimizations and tweaks.
 ;;
-;; Copyright © 2011-2018 Bozhidar Batsov
+;; Copyright © 2011-2020 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
