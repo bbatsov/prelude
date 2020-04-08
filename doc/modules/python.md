@@ -1,9 +1,13 @@
 # Prelude Python
 
+!!! Note
+
+    This module builds on top of the shared [Programming](programming.md) module.
+
 ## Python Mode
 
 Emacs comes with Python programming support through the built-in
-Python-mode. Whenever you are editing Python code run `C-h m` to
+`python-mode`. Whenever you are editing Python code run `C-h m` to
 look at the Python mode key bindings. Alternatively look at the
 menu bar entries under Python. To toggle the menu bar press `F12`.
 
