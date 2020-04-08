@@ -9,6 +9,7 @@ pages:
 - Configuration: configuration.md
 - Modules:
     - Overview: modules/index.md
+    - Company: modules/company.md
     - ERC: modules/erc.md
     - Programming: modules/programming.md
     - Python: modules/python.md

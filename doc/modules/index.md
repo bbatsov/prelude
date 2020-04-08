@@ -83,7 +83,7 @@ The following programming languages have enhanced support in Prelude:
 
 ## Other Modules
 
-- company
+- [Company](company.md)
 - [ERC](erc.md)
 - evil
 - helm
