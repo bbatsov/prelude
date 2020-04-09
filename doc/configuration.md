@@ -113,11 +113,6 @@ cleanup your file on save, you can disable that behavior by setting
 (setq prelude-clean-whitespace-on-save nil)
 ```
 
-The `prelude-clean-whitespace-on-save` setting can also be set on a
-per-file or directory basis by using a file variable or a
-`.dir-locals.el` file.
-
-
 ### Disable flyspell-mode
 
 If you're not fond of spellchecking on the fly:
@@ -125,3 +120,19 @@ If you're not fond of spellchecking on the fly:
 ```lisp
 (setq prelude-flyspell nil)
 ```
+
+### Disable automatic formatting on save
+
+If you prefer not to automatically format your file on save, you can disable that behavior by setting
+`prelude-format-on-save` to `nil` in your config file with:
+
+```lisp
+(setq prelude-format-on-save nil)
+```
+
+Currently this only affects automated formatting of Typescript files.
+
+### Configuration per file or directory
+
+These settings can also be set on a per-file or directory basis by using a file local variable or a `.dir-locals.el`
+file.
