@@ -82,6 +82,12 @@ in the desired elisp file."
   :type 'list
   :group 'prelude)
 
+(defcustom prelude-format-on-save t
+  "Run mode specific format on file before it's saved.
+Currently only applies to tide-mode."
+  :type 'boolean
+  :group 'prelude)
+
 (defcustom prelude-yank-indent-modes '(LaTeX-mode TeX-mode)
   "Modes in which to indent regions that are yanked (or yank-popped).
 Only modes that don't derive from `prog-mode' should be listed here."
