@@ -56,7 +56,7 @@ The following programming languages have enhanced support in Prelude:
 - CoffeeScript
 - Common Lisp
 - CSS
-- Emacs-Lisp
+- Emacs Lisp
 - Erlang
 - Elixir
 - Go
