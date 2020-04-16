@@ -135,7 +135,7 @@ Prelude does not mess by default with the standard mapping of `Command` (to `Sup
 
 If you want to swap them add this to your personal config:
 
-```lisp
+```emacs-lisp
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 ```
@@ -239,13 +239,13 @@ in which case you can disable the binding in your `personal.el` file by setting
 its command to `nil`. For example, to disable the `jj` key-chord add the
 following line:
 
-```lisp
+```emacs-lisp
 (key-chord-define-global "jj" nil)
 ```
 
 If you're an `evil-mode` user you'll probably do well to disable `key-chord-mode` altogether:
 
-```lisp
+```emacs-lisp
 (key-chord-mode -1)
 ```
 
@@ -264,7 +264,7 @@ Use `C-h k <key>` (`<key>` are the ones listed on the left) or `C-h f <function>
 
 Install [LaTeX](https://www.latex-project.org/get/)
 
-``` bash
+```bash
 cd modules/doc
 pdflatex prelude-cheatsheet.tex
 ```
@@ -273,7 +273,7 @@ pdflatex prelude-cheatsheet.tex
 
 Install [Poppler](https://poppler.freedesktop.org/)
 
-``` bash
+```bash
 cd modules/doc
 pdftocairo -png -singlefile prelude-cheatsheet.pdf cheatsheet
 ```

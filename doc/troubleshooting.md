@@ -54,14 +54,14 @@ far as navigation is concerned at least).
 If you'd like to be take this a step further and disable the arrow key navigation
 completely put this in your personal config:
 
-```lisp
+```emacs-lisp
 (setq guru-warn-only nil)
 ```
 
 To disable `guru-mode` completely add the following snippet to your
 personal Emacs config:
 
-```lisp
+```emacs-lisp
 (setq prelude-guru nil)
 ```
 
@@ -71,7 +71,7 @@ Prelude overrides `C-a` to behave as described
 [here](http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/). If
 you don't like that simply add this to your personal config:
 
-```lisp
+```emacs-lisp
 (global-set-key [remap move-beginning-of-line]
                 'move-beginning-of-line)
 ```
@@ -86,13 +86,13 @@ The sorting algorithm `flx` uses is more complex, but yields better results.
 On slower machines, it may be necessary to lower `flx-ido-threshold` to
 ensure a smooth experience.
 
-```lisp
+```emacs-lisp
 (setq flx-ido-threshold 1000)
 ```
 
 You can always disable the improved sorting algorithm all together like this:
 
-```lisp
+```emacs-lisp
 (flx-ido-mode -1)
 ```
 

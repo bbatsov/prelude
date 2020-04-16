@@ -17,13 +17,13 @@ select another theme entirely).
 To disable Zenburn just put in your personal config the following
 line:
 
-```lisp
+```emacs-lisp
 (disable-theme 'zenburn)
 ```
 
 Or you can use another theme altogether by adding something in `personal/preload` like:
 
-```lisp
+```emacs-lisp
 (setq prelude-theme 'tango)
 ```
 
@@ -32,7 +32,7 @@ Or you can use another theme altogether by adding something in `personal/preload
     To use a non-built-in theme, like [Solarized](https://github.com/bbatsov/solarized-emacs),
     you'll have to install it from MELPA first by `M-x package-install RET solarized-theme`. Then add
 
-``` lisp
+```emacs-lisp
 (setq prelude-theme 'solarized-dark)
 ```
 in `personal/preload`.
@@ -40,7 +40,7 @@ in `personal/preload`.
 Finally, if you don't want any theme at all, you can add this to your
 `personal/preload`:
 
-```lisp
+```emacs-lisp
 (setq prelude-theme nil)
 ```
 
@@ -62,7 +62,7 @@ Suppose you want to configure `go-mode` to autoformat on each save.  You
 can create a file in `personal/`, let's call this one
 `config-go-mode.el` and add the following to it.
 
-``` emacs-lisp
+```emacs-lisp
 (add-hook 'go-mode-hook
           (lambda ()
             (add-hook 'before-save-hook 'gofmt-before-save)
@@ -79,13 +79,13 @@ in the future.
 If you'd like to add some auto installation of packages in your
 personal config use the following code:
 
-```lisp
+```emacs-lisp
 (prelude-require-packages '(some-package some-other-package))
 ```
 
 If you require just a single package you can also use:
 
-```lisp
+```emacs-lisp
 (prelude-require-package 'some-package)
 ```
 
@@ -101,7 +101,7 @@ Although `whitespace-mode` is awesome, some people might find it too
 intrusive. You can disable it in your
 personal config with the following bit of code:
 
-```lisp
+```emacs-lisp
 (setq prelude-whitespace nil)
 ```
 
@@ -109,7 +109,7 @@ If you like `whitespace-mode`, but prefer it to not automatically
 cleanup your file on save, you can disable that behavior by setting
 `prelude-clean-whitespace-on-save` to `nil` in your config file with:
 
-```lisp
+```emacs-lisp
 (setq prelude-clean-whitespace-on-save nil)
 ```
 
@@ -117,7 +117,7 @@ cleanup your file on save, you can disable that behavior by setting
 
 If you're not fond of spellchecking on the fly:
 
-```lisp
+```emacs-lisp
 (setq prelude-flyspell nil)
 ```
 
@@ -126,7 +126,7 @@ If you're not fond of spellchecking on the fly:
 If you prefer not to automatically format your file on save, you can disable that behavior by setting
 `prelude-format-on-save` to `nil` in your config file with:
 
-```lisp
+```emacs-lisp
 (setq prelude-format-on-save nil)
 ```
 
