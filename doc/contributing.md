@@ -1,3 +1,5 @@
+# Contributing
+
 ## Issues
 
 Report issues and suggest features and improvements on the
@@ -50,5 +52,6 @@ If you want to make changes to the manual's page structure you'll have to edit
 ## Donations
 
 You can support the development of Prelude via
+[GitHub Sponsors](https://github.com/sponsors/bbatsov),
 [PayPal](https://www.paypal.me/bbatsov) and
- [Patreon](https://www.patreon.com/bbatsov).
+[Patreon](https://www.patreon.com/bbatsov).

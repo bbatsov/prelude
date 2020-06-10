@@ -10,11 +10,20 @@ Emacs power users.
 !!! Important
 
     Prelude is compatible **ONLY with GNU Emacs 25.1+**. In general you're
-    advised to always run Prelude with the latest Emacs - currently **26.1**.
+    advised to always run Prelude with the latest Emacs - currently **26.3**.
 
 You can support the development of Prelude via
+[GitHub Sponsors](https://github.com/sponsors/bbatsov),
 [PayPal](https://www.paypal.me/bbatsov) and
 [Patreon](https://www.patreon.com/bbatsov).
+
+## Features
+
+* Improved UX, that's still in line with Emacs traditions
+* Sane defaults of baseline Emacs functionality
+* A curated set of 3rd party packages to enhance the base functionality
+* Simple modular architecture
+* Easy customization
 
 ## Philosophy
 
@@ -32,11 +41,3 @@ it would never enable something like `evil-mode` (vim keybindings) by default an
 All the third-party packages that it bundles are carefully vetted and are known to be of
 good quality and to have reliable maintainers. That generally means that Prelude's unlikely
 to immediate adopt some shiny new package, that has established tried and true alternatives.
-
-## Features
-
-* Improved UX, that's still in line with Emacs traditions
-* Sane defaults of baseline Emacs functionality
-* A curated set of 3rd party packages to enhance the base functionality
-* Simple modular architecture
-* Easy customization
