@@ -21,10 +21,7 @@ guidelines](https://github.com/bbatsov/prelude/blob/master/CONTRIBUTING.md).
 ## Documentation
 
 Good documentation is just as important as good code.
-
-Consider improving and extending the
-this manual and the
-[community wiki](https://github.com/bbatsov/prelude/wiki).
+Please, consider improving and extending this manual.
 
 ### Working on the Manual
 
