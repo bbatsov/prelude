@@ -88,7 +88,11 @@ development of Emacs Prelude.
 Bug reports and suggestions for improvements are always
 welcome. GitHub pull requests are even better! :-)
 
-Cheers,<br/>
-[Bozhidar](https://twitter.com/bbatsov)
+## License
+
+Copyright © 2011-2020 Bozhidar Batsov and
+[contributors](https://github.com/bbatsov/prelude/contributors).
+
+Distributed under the GNU General Public License, version 3
 
 [badge-license]: https://img.shields.io/badge/license-GPL_3-green.svg
