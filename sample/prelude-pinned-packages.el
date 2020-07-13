@@ -89,6 +89,7 @@
         (marshal . "melpa-stable")
         (merlin . "melpa-stable")
         (operate-on-number . "melpa-stable")
+        (org-num-mode . "melpa-stable")
         (pcache . "melpa-stable")
         (php-mode . "melpa-stable")
         (pkg-info . "melpa-stable")
