@@ -186,8 +186,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.thrift\\'" thrift thrift-mode)
     ("\\.yml\\'" yaml-mode yaml-mode)
     ("\\.yaml\\'" yaml-mode yaml-mode)
-    ("Dockerfile\\'" dockerfile-mode dockerfile-mode)
-    ("\\.dart\\'" dart-mode dart-mode)))
+    ("Dockerfile\\'" dockerfile-mode dockerfile-mode)))
 
 ;; markdown-mode doesn't have autoloads for the auto-mode-alist
 ;; so we add them manually if it's already installed

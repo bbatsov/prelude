@@ -32,11 +32,11 @@
 
 ;;; Code:
 
-(prelude-require-packages '(lsp-mode lsp-dart lsp-ui))
+(require 'prelude-lsp)
+(prelude-require-packages '(lsp-dart))
 
 (with-eval-after-load 'lsp-dart
   (add-hook 'dart-mode-hook #'lsp))
-
 
 (with-eval-after-load 'dart-mode
   (defun prelude-dart-mode-defaults ()
@@ -47,7 +47,6 @@
     (lsp-dart-define-key "s o" #'lsp-dart-show-outline)
     (lsp-dart-define-key "s f" #'lsp-dart-show-flutter-outline)
     (dap-dart-setup))
-
 
   (setq prelude-dart-mode-hook 'prelude-dart-mode-defaults)
 
