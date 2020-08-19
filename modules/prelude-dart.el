@@ -1,4 +1,4 @@
-;;; prelude-dart.el --- Emacs Prelude: Clojure programming configuration.
+;;; prelude-dart.el --- Emacs Prelude: Dart programming configuration.
 ;;
 ;; Copyright © 2011-2020 Bozhidar Batsov
 ;;
