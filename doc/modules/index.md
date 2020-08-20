@@ -56,6 +56,7 @@ The following programming languages have enhanced support in Prelude:
 - CoffeeScript
 - Common Lisp
 - CSS
+- [Dart](dart.md)
 - Emacs Lisp
 - Erlang
 - Elixir
