@@ -7,7 +7,7 @@ try to follow these guidelines when you do so.
 
 ## Issue reporting
 
-* Check that the [issue has not already been reported][5]
+* Check that the [issue has not already been reported][5].
 * Check that the issue has not already been fixed in the latest code
   (a.k.a. `master`).
 * Be clear, concise and precise in your description of the problem.
