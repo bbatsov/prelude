@@ -21,6 +21,7 @@ You can support the development of Prelude via
 
 * Improved UX, that's still in line with Emacs traditions
 * Sane defaults of baseline Emacs functionality
+* Automatic installation of many major programming modes on demand
 * A curated set of 3rd party packages to enhance the base functionality
 * Simple modular architecture
 * Easy customization

@@ -5,16 +5,16 @@
 Nothing fancy here. Just start Emacs as usual. Personally I run Emacs
 in daemon mode:
 
-```bash
-emacs --daemon
+```shellsession
+$ emacs --daemon
 ```
 
 Afterwards I connect to the server with either a terminal or a GUI
 client like this:
 
-```bash
-emacsclient -t
-emacsclient -c
+```shellsession
+$ emacsclient -t
+$ emacsclient -c
 ```
 
 You'd probably do well to put a few aliases in your `.zshrc` (or
@@ -32,8 +32,8 @@ the command line using `vi(m)`.
 
 You can also open a file with the cursor positioned directly on a specific line:
 
-```bash
-emacsclient somefile:1234
+```shellsession
+$ emacsclient somefile:1234
 ```
 
 This will open file `somefile` and set cursor on line 1234.
@@ -262,20 +262,20 @@ Use `C-h k <key>` (`<key>` are the ones listed on the left) or `C-h f <function>
 
 #### PDF generation
 
-Install [LaTeX](https://www.latex-project.org/get/)
+To generate a PDF version of the cheatsheet you'll need to install [LaTeX](https://www.latex-project.org/get/). Afterwards you can do something like:
 
-```bash
-cd modules/doc
-pdflatex prelude-cheatsheet.tex
+```shellsession
+$ cd modules/doc
+$ pdflatex prelude-cheatsheet.tex
 ```
 
 #### PNG generation
 
-Install [Poppler](https://poppler.freedesktop.org/)
+To generate a PDF version of the cheatsheet you'll need to install [Poppler](https://poppler.freedesktop.org/). Afterwards you can do something like:
 
-```bash
-cd modules/doc
-pdftocairo -png -singlefile prelude-cheatsheet.pdf cheatsheet
+```shellsession
+$ cd modules/doc
+$ pdftocairo -png -singlefile prelude-cheatsheet.pdf cheatsheet
 ```
 
 ## Automatic package installation

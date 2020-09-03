@@ -15,6 +15,7 @@ Prelude is compatible **ONLY with GNU Emacs 25.1+**. In general you're
 advised to always run Prelude with the latest stable Emacs release.
 
 You can support the development of Prelude via
+[GitHub Sponsors](https://github.com/sponsors/bbatsov),
 [PayPal](https://www.paypal.me/bbatsov) and
 [Patreon](https://www.patreon.com/bbatsov).
 
@@ -22,6 +23,7 @@ You can support the development of Prelude via
 
 * Improved UX, that's still in line with Emacs traditions
 * Sane defaults of baseline Emacs functionality
+* Automatic installation of many major programming modes on demand
 * A curated set of 3rd party packages to enhance the base functionality
 * Simple modular architecture
 * Easy customization
@@ -33,8 +35,8 @@ etc), you already have a recent version of Emacs installed, as well as `git` & `
 can skip the whole manual and just type in your favorite shell the
 following command:
 
-```bash
-curl -L https://git.io/epre | sh
+```shellsession
+$ curl -L https://git.io/epre | sh
 ```
 
 You can now power up your Emacs, sit back and enjoy Prelude.
@@ -43,14 +45,14 @@ There are two environment variables you can use to control the
 source repository and the installation directory. To change the
 installation directory:
 
-```bash
-export PRELUDE_INSTALL_DIR="$HOME/.emacs.d" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
+```shellsession
+$ export PRELUDE_INSTALL_DIR="$HOME/.emacs.d" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 ```
 
 To change the source repository:
 
-```bash
-export PRELUDE_URL="https://github.com/yourname/prelude.git" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
+```shellsession
+$ export PRELUDE_URL="https://github.com/yourname/prelude.git" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 ```
 
 Note that the installer will back up any existing `.emacs` file or
