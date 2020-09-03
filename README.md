@@ -19,6 +19,14 @@ You can support the development of Prelude via
 [PayPal](https://www.paypal.me/bbatsov) and
 [Patreon](https://www.patreon.com/bbatsov).
 
+## Features
+
+* Improved UX, that's still in line with Emacs traditions
+* Sane defaults of baseline Emacs functionality
+* A curated set of 3rd party packages to enhance the base functionality
+* Simple modular architecture
+* Easy customization
+
 ## Fast Forward
 
 Assuming you're using an Unix-like OS (`*BSD`, `GNU/Linux`, `macOS`, `Solaris`,
@@ -54,6 +62,23 @@ or back up your existing `.emacs.d` directory manually.
 **Important:** Don't forget to adjust your `prelude-modules.el` file in your personal directory
 once the installation is done. By default most of the modules
 that ship with Prelude are **not** loaded.
+
+## Philosophy
+
+Prelude's philosophy is quite simple:
+
+* simple
+* easy to understand and extend
+* stable
+* a foundation for you to build upon, as opposed to some end-user product
+
+This means that it intentionally doesn't pack all the bells and whistles that it could.
+Prelude aims to enhance the classic Emacs experience without deviating a lot from it - e.g.
+it would never enable something like `evil-mode` (vim keybindings) by default and so on.
+
+All the third-party packages that it bundles are carefully vetted and are known to be of
+good quality and to have reliable maintainers. That generally means that Prelude's unlikely
+to immediate adopt some shiny new package, that has established tried and true alternatives.
 
 ## User Manual
 
