@@ -1,9 +1,9 @@
-;;; prelude-js.el --- Emacs Prelude: js-mode configuration.
+;;; prelude-dart.el --- Emacs Prelude: Dart programming configuration.
 ;;
 ;; Copyright © 2011-2020 Bozhidar Batsov
 ;;
-;; Author: Bozhidar Batsov <bozhidar@batsov.com>
-;; URL: https://github.com/bbatsov/prelude
+;; Author: Rafael Medina <rafaelmedina789@gmail.com>
+;; URL: http://batsov.com/prelude
 ;; Version: 1.0.0
 ;; Keywords: convenience
 
@@ -11,7 +11,7 @@
 
 ;;; Commentary:
 
-;; Some basic configuration for js-mode.
+;; Some basic configuration for prelude-dart.
 
 ;;; License:
 
@@ -32,27 +32,27 @@
 
 ;;; Code:
 
-(require 'prelude-programming)
-(prelude-require-packages '(js2-mode json-mode))
+(require 'prelude-lsp)
+(prelude-require-packages '(lsp-dart))
 
-(require 'js2-mode)
+(with-eval-after-load 'lsp-dart
+  (add-hook 'dart-mode-hook #'lsp))
 
-(add-to-list 'auto-mode-alist '("\\.js\\'"    . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.pac\\'"   . js2-mode))
-(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+(with-eval-after-load 'dart-mode
+  (defun prelude-dart-mode-defaults ()
 
-(with-eval-after-load 'js2-mode
-  (defun prelude-js-mode-defaults ()
-    ;; electric-layout-mode doesn't play nice with smartparens
-    (setq-local electric-layout-rules '((?\; . after)))
-    (setq mode-name "JS2")
-    (js2-imenu-extras-mode +1)
-    (subword-mode +1))
+    (setq dap-launch-configuration-providers  '(dap-debug-template-configurations-provider))
 
-  (setq prelude-js-mode-hook 'prelude-js-mode-defaults)
+    ;; Add to default dart-mode key bindings
+    (lsp-dart-define-key "s o" #'lsp-dart-show-outline)
+    (lsp-dart-define-key "s f" #'lsp-dart-show-flutter-outline)
+    (dap-dart-setup))
 
-  (add-hook 'js2-mode-hook (lambda () (run-hooks 'prelude-js-mode-hook))))
+  (setq prelude-dart-mode-hook 'prelude-dart-mode-defaults)
 
-(provide 'prelude-js)
+  (add-hook 'dart-mode-hook (lambda ()
+                            (run-hooks 'prelude-dart-mode-hook))))
 
-;;; prelude-js.el ends here
+(provide 'prelude-dart)
+
+;;; prelude-dart.el ends here

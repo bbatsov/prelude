@@ -40,7 +40,8 @@
 
 (prelude-require-packages '(rust-mode
                             cargo
-                            flycheck-rust))
+                            flycheck-rust
+                            ron-mode))
 
 (unless (featurep 'prelude-lsp)
   (prelude-require-packages '(racer)))

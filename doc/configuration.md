@@ -56,7 +56,7 @@ lexicographical order.  The overall loading precedence is:
 3.  `personal/prelude-modules.el` (or deprecated `prelude-modules.el`)
 4.  `personal/*`
 
-#### Personalization Example
+### Personalization Example
 
 Suppose you want to configure `go-mode` to autoformat on each save.  You
 can create a file in `personal/`, let's call this one
@@ -69,7 +69,7 @@ can create a file in `personal/`, let's call this one
             (setq tab-width 2)))
 ```
 
-#### Tips
+### General Tips
 
 **Fork** (instead of cloning) the official Prelude repo and add your
 own touch to it. You're advised to **avoid changing stuff outside of
