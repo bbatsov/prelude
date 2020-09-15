@@ -3,7 +3,7 @@
 ;; Copyright © 2011-2020 Bozhidar Batsov
 ;;
 ;; Author: Rafael Medina <rafaelmedina789@gmail.com>
-;; URL: http://batsov.com/prelude
+;; URL: https://prelude.emacsredux.com
 ;; Version: 1.0.0
 ;; Keywords: convenience
 
