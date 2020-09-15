@@ -102,7 +102,7 @@
          ["Kill line" crux-smart-kill-line]
          ["Kill whole line" crux-kill-whole-line]
          ["Insert empty line below" crux-smart-open-line]
-         ["insert empty line above" crux-smart-open-line-above]
+         ["Insert empty line above" crux-smart-open-line-above]
          ["Move up" move-text-up]
          ["Move down" move-text-down]
          ["Duplicate line or region" crux-duplicate-current-line-or-region]
