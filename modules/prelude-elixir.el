@@ -3,8 +3,6 @@
 ;; Copyright © 2014-2020 Samuel Tonini
 ;;
 ;; Author: Samuel Tonini <tonini.samuel@gmail.com>
-;; Version: 1.0.0
-;; Keywords: convenience elixir
 
 ;; This file is not part of GNU Emacs.
 

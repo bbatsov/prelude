@@ -3,8 +3,6 @@
 ;; Copyright © 2011-2020 LEE Dongjun
 ;;
 ;; Author: LEE Dongjun <redongjun@gmail.com>
-;; Version: 1.0.0
-;; Keywords: convenience typescript
 
 ;; This file is not part of GNU Emacs.
 

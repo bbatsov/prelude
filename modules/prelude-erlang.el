@@ -3,8 +3,6 @@
 ;; Copyright © 2011-2020 Gleb Peregud
 ;;
 ;; Author: Gleb Peregud <gleber.p@gmail.com>
-;; Version: 1.0.0
-;; Keywords: convenience erlang
 
 ;; This file is not part of GNU Emacs.
 

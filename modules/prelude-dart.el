@@ -3,9 +3,7 @@
 ;; Copyright © 2011-2020 Bozhidar Batsov
 ;;
 ;; Author: Rafael Medina <rafaelmedina789@gmail.com>
-;; URL: https://prelude.emacsredux.com
-;; Version: 1.0.0
-;; Keywords: convenience
+;; URL: https://github.com/bbatsov/prelude
 
 ;; This file is not part of GNU Emacs.
 
