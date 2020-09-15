@@ -70,7 +70,7 @@
      (define-key map (kbd "s-p") 'projectile-command-map))
     (define-key map (kbd "C-c p") 'projectile-command-map)
     ;; make some use of the Super key
-    (when prelude-super-keybinds
+    (when prelude-super-keybindings
       (define-key map (kbd "s-r") 'crux-recentf-find-file)
       (define-key map (kbd "s-j") 'crux-top-join-line)
       (define-key map (kbd "s-k") 'crux-kill-whole-line)
