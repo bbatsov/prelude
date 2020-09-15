@@ -8,8 +8,12 @@
 (setq prelude-format-on-save t)
 (add-hook 'js2-mode-hook #'(lambda() (setq js-indent-level 2)))
 (add-hook 'markdown-mode-hook #'(lambda() (setq markdown-command "multimarkdown")))
-(add-hook 'org-mode-hook #'(lambda() (setq org-agenda-files '("~/Documents/6_Notes/notes/" "~/Documents/6_Notes/private-notes/" "~/Documents/6_Notes/private-notes" "~/Documents/6_Notes/Inbox/"))))
-(add-hook 'org-mode-hook #'(lambda() (setq org-directory "~/Documents/6_Notes")))
+(setq org-directory "~/Documents/6_Notes")
+(setq mmuldoon/org-directory (file-truename "~/Documents/6_Notes"))
+(setq mmuldoon/agenda-subdirs '("/notes/" "/private-notes/" "/todo/"))
+(setq org-agenda-files
+      (mapcar #'(lambda(subdir)
+                  (concat org-directory subdir)) mmuldoon/agenda-subdirs))
 (add-hook 'org-mode-hook #'(lambda () (setq org-default-notes-file (concat org-directory "/inbox-note.org"))))
 (setq org-refile-targets '((nil :maxlevel . 9)
                            (org-agenda-files :maxlevel . 9)))
@@ -20,8 +24,16 @@
   (interactive)
   (org-refile '(4)))
 
+(setq org-capture-templates
+      `(("t" "Todo" entry (file+headline ,(concat org-directory "/inbox.org") "Tasks")
+         "* TODO %?\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree ,(concat org-directory "/private-notes/journal.org"))
+         "* %?")
+        ("m" "Meeting" entry (file+datetree ,(concat org-directory "/notes/meetings.org")) "* Topic: %?\n** Present")
+        ))
 
-(add-hook 'projectile-mode-hook #'(lambda() (setq projectile-project-search-path ("~/Documents/2_Areas/OSCAR/Oscar_Code" "~/Documents/2_Areas/Ochoa/" "~/Documents/2_Areas/Ripley/Ripley_Code" "~/Documents/2_Areas/Dex/Dex_Code"))))
+
+(add-hook 'projectile-mode-hook #'(lambda() (setq projectile-project-search-path ("~/Documents/2_Areas/OSCAR/Oscar_Code" "~/Documents/2_Areas/Ochoa/" "~/Documents/2_Areas/Ripley/Ripley_Code" "~/Documents/2_Areas/Dex/Dex_Code" "~/Documents/6_Notes"))))
 
 (require 'clj-refactor)
 
