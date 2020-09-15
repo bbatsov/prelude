@@ -43,6 +43,14 @@ Note that the toolbar is always hidden regardless of this setting."
   :group 'prelude
   :package-version '(prelude . "1.1"))
 
+(defcustom prelude-super-keybindings t
+  "Controls whether to use the Super key in keybindings.
+They can be problematic in some operating systems (e.g. Windows)
+or desktop environments that make heavy use of them."
+  :type 'boolean
+  :group 'prelude
+  :package-version '(prelude . "1.1"))
+
 (defcustom prelude-auto-save t
   "Non-nil values enable Prelude's auto save."
   :type 'boolean

@@ -66,17 +66,20 @@
     (define-key map (kbd "C-c S") 'crux-find-shell-init-file)
     (define-key map (kbd "C-c i") 'imenu-anywhere)
     ;; extra prefix for projectile
-    (define-key map (kbd "s-p") 'projectile-command-map)
+    (when prelude-super-keybindings
+     (define-key map (kbd "s-p") 'projectile-command-map))
     (define-key map (kbd "C-c p") 'projectile-command-map)
     ;; make some use of the Super key
-    (define-key map (kbd "s-r") 'crux-recentf-find-file)
-    (define-key map (kbd "s-j") 'crux-top-join-line)
-    (define-key map (kbd "s-k") 'crux-kill-whole-line)
-    (define-key map (kbd "s-m m") 'magit-status)
-    (define-key map (kbd "s-m l") 'magit-log)
-    (define-key map (kbd "s-m f") 'magit-log-buffer-file)
-    (define-key map (kbd "s-m b") 'magit-blame)
-    (define-key map (kbd "s-o") 'crux-smart-open-line-above)
+    (when prelude-super-keybinds
+      (define-key map (kbd "s-r") 'crux-recentf-find-file)
+      (define-key map (kbd "s-j") 'crux-top-join-line)
+      (define-key map (kbd "s-k") 'crux-kill-whole-line)
+      (define-key map (kbd "s-m m") 'magit-status)
+      (define-key map (kbd "s-m l") 'magit-log)
+      (define-key map (kbd "s-m f") 'magit-log-buffer-file)
+      (define-key map (kbd "s-m b") 'magit-blame)
+      (define-key map (kbd "s-o") 'crux-smart-open-line-above)
+      (define-key prelude-mode-map (kbd "s-/") 'hippie-expand))
     (easy-menu-define prelude-mode-menu map
       "Prelude's menu."
       '("Prelude"
