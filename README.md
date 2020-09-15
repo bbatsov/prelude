@@ -16,6 +16,7 @@ advised to always run Prelude with the latest stable Emacs release.
 
 You can support the development of Prelude via
 [GitHub Sponsors](https://github.com/sponsors/bbatsov),
+[ko-fi](https://ko-fi.com/bbatsov),
 [PayPal](https://www.paypal.me/bbatsov) and
 [Patreon](https://www.patreon.com/bbatsov).
 
