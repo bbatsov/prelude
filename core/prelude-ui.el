@@ -59,6 +59,10 @@
 (column-number-mode t)
 (size-indication-mode t)
 
+;; show line numbers at the beginning of each line
+(unless prelude-minimalistic-ui
+  (linum-mode))
+
 ;; enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
 

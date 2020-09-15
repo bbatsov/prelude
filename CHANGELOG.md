@@ -4,6 +4,8 @@
 
 ### New features
 
+* Enable `linum-mode` by default. Can be disabled by setting `prelude-minimalistic-ui` to `nil`.
+
 ### Changes
 
 * [#1278](https://github.com/bbatsov/prelude/issues/1278): Don't disable `menu-bar-mode` unless `prelude-minimalistic-ui` is enabled.
