@@ -4,7 +4,7 @@
 
 ### New features
 
-* Enable `linum-mode` by default. Can be disabled by setting `prelude-minimalistic-ui` to `nil`.
+* Enable `nlinum-mode` by default. Can be disabled by setting `prelude-minimalistic-ui` to `nil`.
 
 ### Changes
 
