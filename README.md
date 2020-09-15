@@ -89,6 +89,17 @@ and so on.
 
 Check out our [user manual](https://prelude.emacsredux.com) for more information.
 
+You can also find a lot of information about specific Prelude features and the rationale behind them on
+my Emacs blog [Emacs Redux](https://emacsredux.com).
+
+## crux and super-save
+
+A lot of utility commands that used to be part of Prelude were eventually extracted to the [crux](https://github.com/bbatsov/crux) package,
+so they'd be easily available to more people.
+These days Prelude simply depends on that package.
+
+The [super-save](https://github.com/bbatsov/super-save) package also used to be part of Prelude in the past.
+
 ## Known issues
 
 Check out the project's
