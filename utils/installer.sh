@@ -1,5 +1,5 @@
 install_prelude () {
-    printf " Cloning the Prelude's GitHub repository...\n$RESET"
+    printf " Cloning Emacs Prelude's GitHub repository...\n$RESET"
     if [ x$PRELUDE_VERBOSE != x ]
     then
         /usr/bin/env git clone $PRELUDE_URL "$PRELUDE_INSTALL_DIR"
@@ -14,7 +14,7 @@ install_prelude () {
 }
 
 make_prelude_dirs () {
-    printf " Making the required directories.\n$RESET"
+    printf " Creating the required directories.\n$RESET"
     mkdir -p "$PRELUDE_INSTALL_DIR/savefile"
 }
 
@@ -70,15 +70,15 @@ colors_ () {
 usage() {
     printf "Usage: $0 [OPTION]\n"
     printf "  -c, --colors \t \t \t Enable colors.\n"
-    printf "  -d, --directory [dir] \t Install prelude into the specified directory.\n"
+    printf "  -d, --directory [dir] \t Install Prelude into the specified directory.\n"
     printf "  \t \t \t \t If 'dir' is a relative path prefix with $HOME.\n"
     printf "  \t \t \t \t Defaults to $HOME/.emacs.d\n"
     printf "  -s, --source [url] \t \t Clone prelude from 'url'.\n"
     printf "  \t \t \t \t Defaults to 'https://github.com/bbatsov/prelude.git'.\n"
-    printf "  -n, --no-bytecompile \t \t Skip the bytecompilation step of prelude.\n"
+    printf "  -n, --no-bytecompile \t \t Skip the bytecompilation step of Prelude.\n"
     printf "  -i, --into \t \t \t Install Prelude into a subdirectory in the existing configuration\n"
-    printf "  \t \t \t \t The default behavious is to install prelude into the existing\n"
-    printf "  \t \t \t \t emacs configuration.\n"
+    printf "  \t \t \t \t The default behavior is to install Prelude into the existing\n"
+    printf "  \t \t \t \t Emacs configuration (.emacs.d).\n"
     printf "  -h, --help \t \t \t Display this help and exit\n"
     printf "  -v, --verbose \t \t Display verbose information\n"
     printf "\n"
@@ -151,7 +151,7 @@ if [ -f "$PRELUDE_INSTALL_DIR/core/prelude-core.el" ]
 then
     printf "\n\n$BRED"
     printf "You already have Prelude installed.$RESET\nYou'll need to remove $PRELUDE_INSTALL_DIR/prelude if you want to install Prelude again.\n"
-    printf "If you want to update your copy of prelude, run 'git pull origin master' from your prelude directory\n\n"
+    printf "If you want to update your copy of Prelude, run 'git pull origin master' from your Prelude directory\n\n"
     exit 1;
 fi
 
@@ -222,7 +222,7 @@ if [ -z "$PRELUDE_SKIP_BC" ];
 then
     if which emacs > /dev/null 2>&1
     then
-        printf " Bytecompiling Prelude.\n"
+        printf " Byte-compiling Prelude...\n"
         if [ x$PRELUDE_VERBOSE != x ]
         then
             emacs -batch -f batch-byte-compile "$PRELUDE_INSTALL_DIR/core"/*.el
@@ -230,10 +230,10 @@ then
             emacs -batch -f batch-byte-compile "$PRELUDE_INSTALL_DIR/core"/*.el > /dev/null 2>&1
         fi
     else
-        printf "$YELLOW Emacs not found.$RESET Skipping bytecompilation.\n"
+        printf "$YELLOW Emacs not found.$RESET Skipping byte-compilation.\n"
     fi
 else
-    printf "Skipping bytecompilation.\n"
+    printf "Skipping byte-compilation.\n"
 fi
 
 printf "\n"
