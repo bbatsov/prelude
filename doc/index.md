@@ -43,3 +43,14 @@ it would never enable something like `evil-mode` (vim keybindings) by default an
 All the third-party packages that it bundles are carefully vetted and are known to be of
 good quality and to have reliable maintainers. That generally means that Prelude's unlikely
 to immediate adopt some shiny new package, that has established tried and true alternatives.
+
+In practice this translates to the following:
+
+* Prelude is less opinionated than distros like Spacemacs and Doom Emacs (meaning it's closer to the standard Emacs experience)
+* Prelude installs relatively few additional packages by default
+* Most modules in Prelude are opt-in instead of opt-out (you'll notice the default config enables only a handful of modules)
+* Most modules (e.g. modules for programming languages) are pretty short and feature setup only for essential packages (in some cases that be just the major mode for the language in question)
+* You don't really need to track Prelude's upstream - you're encouraged to just fork it and use it as the basis for your own configuration.
+
+Remember that the ultimate goal of every Emacs user is to create an Emacs setup that reflects their own experience, needs, goals and ideas. Just like Lisp,
+Emacs is nothing but a raw building material for the perfect editing experience.
