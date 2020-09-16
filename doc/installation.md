@@ -156,5 +156,5 @@ After you've uncommented a module you should either restart Emacs or evaluate th
 ## Uninstalling Prelude
 
 Provided you've installed Prelude in `.emacs.d`, all you need to do is delete that folder.
-If you opted for the manual installing and making `.emacs.d` a symlink - you remove/update
+If you opted for the manual installation and making `.emacs.d` a symlink - you remove/update
 the link. Yeah, it's as simple as that. No fancy uninstaller required!
