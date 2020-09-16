@@ -10,7 +10,8 @@
 ;;; Commentary:
 
 ;; Takes care of the automatic installation of all the packages required by
-;; Emacs Prelude.
+;; Emacs Prelude.  This module also adds a couple of package.el extensions
+;; and provides functionality for auto-installing major modes on demand.
 
 ;;; License:
 
@@ -32,6 +33,8 @@
 ;;; Code:
 (require 'cl-lib)
 (require 'package)
+
+;;;; Package setup and additional utility functions
 
 ;; accessing a package repo over https on Windows is a no go, so we
 ;; fallback to http there
@@ -127,6 +130,8 @@ removing unwanted packages."
   (interactive)
   (package-show-package-list
    (cl-set-difference package-activated-list prelude-packages)))
+
+;;;; Auto-installation of major modes on demand
 
 (defmacro prelude-auto-install (extension package mode)
   "When file with EXTENSION is opened triggers auto-install of PACKAGE.
