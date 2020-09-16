@@ -26,36 +26,49 @@ All those tools are completely optional, though.
 
 ### Automated
 
-You can install **Emacs Prelude** via the command line with either `curl` or
+You can install Emacs Prelude via the command line with either `curl` or
 `wget`. Naturally `git` is also required.
+
+The installer script will do the following:
+
+* Clone Prelude's GitHub repo
+* Check your Emacs version
+* Backup any existing `.emacs` or `.emacs.d` you might have
+* Create any additional folders if necessary (e.g. for storing package-specific data)
+
+If you have a `.emacs` file it will backed up as `.emacs.pre-prelude` and if you have
+a `.emacs.d` folder, it will be backed up as `.emacs.d.pre-prelude.tar`.
 
 #### Via Curl
 
 If you're using `curl` type the following command:
 
-```bash
-curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
+```shellsession
+$ curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 ```
 
 #### Via Wget
 
 If you're using `wget` type:
 
-```bash
-wget --no-check-certificate https://github.com/bbatsov/prelude/raw/master/utils/installer.sh -O - | sh
+```shellsession
+$ wget --no-check-certificate https://github.com/bbatsov/prelude/raw/master/utils/installer.sh -O - | sh
 ```
 
 ### Manual
 
 Make sure you do not have any `~/.emacs` file or `~/.emacs.d` folder present.
 
-```bash
-git clone git://github.com/bbatsov/prelude.git path/to/local/repo
-ln -s path/to/local/repo ~/.emacs.d
-cd ~/.emacs.d
+```shellsession
+$ git clone git://github.com/bbatsov/prelude.git path/to/local/repo
+$ ln -s path/to/local/repo ~/.emacs.d
+$ cd ~/.emacs.d
 ```
 
-If you are using Windows, you should check what Emacs thinks the `~` directory is by running Emacs and typing `C-x d ~/<RET>`, and then adjust the command appropriately.
+!!! Note
+
+    If you are using Windows, you should check what Emacs thinks the `~` directory is by running Emacs
+    and typing `C-x d ~/<RET>`, and then adjust the command appropriately.
 
 ## Updating Prelude
 
@@ -69,9 +82,9 @@ Just run <kbd>M-x package-list-packages RET U x</kbd>.
 
 #### Update Prelude's code
 
-```bash
-cd path/to/prelude/installation
-git pull
+```shellsession
+$ cd path/to/prelude/installation
+$ git pull
 ```
 
 The `path/to/prelude/installation` is usually `~/.emacs.d` (at least
