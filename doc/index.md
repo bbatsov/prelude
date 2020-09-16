@@ -27,6 +27,64 @@ You can support the development of Prelude via
 * Simple modular architecture
 * Easy customization
 
+## Package Highlights
+
+Here are some of the essential 3rd party packages that Prelude adds to Emacs:
+
+* ace-window (effective navigation between multiple windows)
+* avy (effective navigation)
+* crux (lots of useful editing commands)
+* diff-hl (shows colorful diff markers in the gutter when you're editing files under version control)
+* easy-kill
+* expand-region
+* flycheck (modern integration with many lint tools)
+* guru-mode (an Emacs guru that helps you learn basic Emacs keybindings)
+* projectile (powerful project navigation/interaction package)
+* magit (the best git client in the known universe)
+* nlinum (line numbers in your buffers)
+* smartparens (powerful package for dealing with expressions and matched delimiters in programming languages)
+* super-save (auto-save buffers when moving around)
+* which-key (shows you possible keybindings when you type a partial keybinding)
+* zenburn-theme (Prelude's default color theme)
+
+On top of this Prelude bundles a bunch of smaller packages and makes many more packages available via optional modules.
+
+## Programming Languages Support
+
+The following programming languages have enhanced support in Prelude:
+
+- C/C++
+- Clojure
+- CoffeeScript
+- Common Lisp
+- CSS
+- [Dart](modules/dart.md)
+- Emacs Lisp
+- Erlang
+- Elixir
+- Go
+- Haskell
+- JavaScript
+- LaTeX
+- Lisp Base (common foundation for Lisp modules)
+- Markdown
+- OCaml
+- Org Mode
+- Perl
+- [Python](modules/python.md)
+- Ruby
+- Rust
+- Scala
+- Scheme
+- SCSS
+- Shell
+- TypeScript
+- Web
+- XML
+- YAML
+
+On top of this - basic support for many other programming languages will be auto-installed when needed (e.g. the first time you open a source file for some language).
+
 ## Philosophy
 
 Prelude's philosophy is quite simple:
