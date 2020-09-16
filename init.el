@@ -39,11 +39,11 @@
 ;; You may delete these explanatory comments.
 ;(package-initialize)
 
-(defvar current-user
+(defvar prelude-user
   (getenv
    (if (equal system-type 'windows-nt) "USERNAME" "USER")))
 
-(message "Prelude is powering up... Be patient, Master %s!" current-user)
+(message "Prelude is powering up... Be patient, Master %s!" prelude-user)
 
 (when (version< emacs-version "25.1")
   (error "Prelude requires GNU Emacs 25.1 or newer, but you're running %s" emacs-version))
@@ -51,6 +51,7 @@
 ;; Always load newest byte code
 (setq load-prefer-newer t)
 
+;; Define Prelude's directory structure
 (defvar prelude-dir (file-name-directory load-file-name)
   "The root dir of the Emacs Prelude distribution.")
 (defvar prelude-core-dir (expand-file-name "core" prelude-dir)
@@ -104,7 +105,7 @@ by Prelude.")
 
 (message "Loading Prelude's core...")
 
-;; the core stuff
+;; load the core stuff
 (require 'prelude-packages)
 (require 'prelude-custom)  ;; Needs to be loaded before core, editor and ui
 (require 'prelude-ui)
@@ -139,7 +140,7 @@ by Prelude.")
                prelude-modules-file
                (directory-files prelude-personal-dir 't "^[^#\.].*\\.el$"))))
 
-(message "Prelude is ready to do thy bidding, Master %s!" current-user)
+(message "Prelude is ready to do thy bidding, Master %s!" prelude-user)
 
 ;; Patch security vulnerability in Emacs versions older than 25.3
 (when (version< emacs-version "25.3")
