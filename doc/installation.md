@@ -1,11 +1,26 @@
 # Installation
 
-## Installing Emacs
+## Prerequisites
 
 Obviously to use the Emacs Prelude you have to install Emacs
-first. Have a look at
-the
-[WikEmacs articles on installing Emacs](http://wikemacs.org/index.php/Installing_Emacs).
+first. We'll assume you can manage this part on your own.
+Aim for the newest stable Emacs release, although as a rule of
+thumb Prelude aims to support the last 2-3 stable releases.
+
+For spell-checking to work you should install `aspell`, together with its
+dictionaries for the languages you wish to check.
+
+You'll also do well to install some of the following:
+
+* `git` (needed by Magit)
+* `ag` (`the_silver_searcher`) or `ripgrep` (Projectile has nice integration with them and they are much faster than `grep`)
+* your favorite lint tools (for Flycheck)
+
+All those tools are completely optional, though.
+
+!!! Note
+
+    Additional external tools might be needed by some of the modules (e.g. tools specific to particular programming languages, etc).
 
 ## Installation
 
@@ -32,7 +47,7 @@ wget --no-check-certificate https://github.com/bbatsov/prelude/raw/master/utils/
 
 ### Manual
 
-Make sure you do not have any `~/.emacs` file present.
+Make sure you do not have any `~/.emacs` file or `~/.emacs.d` folder present.
 
 ```bash
 git clone git://github.com/bbatsov/prelude.git path/to/local/repo
@@ -124,3 +139,9 @@ adjust that one.
 
 After you've uncommented a module you should either restart Emacs or evaluate the module
 `require` expression with <kbd>C-x C-e</kbd>.
+
+## Uninstalling Prelude
+
+Provided you've installed Prelude in `.emacs.d`, all you need to do is delete that folder.
+If you opted for the manual installing and making `.emacs.d` a symlink - you remove/update
+the link. Yeah, it's as simple as that. No fancy uninstaller required!
