@@ -9,7 +9,13 @@
 
 ;;; Commentary:
 
-;; Here are the definitions of most of the functions added by Prelude.
+;; Here are the definitions of most of the general-purpose functions and
+;; commands added by Prelude.  Some modules define additional module-specific
+;; functions and commands.
+;;
+;; Note that many of the original core Prelude commands were extracted to the
+;; crux package (Prelude installs it automatically).  Prelude's auto-save
+;; functionality was extracted to the super-save package.
 
 ;;; License:
 
