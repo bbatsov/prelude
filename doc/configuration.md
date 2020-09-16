@@ -159,7 +159,24 @@ If you prefer not to automatically format your file on save, you can disable tha
 
 Currently this only affects automated formatting of Typescript files.
 
+### Disable Super-based keybindings
+
+Out-of-the-box Prelude will create two versions of many keybindings in `prelude-mode`:
+
+* One "traditional" version with a prefix like `Control`
+* One "alternative" version with a prefix like `Super`
+
+The reason for this is that there are generally more options for short keybindings with `Super` - e.g. you can
+have `s-p`, `s-g`, etc. There's, however, a problem lying here as well - some operating systems and
+desktop environments might be making heavy use of such keybindings. (in most cases those would intercept them before Emacs does).
+`exwm` also uses those heavily. You prevent Prelude from creating such keybindings via `prelude-super-keybindings`:
+
+```emacs-lisp
+(setq prelude-super-keybindings nil)
+```
+
 ### Configuration per file or directory
 
-These settings can also be set on a per-file or directory basis by using a file local variable or a `.dir-locals.el`
-file.
+Some of these settings (those that don't need to be pre-loaded) can also be set
+on a per-file or directory basis by using a file local variable or a
+`.dir-locals.el` file.
