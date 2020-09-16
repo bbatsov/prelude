@@ -95,7 +95,6 @@ PROMPT sets the `read-string prompt."
     "Press <C-S-Backspace> or <s-k> to kill the whole line."
     "Press <s-j> or <C-^> to join lines."
     "Press <s-.> or <C-c j> to jump to the start of a word in any visible window."
-    "Press <f11> to toggle fullscreen mode."
     "Press <f12> to toggle the menu bar."
     "Explore the Tools->Prelude menu to find out about some of Prelude extensions to Emacs."
     "Access the official Emacs manual by pressing <C-h r>."))
@@ -144,18 +143,6 @@ With a prefix ARG updates all installed packages."
       (epl-upgrade (cl-remove-if-not (lambda (p) (memq (epl-package-name p) prelude-packages))
                                      (epl-installed-packages))))
     (message "Update finished. Restart Emacs to complete the process.")))
-
-;;; Emacs in macOS already has fullscreen support
-;;; Emacs has a similar built-in command in 24.4
-(defun prelude-fullscreen ()
-  "Make Emacs window fullscreen.
-
-This follows freedesktop standards, should work in X servers."
-  (interactive)
-  (if (eq window-system 'x)
-      (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                             '(2 "_NET_WM_STATE_FULLSCREEN" 0))
-    (error "Only X server is supported")))
 
 (defun prelude-wrap-with (s)
   "Create a wrapper function for smartparens using S."
