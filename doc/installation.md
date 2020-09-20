@@ -70,6 +70,24 @@ $ cd ~/.emacs.d
     If you are using Windows, you should check what Emacs thinks the `~` directory is by running Emacs
     and typing `C-x d ~/<RET>`, and then adjust the command appropriately.
 
+### Site Wide
+For a multi-user environment, as an admin, the customizations intended
+for all users go in the site-start file represented by the variable
+`site-run-file`, while single users will use their own init file
+represented by the variable `user-init-file`.
+
+If you have placed your prelude directory in `/opt/prelude` then,
+append the following line to the `site-start.el`
+
+``` emacs-lisp
+(load "/opt/prelude/init.el")
+```
+
+If you are using emacs as a daemon process, with other users or daemon
+processes interacting with the emacs daemon (e.g. Emacs is your window
+manager) then the `site-lisp` directory could be the right place to
+place your configuration files.
+
 ## Updating Prelude
 
 ### Manual update
