@@ -13,6 +13,7 @@
 * Removed deprecated alias `prelude-ensure-module-deps`.
 * Remove `prelude-fullscreen`, as these days people can use `toggle-frame-fullscreen` instead. (it was introduced in Emacs 24.4)
 * Removed `beacon-mode`.
+* Add the `ag` package. It provides a nice alternative to `grep` and has nice Projectile integration.
 
 ### Bugs fixed
 

@@ -55,6 +55,7 @@
 
 (defvar prelude-packages
   '(ace-window
+    ag
     avy
     anzu
     browse-kill-ring
