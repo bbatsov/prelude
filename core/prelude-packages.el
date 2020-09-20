@@ -57,7 +57,6 @@
   '(ace-window
     avy
     anzu
-    beacon
     browse-kill-ring
     crux
     discover-my-major
