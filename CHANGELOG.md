@@ -5,6 +5,7 @@
 ### New features
 
 * Enable `nlinum-mode` by default. Can be disabled by setting `prelude-minimalistic-ui` to `nil`.
+* Enable Site installation for prelude
 
 ### Changes
 
