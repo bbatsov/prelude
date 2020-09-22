@@ -89,36 +89,6 @@ processes interacting with the Emacs daemon (e.g. Emacs is your window
 manager) then the `site-lisp` directory could be the right place to
 place your configuration files.
 
-## Updating Prelude
-
-### Manual update
-
-The update procedure is fairly straightforward and consists of 3 steps:
-
-#### Update all bundled packages
-
-Just run <kbd>M-x package-list-packages RET U x</kbd>.
-
-#### Update Prelude's code
-
-```shellsession
-$ cd path/to/prelude/installation
-$ git pull
-```
-
-The `path/to/prelude/installation` is usually `~/.emacs.d` (at least
-on Unix systems).
-
-#### Restart Prelude
-
-It's generally a good idea to stop Emacs after you do the update. The
-next time Prelude starts it will install any new dependencies (if
-there are such).
-
-### Automatic update
-
-Simply run <kbd>M-x prelude-update</kbd> from Emacs itself and restart Emacs afterwards.
-
 ## Pinning packages
 
 By default, Prelude will install packages from the MELPA and GNU ELPA package
@@ -171,6 +141,41 @@ adjust that one.
 
 After you've uncommented a module you should either restart Emacs or evaluate the module
 `require` expression with <kbd>C-x C-e</kbd>.
+
+## Updating Prelude
+
+### Automatic update
+
+Simply run <kbd>M-x prelude-update</kbd> from Emacs itself and restart Emacs afterwards.
+
+### Manual update
+
+The update procedure is fairly straightforward and consists of 3 steps:
+
+#### Update all bundled packages
+
+Just run <kbd>M-x package-list-packages RET U x</kbd>.
+
+!!! Note
+
+    Technically speaking, this will update all the packages you've installed,
+    not just those that were bundled with Prelude. That's fine most of the time.
+
+#### Update Prelude's code
+
+```shellsession
+$ cd path/to/prelude/installation
+$ git pull
+```
+
+The `path/to/prelude/installation` is usually `~/.emacs.d` (at least
+on Unix systems).
+
+#### Restart Prelude
+
+It's generally a good idea to stop Emacs after you do the update. The
+next time Prelude starts it will install any new dependencies (if
+there are such).
 
 ## Uninstalling Prelude
 
