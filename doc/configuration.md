@@ -1,5 +1,32 @@
 # Configuration
 
+## User Interface
+
+Historically Prelude had adopted a very minimalistic approach to UI and
+had hidden by default Emacs's menu bar and tool bar. This was changed a bit
+in Prelude 1.1 for the sake of being more approachable to newcomers to Emacs
+and now the menu bar is displayed by default. The tool bar is still hidden, as
+it's quite big and not that useful.
+
+!!! Tip
+
+    You can toggle the menu bar by pressing `F12`.
+
+Furthermore, Prelude 1.1 displays line numbers (via `global-nlinum-mode`), just
+like most "modern" editors and IDEs do these days. You can go back to the way
+things were by setting `prelude-minimalistic-ui` to `t` in `personal/preload` or
+by adding the following snippets to your personal config:
+
+``` emacs-lisp
+(global-nlinum-mode -1)
+(menu-bar-mode -1)
+```
+
+!!! Note
+
+    The first approach is better as it would prevent those UI elements from
+    appearing temporarily.
+
 ## Color Themes
 
 Emacs provides a dozen of
@@ -132,7 +159,24 @@ If you prefer not to automatically format your file on save, you can disable tha
 
 Currently this only affects automated formatting of Typescript files.
 
+### Disable Super-based keybindings
+
+Out-of-the-box Prelude will create two versions of many keybindings in `prelude-mode`:
+
+* One "traditional" version with a prefix like `Control`
+* One "alternative" version with a prefix like `Super`
+
+The reason for this is that there are generally more options for short keybindings with `Super` - e.g. you can
+have `s-p`, `s-g`, etc. There's, however, a problem lying here as well - some operating systems and
+desktop environments might be making heavy use of such keybindings. (in most cases those would intercept them before Emacs does).
+`exwm` also uses those heavily. You prevent Prelude from creating such keybindings via `prelude-super-keybindings`:
+
+```emacs-lisp
+(setq prelude-super-keybindings nil)
+```
+
 ### Configuration per file or directory
 
-These settings can also be set on a per-file or directory basis by using a file local variable or a `.dir-locals.el`
-file.
+Some of these settings (those that don't need to be pre-loaded) can also be set
+on a per-file or directory basis by using a file local variable or a
+`.dir-locals.el` file.

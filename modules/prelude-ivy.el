@@ -4,14 +4,15 @@
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
-;; Version: 1.0.0
-;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
 
 ;;; Commentary:
 
-;; Ivy-related config.
+;; Ivy-related config.  Ivy is a smart framework for minibuffer
+;; completion/filtering/selection (think of ido).  Swiper and counsel
+;; are two packages built on top of ivy that provide ivy-powered
+;; versions of popular Emacs commands.
 
 ;;; License:
 
@@ -33,6 +34,7 @@
 ;;; Code:
 (prelude-require-packages '(ivy swiper counsel))
 
+;;; Ivy
 ;; ivy is a powerful alternative to the popular ido-mode
 
 (require 'ivy)
@@ -45,11 +47,12 @@
 
 (setq projectile-completion-system 'ivy)
 
+;;; Swiper
 ;; swiper provides enhanced buffer search
 
 (global-set-key "\C-s" 'swiper)
 
-
+;;; Counsel
 ;; counsel supercharges a lot of commands with some ivy magic
 
 (global-set-key (kbd "M-x") 'counsel-M-x)
@@ -64,7 +67,6 @@
 (global-set-key (kbd "C-c a") 'counsel-ag)
 (global-set-key (kbd "C-x l") 'counsel-locate)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-
 
 (provide 'prelude-ivy)
 ;;; prelude-ivy.el ends here

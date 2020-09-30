@@ -4,8 +4,6 @@
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
-;; Version: 1.0.0
-;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
 
@@ -39,7 +37,8 @@
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 
-(menu-bar-mode -1)
+(when prelude-minimalistic-ui
+  (menu-bar-mode -1))
 
 ;; the blinking cursor is nothing, but an annoyance
 (blink-cursor-mode -1)
@@ -60,6 +59,12 @@
 (column-number-mode t)
 (size-indication-mode t)
 
+;; show line numbers at the beginning of each line
+(unless prelude-minimalistic-ui
+  ;; there's a built-in linum-mode, but we're using
+  ;; nlinum-mode, as it's supposedly faster
+  (global-nlinum-mode t))
+
 ;; enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -73,10 +78,6 @@
 ;; use zenburn as the default theme
 (when prelude-theme
   (load-theme prelude-theme t))
-
-;; show the cursor when moving after big movements in the window
-(require 'beacon)
-(beacon-mode +1)
 
 ;; show available keybindings after you start typing
 (require 'which-key)

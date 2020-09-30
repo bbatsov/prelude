@@ -1,8 +1,7 @@
 ;;; prelude-go.el --- Emacs Prelude: Go programming support.
 ;;
 ;; Author: Doug MacEachern
-;; Version: 1.0.0
-;; Keywords: convenience go
+;; URL: https://github.com/bbatsov/prelude
 
 ;; This file is not part of GNU Emacs.
 

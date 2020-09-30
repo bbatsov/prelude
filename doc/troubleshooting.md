@@ -9,7 +9,7 @@ installed.
 
 If you're doing manual Prelude updates you should always do a package update first.
 
-`M-x package-list-packages RET U x`
+    M-x package-list-packages RET U x
 
 That's not necessary if you're using `M-x prelude-update`, since it
 will automatically update the installed packages.
@@ -22,8 +22,8 @@ on the presence of the `aspell` program and an `en` dictionary on your
 system. You can install `aspell` and the dictionary on macOS with
 `homebrew` like this:
 
-```bash
-brew install aspell --with-lang=en
+```shellsession
+$ brew install aspell --with-lang=en
 ```
 
 On Linux distros - just use your distro's package manager.

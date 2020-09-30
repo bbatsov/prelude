@@ -4,9 +4,6 @@
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
-;; Version: 1.0.0
-;; Keywords: convenience
-;; Package-Requires: ((prelude-lisp "1.0.0"))
 
 ;; This file is not part of GNU Emacs.
 

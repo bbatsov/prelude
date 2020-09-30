@@ -16,6 +16,7 @@ advised to always run Prelude with the latest stable Emacs release.
 
 You can support the development of Prelude via
 [GitHub Sponsors](https://github.com/sponsors/bbatsov),
+[ko-fi](https://ko-fi.com/bbatsov),
 [PayPal](https://www.paypal.me/bbatsov) and
 [Patreon](https://www.patreon.com/bbatsov).
 
@@ -27,6 +28,8 @@ You can support the development of Prelude via
 * A curated set of 3rd party packages to enhance the base functionality
 * Simple modular architecture
 * Easy customization
+
+Check out our [user manual](https://prelude.emacsredux.com) for more information.
 
 ## Fast Forward
 
@@ -81,6 +84,19 @@ All the third-party packages that it bundles are carefully vetted and are known 
 good quality and to have reliable maintainers. That generally means that Prelude's unlikely
 to immediate adopt some shiny new package, that has established tried and true alternatives.
 
+In practice this translates to the following:
+
+* Prelude is less opinionated than distros like Spacemacs and Doom Emacs (meaning it's closer to the standard Emacs experience)
+* Prelude installs relatively few additional packages by default
+* Most modules in Prelude are opt-in instead of opt-out (you'll notice the default config enables only a handful of modules)
+* Most modules (e.g. modules for programming languages) are pretty short and feature setup only for essential packages (in some cases that be just the major mode for the language in question)
+* You don't really need to track Prelude's upstream - you're encouraged to just fork it and use it as the basis for your own configuration.
+
+Remember that the ultimate goal of every Emacs user is to create an Emacs setup that reflects their own experience, needs, goals and ideas. Just like Lisp,
+Emacs is nothing but a raw building material for the perfect editing experience.
+
+More installation options are discussed [here](https://prelude.emacsredux.com/en/latest/installation/).
+
 ## User Manual
 
 While Emacs Prelude is pretty simple at its core, it does have some specifics that
@@ -88,6 +104,17 @@ are worth learning - e.g. configuration options, load order of modules and perso
 and so on.
 
 Check out our [user manual](https://prelude.emacsredux.com) for more information.
+
+You can also find a lot of information about specific Prelude features and the rationale behind them on
+my Emacs blog [Emacs Redux](https://emacsredux.com).
+
+## crux and super-save
+
+A lot of utility commands that used to be part of Prelude were eventually extracted to the [crux](https://github.com/bbatsov/crux) package,
+so they'd be easily available to more people.
+These days Prelude simply depends on that package.
+
+The [super-save](https://github.com/bbatsov/super-save) package also used to be part of Prelude in the past.
 
 ## Known issues
 

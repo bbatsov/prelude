@@ -1,8 +1,6 @@
 ;;; prelude-rust.el --- Emacs Prelude: Rust programming support.
 ;;
 ;; Authors: Doug MacEachern, Manoel Vilela, Ben Alex
-;; Version: 1.0.1
-;; Keywords: convenience rust
 
 ;; This file is not part of GNU Emacs.
 
