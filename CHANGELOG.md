@@ -16,6 +16,7 @@
 * Removed `beacon-mode`.
 * Add the `ag` package. It provides a nice alternative to `grep` and has nice Projectile integration.
 * Auto-install `adoc-mode` for AsciiDoc files.
+* Added `transient/` to `.gitignore`.
 
 ### Bugs fixed
 
