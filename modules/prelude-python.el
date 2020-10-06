@@ -31,6 +31,11 @@
 
 ;;; Code:
 
+(defcustom prelude-python-mode-set-encoding-automatically nil
+  "Non-nil values enable auto insertion of '# coding: utf-8' on python buffers."
+  :type 'boolean
+  :group 'prelude)
+
 (prelude-require-package 'anaconda-mode)
 
 (when (boundp 'company-backends)
@@ -97,7 +102,8 @@
                 #'python-imenu-create-flat-index))
   (add-hook 'post-self-insert-hook
             #'electric-layout-post-self-insert-function nil 'local)
-  (add-hook 'after-save-hook 'prelude-python-mode-set-encoding nil 'local))
+  (when prelude-python-mode-set-encoding-automatically
+    (add-hook 'after-save-hook 'prelude-python-mode-set-encoding nil 'local)))
 
 (setq prelude-python-mode-hook 'prelude-python-mode-defaults)
 
