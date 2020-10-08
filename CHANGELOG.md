@@ -18,6 +18,7 @@
 * Add the `ag` package. It provides a nice alternative to `grep` and has nice Projectile integration.
 * Auto-install `adoc-mode` for AsciiDoc files.
 * Added `transient/` to `.gitignore`.
+* Added additional configuration modules for WSL (`prelude-wsl`) and Windows (`prelude-windows`).
 
 ### Bugs fixed
 
