@@ -6,6 +6,7 @@
 
 * Enable `nlinum-mode` by default. Can be disabled by setting `prelude-minimalistic-ui` to `nil`.
 * Enable site-wide installation for Prelude.
+* Auto-installs `julia-mode` if needed.
 
 ### Changes
 
