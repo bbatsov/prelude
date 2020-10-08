@@ -7,6 +7,9 @@
 * Enable `nlinum-mode` by default. Can be disabled by setting `prelude-minimalistic-ui` to `nil`.
 * Enable site-wide installation for Prelude.
 * Auto-installs `julia-mode` if needed.
+* Auto-install `adoc-mode` for AsciiDoc files.
+* Add the `ag` package. It provides a nice alternative to `grep` and has nice Projectile integration.
+* Added additional configuration modules for WSL (`prelude-wsl`) and Windows (`prelude-windows`).
 
 ### Changes
 
@@ -16,10 +19,7 @@
 * Removed deprecated alias `prelude-ensure-module-deps`.
 * Remove `prelude-fullscreen`, as these days people can use `toggle-frame-fullscreen` instead. (it was introduced in Emacs 24.4)
 * Removed `beacon-mode`.
-* Add the `ag` package. It provides a nice alternative to `grep` and has nice Projectile integration.
-* Auto-install `adoc-mode` for AsciiDoc files.
 * Added `transient/` to `.gitignore`.
-* Added additional configuration modules for WSL (`prelude-wsl`) and Windows (`prelude-windows`).
 
 ### Bugs fixed
 
