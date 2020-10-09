@@ -12,7 +12,14 @@ pages:
     - Company: modules/company.md
     - ERC: modules/erc.md
     - Programming: modules/programming.md
+    - Lisp: modules/lisp.md
+    - Emacs Lisp: modules/emacs_lisp.md
+    - Common Lisp: modules/common_lisp.md
+    - Scheme: modules/scheme.md
+    - Clojure: modules/clojure.md
+    - Dart: modules/dart.md
     - Python: modules/python.md
+    - Ruby: modules/ruby.md
 - FAQ: faq.md
 - Troubleshooting: troubleshooting.md
 - Contributing: contributing.md
