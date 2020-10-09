@@ -73,7 +73,7 @@ The following programming languages have enhanced support in Prelude:
 - [Ruby](ruby.md)
 - Rust
 - Scala
-- Scheme
+- [Scheme](scheme.md)
 - SCSS
 - Shell
 - TypeScript
