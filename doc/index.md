@@ -31,21 +31,23 @@ You can support the development of Prelude via
 
 Here are some of the essential 3rd party packages that Prelude adds to Emacs:
 
-* ace-window (effective navigation between multiple windows)
-* avy (effective navigation)
-* crux (lots of useful editing commands)
-* diff-hl (shows colorful diff markers in the gutter when you're editing files under version control)
-* easy-kill
-* expand-region
-* flycheck (modern integration with many lint tools)
-* guru-mode (an Emacs guru that helps you learn basic Emacs keybindings)
-* projectile (powerful project navigation/interaction package)
-* magit (the best git client in the known universe)
-* nlinum (line numbers in your buffers)
-* smartparens (powerful package for dealing with expressions and matched delimiters in programming languages)
-* super-save (auto-save buffers when moving around)
-* which-key (shows you possible keybindings when you type a partial keybinding)
-* zenburn-theme (Prelude's default color theme)
+* [ace-window](https://github.com/abo-abo/ace-window) (effective navigation between multiple windows)
+* [avy](https://github.com/abo-abo/avy) (effective navigation)
+* [crux](https://github.com/bbatsov/crux) (lots of useful editing commands)
+* [diff-hl](https://github.com/dgutov/diff-hl) (shows colorful diff markers in the gutter when you're editing files under version control)
+* [easy-kill](https://github.com/leoliu/easy-kill)
+* [expand-region](https://github.com/magnars/expand-region.el)
+* [flycheck](https://www.flycheck.org/) (modern integration with many lint tools)
+* [guru-mode](https://github.com/bbatsov/guru-mode) (an Emacs guru that helps you learn basic Emacs keybindings)
+* [projectile](https://github.com/bbatsov/projectile) (powerful project navigation/interaction package)
+* [magit](https://magit.vc/) (the best git client in the known universe)
+* [git-timemachine](https://gitlab.com/pidu/git-timemachine) (navigate quickly through different versions of one file)
+* `nlinum` (line numbers in your buffers)
+* [smartparens](https://github.com/Fuco1/smartparens) (powerful package for dealing with expressions and matched delimiters in programming languages)
+* [super-save](https://github.com/bbatsov/super-save) (auto-save buffers when moving around)
+* [which-key](https://github.com/justbur/emacs-which-key) (shows you possible keybindings when you type a partial keybinding)
+* [zenburn-theme](https://github.com/bbatsov/zenburn-emacs) (Prelude's default color theme)
+* [undo-tree](https://elpa.gnu.org/packages/undo-tree.html) (A powerful way to navigate your editing history)
 
 On top of this Prelude bundles a bunch of smaller packages and makes many more packages available via optional modules.
 
@@ -54,32 +56,31 @@ On top of this Prelude bundles a bunch of smaller packages and makes many more p
 The following programming languages have enhanced support in Prelude:
 
 - C/C++
-- Clojure
+- [Clojure](modules/clojure.md)
 - CoffeeScript
-- Common Lisp
+- [Common Lisp](modules/common_lisp.md)
 - CSS
 - [Dart](modules/dart.md)
-- Emacs Lisp
+- [Emacs Lisp](modules/emacs_lisp.md)
 - Erlang
 - Elixir
 - Go
 - Haskell
 - JavaScript
 - LaTeX
-- Lisp Base (common foundation for Lisp modules)
+- [Lisp Base](modules/lisp.md) (common foundation for Lisp modules)
 - Markdown
 - OCaml
 - Org Mode
 - Perl
 - [Python](modules/python.md)
-- Ruby
+- [Ruby](modules/ruby.md)
 - Rust
 - Scala
-- Scheme
+- [Scheme](modules/scheme.md)
 - SCSS
-- Shell
 - TypeScript
-- Web
+- HTML (via `web-mode`)
 - XML
 - YAML
 

@@ -65,6 +65,7 @@ The following programming languages have enhanced support in Prelude:
 - JavaScript
 - LaTeX
 - [Lisp Base](lisp.md) (common foundation for Lisp modules)
+- LSP (common foundation for all modules relying on `lsp-mode`)
 - Markdown
 - OCaml
 - Perl
