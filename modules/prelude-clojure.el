@@ -9,7 +9,8 @@
 
 ;;; Commentary:
 
-;; Some basic configuration for clojure-mode.
+;; A basic setup for Clojure programming based on clojure-mode
+;; and CIDER.
 
 ;;; License:
 
