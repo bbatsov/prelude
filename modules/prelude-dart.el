@@ -9,7 +9,7 @@
 
 ;;; Commentary:
 
-;; Some basic configuration for prelude-dart.
+;; Basic configuration for programming in Dart.
 
 ;;; License:
 
