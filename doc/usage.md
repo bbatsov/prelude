@@ -213,7 +213,7 @@ You can always reactivate Helm with `(prelude-global-helm-global-mode-on)`.
 
     In `helm-M-x`, you have to pass prefix argument *AFTER* you run `helm-M-x`,
     because your prefix argument will be displayed in the modeline when in `helm-M-x`
-    buffer. Passing prefix argument **BEFORE** =helm-M-x= **has no effect**.
+    buffer. Passing prefix argument **BEFORE** `helm-M-x` **has no effect**.
 
 
 #### Key-chords
