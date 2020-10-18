@@ -43,10 +43,10 @@
   (getenv
    (if (equal system-type 'windows-nt) "USERNAME" "USER")))
 
-(message "Prelude is powering up... Be patient, Master %s!" prelude-user)
+(message "[Prelude] Prelude is powering up... Be patient, Master %s!" prelude-user)
 
 (when (version< emacs-version "25.1")
-  (error "Prelude requires GNU Emacs 25.1 or newer, but you're running %s" emacs-version))
+  (error "[Prelude] Prelude requires GNU Emacs 25.1 or newer, but you're running %s" emacs-version))
 
 ;; Always load newest byte code
 (setq load-prefer-newer t)
@@ -100,10 +100,10 @@ by Prelude.")
 
 ;; preload the personal settings from `prelude-personal-preload-dir'
 (when (file-exists-p prelude-personal-preload-dir)
-  (message "Loading personal configuration files in %s..." prelude-personal-preload-dir)
+  (message "[Prelude] Loading personal configuration files in %s..." prelude-personal-preload-dir)
   (mapc 'load (directory-files prelude-personal-preload-dir 't "^[^#\.].*el$")))
 
-(message "Loading Prelude's core...")
+(message "[Prelude] Loading Prelude's core modules...")
 
 ;; load the core stuff
 (require 'prelude-packages)
@@ -130,14 +130,14 @@ by Prelude.")
 (when (eq system-type 'windows-nt)
   (require 'prelude-windows))
 
-(message "Loading Prelude's modules...")
+(message "[Prelude] Loading Prelude's additional modules...")
 
 ;; the modules
 (if (file-exists-p prelude-modules-file)
     (load prelude-modules-file)
-  (message "Missing personal modules file %s" prelude-modules-file)
-  (message "Falling back to the bundled example file sample/prelude-modules.el")
-  (message "You should copy this file to your personal configuration folder and tweak it to your liking")
+  (message "[Prelude] Missing personal modules file %s" prelude-modules-file)
+  (message "[Prelude] Falling back to the bundled example file sample/prelude-modules.el")
+  (message "[Prelude] You should copy this file to your personal configuration folder and tweak it to your liking")
   (load (expand-file-name "sample/prelude-modules.el" user-emacs-directory)))
 
 ;; config changes made through the customize UI will be stored here
@@ -145,12 +145,12 @@ by Prelude.")
 
 ;; load the personal settings (this includes `custom-file')
 (when (file-exists-p prelude-personal-dir)
-  (message "Loading personal configuration files in %s..." prelude-personal-dir)
+  (message "[Prelude] Loading personal configuration files in %s..." prelude-personal-dir)
   (mapc 'load (delete
                prelude-modules-file
                (directory-files prelude-personal-dir 't "^[^#\.].*\\.el$"))))
 
-(message "Prelude is ready to do thy bidding, Master %s!" prelude-user)
+(message "[Prelude] Prelude is ready to do thy bidding, Master %s!" prelude-user)
 
 ;; Patch security vulnerability in Emacs versions older than 25.3
 (when (version< emacs-version "25.3")
