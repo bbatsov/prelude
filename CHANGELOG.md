@@ -20,6 +20,7 @@
 * Remove `prelude-fullscreen`, as these days people can use `toggle-frame-fullscreen` instead. (it was introduced in Emacs 24.4)
 * Removed `beacon-mode`.
 * Added `transient/` to `.gitignore`.
+* Fallback to `sample/prelude-modules.el` in the absence of a `prelude-modules.el` in one's personal folder.
 
 ### Bugs fixed
 

@@ -135,8 +135,10 @@ by Prelude.")
 ;; the modules
 (if (file-exists-p prelude-modules-file)
     (load prelude-modules-file)
-  (message "Missing modules file %s" prelude-modules-file)
-  (message "You can get started by copying the bundled example file from sample/prelude-modules.el"))
+  (message "Missing personal modules file %s" prelude-modules-file)
+  (message "Falling back to the bundled example file sample/prelude-modules.el")
+  (message "You should copy this file to your personal configuration folder and tweak it to your liking")
+  (load (expand-file-name "sample/prelude-modules.el" user-emacs-directory)))
 
 ;; config changes made through the customize UI will be stored here
 (setq custom-file (expand-file-name "custom.el" prelude-personal-dir))
