@@ -60,8 +60,10 @@ colors_ () {
 #   Defaults to 'https://github.com/bbatsov/prelude.git'
 # -i/--into
 #   If one exists, install into the existing config
+# -m/--no-move-dotemacs
+#   Leave '$HOME/.emacs' untouched
 # -n/--no-bytecompile
-#   Skip the compilation of the prelude files.
+#   Skip the compilation of the prelude files
 # -h/--help
 #   Print help
 # -v/--verbose
@@ -75,6 +77,7 @@ usage() {
     printf "  \t \t \t \t Defaults to $HOME/.emacs.d\n"
     printf "  -s, --source [url] \t \t Clone Prelude from 'url'.\n"
     printf "  \t \t \t \t Defaults to 'https://github.com/bbatsov/prelude.git'.\n"
+    printf "  -m, --no-move-dotemacs \t \t Leave '$HOME/.emacs' untouched.\n"
     printf "  -n, --no-bytecompile \t \t Skip the bytecompilation step of Prelude.\n"
     printf "  -i, --into \t \t \t Install Prelude into a subdirectory in the existing configuration\n"
     printf "  \t \t \t \t The default behavior is to install Prelude into the existing\n"
@@ -102,6 +105,10 @@ do
             ;;
         -i | --into)
             PRELUDE_INTO='true'
+            shift 1
+            ;;
+        -m | --no-move-dotemacs)
+            PRELUDE_PRESERVE_DOTEMACS='true'
             shift 1
             ;;
         -n | --no-bytecompile)
@@ -135,6 +142,10 @@ then
     printf "INSTALL_DIR = $PRELUDE_INSTALL_DIR\n"
     printf "SOURCE_URL  = $PRELUDE_URL\n"
     printf "$RESET"
+    if [ -n "$PRELUDE_PRESERVE_DOTEMACS" ]
+    then
+        printf "Leaving ~/.emacs untouched.\n"
+    fi
     if [ -n "$PRELUDE_SKIP_BC" ]
     then
         printf "Skipping bytecompilation.\n"
@@ -180,7 +191,7 @@ then
     printf "$YELLOW WARNING:$RESET Prelude requires Emacs $RED 25$RESET or newer!\n"
 fi
 
-if [ -f "$HOME/.emacs" ]
+if [ -f "$HOME/.emacs" ] && [ -z "$PRELUDE_PRESERVE_DOTEMACS" ]
 then
     ## If $HOME/.emacs exists, emacs ignores prelude's init.el, so remove it
     printf " Backing up the existing $HOME/.emacs to $HOME/.emacs.pre-prelude\n"
