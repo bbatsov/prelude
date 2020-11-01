@@ -13,7 +13,7 @@ following links.
 ## What's a module?
 
 Prelude modules are plain old Elisp libraries - there's absolutely nothing magical about them.
-Most of them simply install a few package and provide some sensible baseline configuration for them.
+Most of them simply install a few Emacs packages and provide some sensible baseline configuration for them.
 Here's a real example.
 
 ``` emacs-lisp
