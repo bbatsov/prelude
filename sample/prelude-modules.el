@@ -47,6 +47,10 @@
 ;; (require 'prelude-helm-everywhere) ;; Enable Helm everywhere
 (require 'prelude-company)
 ;; (require 'prelude-key-chord) ;; Binds useful features to key combinations
+
+;;; Vim emulation
+;;
+;; Enable this module if you're fond of vim's keybindings.
 ;; (require 'prelude-evil)
 
 ;;; Org-mode (a legendary productivity tool that deserves its own category)
