@@ -21,6 +21,7 @@
 * Removed `beacon-mode`.
 * Added `transient/` to `.gitignore`.
 * Fallback to `sample/prelude-modules.el` in the absence of a `prelude-modules.el` in one's personal folder.
+* [Ruby] Don't auto-insert coding comments.
 
 ### Bugs fixed
 
