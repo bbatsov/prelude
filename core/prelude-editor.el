@@ -146,6 +146,7 @@
 ;; add integration with ace-window
 (add-to-list 'super-save-triggers 'ace-window)
 (super-save-mode +1)
+(diminish 'super-save-mode)
 
 (defadvice set-buffer-major-mode (after set-major-mode activate compile)
   "Set buffer major mode according to `auto-mode-alist'."
@@ -307,6 +308,7 @@ indent yanked text (with prefix arg don't indent)."
 
 ;; abbrev config
 (add-hook 'text-mode-hook 'abbrev-mode)
+(diminish 'abbrev-mode)
 
 ;; make a shell script executable automatically on save
 (add-hook 'after-save-hook
@@ -415,6 +417,7 @@ and file 'filename' will be opened and cursor set on line 'linenumber'"
 ;; use settings from .editorconfig file when present
 (require 'editorconfig)
 (editorconfig-mode 1)
+(diminish 'editorconfig-mode)
 
 (provide 'prelude-editor)
 

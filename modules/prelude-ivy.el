@@ -38,12 +38,15 @@
 ;; ivy is a powerful alternative to the popular ido-mode
 
 (require 'ivy)
+(require 'diminish)
 
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
 (setq enable-recursive-minibuffers t)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 (global-set-key (kbd "<f6>") 'ivy-resume)
+
+(diminish 'ivy-mode)
 
 (setq projectile-completion-system 'ivy)
 
