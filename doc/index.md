@@ -36,6 +36,7 @@ Here are some of the essential 3rd party packages that Prelude adds to Emacs:
 * [crux](https://github.com/bbatsov/crux) (lots of useful editing commands)
 * [diff-hl](https://github.com/dgutov/diff-hl) (shows colorful diff markers in the gutter when you're editing files under version control)
 * [easy-kill](https://github.com/leoliu/easy-kill)
+* [editorconfig-mode](https://github.com/editorconfig/editorconfig-emacs) (teaches Emacs to respect [.editorconfig](https://editorconfig.org/))
 * [expand-region](https://github.com/magnars/expand-region.el)
 * [flycheck](https://www.flycheck.org/) (modern integration with many lint tools)
 * [guru-mode](https://github.com/bbatsov/guru-mode) (an Emacs guru that helps you learn basic Emacs keybindings)
