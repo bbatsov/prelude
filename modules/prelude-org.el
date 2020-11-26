@@ -32,7 +32,7 @@
 
 (require 'org)
 
-(add-to-list 'auto-mode-alist '("\\.org\\’" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 ;; a few useful global keybindings for org-mode
 (global-set-key "\C-cl" 'org-store-link)
