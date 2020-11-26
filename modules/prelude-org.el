@@ -30,10 +30,15 @@
 
 ;;; Code:
 
+(require 'org-mode)
+
 (add-to-list 'auto-mode-alist '("\\.org\\’" . org-mode))
+
+;; a few useful global keybindings for org-mode
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-switchb)
+
 (setq org-log-done t)
 
 (defun prelude-org-mode-defaults ()
