@@ -52,8 +52,6 @@
 
 (diminish 'ivy-mode)
 
-(setq projectile-completion-system 'ivy)
-
 ;;; Swiper
 ;; swiper provides enhanced buffer search
 
