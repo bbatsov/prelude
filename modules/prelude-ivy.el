@@ -39,7 +39,8 @@
 ;; ivy is a powerful alternative to the popular ido-mode
 
 (require 'ivy)
-(require 'ivy-prescient)
+(require 'counsel)
+(require 'ivy-prescient) ;; must be loaded after counsel
 (require 'diminish)
 
 (ivy-mode 1)
