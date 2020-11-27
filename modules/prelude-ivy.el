@@ -35,6 +35,7 @@
 (prelude-require-packages '(ivy ivy-prescient swiper counsel))
 
 ;;; Ivy
+;;
 ;; ivy is a powerful alternative to the popular ido-mode
 
 (require 'ivy)
@@ -53,11 +54,13 @@
 (diminish 'ivy-mode)
 
 ;;; Swiper
+;;
 ;; swiper provides enhanced buffer search
 
 (global-set-key "\C-s" 'swiper)
 
 ;;; Counsel
+;;
 ;; counsel supercharges a lot of commands with some ivy magic
 
 (global-set-key (kbd "M-x") 'counsel-M-x)
