@@ -42,7 +42,7 @@
 (define-key lsp-ui-mode-map (kbd "C-c C-l .") 'lsp-ui-peek-find-definitions)
 (define-key lsp-ui-mode-map (kbd "C-c C-l ?") 'lsp-ui-peek-find-references)
 (define-key lsp-ui-mode-map (kbd "C-c C-l r") 'lsp-rename)
-(define-key lsp-ui-mode-map (kbd "C-c C-l x") 'lsp-restart-workspace)
+(define-key lsp-ui-mode-map (kbd "C-c C-l x") 'lsp-workspace-restart)
 (define-key lsp-ui-mode-map (kbd "C-c C-l w") 'lsp-ui-peek-find-workspace-symbol)
 (define-key lsp-ui-mode-map (kbd "C-c C-l i") 'lsp-ui-peek-find-implementation)
 (define-key lsp-ui-mode-map (kbd "C-c C-l d") 'lsp-describe-thing-at-point)
