@@ -26,6 +26,8 @@
 * [Ruby] Don't auto-insert coding comments.
 * Hide (via `diminish`) `editorconfig-mode`, `super-save`, `company`, `abbrev` and `ivy` in the modeline.
 * Use `lsp-workspace-restart` function instead of deprecated `lsp-restart-workspace`.
+* Bind all online search commands under `C-c C-/` to avoid a conflict with `counsel-git` or `magit-file-dispatch`.
+* Bound `magit-file-mode` to `C-c g` (it's also bound to `C-c M-g` if you decide to utilize this keybinding for something else.
 
 ### Bugs fixed
 

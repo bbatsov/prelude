@@ -36,10 +36,10 @@
 (defvar prelude-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c o") 'crux-open-with)
-    (define-key map (kbd "C-c g") 'prelude-google)
-    (define-key map (kbd "C-c G") 'prelude-github)
-    (define-key map (kbd "C-c y") 'prelude-youtube)
-    (define-key map (kbd "C-c U") 'prelude-duckduckgo)
+    (define-key map (kbd "C-c C-/ g") 'prelude-google)
+    (define-key map (kbd "C-c C-/ h") 'prelude-github)
+    (define-key map (kbd "C-c C-/ y") 'prelude-youtube)
+    (define-key map (kbd "C-c C-/ d") 'prelude-duckduckgo)
     ;; mimic popular IDEs binding, note that it doesn't work in a terminal session
     (define-key map (kbd "C-a") 'crux-move-beginning-of-line)
     (define-key map [(shift return)] 'crux-smart-open-line)
@@ -78,8 +78,9 @@
       (define-key map (kbd "s-o") 'crux-smart-open-line-above)
       ;; magit
       (define-key map (kbd "s-m m") 'magit-status)
-      (define-key map (kbd "s-m l") 'magit-log)
-      (define-key map (kbd "s-m f") 'magit-log-buffer-file)
+      (define-key map (kbd "s-m j") 'magit-dispatch)
+      (define-key map (kbd "s-m k") 'magit-file-dispatch)
+      (define-key map (kbd "s-m l") 'magit-log-buffer-file)
       (define-key map (kbd "s-m b") 'magit-blame)
       ;; misc
       (define-key map (kbd "s-/") 'hippie-expand))
