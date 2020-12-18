@@ -28,3 +28,5 @@ prelude-cheatsheet.aux
 prelude-cheatsheet.log
 transient/
 var/
+.cache/
+.lsp-session*
