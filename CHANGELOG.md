@@ -10,7 +10,6 @@
 * Auto-install `adoc-mode` for AsciiDoc files.
 * Add the `ag` package. It provides a nice alternative to `grep` and has nice Projectile integration.
 * Added additional configuration modules for WSL (`prelude-wsl`) and Windows (`prelude-windows`).
-* Add `ivy-prescient` to `prelude-ivy`.
 * Add `prelude-selectrum` module. Selectrum a simpler alternative to `ivy-mode`.
 
 ### Changes
