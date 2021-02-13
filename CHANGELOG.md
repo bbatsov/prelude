@@ -4,7 +4,7 @@
 
 ### New features
 
-* Enable `nlinum-mode` by default. Can be disabled by setting `prelude-minimalistic-ui` to `t`.
+* Enable `nlinum-mode` or `display-line-numbers-mode` by default. Can be disabled by setting `prelude-minimalistic-ui` to `t`.
 * Enable site-wide installation for Prelude.
 * Auto-installs `julia-mode` if needed.
 * Auto-install `adoc-mode` for AsciiDoc files.
