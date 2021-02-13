@@ -62,8 +62,11 @@
 ;; show line numbers at the beginning of each line
 (unless prelude-minimalistic-ui
   ;; there's a built-in linum-mode, but we're using
-  ;; nlinum-mode, as it's supposedly faster
-  (global-nlinum-mode t))
+  ;; display-line-numbers-mode or nlinum-mode,
+  ;; as it's supposedly faster
+  (if (fboundp 'global-display-line-numbers-mode)
+      (global-display-line-numbers-mode)
+    (global-nlinum-mode t)))
 
 ;; enable y/n answers
 (fset 'yes-or-no-p 'y-or-n-p)
