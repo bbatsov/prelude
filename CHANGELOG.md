@@ -6,6 +6,8 @@
 
 ### Changes
 
+* Bind all essential `avy` commands to their recommended keybindings.
+
 ### Bugs fixed
 
 ## 1.1.0 (2021-02-14)
