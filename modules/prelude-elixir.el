@@ -1,6 +1,6 @@
 ;;; prelude-elixir.el --- Emacs Prelude: Elixir programming support.
 ;;
-;; Copyright © 2014-2020 Samuel Tonini
+;; Copyright © 2014-2021 Samuel Tonini
 ;;
 ;; Author: Samuel Tonini <tonini.samuel@gmail.com>
 

@@ -1,6 +1,6 @@
 ;;; prelude-scss.el --- Emacs Prelude: scss support
 ;;
-;; Copyright © 2011-2020 Bozhidar Batsov
+;; Copyright © 2011-2021 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: http://www.batsov.com/emacs-prelude

@@ -143,7 +143,7 @@ welcome. GitHub pull requests are even better! :-)
 
 ## License
 
-Copyright © 2011-2020 Bozhidar Batsov and
+Copyright © 2011-2021 Bozhidar Batsov and
 [contributors](https://github.com/bbatsov/prelude/contributors).
 
 Distributed under the GNU General Public License, version 3
