@@ -27,5 +27,5 @@ in recent years, so Prelude's defaults might change down the road.
 
 ## Why is Zenburn the default color theme?
 
-No particular reason other than the fact that I like it lot and happen to maintain
-it's Emacs port. I believe it's pretty nice improvement over the default Emacs theme, but your perspective might be different.
+No particular reason other than the fact that I like it a lot and happen to maintain
+its Emacs port. I believe it's pretty nice improvement over the default Emacs theme, but your perspective might be different.
