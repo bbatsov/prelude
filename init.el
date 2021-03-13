@@ -39,6 +39,9 @@
 ;; You may delete these explanatory comments.
                                         ;(package-initialize)
 
+;; Prelude could not install because not all of its packages have gpg keys
+(setq package-check-signature nil)
+
 (defvar prelude-user
   (getenv
    (if (equal system-type 'windows-nt) "USERNAME" "USER")))

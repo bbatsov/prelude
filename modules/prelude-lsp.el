@@ -30,7 +30,8 @@
 
 ;;; Code:
 
-(prelude-require-packages '(company-lsp
+;; Commented out since this package cannot be found on melpa
+(prelude-require-packages '(;company-lsp
                             lsp-mode
                             lsp-ui))
 
