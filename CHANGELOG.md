@@ -6,6 +6,7 @@
 
 * Add a Racket module.
 * Add a Lua module.
+* Auto-install `racket-mode` if needed.
 
 ### Changes
 
