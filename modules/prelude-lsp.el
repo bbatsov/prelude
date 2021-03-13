@@ -30,8 +30,7 @@
 
 ;;; Code:
 
-(prelude-require-packages '(company-lsp
-                            lsp-mode
+(prelude-require-packages '(lsp-mode
                             lsp-ui))
 
 (require 'lsp-ui)
