@@ -4,9 +4,13 @@
 
 ### New features
 
+* Add a Racket module.
+* Add a Lua module.
+
 ### Changes
 
 * Bind all essential `avy` commands to their recommended keybindings.
+* Remove `company-lsp`.
 
 ### Bugs fixed
 
