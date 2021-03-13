@@ -76,6 +76,7 @@ The following programming languages have enhanced support in Prelude:
 - Org Mode
 - Perl
 - [Python](modules/python.md)
+- Racket
 - [Ruby](modules/ruby.md)
 - Rust
 - Scala
