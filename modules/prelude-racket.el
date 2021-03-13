@@ -31,19 +31,19 @@
 ;;; Code:
 
 (prelude-require-packages '(racket-mode))
+
 (require 'prelude-lisp)
 
 (with-eval-after-load 'racket-mode
   (define-key racket-mode-map (kbd "M-RET") 'racket-run)
-  (define-key racket-mode-map (kbd "M-.") 'racket-repl-visit-definition))
+  (define-key racket-mode-map (kbd "M-.") 'racket-repl-visit-definition)
 
-(add-hook 'racket-mode-hook #'racket-unicode-input-method-enable)
-(add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable)
+  ;; Enable the common Lisp coding hook
+  (add-hook 'racket-mode-hook (lambda () (run-hooks 'prelude-lisp-coding-hook)))
 
-(add-hook 'racket-mode-hook (lambda () (run-hooks 'prelude-lisp-coding-hook)))
-(add-hook 'racket-mode-hook (lambda () (setq-local whitespace-line-column 102)))
+  (add-hook 'racket-mode-hook #'racket-unicode-input-method-enable)
+  (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable))
 
-(add-to-list 'auto-mode-alist '("\\.rkt$" . racket-mode))
 (add-to-list 'auto-mode-alist '("\\.rkt?\\'" . racket-mode))
 (add-to-list 'auto-mode-alist '("\\.rkt\\'" . racket-mode))
 

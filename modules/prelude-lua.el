@@ -39,6 +39,7 @@
   (setq lua-indent-nested-block-content-align nil)
   (setq lua-indent-close-paren-align nil)
   (setq lua-indent-string-contents t)
+
   (define-key lua-mode-map (kbd "C-c C-b") 'lua-send-buffer)
   (define-key lua-mode-map (kbd "C-c C-l") 'lua-send-current-line)
   (define-key lua-mode-map (kbd "C-c C-f") 'lua-send-defun)
@@ -46,7 +47,7 @@
   (define-key lua-mode-map (kbd "C-c C-z") 'lua-show-process-buffer))
 
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+(add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
 (provide 'prelude-lua)
