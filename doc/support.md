@@ -29,5 +29,4 @@ from other Prelude users there.
 We're also encouraging users to ask Prelude-related questions on StackOverflow.
 
 When doing so you should use the
-[Prelude](http://stackoverflow.com/questions/tagged/prelude) tag (ideally combined
-with the tag `emacs`).
+[emacs-prelude](https://stackoverflow.com/questions/tagged/emacs-prelude) tag.
