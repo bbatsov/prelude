@@ -32,3 +32,6 @@ var/
 .lsp-session*
 gotools/
 eln-cache/
+
+FsAutoComplete/
+anaconda-mode/
