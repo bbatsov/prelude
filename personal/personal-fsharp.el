@@ -15,6 +15,8 @@
 
   ;; ----- Formatting functions -----
   ;; Credits to: https://zwild.github.io/posts/emacs-as-a-fsharp-ide-part1/.
+  (require 'projectile)
+
   (defun fsharp-format-code-region (start end)
     "Formats a code region interactively using Fantomas.
 Ref.: https://github.com/fsprojects/fantomas."
@@ -24,14 +26,18 @@ Ref.: https://github.com/fsprojects/fantomas."
            (ok-buffer (format "*%s*" tool-name))
            (error-buffer (format "*%s-errors*" tool-name)))
       (save-window-excursion
-        (shell-command-on-region
-         start
-         end
-         (format "dotnet %s --stdin --stdout" tool-name)
-         ok-buffer
-         nil
-         ;; The error buffer is used only to quickly check if the command failed.
-         error-buffer)
+        (projectile-with-default-dir (projectile-acquire-root)
+          (shell-command-on-region
+           start
+           end
+           ;; TODO: the option "--stdin" seems to ignore ".editorconfig".
+           ;; https://github.com/fsprojects/fantomas/pull/940#issuecomment-653449468
+           (format "dotnet %s %s --stdout" tool-name (buffer-file-name))
+           ok-buffer
+           nil
+           ;; The error buffer is used only to quickly check if the
+           ;; command failed.
+           error-buffer))
         (if (get-buffer error-buffer)
             ;; If the error buffer is created, show its contents before
             ;; killing the buffer.
