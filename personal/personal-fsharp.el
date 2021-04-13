@@ -4,6 +4,7 @@
 
 (with-eval-after-load 'fsharp-mode
   (setq inferior-fsharp-program "dotnet fsi --readline-")
+  (setq-default fsharp-indent-offset 2)
   ;; WARNING: I couldn't make "eglot-fsharp" work out-of-box. I had to
   ;; manually download "FsAutoComplete" and move to a directory
   ;; structure similar to the one automatically created by "eglot-fsharp".
