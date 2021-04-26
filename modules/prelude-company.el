@@ -44,7 +44,7 @@
 (setq company-tooltip-flip-when-above t)
 
 (global-company-mode 1)
-(diminish 'global-company-mode)
+(diminish 'company-mode)
 
 (provide 'prelude-company)
 ;;; prelude-company.el ends here
