@@ -15,6 +15,8 @@
 
 ### Bugs fixed
 
+* Fix `company` still being visible in the mode line.
+
 ## 1.1.0 (2021-02-14)
 
 ### New features
