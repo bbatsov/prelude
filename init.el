@@ -39,6 +39,7 @@
 ;; You may delete these explanatory comments.
                                         ;(package-initialize)
 
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (defvar prelude-user
   (getenv
    (if (equal system-type 'windows-nt) "USERNAME" "USER")))
