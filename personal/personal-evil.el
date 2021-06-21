@@ -1,28 +1,28 @@
 (prelude-require-packages '(key-chord))
-
-(require 'prelude-evil)
 (require 'key-chord)
+(require 'evil)
+
+(key-chord-mode 1)
+;; Alternative escape key definition.
+(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
 ;; Makes the "redo" system work.
 (evil-set-undo-system 'undo-tree)
-
-;; Alternative escape key definition.
-(setq key-chord-two-keys-delay 0.5)
-(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-(key-chord-mode 1)
 
 ;; Collection of "evil" configurations.
 (prelude-require-packages '(evil-collection))
 (evil-collection-init)
 
 ;; Makes it similar to easymotion on Vim.
-(define-key evil-normal-state-map (kbd "SPC") 'avy-goto-char)
-
-;; Shortcuts to increase/decrease window's height.
-(define-key evil-normal-state-map (kbd "+") 'evil-window-increase-height)
-(define-key evil-normal-state-map (kbd "-") 'evil-window-decrease-height)
+(evil-define-key 'normal 'global
+  (kbd "SPC") 'evil-avy-goto-char-2
+  "+" 'evil-window-increase-height
+  "-" 'evil-window-decrease-height)
 
 ;; Better folding shortcut.
+(require 'hideshow)
+(require 'origami)
+
 (with-eval-after-load 'hideshow
   (setq hs-hide-comments-when-hiding-all nil)
   (evil-define-key 'normal hs-minor-mode-map
@@ -43,5 +43,3 @@
     ;; Navigating through folds.
     "zj" 'origami-next-fold
     "zk" 'origami-previous-fold))
-
-(provide 'personal-evil)

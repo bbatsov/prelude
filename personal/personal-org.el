@@ -1,9 +1,17 @@
+(require 'prelude-org)
 (require 'evil)
-(require 'org)
+
+(prelude-require-package 'org-bullets)
+(require 'org-bullets)
+
+(defun personal-org-mode-defaults ()
+  (org-bullets-mode 1)
+
+  (evil-define-key 'normal org-mode-map
+    "zk" 'org-previous-visible-heading
+    "zj" 'org-next-visible-heading))
 
 (add-hook 'org-mode-hook
-          (lambda ()
-            ((define-key evil-normal-state-map
-               (kbd "zj") 'org-next-visible-heading)
-             (define-key evil-normal-state-map
-               (kbd "zk") 'org-previous-visible-heading))))
+          'personal-org-mode-defaults)
+
+(provide 'personal-org)

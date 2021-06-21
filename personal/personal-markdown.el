@@ -1,6 +1,6 @@
 (require 'evil)
 
-(add-hook 'gfm-mode-hook 'electric-pair-mode-hook)
+(add-hook 'gfm-mode-hook 'electric-pair-local-mode)
 
 (evil-define-key '(normal visual) gfm-mode-map
   ",b" 'markdown-insert-bold
