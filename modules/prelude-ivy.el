@@ -70,6 +70,7 @@
 (global-set-key (kbd "C-c j") 'counsel-git-grep)
 (global-set-key (kbd "C-c a") 'counsel-ag)
 (global-set-key (kbd "C-x l") 'counsel-locate)
+(global-set-key (kbd "M-y") 'counsel-yank-pop)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
 (provide 'prelude-ivy)
