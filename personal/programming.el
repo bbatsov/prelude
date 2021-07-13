@@ -1,9 +1,7 @@
-(require 'prelude-programming)
-
 ;; Disable auto-saving features
 (setq auto-save-default nil)
 (require 'super-save)
-(super-save-mode nil)
+(super-save-mode -1)
 
 ;; Similar to vim-illuminate
 (prelude-require-packages '(idle-highlight-mode))
@@ -13,5 +11,3 @@
 ;; https://evil.readthedocs.io/en/latest/faq.html#underscore-is-not-a-word-character
 (add-hook 'prelude-prog-mode-hook
           (lambda () (modify-syntax-entry ?_ "w")))
-
-(provide 'personal-programming)
