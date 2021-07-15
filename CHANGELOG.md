@@ -14,6 +14,7 @@
 * Bind all essential `avy` commands to their recommended keybindings.
 * Remove `company-lsp`.
 * Replace `yank-pop` key-binding to `counse-yank-pop` for `ivy-mode`.
+* The keybinding for `proced` is now enabled unconditionally.
 
 ### Bugs fixed
 
