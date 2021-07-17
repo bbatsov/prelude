@@ -7,6 +7,7 @@
 * Add a Racket module.
 * Add a Lua module.
 * Auto-install `racket-mode` if needed.
+* Add a F# module.
 
 ### Changes
 
