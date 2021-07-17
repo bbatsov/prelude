@@ -28,7 +28,6 @@
 ;;; Code:
 
 (require 'prelude-programming)
-
 (prelude-require-packages '(fsharp-mode eglot-fsharp))
 
 (with-eval-after-load 'fsharp-mode
