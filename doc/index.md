@@ -65,6 +65,7 @@ The following programming languages have enhanced support in Prelude:
 - [Emacs Lisp](modules/emacs_lisp.md)
 - Erlang
 - Elixir
+- [F#](modules/fsharp.md)
 - Go
 - Haskell
 - JavaScript
