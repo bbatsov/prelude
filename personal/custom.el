@@ -31,7 +31,7 @@
    '("~/Codes/Blogging/org-notes/notes.org" "~/Codes/Blogging/org-notes/tasks.org"))
  '(org-todo-keywords '((sequence "TODO" "DOING" "|" "DONE")))
  '(package-selected-packages
-   '(flycheck-clj-kondo dockerfile-mode org-preview-html org-preview-html-mode scss-mode org-bullets tide origami cython-mode yaml-mode evil-vimish-fold vimish-fold neotree idle-highlight-mode doom-themes evil-collection json-mode eglot-fsharp fsharp-mode rust-mode key-chord prelude-evil helm-ag helm-descbinds helm-projectile helm exec-path-from-shell zop-to-char zenburn-theme which-key volatile-highlights undo-tree super-save smartrep smartparens operate-on-number move-text magit projectile imenu-anywhere hl-todo guru-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major crux browse-kill-ring beacon anzu ace-window))
+   '(org-drill yasnippet-snippets yasnippet poetry flycheck-clj-kondo dockerfile-mode org-preview-html org-preview-html-mode scss-mode org-bullets tide origami cython-mode yaml-mode evil-vimish-fold vimish-fold neotree idle-highlight-mode doom-themes evil-collection json-mode eglot-fsharp fsharp-mode rust-mode key-chord prelude-evil helm-ag helm-descbinds helm-projectile helm exec-path-from-shell zop-to-char zenburn-theme which-key volatile-highlights undo-tree super-save smartrep smartparens operate-on-number move-text magit projectile imenu-anywhere hl-todo guru-mode gitignore-mode gitconfig-mode git-timemachine gist flycheck expand-region epl editorconfig easy-kill diminish diff-hl discover-my-major crux browse-kill-ring beacon anzu ace-window))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
  '(prelude-auto-save nil)
  '(prelude-format-on-save nil)

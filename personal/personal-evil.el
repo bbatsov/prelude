@@ -19,6 +19,9 @@
   "+" 'evil-window-increase-height
   "-" 'evil-window-decrease-height)
 
+(evil-define-key 'insert 'global
+  (kbd "C-x C-f") 'company-files)
+
 ;; Better folding shortcut.
 (require 'hideshow)
 (require 'origami)
@@ -38,7 +41,7 @@
   (evil-define-key 'normal origami-mode-map
     ;; Open and close folds.
     "zA" 'origami-recursively-toggle-node
-    "zm" 'personal-evil-fold-focus
+    "zp" 'personal-evil-fold-focus
     "zM" 'evil-close-folds
     ;; Navigating through folds.
     "zj" 'origami-next-fold

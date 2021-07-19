@@ -34,3 +34,6 @@ eln-cache/
 
 FsAutoComplete/
 anaconda-mode/
+
+# Org-drill
+persist/
