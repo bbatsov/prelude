@@ -1,15 +1,9 @@
-(require 'prelude-programming)
+(require 'prelude-fsharp)
 
-(prelude-require-packages '(fsharp-mode eglot-fsharp origami))
+(prelude-require-packages '(origami))
 
 (with-eval-after-load 'fsharp-mode
-  (setq inferior-fsharp-program "dotnet fsi --readline-")
   (setq-default fsharp-indent-offset 2)
-  ;; WARNING: I couldn't make "eglot-fsharp" work out-of-box. I had to
-  ;; manually download "FsAutoComplete" and move to a directory
-  ;; structure similar to the one automatically created by "eglot-fsharp".
-  (require 'eglot-fsharp)
-
   ;; ----- Folding with "origami" -----
   (add-hook 'fsharp-mode-hook 'origami-mode)
 
@@ -61,5 +55,3 @@ Ref.: https://github.com/fsprojects/fantomas."
     ",f" 'fsharp-format-code-buffer)
   (evil-define-key 'visual fsharp-mode-map
     ",f" 'fsharp-format-code-region))
-
-(provide 'personal-fsharp)
