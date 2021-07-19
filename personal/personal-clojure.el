@@ -1,7 +1,9 @@
 (require 'clojure-mode)
 (require 'evil)
+(prelude-require-packages '(flycheck-clj-kondo))
 
 (with-eval-after-load 'clojure-mode
+  (require 'flycheck-clj-kondo)
   (defun personal-clojure-mode-defaults ()
     (hs-minor-mode +1))
 
