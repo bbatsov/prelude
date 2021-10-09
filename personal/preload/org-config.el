@@ -1,3 +1,4 @@
+(package-install 'org-bullets)
 (defun efs/org-font-setup ()
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
