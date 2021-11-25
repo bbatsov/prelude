@@ -83,8 +83,12 @@
   (load-theme prelude-theme t))
 
 ;; show available keybindings after you start typing
-(require 'which-key)
-(which-key-mode +1)
+;; add to hook when running as a daemon as a workaround for a
+;; which-key bug
+;; https://github.com/justbur/emacs-which-key/issues/306
+(if (daemonp)
+    (add-hook 'server-after-make-frame-hook 'which-key-mode)
+  (which-key-mode +1))
 
 (provide 'prelude-ui)
 ;;; prelude-ui.el ends here
