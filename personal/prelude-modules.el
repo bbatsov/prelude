@@ -21,7 +21,7 @@
 ;; (require 'prelude-elixir)
 ;; (require 'prelude-go)
 ;; (require 'prelude-haskell)
- (require 'prelude-js)
+(require 'prelude-js)
 ;; (require 'prelude-latex)
 (require 'prelude-lisp)
 ;; (require 'prelude-lsp)
