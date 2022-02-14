@@ -136,7 +136,7 @@ In case of an automated installation, you'll find this file in the `personal` di
 
 If you are doing a manual install then you first
 need to copy the `prelude-modules.el` available in the sample
-directory to the root of `path/to/prelude/installation` and then
+directory to the `path/to/prelude/installation/personal` directory and then
 adjust that one.
 
 After you've uncommented a module you should either restart Emacs or evaluate the module
