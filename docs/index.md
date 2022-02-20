@@ -98,7 +98,7 @@ The following programming languages have enhanced support in Prelude:
 - [Python](modules/python.md)
 - Racket
 - [Ruby](modules/ruby.md)
-- Rust
+- [Rust](modules/rust.md)
 - Scala
 - [Scheme](modules/scheme.md)
 - SCSS
