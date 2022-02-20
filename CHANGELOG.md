@@ -19,6 +19,7 @@
 ### Bugs fixed
 
 * Fix `company` still being visible in the mode line.
+* Fix **Edit on GitHub** link in ReadTheDocs site.
 
 ## 1.1.0 (2021-02-14)
 
