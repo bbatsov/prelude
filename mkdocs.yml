@@ -2,7 +2,7 @@ site_name: "Prelude: A sleek, modern, simple and powerful Emacs experience for e
 repo_url: https://github.com/bbatsov/prelude
 copyright: "Copyright (C) 2011-2021 Bozhidar Batsov and Prelude contributors"
 docs_dir: docs
-pages:
+nav:
 - Home: index.md
 - Installation: installation.md
 - Usage: usage.md
