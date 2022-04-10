@@ -1,0 +1,12 @@
+name: Prelude CI
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: install emacs
+        run: apt update && apt install -y emacs
+      - name: load prelude
+        run: emacs --batch --load init.el
