@@ -7,6 +7,6 @@ jobs:
       - name: checkout
         uses: actions/checkout@v1
       - name: install emacs
-        run: apt update && apt install -y emacs
+        run: sudo apt-get update && sudo apt-get install -y emacs
       - name: load prelude
         run: emacs --batch --load init.el
