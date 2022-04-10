@@ -31,10 +31,13 @@
 (require 'prelude-programming)
 
 (prelude-require-packages '(go-mode
-                            company-go
-                            go-eldoc
-                            go-projectile
-                            gotest))
+                            lsp-mode
+                            lsp-ui
+                            company
+                            yasnippet
+                            ;go-projectile
+                            gotest
+                            ))
 
 (require 'go-projectile)
 
@@ -61,14 +64,18 @@
     ;; gofmt on save
     (add-hook 'before-save-hook 'gofmt-before-save nil t)
 
+    (setq company-idle-delay 0)
+    (setq company-minimum-prefix-length 0)
+
+    (defun lsp-go-install-save-hooks ()
+      (add-hook 'before-save-hook #'lsp-format-buffer t t)
+      (add-hook 'before-save-hook #'lsp-organize-imports t t))
+    (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+    (add-hook 'go-mode-hook #'lsp-deferred)
+    (add-hook 'go-mode-hook #'yas-minor-mode)
+
     ;; stop whitespace being highlighted
     (whitespace-toggle-options '(tabs))
-
-    ;; Company mode settings
-    (set (make-local-variable 'company-backends) '(company-go))
-
-    ;; El-doc for Go
-    (go-eldoc-setup)
 
     ;; CamelCase aware editing operations
     (subword-mode +1))
