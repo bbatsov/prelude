@@ -8,5 +8,7 @@ jobs:
         uses: actions/checkout@v1
       - name: install emacs
         run: sudo apt-get update && sudo apt-get install -y emacs
+      - name: put prelude in the right place
+        run: ln -s $(pwd) $HOME/.emacs.d
       - name: load prelude
         run: emacs --batch --load init.el
