@@ -29,15 +29,14 @@
 ;;; Code:
 
 (require 'prelude-programming)
+(require 'prelude-lsp)
 
 (prelude-require-packages '(go-mode
+                            go-projectile
                             lsp-mode
                             lsp-ui
                             company
-                            yasnippet
-                            ;go-projectile
-                            gotest
-                            ))
+                            gotest))
 
 (require 'go-projectile)
 
@@ -61,27 +60,20 @@
       (when goimports
         (setq gofmt-command goimports)))
 
-    ;; gofmt on save
-    (add-hook 'before-save-hook 'gofmt-before-save nil t)
-
-    (setq company-idle-delay 0)
-    (setq company-minimum-prefix-length 0)
-
-    (defun lsp-go-install-save-hooks ()
-      (add-hook 'before-save-hook #'lsp-format-buffer t t)
-      (add-hook 'before-save-hook #'lsp-organize-imports t t))
-    (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-    (add-hook 'go-mode-hook #'lsp-deferred)
-    (add-hook 'go-mode-hook #'yas-minor-mode)
-
     ;; stop whitespace being highlighted
     (whitespace-toggle-options '(tabs))
 
     ;; CamelCase aware editing operations
     (subword-mode +1))
 
-  (setq prelude-go-mode-hook 'prelude-go-mode-defaults)
+  ;; configure lsp for go
+  (defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+  (add-hook 'go-mode-hook #'lsp-deferred)
 
+  (setq prelude-go-mode-hook 'prelude-go-mode-defaults)
   (add-hook 'go-mode-hook (lambda ()
                             (run-hooks 'prelude-go-mode-hook))))
 
