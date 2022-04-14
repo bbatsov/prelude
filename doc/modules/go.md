@@ -14,6 +14,18 @@ each mode's default bindings:
 
 Run <kbd>C-h m</kbd> for all the key bindings and other documentation.
 
+There are two ways to manage projects in Go: `$GOPATH` and with Go
+modules. Modules are the newer, recommended method. Read [Using Go
+Modules](https://go.dev/blog/using-go-modules) to learn about this, if
+you are unfamiliar with the subject. Many of the tools used by Prelude
+Go may provide functions that are broken with modules. There is
+usually another function that will work properly; when in doubt, use a
+function provided by `lsp-mode` which is documented below.
+
+Generics were added to Go in 1.18. `gopls`, the backend for `lsp-mode`
+setup herein, supports generics as long as `gopls` itself was built
+with 1.18+. Other minor modes may not support generics yet.
+
 ## Go Mode
 
 `prelude-go` builds on several useful Go tools, and establishes sensible
@@ -35,6 +47,8 @@ This provides:
 * Very basic refactoring via `go-projectile-rewrite` (uses `gofmt -r`)
 * Support for `go get` and `go get -u` via `go-projectile-get` and
   `go-projectile-update`.
+
+See its documentation for details.
 
 ## LSP Mode and LSP UI
 
