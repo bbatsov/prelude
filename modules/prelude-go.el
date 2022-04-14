@@ -66,6 +66,11 @@
     ;; CamelCase aware editing operations
     (subword-mode +1))
 
+  ;; if yas is present, this enables yas-global-mode
+  ;; which provides completion via company
+  (if (fboundp 'yas-global-mode)
+      (yas-global-mode))
+
   ;; configure lsp for go
   (defun lsp-go-install-save-hooks ()
     (add-hook 'before-save-hook #'lsp-format-buffer t t)
