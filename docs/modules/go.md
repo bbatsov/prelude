@@ -1,7 +1,7 @@
 # Prelude Go
 
 This module builds on top of the shared [Programming](programming.md)
-module, as well as the [Prelude-LSP](lsp.md) module.
+module, as well as the `prelude-lsp` module.
 
 The following keybindings are set by default, which are not present in
 each mode's default bindings:
