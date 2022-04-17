@@ -21,6 +21,8 @@ nav:
     - Python: modules/python.md
     - Ruby: modules/ruby.md
     - Rust: modules/rust.md
+    - F#: modules/fsharp.md
+    - Go: modules/go.md
 - FAQ: faq.md
 - Troubleshooting: troubleshooting.md
 - Contributing: contributing.md
