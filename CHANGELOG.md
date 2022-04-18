@@ -19,6 +19,8 @@
 ### Bugs fixed
 
 * Fix `company` still being visible in the mode line.
+* [#1335](https://github.com/bbatsov/prelude/issues/1335): Workaround
+  for `which-key` bug causing display issues in clients to `emacs --daemon`.
 * Fix **Edit on GitHub** link in ReadTheDocs site.
 
 ## 1.1.0 (2021-02-14)
