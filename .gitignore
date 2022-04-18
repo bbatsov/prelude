@@ -30,3 +30,4 @@ transient/
 var/
 .cache/
 .lsp-session*
+gotools/
