@@ -14,10 +14,14 @@
 * Bind all essential `avy` commands to their recommended keybindings.
 * Remove `company-lsp`.
 * Replace `yank-pop` key-binding to `counse-yank-pop` for `ivy-mode`.
+* The keybinding for `proced` is now enabled unconditionally.
 
 ### Bugs fixed
 
 * Fix `company` still being visible in the mode line.
+* [#1335](https://github.com/bbatsov/prelude/issues/1335): Workaround
+  for `which-key` bug causing display issues in clients to `emacs --daemon`.
+* Fix **Edit on GitHub** link in ReadTheDocs site.
 
 ## 1.1.0 (2021-02-14)
 

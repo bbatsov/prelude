@@ -166,6 +166,7 @@
 ;; note - this should be after volatile-highlights is required
 ;; add the ability to cut the current line, without marking it
 (require 'rect)
+(require 'crux)
 (crux-with-region-or-line kill-region)
 
 ;; tramp, for sudo access
