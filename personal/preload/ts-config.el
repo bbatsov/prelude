@@ -23,3 +23,5 @@
     (setq-local lsp-idle-delay 0.25)
     (setq-local lsp-ui-sideline-show-code-actions nil))
   (add-hook 'javascript-mode-hook 'esc/config-javascript-mode))
+
+;; (require 'mocha)

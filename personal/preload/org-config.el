@@ -50,7 +50,7 @@
 
   (setq org-todo-keywords
     '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-      (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+      (sequence "BLOCKED(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
 
   (setq org-refile-targets
     '(("Archive.org" :maxlevel . 1)
@@ -78,8 +78,10 @@
    '(("d" "Dashboard"
      ((agenda "" ((org-deadline-warning-days 7)))
       (todo "NEXT"
-        ((org-agenda-overriding-header "Next Tasks")))
-      (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+            ((org-agenda-overriding-header "Next Tasks")))
+      (todo "BLOCKED" ((org-agenda-overriding-header "Blocked")))
+      (todo "REVIEW" ((org-agenda-overriding-header "In Review")))
+      (todo "ACTIVE" ((org-agenda-overriding-header "In Progress")))))
 
     ("n" "Next Tasks"
      ((todo "NEXT"
@@ -165,3 +167,16 @@
 
 (use-package visual-fill-column
   :hook (org-mode . efs/org-mode-visual-fill))
+
+;; ;; This is needed as of Org 9.2
+;; (setup org-tempo
+;;        (:when-loaded
+;;         (add-to-list 'org-structure-template-alist '("sh" . "src sh"))
+;;         (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+;;         (add-to-list 'org-structure-template-alist '("li" . "src lisp"))
+;;         (add-to-list 'org-structure-template-alist '("sc" . "src scheme"))
+;;         (add-to-list 'org-structure-template-alist '("ts" . "src typescript"))
+;;         (add-to-list 'org-structure-template-alist '("py" . "src python"))
+;;         (add-to-list 'org-structure-template-alist '("go" . "src go"))
+;;         (add-to-list 'org-structure-template-alist '("yaml" . "src yaml"))
+;;         (add-to-list 'org-structure-template-alist '("json" . "src json"))))

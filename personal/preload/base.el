@@ -16,5 +16,18 @@
 (require 'use-package)
 
 (use-package treemacs
+             :ensure t
+             :defer t)
+
+;;; evil configuration
+(use-package evil
   :ensure t
-  :defer t)
+  :pin melpa
+  :init (setq evil-want-C-u-scroll t)
+  :config
+    (define-key evil-normal-state-map (kbd "M-.") nil)
+    (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+    ;; (define-key evil-normal-state-map (kbd "C-u") 'universal-argument)
+    (evil-mode 1))
+
+(setq prelude-whitespace nil)
