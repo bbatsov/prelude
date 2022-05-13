@@ -76,6 +76,25 @@ you don't like that simply add this to your personal config:
                 'move-beginning-of-line)
 ```
 
+If you're using term-mode or ansi-term-mode, the above will not
+restore the default behaviour of sending the C-a key sequence directly
+to the terminal. As a workaround, you can remove the C-a binding from
+prelude-mode specifically for these as described
+[here](https://emacsredux.com/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/)
+by adding something like the following to your personal config:
+
+```emacs-lisp
+(defun my-term-mode-hook ()
+  (let ((oldmap (cdr (assoc 'prelude-mode minor-mode-map-alist)))
+        (newmap (make-sparse-keymap)))
+    (set-keymap-parent newmap oldmap)
+    (define-key newmap (kbd "C-a") nil)
+    (make-local-variable 'minor-mode-overriding-map-alist)
+    (push `(prelude-mode . ,newmap) minor-mode-overriding-map-alist)))
+
+(add-hook 'term-mode-hook 'my-term-mode-hook)
+```
+
 ## Poor ido matching performance on large datasets
 
 Prelude's `ido` module swaps the default `ido` flex matching with the
