@@ -27,12 +27,19 @@
 (require 'origami)
 
 (with-eval-after-load 'hideshow
+  (defun personal-evil-hs-fold-focus (buffer point)
+    (interactive (list (current-buffer) (point)))
+    (evil-close-folds)
+    (evil-open-fold))
+
   (setq hs-hide-comments-when-hiding-all nil)
   (evil-define-key 'normal hs-minor-mode-map
     "zm" 'hs-hide-level
-    "zM" 'evil-close-folds))
+    "zM" 'evil-close-folds
+    "zp" 'personal-evil-hs-fold-focus))
 
 (with-eval-after-load 'origami
+  ; TODO: define function and add as a hook.
   (defun personal-evil-fold-focus (buffer point)
     (interactive (list (current-buffer) (point)))
     (origami-show-only-node buffer point)
@@ -46,3 +53,6 @@
     ;; Navigating through folds.
     "zj" 'origami-next-fold
     "zk" 'origami-previous-fold))
+
+(with-eval-after-load 'evil
+  (defalias #'forward-evil-word #'forward-evil-symbol))
