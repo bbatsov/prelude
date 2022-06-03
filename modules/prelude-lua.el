@@ -1,6 +1,6 @@
 ;;; prelude-lua.el --- Emacs Prelude: Lua programming configuration.
 ;;
-;; Copyright © 2011-2021 Bozhidar Batsov
+;; Copyright © 2011-2022 Bozhidar Batsov
 ;;
 ;; Author: Xiongfei Shi <xiongfei.shi@icloud.com>
 ;; URL: https://github.com/bbatsov/prelude
