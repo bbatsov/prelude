@@ -28,52 +28,72 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-packages
- '(ob-cfengine3
-   ob-clojurescript
-   ob-coffee
-   ob-dao
-   ob-diagrams
-   ob-elixir
-   ob-elm
-   ob-go
-   ob-graphql
-   ob-http
-   ob-ipython
-   ob-julia-vterm
-   ob-kotlin
-   ob-mongo
-   ob-prolog
-   ob-restclient
-   ob-rust
-   ob-sml
-   ob-sql-mode
-   ob-translate
-   ob-typescript
-   ob-uart
-   code-cells
-   ein
-   elpy
-   math-preview))
 
+(defvar prelude-ipynb-packages
+  '(code-cells   ; file mode for code-cells
+    ein          ; Emacs Ipython Notebook (Jupyter Client)
+    elpy         ; emacs python development environment
+    ))
+
+(defvar prelude-ob-packages
+  '(ob-async   ; asynchronous execution of code-blocks
+    ob-ipython ; for python and ipython
+    ob-tmux    ; for shell
+    ob-deno    ; for javascript
+    ob-typescript
+    ))
+
+
+(prelude-require-packages
+ (append prelude-ipynb-packages prelude-ob-packages))
+
+(setq prelude-ob-loader-list
+  '((python . t)
+    (ipython . t)
+    (shell . t)
+    (js . t)
+    (typescript . t)
+    ;; Include other languages here...
+    ))
 
 ;; Run/highlight code using babel in org-mode
 (org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-   (python . t)
-   (ipython . t)
-   (sh . t)
-   (shell . t)
-   (javascript . t)
-   ;; Include other languages here...
-   ))
+ 'org-babel-load-languages prelude-ob-loader-list)
+
 ;; Syntax highlight in #+BEGIN_SRC blocks
 (setq org-src-fontify-natively t)
+
 ;; Don't prompt before running code in org
 (setq org-confirm-babel-evaluate nil)
+
 ;; Fix an incompatibility between the ob-async and ob-ipython packages
 (setq ob-async-no-async-languages-alist '("ipython"))
+
+(defvar org-babel-language-list
+  '(ob-cfengine3
+    ob-clojurescript
+    ob-coffee
+    ob-dao
+    ob-diagrams
+    ob-elixir
+    ob-elm
+    ob-go
+    ob-graphql
+    ob-http
+    ob-ipython
+    ob-julia-vterm
+    ob-kotlin
+    ob-mongo
+    ob-prolog
+    ob-restclient
+    ob-rust
+    ob-sml
+    ob-sql-mode
+    ob-translate
+    ob-typescript
+    ob-uart
+    ))
+;;; TODO Write a function to enable org-babel for each function
 
 (provide 'prelude-literate-programming)
 ;;; prelude-literate-programming.el ends here
