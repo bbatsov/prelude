@@ -1,4 +1,4 @@
-;;; prelude-mind.el --- Emacs Prelude: Mind programming support.
+;;; prelude-literate-programming.el --- Emacs Prelude: Literate Programming Support
 ;;
 ;; Author: Koustubh Sinkar
 ;; Version: 1.0.0
@@ -28,33 +28,33 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-packages '(ob-cfengine3
-                            ob-clojurescript
-                            ob-coffee
-                            ob-dao
-                            ob-diagrams
-                            ob-elixir
-                            ob-elm
-                            ob-go
-                            ob-graphql
-                            ob-http
-                            ob-ipython
-                            ob-julia-vterm
-                            ob-kotlin
-                            ob-mongo
-                            ob-prolog
-                            ob-restclient
-                            ob-rust
-                            ob-sml
-                            ob-sql-mode
-                            ob-translate
-                            ob-typescript
-                            ob-uart
-                            ein
-                            math-preview
-                            elpy
-                            code-cells
-                            ))
+(prelude-require-packages
+ '(ob-cfengine3
+   ob-clojurescript
+   ob-coffee
+   ob-dao
+   ob-diagrams
+   ob-elixir
+   ob-elm
+   ob-go
+   ob-graphql
+   ob-http
+   ob-ipython
+   ob-julia-vterm
+   ob-kotlin
+   ob-mongo
+   ob-prolog
+   ob-restclient
+   ob-rust
+   ob-sml
+   ob-sql-mode
+   ob-translate
+   ob-typescript
+   ob-uart
+   code-cells
+   ein
+   elpy
+   math-preview))
 
 
 ;; Run/highlight code using babel in org-mode
@@ -75,4 +75,5 @@
 ;; Fix an incompatibility between the ob-async and ob-ipython packages
 (setq ob-async-no-async-languages-alist '("ipython"))
 
-;;; prelude-literate-prgg.el ends here
+(provide 'prelude-literate-programming)
+;;; prelude-literate-programming.el ends here

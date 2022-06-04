@@ -1,7 +1,8 @@
 # Prelude Literate Programming
 
-Prelude's `prelude-literate-prgg` module enables some additional functionality
-for `org-mode` - the parent mode the native markdown language of Emacs.
+Prelude's `prelude-literate-programming` module enables some
+additional functionality for `org-mode` - the parent mode the native
+markdown language of Emacs.
 
 It also enables viewing and interaction of Python Notebooks within Emacs.
 
