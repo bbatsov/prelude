@@ -45,6 +45,12 @@
 
 (define-key 'help-command (kbd "G") 'godoc)
 
+;; Fix: super-save will cause go files to be saved when lsp-mode does
+;; certain things, triggering lsp-format-buffer. This causes, inter alia,
+;; commas to disappear when typing go function invocations
+(add-to-list 'super-save-predicates
+             (lambda () (not (eq major-mode 'go-mode))))
+
 (with-eval-after-load 'go-mode
   (defun prelude-go-mode-defaults ()
     ;; Add to default go-mode key bindings
