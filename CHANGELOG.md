@@ -4,6 +4,7 @@
 
 ### New features
 
+* Add a module to enable Literate Programming
 * Add a Racket module.
 * Add a Lua module.
 * Auto-install `racket-mode` if needed.
