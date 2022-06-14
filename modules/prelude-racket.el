@@ -49,4 +49,4 @@
 
 (provide 'prelude-racket)
 
-;;; prelude-racket ends here
+;;; prelude-racket.el ends here
