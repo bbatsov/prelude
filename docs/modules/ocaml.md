@@ -22,6 +22,7 @@ When the `prelude-ocaml` is enabled it will install 3 packages:
 - `tuareg-mode`
 - `utop`
 - `merlin`
+- `flycheck-ocaml`
 
 ## Environment Setup
 
