@@ -92,7 +92,7 @@ The following programming languages have enhanced support in Prelude:
 - [Lisp Base](modules/lisp.md) (common foundation for Lisp modules)
 - Lua
 - Markdown
-- OCaml
+- [OCaml](modules/ocaml.md)
 - Org Mode
 - Perl
 - [Python](modules/python.md)
