@@ -272,7 +272,7 @@ $ pdflatex prelude-cheatsheet.tex
 
 #### PNG generation
 
-To generate a PDF version of the cheatsheet you'll need to install [Poppler](https://poppler.freedesktop.org/). Afterwards you can do something like:
+To generate a PNG version of the cheatsheet you'll need to install [Poppler](https://poppler.freedesktop.org/). Afterwards you can do something like:
 
 ```shellsession
 $ cd modules/doc
