@@ -63,7 +63,7 @@ Make sure you do not have any `~/.emacs` file or `~/.emacs.d` folder
 present.
 
 ```shellsession
-$ git clone git://github.com/bbatsov/prelude.git path/to/local/repo
+$ git clone https://github.com/bbatsov/prelude.git path/to/local/repo
 $ ln -s path/to/local/repo ~/.emacs.d
 $ cd ~/.emacs.d
 ```
