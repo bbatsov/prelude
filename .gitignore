@@ -31,3 +31,4 @@ var/
 .cache/
 .lsp-session*
 gotools/
+eln-cache/
