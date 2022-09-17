@@ -20,6 +20,18 @@ You can support the development of Prelude via
 [PayPal](https://www.paypal.me/bbatsov) and
 [Patreon](https://www.patreon.com/bbatsov).
 
+## Fork Extensions
+
+I added my configuration for the following languages (and more):
+
+* Python
+* Rust
+* C
+* F#
+* Clojure
+
+More details in the folder `personal/`.
+
 ## Features
 
 * Improved UX, that's still in line with Emacs traditions
