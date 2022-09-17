@@ -11,7 +11,7 @@
 (require 'prelude-evil)
 
 ;;; Programming languages support
-;; (require 'prelude-c)
+(require 'prelude-c)
 (require 'prelude-clojure)
 ;; (require 'prelude-coffee)
 ;; (require 'prelude-common-lisp)
@@ -24,7 +24,7 @@
 (require 'prelude-js)
 ;; (require 'prelude-latex)
 (require 'prelude-lisp)
-;; (require 'prelude-lsp)
+(require 'prelude-lsp)
 ;; (require 'prelude-ocaml)
 (require 'prelude-org) ;; Org-mode helps you keep TODO lists, notes and more
 ;; (require 'prelude-perl)
