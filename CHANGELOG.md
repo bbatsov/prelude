@@ -4,6 +4,9 @@
 
 ### New features
 
+* Enable org-habits
+* Neatly track TODO state changes in a drawer (LOGBOOK) thereby
+  improving readability
 * Add a module to enable Literate Programming
 * Add a Racket module.
 * Add a Lua module.
