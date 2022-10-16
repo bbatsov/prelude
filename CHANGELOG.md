@@ -27,6 +27,7 @@
 * [#1335](https://github.com/bbatsov/prelude/issues/1335): Workaround
   for `which-key` bug causing display issues in clients to `emacs --daemon`.
 * Fix **Edit on GitHub** link in ReadTheDocs site.
+* Fix fall back to sample `prelude-modules.el` not working if user has installed to non-default location.
 
 ## 1.1.0 (2021-02-14)
 
