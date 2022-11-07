@@ -8,7 +8,7 @@
 
 Emacs comes with Ruby programming support through the built-in
 `ruby-mode`. Whenever you are editing Ruby code run `C-h m` to
-look at the Python mode key bindings. Alternatively look at the
+look at the Ruby mode key bindings. Alternatively look at the
 menu bar entries under Ruby. To toggle the menu bar press `F12`.
 
 Prelude enables `CamelCase` aware editing in Ruby code (via `subword-mode`).
