@@ -12,8 +12,7 @@ following packages in your system:
 * `rustc` (Rust compiler)
 * `cargo` (Rust package manager)
 * `rustfmt` (Rust tool for formatting code)
-* `racer` (Rust completion tool, not necessary if `prelude-lsp` is enabled)
-* `rls` (Rust Language Server, if the `prelude-lsp` feature is enabled)
+* `rust-analyzer` (Rust Language Server, required for `prelude-lsp` feature)
 
 ## Rust Mode
 
