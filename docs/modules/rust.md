@@ -20,6 +20,11 @@ Emacs comes with Rust programming support through the built-in
 `rust-mode`. Whenever you are editing Rust code run <kbd>C-h m</kbd> to
 look at the Rust mode key bindings.
 
+## Syntax highlighting
+
+[tree-sitter-mode](https://emacs-tree-sitter.github.io/) is used for nicer
+syntax highlighting.
+
 ## Syntax checking
 
 Prelude ships with [Flycheck](https://github.com/flycheck/flycheck),
