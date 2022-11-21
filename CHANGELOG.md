@@ -20,6 +20,7 @@
 * Replace `yank-pop` key-binding to `counse-yank-pop` for `ivy-mode`.
 * The keybinding for `proced` is now enabled unconditionally.
 * Replace prelude-go backend with `lsp` instead of unmaintained tools
+* Use `rust-analyzer` as language server for prelude-rust and provide nicer syntax highlighting with `tree-sitter`
 
 ### Bugs fixed
 

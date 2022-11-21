@@ -1,6 +1,6 @@
 ;;; prelude-rust.el --- Emacs Prelude: Rust programming support.
 ;;
-;; Authors: Doug MacEachern, Manoel Vilela, Ben Alex
+;; Authors: Doug MacEachern, Manoel Vilela, Ben Alex, Daniel Gerlach
 
 ;; This file is not part of GNU Emacs.
 
@@ -32,37 +32,49 @@
 ;; You may need to install the following packages on your system:
 ;; * rustc (Rust Compiler)
 ;; * cargo (Rust Package Manager)
-;; * racer (Rust Completion Tool)
 ;; * rustfmt (Rust Tool for formatting code)
-;; * rls (Rust Language Server, if the prelude-lsp feature is enabled)
+;; * rust-analyzer as lsp server needs to be in global path, see:
+;; https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
+
 
 (prelude-require-packages '(rust-mode
                             cargo
                             flycheck-rust
+                            tree-sitter
+                            tree-sitter-langs
+                            yasnippet
                             ron-mode))
 
-(unless (featurep 'prelude-lsp)
-  (prelude-require-packages '(racer)))
-
-(setq rust-format-on-save t)
+(require 'tree-sitter)
+(require 'tree-sitter-langs)
 
 (with-eval-after-load 'rust-mode
   (add-hook 'rust-mode-hook 'cargo-minor-mode)
   (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
 
-  (if (featurep 'prelude-lsp)
-      (add-hook 'rust-mode-hook 'lsp)
-    (add-hook 'rust-mode-hook 'racer-mode)
-    (add-hook 'racer-mode-hook 'eldoc-mode))
+  ;; enable lsp for rust, by default it uses rust-analyzer as lsp server
+  (add-hook 'rust-mode-hook 'lsp)
+
+  ;; enable tree-sitter for nicer syntax highlighting
+  (add-hook 'rust-mode-hook #'tree-sitter-mode)
+  (add-hook 'rust-mode-hook #'tree-sitter-hl-mode)
 
   (defun prelude-rust-mode-defaults ()
-    (unless (featurep 'prelude-lsp)
-      (local-set-key (kbd "C-c C-d") 'racer-describe)
-      (local-set-key (kbd "C-c .") 'racer-find-definition)
-      (local-set-key (kbd "C-c ,") 'pop-tag-mark))
+    ;; format on save
+    (setq rust-format-on-save t)
+
+    ;; lsp settings
+    (setq
+     ;; enable macro expansion
+     lsp-rust-analyzer-proc-macro-enable t
+     lsp-rust-analyzer-experimental-proc-attr-macros t)
 
     ;; Prevent #! from chmodding rust files to be executable
     (remove-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
+    ;; snippets are required for correct lsp autocompletions
+    (yas-minor-mode)
+
     ;; CamelCase aware editing operations
     (subword-mode +1))
 

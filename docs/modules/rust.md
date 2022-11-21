@@ -12,14 +12,18 @@ following packages in your system:
 * `rustc` (Rust compiler)
 * `cargo` (Rust package manager)
 * `rustfmt` (Rust tool for formatting code)
-* `racer` (Rust completion tool, not necessary if `prelude-lsp` is enabled)
-* `rls` (Rust Language Server, if the `prelude-lsp` feature is enabled)
+* `rust-analyzer` (Rust Language Server, required for `prelude-lsp` feature)
 
 ## Rust Mode
 
 Emacs comes with Rust programming support through the built-in
 `rust-mode`. Whenever you are editing Rust code run <kbd>C-h m</kbd> to
 look at the Rust mode key bindings.
+
+## Syntax highlighting
+
+[tree-sitter-mode](https://emacs-tree-sitter.github.io/) is used for nicer
+syntax highlighting.
 
 ## Syntax checking
 
