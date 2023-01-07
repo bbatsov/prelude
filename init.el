@@ -58,7 +58,11 @@
   "The home of Prelude's core functionality.")
 (defvar prelude-modules-dir (expand-file-name  "modules" prelude-dir)
   "This directory houses all of the built-in Prelude modules.")
-(defvar prelude-personal-dir (expand-file-name "personal" prelude-dir)
+(defvar prelude-personal-dir (if-let* ((personal-dir (getenv "PRELUDE_PERSONAL_DIR"))
+                                       (personal-dir-exp (expand-file-name personal-dir))
+                                       (is-dir (file-directory-p personal-dir-exp)))
+                                 personal-dir-exp
+                               (expand-file-name "personal" prelude-dir))
   "This directory is for your personal configuration.
 
 Users of Emacs Prelude are encouraged to keep their personal configuration

@@ -83,6 +83,9 @@ lexicographical order.  The overall loading precedence is:
 3.  `personal/prelude-modules.el` (or deprecated `prelude-modules.el`)
 4.  `personal/*`
 
+By setting the environment variable `PRELUDE_PERSONAL_DIR` the
+personal directory can be placed outside the main prelude directory.
+
 ### Personalization Example
 
 Suppose you want to configure `go-mode` to autoformat on each save.  You
