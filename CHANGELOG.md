@@ -30,6 +30,7 @@
 * Fix **Edit on GitHub** link in ReadTheDocs site.
 * Fix fall back to sample `prelude-modules.el` not working if user has installed to non-default location.
 * Stop requiring `helm-config` since upstream has removed the module.
+* Require `typescript-mode` using `prelude-require-packages` to avoid error upon inclusion in `personal/prelude-modules.el`
 
 ## 1.1.0 (2021-02-14)
 
