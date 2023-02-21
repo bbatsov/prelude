@@ -30,9 +30,7 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(tide))
-
-(require 'typescript-mode)
+(prelude-require-packages '(tide typescript-mode))
 
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 
