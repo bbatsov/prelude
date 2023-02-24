@@ -29,6 +29,8 @@
 ;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 ;; Boston, MA 02110-1301, USA.
 
+(require 'use-package)
+
 ;; Enable vertico
 (use-package vertico
   :ensure t
