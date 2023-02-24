@@ -53,6 +53,13 @@
 (setq package-user-dir (expand-file-name "elpa" prelude-dir))
 (package-initialize)
 
+;; install & enable use-package
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-verbose t)
+
 (defvar prelude-packages
   '(ace-window
     ag

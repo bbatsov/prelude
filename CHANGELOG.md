@@ -12,6 +12,7 @@
 * Add a Lua module.
 * Auto-install `racket-mode` if needed.
 * Add a F# module.
+* Auto-install `use-package`.
 
 ### Changes
 
