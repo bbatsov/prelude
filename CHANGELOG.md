@@ -13,6 +13,7 @@
 * Auto-install `racket-mode` if needed.
 * Add a F# module.
 * Auto-install `use-package`.
+* Add `prelude-vertico` module. Vertico a simpler alternative to `ivy-mode` and supersedes Selectrum.
 
 ### Changes
 

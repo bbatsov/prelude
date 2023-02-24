@@ -100,3 +100,4 @@ The following programming languages have enhanced support in Prelude:
 - key-chord
 - Org Mode
 - selectrum
+- vertico
