@@ -1,6 +1,6 @@
 ;;; prelude-ocaml.el --- Emacs Prelude: decent Perl coding settings.
 ;;
-;; Copyright © 2014-2022 Geoff Shannon
+;; Copyright © 2014-2023 Geoff Shannon
 ;;
 ;; Author: Geoff Shannon <geoffpshannon@gmail.com>
 ;; URL: https://github.com/bbatsov/prelude

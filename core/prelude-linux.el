@@ -1,6 +1,6 @@
 ;;; prelude-linux.el --- Emacs Prelude: linux specific settings.
 ;;
-;; Copyright © 2011-2022 Bozhidar Batsov
+;; Copyright © 2011-2023 Bozhidar Batsov
 ;;
 ;; Author: Stanislav Arnaudov <stanislav_ts@avb.bg>
 ;; URL: https://github.com/bbatsov/prelude

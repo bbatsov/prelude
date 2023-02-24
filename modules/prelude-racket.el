@@ -1,6 +1,6 @@
 ;;; prelude-racket.el --- Emacs Prelude: Racket programming support.
 ;;
-;; Copyright © 2011-2022 Bozhidar Batsov
+;; Copyright © 2011-2023 Bozhidar Batsov
 ;;
 ;; Author: Xiongfei Shi <xiongfei.shi@icloud.com>
 ;; URL: https://github.com/bbatsov/prelude
