@@ -124,3 +124,6 @@
          ("M-s m" . consult-multi-occur)
          ("M-s k" . consult-keep-lines)
          ("M-s u" . consult-focus-lines)))
+
+(provide 'prelude-vertico)
+;;; prelude-vertico.el ends here
