@@ -19,6 +19,8 @@ Given how modular the structure of Prelude is, there's relatively little to be g
     I have a stripped-down version of Prelude for personal use, based on `use-package` [here](https://github.com/bbatsov/emacs.d).
     I guess it might be of interest to some of you.
 
+**Update (2023): ** There are now plans to include `use-package` in Emacs 29, which will likely increase its prominence. Prelude 1.2 auto-installs `use-package` and newer Prelude modules might make use of `use-package`. `prelude-vertico` is one such example.
+
 ## Why does Prelude use MELPA instead of MELPA Stable by default?
 
 Mostly because many package authors/maintainers don't have the habit to cut
