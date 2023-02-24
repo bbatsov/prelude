@@ -4,10 +4,10 @@
 
 ### New features
 
-* Enable org-habits
-* Neatly track TODO state changes in a drawer (LOGBOOK) thereby
+* Enable `org-habits`.
+* Neatly track `TODO` state changes in a drawer (LOGBOOK) thereby.
   improving readability
-* Add a module to enable Literate Programming
+* Add a module to enable Literate Programming (`prelude-literal-programming.el`).
 * Add a Racket module.
 * Add a Lua module.
 * Auto-install `racket-mode` if needed.
@@ -21,8 +21,8 @@
 * Remove `company-lsp`.
 * Replace `yank-pop` key-binding to `counse-yank-pop` for `ivy-mode`.
 * The keybinding for `proced` is now enabled unconditionally.
-* Replace prelude-go backend with `lsp` instead of unmaintained tools
-* Use `rust-analyzer` as language server for prelude-rust and provide nicer syntax highlighting with `tree-sitter`
+* Replace prelude-go backend with `lsp` instead of unmaintained tools.
+* Use `rust-analyzer` as language server for prelude-rust and provide nicer syntax highlighting with `tree-sitter`.
 
 ### Bugs fixed
 
@@ -32,7 +32,7 @@
 * Fix **Edit on GitHub** link in ReadTheDocs site.
 * Fix fall back to sample `prelude-modules.el` not working if user has installed to non-default location.
 * Stop requiring `helm-config` since upstream has removed the module.
-* Require `typescript-mode` using `prelude-require-packages` to avoid error upon inclusion in `personal/prelude-modules.el`
+* Require `typescript-mode` using `prelude-require-packages` to avoid error upon inclusion in `personal/prelude-modules.el`.
 
 ## 1.1.0 (2021-02-14)
 
