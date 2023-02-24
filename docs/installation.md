@@ -116,8 +116,8 @@ modules visit the [docs](modules/index.md).
 ;;; General productivity tools
 
 ;; (require 'prelude-ido) ;; Supercharges Emacs completion for C-x C-f and more
-(require 'prelude-ivy) ;; A mighty modern alternative to ido
-;; (require 'prelude-vertico) ;; A powerful, yet simple, alternative to ivy
+;; (require 'prelude-ivy) ;; A mighty modern alternative to ido
+(require 'prelude-vertico) ;; A powerful, yet simple, alternative to ivy
 ;; (require 'prelude-helm) ;; Interface for narrowing and search
 ;; (require 'prelude-helm-everywhere) ;; Enable Helm everywhere
 (require 'prelude-company)
