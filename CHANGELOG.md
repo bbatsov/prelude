@@ -23,6 +23,7 @@
 * The keybinding for `proced` is now enabled unconditionally.
 * Replace prelude-go backend with `lsp` instead of unmaintained tools.
 * Use `rust-analyzer` as language server for prelude-rust and provide nicer syntax highlighting with `tree-sitter`.
+* Use `js2-mode` for Node.js specific `.cjs` and `.mjs` extensions.
 
 ### Bugs fixed
 
