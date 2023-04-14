@@ -35,9 +35,10 @@
 
 (require 'js2-mode)
 
-(add-to-list 'auto-mode-alist '("\\.js\\'"    . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.pac\\'"   . js2-mode))
-(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'"     . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.[cm]js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.pac\\'"    . js2-mode))
+(add-to-list 'interpreter-mode-alist '("node"  . js2-mode))
 
 (with-eval-after-load 'js2-mode
   (defun prelude-js-mode-defaults ()
