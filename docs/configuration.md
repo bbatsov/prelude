@@ -199,3 +199,12 @@ behaviour, add the following to your config.
 Some of these settings (those that don't need to be pre-loaded) can also be set
 on a per-file or directory basis by using a file local variable or a
 `.dir-locals.el` file.
+
+### package-user-dir
+
+By default, prelude sets the directory where downloaded modules are installed to `<prelude-dir>/elpa`. If you want
+to disable this behaviour, set the following variable to nil before loading prelude.
+
+```emacs-lisp
+(setq prelude-override-package-user-dir nil)
+```
