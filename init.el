@@ -47,6 +47,9 @@
 
 (when (version< emacs-version "25.1")
   (error "[Prelude] Prelude requires GNU Emacs 25.1 or newer, but you're running %s" emacs-version))
+(when (version<= emacs-version "26.2")
+  ;; require Gnutls >= 3.6
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
 ;; Always load newest byte code
 (setq load-prefer-newer t)
