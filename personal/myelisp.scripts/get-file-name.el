@@ -11,6 +11,7 @@
   (insert "\n;; The file name is " (read-file-name "Enter file name: ")))
 
 (my/get-file-name)
+;; The file name is ~/GithubRepos/magnars.emacs.d/README.md
 ;; The file name is ~/temp/luccas.readme.org
 ;; The file name is ~/.profile
 ;; The file name is~/bin/emacs.listing.txt
