@@ -9,4 +9,5 @@ Insert the file name at the end of buffer."
   (insert "\n;; The file name is " (read-file-name "Enter the file name: ")))
 
 (my/get-file-name)
+;; The file name is ~/.bashrc.bak
 ;; The file name is ~/.profile
