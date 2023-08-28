@@ -1,0 +1,9 @@
+I am now in hostname eribertto-nuc7i5bnh
+my emacs.d branch name is aug25, the other is master
+git branch remote is origin	https://github.com/eribertto/emacs.prelude.git (fetch/push)
+in main GH repo there are 3 branches: master(fork), develop (purcemac/rhinolinux box) and aug25 (this box)
+in GH i want to merge commits of develop to master then in local machine to switch to master to pull the merge then create another branch
+after merge in GH the develop branch will be deleted since it will return again on the next push from the Thinkpad box
+Damn i made a mistake making PR to the original repo https://github.com/bbatsov/prelude
+So i closed the PR and deleted the develop branch
+Back to my repo the devel branch is gone, damn
