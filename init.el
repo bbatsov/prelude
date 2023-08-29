@@ -62,7 +62,7 @@
   "This directory is for your personal configuration.
 
 Users of Emacs Prelude are encouraged to keep their personal configuration
-changes in this directory.  All Emacs Lisp files there are loaded automatically
+changes in this directory.  All Emacs Lisp files in this location are loaded automatically
 by Prelude.")
 (defvar prelude-personal-preload-dir (expand-file-name "preload" prelude-personal-dir)
   "This directory is for your personal configuration, that you want loaded before Prelude.")
