@@ -1,2 +1,3 @@
 ;; Auto-generated file; don't edit -*- mode: lisp-data -*-
-((:url "http://xahlee.info/emacs/emacs/practical_elisp.html" :title "Practical Emacs Lisp ⭐" :time "Sun Aug 27 21:01:05 2023"))
+((:url "https://www.gnu.org/software/emacs/manual/html_mono/emacs.html#Saving-Emacs-Sessions" :title "GNU Emacs Manual" :time "Tue Aug 29 06:16:33 2023")
+ (:url "http://xahlee.info/emacs/emacs/practical_elisp.html" :title "Practical Emacs Lisp ⭐" :time "Sun Aug 27 21:01:05 2023"))
