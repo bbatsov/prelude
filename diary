@@ -1,0 +1,7 @@
+Aug 31, 2023
+Begin diary entry in this Emacs machine.
+Today I  successfully resolved merge conflicts between develop and main branch in Github.
+Now before doing the final merge i want to journal this steps first by noting them here.
+Note the develop branch is from the Rhino Linux machine I kept in the office. The commits made there are mostly todos and exercism elisp scripts I followed from the coding website.
+I have to consider that I am now in the aug25 branch. After I do the merge in Github, in the local machine I will switch to the main branch then pull the commits. After that I will switch back to aug25 branch then push all commits to Github and do a PR there with main branch and resolve any conflicts if any. Then do merge with main and from main create another (new) branch to start with, something like that idea. Take note to kill Emacs first just to be on the safe side.
+
