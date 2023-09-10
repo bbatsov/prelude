@@ -72,6 +72,8 @@ $ cd ~/.emacs.d
 
     If you are using Windows, you should check what Emacs thinks the `~` directory is by running Emacs
     and typing `C-x d ~/<RET>`, and then adjust the command appropriately.
+    It is recommended to explicitly set HOME environment variable.
+    For details, please refer to [Emacs manual Windows-HOME section](https://www.gnu.org/software/emacs/manual/html_node/emacs/Windows-HOME.html)
 
 ### System-wide (site-wide)
 
