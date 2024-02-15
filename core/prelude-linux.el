@@ -35,6 +35,8 @@
 (prelude-require-packages '(exec-path-from-shell))
 
 (require 'exec-path-from-shell)
+;; for situation when not working gnome-keyring for magit
+;; (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
 (exec-path-from-shell-initialize)
 
 (provide 'prelude-linux)

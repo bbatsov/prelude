@@ -38,11 +38,12 @@
 
 ;; accessing a package repo over https on Windows is a no go, so we
 ;; fallback to http there
-(if (eq system-type 'windows-nt)
+(if (and (>= emacs-major-version 27) (>= emacs-minor-version 1))
+  (if (eq system-type 'windows-nt)
+      (add-to-list 'package-archives
+                   '("melpa" . "http://melpa.org/packages/") t)
     (add-to-list 'package-archives
-                 '("melpa" . "http://melpa.org/packages/") t)
-  (add-to-list 'package-archives
-               '("melpa" . "https://melpa.org/packages/") t))
+                 '("melpa" . "https://melpa.org/packages/") t)))
 
 ;; load the pinned packages
 (let ((prelude-pinned-packages-file (expand-file-name "prelude-pinned-packages.el" prelude-dir)))
@@ -55,6 +56,8 @@
 
 ;; install & enable use-package
 (unless (package-installed-p 'use-package)
+  ;; emacs 26.1 can't install package use-package if not do refresh
+  (package-refresh-contents)
   (package-install 'use-package))
 
 (require 'use-package)
