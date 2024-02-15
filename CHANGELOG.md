@@ -14,6 +14,7 @@
 * Add a F# module.
 * Auto-install `use-package`.
 * Add `prelude-vertico` module. Vertico a simpler alternative to `ivy-mode` and supersedes Selectrum.
+* Add `prelude-override-package-user-dir` to avoid overriding package-user-dir.
 
 ### Changes
 
