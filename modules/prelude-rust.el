@@ -48,6 +48,9 @@
 (require 'tree-sitter)
 (require 'tree-sitter-langs)
 
+(add-to-list 'super-save-predicates
+             (lambda () (not (eq major-mode 'rust-mode))))
+
 (with-eval-after-load 'rust-mode
   (add-hook 'rust-mode-hook 'cargo-minor-mode)
   (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
