@@ -72,6 +72,9 @@ by Prelude.")
   "This folder stores all the automatically generated save/history-files.")
 (defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-personal-dir)
   "This file contains a list of modules that will be loaded by Prelude.")
+(defvar prelude-override-package-user-dir t
+  "By default prelude installs downloaded packages in <prelude-dir>/elpa.
+   Set to nil to override this behaviour")
 
 (unless (file-exists-p prelude-savefile-dir)
   (make-directory prelude-savefile-dir))
