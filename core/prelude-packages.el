@@ -87,7 +87,7 @@
     nlinum
     operate-on-number
     smartparens
-    smartrep
+    ;; smartrep ; temporarily installed manually until https://github.com/myuhe/smartrep.el/pull/25 is merged
     super-save
     undo-tree
     volatile-highlights
@@ -124,6 +124,14 @@ Missing packages are installed automatically."
 
 ;; run package installation
 (prelude-install-packages)
+
+;; Until https://github.com/myuhe/smartrep.el/pull/25 is merged, use a fork of smartrep for emacs 30.0
+(if (version< emacs-version "30.0.50")
+  (add-to-list 'prelude-packages 'smartrep))
+  (use-package smartrep 
+    :vc (:url "https://github.com/rgiar/smartrep.el"
+         :branch "master"
+         :rev :newest))
 
 (defun prelude-list-foreign-packages ()
   "Browse third-party packages not bundled with Prelude.

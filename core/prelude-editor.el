@@ -381,7 +381,14 @@ indent yanked text (with prefix arg don't indent)."
 
 ;; operate-on-number
 (require 'operate-on-number)
-(require 'smartrep)
+
+;; Until https://github.com/myuhe/smartrep.el/pull/25 is merged, use a fork of smartrep for emacs 30.0
+(if (version< emacs-version "30.0.50")
+  (require 'smartrep)
+  (use-package smartrep 
+    :vc (:url "https://github.com/rgiar/smartrep.el"
+         :branch "master"
+         :rev :newest)))
 
 (smartrep-define-key global-map "C-c ."
   '(("+" . apply-operation-to-number-at-point)
