@@ -35,6 +35,7 @@
 * Stop requiring `helm-config` since upstream has removed the module.
 * Require `typescript-mode` using `prelude-require-packages` to avoid error upon inclusion in `personal/prelude-modules.el`.
 * Turn off `super-save` in `rust-mode` to prevent severe hangs during autocomplete.
+* Update `prelude-dart.el` to use `lsp-dart-dap-setup` instead of deprecated `dap-dart-setup` function.
 
 ## 1.1.0 (2021-02-14)
 
