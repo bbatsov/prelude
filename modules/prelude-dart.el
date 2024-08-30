@@ -44,7 +44,7 @@
     ;; Add to default dart-mode key bindings
     (lsp-dart-define-key "s o" #'lsp-dart-show-outline)
     (lsp-dart-define-key "s f" #'lsp-dart-show-flutter-outline)
-    (dap-dart-setup))
+    (lsp-dart-dap-setup))
 
   (setq prelude-dart-mode-hook 'prelude-dart-mode-defaults)
 
