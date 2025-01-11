@@ -1,6 +1,6 @@
 ;;; prelude-dart.el --- Emacs Prelude: Dart programming configuration.
 ;;
-;; Copyright © 2011-2023 Bozhidar Batsov
+;; Copyright © 2011-2025 Bozhidar Batsov
 ;;
 ;; Author: Rafael Medina <rafaelmedina789@gmail.com>
 ;; URL: https://github.com/bbatsov/prelude

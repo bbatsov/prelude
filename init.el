@@ -1,6 +1,6 @@
 ;;; init.el --- Prelude's configuration entry point.
 ;;
-;; Copyright (c) 2011-2023 Bozhidar Batsov
+;; Copyright (c) 2011-2025 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude

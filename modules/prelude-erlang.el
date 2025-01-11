@@ -1,6 +1,6 @@
 ;;; prelude-erlang.el --- Emacs Prelude: Erlang programming support.
 ;;
-;; Copyright © 2011-2023 Gleb Peregud
+;; Copyright © 2011-2025 Gleb Peregud
 ;;
 ;; Author: Gleb Peregud <gleber.p@gmail.com>
 

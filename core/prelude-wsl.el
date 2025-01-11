@@ -1,6 +1,6 @@
 ;;; prelude-wsl.el --- Emacs Prelude: WSL-specific setup.
 ;;
-;; Copyright © 2011-2023 Bozhidar Batsov
+;; Copyright © 2011-2025 Bozhidar Batsov
 ;;
 ;; URL: https://github.com/bbatsov/prelude
 
