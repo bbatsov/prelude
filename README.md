@@ -69,6 +69,15 @@ or back up your existing `.emacs.d` directory manually.
 once the installation is done. By default most of the modules
 that ship with Prelude are **not** loaded.
 
+### Try Before You "Buy"
+
+If you're using Emacs 29+ there's a simple way to try Prelude (or any other Emacs distro for that matter).
+Just clone Prelude's repo somewhere and do the following:
+
+```shellsession
+$ emacs --init-dir ~/path/to/prelude
+```
+
 ## Philosophy
 
 Prelude's philosophy is quite simple:
