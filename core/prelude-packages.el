@@ -49,8 +49,12 @@
   (if (file-exists-p prelude-pinned-packages-file)
       (load prelude-pinned-packages-file)))
 
-;; set package-user-dir to be relative to Prelude install path
-(setq package-user-dir (expand-file-name "elpa" prelude-dir))
+
+(when prelude-override-package-user-dir
+  ;; set package-user-dir to be relative to Prelude install path
+  (setq package-user-dir (expand-file-name "elpa" prelude-dir))
+  )
+
 (package-initialize)
 
 ;; install & enable use-package
