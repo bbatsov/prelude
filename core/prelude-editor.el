@@ -359,7 +359,7 @@ indent yanked text (with prefix arg don't indent)."
 (prelude-mode t)
 
 (defun prelude-enable-undo-tree ()
-  "Enable `whitespace-mode' if `prelude-whitespace' is not nil."
+  "Enable `undo-tree' if `prelude-undo-tree' is not nil."
   (when prelude-undo-tree
     ;; supercharge your undo/redo with undo-tree
     (require 'undo-tree)
