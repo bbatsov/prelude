@@ -51,6 +51,8 @@
     (define-key newmap (kbd "C-c -") nil)
     (define-key newmap (kbd "C-a") 'org-beginning-of-line)
     (make-local-variable 'minor-mode-overriding-map-alist)
+    ;; windmove bindings clash badly with org mode, so disable them in org mode buffers
+    (windmove-mode -1)
     (push `(prelude-mode . ,newmap) minor-mode-overriding-map-alist))
 )
 
