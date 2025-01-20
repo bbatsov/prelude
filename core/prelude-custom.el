@@ -66,6 +66,11 @@ or desktop environments that make heavy use of them."
   :type 'boolean
   :group 'prelude)
 
+(defcustom prelude-undo-tree t
+  "Non-nil values enable Prelude's undo-tree integration."
+  :type 'boolean
+  :group 'prelude)
+
 (defcustom prelude-clean-whitespace-on-save t
   "Cleanup whitespace from file before it's saved.
 Will only occur if `prelude-whitespace' is also enabled."
