@@ -358,7 +358,7 @@ indent yanked text (with prefix arg don't indent)."
 ;; enable Prelude's keybindings
 (prelude-mode t)
 
-(defun prelude-enable-undo-tree ()
+(defun prelude-maybe-enable-undo-tree ()
   "Enable `undo-tree' if `prelude-undo-tree' is not nil."
   (when prelude-undo-tree
     ;; supercharge your undo/redo with undo-tree
@@ -371,7 +371,7 @@ indent yanked text (with prefix arg don't indent)."
     (diminish 'undo-tree-mode)))
 
 
-(prelude-enable-undo-tree)
+(prelude-maybe-enable-undo-tree)
 
 ;; enable winner-mode to manage window configurations
 (winner-mode +1)
