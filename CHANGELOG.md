@@ -14,6 +14,7 @@
 * Add a F# module.
 * Auto-install `use-package`.
 * Add `prelude-vertico` module. Vertico a simpler alternative to `ivy-mode` and supersedes Selectrum.
+* Make it possible to configure the TypeScript format action using `prelude-ts-format-action`.
 
 ### Changes
 

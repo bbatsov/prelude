@@ -34,6 +34,12 @@
 
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 
+(defcustom prelude-ts-format-action #'tide-format-before-save
+  "The format function to invoke on save.
+
+Triggered only when `prelude-format-on-save' is enabled."
+  :package-version '(prelude . "1.2"))
+
 (with-eval-after-load 'typescript-mode
   (defun prelude-ts-mode-defaults ()
     (interactive)
@@ -46,8 +52,8 @@
   ;; formats the buffer before saving
   (add-hook 'before-save-hook
             (lambda ()
-              (when prelude-format-on-save
-                (tide-format-before-save))))
+              (when (and prelude-format-on-save prelude-ts-format-action)
+                (funcall prelude-ts-format-action))))
 
   (setq prelude-ts-mode-hook 'prelude-ts-mode-defaults)
 
