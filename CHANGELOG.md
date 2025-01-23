@@ -5,8 +5,7 @@
 ### New features
 
 * Enable `org-habits`.
-* Neatly track `TODO` state changes in a drawer (LOGBOOK) thereby.
-  improving readability
+* Neatly track `TODO` state changes in a drawer (LOGBOOK), thereby improving readability.
 * Add a module to enable Literate Programming (`prelude-literal-programming.el`).
 * Add a Racket module.
 * Add a Lua module.
