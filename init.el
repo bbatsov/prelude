@@ -58,8 +58,29 @@
   "The home of Prelude's core functionality.")
 (defvar prelude-modules-dir (expand-file-name  "modules" prelude-dir)
   "This directory houses all of the built-in Prelude modules.")
-(defvar prelude-personal-dir (expand-file-name "personal" prelude-dir)
+(defvar prelude-personal-dir
+  (cond
+   ((featurep 'chemacs)
+    (if (getenv "PRELUDE_PERSONAL_DIR")
+        (expand-file-name (getenv "PRELUDE_PERSONAL_DIR"))
+      (expand-file-name "personal" prelude-dir)))
+   ((getenv "PRELUDE_PERSONAL_DIR") (expand-file-name (getenv "PRELUDE_PERSONAL_DIR")))
+   ((or (getenv "XDG_CONFIG_HOME") (file-exists-p (expand-file-name ".config/prelude-personal" (getenv "HOME"))))
+    (if (getenv "XDG_CONFIG_HOME")
+        (expand-file-name "prelude-personal" (getenv "XDG_CONFIG_HOME"))
+      (expand-file-name ".config/prelude-personal" (getenv "HOME"))))
+   ((getenv "HOME") (expand-file-name ".prelude-personal" (getenv "HOME"))))
   "This directory is for your personal configuration.
+
+In order do these checks:
+* using chemacs?
+** yes, and have specified a location with the PRELUDE_PERSONAL_DIR
+   environment variable
+** yes, but no environment variable, assume the prelude-dir/personal
+   folder in the profile
+* use PRELUDE_PERSONAL_DIR environment variable
+* XDG_CONFIG_HOME or the path .config/prelude-personal exists.
+* use HOME environment variable.
 
 Users of Emacs Prelude are encouraged to keep their personal configuration
 changes in this directory.  All Emacs Lisp files there are loaded automatically
@@ -72,6 +93,11 @@ by Prelude.")
   "This folder stores all the automatically generated save/history-files.")
 (defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-personal-dir)
   "This file contains a list of modules that will be loaded by Prelude.")
+
+;; make sure the `prelude-personal-dir' is on the load path so the user
+;; can load `custom.el' from there if desired.
+(unless (file-exists-p prelude-personal-dir) (mkdir prelude-personal-dir t))
+(add-to-list 'load-path (expand-file-name prelude-personal-dir))
 
 (unless (file-exists-p prelude-savefile-dir)
   (make-directory prelude-savefile-dir))
