@@ -9,10 +9,10 @@
 For the proper functioning of this module, you'll need to install the
 following packages in your system:
 
-* `rustc` (Rust compiler)
-* `cargo` (Rust package manager)
-* `rustfmt` (Rust tool for formatting code)
-* `rust-analyzer` (Rust Language Server, required for `prelude-lsp` feature)
+- `rustc` (Rust compiler)
+- `cargo` (Rust package manager)
+- `rustfmt` (Rust tool for formatting code)
+- `rust-analyzer` (Rust Language Server, required for `prelude-lsp` feature)
 
 ## Rust Mode
 

@@ -11,9 +11,9 @@ shortens its modeline name to "EL".
 
 It establishes a few extra keybidings (inspired by SLIME):
 
-* `C-c C-z` (`prelude-visit-ielm`)
-* `C-c C-c` (`eval-defun`)
-* `C-c C-b` (`eval-buffer`)
+- `C-c C-z` (`prelude-visit-ielm`)
+- `C-c C-c` (`eval-defun`)
+- `C-c C-b` (`eval-buffer`)
 
 The module also enables auto-recompilation of Elisp files on save.
 

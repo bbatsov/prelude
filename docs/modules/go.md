@@ -6,11 +6,11 @@ module, as well as the `prelude-lsp` module.
 The following keybindings are set by default, which are not present in
 each mode's default bindings:
 
-* <kbd>C-c a</kbd> (`go-test-current-project`)
-* <kbd>C-c m</kbd> (`go-test-current-file`)
-* <kbd>C-c .</kbd> (`go-test-current-test`)
-* <kbd>C-c b</kbd> (`go-run`)
-* <kbd>C-h f</kbd> (`godoc-at-point`)
+- <kbd>C-c a</kbd> (`go-test-current-project`)
+- <kbd>C-c m</kbd> (`go-test-current-file`)
+- <kbd>C-c .</kbd> (`go-test-current-test`)
+- <kbd>C-c b</kbd> (`go-run`)
+- <kbd>C-h f</kbd> (`godoc-at-point`)
 
 Run <kbd>C-h m</kbd> for all the key bindings and other documentation.
 
@@ -38,14 +38,14 @@ provided by [go-projectile](https://github.com/dougm/go-projectile).
 
 This provides:
 
-* Projectile integration
-* Switching GOPATH if desired per project (customizable via
+- Projectile integration
+- Switching GOPATH if desired per project (customizable via
   `customize`)
-* Ability to download all commonly used `go` tools via <kbd>M-x
+- Ability to download all commonly used `go` tools via <kbd>M-x
   go-projectile-install-tools</kbd> and update them via <kbd>M-x
   go-projectile-update-tools</kbd>
-* Very basic refactoring via `go-projectile-rewrite` (uses `gofmt -r`)
-* Support for `go get` and `go get -u` via `go-projectile-get` and
+- Very basic refactoring via `go-projectile-rewrite` (uses `gofmt -r`)
+- Support for `go get` and `go get -u` via `go-projectile-get` and
   `go-projectile-update`.
 
 See its documentation for details.

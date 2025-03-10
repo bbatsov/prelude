@@ -41,8 +41,8 @@ You can install `MkDocs` locally and use the command `mkdocs serve` to
 see the result of changes you make to the manual locally:
 
 ```sh
-$ cd path/to/prelude/repo
-$ mkdocs serve
+cd path/to/prelude/repo
+mkdocs serve
 ```
 
 If you want to make changes to the manual's page structure you'll have to edit

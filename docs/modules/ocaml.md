@@ -27,7 +27,7 @@ When the `prelude-ocaml` is enabled it will install 3 packages:
 ## Environment Setup
 
 These setups for ocaml assume that you are using the OPAM package
-manager (http://opam.ocaml.org/).
+manager (<http://opam.ocaml.org/>).
 
 Because of the apparent complexity of getting Emacs environment
 variables setup to use opam correctly, it is instead easier to use
@@ -41,7 +41,7 @@ standard libraries
 The minimum required setup for using Prelude's OCaml setup would be
 to install OPAM, and then, minimally `opam install core utop'.  A
 good getting started guide is available at
-https://dev.realworldocaml.org/install.html
+<https://dev.realworldocaml.org/install.html>
 
 ## Configuration
 

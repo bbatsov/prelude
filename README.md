@@ -23,12 +23,12 @@ You can support the development of Prelude via
 
 ## Features
 
-* Improved UX, that's still in line with Emacs traditions
-* Sane defaults of baseline Emacs functionality
-* Automatic installation of many major programming modes on demand
-* A curated set of 3rd party packages to enhance the base functionality
-* Simple modular architecture
-* Easy customization
+- Improved UX, that's still in line with Emacs traditions
+- Sane defaults of baseline Emacs functionality
+- Automatic installation of many major programming modes on demand
+- A curated set of 3rd party packages to enhance the base functionality
+- Simple modular architecture
+- Easy customization
 
 Check out our [user manual](https://prelude.emacsredux.com) for more information.
 
@@ -40,7 +40,7 @@ can skip the whole manual and just type in your favorite shell the
 following command:
 
 ```shellsession
-$ curl -L https://git.io/epre | sh
+curl -L https://git.io/epre | sh
 ```
 
 You can now power up your Emacs, sit back and enjoy Prelude.
@@ -50,13 +50,13 @@ source repository and the installation directory. To change the
 installation directory:
 
 ```shellsession
-$ export PRELUDE_INSTALL_DIR="$HOME/.emacs.d" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
+export PRELUDE_INSTALL_DIR="$HOME/.emacs.d" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 ```
 
 To change the source repository:
 
 ```shellsession
-$ export PRELUDE_URL="https://github.com/yourname/prelude.git" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
+export PRELUDE_URL="https://github.com/yourname/prelude.git" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 ```
 
 Note that the installer will back up any existing `.emacs` file or
@@ -74,17 +74,17 @@ If you're using Emacs 29+ there's a simple way to try Prelude (or any other Emac
 Just clone Prelude's repo somewhere and do the following:
 
 ```shellsession
-$ emacs --init-dir ~/path/to/prelude
+emacs --init-dir ~/path/to/prelude
 ```
 
 ## Philosophy
 
 Prelude's philosophy is quite simple:
 
-* simple
-* easy to understand and extend
-* stable
-* a foundation for you to build upon, as opposed to some end-user product
+- simple
+- easy to understand and extend
+- stable
+- a foundation for you to build upon, as opposed to some end-user product
 
 This means that it intentionally doesn't pack all the bells and whistles that it could.
 Prelude aims to enhance the classic Emacs experience without deviating a lot from it - e.g.
@@ -96,11 +96,11 @@ to immediate adopt some shiny new package, that has established tried and true a
 
 In practice this translates to the following:
 
-* Prelude is less opinionated than distros like Spacemacs and Doom Emacs (meaning it's closer to the standard Emacs experience)
-* Prelude installs relatively few additional packages by default
-* Most modules in Prelude are opt-in instead of opt-out (you'll notice the default config enables only a handful of modules)
-* Most modules (e.g. modules for programming languages) are pretty short and feature setup only for essential packages (in some cases that be just the major mode for the language in question)
-* You don't really need to track Prelude's upstream - you're encouraged to just fork it and use it as the basis for your own configuration.
+- Prelude is less opinionated than distros like Spacemacs and Doom Emacs (meaning it's closer to the standard Emacs experience)
+- Prelude installs relatively few additional packages by default
+- Most modules in Prelude are opt-in instead of opt-out (you'll notice the default config enables only a handful of modules)
+- Most modules (e.g. modules for programming languages) are pretty short and feature setup only for essential packages (in some cases that be just the major mode for the language in question)
+- You don't really need to track Prelude's upstream - you're encouraged to just fork it and use it as the basis for your own configuration.
 
 Remember that the ultimate goal of every Emacs user is to create an Emacs setup that reflects their own experience, needs, goals and ideas. Just like Lisp,
 Emacs is nothing but a raw building material for the perfect editing experience.
@@ -137,9 +137,9 @@ and send me a pull request. :-)
 
 Support is available via several channels:
 
-* Prelude's Google Group <emacs-prelude@googlegroups.com>
-* Prelude's Freenode channel (`#prelude-emacs`)
-* [Gitter](https://gitter.im/bbatsov/prelude)
+- Prelude's Google Group <emacs-prelude@googlegroups.com>
+- Prelude's Freenode channel (`#prelude-emacs`)
+- [Gitter](https://gitter.im/bbatsov/prelude)
 
 ## Contributors
 

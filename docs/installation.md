@@ -12,9 +12,9 @@ dictionaries for the languages you wish to check.
 
 You'll also do well to install some of the following:
 
-* `git` (needed by Magit)
-* `ag` (`the_silver_searcher`) or `ripgrep` (Projectile has nice integration with them and they are much faster than `grep`)
-* your favorite lint tools (for Flycheck)
+- `git` (needed by Magit)
+- `ag` (`the_silver_searcher`) or `ripgrep` (Projectile has nice integration with them and they are much faster than `grep`)
+- your favorite lint tools (for Flycheck)
 
 All those tools are completely optional, though.
 
@@ -31,10 +31,10 @@ You can install Emacs Prelude via the command line with either `curl` or
 
 The installer script will do the following:
 
-* Clone Prelude's GitHub repo
-* Check your Emacs version
-* Backup any existing `.emacs` or `.emacs.d` you might have
-* Create any additional folders if necessary (e.g. for storing
+- Clone Prelude's GitHub repo
+- Check your Emacs version
+- Backup any existing `.emacs` or `.emacs.d` you might have
+- Create any additional folders if necessary (e.g. for storing
   package-specific data)
 
 If you have a `.emacs` file it will backed up as `.emacs.pre-prelude`
@@ -46,7 +46,7 @@ and if you have a `.emacs.d` folder, it will be backed up as
 If you're using `curl` type the following command:
 
 ```shellsession
-$ curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
+curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 ```
 
 #### Via Wget
@@ -54,7 +54,7 @@ $ curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 If you're using `wget` type:
 
 ```shellsession
-$ wget --no-check-certificate https://github.com/bbatsov/prelude/raw/master/utils/installer.sh -O - | sh
+wget --no-check-certificate https://github.com/bbatsov/prelude/raw/master/utils/installer.sh -O - | sh
 ```
 
 ### Manual
@@ -63,9 +63,9 @@ Make sure you do not have any `~/.emacs` file or `~/.emacs.d` folder
 present.
 
 ```shellsession
-$ git clone https://github.com/bbatsov/prelude.git path/to/local/repo
-$ ln -s path/to/local/repo ~/.emacs.d
-$ cd ~/.emacs.d
+git clone https://github.com/bbatsov/prelude.git path/to/local/repo
+ln -s path/to/local/repo ~/.emacs.d
+cd ~/.emacs.d
 ```
 
 !!! Note
@@ -212,8 +212,8 @@ Just run <kbd>M-x package-list-packages RET U x</kbd>.
 #### Update Prelude's code
 
 ```shellsession
-$ cd path/to/prelude/installation
-$ git pull
+cd path/to/prelude/installation
+git pull
 ```
 
 The `path/to/prelude/installation` is usually `~/.emacs.d` (at least

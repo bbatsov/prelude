@@ -6,15 +6,15 @@ Nothing fancy here. Just start Emacs as usual. Personally I run Emacs
 in daemon mode:
 
 ```shellsession
-$ emacs --daemon
+emacs --daemon
 ```
 
 Afterwards I connect to the server with either a terminal or a GUI
 client like this:
 
 ```shellsession
-$ emacsclient -t
-$ emacsclient -c
+emacsclient -t
+emacsclient -c
 ```
 
 You'd probably do well to put a few aliases in your `.zshrc` (or
@@ -33,7 +33,7 @@ the command line using `vi(m)`.
 You can also open a file with the cursor positioned directly on a specific line:
 
 ```shellsession
-$ emacsclient somefile:1234
+emacsclient somefile:1234
 ```
 
 This will open file `somefile` and set cursor on line 1234.
@@ -216,7 +216,6 @@ You can always reactivate Helm with `(prelude-global-helm-global-mode-on)`.
     because your prefix argument will be displayed in the modeline when in `helm-M-x`
     buffer. Passing prefix argument **BEFORE** `helm-M-x` **has no effect**.
 
-
 #### Key-chords
 
 !!! Note
@@ -266,8 +265,8 @@ Use `C-h k <key>` (`<key>` are the ones listed on the left) or `C-h f <function>
 To generate a PDF version of the cheatsheet you'll need to install [LaTeX](https://www.latex-project.org/get/). Afterwards you can do something like:
 
 ```shellsession
-$ cd modules/doc
-$ pdflatex prelude-cheatsheet.tex
+cd modules/doc
+pdflatex prelude-cheatsheet.tex
 ```
 
 #### PNG generation
@@ -275,8 +274,8 @@ $ pdflatex prelude-cheatsheet.tex
 To generate a PNG version of the cheatsheet you'll need to install [Poppler](https://poppler.freedesktop.org/). Afterwards you can do something like:
 
 ```shellsession
-$ cd modules/doc
-$ pdftocairo -png -singlefile prelude-cheatsheet.pdf cheatsheet
+cd modules/doc
+pdftocairo -png -singlefile prelude-cheatsheet.pdf cheatsheet
 ```
 
 ## Automatic package installation

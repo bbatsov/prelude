@@ -15,16 +15,16 @@ programming environment for SLIME, and enables many of its essential features.
 
 SLIME supports many Common Lisp implementations:
 
-* CMU Common Lisp (CMUCL)
-* Steel Bank Common Lisp (SBCL)
-* Clozure CL (a.k.a. OpenMCL)
-* LispWorks
-* Allegro CL
-* CLISP
-* Scieneer CL
-* ECL
-* Corman CL
-* ABCL
+- CMU Common Lisp (CMUCL)
+- Steel Bank Common Lisp (SBCL)
+- Clozure CL (a.k.a. OpenMCL)
+- LispWorks
+- Allegro CL
+- CLISP
+- Scieneer CL
+- ECL
+- Corman CL
+- ABCL
 
 The default config assumes the usage of [Clozure CL](https://github.com/Clozure/ccl) on macOS and
 of [SBCL](http://www.sbcl.org/) everywhere else. That's something you can easily
