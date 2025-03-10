@@ -22,7 +22,7 @@ on the presence of the `aspell` program and an `en` dictionary on your
 system. You can install `aspell` and the dictionary on macOS with
 `homebrew` like this:
 
-```shellsession
+```shell
 brew install aspell --with-lang=en
 ```
 

@@ -39,7 +39,7 @@ etc), you already have a recent version of Emacs installed, as well as `git` & `
 can skip the whole manual and just type in your favorite shell the
 following command:
 
-```shellsession
+```shell
 curl -L https://git.io/epre | sh
 ```
 
@@ -49,13 +49,13 @@ There are two environment variables you can use to control the
 source repository and the installation directory. To change the
 installation directory:
 
-```shellsession
+```shell
 export PRELUDE_INSTALL_DIR="$HOME/.emacs.d" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 ```
 
 To change the source repository:
 
-```shellsession
+```shell
 export PRELUDE_URL="https://github.com/yourname/prelude.git" && curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 ```
 
@@ -73,7 +73,7 @@ that ship with Prelude are **not** loaded.
 If you're using Emacs 29+ there's a simple way to try Prelude (or any other Emacs distro for that matter).
 Just clone Prelude's repo somewhere and do the following:
 
-```shellsession
+```shell
 emacs --init-dir ~/path/to/prelude
 ```
 

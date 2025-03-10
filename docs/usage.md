@@ -5,14 +5,14 @@
 Nothing fancy here. Just start Emacs as usual. Personally I run Emacs
 in daemon mode:
 
-```shellsession
+```shell
 emacs --daemon
 ```
 
 Afterwards I connect to the server with either a terminal or a GUI
 client like this:
 
-```shellsession
+```shell
 emacsclient -t
 emacsclient -c
 ```
@@ -32,7 +32,7 @@ the command line using `vi(m)`.
 
 You can also open a file with the cursor positioned directly on a specific line:
 
-```shellsession
+```shell
 emacsclient somefile:1234
 ```
 
@@ -264,7 +264,7 @@ Use `C-h k <key>` (`<key>` are the ones listed on the left) or `C-h f <function>
 
 To generate a PDF version of the cheatsheet you'll need to install [LaTeX](https://www.latex-project.org/get/). Afterwards you can do something like:
 
-```shellsession
+```shell
 cd modules/doc
 pdflatex prelude-cheatsheet.tex
 ```
@@ -273,7 +273,7 @@ pdflatex prelude-cheatsheet.tex
 
 To generate a PNG version of the cheatsheet you'll need to install [Poppler](https://poppler.freedesktop.org/). Afterwards you can do something like:
 
-```shellsession
+```shell
 cd modules/doc
 pdftocairo -png -singlefile prelude-cheatsheet.pdf cheatsheet
 ```

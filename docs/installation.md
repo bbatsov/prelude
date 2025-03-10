@@ -45,7 +45,7 @@ and if you have a `.emacs.d` folder, it will be backed up as
 
 If you're using `curl` type the following command:
 
-```shellsession
+```shell
 curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 ```
 
@@ -53,7 +53,7 @@ curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 
 If you're using `wget` type:
 
-```shellsession
+```shell
 wget --no-check-certificate https://github.com/bbatsov/prelude/raw/master/utils/installer.sh -O - | sh
 ```
 
@@ -62,7 +62,7 @@ wget --no-check-certificate https://github.com/bbatsov/prelude/raw/master/utils/
 Make sure you do not have any `~/.emacs` file or `~/.emacs.d` folder
 present.
 
-```shellsession
+```shell
 git clone https://github.com/bbatsov/prelude.git path/to/local/repo
 ln -s path/to/local/repo ~/.emacs.d
 cd ~/.emacs.d
@@ -211,7 +211,7 @@ Just run <kbd>M-x package-list-packages RET U x</kbd>.
 
 #### Update Prelude's code
 
-```shellsession
+```shell
 cd path/to/prelude/installation
 git pull
 ```
