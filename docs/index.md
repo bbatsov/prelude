@@ -52,7 +52,7 @@ Here are some of the essential 3rd party packages that Prelude adds to Emacs:
   (powerful project navigation/interaction package)
 - [magit](https://magit.vc/)
   (the best git client in the known universe)
-- [git-timemachine](https://gitlab.com/pidu/git-timemachine)
+- [git-timemachine](https://codeberg.org/pidu/git-timemachine)
   (navigate quickly through different versions of one file)
 - `nlinum`
   (line numbers in your buffers)
