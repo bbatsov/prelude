@@ -122,6 +122,11 @@ Only modes that don't derive from `prog-mode' should be listed here."
   :type 'symbol
   :group 'prelude)
 
+(defcustom prelude-projectile t
+  "Non-nil values enable Prelude's Projectile integration."
+  :type 'boolean
+  :group 'prelude)
+
 (provide 'prelude-custom)
 
 ;;; prelude-custom.el ends here

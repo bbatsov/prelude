@@ -176,6 +176,15 @@ desktop environments might be making heavy use of such keybindings. (in most cas
 (setq prelude-super-keybindings nil)
 ```
 
+### Disable Projectile
+
+By default, Prelude configures [Projectile](https://github.com/bbatsov/projectile) for project
+interaction. To disable this, add the following to your config.
+
+``` emacs-lisp
+(setq prelude-projectile nil)
+```
+
 ### Configuration per file or directory
 
 Some of these settings (those that don't need to be pre-loaded) can also be set

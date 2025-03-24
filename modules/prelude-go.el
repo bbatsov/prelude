@@ -38,7 +38,8 @@
                             company
                             gotest))
 
-(require 'go-projectile)
+(when prelude-projectile
+  (require 'go-projectile))
 
 ;; Ignore go test -c output files
 (add-to-list 'completion-ignored-extensions ".test")
