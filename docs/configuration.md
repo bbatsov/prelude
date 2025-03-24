@@ -185,6 +185,15 @@ interaction. To disable this, add the following to your config.
 (setq prelude-projectile nil)
 ```
 
+### Disable hippie-expand
+
+By default, Prelude configures `hippie-expand` as a replacement for Emacs' default `dabbrev`. To disable this
+behaviour, add the following to your config.
+
+``` emacs-lisp
+(setq prelude-hippie-expand nil)
+```
+
 ### Configuration per file or directory
 
 Some of these settings (those that don't need to be pre-loaded) can also be set

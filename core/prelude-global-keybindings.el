@@ -81,8 +81,9 @@
 ;; Activate occur easily inside isearch
 (define-key isearch-mode-map (kbd "C-o") 'isearch-occur)
 
-;; use hippie-expand instead of dabbrev
-(global-set-key (kbd "M-/") 'hippie-expand)
+(when prelude-hippie-expand
+  ;; use hippie-expand instead of dabbrev
+  (global-set-key (kbd "M-/") 'hippie-expand))
 
 ;; replace buffer-menu with ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)

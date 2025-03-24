@@ -84,7 +84,8 @@
       (define-key map (kbd "s-m l") 'magit-log-buffer-file)
       (define-key map (kbd "s-m b") 'magit-blame)
       ;; misc
-      (define-key map (kbd "s-/") 'hippie-expand))
+      (when prelude-hippie-expand
+        (define-key map (kbd "s-/") 'hippie-expand)))
     (easy-menu-define prelude-mode-menu map
       "Prelude's menu."
       '("Prelude"
