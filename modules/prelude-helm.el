@@ -33,7 +33,8 @@
 
 (prelude-require-packages '(helm helm-projectile))
 
-(require 'helm-projectile)
+(when prelude-projectile
+  (require 'helm-projectile))
 
 (when (executable-find "curl")
   (setq helm-google-suggest-use-curl-p t))

@@ -65,10 +65,11 @@
     (define-key map (kbd "C-c I") 'crux-find-user-init-file)
     (define-key map (kbd "C-c S") 'crux-find-shell-init-file)
     (define-key map (kbd "C-c i") 'imenu-anywhere)
-    ;; extra prefix for projectile
-    (when prelude-super-keybindings
-     (define-key map (kbd "s-p") 'projectile-command-map))
-    (define-key map (kbd "C-c p") 'projectile-command-map)
+    (when prelude-projectile
+      ;; extra prefix for projectile
+      (when prelude-super-keybindings
+        (define-key map (kbd "s-p") 'projectile-command-map))
+      (define-key map (kbd "C-c p") 'projectile-command-map))
     ;; make some use of the Super key
     (when prelude-super-keybindings
       ;; crux
