@@ -4,7 +4,7 @@
 
 ### New features
 
-- Allow users to include directories custom Emacs Lisp files in `personal/preload` instead of only files.
+- [PR #1432](https://github.com/bbatsov/prelude/pull/1432): Allow users to include directories of custom Emacs Lisp files in `personal/preload` instead of only files.
 - Enable `org-habits`.
 - Neatly track `TODO` state changes in a drawer (LOGBOOK), thereby improving readability.
 - Add a module to enable Literate Programming (`prelude-literal-programming.el`).
