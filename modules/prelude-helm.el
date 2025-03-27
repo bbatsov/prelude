@@ -31,9 +31,10 @@
 
 ;;; Code:
 
-(prelude-require-packages '(helm helm-projectile))
+(prelude-require-package 'helm)
 
 (when prelude-projectile
+  (prelude-require-package 'helm-projectile)
   (require 'helm-projectile))
 
 (when (executable-find "curl")
