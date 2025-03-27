@@ -63,7 +63,7 @@
 (helm-descbinds-mode)
 (helm-mode 1)
 
-(when when prelude-projectile
+(when prelude-projectile
       ;; enable Helm version of Projectile with replacment commands
       (helm-projectile-on))
 
