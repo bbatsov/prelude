@@ -32,6 +32,7 @@
 
 ### Bugs fixed
 
+- [PR 1433](https://github.com/bbatsov/prelude/pull/1433): Remove a duplicate `when` call in `modules/prelude-helm-everywhere.el` causing an emacs init error when `prelude-helm-everywhere` is enabled.
 - Fix `company` still being visible in the mode line.
 - [#1335](https://github.com/bbatsov/prelude/issues/1335): Workaround
   for `which-key` bug causing display issues in clients to `emacs --daemon`.
