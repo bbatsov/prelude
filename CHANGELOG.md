@@ -13,9 +13,9 @@
 - Auto-install `racket-mode` if needed.
 - Add a F# module.
 - Auto-install `use-package`.
-- Add `prelude-vertico` module. Vertico a simpler alternative to `ivy-mode` and supersedes Selectrum.
-- [#1421](https://github.com/bbatsov/prelude/issues/1421): Make it possible to configure the TypeScript format action using `prelude-ts-format-action`.
-- [#1354](https://github.com/bbatsov/prelude/issues/1354): Remove default `C--` and `C-+` keybindings to increase/decrease the font size.
+- Add `prelude-vertico` module. Vertico a simpler alternative to `ivy-mode`.
+- Issue 1421: Use `prelude-ts-format-action` for Typescript.
+- Issue 1354: Remove default `C--` and `C-+` keybindings to increase/decrease the font size.
 - Add `prelude-projectile` user option, allowing Projectile integration to be disabled.
 
 ### Changes
@@ -25,7 +25,7 @@
 - Replace `yank-pop` key-binding to `counse-yank-pop` for `ivy-mode`.
 - The keybinding for `proced` is now enabled unconditionally.
 - Replace prelude-go backend with `lsp` instead of unmaintained tools.
-- Use `rust-analyzer` as language server for prelude-rust and provide nicer syntax highlighting with `tree-sitter`.
+- Use `rust-analyzer` as language server for prelude-rust and `tree-sitter`.
 - Use `js2-mode` for Node.js specific `.cjs` and `.mjs` extensions.
 - Add `prelude-undo-tree` custom variable: allows user disable
   undo-tree integration. Enabled by default to maintain backward-compatibility.
@@ -33,10 +33,9 @@
 ### Bugs fixed
 
 - Fix `company` still being visible in the mode line.
-- [#1335](https://github.com/bbatsov/prelude/issues/1335): Workaround
-  for `which-key` bug causing display issues in clients to `emacs --daemon`.
+- Issue 1335: Helps with `which-key` display bug in `emacs --daemon` clients.
 - Fix **Edit on GitHub** link in ReadTheDocs site.
-- Fix fall back to sample `prelude-modules.el` not working if user has installed to non-default location.
+- Fix fallback to sample `prelude-modules.el` for non-default install locations.
 - Stop requiring `helm-config` since upstream has removed the module.
 - Require `typescript-mode` using `prelude-require-packages`.
 - Turn off `super-save` in `rust-mode` to prevent hangs during autocomplete.
@@ -56,7 +55,7 @@
 
 ### Changes
 
-- [#1292](https://github.com/bbatsov/prelude/issues/1292): Add `prelude-python-mode-set-encoding-automatically` defcustom inn `prelude-python.el` module with nil default value.
+- Issue 1292: Add `prelude-python-mode-set-encoding-automatically` defcustom.
 - [#1278](https://github.com/bbatsov/prelude/issues/1278): Don't disable `menu-bar-mode` unless `prelude-minimalistic-ui` is enabled.
 - [#1277](https://github.com/bbatsov/prelude/issues/1277): Make it possible to disable the creation of `Super`-based keybindings via `prelude-super-keybindings`.
 - Removed deprecated alias `prelude-ensure-module-deps`.
