@@ -38,20 +38,20 @@
 - Fix **Edit on GitHub** link in ReadTheDocs site.
 - Fix fall back to sample `prelude-modules.el` not working if user has installed to non-default location.
 - Stop requiring `helm-config` since upstream has removed the module.
-- Require `typescript-mode` using `prelude-require-packages` to avoid error upon inclusion in `personal/prelude-modules.el`.
-- Turn off `super-save` in `rust-mode` to prevent severe hangs during autocomplete.
-- Update `prelude-dart.el` to use `lsp-dart-dap-setup` instead of deprecated `dap-dart-setup` function.
+- Require `typescript-mode` using `prelude-require-packages`.
+- Turn off `super-save` in `rust-mode` to prevent hangs during autocomplete.
+- Update `prelude-dart.el` to use `lsp-dart-dap-setup`.
 
 ## 1.1.0 (2021-02-14)
 
 ### New features
 
-- Enable `nlinum-mode` or `display-line-numbers-mode` by default. Can be disabled by setting `prelude-minimalistic-ui` to `t`.
+- Enable `nlinum-mode` or `display-line-numbers-mode` by default.
 - Enable site-wide installation for Prelude.
 - Auto-installs `julia-mode` if needed.
 - Auto-install `adoc-mode` for AsciiDoc files.
-- Add the `ag` package. It provides a nice alternative to `grep` and has nice Projectile integration.
-- Added additional configuration modules for WSL (`prelude-wsl`) and Windows (`prelude-windows`).
+- Add the `ag` package. Its a nice alternative to `grep`.
+- Added config modules for WSL (`prelude-wsl`) and Windows (`prelude-windows`).
 - Add `prelude-selectrum` module. Selectrum a simpler alternative to `ivy-mode`.
 
 ### Changes
