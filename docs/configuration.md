@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 MD046 -->
+
 # Configuration
 
 ## User Interface

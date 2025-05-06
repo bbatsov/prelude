@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 -->
+
 # Change log
 
 ## master (unreleased)
@@ -13,10 +15,11 @@
 - Auto-install `racket-mode` if needed.
 - Add a F# module.
 - Auto-install `use-package`.
-- Add `prelude-vertico` module. Vertico a simpler alternative to `ivy-mode`.
-- Issue 1421: Use `prelude-ts-format-action` for Typescript.
-- Issue 1354: Remove default `C--` and `C-+` keybindings to increase/decrease the font size.
+- Add `prelude-vertico` module. Vertico a simpler alternative to `ivy-mode` and supersedes Selectrum.
+- [#1421](https://github.com/bbatsov/prelude/issues/1421): Make it possible to configure the TypeScript format action using `prelude-ts-format-action`.
+- [#1354](https://github.com/bbatsov/prelude/issues/1354): Remove default `C--` and `C-+` keybindings to increase/decrease the font size.
 - Add `prelude-projectile` user option, allowing Projectile integration to be disabled.
+- Add `prelude-hippie-expand` user option, allowing hippie-expand support to be disabled.
 
 ### Changes
 
@@ -25,39 +28,41 @@
 - Replace `yank-pop` key-binding to `counse-yank-pop` for `ivy-mode`.
 - The keybinding for `proced` is now enabled unconditionally.
 - Replace prelude-go backend with `lsp` instead of unmaintained tools.
-- Use `rust-analyzer` as language server for prelude-rust and `tree-sitter`.
+- Use `rust-analyzer` as language server for prelude-rust and provide nicer syntax highlighting with `tree-sitter`.
 - Use `js2-mode` for Node.js specific `.cjs` and `.mjs` extensions.
 - Add `prelude-undo-tree` custom variable: allows user disable
   undo-tree integration. Enabled by default to maintain backward-compatibility.
 
 ### Bugs fixed
 
+- [PR 1433](https://github.com/bbatsov/prelude/pull/1433): Remove a duplicate `when` call in `modules/prelude-helm-everywhere.el` causing an emacs init error when `prelude-helm-everywhere` is enabled.
 - Fix `company` still being visible in the mode line.
-- Issue 1335: Helps with `which-key` display bug in `emacs --daemon` clients.
+- [#1335](https://github.com/bbatsov/prelude/issues/1335): Workaround
+  for `which-key` bug causing display issues in clients to `emacs --daemon`.
 - Fix **Edit on GitHub** link in ReadTheDocs site.
-- Fix fallback to sample `prelude-modules.el` for non-default install locations.
+- Fix fall back to sample `prelude-modules.el` not working if user has installed to non-default location.
 - Stop requiring `helm-config` since upstream has removed the module.
-- Require `typescript-mode` using `prelude-require-packages`.
-- Turn off `super-save` in `rust-mode` to prevent hangs during autocomplete.
-- Update `prelude-dart.el` to use `lsp-dart-dap-setup`.
+- Require `typescript-mode` using `prelude-require-packages` to avoid error upon inclusion in `personal/prelude-modules.el`.
+- Turn off `super-save` in `rust-mode` to prevent severe hangs during autocomplete.
+- Update `prelude-dart.el` to use `lsp-dart-dap-setup` instead of deprecated `dap-dart-setup` function.
 
 ## 1.1.0 (2021-02-14)
 
 ### New features
 
-- Enable `nlinum-mode` or `display-line-numbers-mode` by default.
+- Enable `nlinum-mode` or `display-line-numbers-mode` by default. Can be disabled by setting `prelude-minimalistic-ui` to `t`.
 - Enable site-wide installation for Prelude.
 - Auto-installs `julia-mode` if needed.
 - Auto-install `adoc-mode` for AsciiDoc files.
-- Add the `ag` package. Its a nice alternative to `grep`.
-- Added config modules for WSL (`prelude-wsl`) and Windows (`prelude-windows`).
+- Add the `ag` package. It provides a nice alternative to `grep` and has nice Projectile integration.
+- Added additional configuration modules for WSL (`prelude-wsl`) and Windows (`prelude-windows`).
 - Add `prelude-selectrum` module. Selectrum a simpler alternative to `ivy-mode`.
 
 ### Changes
 
-- Issue 1292: Add `prelude-python-mode-set-encoding-automatically` defcustom.
-- Issue 1278: Don't disable `menu-bar-mode` unless `prelude-minimalistic-ui` is enabled.
-- Issue 1277: Make it possible to disable the creation of `Super`-based keybindings via `prelude-super-keybindings`.
+- [#1292](https://github.com/bbatsov/prelude/issues/1292): Add `prelude-python-mode-set-encoding-automatically` defcustom inn `prelude-python.el` module with nil default value.
+- [#1278](https://github.com/bbatsov/prelude/issues/1278): Don't disable `menu-bar-mode` unless `prelude-minimalistic-ui` is enabled.
+- [#1277](https://github.com/bbatsov/prelude/issues/1277): Make it possible to disable the creation of `Super`-based keybindings via `prelude-super-keybindings`.
 - Removed deprecated alias `prelude-ensure-module-deps`.
 - Remove `prelude-fullscreen`, as these days people can use `toggle-frame-fullscreen` instead. (it was introduced in Emacs 24.4)
 - Removed `beacon-mode`.
@@ -72,7 +77,7 @@
 
 ### Bugs fixed
 
-- Issue 1302: `C-a` is bound to `org-beginning-of-line` in org-mode buffers.
+- [#1302](https://github.com/bbatsov/prelude/issues/1302): `C-a` should be bound to `org-beginning-of-line` in org-mode buffers.
 
 ## 1.0.0 (2020-09-15)
 
