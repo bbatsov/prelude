@@ -1,9 +1,12 @@
+<!-- markdownlint-disable MD013 MD024 -->
+
 # Change log
 
 ## master (unreleased)
 
 ### New features
 
+- [PR 1432](https://github.com/bbatsov/prelude/pull/1432): Allow directories of custom Emacs Lisp files in `personal/preload`.
 - Enable `org-habits`.
 - Neatly track `TODO` state changes in a drawer (LOGBOOK), thereby improving readability.
 - Add a module to enable Literate Programming (`prelude-literal-programming.el`).
