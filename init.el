@@ -102,9 +102,9 @@ by Prelude.")
 (setq large-file-warning-threshold 100000000)
 
 ;; preload the personal settings from `prelude-personal-preload-dir'
-(when (file-exists-p prelude-personal-preload-dir)
-  (message "[Prelude] Loading personal configuration files in %s..." prelude-personal-preload-dir)
-  (mapc 'load (directory-files prelude-personal-preload-dir 't "^[^#\.].*el$")))
+(when (file-directory-p prelude-personal-preload-dir)
+  (message "[Prelude] Loading personal configuration files from files and directories in %s..." prelude-personal-preload-dir)
+  (mapc 'load (directory-files-recursively prelude-personal-preload-dir "^[^#\.].*el$")))
 
 (message "[Prelude] Loading Prelude's core modules...")
 

@@ -1,3 +1,5 @@
+<!-- markdownlint-disable MD013 MD046 -->
+
 # Configuration
 
 ## User Interface
@@ -74,10 +76,10 @@ Finally, if you don't want any theme at all, you can add this to your
 
 ## Personalizing
 
-All files you create under the `personal/` directory are yours for
+All files or directories of files you create under the `personal/` directory are yours for
 personalization.  There is no single special personal config file --
-any files you create in the `personal/` directory will be loaded in
-lexicographical order.  The overall loading precedence is:
+any files or directories of files you create in the `personal/` directory will be loaded in
+lexicographical order (files first and then directories of files).  The overall loading precedence is:
 
 1. `personal/preload/*`
 2. `core/`
