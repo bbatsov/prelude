@@ -82,13 +82,27 @@
 (when prelude-theme
   (load-theme prelude-theme t))
 
+
+;; NOTE(@lerax): dom 01 jun 2025 12:42:24
+;; helm-descbinds became incompatible with which-key-mode ins 202402XX version
+;; Using prelude, calling which-key-mode as hook in
+;; server-after-make-frame-hook crash terminal daemoned session
+;; this function prevents to this happen
+(defun prelude-safe-which-key-mode ()
+  (condition-case err
+      (which-key-mode +1)
+    (error
+     (let ((error-message (cadr err)))
+       (with-temp-message "" ;; don't print to minibuffer
+         (message "[Prelude] bypass error: %s" error-message))))))
+
 ;; show available keybindings after you start typing
 ;; add to hook when running as a daemon as a workaround for a
 ;; which-key bug
 ;; https://github.com/justbur/emacs-which-key/issues/306
 (if (daemonp)
-    (add-hook 'server-after-make-frame-hook 'which-key-mode)
-  (which-key-mode +1))
+    (add-hook 'server-after-make-frame-hook #'prelude-safe-which-key-mode)
+  (prelude-safe-which-key-mode))
 
 (provide 'prelude-ui)
 ;;; prelude-ui.el ends here
