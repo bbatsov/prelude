@@ -23,6 +23,8 @@
 
 ### Changes
 
+- Remove redundant addition to `auto-mode-alist` for Markdown
+  (note: this reverts the default to `markdown-mode` instead of `gfm-mode`).
 - Bind all essential `avy` commands to their recommended keybindings.
 - Remove `company-lsp`.
 - Replace `yank-pop` key-binding to `counse-yank-pop` for `ivy-mode`.
