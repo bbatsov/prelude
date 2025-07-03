@@ -1,3 +1,7 @@
+has() {
+  command -v "$1" >/dev/null 2>&1
+}
+
 install_prelude () {
     printf " Cloning Emacs Prelude's GitHub repository...\n$RESET"
     if [ x$PRELUDE_VERBOSE != x ]
@@ -157,7 +161,7 @@ fi
 
 ### Check dependencies
 printf  "$CYAN Checking to see if git is installed... $RESET"
-if hash git 2>&-
+if has git
 then
     printf "$GREEN found.$RESET\n"
 else
@@ -166,7 +170,7 @@ else
 fi;
 
 printf  "$CYAN Checking to see if aspell is installed... "
-if hash aspell 2>&-
+if has aspell
 then
     printf "$GREEN found.$RESET\n"
 else
@@ -221,7 +225,7 @@ fi
 
 if [ -z "$PRELUDE_SKIP_BC" ];
 then
-    if which emacs > /dev/null 2>&1
+    if has emacs
     then
         printf " Byte-compiling Prelude...\n"
         if [ x$PRELUDE_VERBOSE != x ]
