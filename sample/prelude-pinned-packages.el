@@ -66,7 +66,6 @@
         (haml-mode . "melpa-stable")
         (haskell-mode . "melpa-stable")
         (helm . "melpa-stable")
-        (helm-ag . "melpa-stable")
         (helm-core . "melpa-stable")
         (helm-descbinds . "melpa-stable")
         (helm-projectile . "melpa-stable")
