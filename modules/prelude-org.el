@@ -58,6 +58,42 @@
 
 (add-hook 'org-mode-hook (lambda () (run-hooks 'prelude-org-mode-hook)))
 
+(defun prelude-enable-org-mode-shift-bindings ()
+  "Enable `windmove' advice to use `org-mode' shift functions in org buffers."
+  (interactive)
+  (message "Prelude: Installing org-mode shift key bindings to supersede windmove bindings")
+
+  ;; Advice to redirect windmove commands to org-mode functions in org buffers
+  (defun ap/windmove-left-advice (orig-fun &rest args)
+    "Use `org-shiftleft' in org buffers, ORIG-FUN with ARGS elsewhere."
+    (if (derived-mode-p 'org-mode)
+        (org-shiftleft)
+      (apply orig-fun args)))
+
+  (defun ap/windmove-right-advice (orig-fun &rest args)
+    "Use `org-shiftright' in org buffers, ORIG-FUN with ARGS elsewhere."
+    (if (derived-mode-p 'org-mode)
+        (org-shiftright)
+      (apply orig-fun args)))
+
+  (defun ap/windmove-up-advice (orig-fun &rest args)
+    "Use `org-shiftup' in org buffers, ORIG-FUN with ARGS elsewhere."
+    (if (derived-mode-p 'org-mode)
+        (org-shiftup)
+      (apply orig-fun args)))
+
+  (defun ap/windmove-down-advice (orig-fun &rest args)
+    "Use `org-shiftdown' in org buffers, ORIG-FUN with ARGS elsewhere."
+    (if (derived-mode-p 'org-mode)
+        (org-shiftdown)
+      (apply orig-fun args)))
+
+  ;; Apply advice to all windmove functions
+  (advice-add 'windmove-left :around #'ap/windmove-left-advice)
+  (advice-add 'windmove-right :around #'ap/windmove-right-advice)
+  (advice-add 'windmove-up :around #'ap/windmove-up-advice)
+  (advice-add 'windmove-down :around #'ap/windmove-down-advice))
+
 (provide 'prelude-org)
 
 ;;; prelude-org.el ends here

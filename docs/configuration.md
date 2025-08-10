@@ -210,3 +210,19 @@ to disable this behaviour, set the following variable to nil before loading prel
 ```emacs-lisp
 (setq prelude-override-package-user-dir nil)
 ```
+
+### Enable org-mode shift arrow Keybindings
+
+By default, windmove keybindings take precedence for binding to the S+[arrow] keys.
+Org-mode keybindings are overridden. This is a [know issue][1] described in org-mode's
+manual.
+
+[1]: https://orgmode.org/manual/Conflicts.html
+
+To have org-mode S+[arrow key] keybindings in org buffers, add this to your configs:
+
+```lisp
+(prelude-enable-org-mode-shift-bindings)
+```
+
+Other buffers should continue to be bound to windmove keybindings.
