@@ -37,11 +37,9 @@
 ;; https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
 
 
-(prelude-require-packages '(rust-mode
+(prelude-require-packages '(rust-ts-mode
                             cargo
                             flycheck-rust
-                            tree-sitter
-                            tree-sitter-langs
                             yasnippet
                             ron-mode))
 
@@ -49,18 +47,14 @@
 (require 'tree-sitter-langs)
 
 (add-to-list 'super-save-predicates
-             (lambda () (not (eq major-mode 'rust-mode))))
+             (lambda () (not (eq major-mode 'rust-ts-mode))))
 
 (with-eval-after-load 'rust-mode
-  (add-hook 'rust-mode-hook 'cargo-minor-mode)
+  (add-hook 'rust-mode-ts-hook 'cargo-minor-mode)
   (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
 
   ;; enable lsp for rust, by default it uses rust-analyzer as lsp server
-  (add-hook 'rust-mode-hook 'lsp)
-
-  ;; enable tree-sitter for nicer syntax highlighting
-  (add-hook 'rust-mode-hook #'tree-sitter-mode)
-  (add-hook 'rust-mode-hook #'tree-sitter-hl-mode)
+  (add-hook 'rust-mode-ts-hook 'lsp)
 
   (defun prelude-rust-mode-defaults ()
     ;; format on save
@@ -83,7 +77,7 @@
 
   (setq prelude-rust-mode-hook 'prelude-rust-mode-defaults)
 
-  (add-hook 'rust-mode-hook (lambda ()
+  (add-hook 'rust-mode-ts-hook (lambda ()
                               (run-hooks 'prelude-rust-mode-hook))))
 
 (provide 'prelude-rust)
