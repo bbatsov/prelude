@@ -52,6 +52,9 @@
   (define-key lsp-ui-mode-map (kbd "C-c C-l i") 'lsp-ui-peek-find-implementation)
   (define-key lsp-ui-mode-map (kbd "C-c C-l d") 'lsp-describe-thing-at-point)
   (define-key lsp-ui-mode-map (kbd "C-c C-l e") 'lsp-execute-code-action)
+  (define-key lsp-ui-mode-map (kbd "C-c C-l f") 'lsp-format-buffer)
+  (define-key lsp-ui-mode-map (kbd "C-c C-l o") 'lsp-organize-imports)
+  (define-key lsp-ui-mode-map (kbd "C-c C-l m") 'lsp-ui-imenu)
 
   (setq lsp-ui-sideline-enable t)
   (setq lsp-ui-doc-enable t)
