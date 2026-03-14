@@ -41,7 +41,7 @@
   (setq prelude-fsharp-mode-hook 'prelude-fsharp-mode-defaults)
 
   (add-hook 'fsharp-mode-hook (lambda ()
-                                (run-hooks 'prelude-sharp-mode-hook))))
+                                (run-hooks 'prelude-fsharp-mode-hook))))
 
 (provide 'prelude-fsharp)
 
