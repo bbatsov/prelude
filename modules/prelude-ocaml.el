@@ -9,24 +9,12 @@
 
 ;;; Commentary:
 
-;; tuareg is the preferred ocaml mode for Emacs
+;; A modern OCaml setup based on neocaml, eglot, and ocaml-eglot.
 
-;; These setups for ocaml assume that you are using the OPAM package
-;; manager (http://opam.ocaml.org/).
-
-;; Because of the apparent complexity of getting Emacs environment
-;; variables setup to use opam correctly, it is instead easier to use
-;; opam itself to execute any necessary commands.
-
-;; Also, the standard OCaml toplevel usage has been replaced in favor
-;; of UTOP, the universal toplevel, and we assume that you are using
-;; the Jane Street Core libraries rather than the regular OCaml
-;; standard libraries
-
-;; The minimum required setup for using Prelude's OCaml setup would be
-;; to install OPAM, and then, minimally `opam install core utop'.  A
-;; good getting started guide is available at
-;; https://dev.realworldocaml.org/install.html
+;; You'll need to install opam and ocaml-lsp-server:
+;;   opam install ocaml-lsp-server
+;; Optionally install utop for a better REPL experience:
+;;   opam install utop
 
 ;;; License:
 
@@ -47,43 +35,21 @@
 
 ;;; Code:
 
-(prelude-require-packages '(tuareg utop merlin flycheck-ocaml))
+(require 'prelude-programming)
 
-(require 'tuareg)
-(require 'utop)
-(require 'merlin)
+(prelude-require-packages '(neocaml ocaml-eglot dune utop))
 
-(setq auto-mode-alist
-      (append '(("\\.ml[ily]?\\'" . tuareg-mode)
-                ("\\.topml\\'" . tuareg-mode))
-              auto-mode-alist))
+(with-eval-after-load 'neocaml
+  (require 'ocaml-eglot)
 
-(with-eval-after-load 'merlin
-  ;; Disable Merlin's own error checking
-  (setq merlin-error-after-save nil)
+  (defun prelude-ocaml-mode-defaults ()
+    (utop-minor-mode +1)
+    (ocaml-eglot-setup))
 
-  ;; Enable Flycheck checker
-  (flycheck-ocaml-setup))
+  (setq prelude-ocaml-mode-hook 'prelude-ocaml-mode-defaults)
 
-(add-hook 'tuareg-mode-hook #'utop-minor-mode)
-(add-hook 'tuareg-mode-hook #'merlin-mode)
-
-(add-hook 'tuareg-mode-hook (lambda ()
-                              (progn
-                                (define-key tuareg-mode-map (kbd "C-c C-s")
-                                  'utop)
-                                (setq compile-command
-                                      "opam config exec corebuild "))))
-
-;; Setup merlin completions company is used by default in prelude
-(add-to-list 'company-backends 'merlin-company-backend)
-
-;; Merlin also offers support for autocomplete, uncomment this next line
-;; to activate it.
-;; (setq merlin-use-auto-complete-mode t)
-
-(setq utop-command "opam config exec utop -- -emacs"
-      merlin-error-after-save nil)
+  (add-hook 'neocaml-mode-hook (lambda ()
+                                 (run-hooks 'prelude-ocaml-mode-hook))))
 
 (provide 'prelude-ocaml)
 

@@ -2,49 +2,41 @@
 
 !!! Note
 
-    This module builds on top of the shared [Programming](programming.md) module.
+    This module builds on top of the shared
+    [Programming](programming.md) module.
 
 ## Overview
 
-Prelude provides powerful out-of-the-box experience for programming in OCaml:
+Prelude provides a modern OCaml development experience
+powered by TreeSitter and LSP:
 
-- major-mode for editing OCaml code (`tuareg-mode`)
-- integration with `utop`, OCaml's modern top-level (you can think of it as a REPL)
-- linting via `flycheck` or `merlin`
-- code completion via `merlin`
+- [neocaml](https://github.com/bbatsov/neocaml) - a
+  TreeSitter-powered major mode for OCaml
+- [ocaml-eglot](https://github.com/tarides/ocaml-eglot) -
+  OCaml-specific LSP extensions via Eglot
+- [dune](https://github.com/ocaml/dune) - major mode for
+  Dune project files
+- [utop](https://github.com/ocaml-community/utop) - a
+  modern OCaml toplevel (REPL)
 
-You can get similar experience using OCaml's LSP server, but it's based on Merlin internally and the setup with LSP is a bit more involved.
+LSP integration provides code completion, type information,
+diagnostics, code navigation, and refactoring out of the box.
 
-## Packages
+## Prerequisites
 
-When the `prelude-ocaml` is enabled it will install 3 packages:
+You need [OPAM](https://opam.ocaml.org/) and the OCaml LSP
+server installed:
 
-- `tuareg-mode`
-- `utop`
-- `merlin`
-- `flycheck-ocaml`
+```sh
+opam install ocaml-lsp-server
+```
 
-## Environment Setup
+For REPL support, also install utop:
 
-These setups for ocaml assume that you are using the OPAM package
-manager (<http://opam.ocaml.org/>).
+```sh
+opam install utop
+```
 
-Because of the apparent complexity of getting Emacs environment
-variables setup to use opam correctly, it is instead easier to use
-opam itself to execute any necessary commands.
+!!! Note
 
-Also, the standard OCaml toplevel usage has been replaced in favor
-of UTOP, the universal toplevel, and we assume that you are using
-the Jane Street Core libraries rather than the regular OCaml
-standard libraries
-
-The minimum required setup for using Prelude's OCaml setup would be
-to install OPAM, and then, minimally `opam install core utop'.  A
-good getting started guide is available at
-<https://dev.realworldocaml.org/install.html>
-
-## Configuration
-
-Prelude disables Merlin's own linting in favor of Flycheck. It also
-leverages Merlin's company-mode backend instead of using directly
-Merlin's rudimentary auto-completion system.
+    This module requires Emacs 29.1+ (for TreeSitter support).
