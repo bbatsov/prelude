@@ -157,5 +157,16 @@ With a prefix ARG updates all installed packages."
      (require 'prelude-lsp-mode)
      (lsp-deferred))))
 
+;; Eglot configuration
+(with-eval-after-load 'eglot
+  (setq eglot-autoshutdown t)
+  (setq eglot-events-buffer-size 0)
+  (setq eglot-extend-to-xref t)
+
+  (define-key eglot-mode-map (kbd "C-c C-l r") #'eglot-rename)
+  (define-key eglot-mode-map (kbd "C-c C-l e") #'eglot-code-actions)
+  (define-key eglot-mode-map (kbd "C-c C-l f") #'eglot-format-buffer)
+  (define-key eglot-mode-map (kbd "C-c C-l o") #'eglot-code-action-organize-imports))
+
 (provide 'prelude-core)
 ;;; prelude-core.el ends here

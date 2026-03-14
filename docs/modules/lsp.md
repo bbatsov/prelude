@@ -29,11 +29,26 @@ Emacs 29+ and works out of the box with most language servers.
 It uses standard Emacs facilities (xref, eldoc, flymake,
 completion-at-point) rather than introducing its own UI.
 
-Useful key bindings (standard Emacs):
+Prelude configures eglot to shut down language servers
+automatically when the last project buffer is closed and
+extends xref navigation across the whole project.
+
+### Key Bindings
+
+Standard Emacs bindings that work with eglot:
 
 - <kbd>M-.</kbd> - find definition (xref)
 - <kbd>M-?</kbd> - find references (xref)
 - <kbd>C-h .</kbd> - documentation at point (eldoc)
+
+Prelude additions under the <kbd>C-c C-l</kbd> prefix:
+
+| Key | Command | Description |
+|-----|---------|-------------|
+| <kbd>C-c C-l r</kbd> | `eglot-rename` | Rename symbol |
+| <kbd>C-c C-l e</kbd> | `eglot-code-actions` | Code actions |
+| <kbd>C-c C-l f</kbd> | `eglot-format-buffer` | Format buffer |
+| <kbd>C-c C-l o</kbd> | `eglot-code-action-organize-imports` | Organize imports |
 
 ## lsp-mode
 
