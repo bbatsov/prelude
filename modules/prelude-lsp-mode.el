@@ -44,8 +44,6 @@
   (require 'lsp-ui)
   (require 'lsp-ui-imenu)
 
-  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
   (define-key lsp-ui-mode-map (kbd "C-c C-l .") 'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map (kbd "C-c C-l ?") 'lsp-ui-peek-find-references)
   (define-key lsp-ui-mode-map (kbd "C-c C-l r") 'lsp-rename)
