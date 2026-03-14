@@ -42,7 +42,6 @@ Triggered only when `prelude-format-on-save' is enabled."
 
 (with-eval-after-load 'typescript-mode
   (defun prelude-ts-mode-defaults ()
-    (interactive)
     (tide-setup)
     (flycheck-mode +1)
     (setq flycheck-check-syntax-automatically '(save mode-enabled))
