@@ -32,14 +32,10 @@
 (require 'prelude-lsp)
 
 (prelude-require-packages '(go-mode
-                            go-projectile
                             lsp-mode
                             lsp-ui
                             company
                             gotest))
-
-(when prelude-projectile
-  (require 'go-projectile))
 
 ;; Ignore go test -c output files
 (add-to-list 'completion-ignored-extensions ".test")
