@@ -48,7 +48,6 @@ nav:
         - Helm: modules/helm.md
         - Ido: modules/ido.md
         - Ivy: modules/ivy.md
-        - Selectrum: modules/selectrum.md
         - Vertico: modules/vertico.md
     - Other Modules:
         - ERC (IRC): modules/erc.md

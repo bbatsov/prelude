@@ -12,7 +12,7 @@ and integrates it with Projectile.
     `prelude-helm-everywhere` (replaces standard Emacs commands with Helm
     equivalents). You'll typically want to enable both. This module is an
     alternative to the [Ido](ido.md), [Ivy](ivy.md), [Vertico](vertico.md), and
-    [Selectrum](selectrum.md) modules - you should only enable one
+    modules - you should only enable one
     completion framework.
 
 ## Base Configuration (prelude-helm)

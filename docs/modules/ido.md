@@ -10,7 +10,7 @@ better fuzzy matching and additional features.
 !!! Note
 
     This module is an alternative to the [Helm](helm.md), [Ivy](ivy.md),
-    [Vertico](vertico.md), and [Selectrum](selectrum.md) modules - you should
+    [Vertico](vertico.md) modules - you should
     only enable one completion framework.
 
 ## Packages

@@ -98,7 +98,6 @@ only enable **one** of these:
 - [Helm](helm.md) - incremental completion and narrowing
 - [Ido](ido.md) - built-in completion with fuzzy matching
 - [Ivy](ivy.md) - lightweight completion with Swiper/Counsel
-- [Selectrum](selectrum.md) - simple completion (deprecated)
 - [Vertico](vertico.md) - vertical completion with Consult
 
 ## Other Modules

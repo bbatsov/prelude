@@ -9,7 +9,7 @@ packages for a modern and lightweight completion experience.
 !!! Note
 
     This module is an alternative to the [Helm](helm.md), [Ido](ido.md),
-    [Ivy](ivy.md), and [Selectrum](selectrum.md) modules - you should
+    [Ivy](ivy.md) modules - you should
     only enable one completion framework.
 
 ## Packages
