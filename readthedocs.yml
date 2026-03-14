@@ -10,5 +10,9 @@ build:
   tools:
     python: "3.12"
 
+python:
+  install:
+    - requirements: requirements.txt
+
 mkdocs:
   configuration: mkdocs.yml
