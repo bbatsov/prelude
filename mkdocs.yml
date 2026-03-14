@@ -9,20 +9,53 @@ nav:
 - Configuration: configuration.md
 - Modules:
     - Overview: modules/index.md
-    - Company: modules/company.md
-    - ERC: modules/erc.md
-    - Programming: modules/programming.md
-    - Lisp: modules/lisp.md
-    - Emacs Lisp: modules/emacs_lisp.md
-    - Common Lisp: modules/common_lisp.md
-    - Scheme: modules/scheme.md
-    - Clojure: modules/clojure.md
-    - Dart: modules/dart.md
-    - Python: modules/python.md
-    - Ruby: modules/ruby.md
-    - Rust: modules/rust.md
-    - F#: modules/fsharp.md
-    - Go: modules/go.md
+    - Foundation Modules:
+        - Programming: modules/programming.md
+        - Lisp Base: modules/lisp.md
+        - LSP: modules/lsp.md
+        - Company: modules/company.md
+    - Programming Languages:
+        - C/C++: modules/c.md
+        - Clojure: modules/clojure.md
+        - CoffeeScript: modules/coffee.md
+        - Common Lisp: modules/common_lisp.md
+        - CSS: modules/css.md
+        - Dart: modules/dart.md
+        - Elixir: modules/elixir.md
+        - Emacs Lisp: modules/emacs_lisp.md
+        - Erlang: modules/erlang.md
+        - F#: modules/fsharp.md
+        - Go: modules/go.md
+        - Haskell: modules/haskell.md
+        - JavaScript: modules/js.md
+        - LaTeX: modules/latex.md
+        - Lua: modules/lua.md
+        - OCaml: modules/ocaml.md
+        - Perl: modules/perl.md
+        - Python: modules/python.md
+        - Racket: modules/racket.md
+        - Ruby: modules/ruby.md
+        - Rust: modules/rust.md
+        - Scala: modules/scala.md
+        - Scheme: modules/scheme.md
+        - SCSS: modules/scss.md
+        - Shell: modules/shell.md
+        - TypeScript: modules/ts.md
+        - Web/HTML: modules/web.md
+        - XML: modules/xml.md
+        - YAML: modules/yaml.md
+    - Completion Frameworks:
+        - Helm: modules/helm.md
+        - Ido: modules/ido.md
+        - Ivy: modules/ivy.md
+        - Selectrum: modules/selectrum.md
+        - Vertico: modules/vertico.md
+    - Other Modules:
+        - ERC (IRC): modules/erc.md
+        - Evil (Vim): modules/evil.md
+        - Key Chord: modules/key_chord.md
+        - Literate Programming: modules/literate-programming.md
+        - Org Mode: modules/orgmode.md
 - FAQ: faq.md
 - Troubleshooting: troubleshooting.md
 - Contributing: contributing.md

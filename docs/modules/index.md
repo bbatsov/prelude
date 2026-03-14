@@ -1,10 +1,5 @@
 # Modules
 
-!!! Note
-
-    Most modules are not currently documented. Helping out with their
-    documentation is a great way to contribute to the project!
-
 Prelude provides extra functionality through modules. Some modules may
 require extra steps to enable all functionality. These steps and the
 functionality provided by these modules are documented on the
@@ -50,54 +45,67 @@ Here's a real example.
 ;;; prelude-ruby.el ends here
 ```
 
-To use a module you simple have to require it. No new concepts. No magic.
+To use a module you simply have to require it. No new concepts. No magic.
+
+## Foundation Modules
+
+These modules provide shared functionality used by other modules:
+
+- [Programming](programming.md) - common foundation for all programming modes
+- [Lisp Base](lisp.md) - common foundation for Lisp-family language modules
+- [LSP](lsp.md) - common foundation for modules using the Language Server Protocol
+- [Company](company.md) - completion framework used across many modes
 
 ## Programming Language Modules
 
 The following programming languages have enhanced support in Prelude:
 
-- C/C++
+- [C/C++](c.md)
 - [Clojure](clojure.md)
-- CoffeeScript
+- [CoffeeScript](coffee.md)
 - [Common Lisp](common_lisp.md)
-- CSS
+- [CSS](css.md)
 - [Dart](dart.md)
-- Elixir
+- [Elixir](elixir.md)
 - [Emacs Lisp](emacs_lisp.md)
-- Erlang
-- Go
-- Haskell
-- JavaScript
-- LaTeX
-- [Lisp Base](lisp.md) (common foundation for Lisp modules)
-- LSP (common foundation for all modules relying on `lsp-mode`)
-- Lua
-- Markdown
-- OCaml
-- Perl
-- [Programming Base](programming.md) (common foundation for programming modules)
+- [Erlang](erlang.md)
+- [F#](fsharp.md)
+- [Go](go.md)
+- [Haskell](haskell.md)
+- [JavaScript](js.md)
+- [LaTeX](latex.md)
+- [Lua](lua.md)
+- [OCaml](ocaml.md)
+- [Perl](perl.md)
 - [Python](python.md)
-- Racket
+- [Racket](racket.md)
 - [Ruby](ruby.md)
-- Rust
-- Scala
+- [Rust](rust.md)
+- [Scala](scala.md)
 - [Scheme](scheme.md)
-- SCSS
-- Shell
-- TypeScript
-- Web
-- XML
-- YAML
+- [SCSS](scss.md)
+- [Shell](shell.md)
+- [TypeScript](ts.md)
+- [Web/HTML](web.md)
+- [XML](xml.md)
+- [YAML](yaml.md)
+
+## Completion Frameworks
+
+Prelude supports several completion frameworks. You should
+only enable **one** of these:
+
+- [Helm](helm.md) - incremental completion and narrowing
+- [Ido](ido.md) - built-in completion with fuzzy matching
+- [Ivy](ivy.md) - lightweight completion with Swiper/Counsel
+- [Selectrum](selectrum.md) - simple completion (deprecated)
+- [Vertico](vertico.md) - vertical completion with Consult
 
 ## Other Modules
 
-- [Company](company.md)
-- [ERC](erc.md)
-- evil
-- helm
-- ido
-- ivy
-- key-chord
-- Org Mode
-- selectrum
-- vertico
+- [ERC](erc.md) - IRC client configuration
+- [Evil](evil.md) - Vim emulation
+- [Key Chord](key_chord.md) - simultaneous key press bindings
+- [Literate Programming](literate-programming.md) - org-babel
+  and Jupyter notebook support
+- [Org Mode](orgmode.md) - org-mode configuration
