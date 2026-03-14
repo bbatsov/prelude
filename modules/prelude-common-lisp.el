@@ -65,8 +65,7 @@
   ;; Add fancy slime contribs
   (setq slime-contribs '(slime-fancy slime-cl-indent))
 
-  (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol
-        slime-fuzzy-completion-in-place t
+  (setq slime-complete-symbol-function 'slime-flex-completions
         slime-enable-evaluate-in-emacs t
         slime-autodoc-use-multiline-p t)
 
