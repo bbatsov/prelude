@@ -30,7 +30,6 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(require 'use-package)
 
 ;; Enable vertico
 (use-package vertico

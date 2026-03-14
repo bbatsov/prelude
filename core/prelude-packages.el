@@ -56,11 +56,7 @@
 (unless package--initialized
     (package-initialize))
 
-;; install & enable use-package
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
+;; use-package is built-in since Emacs 29
 (setq use-package-verbose t)
 
 (defvar prelude-packages
