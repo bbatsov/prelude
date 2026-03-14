@@ -31,7 +31,7 @@
 
 (require 'prelude-programming)
 
-(prelude-require-packages '(elixir-mode alchemist))
+(prelude-require-packages '(elixir-mode))
 
 (provide 'prelude-elixir)
 
