@@ -9,7 +9,7 @@
 
 ;;; Commentary:
 
-;; Some basic configuration for cc-mode and the modes derived from it.
+;; Some basic configuration for sh-mode.
 
 ;;; License:
 
@@ -33,7 +33,7 @@
 (require 'sh-script)
 
 ;; recognize prezto files as zsh scripts
-(defvar prelude-prezto-files '("zlogin" "zlogin" "zlogout" "zpreztorc" "zprofile" "zshenv" "zshrc"))
+(defvar prelude-prezto-files '("zlogin" "zlogout" "zpreztorc" "zprofile" "zshenv" "zshrc"))
 
 (mapc (lambda (file)
         (add-to-list 'auto-mode-alist `(,(format "\\%s\\'" file) . sh-mode)))
