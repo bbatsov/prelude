@@ -154,7 +154,7 @@ With a prefix ARG updates all installed packages."
   (pcase prelude-lsp-client
     ('eglot (eglot-ensure))
     ('lsp-mode
-     (require 'prelude-lsp)
+     (require 'prelude-lsp-mode)
      (lsp-deferred))))
 
 (provide 'prelude-core)

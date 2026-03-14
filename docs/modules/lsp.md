@@ -38,7 +38,7 @@ Useful key bindings (standard Emacs):
 ## lsp-mode
 
 When `prelude-lsp-client` is set to `lsp-mode`, the
-`prelude-lsp` module is loaded automatically. It installs
+`prelude-lsp-mode` module is loaded automatically. It installs
 [lsp-mode](https://emacs-lsp.github.io/lsp-mode/) and
 [lsp-ui](https://emacs-lsp.github.io/lsp-ui/).
 

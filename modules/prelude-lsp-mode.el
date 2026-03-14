@@ -1,4 +1,4 @@
-;;; prelude-lsp.el --- lsp-mode setup
+;;; prelude-lsp-mode.el --- lsp-mode setup
 ;;
 ;; Copyright © 2011-2025 Bozhidar Batsov
 ;;
@@ -52,5 +52,5 @@
 (setq lsp-ui-peek-enable t)
 (setq lsp-ui-peek-always-show t)
 
-(provide 'prelude-lsp)
-;;; prelude-lsp.el ends here
+(provide 'prelude-lsp-mode)
+;;; prelude-lsp-mode.el ends here
