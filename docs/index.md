@@ -9,7 +9,7 @@ Emacs power users.
 
 !!! Important
 
-    Prelude is compatible **ONLY with GNU Emacs 25.1+**. In general you're
+    Prelude is compatible **ONLY with GNU Emacs 29.1+**. In general you're
     advised to always run Prelude with the latest stable Emacs release.
 
 You can support the development of Prelude via

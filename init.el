@@ -45,8 +45,8 @@
 
 (message "[Prelude] Prelude is powering up... Be patient, Master %s!" prelude-user)
 
-(when (version< emacs-version "25.1")
-  (error "[Prelude] Prelude requires GNU Emacs 25.1 or newer, but you're running %s" emacs-version))
+(when (version< emacs-version "29.1")
+  (error "[Prelude] Prelude requires GNU Emacs 29.1 or newer, but you're running %s" emacs-version))
 
 ;; Always load newest byte code
 (setq load-prefer-newer t)
@@ -154,12 +154,6 @@ by Prelude.")
                (directory-files prelude-personal-dir 't "^[^#\.].*\\.el$"))))
 
 (message "[Prelude] Prelude is ready to do thy bidding, Master %s!" prelude-user)
-
-;; Patch security vulnerability in Emacs versions older than 25.3
-(when (version< emacs-version "25.3")
-  (with-eval-after-load "enriched"
-    (defun enriched-decode-display-prop (start end &optional param)
-      (list start end))))
 
 (prelude-eval-after-init
  ;; greet the use with some useful tip
