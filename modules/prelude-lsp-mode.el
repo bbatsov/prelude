@@ -36,6 +36,9 @@
 (setq lsp-keymap-prefix "C-c C-l")
 (setq lsp-keep-workspace-alive nil)
 (setq lsp-auto-guess-root t)
+(setq lsp-idle-delay 0.5)
+(setq lsp-log-io nil)
+(setq lsp-completion-provider :capf)
 
 (with-eval-after-load 'lsp-mode
   (require 'lsp-ui)
