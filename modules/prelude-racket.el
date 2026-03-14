@@ -44,8 +44,7 @@
   (add-hook 'racket-mode-hook #'racket-unicode-input-method-enable)
   (add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable))
 
-(add-to-list 'auto-mode-alist '("\\.rkt?\\'" . racket-mode))
-(add-to-list 'auto-mode-alist '("\\.rkt\\'" . racket-mode))
+(add-to-list 'auto-mode-alist '("\\.rkt[dl]?\\'" . racket-mode))
 
 (provide 'prelude-racket)
 
