@@ -132,6 +132,15 @@ Only modes that don't derive from `prog-mode' should be listed here."
   :type 'boolean
   :group 'prelude)
 
+(defcustom prelude-lsp-client 'eglot
+  "The LSP client to use in programming modes.
+Eglot is built into Emacs 29+ and requires no extra packages.
+Set to `lsp-mode' if you prefer lsp-mode with lsp-ui (peek
+definitions, sideline diagnostics, etc.)."
+  :type '(choice (const :tag "Eglot (built-in)" eglot)
+                 (const :tag "LSP Mode" lsp-mode))
+  :group 'prelude)
+
 (provide 'prelude-custom)
 
 ;;; prelude-custom.el ends here

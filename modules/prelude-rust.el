@@ -40,11 +40,7 @@
 (prelude-require-packages '(rust-ts-mode
                             cargo
                             flycheck-rust
-                            yasnippet
                             ron-mode))
-
-(require 'tree-sitter)
-(require 'tree-sitter-langs)
 
 (add-to-list 'super-save-predicates
              (lambda () (not (eq major-mode 'rust-ts-mode))))
@@ -53,24 +49,14 @@
   (add-hook 'rust-mode-ts-hook 'cargo-minor-mode)
   (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
 
-  ;; enable lsp for rust, by default it uses rust-analyzer as lsp server
-  (add-hook 'rust-mode-ts-hook 'lsp)
+  (add-hook 'rust-mode-ts-hook #'prelude-lsp-enable)
 
   (defun prelude-rust-mode-defaults ()
     ;; format on save
     (setq rust-format-on-save t)
 
-    ;; lsp settings
-    (setq
-     ;; enable macro expansion
-     lsp-rust-analyzer-proc-macro-enable t
-     lsp-rust-analyzer-experimental-proc-attr-macros t)
-
     ;; Prevent #! from chmodding rust files to be executable
     (remove-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-
-    ;; snippets are required for correct lsp autocompletions
-    (yas-minor-mode)
 
     ;; CamelCase aware editing operations
     (subword-mode +1))

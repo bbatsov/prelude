@@ -30,26 +30,26 @@
 
 ;;; Code:
 
-(require 'prelude-lsp)
-(prelude-require-packages '(lsp-dart))
+(require 'prelude-programming)
 
-(with-eval-after-load 'lsp-dart
-  (add-hook 'dart-mode-hook #'lsp))
+;; lsp-dart provides Flutter-specific features on top of lsp-mode
+(when (eq prelude-lsp-client 'lsp-mode)
+  (prelude-require-packages '(lsp-dart)))
 
 (with-eval-after-load 'dart-mode
   (defun prelude-dart-mode-defaults ()
-
-    (setq dap-launch-configuration-providers  '(dap-debug-template-configurations-provider))
-
-    ;; Add to default dart-mode key bindings
-    (lsp-dart-define-key "s o" #'lsp-dart-show-outline)
-    (lsp-dart-define-key "s f" #'lsp-dart-show-flutter-outline)
-    (lsp-dart-dap-setup))
+    (prelude-lsp-enable)
+    (when (eq prelude-lsp-client 'lsp-mode)
+      (setq dap-launch-configuration-providers
+            '(dap-debug-template-configurations-provider))
+      (lsp-dart-define-key "s o" #'lsp-dart-show-outline)
+      (lsp-dart-define-key "s f" #'lsp-dart-show-flutter-outline)
+      (lsp-dart-dap-setup)))
 
   (setq prelude-dart-mode-hook 'prelude-dart-mode-defaults)
 
   (add-hook 'dart-mode-hook (lambda ()
-                            (run-hooks 'prelude-dart-mode-hook))))
+                              (run-hooks 'prelude-dart-mode-hook))))
 
 (provide 'prelude-dart)
 

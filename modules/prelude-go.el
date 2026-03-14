@@ -29,12 +29,8 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(require 'prelude-lsp)
 
 (prelude-require-packages '(go-mode
-                            lsp-mode
-                            lsp-ui
-                            company
                             gotest))
 
 ;; Ignore go test -c output files
@@ -74,12 +70,7 @@
   (if (fboundp 'yas-global-mode)
       (yas-global-mode))
 
-  ;; configure lsp for go
-  (defun lsp-go-install-save-hooks ()
-    (add-hook 'before-save-hook #'lsp-format-buffer t t)
-    (add-hook 'before-save-hook #'lsp-organize-imports t t))
-  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-  (add-hook 'go-mode-hook #'lsp-deferred)
+  (add-hook 'go-mode-hook #'prelude-lsp-enable)
 
   (setq prelude-go-mode-hook 'prelude-go-mode-defaults)
   (add-hook 'go-mode-hook (lambda ()

@@ -162,6 +162,17 @@ If you prefer not to automatically format your file on save, you can disable tha
 
 Currently this only affects automated formatting of Typescript files.
 
+### Switch LSP client
+
+Prelude uses Eglot (built-in) as the default LSP client. If you prefer lsp-mode
+with its richer UI (peek views, sideline diagnostics), add to `personal/preload`:
+
+```emacs-lisp
+(setq prelude-lsp-client 'lsp-mode)
+```
+
+See the [LSP module documentation](modules/lsp.md) for details.
+
 ### Disable Super-based keybindings
 
 Out-of-the-box Prelude will create two versions of many keybindings in `prelude-mode`:

@@ -2,59 +2,68 @@
 
 ## Overview
 
-This module provides a base configuration for the
-[Language Server Protocol (LSP)](https://microsoft.github.io/language-server-protocol/)
-via [lsp-mode](https://emacs-lsp.github.io/lsp-mode/) and
+Prelude supports two LSP clients, controlled by the
+`prelude-lsp-client` variable:
+
+- **Eglot** (default) - built into Emacs 29+, lightweight,
+  zero extra dependencies
+- **lsp-mode** - feature-rich third-party client with lsp-ui
+  (peek views, sideline diagnostics, doc overlays)
+
+Language modules that support LSP (Go, Rust, Scala, Dart,
+etc.) automatically use whichever client you've configured.
+
+## Choosing an LSP Client
+
+The default is Eglot. To switch to lsp-mode, add to your
+`personal/preload/` config:
+
+```emacs-lisp
+(setq prelude-lsp-client 'lsp-mode)
+```
+
+## Eglot
+
+[Eglot](https://github.com/joaotavora/eglot) is built into
+Emacs 29+ and works out of the box with most language servers.
+It uses standard Emacs facilities (xref, eldoc, flymake,
+completion-at-point) rather than introducing its own UI.
+
+Useful key bindings (standard Emacs):
+
+- <kbd>M-.</kbd> - find definition (xref)
+- <kbd>M-?</kbd> - find references (xref)
+- <kbd>C-h .</kbd> - documentation at point (eldoc)
+
+## lsp-mode
+
+When `prelude-lsp-client` is set to `lsp-mode`, the
+`prelude-lsp` module is loaded automatically. It installs
+[lsp-mode](https://emacs-lsp.github.io/lsp-mode/) and
 [lsp-ui](https://emacs-lsp.github.io/lsp-ui/).
 
-LSP allows Emacs to communicate with language servers to provide features like
-autocompletion, documentation lookup, code navigation, refactoring, and
-diagnostics for many programming languages.
+### Key Bindings
 
-!!! Note
-
-    This is a foundation module used by other language modules
-    (e.g. [Go](go.md), [Dart](dart.md), [Scala](scala.md)).
-    You typically don't
-    need to enable it directly - it will be pulled in automatically by the
-    language modules that need it.
-
-## Packages
-
-- [lsp-mode](https://emacs-lsp.github.io/lsp-mode/) - the LSP client
-- [lsp-ui](https://emacs-lsp.github.io/lsp-ui/) - UI
-  enhancements for lsp-mode (sideline info, peek views, docs)
-
-## Key Bindings
-
-All LSP key bindings use the <kbd>C-c C-l</kbd> prefix:
+All lsp-mode key bindings use the <kbd>C-c C-l</kbd> prefix:
 
 | Key | Command | Description |
 |-----|---------|-------------|
 | <kbd>C-c C-l .</kbd> | `lsp-ui-peek-find-definitions` | Peek at definition |
 | <kbd>C-c C-l ?</kbd> | `lsp-ui-peek-find-references` | Peek at references |
 | <kbd>C-c C-l r</kbd> | `lsp-rename` | Rename symbol |
-| <kbd>C-c C-l x</kbd> | `lsp-workspace-restart` | Restart LSP workspace |
-| <kbd>C-c C-l w</kbd> | `lsp-ui-peek-find-workspace-symbol` | Find workspace symbol |
+| <kbd>C-c C-l x</kbd> | `lsp-workspace-restart` | Restart workspace |
+| <kbd>C-c C-l w</kbd> | `lsp-ui-peek-find-workspace-symbol` | Find symbol |
 | <kbd>C-c C-l i</kbd> | `lsp-ui-peek-find-implementation` | Find implementation |
-| <kbd>C-c C-l d</kbd> | `lsp-describe-thing-at-point` | Describe thing at point |
-| <kbd>C-c C-l e</kbd> | `lsp-execute-code-action` | Execute code action |
-
-Additionally, `xref-find-definitions` (<kbd>M-.</kbd>) and
-`xref-find-references` (<kbd>M-?</kbd>) are remapped to use LSP peek views.
-
-## UI Features
-
-The following `lsp-ui` features are enabled by default:
-
-- **Sideline**: shows diagnostics and code actions in the sideline
-- **Doc**: shows documentation on hover
-- **Peek**: peek-style code navigation (definitions,
-  references, implementations)
+| <kbd>C-c C-l d</kbd> | `lsp-describe-thing-at-point` | Describe at point |
+| <kbd>C-c C-l e</kbd> | `lsp-execute-code-action` | Code action |
 
 ## Installing Language Servers
 
-You'll need to install the appropriate language server for each
-language you want to use. See the
-[lsp-mode documentation](https://emacs-lsp.github.io/lsp-mode/page/languages/)
-for a complete list of supported languages and their servers.
+Regardless of which client you use, you need the appropriate
+language server installed on your system. Common examples:
+
+- **Go**: `gopls` (`go install golang.org/x/tools/gopls@latest`)
+- **Rust**: `rust-analyzer`
+- **Scala**: `metals`
+- **Python**: `pyright` or `pylsp`
+- **Dart**: Dart SDK includes its analysis server

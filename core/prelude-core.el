@@ -149,5 +149,13 @@ With a prefix ARG updates all installed packages."
      (interactive "P")
      (sp-wrap-with-pair ,s)))
 
+(defun prelude-lsp-enable ()
+  "Enable the LSP client configured via `prelude-lsp-client'."
+  (pcase prelude-lsp-client
+    ('eglot (eglot-ensure))
+    ('lsp-mode
+     (require 'prelude-lsp)
+     (lsp-deferred))))
+
 (provide 'prelude-core)
 ;;; prelude-core.el ends here

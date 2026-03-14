@@ -31,11 +31,11 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(scala-mode lsp-mode))
+(prelude-require-packages '(scala-mode))
 
 (defun prelude-scala-mode-defaults ()
   (subword-mode +1)
-  (lsp))
+  (prelude-lsp-enable))
 
 (setq prelude-scala-mode-hook 'prelude-scala-mode-defaults)
 
