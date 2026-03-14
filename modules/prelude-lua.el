@@ -46,10 +46,11 @@
   (define-key lua-mode-map (kbd "C-c C-r") 'lua-send-region)
   (define-key lua-mode-map (kbd "C-c C-z") 'lua-show-process-buffer))
 
-(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
+(add-hook 'lua-mode-hook #'prelude-lsp-enable)
+
 (provide 'prelude-lua)
 
-;;; prelude-lua ends here
+;;; prelude-lua.el ends here

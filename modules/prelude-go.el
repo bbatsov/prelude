@@ -33,6 +33,10 @@
 (prelude-require-packages '(go-mode
                             gotest))
 
+;; Use go-ts-mode when the tree-sitter grammar is available
+(when (treesit-ready-p 'go t)
+  (add-to-list 'major-mode-remap-alist '(go-mode . go-ts-mode)))
+
 ;; Ignore go test -c output files
 (add-to-list 'completion-ignored-extensions ".test")
 
@@ -71,10 +75,13 @@
       (yas-global-mode))
 
   (add-hook 'go-mode-hook #'prelude-lsp-enable)
+  (add-hook 'go-ts-mode-hook #'prelude-lsp-enable)
 
   (setq prelude-go-mode-hook 'prelude-go-mode-defaults)
   (add-hook 'go-mode-hook (lambda ()
-                            (run-hooks 'prelude-go-mode-hook))))
+                            (run-hooks 'prelude-go-mode-hook)))
+  (add-hook 'go-ts-mode-hook (lambda ()
+                               (run-hooks 'prelude-go-mode-hook))))
 
 (provide 'prelude-go)
 ;;; prelude-go.el ends here

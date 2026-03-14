@@ -29,14 +29,20 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-packages '(yaml-mode))
 
-;; yaml-mode doesn't derive from prog-mode, but we can at least enable
-;; whitespace-mode and apply cleanup.
-(add-hook 'yaml-mode-hook 'whitespace-mode)
-(add-hook 'yaml-mode-hook 'subword-mode)
-(add-hook 'yaml-mode-hook
-          (lambda () (add-hook 'before-save-hook 'prelude-cleanup-maybe nil t)))
+;; Use yaml-ts-mode when the tree-sitter grammar is available,
+;; otherwise fall back to yaml-mode from MELPA
+(if (treesit-ready-p 'yaml t)
+    (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
+  (prelude-require-packages '(yaml-mode)))
+
+(defun prelude-yaml-mode-defaults ()
+  (whitespace-mode +1)
+  (subword-mode +1)
+  (add-hook 'before-save-hook 'prelude-cleanup-maybe nil t))
+
+(add-hook 'yaml-mode-hook #'prelude-yaml-mode-defaults)
+(add-hook 'yaml-ts-mode-hook #'prelude-yaml-mode-defaults)
 
 (provide 'prelude-yaml)
 ;;; prelude-yaml.el ends here

@@ -1,4 +1,4 @@
-;;; prelude-ts.el --- Emacs Prelude: Typescript programming support.
+;;; prelude-ts.el --- Emacs Prelude: TypeScript programming support.
 ;;
 ;; Copyright © 2023-2025 LEE Dongjun
 ;;
@@ -8,7 +8,9 @@
 
 ;;; Commentary:
 
-;; Some basic configuration for Typescript development.
+;; Configuration for TypeScript development.  Uses
+;; typescript-ts-mode (tree-sitter) when available and LSP for
+;; code intelligence.
 
 ;;; License:
 
@@ -30,33 +32,22 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(tide typescript-mode))
 
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+;; Use typescript-ts-mode when the tree-sitter grammar is available
+(when (treesit-ready-p 'typescript t)
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode)))
 
-(defcustom prelude-ts-format-action #'tide-format-before-save
-  "The format function to invoke on save.
+(defun prelude-ts-mode-defaults ()
+  (subword-mode +1)
+  (prelude-lsp-enable))
 
-Triggered only when `prelude-format-on-save' is enabled."
-  :package-version '(prelude . "1.2"))
+(setq prelude-ts-mode-hook 'prelude-ts-mode-defaults)
 
-(with-eval-after-load 'typescript-mode
-  (defun prelude-ts-mode-defaults ()
-    (tide-setup)
-    (flycheck-mode +1)
-    (setq flycheck-check-syntax-automatically '(save mode-enabled))
-    (eldoc-mode +1)
-    (tide-hl-identifier-mode +1))
-
-  ;; formats the buffer before saving
-  (add-hook 'before-save-hook
-            (lambda ()
-              (when (and prelude-format-on-save prelude-ts-format-action)
-                (funcall prelude-ts-format-action))))
-
-  (setq prelude-ts-mode-hook 'prelude-ts-mode-defaults)
-
-  (add-hook 'typescript-mode-hook (lambda () (run-hooks 'prelude-ts-mode-hook))))
+(add-hook 'typescript-ts-mode-hook (lambda ()
+                                     (run-hooks 'prelude-ts-mode-hook)))
+(add-hook 'tsx-ts-mode-hook (lambda ()
+                              (run-hooks 'prelude-ts-mode-hook)))
 
 (provide 'prelude-ts)
 

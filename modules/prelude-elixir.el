@@ -8,7 +8,9 @@
 
 ;;; Commentary:
 
-;; Some basic configuration for Elixir development.
+;; Configuration for Elixir development.  Uses elixir-ts-mode
+;; (tree-sitter) when available and LSP for code intelligence.
+;; You'll need ElixirLS or Lexical as language server.
 
 ;;; License:
 
@@ -31,7 +33,25 @@
 
 (require 'prelude-programming)
 
-(prelude-require-packages '(elixir-mode))
+;; Use elixir-ts-mode when the tree-sitter grammar is available
+(if (treesit-ready-p 'elixir t)
+    (progn
+      (prelude-require-packages '(heex-ts-mode))
+      (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-ts-mode))
+      (add-to-list 'auto-mode-alist '("\\.exs\\'" . elixir-ts-mode))
+      (add-to-list 'auto-mode-alist '("mix\\.lock" . elixir-ts-mode)))
+  (prelude-require-packages '(elixir-mode)))
+
+(defun prelude-elixir-mode-defaults ()
+  (subword-mode +1)
+  (prelude-lsp-enable))
+
+(setq prelude-elixir-mode-hook 'prelude-elixir-mode-defaults)
+
+(add-hook 'elixir-mode-hook (lambda ()
+                              (run-hooks 'prelude-elixir-mode-hook)))
+(add-hook 'elixir-ts-mode-hook (lambda ()
+                                 (run-hooks 'prelude-elixir-mode-hook)))
 
 (provide 'prelude-elixir)
 
