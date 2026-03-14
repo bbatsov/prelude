@@ -41,8 +41,7 @@
 (defun prelude-c-mode-common-defaults ()
   (setq c-default-style "k&r"
         c-basic-offset 4)
-  (when (fboundp 'c-set-offset)
-    (c-set-offset 'substatement-open 0))
+  (c-set-offset 'substatement-open 0)
   (prelude-lsp-enable))
 
 (setq prelude-c-mode-common-hook 'prelude-c-mode-common-defaults)

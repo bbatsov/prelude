@@ -46,9 +46,8 @@
   (subword-mode +1)
   (eldoc-mode +1)
   (prelude-lsp-enable)
-  (when (fboundp #'python-imenu-create-flat-index)
-    (setq-local imenu-create-index-function
-                #'python-imenu-create-flat-index)))
+  (setq-local imenu-create-index-function
+              #'python-imenu-create-flat-index))
 
 (setq prelude-python-mode-hook 'prelude-python-mode-defaults)
 
