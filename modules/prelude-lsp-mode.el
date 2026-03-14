@@ -57,6 +57,8 @@
 
   (setq lsp-ui-sideline-enable t)
   (setq lsp-ui-doc-enable t)
+  (setq lsp-ui-doc-position 'at-point)
+  (setq lsp-ui-doc-delay 0.5)
   (setq lsp-ui-peek-enable t)
   (setq lsp-ui-peek-always-show t))
 
