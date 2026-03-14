@@ -87,7 +87,6 @@
     projectile
     magit
     move-text
-    nlinum
     operate-on-number
     smartparens
     smartrep

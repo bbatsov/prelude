@@ -54,8 +54,6 @@ Here are some of the essential 3rd party packages that Prelude adds to Emacs:
   (the best git client in the known universe)
 - [git-timemachine](https://codeberg.org/pidu/git-timemachine)
   (navigate quickly through different versions of one file)
-- `nlinum`
-  (line numbers in your buffers)
 - [smartparens](https://github.com/Fuco1/smartparens)
   (powerful package for dealing with expressions and matched
   delimiters in programming languages)

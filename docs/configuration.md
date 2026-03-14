@@ -14,13 +14,13 @@ it's quite big and not that useful.
 
     You can toggle the menu bar by pressing `F12`.
 
-Furthermore, Prelude 1.1 displays line numbers (via `global-nlinum-mode`), just
-like most "modern" editors and IDEs do these days. You can go back to the way
+Furthermore, Prelude displays line numbers (via `global-display-line-numbers-mode`),
+just like most "modern" editors and IDEs do these days. You can go back to the way
 things were by setting `prelude-minimalistic-ui` to `t` in `personal/preload` or
 by adding the following snippets to your personal config:
 
 ``` emacs-lisp
-(global-nlinum-mode -1)
+(global-display-line-numbers-mode -1)
 (menu-bar-mode -1)
 ```
 
