@@ -149,7 +149,7 @@
 (super-save-mode +1)
 (diminish 'super-save-mode)
 
-(defadvice set-buffer-major-mode (after set-major-mode activate compile)
+(define-advice set-buffer-major-mode (:after (buffer) prelude-set-major-mode)
   "Set buffer major mode according to `auto-mode-alist'."
   (let* ((name (buffer-name buffer))
          (mode (assoc-default name auto-mode-alist 'string-match)))
@@ -266,7 +266,7 @@
 (browse-kill-ring-default-keybindings)
 (global-set-key (kbd "s-y") 'browse-kill-ring)
 
-(defadvice exchange-point-and-mark (before deactivate-mark activate compile)
+(define-advice exchange-point-and-mark (:before (&rest _) prelude-deactivate-mark)
   "When called with no active region, do not activate mark."
   (interactive
    (list (not (region-active-p)))))
@@ -274,7 +274,7 @@
 (require 'tabify)
 (defmacro with-region-or-buffer (func)
   "When called with no active region, call FUNC on current buffer."
-  `(defadvice ,func (before with-region-or-buffer activate compile)
+  `(define-advice ,func (:before (&rest _) prelude-region-or-buffer)
      (interactive
       (if mark-active
           (list (region-beginning) (region-end))
@@ -289,25 +289,17 @@
   (if (<= (- end beg) prelude-yank-indent-threshold)
       (indent-region beg end nil)))
 
-(defmacro advise-commands (advice-name commands class &rest body)
-  "Apply advice named ADVICE-NAME to multiple COMMANDS.
+(defun prelude-yank-indent-advice (&rest _args)
+  "Indent yanked text if in a programming mode.
+Does not indent if the mode is in `prelude-indent-sensitive-modes'."
+  (when (and (not (member major-mode prelude-indent-sensitive-modes))
+             (or (derived-mode-p 'prog-mode)
+                 (member major-mode prelude-yank-indent-modes)))
+    (let ((transient-mark-mode nil))
+      (yank-advised-indent-function (region-beginning) (region-end)))))
 
-The body of the advice is in BODY."
-  `(progn
-     ,@(mapcar (lambda (command)
-                 `(defadvice ,command (,class ,(intern (concat (symbol-name command) "-" advice-name)) activate)
-                    ,@body))
-               commands)))
-
-(advise-commands "indent" (yank yank-pop) after
-  "If current mode is one of `prelude-yank-indent-modes',
-indent yanked text (with prefix arg don't indent)."
-  (if (and (not (ad-get-arg 0))
-           (not (member major-mode prelude-indent-sensitive-modes))
-           (or (derived-mode-p 'prog-mode)
-               (member major-mode prelude-yank-indent-modes)))
-      (let ((transient-mark-mode nil))
-        (yank-advised-indent-function (region-beginning) (region-end)))))
+(advice-add 'yank :after #'prelude-yank-indent-advice)
+(advice-add 'yank-pop :after #'prelude-yank-indent-advice)
 
 ;; abbrev config
 (add-hook 'text-mode-hook 'abbrev-mode)
@@ -404,24 +396,30 @@ indent yanked text (with prefix arg don't indent)."
     ("%" . apply-operation-to-number-at-point)
     ("'" . operate-on-number-at-point)))
 
-(defadvice server-visit-files (before parse-numbers-in-lines (files proc &optional nowait) activate)
-  "Open file with emacsclient with cursors positioned on requested line.
-Most of console-based utilities prints filename in format
-'filename:linenumber'.  So you may wish to open filename in that format.
-Just call:
+(defun prelude-server-visit-files-parse-numbers (args)
+  "Parse line numbers from filenames for emacsclient.
+Most console-based utilities print filenames in the format
+'filename:linenumber'.  So you may wish to open filename in
+that format.  Just call:
 
   emacsclient filename:linenumber
 
-and file 'filename' will be opened and cursor set on line 'linenumber'"
-  (ad-set-arg 0
-              (mapcar (lambda (fn)
-                        (let ((name (car fn)))
-                          (if (string-match "^\\(.*?\\):\\([0-9]+\\)\\(?::\\([0-9]+\\)\\)?$" name)
-                              (cons
-                               (match-string 1 name)
-                               (cons (string-to-number (match-string 2 name))
-                                     (string-to-number (or (match-string 3 name) ""))))
-                            fn))) files)))
+and file 'filename' will be opened and cursor set on line
+'linenumber'."
+  (list
+   (mapcar (lambda (fn)
+             (let ((name (car fn)))
+               (if (string-match "^\\(.*?\\):\\([0-9]+\\)\\(?::\\([0-9]+\\)\\)?$" name)
+                   (cons
+                    (match-string 1 name)
+                    (cons (string-to-number (match-string 2 name))
+                          (string-to-number (or (match-string 3 name) ""))))
+                 fn)))
+           (car args))
+   (cadr args)
+   (caddr args)))
+
+(advice-add 'server-visit-files :filter-args #'prelude-server-visit-files-parse-numbers)
 
 ;; use settings from .editorconfig file when present
 (require 'editorconfig)
