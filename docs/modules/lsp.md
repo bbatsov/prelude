@@ -56,6 +56,9 @@ All lsp-mode key bindings use the <kbd>C-c C-l</kbd> prefix:
 | <kbd>C-c C-l i</kbd> | `lsp-ui-peek-find-implementation` | Find implementation |
 | <kbd>C-c C-l d</kbd> | `lsp-describe-thing-at-point` | Describe at point |
 | <kbd>C-c C-l e</kbd> | `lsp-execute-code-action` | Code action |
+| <kbd>C-c C-l f</kbd> | `lsp-format-buffer` | Format buffer |
+| <kbd>C-c C-l o</kbd> | `lsp-organize-imports` | Organize imports |
+| <kbd>C-c C-l m</kbd> | `lsp-ui-imenu` | LSP imenu |
 
 ## Installing Language Servers
 
