@@ -51,6 +51,11 @@
 (add-to-list 'auto-mode-alist
              '("/\\(views\\|html\\|theme\\|templates\\)/.*\\.php\\'" . web-mode))
 
+;; sensible indentation defaults
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+(setq web-mode-code-indent-offset 2)
+
 ;; make web-mode play nice with smartparens
 (setq web-mode-enable-auto-pairing nil)
 
