@@ -64,9 +64,6 @@
     (mkdir erc-log-channels-directory t))
 
 (setq erc-save-buffer-on-part t)
-;; FIXME - this advice is wrong and is causing problems on Emacs exit
-;; (defadvice save-buffers-kill-emacs (before save-logs (arg) activate)
-;;   (save-some-buffers t (lambda () (when (eq major-mode 'erc-mode) t))))
 
 ;; truncate long irc buffers
 (erc-truncate-mode +1)
