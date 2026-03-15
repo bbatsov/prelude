@@ -116,14 +116,12 @@ PROMPT sets the `read-string prompt."
     (when after-init-time
       (eval form))))
 
-(require 'epl)
-
 (defun prelude-update ()
   "Update Prelude to its latest version."
   (interactive)
   (when (y-or-n-p "Do you want to update Prelude? ")
     (message "Updating installed packages...")
-    (epl-upgrade)
+    (package-upgrade-all)
     (message "Updating Prelude...")
     (cd prelude-dir)
     (shell-command "git pull")
@@ -132,15 +130,16 @@ PROMPT sets the `read-string prompt."
 
 (defun prelude-update-packages (&optional arg)
   "Update Prelude's packages.
-This includes package installed via `prelude-require-package'.
+This includes packages installed via `prelude-require-package'.
 
 With a prefix ARG updates all installed packages."
   (interactive "P")
   (when (y-or-n-p "Do you want to update Prelude's packages? ")
     (if arg
-        (epl-upgrade)
-      (epl-upgrade (cl-remove-if-not (lambda (p) (memq (epl-package-name p) prelude-packages))
-                                     (epl-installed-packages))))
+        (package-upgrade-all)
+      (dolist (package prelude-packages)
+        (when (package-installed-p package)
+          (package-upgrade package))))
     (message "Update finished. Restart Emacs to complete the process.")))
 
 (defun prelude-wrap-with (s)
