@@ -53,6 +53,9 @@
       scroll-conservatively 100000
       scroll-preserve-screen-position 1)
 
+;; enable smooth pixel scrolling on graphical displays
+(pixel-scroll-precision-mode t)
+
 ;; mode line settings
 (line-number-mode t)
 (column-number-mode t)
