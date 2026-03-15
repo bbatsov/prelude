@@ -32,7 +32,7 @@
 
 (require 'nxml-mode)
 
-(push '("<\\?xml" . nxml-mode) magic-mode-alist)
+(add-to-list 'magic-mode-alist '("<\\?xml" . nxml-mode))
 
 ;; pom files should be treated as xml files
 (add-to-list 'auto-mode-alist '("\\.pom\\'" . nxml-mode))
@@ -42,6 +42,14 @@
 (setq nxml-auto-insert-xml-declaration-flag nil)
 (setq nxml-bind-meta-tab-to-complete-flag t)
 (setq nxml-slash-auto-complete-flag t)
+
+(defun prelude-xml-mode-defaults ()
+  (subword-mode +1))
+
+(setq prelude-xml-mode-hook 'prelude-xml-mode-defaults)
+
+(add-hook 'nxml-mode-hook (lambda ()
+                            (run-hooks 'prelude-xml-mode-hook)))
 
 (provide 'prelude-xml)
 
