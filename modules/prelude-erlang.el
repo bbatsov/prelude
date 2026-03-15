@@ -42,10 +42,6 @@
   (require 'projectile))
 
 (when (require 'erlang-start nil t)
-
-  (with-eval-after-load 'erlang-mode
-    (flymake-mode))
-
   (when (not (null wrangler-path))
     (add-to-list 'load-path wrangler-path)
     (require 'wrangler)))
