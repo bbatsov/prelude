@@ -98,7 +98,7 @@
 (require 'prelude-yaml)
 
 ;;; Misc
-(require 'prelude-erc) ;; A popular Emacs IRC client (useful if you're still into Freenode)
+;; (require 'prelude-erc) ;; A popular Emacs IRC client
 
 (provide 'prelude-modules)
 ;;; prelude-modules.el ends here
