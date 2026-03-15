@@ -61,7 +61,10 @@
   (sp-local-tag "#" "<%# " " %>"))
 
 (with-eval-after-load 'web-mode
-  (defun prelude-web-mode-defaults ())
+  (defun prelude-web-mode-defaults ()
+    (subword-mode +1)
+    (run-hooks 'prelude-prog-mode-hook))
+
   (setq prelude-web-mode-hook 'prelude-web-mode-defaults)
 
   (add-hook 'web-mode-hook (lambda ()
