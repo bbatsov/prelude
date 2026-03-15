@@ -75,6 +75,7 @@
   "Default Prelude hook for `LaTeX-mode'."
   (turn-on-auto-fill)
   (abbrev-mode +1)
+  (subword-mode +1)
   (smartparens-mode +1)
   (cl-case prelude-latex-fast-math-entry
     (LaTeX-math-mode (LaTeX-math-mode 1))
