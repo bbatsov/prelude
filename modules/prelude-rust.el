@@ -46,10 +46,10 @@
              (lambda () (not (eq major-mode 'rust-ts-mode))))
 
 (with-eval-after-load 'rust-mode
-  (add-hook 'rust-mode-ts-hook 'cargo-minor-mode)
+  (add-hook 'rust-ts-mode-hook 'cargo-minor-mode)
   (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
 
-  (add-hook 'rust-mode-ts-hook #'prelude-lsp-enable)
+  (add-hook 'rust-ts-mode-hook #'prelude-lsp-enable)
 
   (defun prelude-rust-mode-defaults ()
     ;; format on save
@@ -63,7 +63,7 @@
 
   (setq prelude-rust-mode-hook 'prelude-rust-mode-defaults)
 
-  (add-hook 'rust-mode-ts-hook (lambda ()
+  (add-hook 'rust-ts-mode-hook (lambda ()
                               (run-hooks 'prelude-rust-mode-hook))))
 
 (provide 'prelude-rust)
