@@ -20,6 +20,9 @@ Before submitting a patch or a pull request make sure that your patch
 is in line with the [contribution
 guidelines](https://github.com/bbatsov/prelude/blob/master/CONTRIBUTING.md).
 
+If you're contributing a new module or modifying an existing one,
+please follow the [module conventions](modules/index.md#writing-a-module).
+
 ## Documentation
 
 Good documentation is just as important as good code.  Please,
