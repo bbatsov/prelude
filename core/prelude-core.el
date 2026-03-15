@@ -38,11 +38,6 @@
 
 (require 'cl-lib)
 
-(defun prelude-buffer-mode (buffer-or-name)
-  "Retrieve the `major-mode' of BUFFER-OR-NAME."
-  (with-current-buffer buffer-or-name
-    major-mode))
-
 (defun prelude-search (query-url prompt)
   "Open the search url constructed with the QUERY-URL.
 PROMPT sets the `read-string prompt."
