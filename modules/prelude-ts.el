@@ -1,6 +1,6 @@
 ;;; prelude-ts.el --- Emacs Prelude: TypeScript programming support.
 ;;
-;; Copyright © 2023-2025 LEE Dongjun
+;; Copyright © 2023-2026 LEE Dongjun
 ;;
 ;; Author: LEE Dongjun <redongjun@gmail.com>
 

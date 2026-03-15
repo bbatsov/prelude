@@ -1,6 +1,6 @@
 ;;; prelude-latex.el --- Emacs Prelude: Sane setup for LaTeX writers.
 ;;
-;; Copyright © 2011-2025 Bozhidar Batsov
+;; Copyright © 2011-2026 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude

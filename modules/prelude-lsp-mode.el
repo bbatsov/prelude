@@ -1,6 +1,6 @@
 ;;; prelude-lsp-mode.el --- lsp-mode setup
 ;;
-;; Copyright © 2011-2025 Bozhidar Batsov
+;; Copyright © 2011-2026 Bozhidar Batsov
 ;;
 ;; Author: Bozhidar Batsov, Ben Alex
 ;; URL: https://github.com/bbatsov/prelude

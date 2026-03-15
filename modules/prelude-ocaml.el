@@ -1,6 +1,6 @@
 ;;; prelude-ocaml.el --- Emacs Prelude: OCaml programming support.
 ;;
-;; Copyright © 2014-2025 Geoff Shannon
+;; Copyright © 2014-2026 Geoff Shannon
 ;;
 ;; Author: Geoff Shannon <geoffpshannon@gmail.com>
 ;; URL: https://github.com/bbatsov/prelude
