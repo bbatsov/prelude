@@ -36,6 +36,7 @@
     ;; Unix-like systems.
     ;; https://github.com/fsharp/emacs-fsharp-mode#compiler-and-repl-paths
     (setq inferior-fsharp-program "dotnet fsi --readline-")
+    (subword-mode +1)
     (require 'eglot-sharp))
 
   (setq prelude-fsharp-mode-hook 'prelude-fsharp-mode-defaults)

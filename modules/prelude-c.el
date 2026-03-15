@@ -42,6 +42,7 @@
   (setq c-default-style "k&r"
         c-basic-offset 4)
   (c-set-offset 'substatement-open 0)
+  (subword-mode +1)
   (prelude-lsp-enable))
 
 (setq prelude-c-mode-common-hook 'prelude-c-mode-common-defaults)

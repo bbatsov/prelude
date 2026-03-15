@@ -43,6 +43,7 @@
   (require 'ocaml-eglot)
 
   (defun prelude-ocaml-mode-defaults ()
+    (subword-mode +1)
     (utop-minor-mode +1)
     (ocaml-eglot-setup))
 

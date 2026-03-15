@@ -38,6 +38,7 @@
 
 (with-eval-after-load 'dart-mode
   (defun prelude-dart-mode-defaults ()
+    (subword-mode +1)
     (prelude-lsp-enable)
     (when (eq prelude-lsp-client 'lsp-mode)
       (setq dap-launch-configuration-providers
