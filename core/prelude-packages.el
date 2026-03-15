@@ -62,7 +62,6 @@
   '(ace-window
     ag
     avy
-    anzu
     browse-kill-ring
     crux
     discover-my-major

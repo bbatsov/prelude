@@ -231,13 +231,9 @@
 (setq avy-background t)
 (setq avy-style 'at-full)
 
-;; anzu-mode enhances isearch & query-replace by showing total matches and current match position
-(require 'anzu)
-(diminish 'anzu-mode)
-(global-anzu-mode)
-
-(global-set-key (kbd "M-%") 'anzu-query-replace)
-(global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
+;; show match count during isearch and query-replace
+(setq isearch-lazy-count t)
+(setq lazy-count-prefix-format "(%s/%s) ")
 
 ;; dired - reuse current buffer by pressing 'a'
 (put 'dired-find-alternate-file 'disabled nil)
