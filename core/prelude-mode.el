@@ -29,7 +29,6 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(require 'easymenu)
 (require 'imenu-anywhere)
 (require 'crux)
 
