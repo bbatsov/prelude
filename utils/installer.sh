@@ -5,17 +5,20 @@ has() {
 }
 
 install_prelude () {
-    printf " Cloning Emacs Prelude's GitHub repository...\n$RESET"
-    if [ x$PRELUDE_VERBOSE != x ]
+    printf " Cloning Emacs Prelude's GitHub repository...\n${RESET}"
+    if [ -n "$PRELUDE_VERBOSE" ]
     then
-        /usr/bin/env git clone $PRELUDE_URL "$PRELUDE_INSTALL_DIR"
+        if ! /usr/bin/env git clone "$PRELUDE_URL" "$PRELUDE_INSTALL_DIR"
+        then
+            printf "${RED} A fatal error occurred during Prelude's installation. Aborting...${RESET}\n"
+            exit 1
+        fi
     else
-        /usr/bin/env git clone $PRELUDE_URL "$PRELUDE_INSTALL_DIR" > /dev/null
-    fi
-    if ! [ $? -eq 0 ]
-    then
-        printf "$RED A fatal error occurred during Prelude's installation. Aborting..."
-        exit 1
+        if ! /usr/bin/env git clone "$PRELUDE_URL" "$PRELUDE_INSTALL_DIR" > /dev/null 2>&1
+        then
+            printf "${RED} A fatal error occurred during Prelude's installation. Aborting...${RESET}\n"
+            exit 1
+        fi
     fi
 }
 
