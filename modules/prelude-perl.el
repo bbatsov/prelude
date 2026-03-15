@@ -35,7 +35,7 @@
 ;; use cperl-mode instead of perl-mode
 (defalias 'perl-mode 'cperl-mode)
 
-(define-key 'help-command "P" 'cperl-perldoc)
+(define-key 'help-command (kbd "P") 'cperl-perldoc)
 
 (defun prelude-cperl-mode-defaults ()
   (setq cperl-indent-level 4)
