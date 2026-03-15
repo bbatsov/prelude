@@ -43,11 +43,19 @@
         (add-to-list 'auto-mode-alist `(,(format "\\%s\\'" file) . sh-mode)))
       prelude-prezto-files)
 
-(add-hook 'sh-mode-hook
-          (lambda ()
-            (if (and buffer-file-name
-                     (member (file-name-nondirectory buffer-file-name) prelude-prezto-files))
-                (sh-set-shell "zsh"))))
+(defun prelude-sh-mode-defaults ()
+  (subword-mode +1)
+  ;; Auto-detect zsh for prezto files
+  (when (and buffer-file-name
+             (member (file-name-nondirectory buffer-file-name) prelude-prezto-files))
+    (sh-set-shell "zsh")))
+
+(setq prelude-sh-mode-hook 'prelude-sh-mode-defaults)
+
+(add-hook 'sh-mode-hook (lambda ()
+                          (run-hooks 'prelude-sh-mode-hook)))
+(add-hook 'bash-ts-mode-hook (lambda ()
+                               (run-hooks 'prelude-sh-mode-hook)))
 
 (provide 'prelude-shell)
 ;;; prelude-shell.el ends here
