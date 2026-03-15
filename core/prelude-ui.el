@@ -63,7 +63,7 @@
   (global-display-line-numbers-mode))
 
 ;; enable y/n answers
-(fset 'yes-or-no-p 'y-or-n-p)
+(setq use-short-answers t)
 
 ;; more useful frame title, that show either a file or a
 ;; buffer name (if the buffer isn't visiting a file)
