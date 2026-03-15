@@ -29,19 +29,25 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-package 'geiser)
+(prelude-require-packages '(geiser))
 
 (require 'prelude-lisp)
 (require 'geiser)
 
-;; geiser replies on a REPL to provide autodoc and completion
+;; geiser relies on a REPL to provide autodoc and completion
 (setq geiser-mode-start-repl-p t)
 
 ;; keep the home clean
 (setq geiser-repl-history-filename
       (expand-file-name "geiser-history" prelude-savefile-dir))
 
-(add-hook 'scheme-mode-hook (lambda () (run-hooks 'prelude-lisp-coding-hook)))
+(defun prelude-scheme-mode-defaults ()
+  (run-hooks 'prelude-lisp-coding-hook))
+
+(setq prelude-scheme-mode-hook 'prelude-scheme-mode-defaults)
+
+(add-hook 'scheme-mode-hook (lambda ()
+                              (run-hooks 'prelude-scheme-mode-hook)))
 
 (provide 'prelude-scheme)
 
