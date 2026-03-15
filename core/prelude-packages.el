@@ -53,8 +53,7 @@
 (when prelude-override-package-user-dir
   (setq package-user-dir (expand-file-name "elpa" prelude-dir)))
 
-(unless package--initialized
-    (package-initialize))
+(package-initialize)
 
 ;; use-package is built-in since Emacs 29
 (setq use-package-verbose t)
