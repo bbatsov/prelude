@@ -277,7 +277,7 @@
 (with-region-or-buffer untabify)
 
 ;; automatically indenting yanked text if in programming-modes
-(defun yank-advised-indent-function (beg end)
+(defun prelude-yank-indent-function (beg end)
   "Do indentation, as long as the region isn't too large."
   (if (<= (- end beg) prelude-yank-indent-threshold)
       (indent-region beg end nil)))
@@ -289,7 +289,7 @@ Does not indent if the mode is in `prelude-indent-sensitive-modes'."
              (or (derived-mode-p 'prog-mode)
                  (member major-mode prelude-yank-indent-modes)))
     (let ((transient-mark-mode nil))
-      (yank-advised-indent-function (region-beginning) (region-end)))))
+      (prelude-yank-indent-function (region-beginning) (region-end)))))
 
 (advice-add 'yank :after #'prelude-yank-indent-advice)
 (advice-add 'yank-pop :after #'prelude-yank-indent-advice)
