@@ -88,6 +88,12 @@
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
 
+;; Rich annotations in the minibuffer (docstrings, file sizes, etc.)
+(use-package marginalia
+  :ensure t
+  :init
+  (marginalia-mode))
+
 (use-package consult
   :ensure t
   :bind (
