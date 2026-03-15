@@ -13,39 +13,104 @@ packages and provide some sensible baseline configuration for them.
 Here's a real example.
 
 ``` emacs-lisp
-;;; prelude-ruby.el --- Emacs Prelude: A nice setup for Ruby (and Rails) devs.
-;;
+;;; prelude-ruby.el --- Emacs Prelude: A nice setup for Ruby devs.
 ;;; Code:
 
 (require 'prelude-programming)
 
 (prelude-require-packages '(inf-ruby yari))
 
-;; We never want to edit Rubinius bytecode
-(add-to-list 'completion-ignored-extensions ".rbc")
+;; Use ruby-ts-mode when the tree-sitter grammar is available
+(when (treesit-ready-p 'ruby t)
+  (add-to-list 'major-mode-remap-alist
+               '(ruby-mode . ruby-ts-mode)))
 
 ;; Map yari to C-h R
 (define-key 'help-command (kbd "R") 'yari)
 
-(with-eval-after-load 'ruby-mode
-  (defun prelude-ruby-mode-defaults ()
-    ;; Don't auto-insert encoding comments
-    ;; Those are almost never needed in Ruby 2+
-    (setq ruby-insert-encoding-magic-comment nil)
-    (inf-ruby-minor-mode +1)
-    ;; CamelCase aware editing operations
-    (subword-mode +1))
+(defun prelude-ruby-mode-defaults ()
+  (setq ruby-insert-encoding-magic-comment nil)
+  (inf-ruby-minor-mode +1)
+  (subword-mode +1)
+  (prelude-lsp-enable))
 
-  (setq prelude-ruby-mode-hook 'prelude-ruby-mode-defaults)
+(setq prelude-ruby-mode-hook 'prelude-ruby-mode-defaults)
 
-  (add-hook 'ruby-mode-hook (lambda ()
-                              (run-hooks 'prelude-ruby-mode-hook))))
+(add-hook 'ruby-mode-hook (lambda ()
+                            (run-hooks 'prelude-ruby-mode-hook)))
+(add-hook 'ruby-ts-mode-hook (lambda ()
+                               (run-hooks 'prelude-ruby-mode-hook)))
 
 (provide 'prelude-ruby)
 ;;; prelude-ruby.el ends here
 ```
 
-To use a module you simply have to require it. No new concepts. No magic.
+To use a module you simply have to require it. No new
+concepts. No magic.
+
+## Writing a Module
+
+When writing or modifying a module, follow these conventions
+for consistency:
+
+### Structure
+
+A typical programming language module follows this pattern:
+
+``` emacs-lisp
+;;; prelude-example.el --- Emacs Prelude: Example config.
+;;; Code:
+
+(require 'prelude-programming)
+
+(prelude-require-packages '(example-mode))
+
+;; Use tree-sitter mode when grammar is available
+(when (treesit-ready-p 'example t)
+  (add-to-list 'major-mode-remap-alist
+               '(example-mode . example-ts-mode)))
+
+(defun prelude-example-mode-defaults ()
+  (subword-mode +1)
+  (prelude-lsp-enable))
+
+(setq prelude-example-mode-hook
+      'prelude-example-mode-defaults)
+
+(add-hook 'example-mode-hook
+          (lambda ()
+            (run-hooks 'prelude-example-mode-hook)))
+(add-hook 'example-ts-mode-hook
+          (lambda ()
+            (run-hooks 'prelude-example-mode-hook)))
+
+(provide 'prelude-example)
+;;; prelude-example.el ends here
+```
+
+### Conventions
+
+- **Require `prelude-programming`** as the foundation for
+  all programming language modules. Lisp-family modules
+  should require `prelude-lisp` instead.
+- **Define a `prelude-*-mode-defaults` function** with the
+  mode-specific setup. This makes it easy for users to
+  override.
+- **Use the `prelude-*-mode-hook` variable pattern** (setq +
+  add-hook with lambda). This lets users replace the
+  defaults function entirely via their personal config.
+- **Enable `subword-mode`** for CamelCase-aware editing.
+- **Call `prelude-lsp-enable`** for LSP support. This
+  respects the user's `prelude-lsp-client` setting
+  (Eglot or lsp-mode).
+- **Add tree-sitter support** using `treesit-ready-p` with
+  the `t` argument (silent, no error if grammar missing)
+  and `major-mode-remap-alist`. Always add hooks for both
+  the legacy mode and the tree-sitter mode.
+- **Use `with-eval-after-load`** to defer configuration
+  until the relevant package is loaded.
+- **Install packages with `prelude-require-packages`**,
+  not `use-package` or manual `package-install` calls.
 
 ## Foundation Modules
 
