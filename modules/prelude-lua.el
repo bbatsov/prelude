@@ -49,7 +49,14 @@
 (add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
-(add-hook 'lua-mode-hook #'prelude-lsp-enable)
+(defun prelude-lua-mode-defaults ()
+  (subword-mode +1)
+  (prelude-lsp-enable))
+
+(setq prelude-lua-mode-hook 'prelude-lua-mode-defaults)
+
+(add-hook 'lua-mode-hook (lambda ()
+                           (run-hooks 'prelude-lua-mode-hook)))
 
 (provide 'prelude-lua)
 

@@ -50,11 +50,16 @@
     (add-to-list 'load-path wrangler-path)
     (require 'wrangler)))
 
-(add-hook 'erlang-mode-hook #'prelude-lsp-enable)
+(defun prelude-erlang-mode-defaults ()
+  (subword-mode +1)
+  (prelude-lsp-enable)
+  (when prelude-projectile
+    (setq erlang-compile-function 'projectile-compile-project)))
 
-(when prelude-projectile
-  (add-hook 'erlang-mode-hook (lambda ()
-                                (setq erlang-compile-function 'projectile-compile-project))))
+(setq prelude-erlang-mode-hook 'prelude-erlang-mode-defaults)
+
+(add-hook 'erlang-mode-hook (lambda ()
+                              (run-hooks 'prelude-erlang-mode-hook)))
 
 (provide 'prelude-erlang)
 
