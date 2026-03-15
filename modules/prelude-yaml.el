@@ -2,7 +2,7 @@
 ;;
 ;; Copyright © 2011-2025 Bozhidar Batsov
 ;;
-;; Author: ToBeReplaced
+;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
 
 ;; This file is not part of GNU Emacs.
@@ -41,8 +41,12 @@
   (subword-mode +1)
   (add-hook 'before-save-hook 'prelude-cleanup-maybe nil t))
 
-(add-hook 'yaml-mode-hook #'prelude-yaml-mode-defaults)
-(add-hook 'yaml-ts-mode-hook #'prelude-yaml-mode-defaults)
+(setq prelude-yaml-mode-hook 'prelude-yaml-mode-defaults)
+
+(add-hook 'yaml-mode-hook (lambda ()
+                            (run-hooks 'prelude-yaml-mode-hook)))
+(add-hook 'yaml-ts-mode-hook (lambda ()
+                               (run-hooks 'prelude-yaml-mode-hook)))
 
 (provide 'prelude-yaml)
 ;;; prelude-yaml.el ends here
