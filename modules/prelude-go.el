@@ -63,6 +63,9 @@
       (when goimports
         (setq gofmt-command goimports)))
 
+    ;; format before save
+    (add-hook 'before-save-hook #'gofmt-before-save nil t)
+
     ;; stop whitespace being highlighted
     (whitespace-toggle-options '(tabs))
 
