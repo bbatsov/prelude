@@ -57,9 +57,6 @@
           #'(lambda ()
               (substitute-key-definition 'eshell-list-history 'helm-eshell-history eshell-mode-map)))
 
-(substitute-key-definition 'find-tag 'helm-etags-select global-map)
-
-(helm-descbinds-mode)
 (helm-mode 1)
 
 (when prelude-projectile

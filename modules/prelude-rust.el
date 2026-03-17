@@ -45,11 +45,9 @@
 (add-to-list 'super-save-predicates
              (lambda () (not (eq major-mode 'rust-ts-mode))))
 
-(with-eval-after-load 'rust-mode
+(with-eval-after-load 'rust-ts-mode
   (add-hook 'rust-ts-mode-hook 'cargo-minor-mode)
   (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
-
-  (add-hook 'rust-ts-mode-hook #'prelude-lsp-enable)
 
   (defun prelude-rust-mode-defaults ()
     ;; format on save
@@ -59,7 +57,9 @@
     (remove-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
     ;; CamelCase aware editing operations
-    (subword-mode +1))
+    (subword-mode +1)
+
+    (prelude-lsp-enable))
 
   (setq prelude-rust-mode-hook 'prelude-rust-mode-defaults)
 

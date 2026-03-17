@@ -70,15 +70,9 @@
     (whitespace-toggle-options '(tabs))
 
     ;; CamelCase aware editing operations
-    (subword-mode +1))
+    (subword-mode +1)
 
-  ;; if yas is present, this enables yas-global-mode
-  ;; which provides completion via company
-  (if (fboundp 'yas-global-mode)
-      (yas-global-mode))
-
-  (add-hook 'go-mode-hook #'prelude-lsp-enable)
-  (add-hook 'go-ts-mode-hook #'prelude-lsp-enable)
+    (prelude-lsp-enable))
 
   (setq prelude-go-mode-hook 'prelude-go-mode-defaults)
   (add-hook 'go-mode-hook (lambda ()
