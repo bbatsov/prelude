@@ -33,10 +33,8 @@
 (require 'prelude-programming)
 
 ;; Use tree-sitter modes when grammars are available
-(when (treesit-ready-p 'c t)
-  (add-to-list 'major-mode-remap-alist '(c-mode . c-ts-mode)))
-(when (treesit-ready-p 'cpp t)
-  (add-to-list 'major-mode-remap-alist '(c++-mode . c++-ts-mode)))
+(prelude-treesit-remap 'c 'c-mode 'c-ts-mode)
+(prelude-treesit-remap 'cpp 'c++-mode 'c++-ts-mode)
 
 (defun prelude-c-mode-common-defaults ()
   (setq c-default-style "k&r"

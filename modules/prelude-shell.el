@@ -33,8 +33,7 @@
 (require 'sh-script)
 
 ;; Use bash-ts-mode when the tree-sitter grammar is available
-(when (treesit-ready-p 'bash t)
-  (add-to-list 'major-mode-remap-alist '(sh-mode . bash-ts-mode)))
+(prelude-treesit-remap 'bash 'sh-mode 'bash-ts-mode)
 
 ;; recognize prezto files as zsh scripts
 (defvar prelude-prezto-files '("zlogin" "zlogout" "zpreztorc" "zprofile" "zshenv" "zshrc"))

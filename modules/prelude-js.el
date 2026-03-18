@@ -33,13 +33,9 @@
 
 (require 'prelude-programming)
 
-;; Use js-ts-mode when the tree-sitter grammar is available
-(when (treesit-ready-p 'javascript t)
-  (add-to-list 'major-mode-remap-alist '(js-mode . js-ts-mode)))
-
-;; Use json-ts-mode when the tree-sitter grammar is available
-(when (treesit-ready-p 'json t)
-  (add-to-list 'major-mode-remap-alist '(js-json-mode . json-ts-mode)))
+;; Use tree-sitter modes when grammars are available
+(prelude-treesit-remap 'javascript 'js-mode 'js-ts-mode)
+(prelude-treesit-remap 'json 'js-json-mode 'json-ts-mode)
 
 (defun prelude-js-mode-defaults ()
   (subword-mode +1)

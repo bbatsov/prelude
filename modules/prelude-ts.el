@@ -34,7 +34,8 @@
 (require 'prelude-programming)
 
 ;; Use typescript-ts-mode when the tree-sitter grammar is available
-(when (treesit-ready-p 'typescript t)
+(require 'treesit nil t)
+(when (and (fboundp 'treesit-ready-p) (treesit-ready-p 'typescript t))
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode)))
 

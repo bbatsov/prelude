@@ -34,7 +34,8 @@
 (require 'prelude-programming)
 
 ;; Use elixir-ts-mode when the tree-sitter grammar is available
-(if (treesit-ready-p 'elixir t)
+(require 'treesit nil t)
+(if (and (fboundp 'treesit-ready-p) (treesit-ready-p 'elixir t))
     (progn
       (prelude-require-packages '(heex-ts-mode))
       (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-ts-mode))

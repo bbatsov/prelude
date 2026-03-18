@@ -34,8 +34,7 @@
                             gotest))
 
 ;; Use go-ts-mode when the tree-sitter grammar is available
-(when (treesit-ready-p 'go t)
-  (add-to-list 'major-mode-remap-alist '(go-mode . go-ts-mode)))
+(prelude-treesit-remap 'go 'go-mode 'go-ts-mode)
 
 ;; Ignore go test -c output files
 (add-to-list 'completion-ignored-extensions ".test")

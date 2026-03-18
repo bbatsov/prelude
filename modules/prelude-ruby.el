@@ -35,8 +35,7 @@
 (prelude-require-packages '(inf-ruby yari))
 
 ;; Use ruby-ts-mode when the tree-sitter grammar is available
-(when (treesit-ready-p 'ruby t)
-  (add-to-list 'major-mode-remap-alist '(ruby-mode . ruby-ts-mode)))
+(prelude-treesit-remap 'ruby 'ruby-mode 'ruby-ts-mode)
 
 ;; We never want to edit Rubinius bytecode
 (add-to-list 'completion-ignored-extensions ".rbc")

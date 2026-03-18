@@ -32,7 +32,8 @@
 
 ;; Use yaml-ts-mode when the tree-sitter grammar is available,
 ;; otherwise fall back to yaml-mode from MELPA
-(if (treesit-ready-p 'yaml t)
+(require 'treesit nil t)
+(if (and (fboundp 'treesit-ready-p) (treesit-ready-p 'yaml t))
     (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
   (prelude-require-packages '(yaml-mode)))
 

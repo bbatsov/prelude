@@ -143,6 +143,14 @@ With a prefix ARG updates all installed packages."
      (interactive "P")
      (sp-wrap-with-pair ,s)))
 
+(defun prelude-treesit-remap (grammar old-mode new-mode)
+  "Remap OLD-MODE to NEW-MODE when tree-sitter GRAMMAR is available.
+Does nothing if Emacs was compiled without tree-sitter support."
+  (require 'treesit nil t)
+  (when (and (fboundp 'treesit-ready-p)
+             (treesit-ready-p grammar t))
+    (add-to-list 'major-mode-remap-alist (cons old-mode new-mode))))
+
 (defun prelude-lsp-enable ()
   "Enable the LSP client configured via `prelude-lsp-client'."
   (pcase prelude-lsp-client
