@@ -1,14 +1,31 @@
 name: CI
-on: push
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 jobs:
-  build:
+  load-test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        emacs_version:
+          - "29.4"
+          - "30.1"
     steps:
       - name: checkout
-        uses: actions/checkout@v1
-      - name: install emacs
-        run: sudo apt-get update && sudo apt-get install -y emacs
-      - name: put prelude in the right place
-        run: ln -s $(pwd) $HOME/.emacs.d
-      - name: load prelude
+        uses: actions/checkout@v4
+      - name: install Emacs
+        uses: purcell/setup-emacs@master
+        with:
+          version: ${{ matrix.emacs_version }}
+      - name: set up Prelude
+        run: |
+          ln -s $(pwd) $HOME/.emacs.d
+          mkdir -p personal
+          echo '(provide (quote prelude-modules))' > personal/prelude-modules.el
+      - name: load core
         run: emacs --batch --load init.el
+      - name: load all modules
+        run: emacs --batch --load init.el --load test/prelude-load-test.el
