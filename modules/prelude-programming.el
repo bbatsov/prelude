@@ -34,11 +34,9 @@
   (set (make-local-variable 'comment-auto-fill-only-comments) t))
 
 ;; show the name of the current function definition in the modeline
-(require 'which-func)
 (which-function-mode 1)
 
 ;; font-lock annotations like TODO in source code
-(require 'hl-todo)
 (global-hl-todo-mode 1)
 
 ;; in Emacs 24 programming major modes generally derive from a common

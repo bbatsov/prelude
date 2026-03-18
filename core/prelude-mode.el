@@ -29,8 +29,6 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(require 'imenu-anywhere)
-(require 'crux)
 
 (defvar prelude-mode-map
   (let ((map (make-sparse-keymap)))

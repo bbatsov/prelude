@@ -32,7 +32,6 @@
 (prelude-require-packages '(company))
 
 (require 'company)
-(require 'diminish)
 
 (setq company-idle-delay 0.5)
 (setq company-show-numbers t)

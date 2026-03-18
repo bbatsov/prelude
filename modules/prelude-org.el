@@ -30,19 +30,16 @@
 
 ;;; Code:
 
-(require 'org)
-(require 'org-habit)
-
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-
 ;; a few useful global keybindings for org-mode
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c b") 'org-switchb)
 
-(setq org-log-done t)
-(setq org-log-into-drawer t)
+(with-eval-after-load 'org
+  (require 'org-habit)
+  (setq org-log-done t)
+  (setq org-log-into-drawer t))
 
 (defun prelude-org-mode-defaults ()
   ;; clean visual indentation

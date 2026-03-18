@@ -39,7 +39,6 @@
 ;; ivy is a powerful alternative to the popular ido-mode
 
 (require 'ivy)
-(require 'diminish)
 
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
