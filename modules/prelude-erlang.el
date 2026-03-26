@@ -30,32 +30,23 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(erlang))
-
-(defcustom wrangler-path nil
-  "The location of wrangler elisp directory."
-  :group 'prelude-erlang
-  :type 'string
-  :safe 'stringp)
-
-(when prelude-projectile
-  (require 'projectile))
-
-(when (require 'erlang-start nil t)
-  (when (not (null wrangler-path))
-    (add-to-list 'load-path wrangler-path)
-    (require 'wrangler)))
 
 (defun prelude-erlang-mode-defaults ()
   (subword-mode +1)
   (prelude-lsp-enable)
+  ;; Use Projectile's compile command instead of erlang-mode's default
   (when prelude-projectile
+    (require 'projectile)
     (setq erlang-compile-function 'projectile-compile-project)))
 
-(setq prelude-erlang-mode-hook 'prelude-erlang-mode-defaults)
+;; Major mode for Erlang.  Install erlang_ls for LSP support:
+;;   https://github.com/erlang-ls/erlang_ls
+(use-package erlang
+  :ensure t
+  :hook (erlang-mode . (lambda ()
+                         (run-hooks 'prelude-erlang-mode-hook))))
 
-(add-hook 'erlang-mode-hook (lambda ()
-                              (run-hooks 'prelude-erlang-mode-hook)))
+(setq prelude-erlang-mode-hook 'prelude-erlang-mode-defaults)
 
 (provide 'prelude-erlang)
 
