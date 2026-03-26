@@ -126,6 +126,61 @@ These days Prelude simply depends on that package.
 
 The [super-save](https://github.com/bbatsov/super-save) package also used to be part of Prelude in the past.
 
+## Upgrading to Prelude 2.0
+
+Prelude 2.0 is a major release that modernizes the entire distribution around Emacs 29+ features. Here's what you need to know:
+
+### Emacs 29.1 is now required
+
+Prelude no longer supports Emacs 28 or older. If you haven't upgraded yet, now's the time. Emacs 29 brings built-in tree-sitter, Eglot (LSP client), `use-package`, and many other improvements that Prelude 2.0 takes full advantage of.
+
+### Tree-sitter support
+
+For built-in modes that ship both classic and tree-sitter variants (e.g., `python-mode` / `python-ts-mode`), Prelude automatically selects the tree-sitter version when a grammar is available and falls back to the classic mode when it isn't. Some modules use tree-sitter modes unconditionally (e.g., `prelude-ocaml` uses `neocaml` which is tree-sitter-only), though such modes typically auto-install their grammars.
+
+To install tree-sitter grammars, use `M-x treesit-install-language-grammar`. See the [Emacs manual](https://www.gnu.org/software/emacs/manual/html_node/emacs/Language-Grammar.html) for details.
+
+### Built-in LSP via Eglot
+
+Prelude 2.0 adds LSP support to most language modules using Eglot (built-in since Emacs 29) as the default client. If you were previously using `prelude-lsp` with lsp-mode, note that:
+
+- The module has been renamed to `prelude-lsp-mode`.
+- Set `(setq prelude-lsp-client 'lsp-mode)` in your personal config to keep using lsp-mode.
+- The default is now Eglot -- no extra packages needed.
+- Eglot keybindings live under `C-c C-l` (rename, code actions, format, etc.).
+
+### Removed packages and modules
+
+Several outdated packages have been replaced by built-in alternatives:
+
+| Removed | Replacement |
+|---------|-------------|
+| `nlinum` | Built-in `display-line-numbers-mode` |
+| `anzu` | Built-in `isearch-lazy-count` |
+| `epl` | Built-in `package-upgrade-all` / `package-upgrade` |
+| `smex` (binding) | `execute-extended-command` |
+| `anaconda-mode` | LSP (Eglot/lsp-mode) |
+| `js2-mode` | `js-ts-mode` + LSP |
+| `tide` | `typescript-ts-mode` + LSP |
+| `alchemist` | LSP |
+| `go-projectile` | Removed (unmaintained) |
+| `prelude-selectrum` | Use `prelude-vertico` instead |
+
+### Keybinding changes
+
+- `C-x p` no longer opens `proced` (this prefix is now reserved for `project.el`).
+- `C-x C-m` runs `execute-extended-command` instead of `smex`.
+- `C-c c` is bound to `org-capture`.
+- `C-c C-l` prefix is used for Eglot commands in programming modes.
+
+### What you should do
+
+1. **Update Emacs** to 29.1 or newer.
+2. **Pull the latest Prelude** and restart Emacs. Packages will be updated automatically.
+3. **Review your `prelude-modules.el`** -- if you had `prelude-lsp` enabled, rename it to `prelude-lsp-mode`. If you want Eglot (recommended), you don't need any LSP module enabled.
+4. **Install tree-sitter grammars** for your languages of choice (optional but recommended).
+5. **Check your personal config** for references to removed packages (`nlinum`, `anzu`, `epl`, `anaconda-mode`, `js2-mode`, `tide`, `alchemist`).
+
 ## Known issues
 
 Check out the project's
@@ -138,8 +193,7 @@ and send me a pull request. :-)
 Support is available via several channels:
 
 - Prelude's Google Group <emacs-prelude@googlegroups.com>
-- Prelude's Freenode channel (`#prelude-emacs`)
-- [Gitter](https://gitter.im/bbatsov/prelude)
+- [GitHub Discussions](https://github.com/bbatsov/prelude/discussions)
 
 ## Contributors
 
@@ -153,7 +207,7 @@ welcome. GitHub pull requests are even better! :-)
 
 ## License
 
-Copyright © 2011-2025 Bozhidar Batsov and
+Copyright © 2011-2026 Bozhidar Batsov and
 [contributors](https://github.com/bbatsov/prelude/contributors).
 
 Distributed under the GNU General Public License, version 3
