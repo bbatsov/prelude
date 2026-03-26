@@ -30,12 +30,15 @@
 
 ;;; Code:
 
-(prelude-require-packages '(rainbow-mode))
-
 ;; Use css-ts-mode when the tree-sitter grammar is available
 (prelude-treesit-remap 'css 'css-mode 'css-ts-mode)
 
 (setq css-indent-offset 2)
+
+;; Colorize color names and hex values in CSS buffers
+(use-package rainbow-mode
+  :ensure t
+  :defer t)
 
 (defun prelude-css-mode-defaults ()
   (rainbow-mode +1)
