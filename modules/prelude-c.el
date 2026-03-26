@@ -37,9 +37,14 @@
 (prelude-treesit-remap 'cpp 'c++-mode 'c++-ts-mode)
 
 (defun prelude-c-mode-common-defaults ()
+  ;; K&R style for classic cc-mode
   (setq c-default-style "k&r"
         c-basic-offset 4)
   (c-set-offset 'substatement-open 0)
+  ;; Match the K&R style in tree-sitter mode (c-set-offset has no
+  ;; effect there since it uses its own indentation engine)
+  (when (derived-mode-p 'c-ts-mode 'c++-ts-mode)
+    (setq c-ts-mode-indent-style 'k&r))
   (subword-mode +1)
   (prelude-lsp-enable))
 
@@ -54,14 +59,11 @@
 (add-hook 'c++-ts-mode-hook (lambda ()
                                (run-hooks 'prelude-c-mode-common-hook)))
 
-(defun prelude-makefile-mode-defaults ()
-  (whitespace-toggle-options '(tabs))
-  (setq indent-tabs-mode t ))
+;; Major mode for CMake build files
+(use-package cmake-mode
+  :ensure t
+  :defer t)
 
-(setq prelude-makefile-mode-hook 'prelude-makefile-mode-defaults)
-
-(add-hook 'makefile-mode-hook (lambda ()
-                                (run-hooks 'prelude-makefile-mode-hook)))
 (provide 'prelude-c)
 
 ;;; prelude-c.el ends here

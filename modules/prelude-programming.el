@@ -79,5 +79,15 @@
     (global-flycheck-mode +1)
   (add-hook 'prog-mode-hook 'flycheck-mode))
 
+;; Makefiles require tabs for indentation
+(defun prelude-makefile-mode-defaults ()
+  (whitespace-toggle-options '(tabs))
+  (setq indent-tabs-mode t))
+
+(setq prelude-makefile-mode-hook 'prelude-makefile-mode-defaults)
+
+(add-hook 'makefile-mode-hook (lambda ()
+                                (run-hooks 'prelude-makefile-mode-hook)))
+
 (provide 'prelude-programming)
 ;;; prelude-programming.el ends here
