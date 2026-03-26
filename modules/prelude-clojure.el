@@ -32,31 +32,34 @@
 ;;; Code:
 
 (require 'prelude-lisp)
-(prelude-require-packages '(clojure-mode cider))
 
-(with-eval-after-load 'clojure-mode
-  (defun prelude-clojure-mode-defaults ()
-    (subword-mode +1)
-    (run-hooks 'prelude-lisp-coding-hook))
+(defun prelude-clojure-mode-defaults ()
+  (subword-mode +1)
+  (run-hooks 'prelude-lisp-coding-hook))
 
-  (setq prelude-clojure-mode-hook 'prelude-clojure-mode-defaults)
+(defun prelude-cider-repl-mode-defaults ()
+  (subword-mode +1)
+  (run-hooks 'prelude-interactive-lisp-coding-hook))
 
-  (add-hook 'clojure-mode-hook (lambda ()
-                                 (run-hooks 'prelude-clojure-mode-hook))))
+;; For tree-sitter support on Emacs 30+, install clojure-ts-mode
+;; separately -- it auto-remaps clojure-mode buffers when present.
+(use-package clojure-mode
+  :ensure t
+  :hook (clojure-mode . (lambda ()
+                           (run-hooks 'prelude-clojure-mode-hook))))
 
-(with-eval-after-load 'cider
-  (setq nrepl-log-messages t)
+;; CIDER: Clojure Interactive Development Environment that Rocks
+(use-package cider
+  :ensure t
+  :defer t
+  :config
+  ;; Enable to log all nREPL messages for debugging
+  ;; (setq nrepl-log-messages t)
+  :hook (cider-repl-mode . (lambda ()
+                              (run-hooks 'prelude-cider-repl-mode-hook))))
 
-  (add-hook 'cider-mode-hook 'eldoc-mode)
-
-  (defun prelude-cider-repl-mode-defaults ()
-    (subword-mode +1)
-    (run-hooks 'prelude-interactive-lisp-coding-hook))
-
-  (setq prelude-cider-repl-mode-hook 'prelude-cider-repl-mode-defaults)
-
-  (add-hook 'cider-repl-mode-hook (lambda ()
-                                    (run-hooks 'prelude-cider-repl-mode-hook))))
+(setq prelude-clojure-mode-hook 'prelude-clojure-mode-defaults)
+(setq prelude-cider-repl-mode-hook 'prelude-cider-repl-mode-defaults)
 
 (provide 'prelude-clojure)
 
