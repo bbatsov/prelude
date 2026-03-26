@@ -32,25 +32,29 @@
 
 (require 'prelude-programming)
 
-;; lsp-dart provides Flutter-specific features on top of lsp-mode
-(when (eq prelude-lsp-client 'lsp-mode)
-  (prelude-require-packages '(lsp-dart)))
+(defun prelude-dart-mode-defaults ()
+  (subword-mode +1)
+  (prelude-lsp-enable)
+  (when (eq prelude-lsp-client 'lsp-mode)
+    (setq dap-launch-configuration-providers
+          '(dap-debug-template-configurations-provider))
+    (lsp-dart-define-key "s o" #'lsp-dart-show-outline)
+    (lsp-dart-define-key "s f" #'lsp-dart-show-flutter-outline)
+    (lsp-dart-dap-setup)))
 
-(with-eval-after-load 'dart-mode
-  (defun prelude-dart-mode-defaults ()
-    (subword-mode +1)
-    (prelude-lsp-enable)
-    (when (eq prelude-lsp-client 'lsp-mode)
-      (setq dap-launch-configuration-providers
-            '(dap-debug-template-configurations-provider))
-      (lsp-dart-define-key "s o" #'lsp-dart-show-outline)
-      (lsp-dart-define-key "s f" #'lsp-dart-show-flutter-outline)
-      (lsp-dart-dap-setup)))
+(use-package dart-mode
+  :ensure t
+  :hook (dart-mode . (lambda ()
+                       (run-hooks 'prelude-dart-mode-hook))))
 
-  (setq prelude-dart-mode-hook 'prelude-dart-mode-defaults)
+;; Flutter-specific features on top of lsp-mode (outline views, DAP
+;; debugging, hot reload, etc.)
+(use-package lsp-dart
+  :ensure t
+  :defer t
+  :if (eq prelude-lsp-client 'lsp-mode))
 
-  (add-hook 'dart-mode-hook (lambda ()
-                              (run-hooks 'prelude-dart-mode-hook))))
+(setq prelude-dart-mode-hook 'prelude-dart-mode-defaults)
 
 (provide 'prelude-dart)
 
