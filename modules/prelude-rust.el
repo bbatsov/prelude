@@ -36,35 +36,44 @@
 ;; * rust-analyzer as lsp server needs to be in global path, see:
 ;; https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
 
-
-(prelude-require-packages '(rust-ts-mode
-                            cargo
-                            flycheck-rust
-                            ron-mode))
-
+;; Disable super-save in Rust buffers -- auto-saving triggers
+;; lsp-format-buffer which causes severe hangs during autocomplete
 (add-to-list 'super-save-predicates
              (lambda () (not (eq major-mode 'rust-ts-mode))))
 
-(with-eval-after-load 'rust-ts-mode
-  (add-hook 'rust-ts-mode-hook 'cargo-minor-mode)
-  (add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
+(defun prelude-rust-mode-defaults ()
+  (setq rust-format-on-save t)
 
-  (defun prelude-rust-mode-defaults ()
-    ;; format on save
-    (setq rust-format-on-save t)
+  ;; Rust files start with #![...] (inner attributes), which looks
+  ;; like a shebang to Emacs -- prevent auto-chmod on save
+  (remove-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
-    ;; Prevent #! from chmodding rust files to be executable
-    (remove-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+  ;; CamelCase aware editing operations
+  (subword-mode +1)
 
-    ;; CamelCase aware editing operations
-    (subword-mode +1)
+  (prelude-lsp-enable))
 
-    (prelude-lsp-enable))
+;; Built-in tree-sitter mode for Rust (requires rust grammar)
+(use-package rust-ts-mode
+  :ensure t
+  :hook (rust-ts-mode . (lambda () (run-hooks 'prelude-rust-mode-hook))))
 
-  (setq prelude-rust-mode-hook 'prelude-rust-mode-defaults)
+;; Interface to Cargo commands (C-c C-c C-b to build, etc.)
+(use-package cargo
+  :ensure t
+  :hook (rust-ts-mode . cargo-minor-mode))
 
-  (add-hook 'rust-ts-mode-hook (lambda ()
-                              (run-hooks 'prelude-rust-mode-hook))))
+;; Configures Flycheck to use cargo/clippy for Rust diagnostics
+(use-package flycheck-rust
+  :ensure t
+  :hook (flycheck-mode . flycheck-rust-setup))
+
+;; Major mode for Rusty Object Notation (.ron) files
+(use-package ron-mode
+  :ensure t
+  :defer t)
+
+(setq prelude-rust-mode-hook 'prelude-rust-mode-defaults)
 
 (provide 'prelude-rust)
 ;;; prelude-rust.el ends here
