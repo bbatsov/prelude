@@ -72,7 +72,6 @@
 (defvar org-babel-language-list
   '(ob-cfengine3
     ob-clojurescript
-    ob-coffee
     ob-dao
     ob-diagrams
     ob-elixir

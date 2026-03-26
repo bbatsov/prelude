@@ -127,7 +127,6 @@ The following programming languages have enhanced support in Prelude:
 
 - [C/C++](c.md)
 - [Clojure](clojure.md)
-- [CoffeeScript](coffee.md)
 - [Common Lisp](common_lisp.md)
 - [CSS](css.md)
 - [Dart](dart.md)

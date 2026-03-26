@@ -12,7 +12,6 @@
         (cider . "melpa-stable")
         (clojure-mode . "melpa-stable")
         (cmake-mode . "melpa-stable")
-        (coffee-mode . "melpa-stable")
         (company . "melpa-stable")
         (company-auctex . "melpa-stable")
         (crux . "melpa-stable")

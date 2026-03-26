@@ -21,7 +21,6 @@
     prelude-programming
     prelude-c
     prelude-clojure
-    prelude-coffee
     prelude-common-lisp
     prelude-css
     prelude-dart

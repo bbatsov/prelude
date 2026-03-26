@@ -144,7 +144,6 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.edn\\'" clojure-mode clojure-mode)
     ("\\.cmake\\'" cmake-mode cmake-mode)
     ("CMakeLists\\.txt\\'" cmake-mode cmake-mode)
-    ("\\.coffee\\'" coffee-mode coffee-mode)
     ("\\.csv\\'" csv-mode csv-mode)
     ("Cask" cask-mode cask-mode)
     ("\\.d\\'" d-mode d-mode)
