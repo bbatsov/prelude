@@ -48,4 +48,6 @@ alongside/instead of CIDER, but you'll have to set them up yourselves.
 
 ## Fun trivia
 
-I'm the author of CIDER and `inf-clojure` and the primary maintainer of `clojure-mode`. I'm also a co-maintainer of `clj-refactor`. I guess I love Clojure! :-)
+I'm the author of CIDER and `inf-clojure` and the primary
+maintainer of `clojure-mode`. I'm also a co-maintainer of
+`clj-refactor`. I guess I love Clojure! :-)

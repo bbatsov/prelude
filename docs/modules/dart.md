@@ -16,8 +16,12 @@ Some features it provides:
 
 Some essential commands:
 
-- `lsp-dart-pub-get` - Run pub get or flutter pub get on project root.
-- `lsp-dart-pub-upgrade` - Run pub upgrade or flutter pub upgrade on project root.
-- `lsp-dart-pub-outdated` - Run pub outdated or flutter pub outdated on project root.
+- `lsp-dart-pub-get` - Run pub get or flutter pub get on
+  project root.
+- `lsp-dart-pub-upgrade` - Run pub upgrade or flutter pub
+  upgrade on project root.
+- `lsp-dart-pub-outdated` - Run pub outdated or flutter pub
+  outdated on project root.
 - `lsp-dart-run-all-tests` - Run all tests from project.
-- `lsp-dart-run-test-file` - Run all tests from current test buffer.
+- `lsp-dart-run-test-file` - Run all tests from current
+  test buffer.

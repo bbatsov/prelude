@@ -14,8 +14,11 @@ kitchen.
 
 ## Mailing List
 
-The [official mailing list](https://groups.google.com/forum/#!forum/emacs-prelude) is
-hosted at Google Groups. It's a low-traffic list, so don't be too hesitant to subscribe.
+The [official mailing list][mailing-list] is hosted at
+Google Groups. It's a low-traffic list, so don't be too
+hesitant to subscribe.
+
+[mailing-list]: https://groups.google.com/forum/#!forum/emacs-prelude
 
 ## Freenode
 

@@ -9,3 +9,9 @@ config:
     style: ordered
   # Allow inline HTML
   MD033: false
+  # Disable code-block-style: MkDocs admonitions use 4-space
+  # indentation that conflicts with this rule
+  MD046: false
+  # Disable table column alignment: the project uses both
+  # pipe-style and headerless table formats
+  MD060: false

@@ -28,7 +28,7 @@ The base module provides:
 ### Key Bindings
 
 | Key | Command | Description |
-|-----|---------|-------------|
+| --- | ------- | ----------- |
 | <kbd>C-c h</kbd> | `helm-command-prefix` | Helm command prefix |
 | <kbd>C-c h o</kbd> | `helm-occur` | Search in current buffer |
 | <kbd>C-c h g</kbd> | `helm-do-grep` | Grep with Helm |
@@ -40,7 +40,7 @@ The base module provides:
 This module replaces many standard Emacs commands with Helm-powered equivalents:
 
 | Key | Helm Command | Replaces |
-|-----|-------------|----------|
+| --- | ------------ | -------- |
 | <kbd>M-x</kbd> | `helm-M-x` | `execute-extended-command` |
 | <kbd>M-y</kbd> | `helm-show-kill-ring` | `yank-pop` |
 | <kbd>C-x b</kbd> | `helm-mini` | `switch-to-buffer` |

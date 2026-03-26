@@ -19,10 +19,12 @@ The following packages are installed:
 
 - [flx-ido](https://github.com/lewang/flx) - advanced fuzzy
   matching for Ido
-- [ido-completing-read+](https://github.com/DarwinAwardWinner/ido-completing-read-plus) -
-  use Ido for even more completing-read calls
+- [ido-completing-read+][ido-cr+] - use Ido for even more
+  completing-read calls
 - [smex](https://github.com/nonsequitur/smex) - a smart M-x
   enhancement (Ido-powered, with history and frequency sorting)
+
+[ido-cr+]: https://github.com/DarwinAwardWinner/ido-completing-read-plus
 
 ## Configuration
 
@@ -38,6 +40,6 @@ Prelude sets the following Ido defaults:
 ## Key Bindings
 
 | Key | Command | Description |
-|-----|---------|-------------|
+| --- | ------- | ----------- |
 | <kbd>M-x</kbd> | `smex` | Ido-powered command execution |
 | <kbd>M-X</kbd> | `smex-major-mode-commands` | Major mode commands |

@@ -41,7 +41,9 @@ this, add the following to your configuration:
 
 !!! Note
 
-    Previously `prelude-python` had this feature enabled by default (up to Prelude 1.1), but
-    it is only necessary on Python 2, because Python 3 uses utf-8
-    as the default file encoding. In 2020 Python 2 became deprecated, so that
-    functionality became mostly obsolete.
+    Previously `prelude-python` had this feature enabled
+    by default (up to Prelude 1.1), but it is only
+    necessary on Python 2, because Python 3 uses utf-8
+    as the default file encoding. In 2020 Python 2 became
+    deprecated, so that functionality became mostly
+    obsolete.

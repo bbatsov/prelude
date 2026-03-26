@@ -15,11 +15,15 @@ Prelude enables `CamelCase` aware editing in Ruby code (via `subword-mode`).
 
 ## inf-ruby
 
-The module bundles the [inf-ruby](https://github.com/nonsequitur/inf-ruby) package which allows you to run a Ruby
+The module bundles the
+[inf-ruby](https://github.com/nonsequitur/inf-ruby)
+package which allows you to run a Ruby
 REPL (e.g. `irb` or `pry`) in an Emacs buffer and interact with it from
 Ruby source buffers.
 
 ## yari
 
-The module bundles the [yari](https://github.com/hron/yari.el) package which allows you to search in Ruby's RI
+The module bundles the
+[yari](https://github.com/hron/yari.el) package which
+allows you to search in Ruby's RI
 documentation. Use `C-h R` to invoke it.

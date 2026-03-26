@@ -15,5 +15,10 @@ It establishes a few extra keybidings:
 
 ## org-habits
 
-It enables [org-habits](https://orgmode.org/manual/Tracking-your-habits.html "org-habits") and [tracks TODO state changes](https://orgmode.org/manual/Tracking-TODO-state-changes.html "todo-state-changes") into a
-[drawer](https://orgmode.org/manual/Drawers.html "org-drawers").
+It enables [org-habits][habits] and
+[tracks TODO state changes][todo-changes] into a
+[drawer][drawers].
+
+[habits]: https://orgmode.org/manual/Tracking-your-habits.html "org-habits"
+[todo-changes]: https://orgmode.org/manual/Tracking-TODO-state-changes.html "todo-state-changes"
+[drawers]: https://orgmode.org/manual/Drawers.html "org-drawers"

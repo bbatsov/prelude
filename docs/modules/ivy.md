@@ -25,20 +25,20 @@ its companion packages Swiper and Counsel.
 ### Ivy
 
 | Key | Command | Description |
-|-----|---------|-------------|
+| --- | ------- | ----------- |
 | <kbd>C-c C-r</kbd> | `ivy-resume` | Resume the last Ivy completion session |
 | <kbd>F6</kbd> | `ivy-resume` | Same as above |
 
 ### Swiper
 
 | Key | Command | Description |
-|-----|---------|-------------|
-| <kbd>C-s</kbd> | `swiper` | Ivy-powered buffer search (replaces `isearch-forward`) |
+| --- | ------- | ----------- |
+| <kbd>C-s</kbd> | `swiper` | Ivy-powered buffer search |
 
 ### Counsel
 
 | Key | Command | Description |
-|-----|---------|-------------|
+| --- | ------- | ----------- |
 | <kbd>M-x</kbd> | `counsel-M-x` | Ivy-powered command execution |
 | <kbd>C-x C-f</kbd> | `counsel-find-file` | Ivy-powered file finding |
 | <kbd>F1 f</kbd> | `counsel-describe-function` | Describe function |

@@ -29,7 +29,8 @@ with 1.18+. Other minor modes may not support generics yet.
 ## Go Mode
 
 `prelude-go` builds on several useful Go tools, and establishes sensible
-defaults. The major mode is `go-mode`. Documentation is available at [github.com/dominikh/go-mode.el](https://github.com/dominikh/go-mode.el)
+defaults. The major mode is `go-mode`. Documentation is
+available at [github.com/dominikh/go-mode.el](https://github.com/dominikh/go-mode.el)
 
 ## Go Projectile
 
@@ -63,13 +64,14 @@ features separately in each editor. Emacs supports LSP via
 To install `gopls`, change to a directory outside of `$GOPATH` or any
 module (e.g., `/tmp`) and execute:
 
-```
+```shell
 go install golang.org/x/tools/gopls@latest
 ```
 
 Ensure that `gopls` is in your `$PATH`.
 
-Excellent documentation for `lsp-mode` and `lsp-ui` are provided at [emacs-lsp.github.io/lsp-mode/](https://emacs-lsp.github.io/lsp-mode/)
+Excellent documentation for `lsp-mode` and `lsp-ui` are
+provided at [emacs-lsp.github.io/lsp-mode/](https://emacs-lsp.github.io/lsp-mode/)
 
 If a feature, such as documentation, refactoring, indenting, etc. is
 provided by `lsp`, you should use it instead of calling to another

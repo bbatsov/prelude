@@ -28,7 +28,7 @@ Prelude:
 ### Buffer and File Navigation
 
 | Key | Command | Description |
-|-----|---------|-------------|
+| --- | ------- | ----------- |
 | <kbd>C-x b</kbd> | `consult-buffer` | Enhanced buffer switching |
 | <kbd>C-x 4 b</kbd> | `consult-buffer-other-window` | Buffer in other window |
 | <kbd>C-x 5 b</kbd> | `consult-buffer-other-frame` | Buffer in other frame |
@@ -37,7 +37,7 @@ Prelude:
 ### Navigation (M-g prefix)
 
 | Key | Command | Description |
-|-----|---------|-------------|
+| --- | ------- | ----------- |
 | <kbd>M-g g</kbd> | `consult-goto-line` | Go to line |
 | <kbd>M-g o</kbd> | `consult-outline` | Navigate outline headings |
 | <kbd>M-g m</kbd> | `consult-mark` | Navigate marks |
@@ -50,7 +50,7 @@ Prelude:
 ### Search (M-s prefix)
 
 | Key | Command | Description |
-|-----|---------|-------------|
+| --- | ------- | ----------- |
 | <kbd>M-s l</kbd> | `consult-line` | Search lines in buffer |
 | <kbd>M-s L</kbd> | `consult-line-multi` | Search lines across buffers |
 | <kbd>M-s g</kbd> | `consult-grep` | Grep |
@@ -64,7 +64,7 @@ Prelude:
 ### Registers
 
 | Key | Command | Description |
-|-----|---------|-------------|
+| --- | ------- | ----------- |
 | <kbd>M-#</kbd> | `consult-register-load` | Load register |
 | <kbd>M-'</kbd> | `consult-register-store` | Store register |
 | <kbd>C-M-#</kbd> | `consult-register` | Browse registers |

@@ -8,7 +8,7 @@
 
 This module simply provides some reasonable defaults for it and enables `company-mode`:
 
-```
+```emacs-lisp
 (setq company-idle-delay 0.5)
 (setq company-show-numbers t)
 (setq company-tooltip-limit 10)

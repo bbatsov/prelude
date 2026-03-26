@@ -9,7 +9,7 @@ simultaneously (or in quick succession).
 ## Default Key Chords
 
 | Chord | Command | Description |
-|-------|---------|-------------|
+| ----- | ------- | ----------- |
 | <kbd>jj</kbd> | `avy-goto-word-1` | Jump to the beginning of a word |
 | <kbd>jl</kbd> | `avy-goto-line` | Jump to a visible line |
 | <kbd>jk</kbd> | `avy-goto-char` | Jump to a visible character |

@@ -13,5 +13,6 @@ Here are some features it provides:
 - viewing python notebooks within Emacs
 - Using Emacs to interact with python notebooks and other remote compute engines
 
-It makes an attempt to enable [literate programming](http://www.literateprogramming.com/knuthweb.pdf)
+It makes an attempt to enable
+[literate programming](http://www.literateprogramming.com/knuthweb.pdf)
 from within emacs

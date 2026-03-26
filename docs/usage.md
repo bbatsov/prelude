@@ -30,7 +30,8 @@ alias vi='emacsclient -t'
 The last two aliases are helpful if you're used to editing files from
 the command line using `vi(m)`.
 
-You can also open a file with the cursor positioned directly on a specific line:
+You can also open a file with the cursor positioned directly
+on a specific line:
 
 ```shell
 emacsclient somefile:1234
@@ -51,6 +52,8 @@ extensions to keybindings.
 ### Keymap
 
 #### Global
+
+<!-- markdownlint-disable MD013 -->
 
 Keybinding         | Description
 -------------------|------------------------------------------------------------
@@ -125,14 +128,20 @@ Keybinding         | Description
 <kbd>Super-m f</kbd> | Magit file log
 <kbd>Super-m b</kbd> | Magit blame mode
 
+<!-- markdownlint-enable MD013 -->
+
 !!! Note
 
-    For various arithmetic operations, the prefix `C-c .` only needs to be pressed once for the first operation.
-    For subsequent operations, only the appropriate operations (i.e. `+`, `-`, `*`, `/`... needs to be pressed).
+    For various arithmetic operations, the prefix `C-c .`
+    only needs to be pressed once for the first operation.
+    For subsequent operations, only the appropriate
+    operations (i.e. `+`, `-`, `*`, `/`... needs to be
+    pressed).
 
 #### macOS modifier keys
 
-Prelude does not mess by default with the standard mapping of `Command` (to `Super`) and `Option` (to `Meta`).
+Prelude does not mess by default with the standard mapping
+of `Command` (to `Super`) and `Option` (to `Meta`).
 
 If you want to swap them add this to your personal config:
 
@@ -141,12 +150,13 @@ If you want to swap them add this to your personal config:
 (setq mac-option-modifier 'super)
 ```
 
-You can also temporarily swap them with `C-c w` (`M-x prelude-swap-meta-and-super`).
+You can also temporarily swap them with `C-c w`
+(`M-x prelude-swap-meta-and-super`).
 
 !!! Tip
 
-    [The Emacs Mac port](https://bitbucket.org/mituharu/emacs-mac.git) comes
-    with `Command`
+    [The Emacs Mac port](https://bitbucket.org/mituharu/emacs-mac.git)
+    comes with `Command`
     [set](https://bitbucket.org/mituharu/emacs-mac/src/7fdbfba85d543f01b81e997e2b03788c35cb3bfa/src/macterm.c?at=master&fileviewer=file-view-default#macterm.c-6147:6169)
     to `Meta`.
 
@@ -154,35 +164,49 @@ You can also temporarily swap them with `C-c w` (`M-x prelude-swap-meta-and-supe
 
     I'd highly recommend to all macOS users to consider
     [remapping Return to Control](http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/)
-    instead. That's an epic productivity boost and it's not as crazy as it sounds!
+    instead. That's an epic productivity boost and it's
+    not as crazy as it sounds!
 
 #### Projectile
 
-[Projectile](https://github.com/bbatsov/projectile) is one of the essential packages bundled with Prelude.
-It provides an easy way to navigate and switch projects. Take a look at its extensive documentation
-to get a feel for everything you can do with Projectile.
+[Projectile](https://github.com/bbatsov/projectile) is one
+of the essential packages bundled with Prelude. It provides
+an easy way to navigate and switch projects. Take a look at
+its extensive documentation to get a feel for everything you
+can do with Projectile.
 
 Prelude adds an extra keymap prefix `s-p` (`s` stands for
-`Super`) in addition to the standard one `C-c p`. By default on Windows keyboard
-`Super` is mapped to the `Windows` key and on macOS keyboards `Super` is mapped
-to the `Command` key.
+`Super`) in addition to the standard one `C-c p`. By default
+on Windows keyboard `Super` is mapped to the `Windows` key
+and on macOS keyboards `Super` is mapped to the `Command`
+key.
 
 If you ever forget any of Projectile's keybindings just do a:
 
 <kbd>C-c p C-h</kbd> or <kbd>s-p C-h</kbd>
 
-Alternatively you can just press <kbd>s-p</kbd> and wait for a moment
-for `which-key` to kick in and show you the available keybindings.
+Alternatively you can just press <kbd>s-p</kbd> and wait for
+a moment for `which-key` to kick in and show you the
+available keybindings.
 
 #### Helm
 
-Helm is setup according to this guide: [A Package in a league of its own: Helm](http://tuhdo.github.io/helm-intro.html).
+<!-- markdownlint-disable MD013 -->
 
-You can learn Helm usage and key bindings following the guide. <kbd>C-c h</kbd> is Prelude's default prefix key for Helm.
-If you don't remember any key binding, append <kbd>C-h</kbd> after <kbd>C-c h</kbd> for a list of key bindings in Helm.
+Helm is setup according to this guide:
+[A Package in a league of its own: Helm](http://tuhdo.github.io/helm-intro.html).
 
-If you love Helm and want to use Helm globally with enhanced `helm-find-files`, `helm-buffer-lists`..., you will have to also add `(require 'prelude-helm-everywhere)`.
-When `prelude-helm-everywhere` is activated, Helm enables these global key bindings:
+You can learn Helm usage and key bindings following the
+guide. <kbd>C-c h</kbd> is Prelude's default prefix key for
+Helm. If you don't remember any key binding, append
+<kbd>C-h</kbd> after <kbd>C-c h</kbd> for a list of key
+bindings in Helm.
+
+If you love Helm and want to use Helm globally with enhanced
+`helm-find-files`, `helm-buffer-lists`..., you will have to
+also add `(require 'prelude-helm-everywhere)`.
+When `prelude-helm-everywhere` is activated, Helm enables
+these global key bindings:
 
 Key binding        | Description
 -------------------|----------------------------------------------
@@ -198,29 +222,39 @@ This key binding is activated in `shell-mode`:
 
 Key Binding        | Description
 -------------------|----------------------------------------------
-<kbd>C-c C-l</kbd>     | Run `helm-comint-input-ring` that shows `shell` history using Helm interface.
+<kbd>C-c C-l</kbd> | Run `helm-comint-input-ring` that shows `shell` history using Helm interface.
 
 This key bindings is activated in `eshell-mode`:
 
 Key Binding        | Description
 -------------------|----------------------------------------------
-<kbd>C-c C-l</kbd>     | Run `helm-eshell-history` that shows `eshell` history using Helm interface.
+<kbd>C-c C-l</kbd> | Run `helm-eshell-history` that shows `eshell` history using Helm interface.
 
-If you prefer Ido in everywhere, you should not add `prelude-helm-everywhere`, so you can use Helm along with Ido and Prelude's default commands.
+<!-- markdownlint-enable MD013 -->
 
-You can always reactivate Helm with `(prelude-global-helm-global-mode-on)`.
+If you prefer Ido in everywhere, you should not add
+`prelude-helm-everywhere`, so you can use Helm along with
+Ido and Prelude's default commands.
+
+You can always reactivate Helm with
+`(prelude-global-helm-global-mode-on)`.
 
 !!! Note
 
-    In `helm-M-x`, you have to pass prefix argument *AFTER* you run `helm-M-x`,
-    because your prefix argument will be displayed in the modeline when in `helm-M-x`
-    buffer. Passing prefix argument **BEFORE** `helm-M-x` **has no effect**.
+    In `helm-M-x`, you have to pass prefix argument
+    *AFTER* you run `helm-M-x`, because your prefix
+    argument will be displayed in the modeline when in
+    `helm-M-x` buffer. Passing prefix argument **BEFORE**
+    `helm-M-x` **has no effect**.
 
 #### Key-chords
 
 !!! Note
 
-    Key-chords are available only when the `prelude-key-chord` module has been enabled.
+    Key-chords are available only when the
+    `prelude-key-chord` module has been enabled.
+
+<!-- markdownlint-disable MD013 -->
 
 Keybinding         | Description
 -------------------|----------------------------------------------
@@ -232,18 +266,22 @@ Keybinding         | Description
 <kbd>xx</kbd>      | Executed extended command(`execute-extended-command`)
 <kbd>yy</kbd>      | Browse the kill ring(`browse-kill-ring`)
 
+<!-- markdownlint-enable MD013 -->
+
 ##### Disabling key-chords
 
-In some cases you may not want to have a key-chord that is defined by prelude,
-in which case you can disable the binding in your `personal.el` file by setting
-its command to `nil`. For example, to disable the `jj` key-chord add the
+In some cases you may not want to have a key-chord that is
+defined by prelude, in which case you can disable the binding
+in your `personal.el` file by setting its command to `nil`.
+For example, to disable the `jj` key-chord add the
 following line:
 
 ```emacs-lisp
 (key-chord-define-global "jj" nil)
 ```
 
-If you're an `evil-mode` user you'll probably do well to disable `key-chord-mode` altogether:
+If you're an `evil-mode` user you'll probably do well to
+disable `key-chord-mode` altogether:
 
 ```emacs-lisp
 (key-chord-mode -1)
@@ -251,18 +289,23 @@ If you're an `evil-mode` user you'll probably do well to disable `key-chord-mode
 
 #### vim emulation
 
-If you want to use vim keybindings inside of Emacs enable the `prelude-evil` module which provides
-support for `evil-mode`.
+If you want to use vim keybindings inside of Emacs enable
+the `prelude-evil` module which provides support for
+`evil-mode`.
 
 ### Cheatsheet
 
-Use `C-h k <key>` (`<key>` are the ones listed on the left) or `C-h f <function>` (`<function>` are the ones listed on the right) to see the detailed explanation.
+Use `C-h k <key>` (`<key>` are the ones listed on the left)
+or `C-h f <function>` (`<function>` are the ones listed on
+the right) to see the detailed explanation.
 
 ![cheatsheet](cheatsheet.png)
 
 #### PDF generation
 
-To generate a PDF version of the cheatsheet you'll need to install [LaTeX](https://www.latex-project.org/get/). Afterwards you can do something like:
+To generate a PDF version of the cheatsheet you'll need to
+install [LaTeX](https://www.latex-project.org/get/).
+Afterwards you can do something like:
 
 ```shell
 cd modules/doc
@@ -271,7 +314,9 @@ pdflatex prelude-cheatsheet.tex
 
 #### PNG generation
 
-To generate a PNG version of the cheatsheet you'll need to install [Poppler](https://poppler.freedesktop.org/). Afterwards you can do something like:
+To generate a PNG version of the cheatsheet you'll need to
+install [Poppler](https://poppler.freedesktop.org/).
+Afterwards you can do something like:
 
 ```shell
 cd modules/doc

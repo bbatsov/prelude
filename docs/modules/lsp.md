@@ -43,12 +43,16 @@ Standard Emacs bindings that work with eglot:
 
 Prelude additions under the <kbd>C-c C-l</kbd> prefix:
 
+<!-- markdownlint-disable MD013 -->
+
 | Key | Command | Description |
-|-----|---------|-------------|
+| --- | ------- | ----------- |
 | <kbd>C-c C-l r</kbd> | `eglot-rename` | Rename symbol |
 | <kbd>C-c C-l e</kbd> | `eglot-code-actions` | Code actions |
 | <kbd>C-c C-l f</kbd> | `eglot-format-buffer` | Format buffer |
 | <kbd>C-c C-l o</kbd> | `eglot-code-action-organize-imports` | Organize imports |
+
+<!-- markdownlint-enable MD013 -->
 
 ## lsp-mode
 
@@ -57,12 +61,14 @@ When `prelude-lsp-client` is set to `lsp-mode`, the
 [lsp-mode](https://emacs-lsp.github.io/lsp-mode/) and
 [lsp-ui](https://emacs-lsp.github.io/lsp-ui/).
 
-### Key Bindings
+### lsp-mode Key Bindings
 
 All lsp-mode key bindings use the <kbd>C-c C-l</kbd> prefix:
 
+<!-- markdownlint-disable MD013 -->
+
 | Key | Command | Description |
-|-----|---------|-------------|
+| --- | ------- | ----------- |
 | <kbd>C-c C-l .</kbd> | `lsp-ui-peek-find-definitions` | Peek at definition |
 | <kbd>C-c C-l ?</kbd> | `lsp-ui-peek-find-references` | Peek at references |
 | <kbd>C-c C-l r</kbd> | `lsp-rename` | Rename symbol |
@@ -74,6 +80,8 @@ All lsp-mode key bindings use the <kbd>C-c C-l</kbd> prefix:
 | <kbd>C-c C-l f</kbd> | `lsp-format-buffer` | Format buffer |
 | <kbd>C-c C-l o</kbd> | `lsp-organize-imports` | Organize imports |
 | <kbd>C-c C-l m</kbd> | `lsp-ui-imenu` | LSP imenu |
+
+<!-- markdownlint-enable MD013 -->
 
 ## Installing Language Servers
 
