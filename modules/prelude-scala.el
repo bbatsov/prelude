@@ -9,7 +9,9 @@
 
 ;;; Commentary:
 
-;; Some basic support for the Scala programming language
+;; Some basic support for the Scala programming language.
+;; Install Metals for LSP support:
+;;   https://scalameta.org/metals/docs/editors/emacs
 
 ;;; License:
 
@@ -31,16 +33,18 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(scala-mode))
 
 (defun prelude-scala-mode-defaults ()
   (subword-mode +1)
   (prelude-lsp-enable))
 
+(use-package scala-mode
+  :ensure t
+  :hook (scala-mode . (lambda ()
+                        (run-hooks 'prelude-scala-mode-hook))))
+
 (setq prelude-scala-mode-hook 'prelude-scala-mode-defaults)
 
-(add-hook 'scala-mode-hook (lambda ()
-                             (run-hooks 'prelude-scala-mode-hook)))
 (provide 'prelude-scala)
 
 ;;; prelude-scala.el ends here
