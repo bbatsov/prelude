@@ -32,16 +32,11 @@
 
 (require 'prelude-programming)
 
-(prelude-require-packages '(inf-ruby yari))
-
 ;; Use ruby-ts-mode when the tree-sitter grammar is available
 (prelude-treesit-remap 'ruby 'ruby-mode 'ruby-ts-mode)
 
 ;; We never want to edit Rubinius bytecode
 (add-to-list 'completion-ignored-extensions ".rbc")
-
-;; Map yari to C-h R
-(define-key 'help-command (kbd "R") 'yari)
 
 (defun prelude-ruby-mode-defaults ()
   ;; Don't auto-insert encoding comments
@@ -51,6 +46,17 @@
   ;; CamelCase aware editing operations
   (subword-mode +1)
   (prelude-lsp-enable))
+
+;; Run a Ruby REPL (IRB/Pry) inside Emacs and send code to it
+(use-package inf-ruby
+  :ensure t
+  :defer t)
+
+;; Browse Ruby documentation via ri (C-h R)
+(use-package yari
+  :ensure t
+  :defer t
+  :bind (:map help-map ("R" . yari)))
 
 (setq prelude-ruby-mode-hook 'prelude-ruby-mode-defaults)
 
