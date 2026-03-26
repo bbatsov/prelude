@@ -11,13 +11,11 @@ Prelude provides a modern OCaml development experience
 powered by TreeSitter and LSP:
 
 - [neocaml](https://github.com/bbatsov/neocaml) - a
-  TreeSitter-powered major mode for OCaml
+  TreeSitter-powered major mode for OCaml (includes built-in
+  support for Dune files and utop)
 - [ocaml-eglot](https://github.com/tarides/ocaml-eglot) -
-  OCaml-specific LSP extensions via Eglot
-- [dune](https://github.com/ocaml/dune) - major mode for
-  Dune project files
-- [utop](https://github.com/ocaml-community/utop) - a
-  modern OCaml toplevel (REPL)
+  OCaml-specific LSP extensions via Eglot (enabled when
+  `prelude-lsp-client` is set to `eglot`, the default)
 
 LSP integration provides code completion, type information,
 diagnostics, code navigation, and refactoring out of the box.
@@ -29,12 +27,6 @@ server installed:
 
 ```sh
 opam install ocaml-lsp-server
-```
-
-For REPL support, also install utop:
-
-```sh
-opam install utop
 ```
 
 !!! Note

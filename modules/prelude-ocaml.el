@@ -13,8 +13,6 @@
 
 ;; You'll need to install opam and ocaml-lsp-server:
 ;;   opam install ocaml-lsp-server
-;; Optionally install utop for a better REPL experience:
-;;   opam install utop
 
 ;;; License:
 
@@ -37,15 +35,17 @@
 
 (require 'prelude-programming)
 
-(prelude-require-packages '(neocaml ocaml-eglot dune utop))
+(prelude-require-packages '(neocaml))
+
+(when (eq prelude-lsp-client 'eglot)
+  (prelude-require-packages '(ocaml-eglot)))
 
 (with-eval-after-load 'neocaml
-  (require 'ocaml-eglot)
-
   (defun prelude-ocaml-mode-defaults ()
     (subword-mode +1)
-    (utop-minor-mode +1)
-    (ocaml-eglot-setup))
+    (when (eq prelude-lsp-client 'eglot)
+      (require 'ocaml-eglot)
+      (ocaml-eglot-setup)))
 
   (setq prelude-ocaml-mode-hook 'prelude-ocaml-mode-defaults)
 

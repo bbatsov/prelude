@@ -2,6 +2,13 @@
 
 # Change log
 
+## master (unreleased)
+
+### Changes
+
+- Remove `dune` and `utop` packages from `prelude-ocaml` (both are provided by `neocaml` out of the box).
+- Load `ocaml-eglot` in `prelude-ocaml` only when `prelude-lsp-client` is set to `eglot`.
+
 ## 2.0.0 (2026-03-26)
 
 ### New features
