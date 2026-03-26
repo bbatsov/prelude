@@ -30,25 +30,24 @@
 
 ;;; Code:
 
-(prelude-require-packages '(racket-mode))
-
 (require 'prelude-lisp)
-
-(with-eval-after-load 'racket-mode
-  (define-key racket-mode-map (kbd "M-RET") 'racket-run)
-  (define-key racket-mode-map (kbd "M-.") 'racket-repl-visit-definition))
-
-(add-to-list 'auto-mode-alist '("\\.rkt[dl]?\\'" . racket-mode))
 
 (defun prelude-racket-mode-defaults ()
   (run-hooks 'prelude-lisp-coding-hook)
+  ;; Input method for Unicode symbols (e.g., λ, →, ≤)
   (racket-unicode-input-method-enable))
 
-(setq prelude-racket-mode-hook 'prelude-racket-mode-defaults)
+;; IDE-like Racket support with REPL, docs, and macro expansion
+(use-package racket-mode
+  :ensure t
+  :bind (:map racket-mode-map
+              ("M-RET" . racket-run)
+              ("M-." . racket-repl-visit-definition))
+  :hook ((racket-mode . (lambda ()
+                           (run-hooks 'prelude-racket-mode-hook)))
+         (racket-repl-mode . racket-unicode-input-method-enable)))
 
-(add-hook 'racket-mode-hook (lambda ()
-                              (run-hooks 'prelude-racket-mode-hook)))
-(add-hook 'racket-repl-mode-hook #'racket-unicode-input-method-enable)
+(setq prelude-racket-mode-hook 'prelude-racket-mode-defaults)
 
 (provide 'prelude-racket)
 
