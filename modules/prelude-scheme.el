@@ -29,20 +29,23 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-packages '(geiser))
 
 (require 'prelude-lisp)
-(require 'geiser)
-
-;; geiser relies on a REPL to provide autodoc and completion
-(setq geiser-mode-start-repl-p t)
-
-;; keep the home clean
-(setq geiser-repl-history-filename
-      (expand-file-name "geiser-history" prelude-savefile-dir))
 
 (defun prelude-scheme-mode-defaults ()
   (run-hooks 'prelude-lisp-coding-hook))
+
+;; Geiser: REPL-driven development for Scheme (Guile, Chicken, Chez,
+;; Racket, etc.)
+(use-package geiser
+  :ensure t
+  :defer t
+  :custom
+  ;; Auto-start a REPL for autodoc and completion
+  (geiser-mode-start-repl-p t)
+  ;; Keep history out of ~/.emacs.d
+  (geiser-repl-history-filename
+   (expand-file-name "geiser-history" prelude-savefile-dir)))
 
 (setq prelude-scheme-mode-hook 'prelude-scheme-mode-defaults)
 
