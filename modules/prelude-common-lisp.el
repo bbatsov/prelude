@@ -32,8 +32,6 @@
 
 (require 'prelude-lisp)
 
-(prelude-require-package 'slime)
-
 ;; the SBCL configuration file is in Common Lisp
 (add-to-list 'auto-mode-alist '("\\.sbclrc\\'" . lisp-mode))
 
@@ -42,35 +40,36 @@
 
 (add-hook 'lisp-mode-hook (lambda () (run-hooks 'prelude-lisp-coding-hook)))
 
-(with-eval-after-load "slime"
-  ;; a list of alternative Common Lisp implementations that can be
-  ;; used with SLIME. Note that their presence render
-  ;; inferior-lisp-program useless. This variable holds a list of
-  ;; programs and if you invoke SLIME with a negative prefix
-  ;; argument, M-- M-x slime, you can select a program from that list.
+;; SLIME: Superior Lisp Interaction Mode for Emacs.
+;; If you prefer Sly (a modernized SLIME fork), install it in your
+;; personal config instead.
+(use-package slime
+  :ensure t
+  :defer t
+  :config
+  ;; Known Common Lisp implementations.  Use M-- M-x slime to pick one.
   (setq slime-lisp-implementations
         '((ccl ("ccl"))
           (clisp ("clisp" "-q"))
           (cmucl ("cmucl" "-quiet"))
           (sbcl ("sbcl" "--noinform") :coding-system utf-8-unix)))
 
-  ;; select the default value from slime-lisp-implementations
-  (if (and (eq system-type 'darwin)
-           (executable-find "ccl"))
-      ;; default to Clozure CL on macOS
-      (setq slime-default-lisp 'ccl)
-    ;; default to SBCL on Linux and Windows
-    (setq slime-default-lisp 'sbcl))
+  (setq slime-default-lisp 'sbcl)
 
-  ;; Add fancy slime contribs
+  ;; slime-fancy loads most popular contribs in one go;
+  ;; slime-cl-indent provides better CL-aware indentation
   (setq slime-contribs '(slime-fancy slime-cl-indent))
 
   (setq slime-complete-symbol-function 'slime-flex-completions
-        slime-enable-evaluate-in-emacs t
         slime-autodoc-use-multiline-p t)
 
-  ;; rainbow-delimeters messes up colors in slime-repl, and doesn't seem to work
-  ;; anyway, so we won't use prelude-lisp-coding-defaults.
+  ;; Uncomment to let the Lisp process evaluate Emacs Lisp.
+  ;; Useful for advanced setups but a potential security risk.
+  ;; (setq slime-enable-evaluate-in-emacs t)
+
+  ;; rainbow-delimiters messes up colors in slime-repl, so we
+  ;; configure the REPL hooks directly instead of using
+  ;; prelude-lisp-coding-defaults.
   (add-hook 'slime-repl-mode-hook (lambda ()
                                     (smartparens-strict-mode +1)
                                     (whitespace-mode -1)))
