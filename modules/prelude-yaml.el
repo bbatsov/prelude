@@ -35,7 +35,9 @@
 (require 'treesit nil t)
 (if (and (fboundp 'treesit-ready-p) (treesit-ready-p 'yaml t))
     (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
-  (prelude-require-packages '(yaml-mode)))
+  (use-package yaml-mode
+    :ensure t
+    :defer t))
 
 (defun prelude-yaml-mode-defaults ()
   (whitespace-mode +1)
