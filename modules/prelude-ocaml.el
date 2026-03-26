@@ -35,22 +35,27 @@
 
 (require 'prelude-programming)
 
-(prelude-require-packages '(neocaml))
+(defun prelude-ocaml-mode-defaults ()
+  ;; CamelCase aware editing operations
+  (subword-mode +1)
+  (when (eq prelude-lsp-client 'eglot)
+    (require 'ocaml-eglot)
+    ;; ocaml-eglot-setup adds OCaml-specific LSP extensions (e.g.
+    ;; switch between .ml and .mli, type-enclosing, jump to holes)
+    (ocaml-eglot-setup)))
 
-(when (eq prelude-lsp-client 'eglot)
-  (prelude-require-packages '(ocaml-eglot)))
+;; Tree-sitter powered major mode for OCaml, Dune, and utop.
+;; Replaces the older tuareg + merlin + utop stack.
+(use-package neocaml
+  :ensure t
+  :hook (neocaml-mode . prelude-ocaml-mode-defaults))
 
-(with-eval-after-load 'neocaml
-  (defun prelude-ocaml-mode-defaults ()
-    (subword-mode +1)
-    (when (eq prelude-lsp-client 'eglot)
-      (require 'ocaml-eglot)
-      (ocaml-eglot-setup)))
-
-  (setq prelude-ocaml-mode-hook 'prelude-ocaml-mode-defaults)
-
-  (add-hook 'neocaml-mode-hook (lambda ()
-                                 (run-hooks 'prelude-ocaml-mode-hook))))
+;; OCaml-specific Eglot extensions (requires ocaml-lsp-server).
+;; Only installed when Eglot is the configured LSP client.
+(use-package ocaml-eglot
+  :ensure t
+  :defer t
+  :if (eq prelude-lsp-client 'eglot))
 
 (provide 'prelude-ocaml)
 
