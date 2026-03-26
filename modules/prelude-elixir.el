@@ -33,15 +33,21 @@
 
 (require 'prelude-programming)
 
-;; Use elixir-ts-mode when the tree-sitter grammar is available
+;; elixir-ts-mode is built-in since Emacs 30.  On Emacs 29,
+;; fall back to the third-party elixir-mode package.
 (require 'treesit nil t)
 (if (and (fboundp 'treesit-ready-p) (treesit-ready-p 'elixir t))
     (progn
-      (prelude-require-packages '(heex-ts-mode))
+      ;; HEEx template support (Phoenix)
+      (use-package heex-ts-mode
+        :ensure t
+        :defer t)
       (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-ts-mode))
       (add-to-list 'auto-mode-alist '("\\.exs\\'" . elixir-ts-mode))
       (add-to-list 'auto-mode-alist '("mix\\.lock" . elixir-ts-mode)))
-  (prelude-require-packages '(elixir-mode)))
+  (use-package elixir-mode
+    :ensure t
+    :defer t))
 
 (defun prelude-elixir-mode-defaults ()
   (subword-mode +1)
