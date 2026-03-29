@@ -76,10 +76,19 @@
 
 ;; smart pairing for all
 (require 'smartparens-config)
-(setq sp-base-key-bindings 'paredit)
+(setq sp-base-key-bindings 'sp)
 (setq sp-autoskip-closing-pair 'always)
 (setq sp-hybrid-kill-entire-symbol nil)
-(sp-use-paredit-bindings)
+(sp-use-smartparens-bindings)
+
+;; On macOS, add Super-based alternatives for common structural
+;; editing commands (à la Magnar Sveen's config)
+(when (eq system-type 'darwin)
+  (define-key smartparens-mode-map (kbd "s-s") #'sp-splice-sexp)
+  (define-key smartparens-mode-map (kbd "s-<right>") #'sp-forward-slurp-sexp)
+  (define-key smartparens-mode-map (kbd "s-<left>") #'sp-forward-barf-sexp)
+  (define-key smartparens-mode-map (kbd "s-<up>") #'sp-splice-sexp-killing-backward)
+  (define-key smartparens-mode-map (kbd "s-<down>") #'sp-splice-sexp-killing-forward))
 
 (show-smartparens-global-mode +1)
 
