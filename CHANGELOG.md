@@ -2,12 +2,35 @@
 
 # Change log
 
-## master (unreleased)
+## 2.1.0 (2026-03-29)
+
+### New features
+
+- Add `cmake-mode` package to `prelude-c`.
+- Set `c-ts-mode-indent-style` to `k&r` so tree-sitter C/C++ modes match the classic cc-mode indentation style.
+- Add `auto-mode-alist` entries for Eask and Eldev build tool files in `prelude-emacs-lisp`.
+- Add Super-based (`s-`) keybindings on macOS for smartparens structural editing commands (splice, slurp, barf, splice-killing).
 
 ### Changes
 
+- **Switch smartparens from paredit to default keybinding set.** This frees `M-s` (was `sp-splice-sexp`, shadowed `search-map`) and `M-?` (was `sp-convolute-sexp`, shadowed `xref-find-references`). Splice is now on `M-D`, convolute is unbound, splice-killing moves to `C-M-<backspace>` / `C-M-<delete>`.
+- Convert all language modules to `use-package`: C, Clojure, Common Lisp, CSS, Dart, Elixir, Erlang, Emacs Lisp, F#, Go, Haskell, LaTeX, Lua, OCaml, Racket, Ruby, Rust, Scala, Scheme, SCSS, Web, YAML.
+- Remove `prelude-coffee` module (CoffeeScript is no longer actively developed). The module file is kept as a deprecation stub so existing configs don't break.
 - Remove `dune` and `utop` packages from `prelude-ocaml` (both are provided by `neocaml` out of the box).
 - Load `ocaml-eglot` in `prelude-ocaml` only when `prelude-lsp-client` is set to `eglot`.
+- Default to SBCL on all platforms in `prelude-common-lisp` (was Clozure CL on macOS).
+- Disable `slime-enable-evaluate-in-emacs` by default in `prelude-common-lisp` (security risk).
+- Add missing `prelude-lsp-enable` call in `prelude-fsharp`.
+- Guard `eglot-fsharp` behind `prelude-lsp-client` check in `prelude-fsharp`.
+- Use `major-mode-remap-alist` instead of `defalias` for cperl-mode in `prelude-perl`.
+- Remove `C-c C-l` binding from `prelude-lua` (conflicts with Eglot prefix).
+- Load `company-auctex` only when company is present in `prelude-latex`.
+- Move Makefile configuration from `prelude-c` to `prelude-programming` (benefits all programming modules).
+- Install `dart-mode` explicitly in `prelude-dart` instead of relying on auto-install.
+
+### Bugs fixed
+
+- [#1400](https://github.com/bbatsov/prelude/issues/1400): Fix `M-s` (`search-map`) and `M-?` (`xref-find-references`) being shadowed by smartparens paredit keybindings.
 
 ## 2.0.0 (2026-03-26)
 
