@@ -39,9 +39,9 @@
   ;; CamelCase aware editing operations
   (subword-mode +1)
   (when (eq prelude-lsp-client 'eglot)
-    ;; ocaml-eglot minor mode adds OCaml-specific LSP commands
+    ;; ocaml-eglot-mode adds OCaml-specific LSP commands
     ;; (switch .ml/.mli, type-enclosing, destruct, etc.)
-    (ocaml-eglot 1))
+    (ocaml-eglot-mode 1))
   ;; Start the LSP server (eglot-ensure or lsp-deferred)
   (prelude-lsp-enable))
 
