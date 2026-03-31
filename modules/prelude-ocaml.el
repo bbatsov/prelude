@@ -62,9 +62,9 @@
                             (assq 'neocaml-mode (car entry))))
                      eglot-server-programs)
       (add-to-list 'eglot-server-programs
-                   '((neocaml-mode :language-id "ocaml")
-                     (neocaml-interface-mode
-                      :language-id "ocaml.interface")
+                   '(((neocaml-mode :language-id "ocaml")
+                      (neocaml-interface-mode
+                       :language-id "ocaml.interface"))
                      "ocamllsp")))))
 
 ;; OCaml-specific Eglot extensions (requires ocaml-lsp-server).
