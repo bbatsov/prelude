@@ -39,16 +39,19 @@
   ;; CamelCase aware editing operations
   (subword-mode +1)
   (when (eq prelude-lsp-client 'eglot)
-    (require 'ocaml-eglot)
-    ;; ocaml-eglot-setup adds OCaml-specific LSP extensions (e.g.
-    ;; switch between .ml and .mli, type-enclosing, jump to holes)
-    (ocaml-eglot-setup)))
+    ;; ocaml-eglot minor mode adds OCaml-specific LSP commands
+    ;; (switch .ml/.mli, type-enclosing, destruct, etc.)
+    (ocaml-eglot 1))
+  ;; Start the LSP server (eglot-ensure or lsp-deferred)
+  (prelude-lsp-enable))
 
 ;; Tree-sitter powered major mode for OCaml, Dune, and utop.
 ;; Replaces the older tuareg + merlin + utop stack.
+;; Hook into neocaml-base-mode so both .ml and .mli buffers
+;; get the same setup.
 (use-package neocaml
   :ensure t
-  :hook (neocaml-mode . prelude-ocaml-mode-defaults))
+  :hook (neocaml-base-mode . prelude-ocaml-mode-defaults))
 
 ;; OCaml-specific Eglot extensions (requires ocaml-lsp-server).
 ;; Only installed when Eglot is the configured LSP client.
