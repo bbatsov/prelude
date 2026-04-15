@@ -53,6 +53,9 @@
 ;; so you don't lose what you copied from another app
 (setq save-interprogram-paste-before-kill t)
 
+;; don't clutter the kill ring with duplicate entries
+(setq kill-do-not-save-duplicates t)
+
 ;; store all backup and autosave files in the tmp dir
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
