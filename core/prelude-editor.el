@@ -49,6 +49,10 @@
 ;; delete the selection with a keypress
 (delete-selection-mode t)
 
+;; preserve the system clipboard contents before killing text in Emacs,
+;; so you don't lose what you copied from another app
+(setq save-interprogram-paste-before-kill t)
+
 ;; store all backup and autosave files in the tmp dir
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
