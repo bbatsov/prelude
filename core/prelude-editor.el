@@ -383,6 +383,9 @@ Does not indent if the mode is in `prelude-indent-sensitive-modes'."
 ;; enable winner-mode to manage window configurations
 (winner-mode +1)
 
+;; automatically select help windows so you can dismiss them with 'q'
+(setq help-window-select t)
+
 ;; diff-hl
 (global-diff-hl-mode +1)
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
