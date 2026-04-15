@@ -369,6 +369,11 @@ Does not indent if the mode is in `prelude-indent-sensitive-modes'."
 (setq semanticdb-default-save-directory
       (expand-file-name "semanticdb" prelude-savefile-dir))
 
+;; increase the amount of data Emacs reads from subprocesses in a
+;; single chunk (default is 4KB).  This improves throughput for LSP
+;; servers and other processes that produce large output.
+(setq read-process-output-max (* 1024 1024)) ; 1MB
+
 ;; Compilation from Emacs
 (use-package compile
   :defer t
