@@ -122,12 +122,19 @@
 ;; savehist keeps track of some history
 (require 'savehist)
 (setq savehist-additional-variables
-      ;; search entries
-      '(search-ring regexp-search-ring)
+      ;; search entries and kill ring
+      '(search-ring regexp-search-ring kill-ring)
       ;; save every minute
       savehist-autosave-interval 60
       ;; keep the home clean
       savehist-file (expand-file-name "savehist" prelude-savefile-dir))
+;; strip text properties from kill-ring entries before saving to disk --
+;; propertized strings cause errors and bloat the savehist file
+(add-hook 'savehist-save-hook
+          (lambda ()
+            (setq kill-ring
+                  (mapcar #'substring-no-properties
+                          (cl-remove-if-not #'stringp kill-ring)))))
 (savehist-mode +1)
 
 ;; save recent files
