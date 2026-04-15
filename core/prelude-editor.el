@@ -343,6 +343,11 @@ Does not indent if the mode is in `prelude-indent-sensitive-modes'."
   (setq whitespace-line-column 80
         whitespace-style '(face tabs empty trailing lines-tail)))
 
+;; don't let ffap ping random hostnames -- when point is on something
+;; that looks like a hostname, ffap would attempt a network lookup to
+;; verify it, causing annoying freezes
+(setq ffap-machine-p-known 'reject)
+
 ;; saner regex syntax
 (use-package re-builder
   :defer t
