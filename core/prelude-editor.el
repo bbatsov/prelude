@@ -389,6 +389,10 @@ Does not indent if the mode is in `prelude-indent-sensitive-modes'."
 
 (prelude-maybe-enable-undo-tree)
 
+;; when splitting a window, resize all windows proportionally
+;; instead of just shrinking the current one
+(setq window-combination-resize t)
+
 ;; enable winner-mode to manage window configurations
 (winner-mode +1)
 
