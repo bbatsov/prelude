@@ -286,6 +286,10 @@
   :bind (("M-y" . browse-kill-ring)
          ("s-y" . browse-kill-ring)))
 
+;; after C-u C-SPC, keep popping the mark ring with just C-SPC
+;; instead of having to repeat the C-u prefix each time
+(setq set-mark-command-repeat-pop t)
+
 (define-advice exchange-point-and-mark (:before (&rest _) prelude-deactivate-mark)
   "When called with no active region, do not activate mark."
   (interactive
