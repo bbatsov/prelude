@@ -102,7 +102,7 @@ in the desired elisp file."
 
 (defcustom prelude-format-on-save t
   "Run mode specific format on file before it's saved.
-Currently only applies to tide-mode."
+Currently only applies to TypeScript files."
   :type 'boolean
   :group 'prelude)
 
