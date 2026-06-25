@@ -23,6 +23,7 @@
 - Replace stale `erc-autoaway-use-emacs-idle` setting in `prelude-erc` with `(setq erc-autoaway-idle-method 'emacs)` (the old variable was removed; idle source is now selected via `erc-autoaway-idle-method`).
 - Rebind `M-s m` from removed `consult-multi-occur` to built-in `multi-occur` in `prelude-vertico` (consult dropped the wrapper in favor of the built-in command).
 - [#1450](https://github.com/bbatsov/prelude/issues/1450): Remove broken `slime-complete-symbol-function` setting in `prelude-common-lisp` (referenced an undefined `slime-flex-completions` symbol; the variable itself has been obsolete since 2015).
+- [#1453](https://github.com/bbatsov/prelude/issues/1453): Fix Common Lisp completion in `prelude-common-lisp`: call `slime-setup` so the configured contribs (and `slime-c-p-c-completion-at-point`) actually load, and skip SLIME completion when no Swank session is connected so company no longer errors with a void-function or "Not connected." message.
 - Fix `prelude-ocaml` integration with `neocaml`: hook into `neocaml-base-mode` (so `.mli` files are covered), enable `ocaml-eglot-mode` properly, and call `prelude-lsp-enable` so the LSP server actually starts.
 - Use `ocaml-eglot-mode` instead of the obsolete `ocaml-eglot` alias (renamed in `ocaml-eglot` 1.4.0).
 - Add a temporary `eglot-server-programs` entry for `neocaml` so older `neocaml` versions still get `ocamllsp` started. Can be removed once `neocaml >= 20260331` is widely available on MELPA.
