@@ -228,11 +228,24 @@ Does nothing when `prelude-spell-checker' is set to something else
   (when prelude-clean-whitespace-on-save
     (whitespace-cleanup)))
 
+;; ws-butler trims trailing whitespace on save, but only on the lines
+;; you actually edited, so saving a file in someone else's project
+;; doesn't produce noisy whitespace-only diffs.  Only pull it in when
+;; it's the chosen cleanup style.
+(when (and prelude-whitespace
+           prelude-clean-whitespace-on-save
+           (eq prelude-whitespace-cleanup-style 'ws-butler))
+  (prelude-require-package 'ws-butler)
+  (require 'ws-butler nil t))
+
 (defun prelude-enable-whitespace ()
   "Enable `whitespace-mode' if `prelude-whitespace' is not nil."
   (when prelude-whitespace
     ;; keep the whitespace decent all the time (in this buffer)
-    (add-hook 'before-save-hook 'prelude-cleanup-maybe nil t)
+    (when prelude-clean-whitespace-on-save
+      (if (eq prelude-whitespace-cleanup-style 'ws-butler)
+          (ws-butler-mode +1)
+        (add-hook 'before-save-hook 'prelude-cleanup-maybe nil t)))
     (whitespace-mode +1)))
 
 (add-hook 'text-mode-hook 'prelude-enable-flyspell)
