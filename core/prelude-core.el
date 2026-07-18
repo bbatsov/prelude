@@ -151,6 +151,30 @@ Does nothing if Emacs was compiled without tree-sitter support."
              (treesit-ready-p grammar t))
     (add-to-list 'major-mode-remap-alist (cons old-mode new-mode))))
 
+;; Grammar recipes for the languages Prelude's modules know about, so a
+;; missing grammar can be installed with `M-x treesit-install-language-grammar'
+;; (or `treesit-install-language-grammar' for the whole set) instead of
+;; hunting down repository URLs.  Add your own recipes from personal config.
+(when (require 'treesit nil t)
+  (dolist (recipe
+           '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+             (c "https://github.com/tree-sitter/tree-sitter-c")
+             (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+             (css "https://github.com/tree-sitter/tree-sitter-css")
+             (elixir "https://github.com/elixir-lang/tree-sitter-elixir")
+             (go "https://github.com/tree-sitter/tree-sitter-go")
+             (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+             (heex "https://github.com/phoenixframework/tree-sitter-heex")
+             (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
+             (json "https://github.com/tree-sitter/tree-sitter-json")
+             (python "https://github.com/tree-sitter/tree-sitter-python")
+             (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
+             (rust "https://github.com/tree-sitter/tree-sitter-rust")
+             (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+             (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+             (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+    (add-to-list 'treesit-language-source-alist recipe)))
+
 (defun prelude-lsp-enable ()
   "Enable the LSP client configured via `prelude-lsp-client'."
   (pcase prelude-lsp-client
@@ -162,7 +186,11 @@ Does nothing if Emacs was compiled without tree-sitter support."
 ;; Eglot configuration
 (with-eval-after-load 'eglot
   (setq eglot-autoshutdown t)
-  (setq eglot-events-buffer-size 0)
+  ;; don't log every LSP event - the logging adds overhead with chatty
+  ;; servers (set these back when you need to debug an LSP session)
+  (if (boundp 'eglot-events-buffer-config)
+      (setq eglot-events-buffer-config '(:size 0 :format full)) ; newer Eglot
+    (setq eglot-events-buffer-size 0))                          ; older Eglot
   (setq eglot-extend-to-xref t)
 
   (define-key eglot-mode-map (kbd "C-c C-l r") #'eglot-rename)
