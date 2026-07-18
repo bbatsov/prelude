@@ -94,6 +94,7 @@
 ;; (require 'prelude-scheme)
 (require 'prelude-shell)
 ;; (require 'prelude-scss)
+;; (require 'prelude-swift)
 ;; (require 'prelude-ts)
 (require 'prelude-web) ;; Emacs mode for web templates
 (require 'prelude-xml)
@@ -103,6 +104,7 @@
 ;; (require 'prelude-ai) ;; LLM-backed chat via gptel
 ;; (require 'prelude-erc) ;; A popular Emacs IRC client
 ;; (require 'prelude-forge) ;; GitHub/GitLab/Gitea PRs and issues via Magit
+;; (require 'prelude-mistty) ;; MisTTY terminal (pure elisp, no native module; rebinds C-c t)
 
 (provide 'prelude-modules)
 ;;; prelude-modules.el ends here

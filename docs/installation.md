@@ -173,6 +173,7 @@ modules visit the [docs](modules/index.md).
 ;; (require 'prelude-scheme)
 (require 'prelude-shell)
 ;; (require 'prelude-scss)
+;; (require 'prelude-swift)
 ;; (require 'prelude-ts)
 (require 'prelude-web) ;; Emacs mode for web templates
 (require 'prelude-xml)
@@ -180,6 +181,7 @@ modules visit the [docs](modules/index.md).
 
 ;;; Misc
 (require 'prelude-erc) ;; A popular Emacs IRC client
+;; (require 'prelude-mistty) ;; MisTTY terminal (pure elisp, no native module)
 ```
 
 You'll need to adjust your `prelude-modules.el` file once the

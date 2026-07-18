@@ -42,6 +42,7 @@ nav:
         - Scheme: modules/scheme.md
         - SCSS: modules/scss.md
         - Shell: modules/shell.md
+        - Swift: modules/swift.md
         - TypeScript: modules/ts.md
         - Web/HTML: modules/web.md
         - XML: modules/xml.md
@@ -58,6 +59,7 @@ nav:
         - Forge (PRs/Issues): modules/forge.md
         - Key Chord: modules/key_chord.md
         - Literate Programming: modules/literate-programming.md
+        - MisTTY (Terminal): modules/mistty.md
         - Org Mode: modules/orgmode.md
 - FAQ: faq.md
 - Troubleshooting: troubleshooting.md
