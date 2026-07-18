@@ -6,6 +6,8 @@
 
 ### New features
 
+- Add `prelude-swift` module: Swift support via the tree-sitter powered `swift-ts-mode` and `sourcekit-lsp` (registered with Eglot, since Eglot has no built-in entry for Swift). Starts an LSP session through the usual `prelude-lsp-enable` abstraction.
+- Add `prelude-mistty` module: a terminal based on [MisTTY](https://github.com/szermatt/mistty), a pure-elisp shell/comint hybrid on top of `term.el` (no native module to compile). Rebinds Prelude's terminal key `C-c t` to `mistty`.
 - Add a `prelude-spell-checker` option to choose between `flyspell` (the default) and [jinx](https://github.com/minad/jinx), a faster libenchant-based spell checker that only checks the visible part of the buffer. Jinx is installed on demand and enabled as a single global mode; set `(setq prelude-spell-checker 'jinx)` in your personal config to opt in (requires libenchant and a C compiler).
 - Add a `prelude-whitespace-cleanup-style` option to choose how whitespace is cleaned on save: `whitespace-cleanup` (the default, tidies the whole file) or [ws-butler](https://github.com/lewang/ws-butler), which trims only the lines you actually edited so saving a file in someone else's project no longer produces noisy whitespace-only diffs. ws-butler is installed on demand.
 - Add `prelude-ai` module: a thin wrapper around [gptel](https://github.com/karthink/gptel) for LLM-backed chat (Claude, GPT, Gemini, Ollama, etc.). Binds `gptel-menu` to `C-c q`. Backends and API keys are configured in personal config -- see the module documentation for examples.
