@@ -31,10 +31,8 @@
 
 ;;; Code:
 
-;; the toolbar is just a waste of valuable screen estate
-;; in a tty tool-bar-mode does not properly auto-load, and is
-;; already disabled anyway
-(tool-bar-mode -1)
+;; the toolbar is disabled via `default-frame-alist' in early-init.el,
+;; so the initial frame is never drawn with one
 
 (when prelude-minimalistic-ui
   (menu-bar-mode -1))
