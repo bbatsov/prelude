@@ -29,6 +29,23 @@ by adding the following snippets to your personal config:
     The first approach is better as it would prevent those UI elements from
     appearing temporarily.
 
+## Welcome Screen
+
+On startup Prelude greets you with a welcome screen that points you at the
+essentials - where your personal configuration lives, how to enable modules,
+and the user manual - and gives you quick access to your recent files, known
+projects and bookmarks. It's skipped automatically when you start Emacs to open
+specific files (e.g. `emacs foo.rb`).
+
+You can bring it back at any time with `M-x prelude-welcome`.
+
+If you'd rather not see it, set `prelude-welcome-screen` to `nil` in
+`personal/preload`:
+
+``` emacs-lisp
+(setq prelude-welcome-screen nil)
+```
+
 ## Color Themes
 
 Emacs provides a dozen of
