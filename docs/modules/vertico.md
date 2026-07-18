@@ -17,8 +17,14 @@ packages for a modern and lightweight completion experience.
 - [vertico](https://github.com/minad/vertico) - the vertical completion UI
 - [orderless](https://github.com/oantolin/orderless) - flexible
   completion style (space-separated patterns)
+- [marginalia](https://github.com/minad/marginalia) - rich annotations
+  in the minibuffer (docstrings, file sizes, etc.)
 - [consult](https://github.com/minad/consult) - enhanced versions
   of built-in commands
+- [embark](https://github.com/oantolin/embark) - a keyboard-driven
+  context menu for candidates and things at point
+- [embark-consult](https://github.com/oantolin/embark) - integration
+  between Embark and Consult
 
 ## Consult Key Bindings
 
@@ -74,3 +80,29 @@ Prelude:
 The module configures the `orderless` completion style, which allows you to
 type space-separated patterns that can match in any order. For example, typing
 `buf swi` would match `switch-to-buffer`.
+
+## Acting on Candidates with Embark
+
+[Embark](https://github.com/oantolin/embark) is a keyboard-driven context
+menu. Point it at a minibuffer candidate or a thing at point (a file, a URL, a
+symbol, ...) and it offers the actions that make sense for it.
+
+| Key | Command | Description |
+| --- | ------- | ----------- |
+| <kbd>C-.</kbd> | `embark-act` | Act on the thing at point or candidate |
+| <kbd>C-;</kbd> | `embark-dwim` | Run the default action directly |
+| <kbd>C-h B</kbd> | `embark-bindings` | Browse the bindings at point |
+
+A particularly handy trick is `embark-export`: from a `consult-ripgrep` (or
+`consult-line`, etc.) session you can export the whole candidate set into a
+proper `grep`/`occur` buffer, which you can then edit in place with
+[wgrep](https://github.com/mhayashi1120/Emacs-wgrep).
+
+!!! Note
+
+    <kbd>C-.</kbd> and <kbd>C-;</kbd> are also bound by `flyspell-mode`
+    (auto-correct), so in buffers where Prelude enables Flyspell those keys
+    keep their Flyspell meaning. Embark still works everywhere else, including
+    the minibuffer, which is where you'll use it most with Vertico and Consult.
+    Switch to the `jinx` spell checker (see `prelude-spell-checker`), or rebind
+    the keys, if you'd rather have Embark at point in prose buffers too.
