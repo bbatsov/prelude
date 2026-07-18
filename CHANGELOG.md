@@ -6,6 +6,7 @@
 
 ### New features
 
+- Add a welcome screen shown on startup (unless Emacs is launched to open specific files). It points you at the essentials (personal config location, how to enable modules, the user manual) and offers quick access to recent files, known projects and bookmarks, plus a rotating tip. Reopen it any time with `M-x prelude-welcome`, or turn it off with `(setq prelude-welcome-screen nil)`.
 - Add `prelude-swift` module: Swift support via the tree-sitter powered `swift-ts-mode` and `sourcekit-lsp` (registered with Eglot, since Eglot has no built-in entry for Swift). Starts an LSP session through the usual `prelude-lsp-enable` abstraction.
 - Add `prelude-mistty` module: a terminal based on [MisTTY](https://github.com/szermatt/mistty), a pure-elisp shell/comint hybrid on top of `term.el` (no native module to compile). Rebinds Prelude's terminal key `C-c t` to `mistty`.
 - Add a `prelude-spell-checker` option to choose between `flyspell` (the default) and [jinx](https://github.com/minad/jinx), a faster libenchant-based spell checker that only checks the visible part of the buffer. Jinx is installed on demand and enabled as a single global mode; set `(setq prelude-spell-checker 'jinx)` in your personal config to opt in (requires libenchant and a C compiler).

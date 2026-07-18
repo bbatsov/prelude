@@ -11,6 +11,8 @@ library to the mix. The final product offers an easy to use Emacs
 configuration for Emacs newcomers and lots of additional power for
 Emacs power users.
 
+![The Prelude welcome screen](docs/welcome-screen.png)
+
 Prelude is compatible **ONLY with GNU Emacs 29.1+**. In general
 you're advised to always run Prelude with the latest stable
 Emacs release.

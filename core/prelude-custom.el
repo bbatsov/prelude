@@ -137,6 +137,13 @@ Only modes that don't derive from `prog-mode' should be listed here."
   :type 'number
   :group 'prelude)
 
+(defcustom prelude-welcome-screen t
+  "Non-nil values show Prelude's welcome screen on startup.
+The welcome screen is skipped when Emacs is started with file
+arguments (e.g. `emacs foo.rb')."
+  :type 'boolean
+  :group 'prelude)
+
 (defcustom prelude-theme 'zenburn
   "The default color theme, change this in your /personal/preload config."
   :type 'symbol
