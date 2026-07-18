@@ -50,6 +50,21 @@
   ;; (setq vertico-cycle t)
   )
 
+;; Smarter path editing in file prompts (ships as part of Vertico):
+;; RET descends into the selected directory instead of opening it in
+;; Dired, DEL deletes a whole directory component at once, and M-DEL
+;; deletes just a word of it.
+(use-package vertico-directory
+  :ensure nil ; comes with vertico
+  :after vertico
+  :bind (:map vertico-map
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char)
+              ("M-DEL" . vertico-directory-delete-word))
+  ;; tidy the shadowed part of the path when you re-root it (e.g. type
+  ;; ~/ or / in the middle of a path)
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
+
 ;; A few more useful configurations for Vertico
 (use-package emacs
   :init
@@ -131,7 +146,12 @@
          ("M-s L" . consult-line-multi)
          ("M-s m" . multi-occur)
          ("M-s k" . consult-keep-lines)
-         ("M-s u" . consult-focus-lines)))
+         ("M-s u" . consult-focus-lines))
+  :config
+  ;; press < followed by a group key to narrow the candidates to a
+  ;; single group (e.g. in consult-buffer, < b shows only buffers);
+  ;; press < again to remove the narrowing
+  (setq consult-narrow-key "<"))
 
 (provide 'prelude-vertico)
 ;;; prelude-vertico.el ends here

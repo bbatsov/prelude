@@ -18,6 +18,9 @@
 - Populate `treesit-language-source-alist` with recipes for the languages Prelude's modules use, so a missing grammar can be installed with `M-x treesit-install-language-grammar` without hunting down repository URLs.
 - Modernize the Eglot event-log setting to prefer `eglot-events-buffer-config` on newer Eglot, falling back to the obsolete `eglot-events-buffer-size` on older versions.
 - Bridge Eglot diagnostics into Flycheck via [flycheck-eglot](https://github.com/flycheck/flycheck-eglot) when `prelude-lsp-client` is `eglot`, so LSP diagnostics show up in Prelude's Flycheck UI instead of only through Flymake. Installed on demand; lsp-mode users are unaffected (lsp-mode has its own Flycheck integration).
+- Enable the `vertico-directory` extension in `prelude-vertico`: `RET` descends into the selected directory, `DEL` deletes a whole path component, and `M-DEL` deletes a word of it.
+- Enable `corfu-history-mode` in `prelude-corfu` so recently chosen completion candidates sort first (persisted across sessions via savehist).
+- Set `consult-narrow-key` to `<` in `prelude-vertico`, so you can narrow consult candidates to a single group (e.g. `< b` for buffers in `consult-buffer`).
 - Tidy up `prelude-common-lisp`: drop stale `slime-autodoc-use-multiline-p` setting (the variable was removed from upstream SLIME; modern autodoc honors `eldoc-echo-area-use-multiline-p`), set `inferior-lisp-program` to `sbcl` so `M-x run-lisp` works without SLIME, and add `slime-quicklisp` to `slime-contribs` for Quicklisp integration.
 
 ### Bugs fixed

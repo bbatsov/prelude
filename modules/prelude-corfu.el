@@ -49,7 +49,11 @@
   :init
   (global-corfu-mode)
   :config
-  (corfu-popupinfo-mode))
+  (corfu-popupinfo-mode)
+  ;; sort candidates by recency of selection, so the ones you pick
+  ;; often bubble to the top; the history persists across sessions
+  ;; when savehist-mode is on (which Prelude enables in core)
+  (corfu-history-mode))
 
 (use-package cape
   :ensure t
