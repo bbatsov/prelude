@@ -77,6 +77,16 @@ Will only occur if `prelude-whitespace' is also enabled."
   :type 'boolean
   :group 'prelude)
 
+(defcustom prelude-whitespace-cleanup-style 'whitespace-cleanup
+  "How whitespace is cleaned up on save when enabled.
+`whitespace-cleanup' (the default) tidies the whole file, which can
+produce noisy whitespace-only diffs in projects that aren't already
+clean.  `ws-butler' instead trims only the lines you actually edited,
+leaving the rest of the file untouched (installed on demand)."
+  :type '(choice (const :tag "whitespace-cleanup (whole file)" whitespace-cleanup)
+                 (const :tag "ws-butler (edited lines only)" ws-butler))
+  :group 'prelude)
+
 (defcustom prelude-flyspell t
   "Non-nil values enable Prelude's spell checking support."
   :type 'boolean
