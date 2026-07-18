@@ -79,6 +79,15 @@
     (global-flycheck-mode +1)
   (add-hook 'prog-mode-hook 'flycheck-mode))
 
+;; When Eglot is the LSP client, route its diagnostics through Flycheck
+;; as well.  On its own Eglot reports only via Flymake, so without this
+;; bridge LSP diagnostics wouldn't show up in Prelude's Flycheck UI.
+;; (lsp-mode has its own Flycheck integration, so this is Eglot-only.)
+(when (eq prelude-lsp-client 'eglot)
+  (prelude-require-package 'flycheck-eglot)
+  (require 'flycheck-eglot)
+  (global-flycheck-eglot-mode +1))
+
 ;; Makefiles require tabs for indentation
 (defun prelude-makefile-mode-defaults ()
   (whitespace-toggle-options '(tabs))
