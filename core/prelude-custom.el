@@ -78,8 +78,18 @@ Will only occur if `prelude-whitespace' is also enabled."
   :group 'prelude)
 
 (defcustom prelude-flyspell t
-  "Non-nil values enable Prelude's flyspell support."
+  "Non-nil values enable Prelude's spell checking support."
   :type 'boolean
+  :group 'prelude)
+
+(defcustom prelude-spell-checker 'flyspell
+  "The spell checker to use when `prelude-flyspell' is enabled.
+`flyspell' is the classic built-in checker (it needs an external
+aspell/hunspell binary).  `jinx' is a faster, libenchant-based
+checker that only checks the visible portion of the buffer, but it
+requires libenchant and a C compiler to build its native module."
+  :type '(choice (const :tag "Flyspell (built-in)" flyspell)
+                 (const :tag "Jinx (libenchant)" jinx))
   :group 'prelude)
 
 (defcustom prelude-user-init-file (expand-file-name "personal/"

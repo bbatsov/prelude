@@ -59,8 +59,9 @@
 
 (defun prelude-prog-mode-defaults ()
   "Default coding hook, useful with any programming language."
-  (when (and (executable-find ispell-program-name)
-             prelude-flyspell)
+  (when (and prelude-flyspell
+             (eq prelude-spell-checker 'flyspell)
+             (executable-find ispell-program-name))
     (flyspell-prog-mode))
   (when prelude-guru
     (guru-mode +1)

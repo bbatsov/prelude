@@ -6,6 +6,7 @@
 
 ### New features
 
+- Add a `prelude-spell-checker` option to choose between `flyspell` (the default) and [jinx](https://github.com/minad/jinx), a faster libenchant-based spell checker that only checks the visible part of the buffer. Jinx is installed on demand and enabled as a single global mode; set `(setq prelude-spell-checker 'jinx)` in your personal config to opt in (requires libenchant and a C compiler).
 - Add `prelude-ai` module: a thin wrapper around [gptel](https://github.com/karthink/gptel) for LLM-backed chat (Claude, GPT, Gemini, Ollama, etc.). Binds `gptel-menu` to `C-c q`. Backends and API keys are configured in personal config -- see the module documentation for examples.
 - Add `prelude-forge` module: enables [Forge](https://github.com/magit/forge) on top of Magit so you can read and reply to GitHub/GitLab/Gitea pull requests and issues without leaving Emacs.
 - Add `prelude-eglot-booster` module: speeds up Eglot via the [emacs-lsp-booster](https://github.com/blahgeek/emacs-lsp-booster) wrapper. The Emacs side ([eglot-booster](https://github.com/jdtsmith/eglot-booster)) is auto-installed via `package-vc-install` when the booster binary is on `PATH`; otherwise the module no-ops.
