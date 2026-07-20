@@ -2,7 +2,6 @@
 
 [![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
 [![CI](https://github.com/bbatsov/prelude/workflows/CI/badge.svg)](https://github.com/bbatsov/prelude/actions/workflows/ci.yml)
-[![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/bbatsov)
 
 Prelude is an Emacs distribution that aims to enhance the default
 Emacs experience.  Prelude alters a lot of the default settings,
@@ -17,11 +16,15 @@ Prelude is compatible **ONLY with GNU Emacs 29.1+**. In general
 you're advised to always run Prelude with the latest stable
 Emacs release.
 
-You can support the development of Prelude via
-[GitHub Sponsors](https://github.com/sponsors/bbatsov),
-[ko-fi](https://ko-fi.com/bbatsov),
-[PayPal](https://www.paypal.me/bbatsov) and
-[Patreon](https://www.patreon.com/bbatsov).
+-----------
+[![GitHub Sponsors](https://img.shields.io/badge/sponsor-GitHub-ea4aaa.svg?logo=github)](https://github.com/sponsors/bbatsov)
+[![Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://www.patreon.com/bbatsov)
+[![Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.me/bbatsov)
+
+I've been developing and maintaining Prelude in my free time for well over
+a decade. That's a lot of work, and not all of it is fun!
+
+**Please consider [supporting Prelude's ongoing development](#funding).**
 
 ## Features
 
@@ -246,6 +249,19 @@ Check out the project's
 [issue list](https://github.com/bbatsov/prelude/issues?sort=created&direction=desc&state=open)
 a list of unresolved issues. By the way - feel free to fix any
 of them and send me a pull request. :-)
+
+## Funding
+
+While Prelude is free software and will always be, the project would
+benefit immensely from some funding. If Prelude improves your daily Emacs
+experience, please consider supporting its ongoing development.
+
+You can support the development of Prelude via:
+
+- [GitHub Sponsors](https://github.com/sponsors/bbatsov)
+- [Patreon](https://www.patreon.com/bbatsov)
+- [ko-fi](https://ko-fi.com/bbatsov)
+- [PayPal](https://www.paypal.me/bbatsov)
 
 ## Support
 
