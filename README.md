@@ -1,6 +1,6 @@
 # Emacs Prelude
 
-[![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
+[![License GPL 3][badge-license]](https://www.gnu.org/licenses/gpl-3.0.txt)
 [![CI](https://github.com/bbatsov/prelude/workflows/CI/badge.svg)](https://github.com/bbatsov/prelude/actions/workflows/ci.yml)
 
 Prelude is an Emacs distribution that aims to enhance the default
