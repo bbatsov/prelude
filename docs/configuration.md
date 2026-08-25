@@ -232,6 +232,14 @@ behaviour, add the following to your config.
 (setq prelude-hippie-expand nil)
 ```
 
+### Disable smartparens
+
+By default, Prelude enables `smartparens`. To disable this behaviour, add the following to your config.
+
+``` emacs-lisp
+(setq prelude-smartparens nil)
+```
+
 ### Configuration per file or directory
 
 Some of these settings (those that don't need to be pre-loaded) can also be set

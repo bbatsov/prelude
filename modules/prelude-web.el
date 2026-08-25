@@ -62,18 +62,19 @@
   :hook (web-mode . (lambda ()
                       (run-hooks 'prelude-web-mode-hook))))
 
-;; smartparens integration for ERB/EJS-style template tags
-(with-eval-after-load 'web-mode
-  (sp-with-modes '(web-mode)
-    (sp-local-pair "%" "%"
-                   :unless '(sp-in-string-p)
-                   :post-handlers '(((lambda (&rest _ignored)
-                                       (just-one-space)
-                                       (save-excursion (insert " ")))
-                                     "SPC" "=" "#")))
-    (sp-local-tag "%" "<% "  " %>")
-    (sp-local-tag "=" "<%= " " %>")
-    (sp-local-tag "#" "<%# " " %>")))
+(when prelude-smartparens
+  ;; smartparens integration for ERB/EJS-style template tags
+  (with-eval-after-load 'web-mode
+    (sp-with-modes '(web-mode)
+      (sp-local-pair "%" "%"
+                     :unless '(sp-in-string-p)
+                     :post-handlers '(((lambda (&rest _ignored)
+                                         (just-one-space)
+                                         (save-excursion (insert " ")))
+                                       "SPC" "=" "#")))
+      (sp-local-tag "%" "<% "  " %>")
+      (sp-local-tag "=" "<%= " " %>")
+      (sp-local-tag "#" "<%# " " %>"))))
 
 (add-hook 'prelude-web-mode-hook #'prelude-web-mode-defaults)
 

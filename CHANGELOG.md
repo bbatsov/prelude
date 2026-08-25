@@ -18,6 +18,7 @@
 - Add `prelude-apheleia` module: enables [Apheleia](https://github.com/radian-software/apheleia) globally for async, flicker-free format-on-save (Prettier, Black, Ruff, gofmt, rustfmt, ...). Supersedes the per-language format hooks in modules like `prelude-rust` and `prelude-go`.
 - [#1460](https://github.com/bbatsov/prelude/issues/1460): Load `personal/early-init.el` from Prelude's `early-init.el`, so you can keep your own early startup settings without editing Prelude's files.
 - Warn at startup when modules that do the same job are enabled together (e.g. `prelude-vertico` and `prelude-ivy`, or `prelude-company` and `prelude-corfu`).
+- [#1461](https://github.com/bbatsov/prelude/pull/1461): Add `prelude-smartparens` user option, allowing smartparens support to be disabled.
 
 ### Changes
 
