@@ -137,11 +137,12 @@ With a prefix ARG updates all installed packages."
           (package-upgrade package))))
     (message "Update finished. Restart Emacs to complete the process.")))
 
-(defun prelude-wrap-with (s)
-  "Create a wrapper function for smartparens using S."
-  `(lambda (&optional arg)
-     (interactive "P")
-     (sp-wrap-with-pair ,s)))
+(when prelude-smartparens
+  (defun prelude-wrap-with (s)
+    "Create a wrapper function for smartparens using S."
+    `(lambda (&optional arg)
+       (interactive "P")
+       (sp-wrap-with-pair ,s))))
 
 (defun prelude-treesit-remap (grammar old-mode new-mode)
   "Remap OLD-MODE to NEW-MODE when tree-sitter GRAMMAR is available.

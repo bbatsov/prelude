@@ -159,6 +159,11 @@ arguments (e.g. `emacs foo.rb')."
   :type 'boolean
   :group 'prelude)
 
+(defcustom prelude-smartparens t
+  "Non-nil values enable Prelude's smartparens integration."
+  :type 'boolean
+  :group 'prelude)
+
 (defcustom prelude-lsp-client 'eglot
   "The LSP client to use in programming modes.
 Eglot is built into Emacs 29+ and requires no extra packages.

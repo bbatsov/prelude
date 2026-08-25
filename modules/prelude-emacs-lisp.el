@@ -110,12 +110,13 @@ Start `ielm' if it's not already running."
   (define-key ielm-map (kbd "M-(") (prelude-wrap-with "("))
   (define-key ielm-map (kbd "M-\"") (prelude-wrap-with "\"")))
 
-(defun prelude-conditionally-enable-smartparens-mode ()
-  "Enable `smartparens-mode' in the minibuffer during `eval-expression'."
-  (if (eq this-command 'eval-expression)
-      (smartparens-mode 1)))
+(when prelude-smartparens
+  (defun prelude-conditionally-enable-smartparens-mode ()
+    "Enable `smartparens-mode' in the minibuffer during `eval-expression'."
+    (if (eq this-command 'eval-expression)
+        (smartparens-mode 1)))
 
-(add-hook 'minibuffer-setup-hook 'prelude-conditionally-enable-smartparens-mode)
+  (add-hook 'minibuffer-setup-hook 'prelude-conditionally-enable-smartparens-mode))
 
 (provide 'prelude-emacs-lisp)
 

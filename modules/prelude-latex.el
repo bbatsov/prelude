@@ -30,7 +30,8 @@
 
 ;;; Code:
 
-(require 'smartparens-latex)
+(when prelude-smartparens
+  (require 'smartparens-latex))
 
 ;; AUCTeX: the de facto standard LaTeX editing environment for Emacs
 (use-package auctex
@@ -87,7 +88,8 @@
   (turn-on-auto-fill)
   (abbrev-mode +1)
   (subword-mode +1)
-  (smartparens-mode +1)
+  (when prelude-smartparens
+    (smartparens-mode +1))
   (pcase prelude-latex-fast-math-entry
     ('LaTeX-math-mode (LaTeX-math-mode 1))
     ('cdlatex (turn-on-cdlatex))))
