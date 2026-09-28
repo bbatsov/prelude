@@ -38,9 +38,12 @@
 (defun prelude-ocaml-mode-defaults ()
   ;; CamelCase aware editing operations
   (subword-mode +1)
-  (when (eq prelude-lsp-client 'eglot)
-    ;; ocaml-eglot-mode adds OCaml-specific LSP commands
-    ;; (switch .ml/.mli, type-enclosing, destruct, etc.)
+  ;; ocaml-eglot-mode adds OCaml-specific LSP commands
+  ;; (switch .ml/.mli, type-enclosing, destruct, etc.).  Check that
+  ;; it's actually available, as a failed install would otherwise
+  ;; break the whole mode hook.
+  (when (and (eq prelude-lsp-client 'eglot)
+             (fboundp 'ocaml-eglot-mode))
     (ocaml-eglot-mode 1))
   ;; Start the LSP server (eglot-ensure or lsp-deferred)
   (prelude-lsp-enable))

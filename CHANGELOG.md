@@ -42,6 +42,7 @@
 - Add a temporary `eglot-server-programs` entry for `neocaml` so older `neocaml` versions still get `ocamllsp` started. Can be removed once `neocaml >= 20260331` is widely available on MELPA.
 - Drop `M-g e` and `M-g f` from `prelude-vertico`'s consult bindings so they no longer shadow the avy bindings (`avy-goto-word-0`, `avy-goto-line`) set in core. Bind `consult-compile-error` / `consult-flymake` in your personal config if you want them.
 - [#1454](https://github.com/bbatsov/prelude/issues/1454): Drop stale `tide` references from the docs now that `prelude-ts` uses `typescript-ts-mode` + LSP.
+- [#1462](https://github.com/bbatsov/prelude/issues/1462): Don't break the `prelude-ocaml` mode hook (and with it font-locking and line numbers) when `ocaml-eglot` isn't installed.
 
 ## 2.1.0 (2026-03-29)
 
