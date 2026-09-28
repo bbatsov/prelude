@@ -98,10 +98,11 @@ personalization.  There is no single special personal config file --
 any files or directories of files you create in the `personal/` directory will be loaded in
 lexicographical order (files first and then directories of files).  The overall loading precedence is:
 
-1. `personal/preload/*`
-2. `core/`
-3. `personal/prelude-modules.el` (or deprecated `prelude-modules.el`)
-4. `personal/*`
+1. `personal/early-init.el`
+2. `personal/preload/*`
+3. `core/`
+4. `personal/prelude-modules.el` (or deprecated `prelude-modules.el`)
+5. `personal/*`
 
 ### Personalization Example
 
@@ -141,6 +142,13 @@ If you require just a single package you can also use:
 Sometimes you might want to load code before Prelude has started loading. Prelude will automatically preload all
 Emacs Lisp files in your `personal/preload` directory. Note that at this point you can't using anything from
 Prelude, except a few variables like `prelude-dir`, etc (since nothing is yet loaded).
+
+### Personal early-init
+
+Some settings have to be in place before the package system and the first frame are set up (e.g.
+`default-frame-alist` tweaks). Put those in `personal/early-init.el` and Prelude's own `early-init.el`
+will load it after its own settings, so you can also override those. The file isn't loaded
+again together with the rest of `personal/`.
 
 ### Disabling whitespace-mode
 

@@ -16,6 +16,7 @@
 - Add `prelude-eglot-booster` module: speeds up Eglot via the [emacs-lsp-booster](https://github.com/blahgeek/emacs-lsp-booster) wrapper. The Emacs side ([eglot-booster](https://github.com/jdtsmith/eglot-booster)) is auto-installed via `package-vc-install` when the booster binary is on `PATH`; otherwise the module no-ops.
 - Add `prelude-corfu` module: a modern, lightweight in-buffer completion stack ([corfu](https://github.com/minad/corfu) + [cape](https://github.com/minad/cape)) -- alternative to `prelude-company`. Pairs naturally with the vertico/orderless setup in `prelude-vertico`.
 - Add `prelude-apheleia` module: enables [Apheleia](https://github.com/radian-software/apheleia) globally for async, flicker-free format-on-save (Prettier, Black, Ruff, gofmt, rustfmt, ...). Supersedes the per-language format hooks in modules like `prelude-rust` and `prelude-go`.
+- [#1460](https://github.com/bbatsov/prelude/issues/1460): Load `personal/early-init.el` from Prelude's `early-init.el`, so you can keep your own early startup settings without editing Prelude's files.
 
 ### Changes
 

@@ -31,3 +31,8 @@ jobs:
         run: emacs --batch --load init.el --load test/prelude-load-test.el
       - name: run regression tests
         run: emacs --batch --load init.el --load test/prelude-test.el -f ert-run-tests-batch-and-exit
+      - name: load personal early-init once, before core
+        run: |
+          printf '%s\n' "(defvar prelude-test-early-init-loads nil)" "(push (featurep 'prelude-core) prelude-test-early-init-loads)" > personal/early-init.el
+          emacs --batch --load early-init.el --load init.el \
+            --eval "(unless (equal prelude-test-early-init-loads (list nil)) (error \"Expected one load before core, got %S\" prelude-test-early-init-loads))"

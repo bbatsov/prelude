@@ -72,6 +72,8 @@ by Prelude.")
   "This folder stores all the automatically generated save/history-files.")
 (defvar prelude-modules-file (expand-file-name "prelude-modules.el" prelude-personal-dir)
   "This file contains a list of modules that will be loaded by Prelude.")
+(defvar prelude-personal-early-init-file (expand-file-name "early-init.el" prelude-personal-dir)
+  "Your personal early init file, loaded from Prelude's early-init.el.")
 (defvar prelude-override-package-user-dir t
   "By default prelude installs downloaded packages in <prelude-dir>/elpa.
    Set to nil to override this behaviour")
@@ -149,9 +151,9 @@ by Prelude.")
 ;; load the personal settings (this includes `custom-file')
 (when (file-exists-p prelude-personal-dir)
   (message "[Prelude] Loading personal configuration files in %s..." prelude-personal-dir)
-  (mapc 'load (delete
-               prelude-modules-file
-               (directory-files prelude-personal-dir 't "^[^#\.].*\\.el$"))))
+  (mapc 'load (seq-difference
+               (directory-files prelude-personal-dir 't "^[^#\.].*\\.el$")
+               (list prelude-modules-file prelude-personal-early-init-file))))
 
 (message "[Prelude] Prelude is ready to do thy bidding, Master %s!" prelude-user)
 
