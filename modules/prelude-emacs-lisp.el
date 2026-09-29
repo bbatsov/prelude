@@ -30,6 +30,8 @@
 
 ;;; Code:
 
+(defvar ielm-map)
+
 (require 'prelude-lisp)
 (require 'crux)
 

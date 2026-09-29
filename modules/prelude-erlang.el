@@ -29,6 +29,8 @@
 
 ;;; Code:
 
+(defvar erlang-compile-function)
+
 (require 'prelude-programming)
 
 (defun prelude-erlang-mode-defaults ()

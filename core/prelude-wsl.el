@@ -29,6 +29,8 @@
 
 ;;; Code:
 
+(defvar search-web-default-browser)
+
 ;; teach Emacs how to open links with your default browser
 (let ((cmd-exe "/mnt/c/Windows/System32/cmd.exe")
       (cmd-args '("/c" "start")))

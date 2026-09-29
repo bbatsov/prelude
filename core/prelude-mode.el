@@ -126,7 +126,8 @@
 \\{prelude-mode-map}"
   :lighter " Pre"
   :keymap prelude-mode-map
-  :global t)
+  :global t
+  :group 'prelude)
 
 (provide 'prelude-mode)
 ;;; prelude-mode.el ends here

@@ -27,6 +27,8 @@
 
 ;;; Code:
 
+(defvar inferior-fsharp-program)
+
 (require 'prelude-programming)
 
 (defun prelude-fsharp-mode-defaults ()

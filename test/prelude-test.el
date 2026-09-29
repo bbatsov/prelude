@@ -12,6 +12,7 @@
 (require 'ert)
 (require 'cl-lib)
 
+(declare-function prelude-ocaml-mode-defaults "prelude-ocaml")
 (declare-function prelude-racket-enable-input-mode "prelude-racket")
 
 (ert-deftest prelude-ocaml-mode-defaults-without-ocaml-eglot ()

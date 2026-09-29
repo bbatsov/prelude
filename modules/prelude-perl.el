@@ -30,6 +30,8 @@
 
 ;;; Code:
 
+(eval-when-compile (require 'cperl-mode))
+
 (require 'prelude-programming)
 
 ;; Prefer cperl-mode over perl-mode for all Perl files
@@ -55,7 +57,11 @@
   ;; Remove distracting background colors on array/hash variables
   (set-face-background 'cperl-array-face nil)
   (set-face-background 'cperl-hash-face nil)
-  (setq cperl-invalid-face nil)
+  ;; Don't highlight trailing whitespace (Emacs 30+ cperl-mode follows
+  ;; `show-trailing-whitespace' instead, which is off by default)
+  (when (< emacs-major-version 30)
+    (with-suppressed-warnings ((obsolete cperl-invalid-face))
+      (setq cperl-invalid-face nil)))
   (subword-mode +1))
 
 (add-hook 'prelude-cperl-mode-hook #'prelude-cperl-mode-defaults)

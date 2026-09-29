@@ -27,6 +27,8 @@
 
 ;;; Code:
 
+(defvar rust-format-on-save)
+
 (require 'prelude-programming)
 
 ;; You may need to install the following packages on your system:

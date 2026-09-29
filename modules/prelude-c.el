@@ -34,6 +34,7 @@
 
 (defvar c-default-style)
 (defvar c-basic-offset)
+(defvar c-ts-mode-indent-style)
 
 ;; Use tree-sitter modes when grammars are available
 (prelude-treesit-remap 'c 'c-mode 'c-ts-mode)

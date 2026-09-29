@@ -30,6 +30,8 @@
 
 ;;; Code:
 
+(declare-function LaTeX-math-mode "latex")
+
 (require 'smartparens-latex)
 
 ;; AUCTeX: the de facto standard LaTeX editing environment for Emacs

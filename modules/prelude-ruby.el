@@ -30,6 +30,8 @@
 
 ;;; Code:
 
+(defvar ruby-insert-encoding-magic-comment)
+
 (require 'prelude-programming)
 
 ;; Use ruby-ts-mode when the tree-sitter grammar is available

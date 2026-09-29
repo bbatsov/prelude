@@ -30,6 +30,9 @@
 
 ;;; Code:
 
+(declare-function global-jinx-mode "jinx")
+(declare-function ws-butler-mode "ws-butler")
+
 ;; Death to the tabs!  However, tabs historically indent to the next
 ;; 8-character offset; specifying anything else will cause *mass*
 ;; confusion, as it will change the appearance of every existing file.
@@ -469,13 +472,13 @@ Does not indent if the mode is in `prelude-indent-sensitive-modes'."
 (defun prelude-server-visit-files-parse-numbers (args)
   "Parse line numbers from filenames for emacsclient.
 Most console-based utilities print filenames in the format
-'filename:linenumber'.  So you may wish to open filename in
+\"filename:linenumber\".  So you may wish to open filename in
 that format.  Just call:
 
   emacsclient filename:linenumber
 
-and file 'filename' will be opened and cursor set on line
-'linenumber'."
+and file \"filename\" will be opened and cursor set on line
+\"linenumber\"."
   (list
    (mapcar (lambda (fn)
              (let ((name (car fn)))

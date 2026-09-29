@@ -30,6 +30,14 @@
 
 ;;; Code:
 
+(defvar lsp-ui-mode-map)
+(defvar lsp-ui-sideline-enable)
+(defvar lsp-ui-doc-enable)
+(defvar lsp-ui-doc-position)
+(defvar lsp-ui-doc-delay)
+(defvar lsp-ui-peek-enable)
+(defvar lsp-ui-peek-always-show)
+
 (prelude-require-packages '(lsp-mode
                             lsp-ui))
 

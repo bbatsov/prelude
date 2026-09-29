@@ -30,6 +30,9 @@
 
 ;;; Code:
 
+(defvar inferior-lisp-program)
+(declare-function slime-connected-p "slime")
+
 (require 'prelude-lisp)
 
 ;; the SBCL configuration file is in Common Lisp

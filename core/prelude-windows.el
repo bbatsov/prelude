@@ -29,6 +29,13 @@
 
 ;;; Code:
 
+(defvar w32-pass-lwindow-to-system)
+(defvar w32-lwindow-modifier)
+(defvar w32-pass-rwindow-to-system)
+(defvar w32-rwindow-modifier)
+(defvar w32-pass-apps-to-system)
+(defvar w32-apps-modifier)
+
 ;; Teach Emacs how to interpret various modifier keys
 (setq w32-pass-lwindow-to-system nil)
 (setq w32-lwindow-modifier 'super) ; Left Windows key

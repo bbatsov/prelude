@@ -43,6 +43,8 @@
 
 ;;; Code:
 
+(declare-function eglot-booster-mode "eglot-booster")
+
 (defvar prelude-eglot-booster-binary "emacs-lsp-booster"
   "Name of the lsp-booster binary, looked up via `executable-find'.")
 

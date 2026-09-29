@@ -49,7 +49,9 @@ PROMPT sets the `read-string prompt."
               (read-string prompt))))))
 
 (defmacro prelude-install-search-engine (search-engine-name search-engine-url search-engine-prompt)
-  "Given some information regarding a search engine, install the interactive command to search through them"
+  "Define `prelude-SEARCH-ENGINE-NAME', a command searching SEARCH-ENGINE-URL.
+The command prompts with SEARCH-ENGINE-PROMPT for the query, defaulting
+to the active region."
   `(defun ,(intern (format "prelude-%s" search-engine-name)) ()
        ,(format "Search %s with a query or region if any." search-engine-name)
        (interactive)

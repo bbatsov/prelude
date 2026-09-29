@@ -30,6 +30,10 @@
 
 ;;; Code:
 
+(defvar mac-command-modifier)
+(defvar mac-option-modifier)
+(declare-function set-fontset-font "fontset.c")
+
 ;; On macOS Emacs doesn't use the shell PATH if it's not started from
 ;; the shell. Let's fix that:
 (prelude-require-packages '(exec-path-from-shell))

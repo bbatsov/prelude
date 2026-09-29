@@ -117,7 +117,7 @@ in the desired elisp file."
 (defcustom prelude-indent-sensitive-modes
   '(conf-mode haml-mode python-mode slim-mode yaml-mode)
   "Modes for which auto-indenting is suppressed."
-  :type 'list
+  :type '(repeat symbol)
   :group 'prelude)
 
 (defcustom prelude-format-on-save t
@@ -129,7 +129,7 @@ Currently only applies to TypeScript files."
 (defcustom prelude-yank-indent-modes '(LaTeX-mode TeX-mode)
   "Modes in which to indent regions that are yanked (or yank-popped).
 Only modes that don't derive from `prog-mode' should be listed here."
-  :type 'list
+  :type '(repeat symbol)
   :group 'prelude)
 
 (defcustom prelude-yank-indent-threshold 1000
