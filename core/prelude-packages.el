@@ -120,6 +120,11 @@ NAME, ARGS, STATE and NO-REFRESH are as for `use-package-ensure-elpa',
 which still handles the pinned (package . archive) form."
   (dolist (ensure args)
     (let ((package (if (eq ensure t) (use-package-as-symbol name) ensure)))
+      ;; When a `use-package' form is byte-compiled, its :ensure runs at
+      ;; compile time and NAME is a symbol with position.  If that ends up
+      ;; in `package-selected-packages', every later install fails.
+      (when (and package (symbolp package))
+        (setq package (bare-symbol package)))
       (if (and package (symbolp package))
           (unless (package-installed-p package)
             (condition-case-unless-debug err

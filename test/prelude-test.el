@@ -112,4 +112,13 @@ The calls made to both are recorded in order in `calls'."
       (prelude-racket-enable-input-mode)
       (should enabled))))
 
+(ert-deftest prelude-use-package-ensure-strips-symbol-positions ()
+  "Packages ensured while byte-compiling are installed by their bare symbol."
+  (require 'use-package)
+  (prelude-test-with-stale-archives
+    (setq prelude--package-archives-refreshed t refreshed t)
+    (let ((symbols-with-pos-enabled t))
+      (prelude-use-package-ensure (position-symbol 'foo 10) '(t) nil))
+    (should (eq (cadr (car calls)) 'foo))))
+
 ;;; prelude-test.el ends here
