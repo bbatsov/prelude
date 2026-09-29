@@ -58,7 +58,7 @@
   (web-mode-css-indent-offset 2)
   (web-mode-code-indent-offset 2)
   ;; Let smartparens handle pairing instead of web-mode's built-in
-  (web-mode-enable-auto-pairing nil)
+  (web-mode-enable-auto-pairing (not prelude-smartparens))
   :hook (web-mode . (lambda ()
                       (run-hooks 'prelude-web-mode-hook))))
 

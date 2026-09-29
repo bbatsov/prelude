@@ -234,7 +234,8 @@ behaviour, add the following to your config.
 
 ### Disable smartparens
 
-By default, Prelude enables `smartparens`. To disable this behaviour, add the following to your config.
+By default, Prelude enables `smartparens`. To disable this behaviour, add the following to
+your `personal/preload` config (it has to be set before Prelude's core is loaded).
 
 ``` emacs-lisp
 (setq prelude-smartparens nil)

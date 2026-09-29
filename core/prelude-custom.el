@@ -160,7 +160,8 @@ arguments (e.g. `emacs foo.rb')."
   :group 'prelude)
 
 (defcustom prelude-smartparens t
-  "Non-nil values enable Prelude's smartparens integration."
+  "Non-nil values enable Prelude's smartparens integration.
+Set this in `personal/preload', since it takes effect when the core loads."
   :type 'boolean
   :group 'prelude)
 
