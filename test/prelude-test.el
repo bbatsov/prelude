@@ -12,6 +12,8 @@
 (require 'ert)
 (require 'cl-lib)
 
+(declare-function prelude-racket-enable-input-mode "prelude-racket")
+
 (ert-deftest prelude-ocaml-mode-defaults-without-ocaml-eglot ()
   "The OCaml mode hook shouldn't fail when ocaml-eglot isn't installed."
   (require 'prelude-ocaml)
@@ -98,5 +100,15 @@ The calls made to both are recorded in order in `calls'."
     (load "prelude-ruby" nil t)
     (should (memq #'ignore prelude-ruby-mode-hook))
     (should (memq #'prelude-ruby-mode-defaults prelude-ruby-mode-hook))))
+
+(ert-deftest prelude-racket-input-mode-falls-back-on-older-racket-mode ()
+  "Older racket-mode versions only have `racket-unicode-input-method-enable'."
+  (require 'prelude-racket)
+  (let ((enabled nil))
+    (cl-letf (((symbol-function 'racket-input-mode) nil)
+              ((symbol-function 'racket-unicode-input-method-enable)
+               (lambda () (setq enabled t))))
+      (prelude-racket-enable-input-mode)
+      (should enabled))))
 
 ;;; prelude-test.el ends here

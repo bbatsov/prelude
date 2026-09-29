@@ -47,6 +47,7 @@
 - [#1454](https://github.com/bbatsov/prelude/issues/1454): Drop stale `tide` references from the docs now that `prelude-ts` uses `typescript-ts-mode` + LSP.
 - [#1462](https://github.com/bbatsov/prelude/issues/1462): Don't break the `prelude-ocaml` mode hook (and with it font-locking and line numbers) when `ocaml-eglot` isn't installed.
 - [#1462](https://github.com/bbatsov/prelude/issues/1462): Refresh the package archives and retry once when installing a package fails, so a stale package cache (listing versions MELPA no longer has) no longer leaves packages uninstalled. Covers `use-package` `:ensure` as well as `prelude-require-package`.
+- Replace obsolete APIs flagged by the byte-compiler: `company-show-numbers` (now `company-show-quick-access`), `helm-projectile-on` (now `helm-projectile-mode`), `racket-unicode-input-method-enable` (now `racket-input-mode`), `erc-server-buffer-p` on ERC 5.6+, and the `racket-repl-visit-definition` binding on `M-.` (racket-mode uses xref now, so the global `M-.` already does the right thing). Drop the redundant `uniquify-after-kill-buffer-p` setting, which is on by default and obsolete in Emacs 31.
 
 ## 2.1.0 (2026-03-29)
 

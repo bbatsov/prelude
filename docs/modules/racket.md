@@ -23,7 +23,7 @@ Racket Mode provides:
 | Key | Command | Description |
 |-----|---------|-------------|
 | <kbd>M-RET</kbd> | `racket-run` | Run the current file in the REPL |
-| <kbd>M-.</kbd> | `racket-repl-visit-definition` | Jump to definition |
+| <kbd>M-.</kbd> | `xref-find-definitions` | Jump to definition |
 
 The common Lisp coding hook is also enabled, providing `smartparens-strict-mode`
 and `rainbow-delimiters`.

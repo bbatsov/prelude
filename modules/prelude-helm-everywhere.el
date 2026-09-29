@@ -58,7 +58,10 @@
 
 (when prelude-projectile
       ;; enable Helm version of Projectile with replacment commands
-      (helm-projectile-on))
+      (if (fboundp 'helm-projectile-mode) ; helm-projectile 1.7.0+
+          (helm-projectile-mode +1)
+        (with-suppressed-warnings ((obsolete helm-projectile-on))
+          (helm-projectile-on))))
 
 (provide 'prelude-helm-everywhere)
 ;; prelude-helm-everywhere.el ends here.

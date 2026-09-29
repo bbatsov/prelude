@@ -190,7 +190,9 @@ Does nothing if Emacs was compiled without tree-sitter support."
   ;; servers (set these back when you need to debug an LSP session)
   (if (boundp 'eglot-events-buffer-config)
       (setq eglot-events-buffer-config '(:size 0 :format full)) ; newer Eglot
-    (setq eglot-events-buffer-size 0))                          ; older Eglot
+    (with-suppressed-warnings ((obsolete eglot-events-buffer-size)
+                               (free-vars eglot-events-buffer-size))
+      (setq eglot-events-buffer-size 0)))                       ; older Eglot
   (setq eglot-extend-to-xref t)
 
   (define-key eglot-mode-map (kbd "C-c C-l r") #'eglot-rename)

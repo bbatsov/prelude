@@ -137,7 +137,12 @@ that can occur between two notifications.  The default is
 (defun filter-server-buffers ()
   (delq nil
         (mapcar
-         (lambda (x) (and (erc-server-buffer-p x) x))
+         (lambda (x)
+           (and (if (fboundp 'erc-server-or-unjoined-channel-buffer-p)
+                    (erc-server-or-unjoined-channel-buffer-p x) ; ERC 5.6+
+                  (with-suppressed-warnings ((obsolete erc-server-buffer-p))
+                    (erc-server-buffer-p x)))
+                x))
          (buffer-list))))
 
 (defun stop-irc ()
