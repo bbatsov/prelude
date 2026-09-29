@@ -1,4 +1,4 @@
-;;; prelude-programming.el --- Emacs Prelude: prog-mode configuration
+;;; prelude-programming.el --- Emacs Prelude: prog-mode configuration  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

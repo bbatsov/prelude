@@ -1,4 +1,4 @@
-;;; init.el --- Prelude's configuration entry point.
+;;; init.el --- Prelude's configuration entry point.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright (c) 2011-2026 Bozhidar Batsov
 ;;

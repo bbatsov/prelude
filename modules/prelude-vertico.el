@@ -1,4 +1,4 @@
-;;; prelude-vertico.el --- Vertico setup
+;;; prelude-vertico.el --- Vertico setup  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

@@ -1,4 +1,4 @@
-;;; prelude-ocaml.el --- Emacs Prelude: OCaml programming support.
+;;; prelude-ocaml.el --- Emacs Prelude: OCaml programming support.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2014-2026 Geoff Shannon
 ;;

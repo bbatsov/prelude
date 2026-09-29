@@ -1,4 +1,4 @@
-;;; prelude-rust.el --- Emacs Prelude: Rust programming support.
+;;; prelude-rust.el --- Emacs Prelude: Rust programming support.  -*- lexical-binding: t; -*-
 ;;
 ;; Authors: Doug MacEachern, Manoel Vilela, Ben Alex, Daniel Gerlach
 

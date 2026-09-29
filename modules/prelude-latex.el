@@ -1,4 +1,4 @@
-;;; prelude-latex.el --- Emacs Prelude: Sane setup for LaTeX writers.
+;;; prelude-latex.el --- Emacs Prelude: Sane setup for LaTeX writers.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

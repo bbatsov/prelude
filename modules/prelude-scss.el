@@ -1,4 +1,4 @@
-;;; prelude-scss.el --- Emacs Prelude: scss support
+;;; prelude-scss.el --- Emacs Prelude: scss support  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

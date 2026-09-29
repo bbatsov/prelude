@@ -1,4 +1,4 @@
-;;; prelude-coffee.el --- Emacs Prelude: CoffeeScript programming support.
+;;; prelude-coffee.el --- Emacs Prelude: CoffeeScript programming support.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

@@ -1,4 +1,4 @@
-;;; prelude-go.el --- Emacs Prelude: Go programming support.
+;;; prelude-go.el --- Emacs Prelude: Go programming support.  -*- lexical-binding: t; -*-
 ;;
 ;; Author: Doug MacEachern
 ;; URL: https://github.com/bbatsov/prelude

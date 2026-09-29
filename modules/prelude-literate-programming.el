@@ -1,4 +1,4 @@
-;;; prelude-literate-programming.el --- Emacs Prelude: Literate Programming Support
+;;; prelude-literate-programming.el --- Emacs Prelude: Literate Programming Support  -*- lexical-binding: t; -*-
 ;;
 ;; Author: Koustubh Sinkar
 ;; Version: 1.0.0

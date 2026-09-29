@@ -1,4 +1,4 @@
-;;; prelude-apheleia.el --- Async format-on-save via Apheleia
+;;; prelude-apheleia.el --- Async format-on-save via Apheleia  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

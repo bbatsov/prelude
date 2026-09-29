@@ -1,3 +1,5 @@
+;;; prelude-pinned-packages.el --- Pin packages to specific archives  -*- lexical-binding: t; -*-
+
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 

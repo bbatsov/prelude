@@ -1,4 +1,4 @@
-;;; prelude-mistty.el --- Emacs Prelude: mistty terminal.
+;;; prelude-mistty.el --- Emacs Prelude: mistty terminal.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

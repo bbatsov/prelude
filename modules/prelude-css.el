@@ -1,4 +1,4 @@
-;;; prelude-css.el --- Emacs Prelude: css support
+;;; prelude-css.el --- Emacs Prelude: css support  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

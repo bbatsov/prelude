@@ -1,4 +1,4 @@
-;;; prelude-web.el --- Emacs Prelude: web template support
+;;; prelude-web.el --- Emacs Prelude: web template support  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

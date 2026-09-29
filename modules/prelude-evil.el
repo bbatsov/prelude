@@ -1,4 +1,4 @@
-;;; prelude-evil.el --- Emacs Prelude: evil-mode configuration.
+;;; prelude-evil.el --- Emacs Prelude: evil-mode configuration.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

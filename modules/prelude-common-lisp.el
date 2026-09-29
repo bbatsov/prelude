@@ -1,4 +1,4 @@
-;;; prelude-common-lisp.el --- Emacs Prelude: lisp-mode and SLIME config.
+;;; prelude-common-lisp.el --- Emacs Prelude: lisp-mode and SLIME config.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

@@ -1,4 +1,4 @@
-;;; prelude-custom.el --- Emacs Prelude: Prelude's customizable variables.
+;;; prelude-custom.el --- Emacs Prelude: Prelude's customizable variables.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

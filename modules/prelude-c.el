@@ -1,4 +1,4 @@
-;;; prelude-c.el --- Emacs Prelude: cc-mode configuration.
+;;; prelude-c.el --- Emacs Prelude: cc-mode configuration.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;
@@ -31,6 +31,9 @@
 ;;; Code:
 
 (require 'prelude-programming)
+
+(defvar c-default-style)
+(defvar c-basic-offset)
 
 ;; Use tree-sitter modes when grammars are available
 (prelude-treesit-remap 'c 'c-mode 'c-ts-mode)

@@ -1,4 +1,4 @@
-;;; prelude-forge.el --- Emacs Prelude: Magit Forge configuration.
+;;; prelude-forge.el --- Emacs Prelude: Magit Forge configuration.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

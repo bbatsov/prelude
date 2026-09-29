@@ -1,4 +1,4 @@
-;;; prelude-xml.el --- Emacs Prelude: XML editing configuration.
+;;; prelude-xml.el --- Emacs Prelude: XML editing configuration.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

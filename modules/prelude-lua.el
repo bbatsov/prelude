@@ -1,4 +1,4 @@
-;;; prelude-lua.el --- Emacs Prelude: Lua programming configuration.
+;;; prelude-lua.el --- Emacs Prelude: Lua programming configuration.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

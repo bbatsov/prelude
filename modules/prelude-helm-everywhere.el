@@ -1,4 +1,4 @@
-;;; prelude-helm-everywhere.el --- Enable Helm everywhere
+;;; prelude-helm-everywhere.el --- Enable Helm everywhere  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2014-2026 Tu, Do Hoang
 ;;

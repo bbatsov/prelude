@@ -1,4 +1,4 @@
-;;; prelude-shell.el --- Emacs Prelude: sh-mode configuration.
+;;; prelude-shell.el --- Emacs Prelude: sh-mode configuration.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

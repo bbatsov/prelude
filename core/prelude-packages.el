@@ -1,4 +1,4 @@
-;;; prelude-packages.el --- Emacs Prelude: default package selection.
+;;; prelude-packages.el --- Emacs Prelude: default package selection.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

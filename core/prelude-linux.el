@@ -1,4 +1,4 @@
-;;; prelude-linux.el --- Emacs Prelude: linux specific settings.
+;;; prelude-linux.el --- Emacs Prelude: linux specific settings.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

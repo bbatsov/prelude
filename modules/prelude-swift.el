@@ -1,4 +1,4 @@
-;;; prelude-swift.el --- Emacs Prelude: Swift programming support.
+;;; prelude-swift.el --- Emacs Prelude: Swift programming support.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

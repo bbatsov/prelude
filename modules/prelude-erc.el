@@ -1,4 +1,4 @@
-;;; prelude-erc.el --- Emacs Prelude: ERC mode configuration.
+;;; prelude-erc.el --- Emacs Prelude: ERC mode configuration.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

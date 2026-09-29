@@ -1,4 +1,4 @@
-;;; prelude-macos.el --- Emacs Prelude: macOS specific settings.
+;;; prelude-macos.el --- Emacs Prelude: macOS specific settings.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;
