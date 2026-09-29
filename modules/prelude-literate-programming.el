@@ -29,6 +29,8 @@
 
 ;;; Code:
 
+(declare-function ob-ipython-auto-configure-kernels "ob-ipython")
+
 (defvar prelude-ipynb-packages
   '(code-cells   ; file mode for code-cells
     ein          ; Emacs Ipython Notebook (Jupyter Client)
@@ -59,6 +61,11 @@
 ;; Run/highlight code using babel in org-mode
 (org-babel-do-load-languages
  'org-babel-load-languages prelude-ob-loader-list)
+
+;; ob-ipython queries Jupyter for its kernels whenever an Org buffer is
+;; opened, which fails (and breaks `org-mode') if Jupyter isn't installed.
+(unless (executable-find "jupyter")
+  (remove-hook 'org-mode-hook #'ob-ipython-auto-configure-kernels))
 
 ;; Syntax highlight in #+BEGIN_SRC blocks
 (setq org-src-fontify-natively t)
