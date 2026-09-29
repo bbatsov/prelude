@@ -7,12 +7,16 @@ on:
 jobs:
   load-test:
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.emacs_version == 'snapshot' }}
     strategy:
       fail-fast: false
       matrix:
         emacs_version:
+          - "29.1"
           - "29.4"
-          - "30.1"
+          - "30.2"
+          - "31.1"
+          - "snapshot"
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -31,6 +35,12 @@ jobs:
         run: emacs --batch --load init.el --load test/prelude-load-test.el
       - name: run regression tests
         run: emacs --batch --load init.el --load test/prelude-test.el -f ert-run-tests-batch-and-exit
+      # Obsolescence warnings differ between Emacs versions (a name that's
+      # obsolete in one may be the only one available in another), so the
+      # warnings-as-errors build only runs on the latest stable release.
+      - name: byte-compile with warnings as errors
+        if: matrix.emacs_version == '31.1'
+        run: emacs --batch --load init.el --load test/prelude-compile-test.el
       - name: load personal early-init once, before core
         run: |
           printf '%s\n' "(defvar prelude-test-early-init-loads nil)" "(push (featurep 'prelude-core) prelude-test-early-init-loads)" > personal/early-init.el

@@ -14,48 +14,27 @@
 (defvar prelude-load-test-errors nil
   "List of (module . error) pairs collected during the load test.")
 
+(defvar prelude-load-test-excluded-modules
+  '(prelude-ido
+    prelude-ivy
+    prelude-helm
+    prelude-helm-everywhere
+    prelude-lsp-mode
+    prelude-evil
+    prelude-erc
+    prelude-key-chord
+    prelude-coffee
+    prelude-literate-programming)
+  "Modules left out of the load test.
+Mutually exclusive modules (ido/ivy/helm, lsp-mode instead of Eglot)
+and modules with heavy external deps or global side effects.")
+
 (defvar prelude-load-test-modules
-  '(prelude-vertico
-    prelude-company
-    prelude-corfu
-    prelude-ai
-    prelude-apheleia
-    prelude-eglot-booster
-    prelude-forge
-    prelude-org
-    prelude-programming
-    prelude-c
-    prelude-clojure
-    prelude-common-lisp
-    prelude-css
-    prelude-dart
-    prelude-emacs-lisp
-    prelude-elixir
-    prelude-erlang
-    prelude-fsharp
-    prelude-go
-    prelude-haskell
-    prelude-js
-    prelude-latex
-    prelude-lisp
-    prelude-lua
-    prelude-ocaml
-    prelude-perl
-    prelude-python
-    prelude-racket
-    prelude-ruby
-    prelude-rust
-    prelude-scala
-    prelude-scheme
-    prelude-scss
-    prelude-shell
-    prelude-ts
-    prelude-web
-    prelude-xml
-    prelude-yaml)
-  "All modules to test.  Mutually exclusive modules (ido/ivy/helm)
-and modules with heavy external deps (erc, evil, literate-programming)
-are excluded.")
+  (seq-difference
+   (mapcar (lambda (file) (intern (file-name-base file)))
+           (directory-files prelude-modules-dir nil "\\`prelude-.*\\.el\\'"))
+   prelude-load-test-excluded-modules)
+  "All modules to test, i.e. every module that isn't excluded.")
 
 (message "\n[test] Verifying core loaded successfully...")
 (unless (featurep 'prelude-editor)
