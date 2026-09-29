@@ -171,14 +171,15 @@ removing unwanted packages."
 
 ;;;; Auto-installation of major modes on demand
 
-(defmacro prelude-auto-install (extension package mode)
+(defun prelude-auto-install (extension package mode)
   "When file with EXTENSION is opened triggers auto-install of PACKAGE.
 PACKAGE is installed only if not already present.  The file is opened in MODE."
-  `(add-to-list 'auto-mode-alist
-                `(,extension . (lambda ()
-                                 (unless (package-installed-p ',package)
-                                   (prelude-package-install ',package))
-                                 (,mode)))))
+  (add-to-list 'auto-mode-alist
+               (cons extension
+                     (lambda ()
+                       (unless (package-installed-p package)
+                         (prelude-package-install package))
+                       (funcall mode)))))
 
 (defvar prelude-auto-install-alist
   '(("\\.adoc\\'" adoc-mode adoc-mode)

@@ -78,4 +78,16 @@ The calls made to both are recorded in order in `calls'."
     (prelude-use-package-ensure 'foo-mode '(foo) nil)
     (should (equal calls '((install foo))))))
 
+(ert-deftest prelude-auto-install-installs-and-enables-mode ()
+  "Visiting a matching file installs the package and enables its mode."
+  (let ((auto-mode-alist nil)
+        (enabled nil))
+    (prelude-test-with-stale-archives
+      (setq prelude--package-archives-refreshed t refreshed t)
+      (cl-letf (((symbol-function 'foo-mode) (lambda () (setq enabled t))))
+        (prelude-auto-install "\\.foo\\'" 'foo 'foo-mode)
+        (funcall (cdr (assoc "\\.foo\\'" auto-mode-alist)))
+        (should (equal calls '((install foo))))
+        (should enabled)))))
+
 ;;; prelude-test.el ends here
