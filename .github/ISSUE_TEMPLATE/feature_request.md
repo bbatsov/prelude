@@ -1,6 +1,7 @@
 ---
 name: Feature Request
 about: Suggest new Emacs Prelude features or improvements to existing features.
+labels: Feature Request
 ---
 
 **Is your feature request related to a problem? Please describe.**

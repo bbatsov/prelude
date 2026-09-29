@@ -1,6 +1,7 @@
 ---
 name: Bug Report
 about: Report an issue with Emacs Prelude you've discovered.
+labels: Bug
 ---
 
 *Use the template below when reporting bugs. Please, make sure that
