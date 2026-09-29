@@ -145,6 +145,8 @@ by Prelude.")
   (message "[Prelude] You should copy this file to your personal configuration folder and tweak it to your liking")
   (load (expand-file-name "sample/prelude-modules.el" prelude-dir)))
 
+(prelude-check-module-conflicts)
+
 ;; config changes made through the customize UI will be stored here
 (setq custom-file (expand-file-name "custom.el" prelude-personal-dir))
 

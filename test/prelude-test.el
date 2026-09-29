@@ -121,4 +121,18 @@ The calls made to both are recorded in order in `calls'."
       (prelude-use-package-ensure (position-symbol 'foo 10) '(t) nil))
     (should (eq (cadr (car calls)) 'foo))))
 
+(ert-deftest prelude-check-module-conflicts-warns-about-each-group ()
+  "Only groups with more than one enabled module are reported."
+  (let ((prelude-conflicting-modules '((prelude-test-a prelude-test-b prelude-test-c)
+                                       (prelude-test-d prelude-test-e)))
+        (warnings nil))
+    (cl-letf (((symbol-function 'featurep)
+               (lambda (feature &rest _)
+                 (memq feature '(prelude-test-a prelude-test-c prelude-test-d))))
+              ((symbol-function 'display-warning)
+               (lambda (_type message &rest _) (push message warnings))))
+      (prelude-check-module-conflicts))
+    (should (= (length warnings) 1))
+    (should (string-match-p "prelude-test-a, prelude-test-c" (car warnings)))))
+
 ;;; prelude-test.el ends here

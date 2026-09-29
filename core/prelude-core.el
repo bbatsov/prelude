@@ -177,6 +177,23 @@ Does nothing if Emacs was compiled without tree-sitter support."
              (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
     (add-to-list 'treesit-language-source-alist recipe)))
 
+(defvar prelude-conflicting-modules
+  '((prelude-ido prelude-ivy prelude-vertico prelude-helm)
+    (prelude-company prelude-corfu))
+  "Groups of modules that do the same job and shouldn't be enabled together.")
+
+(defun prelude-check-module-conflicts ()
+  "Warn about enabled modules that conflict with each other.
+See `prelude-conflicting-modules'."
+  (dolist (group prelude-conflicting-modules)
+    (let ((enabled (seq-filter #'featurep group)))
+      (when (cdr enabled)
+        (display-warning
+         'prelude
+         (format "Modules %s do the same job, keep only one of them in %s"
+                 (mapconcat #'symbol-name enabled ", ")
+                 prelude-modules-file))))))
+
 (defun prelude-lsp-enable ()
   "Enable the LSP client configured via `prelude-lsp-client'."
   (pcase prelude-lsp-client
