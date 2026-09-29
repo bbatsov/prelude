@@ -90,12 +90,55 @@
   "Check if all packages in `prelude-packages' are installed."
   (cl-every #'package-installed-p prelude-packages))
 
+(defvar prelude--package-archives-refreshed nil
+  "Non-nil once `prelude-package-install' has refreshed the package archives.")
+
+(defun prelude-package-install (package)
+  "Install PACKAGE, refreshing the package archives and retrying on failure.
+
+A stale package cache can list versions that are no longer on the
+server (MELPA only keeps the latest build) or miss newly added
+packages, and then installing fails.  The archives are refreshed at
+most once per session."
+  ;; A `use-package' :pin is only recorded when the form runs, after the
+  ;; archives were read, so re-read them for the pin to take effect.
+  (when (assq package package-pinned-packages)
+    (package-read-all-archive-contents))
+  (condition-case err
+      (package-install package)
+    (error
+     (if prelude--package-archives-refreshed
+         (signal (car err) (cdr err))
+       (message "[Prelude] Failed to install %s, refreshing the package archives and retrying..." package)
+       (package-refresh-contents)
+       (setq prelude--package-archives-refreshed t)
+       (package-install package)))))
+
+(defun prelude-use-package-ensure (name args state &optional no-refresh)
+  "Install the packages of a `use-package' form with `prelude-package-install'.
+NAME, ARGS, STATE and NO-REFRESH are as for `use-package-ensure-elpa',
+which still handles the pinned (package . archive) form."
+  (dolist (ensure args)
+    (let ((package (if (eq ensure t) (use-package-as-symbol name) ensure)))
+      (if (and package (symbolp package))
+          (unless (package-installed-p package)
+            (condition-case-unless-debug err
+                (prelude-package-install package)
+              (error
+               (display-warning 'prelude
+                                (format "Failed to install %s: %s"
+                                        package (error-message-string err))
+                                :error))))
+        (use-package-ensure-elpa name (list ensure) state no-refresh)))))
+
+(setq use-package-ensure-function #'prelude-use-package-ensure)
+
 (defun prelude-require-package (package)
   "Install PACKAGE unless already installed."
   (unless (memq package prelude-packages)
     (add-to-list 'prelude-packages package))
   (unless (package-installed-p package)
-    (package-install package)))
+    (prelude-package-install package)))
 
 (defun prelude-require-packages (packages)
   "Ensure PACKAGES are installed.
@@ -109,6 +152,7 @@ Missing packages are installed automatically."
     (message "%s" "Emacs Prelude is now refreshing its package database...")
     (package-refresh-contents)
     (message "%s" " done.")
+    (setq prelude--package-archives-refreshed t)
     ;; install the missing packages
     (prelude-require-packages prelude-packages)))
 
@@ -133,7 +177,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
   `(add-to-list 'auto-mode-alist
                 `(,extension . (lambda ()
                                  (unless (package-installed-p ',package)
-                                   (package-install ',package))
+                                   (prelude-package-install ',package))
                                  (,mode)))))
 
 (defvar prelude-auto-install-alist

@@ -21,4 +21,61 @@
       (with-temp-buffer
         (prelude-ocaml-mode-defaults)))))
 
+(defmacro prelude-test-with-stale-archives (&rest body)
+  "Run BODY with package installs failing until the archives are refreshed.
+The calls made to both are recorded in order in `calls'."
+  (declare (indent 0))
+  `(let ((calls nil)
+         (refreshed nil)
+         (prelude--package-archives-refreshed nil))
+     (cl-letf (((symbol-function 'package-install)
+                (lambda (pkg)
+                  (setq calls (append calls (list (list 'install pkg))))
+                  (unless refreshed
+                    (signal 'file-error (list "Not found" (symbol-name pkg))))))
+               ((symbol-function 'package-refresh-contents)
+                (lambda (&rest _)
+                  (setq calls (append calls (list 'refresh)))
+                  (setq refreshed t)))
+               ((symbol-function 'package-installed-p) #'ignore))
+       ,@body)))
+
+(ert-deftest prelude-package-install-retries-after-refresh ()
+  "A failed install refreshes the archives and tries again."
+  (prelude-test-with-stale-archives
+    (prelude-package-install 'foo)
+    (should (equal calls '((install foo) refresh (install foo))))))
+
+(ert-deftest prelude-package-install-refreshes-only-once ()
+  "The archives aren't refreshed again after a refresh this session."
+  (prelude-test-with-stale-archives
+    (setq prelude--package-archives-refreshed t)
+    (should-error (prelude-package-install 'foo) :type 'file-error)
+    (should (equal calls '((install foo))))))
+
+(ert-deftest prelude-package-install-applies-pins ()
+  "Archives are re-read before installing a pinned package."
+  (prelude-test-with-stale-archives
+    (setq prelude--package-archives-refreshed t refreshed t)
+    (let ((package-pinned-packages '((foo . "melpa-stable"))))
+      (cl-letf (((symbol-function 'package-read-all-archive-contents)
+                 (lambda () (setq calls (append calls (list 'read))))))
+        (prelude-package-install 'foo)
+        (should (equal calls '(read (install foo))))))))
+
+(ert-deftest prelude-use-package-ensure-retries-after-refresh ()
+  "`use-package' :ensure goes through `prelude-package-install'."
+  (require 'use-package)
+  (prelude-test-with-stale-archives
+    (prelude-use-package-ensure 'foo '(t) nil)
+    (should (equal calls '((install foo) refresh (install foo))))))
+
+(ert-deftest prelude-use-package-ensure-installs-named-package ()
+  "`:ensure some-package' installs that package instead of the form's name."
+  (require 'use-package)
+  (prelude-test-with-stale-archives
+    (setq prelude--package-archives-refreshed t refreshed t)
+    (prelude-use-package-ensure 'foo-mode '(foo) nil)
+    (should (equal calls '((install foo))))))
+
 ;;; prelude-test.el ends here
