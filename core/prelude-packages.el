@@ -54,36 +54,37 @@
 (setq use-package-verbose t)
 
 (defvar prelude-packages
-  '(ace-window
-    ag
-    avy
-    browse-kill-ring
-    crux
-    discover-my-major
-    diff-hl
-    diminish
-    easy-kill
-    editorconfig
-    expand-region
-    flycheck
-    gist
-    git-timemachine
-    git-modes
-    guru-mode
-    hl-todo
-    imenu-anywhere
-    projectile
-    magit
-    move-text
-    operate-on-number
-    smartparens
-    smartrep
-    super-save
-    undo-tree
-    volatile-highlights
-    which-key
-    zenburn-theme
-    zop-to-char)
+  (append
+   '(ace-window
+     ag
+     avy
+     browse-kill-ring
+     crux
+     discover-my-major
+     diff-hl
+     diminish
+     easy-kill
+     expand-region
+     flycheck
+     git-timemachine
+     git-modes
+     guru-mode
+     hl-todo
+     imenu-anywhere
+     projectile
+     magit
+     move-text
+     operate-on-number
+     smartparens
+     smartrep
+     super-save
+     undo-tree
+     volatile-highlights
+     zenburn-theme
+     zop-to-char)
+   ;; built into Emacs 30+
+   (when (< emacs-major-version 30)
+     '(editorconfig which-key)))
   "A list of packages to ensure are installed at launch.")
 
 (defun prelude-packages-installed-p ()
