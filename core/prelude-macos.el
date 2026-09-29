@@ -32,6 +32,7 @@
 
 (defvar mac-command-modifier)
 (defvar mac-option-modifier)
+(defvar ns-function-modifier)
 (declare-function set-fontset-font "fontset.c")
 
 ;; On macOS Emacs doesn't use the shell PATH if it's not started from
