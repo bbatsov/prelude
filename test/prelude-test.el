@@ -135,4 +135,32 @@ The calls made to both are recorded in order in `calls'."
     (should (= (length warnings) 1))
     (should (string-match-p "prelude-test-a, prelude-test-c" (car warnings)))))
 
+(defmacro prelude-test-with-update-stubs (git-exit &rest body)
+  "Run BODY with `prelude-update' stubbed so git exits with GIT-EXIT.
+Whether Prelude got recompiled is recorded in `recompiled'."
+  (declare (indent 1))
+  `(let ((recompiled nil))
+     (cl-letf (((symbol-function 'y-or-n-p) (lambda (&rest _) t))
+               ((symbol-function 'package-upgrade-all) #'ignore)
+               ((symbol-function 'display-buffer) #'ignore)
+               ((symbol-function 'call-process) (lambda (&rest _) ,git-exit))
+               ((symbol-function 'prelude-recompile-init)
+                (lambda () (setq recompiled t))))
+       ,@body)))
+
+(ert-deftest prelude-update-stops-when-git-pull-fails ()
+  "A failed pull is reported and nothing gets recompiled."
+  (prelude-test-with-update-stubs 1
+    (should-error (prelude-update) :type 'user-error)
+    (should-not recompiled)))
+
+(ert-deftest prelude-update-keeps-default-directory ()
+  "Updating doesn't change the current buffer's directory."
+  (with-temp-buffer
+    (setq default-directory "/tmp/")
+    (prelude-test-with-update-stubs 0
+      (prelude-update)
+      (should recompiled)
+      (should (equal default-directory "/tmp/")))))
+
 ;;; prelude-test.el ends here

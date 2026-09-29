@@ -204,6 +204,12 @@ evaluate the module `require` expression with <kbd>C-x C-e</kbd>.
 Simply run <kbd>M-x prelude-update</kbd> from Emacs itself and restart
 Emacs afterwards.
 
+The update only fast-forwards your checkout (`git pull --ff-only`). If
+that fails, it stops and shows the output of `git` in the
+`*prelude-update*` buffer. Most often that's because you've committed
+changes to Prelude itself, in which case you'll have to merge the
+upstream changes by hand.
+
 ### Manual update
 
 The update procedure is fairly straightforward and consists of 3
