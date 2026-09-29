@@ -49,7 +49,7 @@
   (subword-mode +1)
   (prelude-lsp-enable))
 
-(setq prelude-swift-mode-hook 'prelude-swift-mode-defaults)
+(add-hook 'prelude-swift-mode-hook #'prelude-swift-mode-defaults)
 
 ;; Tree-sitter based major mode for Swift (requires the swift grammar)
 (use-package swift-ts-mode

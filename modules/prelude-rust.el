@@ -73,7 +73,7 @@
   :ensure t
   :defer t)
 
-(setq prelude-rust-mode-hook 'prelude-rust-mode-defaults)
+(add-hook 'prelude-rust-mode-hook #'prelude-rust-mode-defaults)
 
 (provide 'prelude-rust)
 ;;; prelude-rust.el ends here

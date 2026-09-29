@@ -82,7 +82,7 @@
   :ensure t
   :defer t)
 
-(setq prelude-go-mode-hook 'prelude-go-mode-defaults)
+(add-hook 'prelude-go-mode-hook #'prelude-go-mode-defaults)
 
 (provide 'prelude-go)
 ;;; prelude-go.el ends here

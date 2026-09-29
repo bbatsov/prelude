@@ -48,7 +48,7 @@
   (setq-local imenu-create-index-function
               #'python-imenu-create-flat-index))
 
-(setq prelude-python-mode-hook 'prelude-python-mode-defaults)
+(add-hook 'prelude-python-mode-hook #'prelude-python-mode-defaults)
 
 (add-hook 'python-mode-hook (lambda ()
                               (run-hooks 'prelude-python-mode-hook)))

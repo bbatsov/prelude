@@ -69,7 +69,7 @@ Start `ielm' if it's not already running."
   (setq mode-name "EL")
   (prelude-conditional-emacs-lisp-checker))
 
-(setq prelude-emacs-lisp-mode-hook 'prelude-emacs-lisp-mode-defaults)
+(add-hook 'prelude-emacs-lisp-mode-hook #'prelude-emacs-lisp-mode-defaults)
 
 (add-hook 'emacs-lisp-mode-hook (lambda ()
                                   (run-hooks 'prelude-emacs-lisp-mode-hook)))
@@ -85,7 +85,7 @@ Start `ielm' if it's not already running."
   (run-hooks 'prelude-interactive-lisp-coding-hook)
   (eldoc-mode +1))
 
-(setq prelude-ielm-mode-hook 'prelude-ielm-mode-defaults)
+(add-hook 'prelude-ielm-mode-hook #'prelude-ielm-mode-defaults)
 
 (add-hook 'ielm-mode-hook (lambda ()
                             (run-hooks 'prelude-ielm-mode-hook)))

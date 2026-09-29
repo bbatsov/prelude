@@ -43,7 +43,7 @@
   :hook (scala-mode . (lambda ()
                         (run-hooks 'prelude-scala-mode-hook))))
 
-(setq prelude-scala-mode-hook 'prelude-scala-mode-defaults)
+(add-hook 'prelude-scala-mode-hook #'prelude-scala-mode-defaults)
 
 (provide 'prelude-scala)
 

@@ -43,7 +43,7 @@
   (subword-mode +1)
   (prelude-lsp-enable))
 
-(setq prelude-ts-mode-hook 'prelude-ts-mode-defaults)
+(add-hook 'prelude-ts-mode-hook #'prelude-ts-mode-defaults)
 
 (add-hook 'typescript-ts-mode-hook (lambda ()
                                      (run-hooks 'prelude-ts-mode-hook)))

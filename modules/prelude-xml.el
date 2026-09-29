@@ -46,7 +46,7 @@
 (defun prelude-xml-mode-defaults ()
   (subword-mode +1))
 
-(setq prelude-xml-mode-hook 'prelude-xml-mode-defaults)
+(add-hook 'prelude-xml-mode-hook #'prelude-xml-mode-defaults)
 
 (add-hook 'nxml-mode-hook (lambda ()
                             (run-hooks 'prelude-xml-mode-hook)))

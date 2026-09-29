@@ -54,7 +54,7 @@
   :defer t
   :if (eq prelude-lsp-client 'lsp-mode))
 
-(setq prelude-dart-mode-hook 'prelude-dart-mode-defaults)
+(add-hook 'prelude-dart-mode-hook #'prelude-dart-mode-defaults)
 
 (provide 'prelude-dart)
 

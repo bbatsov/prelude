@@ -30,6 +30,7 @@
 - Set `consult-narrow-key` to `<` in `prelude-vertico`, so you can narrow consult candidates to a single group (e.g. `< b` for buffers in `consult-buffer`).
 - Tidy up `prelude-common-lisp`: drop stale `slime-autodoc-use-multiline-p` setting (the variable was removed from upstream SLIME; modern autodoc honors `eldoc-echo-area-use-multiline-p`), set `inferior-lisp-program` to `sbcl` so `M-x run-lisp` works without SLIME, and add `slime-quicklisp` to `slime-contribs` for Quicklisp integration.
 - Enable `lexical-binding` in all of Prelude's Emacs Lisp files (including the sample `prelude-modules.el`), which silences the missing-cookie warnings Emacs 31 prints on every startup.
+- Modules now `add-hook` their defaults to Prelude's hooks (`prelude-<lang>-mode-hook`, `prelude-lisp-coding-hook`, etc.) instead of `setq`-ing them, so functions you add to those hooks in `personal/preload` are no longer thrown away when the module loads.
 
 ### Bugs fixed
 

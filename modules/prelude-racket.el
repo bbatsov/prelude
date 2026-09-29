@@ -47,7 +47,7 @@
                            (run-hooks 'prelude-racket-mode-hook)))
          (racket-repl-mode . racket-unicode-input-method-enable)))
 
-(setq prelude-racket-mode-hook 'prelude-racket-mode-defaults)
+(add-hook 'prelude-racket-mode-hook #'prelude-racket-mode-defaults)
 
 (provide 'prelude-racket)
 

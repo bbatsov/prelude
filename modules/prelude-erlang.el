@@ -46,7 +46,7 @@
   :hook (erlang-mode . (lambda ()
                          (run-hooks 'prelude-erlang-mode-hook))))
 
-(setq prelude-erlang-mode-hook 'prelude-erlang-mode-defaults)
+(add-hook 'prelude-erlang-mode-hook #'prelude-erlang-mode-defaults)
 
 (provide 'prelude-erlang)
 

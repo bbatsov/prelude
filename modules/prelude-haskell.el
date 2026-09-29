@@ -48,7 +48,7 @@
   :hook (haskell-mode . (lambda ()
                           (run-hooks 'prelude-haskell-mode-hook))))
 
-(setq prelude-haskell-mode-hook 'prelude-haskell-mode-defaults)
+(add-hook 'prelude-haskell-mode-hook #'prelude-haskell-mode-defaults)
 
 (provide 'prelude-haskell)
 

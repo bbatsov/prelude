@@ -44,7 +44,7 @@
   (subword-mode +1)
   (add-hook 'before-save-hook 'prelude-cleanup-maybe nil t))
 
-(setq prelude-yaml-mode-hook 'prelude-yaml-mode-defaults)
+(add-hook 'prelude-yaml-mode-hook #'prelude-yaml-mode-defaults)
 
 (add-hook 'yaml-mode-hook (lambda ()
                             (run-hooks 'prelude-yaml-mode-hook)))

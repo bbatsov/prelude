@@ -41,7 +41,7 @@
   (subword-mode +1)
   (prelude-lsp-enable))
 
-(setq prelude-js-mode-hook 'prelude-js-mode-defaults)
+(add-hook 'prelude-js-mode-hook #'prelude-js-mode-defaults)
 
 (add-hook 'js-mode-hook (lambda () (run-hooks 'prelude-js-mode-hook)))
 (add-hook 'js-ts-mode-hook (lambda () (run-hooks 'prelude-js-mode-hook)))

@@ -49,7 +49,7 @@
   :defer t
   :if (eq prelude-lsp-client 'eglot))
 
-(setq prelude-fsharp-mode-hook 'prelude-fsharp-mode-defaults)
+(add-hook 'prelude-fsharp-mode-hook #'prelude-fsharp-mode-defaults)
 
 (provide 'prelude-fsharp)
 

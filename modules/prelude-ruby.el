@@ -58,7 +58,7 @@
   :defer t
   :bind (:map help-map ("R" . yari)))
 
-(setq prelude-ruby-mode-hook 'prelude-ruby-mode-defaults)
+(add-hook 'prelude-ruby-mode-hook #'prelude-ruby-mode-defaults)
 
 (add-hook 'ruby-mode-hook (lambda ()
                             (run-hooks 'prelude-ruby-mode-hook)))

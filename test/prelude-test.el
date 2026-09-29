@@ -90,4 +90,13 @@ The calls made to both are recorded in order in `calls'."
         (should (equal calls '((install foo))))
         (should enabled)))))
 
+(defvar prelude-ruby-mode-hook)
+
+(ert-deftest prelude-module-keeps-user-mode-hook-functions ()
+  "Loading a module doesn't drop functions already on its mode hook."
+  (let ((prelude-ruby-mode-hook (list #'ignore)))
+    (load "prelude-ruby" nil t)
+    (should (memq #'ignore prelude-ruby-mode-hook))
+    (should (memq #'prelude-ruby-mode-defaults prelude-ruby-mode-hook))))
+
 ;;; prelude-test.el ends here

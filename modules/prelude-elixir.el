@@ -53,7 +53,7 @@
   (subword-mode +1)
   (prelude-lsp-enable))
 
-(setq prelude-elixir-mode-hook 'prelude-elixir-mode-defaults)
+(add-hook 'prelude-elixir-mode-hook #'prelude-elixir-mode-defaults)
 
 (add-hook 'elixir-mode-hook (lambda ()
                               (run-hooks 'prelude-elixir-mode-hook)))

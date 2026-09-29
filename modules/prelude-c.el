@@ -51,7 +51,7 @@
   (subword-mode +1)
   (prelude-lsp-enable))
 
-(setq prelude-c-mode-common-hook 'prelude-c-mode-common-defaults)
+(add-hook 'prelude-c-mode-common-hook #'prelude-c-mode-common-defaults)
 
 ;; this will affect all modes derived from cc-mode, like
 ;; java-mode, php-mode, etc

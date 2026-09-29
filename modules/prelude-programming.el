@@ -70,7 +70,7 @@
   (prelude-enable-whitespace)
   (prelude-local-comment-auto-fill))
 
-(setq prelude-prog-mode-hook 'prelude-prog-mode-defaults)
+(add-hook 'prelude-prog-mode-hook #'prelude-prog-mode-defaults)
 
 (add-hook 'prog-mode-hook (lambda ()
                             (run-hooks 'prelude-prog-mode-hook)))
@@ -94,7 +94,7 @@
   (whitespace-toggle-options '(tabs))
   (setq indent-tabs-mode t))
 
-(setq prelude-makefile-mode-hook 'prelude-makefile-mode-defaults)
+(add-hook 'prelude-makefile-mode-hook #'prelude-makefile-mode-defaults)
 
 (add-hook 'makefile-mode-hook (lambda ()
                                 (run-hooks 'prelude-makefile-mode-hook)))

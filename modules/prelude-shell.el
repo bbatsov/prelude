@@ -49,7 +49,7 @@
              (member (file-name-nondirectory buffer-file-name) prelude-prezto-files))
     (sh-set-shell "zsh")))
 
-(setq prelude-sh-mode-hook 'prelude-sh-mode-defaults)
+(add-hook 'prelude-sh-mode-hook #'prelude-sh-mode-defaults)
 
 (add-hook 'sh-mode-hook (lambda ()
                           (run-hooks 'prelude-sh-mode-hook)))

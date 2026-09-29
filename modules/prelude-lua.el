@@ -55,7 +55,7 @@
   :hook (lua-mode . (lambda ()
                       (run-hooks 'prelude-lua-mode-hook))))
 
-(setq prelude-lua-mode-hook 'prelude-lua-mode-defaults)
+(add-hook 'prelude-lua-mode-hook #'prelude-lua-mode-defaults)
 
 (provide 'prelude-lua)
 

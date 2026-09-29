@@ -75,7 +75,7 @@
     (sp-local-tag "=" "<%= " " %>")
     (sp-local-tag "#" "<%# " " %>")))
 
-(setq prelude-web-mode-hook 'prelude-web-mode-defaults)
+(add-hook 'prelude-web-mode-hook #'prelude-web-mode-defaults)
 
 (provide 'prelude-web)
 ;;; prelude-web.el ends here

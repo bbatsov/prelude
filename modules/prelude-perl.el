@@ -58,7 +58,7 @@
   (setq cperl-invalid-face nil)
   (subword-mode +1))
 
-(setq prelude-cperl-mode-hook 'prelude-cperl-mode-defaults)
+(add-hook 'prelude-cperl-mode-hook #'prelude-cperl-mode-defaults)
 
 (add-hook 'cperl-mode-hook (lambda ()
                              (run-hooks 'prelude-cperl-mode-hook)) t)

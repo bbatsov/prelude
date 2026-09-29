@@ -92,7 +92,7 @@
     ('LaTeX-math-mode (LaTeX-math-mode 1))
     ('cdlatex (turn-on-cdlatex))))
 
-(setq prelude-latex-mode-hook 'prelude-latex-mode-defaults)
+(add-hook 'prelude-latex-mode-hook #'prelude-latex-mode-defaults)
 
 (add-hook 'LaTeX-mode-hook (lambda ()
                              (run-hooks 'prelude-latex-mode-hook)))

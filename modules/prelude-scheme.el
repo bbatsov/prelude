@@ -47,7 +47,7 @@
   (geiser-repl-history-filename
    (expand-file-name "geiser-history" prelude-savefile-dir)))
 
-(setq prelude-scheme-mode-hook 'prelude-scheme-mode-defaults)
+(add-hook 'prelude-scheme-mode-hook #'prelude-scheme-mode-defaults)
 
 (add-hook 'scheme-mode-hook (lambda ()
                               (run-hooks 'prelude-scheme-mode-hook)))
