@@ -30,7 +30,7 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-package 'key-chord)
+(use-package key-chord :ensure t :defer t)
 
 (require 'key-chord)
 

@@ -74,9 +74,18 @@
                                           "%b"))))
 
 ;; use zenburn as the default theme
+(use-package zenburn-theme
+  :ensure t
+  :defer t)
+
 (when prelude-theme
   (load-theme prelude-theme t))
 
+
+;; built into Emacs 30+
+(use-package which-key
+  :ensure t
+  :defer t)
 
 ;; NOTE(@lerax): dom 01 jun 2025 12:42:24
 ;; helm-descbinds became incompatible with which-key-mode ins 202402XX version

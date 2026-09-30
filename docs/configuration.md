@@ -125,17 +125,19 @@ the personal folder** to avoid having to deal with git merge conflicts
 in the future.
 
 If you'd like to add some auto installation of packages in your
-personal config use the following code:
+personal config, use `use-package` with `:ensure t`:
 
 ```emacs-lisp
-(prelude-require-packages '(some-package some-other-package))
+(use-package some-package
+  :ensure t)
 ```
 
-If you require just a single package you can also use:
+Prelude installs these the same way it installs its own packages (it
+refreshes a stale package list and retries if an install fails), and
+`M-x prelude-update-packages` updates them as well.
 
-```emacs-lisp
-(prelude-require-package 'some-package)
-```
+The older `prelude-require-package` and `prelude-require-packages`
+still work, but they're deprecated.
 
 ### Preloading personal config
 

@@ -131,7 +131,7 @@ to the active region."
 
 (defun prelude-update-packages (&optional arg)
   "Update Prelude's packages.
-This includes packages installed via `prelude-require-package'.
+This covers every package Prelude installs (see `prelude-packages').
 
 With a prefix ARG updates all installed packages."
   (interactive "P")

@@ -32,7 +32,9 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-packages '(ivy swiper counsel))
+(use-package ivy :ensure t :defer t)
+(use-package swiper :ensure t :defer t)
+(use-package counsel :ensure t :defer t)
 
 ;;; Ivy
 ;;

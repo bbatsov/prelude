@@ -46,8 +46,8 @@
     ))
 
 
-(prelude-require-packages
- (append prelude-ipynb-packages prelude-ob-packages))
+(dolist (package (append prelude-ipynb-packages prelude-ob-packages))
+  (prelude-use-package-ensure package '(t) nil))
 
 (setq prelude-ob-loader-list
   '((python . t)

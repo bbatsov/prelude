@@ -31,10 +31,10 @@
 
 ;;; Code:
 
-(prelude-require-package 'helm)
+(use-package helm :ensure t :defer t)
 
 (when prelude-projectile
-  (prelude-require-package 'helm-projectile)
+  (use-package helm-projectile :ensure t :defer t)
   (require 'helm-projectile))
 
 (when (executable-find "curl")

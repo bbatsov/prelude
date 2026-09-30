@@ -53,38 +53,12 @@
 ;; use-package is built-in since Emacs 29
 (setq use-package-verbose t)
 
-(defvar prelude-packages
-  (append
-   '(ace-window
-     ag
-     avy
-     browse-kill-ring
-     crux
-     discover-my-major
-     diff-hl
-     diminish
-     easy-kill
-     expand-region
-     flycheck
-     git-timemachine
-     git-modes
-     guru-mode
-     hl-todo
-     imenu-anywhere
-     projectile
-     magit
-     move-text
-     operate-on-number
-     smartparens
-     super-save
-     undo-tree
-     volatile-highlights
-     zenburn-theme
-     zop-to-char)
-   ;; built into Emacs 30+
-   (when (< emacs-major-version 30)
-     '(editorconfig which-key)))
-  "A list of packages to ensure are installed at launch.")
+(defvar prelude-packages nil
+  "Packages installed and managed by Prelude.
+Prelude's `use-package' forms add the packages they ensure here as they
+run, which is what `prelude-update-packages' and
+`prelude-list-foreign-packages' go by.  Packages you add to it in
+`personal/preload' are installed at startup as well.")
 
 (defun prelude-packages-installed-p ()
   "Check if all packages in `prelude-packages' are installed."
@@ -126,14 +100,16 @@ which still handles the pinned (package . archive) form."
       (when (and package (symbolp package))
         (setq package (bare-symbol package)))
       (if (and package (symbolp package))
-          (unless (package-installed-p package)
-            (condition-case-unless-debug err
-                (prelude-package-install package)
-              (error
-               (display-warning 'prelude
-                                (format "Failed to install %s: %s"
-                                        package (error-message-string err))
-                                :error))))
+          (progn
+            (add-to-list 'prelude-packages package)
+            (unless (package-installed-p package)
+              (condition-case-unless-debug err
+                  (prelude-package-install package)
+                (error
+                 (display-warning 'prelude
+                                  (format "Failed to install %s: %s"
+                                          package (error-message-string err))
+                                  :error)))))
         (use-package-ensure-elpa name (list ensure) state no-refresh)))))
 
 (setq use-package-ensure-function #'prelude-use-package-ensure)
@@ -148,7 +124,13 @@ which still handles the pinned (package . archive) form."
 (defun prelude-require-packages (packages)
   "Ensure PACKAGES are installed.
 Missing packages are installed automatically."
-  (mapc #'prelude-require-package packages))
+  (with-suppressed-warnings ((obsolete prelude-require-package))
+    (mapc #'prelude-require-package packages)))
+
+(make-obsolete 'prelude-require-package
+               "use `use-package' with `:ensure t' instead." "2.2.0")
+(make-obsolete 'prelude-require-packages
+               "use `use-package' with `:ensure t' instead." "2.2.0")
 
 (defun prelude-install-packages ()
   "Install all packages listed in `prelude-packages'."
@@ -159,7 +141,9 @@ Missing packages are installed automatically."
     (message "%s" " done.")
     (setq prelude--package-archives-refreshed t)
     ;; install the missing packages
-    (prelude-require-packages prelude-packages)))
+    (dolist (package prelude-packages)
+      (unless (package-installed-p package)
+        (prelude-package-install package)))))
 
 ;; run package installation
 (prelude-install-packages)

@@ -29,7 +29,7 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(prelude-require-packages '(company))
+(use-package company :ensure t :defer t)
 
 (require 'company)
 

@@ -31,7 +31,7 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(rainbow-delimiters))
+(use-package rainbow-delimiters :ensure t :defer t)
 
 ;; Lisp configuration
 (define-key read-expression-map (kbd "TAB") 'completion-at-point)

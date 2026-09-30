@@ -34,7 +34,11 @@
 ;;; evil-visualstar enables searching visual selection with *
 ;;; evil-numbers enables vim style numeric incrementing and decrementing
 
-(prelude-require-packages '(evil goto-chg evil-surround evil-visualstar evil-numbers))
+(use-package evil :ensure t :defer t)
+(use-package goto-chg :ensure t :defer t)
+(use-package evil-surround :ensure t :defer t)
+(use-package evil-visualstar :ensure t :defer t)
+(use-package evil-numbers :ensure t :defer t)
 
 (require 'evil-visualstar)
 

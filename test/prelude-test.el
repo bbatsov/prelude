@@ -172,4 +172,13 @@ Whether Prelude got recompiled is recorded in `recompiled'."
     (execute-kbd-macro (kbd "C-c . + + *"))
     (should (equal (buffer-string) "14"))))
 
+(ert-deftest prelude-use-package-ensure-tracks-packages ()
+  "Packages ensured through `use-package' are recorded in `prelude-packages'."
+  (require 'use-package)
+  (let ((prelude-packages nil))
+    (cl-letf (((symbol-function 'package-installed-p) (lambda (&rest _) t)))
+      (prelude-use-package-ensure 'foo '(t) nil)
+      (prelude-use-package-ensure 'foo-mode '(bar) nil))
+    (should (equal (sort prelude-packages #'string<) '(bar foo)))))
+
 ;;; prelude-test.el ends here

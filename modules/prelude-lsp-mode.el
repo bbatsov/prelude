@@ -38,8 +38,8 @@
 (defvar lsp-ui-peek-enable)
 (defvar lsp-ui-peek-always-show)
 
-(prelude-require-packages '(lsp-mode
-                            lsp-ui))
+(use-package lsp-mode :ensure t :defer t)
+(use-package lsp-ui :ensure t :defer t)
 
 (setq lsp-keymap-prefix "C-c C-l")
 (setq lsp-keep-workspace-alive nil)

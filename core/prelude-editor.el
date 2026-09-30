@@ -86,6 +86,8 @@
 
 (when prelude-smartparens
   ;; smart pairing for all
+  (use-package smartparens
+    :ensure t)
   (require 'smartparens-config)
   (setq sp-base-key-bindings 'sp)
   (setq sp-autoskip-closing-pair 'always)
@@ -110,7 +112,8 @@
 (setq blink-matching-paren nil)
 
 ;; diminish keeps the modeline tidy
-(require 'diminish)
+(use-package diminish
+  :ensure t)
 
 ;; meaningful names for buffers with the same name
 (setq uniquify-buffer-name-style 'forward)
@@ -166,11 +169,13 @@
 
 ;; automatically save buffers associated with files on buffer switch
 ;; and on windows switch
-(require 'super-save)
-;; add integration with ace-window
-(add-to-list 'super-save-triggers 'ace-window)
-(super-save-mode +1)
-(diminish 'super-save-mode)
+(use-package super-save
+  :ensure t
+  :diminish
+  :config
+  ;; add integration with ace-window
+  (add-to-list 'super-save-triggers 'ace-window)
+  (super-save-mode +1))
 
 (define-advice set-buffer-major-mode (:after (buffer) prelude-set-major-mode)
   "Set buffer major mode according to `auto-mode-alist'."
@@ -183,15 +188,19 @@
 ;; highlight the current line
 (global-hl-line-mode +1)
 
-(require 'volatile-highlights)
-(volatile-highlights-mode t)
-(diminish 'volatile-highlights-mode)
+(use-package volatile-highlights
+  :ensure t
+  :diminish
+  :config
+  (volatile-highlights-mode t))
 
 ;; note - this should be after volatile-highlights is required
 ;; add the ability to cut the current line, without marking it
 (require 'rect)
-(require 'crux)
-(crux-with-region-or-line kill-region)
+(use-package crux
+  :ensure t
+  :config
+  (crux-with-region-or-line kill-region))
 
 ;; tramp, for sudo access
 (use-package tramp
@@ -221,10 +230,13 @@ Does nothing when `prelude-spell-checker' is set to something else
 ;; single global mode that checks only the visible part of the buffer,
 ;; so it's enabled once here rather than per-buffer.  The enable is
 ;; guarded so a missing libenchant only warns instead of aborting startup.
+;; (`:if' doesn't stop `:ensure', hence the `when' around these forms)
 (when (and prelude-flyspell (eq prelude-spell-checker 'jinx))
-  (prelude-require-package 'jinx)
-  (with-demoted-errors "Prelude: could not enable jinx: %S"
-    (global-jinx-mode +1)))
+  (use-package jinx
+    :ensure t
+    :config
+    (with-demoted-errors "Prelude: could not enable jinx: %S"
+      (global-jinx-mode +1))))
 
 (defun prelude-cleanup-maybe ()
   "Invoke `whitespace-cleanup' if `prelude-clean-whitespace-on-save' is not nil."
@@ -238,8 +250,8 @@ Does nothing when `prelude-spell-checker' is set to something else
 (when (and prelude-whitespace
            prelude-clean-whitespace-on-save
            (eq prelude-whitespace-cleanup-style 'ws-butler))
-  (prelude-require-package 'ws-butler)
-  (require 'ws-butler nil t))
+  (use-package ws-butler
+    :ensure t))
 
 (defun prelude-enable-whitespace ()
   "Enable `whitespace-mode' if `prelude-whitespace' is not nil."
@@ -267,6 +279,7 @@ Does nothing when `prelude-spell-checker' is set to something else
 (put 'erase-buffer 'disabled nil)
 
 (use-package expand-region
+  :ensure t
   :defer t)
 
 ;; bookmarks
@@ -278,12 +291,15 @@ Does nothing when `prelude-spell-checker' is set to something else
 
 ;; projectile is a project management mode
 (when prelude-projectile
-  (require 'projectile)
-  (setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
-  (projectile-mode t))
+  (use-package projectile
+    :ensure t
+    :config
+    (setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
+    (projectile-mode t)))
 
 ;; avy allows us to effectively navigate to visible things
 (use-package avy
+  :ensure t
   :defer t
   :init
   (setq avy-background t
@@ -319,6 +335,7 @@ Does nothing when `prelude-spell-checker' is set to something else
 
 ;; smarter kill-ring navigation
 (use-package browse-kill-ring
+  :ensure t
   :bind (("M-y" . browse-kill-ring)
          ("s-y" . browse-kill-ring)))
 
@@ -423,13 +440,15 @@ Does not indent if the mode is in `prelude-indent-sensitive-modes'."
   "Enable `undo-tree' if `prelude-undo-tree' is not nil."
   (when prelude-undo-tree
     ;; supercharge your undo/redo with undo-tree
-    (require 'undo-tree)
-    ;; autosave the undo-tree history
-    (setq undo-tree-history-directory-alist
-          `((".*" . ,temporary-file-directory)))
-    (setq undo-tree-auto-save-history t)
-    (global-undo-tree-mode)
-    (diminish 'undo-tree-mode)))
+    (use-package undo-tree
+      :ensure t
+      :diminish
+      :config
+      ;; autosave the undo-tree history
+      (setq undo-tree-history-directory-alist
+            `((".*" . ,temporary-file-directory)))
+      (setq undo-tree-auto-save-history t)
+      (global-undo-tree-mode))))
 
 
 (prelude-maybe-enable-undo-tree)
@@ -445,16 +464,33 @@ Does not indent if the mode is in `prelude-indent-sensitive-modes'."
 (setq help-window-select t)
 
 ;; diff-hl
-(global-diff-hl-mode +1)
-(add-hook 'dired-mode-hook 'diff-hl-dired-mode)
-(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+(use-package diff-hl
+  :ensure t
+  :demand t
+  :hook ((dired-mode . diff-hl-dired-mode)
+         (magit-post-refresh . diff-hl-magit-post-refresh))
+  :config
+  (global-diff-hl-mode +1))
 
-;; easy-kill
-(global-set-key [remap kill-ring-save] 'easy-kill)
-(global-set-key [remap mark-sexp] 'easy-mark)
+(use-package easy-kill
+  :ensure t
+  :bind (([remap kill-ring-save] . easy-kill)
+         ([remap mark-sexp] . easy-mark)))
 
-;; operate-on-number
-(require 'operate-on-number)
+(use-package operate-on-number
+  :ensure t)
+
+;; Packages that are only used through their autoloaded commands, bound
+;; in prelude-mode.el and prelude-global-keybindings.el
+(use-package ace-window :ensure t :defer t)
+(use-package ag :ensure t :defer t)
+(use-package discover-my-major :ensure t :defer t)
+(use-package git-modes :ensure t :defer t)
+(use-package git-timemachine :ensure t :defer t)
+(use-package imenu-anywhere :ensure t :defer t)
+(use-package magit :ensure t :defer t)
+(use-package move-text :ensure t :defer t)
+(use-package zop-to-char :ensure t :defer t)
 
 (defvar prelude-operate-on-number-map
   (let ((map (make-sparse-keymap)))
@@ -505,10 +541,12 @@ and file \"filename\" will be opened and cursor set on line
 
 (advice-add 'server-visit-files :filter-args #'prelude-server-visit-files-parse-numbers)
 
-;; use settings from .editorconfig file when present
-(require 'editorconfig)
-(editorconfig-mode 1)
-(diminish 'editorconfig-mode)
+;; use settings from .editorconfig file when present (built into Emacs 30+)
+(use-package editorconfig
+  :ensure t
+  :diminish
+  :config
+  (editorconfig-mode 1))
 
 (provide 'prelude-editor)
 

@@ -35,6 +35,7 @@
 - Modules now `add-hook` their defaults to Prelude's hooks (`prelude-<lang>-mode-hook`, `prelude-lisp-coding-hook`, etc.) instead of `setq`-ing them, so functions you add to those hooks in `personal/preload` are no longer thrown away when the module loads.
 - Stop installing `gist` (unused), and only install `which-key` and `editorconfig` on Emacs 29, since both are built into Emacs 30+.
 - Replace the unmaintained `smartrep` package with a plain transient keymap for the `C-c .` operate-on-number bindings. They work the same way: after the first operation, the operator keys can be repeated without the prefix.
+- Install all of Prelude's packages with `use-package` and `:ensure t`, and deprecate `prelude-require-package` and `prelude-require-packages` in favour of it. `prelude-packages` now starts out empty and gets filled in with every package Prelude ensures (including ones from modules), so `prelude-update-packages` and `prelude-list-foreign-packages` keep working, and your own `use-package :ensure` forms are tracked the same way.
 
 ### Bugs fixed
 

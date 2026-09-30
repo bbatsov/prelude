@@ -18,21 +18,31 @@ Here's a real example.
 
 (require 'prelude-programming)
 
-(prelude-require-packages '(inf-ruby yari))
-
 ;; Use ruby-ts-mode when the tree-sitter grammar is available
-(when (treesit-ready-p 'ruby t)
-  (add-to-list 'major-mode-remap-alist
-               '(ruby-mode . ruby-ts-mode)))
+(prelude-treesit-remap 'ruby 'ruby-mode 'ruby-ts-mode)
 
-;; Map yari to C-h R
-(define-key 'help-command (kbd "R") 'yari)
+;; We never want to edit Rubinius bytecode
+(add-to-list 'completion-ignored-extensions ".rbc")
 
 (defun prelude-ruby-mode-defaults ()
+  ;; Don't auto-insert encoding comments
+  ;; Those are almost never needed in Ruby 2+
   (setq ruby-insert-encoding-magic-comment nil)
   (inf-ruby-minor-mode +1)
+  ;; CamelCase aware editing operations
   (subword-mode +1)
   (prelude-lsp-enable))
+
+;; Run a Ruby REPL (IRB/Pry) inside Emacs and send code to it
+(use-package inf-ruby
+  :ensure t
+  :defer t)
+
+;; Browse Ruby documentation via ri (C-h R)
+(use-package yari
+  :ensure t
+  :defer t
+  :bind (:map help-map ("R" . yari)))
 
 (add-hook 'prelude-ruby-mode-hook #'prelude-ruby-mode-defaults)
 
@@ -63,19 +73,18 @@ A typical programming language module follows this pattern:
 
 (require 'prelude-programming)
 
-(prelude-require-packages '(example-mode))
+;; Use the tree-sitter mode when its grammar is available
+(prelude-treesit-remap 'example 'example-mode 'example-ts-mode)
 
-;; Use tree-sitter mode when grammar is available
-(when (treesit-ready-p 'example t)
-  (add-to-list 'major-mode-remap-alist
-               '(example-mode . example-ts-mode)))
+(use-package example-mode
+  :ensure t
+  :defer t)
 
 (defun prelude-example-mode-defaults ()
   (subword-mode +1)
   (prelude-lsp-enable))
 
-(setq prelude-example-mode-hook
-      'prelude-example-mode-defaults)
+(add-hook 'prelude-example-mode-hook #'prelude-example-mode-defaults)
 
 (add-hook 'example-mode-hook
           (lambda ()
@@ -96,21 +105,23 @@ A typical programming language module follows this pattern:
 - **Define a `prelude-*-mode-defaults` function** with the
   mode-specific setup. This makes it easy for users to
   override.
-- **Use the `prelude-*-mode-hook` variable pattern** (setq +
-  add-hook with lambda). This lets users replace the
-  defaults function entirely via their personal config.
+- **Use the `prelude-*-mode-hook` pattern**: add the
+  defaults function to the hook with `add-hook`, and run the
+  hook from the major mode hooks. Users can then add to it,
+  or remove the defaults function, from their personal config.
 - **Enable `subword-mode`** for CamelCase-aware editing.
 - **Call `prelude-lsp-enable`** for LSP support. This
   respects the user's `prelude-lsp-client` setting
   (Eglot or lsp-mode).
-- **Add tree-sitter support** using `treesit-ready-p` with
-  the `t` argument (silent, no error if grammar missing)
-  and `major-mode-remap-alist`. Always add hooks for both
-  the legacy mode and the tree-sitter mode.
+- **Add tree-sitter support** with `prelude-treesit-remap`,
+  which switches to the tree-sitter mode when its grammar is
+  available. Always add hooks for both the legacy mode and
+  the tree-sitter mode.
 - **Use `with-eval-after-load`** to defer configuration
   until the relevant package is loaded.
-- **Install packages with `prelude-require-packages`**,
-  not `use-package` or manual `package-install` calls.
+- **Install packages with `use-package` and `:ensure t`**,
+  not manual `package-install` calls. Prelude keeps track of
+  the packages installed this way (see `prelude-packages`).
 
 ## Foundation Modules
 
