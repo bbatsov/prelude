@@ -33,6 +33,7 @@
 ;;; Code:
 (require 'cl-lib)
 (require 'package)
+(require 'use-package)
 
 ;;;; Package setup and additional utility functions
 
@@ -94,25 +95,43 @@ NAME, ARGS, STATE and NO-REFRESH are as for `use-package-ensure-elpa',
 which still handles the pinned (package . archive) form."
   (dolist (ensure args)
     (let ((package (if (eq ensure t) (use-package-as-symbol name) ensure)))
-      ;; When a `use-package' form is byte-compiled, its :ensure runs at
-      ;; compile time and NAME is a symbol with position.  If that ends up
-      ;; in `package-selected-packages', every later install fails.
+      ;; If this ever runs while a `use-package' form is being compiled,
+      ;; NAME is a symbol with position.  If that ends up in
+      ;; `package-selected-packages', every later install fails.
       (when (and package (symbolp package))
         (setq package (bare-symbol package)))
-      (if (and package (symbolp package))
-          (progn
-            (add-to-list 'prelude-packages package)
-            (unless (package-installed-p package)
-              (condition-case-unless-debug err
-                  (prelude-package-install package)
-                (error
-                 (display-warning 'prelude
-                                  (format "Failed to install %s: %s"
-                                          package (error-message-string err))
-                                  :error)))))
-        (use-package-ensure-elpa name (list ensure) state no-refresh)))))
+      (cond
+       ((null package))                 ; `:ensure nil'
+       ((symbolp package)
+        ;; Built-in packages (e.g. which-key on Emacs 30+) aren't
+        ;; tracked, so `prelude-update-packages' doesn't replace them
+        ;; with ELPA copies.
+        (unless (package-built-in-p package)
+          (add-to-list 'prelude-packages package))
+        (unless (package-installed-p package)
+          (condition-case-unless-debug err
+              (prelude-package-install package)
+            (error
+             (display-warning 'prelude
+                              (format "Failed to install %s: %s"
+                                      package (error-message-string err))
+                              :error)))))
+       ;; the pinned (package . archive) form
+       (t (use-package-ensure-elpa name (list ensure) state no-refresh))))))
 
 (setq use-package-ensure-function #'prelude-use-package-ensure)
+
+(defun prelude--use-package-ensure-at-load-time (handler &rest args)
+  "Call the `use-package' :ensure HANDLER with ARGS as if not compiling.
+When a file is byte-compiled, `use-package' ensures packages at compile
+time and leaves nothing to do at load time, so compiled forms would
+never install (or track) their packages, and conditions around them
+wouldn't be respected."
+  (let ((byte-compile-current-file nil))
+    (apply handler args)))
+
+(advice-add 'use-package-handler/:ensure :around
+            #'prelude--use-package-ensure-at-load-time)
 
 (defun prelude-require-package (package)
   "Install PACKAGE unless already installed."

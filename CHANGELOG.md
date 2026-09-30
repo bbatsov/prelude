@@ -57,6 +57,7 @@
 - Don't break `org-mode` in `prelude-literate-programming` when Jupyter isn't installed: `ob-ipython` queried Jupyter for its kernels every time an Org buffer was opened and signaled an error if it wasn't there.
 - Make `prelude-update` stop with an error (showing the `git` output) when the checkout can't be fast-forwarded, instead of reporting success, and stop it from changing the current buffer's directory.
 - Don't install LSP-client-specific packages (`lsp-dart`, `ocaml-eglot`, `eglot-fsharp`) for users of the other LSP client.
+- Keep installing the packages of `use-package :ensure` forms after Prelude gets byte-compiled (as `prelude-update` does). `use-package` ensures packages at compile time when a file is compiled, so the compiled files never installed missing packages (and installed conditional ones regardless of their condition).
 
 ## 2.1.0 (2026-03-29)
 

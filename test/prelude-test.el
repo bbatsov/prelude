@@ -203,4 +203,33 @@ Whether Prelude got recompiled is recorded in `recompiled'."
                                   (seq-take form 2))))))
         (end-of-file nil)))))
 
+(ert-deftest prelude-use-package-ensure-runs-when-compiled ()
+  "A byte-compiled `use-package' form still ensures its package at load time."
+  (require 'use-package)
+  (let* ((source (make-temp-file "prelude-ensure-test" nil ".el"
+                                 ";;; -*- lexical-binding: t; -*-\n(use-package prelude-test-pkg :ensure t :defer t)\n"))
+         (compiled (byte-compile-dest-file source))
+         (ensured nil))
+    (unwind-protect
+        (cl-letf (((symbol-function 'prelude-use-package-ensure)
+                   (lambda (name &rest _) (push (list name load-in-progress) ensured))))
+          (let ((byte-compile-warnings nil))
+            (byte-compile-file source))
+          (should-not ensured)
+          (load compiled nil t)
+          (should (equal ensured '((prelude-test-pkg t)))))
+      (delete-file source)
+      (when (file-exists-p compiled) (delete-file compiled)))))
+
+(ert-deftest prelude-use-package-ensure-skips-built-in-packages ()
+  "Built-in packages aren't tracked, so they don't get upgraded from ELPA."
+  (require 'use-package)
+  (let ((prelude-packages nil))
+    (cl-letf (((symbol-function 'package-built-in-p)
+               (lambda (pkg &rest _) (eq pkg 'builtin-pkg)))
+              ((symbol-function 'package-installed-p) (lambda (&rest _) t)))
+      (prelude-use-package-ensure 'builtin-pkg '(t) nil)
+      (prelude-use-package-ensure 'elpa-pkg '(t) nil))
+    (should (equal prelude-packages '(elpa-pkg)))))
+
 ;;; prelude-test.el ends here
