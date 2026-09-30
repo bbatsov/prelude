@@ -181,4 +181,26 @@ Whether Prelude got recompiled is recorded in `recompiled'."
       (prelude-use-package-ensure 'foo-mode '(bar) nil))
     (should (equal (sort prelude-packages #'string<) '(bar foo)))))
 
+(defun prelude-test--use-package-forms (form)
+  "Return all `use-package' forms nested in FORM."
+  (when (consp form)
+    (append (and (eq (car form) 'use-package) (list form))
+            (and (proper-list-p form)
+                 (mapcan #'prelude-test--use-package-forms form)))))
+
+(ert-deftest prelude-no-conditional-ensure ()
+  "`:if' and friends don't stop `:ensure', so they mustn't be combined."
+  (dolist (file (append (directory-files prelude-core-dir t "\\.el\\'")
+                        (directory-files prelude-modules-dir t "\\.el\\'")))
+    (with-temp-buffer
+      (insert-file-contents file)
+      (condition-case nil
+          (while t
+            (dolist (form (prelude-test--use-package-forms (read (current-buffer))))
+              (when (and (memq :ensure form)
+                         (seq-some (lambda (kw) (memq kw form)) '(:if :when :unless)))
+                (ert-fail (format "%s: %S" (file-name-nondirectory file)
+                                  (seq-take form 2))))))
+        (end-of-file nil)))))
+
 ;;; prelude-test.el ends here

@@ -53,10 +53,10 @@
 
 ;; Flutter-specific features on top of lsp-mode (outline views, DAP
 ;; debugging, hot reload, etc.)
-(use-package lsp-dart
-  :ensure t
-  :defer t
-  :if (eq prelude-lsp-client 'lsp-mode))
+(when (eq prelude-lsp-client 'lsp-mode)
+  (use-package lsp-dart
+    :ensure t
+    :defer t))
 
 (add-hook 'prelude-dart-mode-hook #'prelude-dart-mode-defaults)
 

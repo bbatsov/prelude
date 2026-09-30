@@ -56,6 +56,7 @@
 - Fix package installs failing for the rest of the session after installing a package whose own code runs `use-package` with `:ensure` at compile time (such as recent SLIME with its `slime-xterm-color` contrib). The package name was recorded with its source position, which broke every later install on Emacs 30 and 31.
 - Don't break `org-mode` in `prelude-literate-programming` when Jupyter isn't installed: `ob-ipython` queried Jupyter for its kernels every time an Org buffer was opened and signaled an error if it wasn't there.
 - Make `prelude-update` stop with an error (showing the `git` output) when the checkout can't be fast-forwarded, instead of reporting success, and stop it from changing the current buffer's directory.
+- Don't install LSP-client-specific packages (`lsp-dart`, `ocaml-eglot`, `eglot-fsharp`) for users of the other LSP client.
 
 ## 2.1.0 (2026-03-29)
 

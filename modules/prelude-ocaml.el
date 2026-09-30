@@ -72,10 +72,10 @@
 
 ;; OCaml-specific Eglot extensions (requires ocaml-lsp-server).
 ;; Only installed when Eglot is the configured LSP client.
-(use-package ocaml-eglot
-  :ensure t
-  :defer t
-  :if (eq prelude-lsp-client 'eglot))
+(when (eq prelude-lsp-client 'eglot)
+  (use-package ocaml-eglot
+    :ensure t
+    :defer t))
 
 (provide 'prelude-ocaml)
 
