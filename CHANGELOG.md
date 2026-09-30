@@ -34,6 +34,7 @@
 - Enable `lexical-binding` in all of Prelude's Emacs Lisp files (including the sample `prelude-modules.el`), which silences the missing-cookie warnings Emacs 31 prints on every startup.
 - Modules now `add-hook` their defaults to Prelude's hooks (`prelude-<lang>-mode-hook`, `prelude-lisp-coding-hook`, etc.) instead of `setq`-ing them, so functions you add to those hooks in `personal/preload` are no longer thrown away when the module loads.
 - Stop installing `gist` (unused), and only install `which-key` and `editorconfig` on Emacs 29, since both are built into Emacs 30+.
+- Replace the unmaintained `smartrep` package with a plain transient keymap for the `C-c .` operate-on-number bindings. They work the same way: after the first operation, the operator keys can be repeated without the prefix.
 
 ### Bugs fixed
 

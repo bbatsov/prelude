@@ -455,20 +455,30 @@ Does not indent if the mode is in `prelude-indent-sensitive-modes'."
 
 ;; operate-on-number
 (require 'operate-on-number)
-(require 'smartrep)
 
-(smartrep-define-key global-map "C-c ."
-  '(("+" . apply-operation-to-number-at-point)
-    ("-" . apply-operation-to-number-at-point)
-    ("*" . apply-operation-to-number-at-point)
-    ("/" . apply-operation-to-number-at-point)
-    ("\\" . apply-operation-to-number-at-point)
-    ("^" . apply-operation-to-number-at-point)
-    ("<" . apply-operation-to-number-at-point)
-    (">" . apply-operation-to-number-at-point)
-    ("#" . apply-operation-to-number-at-point)
-    ("%" . apply-operation-to-number-at-point)
-    ("'" . operate-on-number-at-point)))
+(defvar prelude-operate-on-number-map
+  (let ((map (make-sparse-keymap)))
+    (dolist (key '("+" "-" "*" "/" "\\" "^" "<" ">" "#" "%"))
+      (define-key map key #'prelude-apply-operation-to-number-at-point))
+    (define-key map "'" #'prelude-operate-on-number-at-point)
+    map)
+  "Keymap for operating on the number at point, bound to \\`C-c .'.
+After an operation its keys keep working without the prefix, until
+some other key is pressed.")
+
+(defun prelude-apply-operation-to-number-at-point ()
+  "Run `apply-operation-to-number-at-point' and keep its keys active."
+  (interactive)
+  (call-interactively #'apply-operation-to-number-at-point)
+  (set-transient-map prelude-operate-on-number-map))
+
+(defun prelude-operate-on-number-at-point ()
+  "Run `operate-on-number-at-point' and keep the operator keys active."
+  (interactive)
+  (call-interactively #'operate-on-number-at-point)
+  (set-transient-map prelude-operate-on-number-map))
+
+(global-set-key (kbd "C-c .") prelude-operate-on-number-map)
 
 (defun prelude-server-visit-files-parse-numbers (args)
   "Parse line numbers from filenames for emacsclient.

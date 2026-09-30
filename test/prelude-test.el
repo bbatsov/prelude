@@ -163,4 +163,13 @@ Whether Prelude got recompiled is recorded in `recompiled'."
       (should recompiled)
       (should (equal default-directory "/tmp/")))))
 
+(ert-deftest prelude-operate-on-number-keys-repeat ()
+  "After \\`C-c .' the operator keys keep working without the prefix."
+  (with-temp-buffer
+    (switch-to-buffer (current-buffer))
+    (insert "5")
+    (goto-char (point-min))
+    (execute-kbd-macro (kbd "C-c . + + *"))
+    (should (equal (buffer-string) "14"))))
+
 ;;; prelude-test.el ends here
