@@ -33,6 +33,8 @@
 (defvar dap-launch-configuration-providers)
 (declare-function lsp-dart-define-key "lsp-dart")
 (declare-function lsp-dart-dap-setup "lsp-dart-dap")
+(declare-function lsp-dart-show-outline "lsp-dart-outline")
+(declare-function lsp-dart-show-flutter-outline "lsp-dart-outline")
 
 (require 'prelude-programming)
 

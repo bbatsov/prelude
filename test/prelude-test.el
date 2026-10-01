@@ -207,7 +207,7 @@ Whether Prelude got recompiled is recorded in `recompiled'."
   "A byte-compiled `use-package' form still ensures its package at load time."
   (require 'use-package)
   (let* ((source (make-temp-file "prelude-ensure-test" nil ".el"
-                                 ";;; -*- lexical-binding: t; -*-\n(use-package prelude-test-pkg :ensure t :defer t)\n"))
+                                 ";;; -*- lexical-binding: t; -*-\n(use-package prelude-test-pkg :ensure t :defer t :no-require t)\n"))
          (compiled (byte-compile-dest-file source))
          (ensured nil))
     (unwind-protect
