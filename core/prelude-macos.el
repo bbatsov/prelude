@@ -37,10 +37,13 @@
 
 ;; On macOS Emacs doesn't use the shell PATH if it's not started from
 ;; the shell. Let's fix that:
+;; (Emacs started from a terminal inherits the shell's environment already.)
 (use-package exec-path-from-shell
   :ensure t
-  :config
-  (exec-path-from-shell-initialize))
+  :defer t
+  :init
+  (when (prelude-fetch-shell-environment-p)
+    (exec-path-from-shell-initialize)))
 
 ;; It's all in the Meta
 (setq ns-function-modifier 'hyper)

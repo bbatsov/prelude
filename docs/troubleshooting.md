@@ -122,6 +122,21 @@ You can always disable the improved sorting algorithm all together like this:
 (flx-ido-mode -1)
 ```
 
+## Slow startup in GUI Emacs on macOS or Linux
+
+GUI Emacs doesn't inherit the environment of your shell, so Prelude uses
+[exec-path-from-shell](https://github.com/purcell/exec-path-from-shell) to
+fetch `PATH` and friends from it at startup (Emacs started from a terminal
+inherits them already, so this is skipped there). By default that starts an
+interactive login shell, which can take a good part of a second with a heavy
+shell config. If you set `PATH` in your login files (e.g. `~/.zprofile` or
+`~/.bash_profile`), a login shell is enough, and much faster. Add this to your
+`personal/preload` config:
+
+```emacs-lisp
+(setq exec-path-from-shell-arguments '("-l"))
+```
+
 ## Windows compatibility
 
 While everything in Prelude should work fine in Windows, I test it only

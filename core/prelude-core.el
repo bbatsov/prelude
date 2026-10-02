@@ -113,6 +113,12 @@ to the active region."
     (when after-init-time
       (eval form))))
 
+(defun prelude-fetch-shell-environment-p ()
+  "Return non-nil if Emacs needs to get its environment from the shell.
+That's the case for GUI frames and daemons, which don't inherit it the
+way Emacs started from a terminal does."
+  (or (memq window-system '(mac ns x pgtk)) (daemonp)))
+
 (defun prelude-update ()
   "Update Prelude to its latest version."
   (interactive)

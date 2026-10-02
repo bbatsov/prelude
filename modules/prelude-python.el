@@ -37,7 +37,8 @@
 ;; Use python-ts-mode when the tree-sitter grammar is available
 (prelude-treesit-remap 'python 'python-mode 'python-ts-mode)
 
-(when (fboundp 'exec-path-from-shell-copy-env)
+(when (and (fboundp 'exec-path-from-shell-copy-env)
+           (prelude-fetch-shell-environment-p))
   (exec-path-from-shell-copy-env "PYTHONPATH"))
 
 (defun prelude-python-mode-defaults ()
