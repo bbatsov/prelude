@@ -30,7 +30,17 @@
 
 ;;; Code:
 
-(eval-when-compile (require 'cperl-mode))
+(defvar cperl-indent-level)
+(defvar cperl-continued-statement-offset)
+(defvar cperl-font-lock)
+(defvar cperl-electric-lbrace-space)
+(defvar cperl-electric-parens)
+(defvar cperl-electric-linefeed)
+(defvar cperl-electric-keywords)
+(defvar cperl-info-on-command-no-prompt)
+(defvar cperl-clobber-lisp-bindings)
+(defvar cperl-lazy-help-time)
+(defvar cperl-invalid-face)
 
 (require 'prelude-programming)
 

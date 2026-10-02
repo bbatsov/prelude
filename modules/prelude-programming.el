@@ -97,6 +97,7 @@
 (when (eq prelude-lsp-client 'eglot)
   (use-package flycheck-eglot
     :ensure t
+    :after eglot
     :config
     (global-flycheck-eglot-mode +1)))
 

@@ -199,8 +199,20 @@
 (require 'rect)
 (use-package crux
   :ensure t
-  :config
-  (crux-with-region-or-line kill-region))
+  :defer t
+  ;; aliases and helpers without autoloads of their own
+  :commands (crux-rename-buffer-and-file crux-swap-windows crux-start-or-switch-to))
+
+(defun prelude-kill-region-or-line (orig-fn &rest args)
+  "Call ORIG-FN on the current line when there's no active region.
+Used as advice around `kill-region', with ARGS being its arguments."
+  (interactive
+   (if mark-active
+       (list (region-beginning) (region-end))
+     (list (line-beginning-position) (line-beginning-position 2))))
+  (apply orig-fn args))
+
+(advice-add 'kill-region :around #'prelude-kill-region-or-line)
 
 ;; tramp, for sudo access
 (use-package tramp
@@ -478,7 +490,8 @@ Does not indent if the mode is in `prelude-indent-sensitive-modes'."
          ([remap mark-sexp] . easy-mark)))
 
 (use-package operate-on-number
-  :ensure t)
+  :ensure t
+  :defer t)
 
 ;; Packages that are only used through their autoloaded commands, bound
 ;; in prelude-mode.el and prelude-global-keybindings.el

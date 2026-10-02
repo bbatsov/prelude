@@ -53,3 +53,7 @@ jobs:
             --eval "(progn (require 'prelude-emacs-lisp) (require 'ielm) (with-temp-buffer (emacs-lisp-mode) (when (bound-and-true-p smartparens-mode) (error \"smartparens-mode is on\"))))"
           emacs --batch --load init.el --load test/prelude-load-test.el
           rm personal/preload/no-smartparens.el
+      - name: keep startup lazy
+        run: |
+          emacs --batch --load init.el --load sample/prelude-modules.el \
+            --eval "(let ((loaded (seq-filter #'featurep '(tramp calc eglot ert cperl-mode sh-script nxml-mode exec-path-from-shell crux operate-on-number)))) (when loaded (error \"Loaded at startup: %S\" loaded)))"

@@ -30,7 +30,11 @@
 
 ;;; Code:
 
-(require 'nxml-mode)
+(defvar nxml-child-indent)
+(defvar nxml-attribute-indent)
+(defvar nxml-auto-insert-xml-declaration-flag)
+(defvar nxml-bind-meta-tab-to-complete-flag)
+(defvar nxml-slash-auto-complete-flag)
 
 (add-to-list 'magic-mode-alist '("<\\?xml" . nxml-mode))
 

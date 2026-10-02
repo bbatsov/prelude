@@ -33,7 +33,7 @@
 (defvar ielm-map)
 
 (require 'prelude-lisp)
-(require 'crux)
+(declare-function crux-start-or-switch-to "crux")
 
 (defun prelude-recompile-elc-on-save ()
   "Recompile your elc when saving an elisp file."

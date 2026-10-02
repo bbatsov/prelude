@@ -30,8 +30,6 @@
 
 ;;; Code:
 
-(require 'sh-script)
-
 ;; Use bash-ts-mode when the tree-sitter grammar is available
 (prelude-treesit-remap 'bash 'sh-mode 'bash-ts-mode)
 

@@ -36,6 +36,7 @@
 - Stop installing `gist` (unused), and only install `which-key` and `editorconfig` on Emacs 29, since both are built into Emacs 30+.
 - Replace the unmaintained `smartrep` package with a plain transient keymap for the `C-c .` operate-on-number bindings. They work the same way: after the first operation, the operator keys can be repeated without the prefix.
 - Install all of Prelude's packages with `use-package` and `:ensure t`, and deprecate `prelude-require-package` and `prelude-require-packages` in favour of it. `prelude-packages` now starts out empty and gets filled in with every package Prelude ensures (including ones from modules), so `prelude-update-packages` and `prelude-list-foreign-packages` keep working, and your own `use-package :ensure` forms are tracked the same way.
+- Start up a lot faster (about 1.3s down to 0.4s in a terminal with the default modules): the shell environment is only fetched for GUI frames and daemons, packages are no longer initialized twice, and TRAMP, Eglot, calc, crux and the Perl, shell and XML modes are only loaded when they're actually used.
 
 ### Bugs fixed
 

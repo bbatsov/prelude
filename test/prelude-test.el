@@ -363,6 +363,18 @@ Prompts are answered with ANSWER and recorded in `prompted'."
     (should (equal (prelude-treesit--recipe 'yaml 'ignore) '(yaml "prelude-yaml-recipe")))
     (should (assq 'yaml treesit-language-source-alist))))
 
+(ert-deftest prelude-kill-region-kills-line-without-region ()
+  "With no active region, \\[kill-region] kills the current line."
+  (with-temp-buffer
+    (insert "one\ntwo\nthree\n")
+    (goto-char (point-min))
+    (forward-line 1)
+    (deactivate-mark)
+    (let ((kill-ring nil))
+      (call-interactively #'kill-region)
+      (should (equal (buffer-string) "one\nthree\n"))
+      (should (equal (car kill-ring) "two\n")))))
+
 (ert-deftest prelude-packages-activated-only-from-same-dir ()
   "Packages Emacs activated from another directory don't count."
   (let ((package--activated t)

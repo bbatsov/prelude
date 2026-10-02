@@ -182,6 +182,15 @@ See `prelude-conflicting-modules'."
      (lsp-deferred))))
 
 ;; Eglot configuration
+(defvar eglot-autoshutdown)
+(defvar eglot-events-buffer-config)
+(defvar eglot-extend-to-xref)
+(defvar eglot-mode-map)
+(declare-function eglot-code-action-organize-imports "eglot")
+(declare-function eglot-code-actions "eglot")
+(declare-function eglot-format-buffer "eglot")
+(declare-function eglot-rename "eglot")
+
 (with-eval-after-load 'eglot
   (setq eglot-autoshutdown t)
   ;; don't log every LSP event - the logging adds overhead with chatty
