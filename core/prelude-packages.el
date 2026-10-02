@@ -45,11 +45,24 @@
   (if (file-exists-p prelude-pinned-packages-file)
       (load prelude-pinned-packages-file)))
 
-;; set package-user-dir to be relative to Prelude install path
-(when prelude-override-package-user-dir
-  (setq package-user-dir (expand-file-name "elpa" prelude-dir)))
+(defun prelude--packages-activated-p (activated-dir)
+  "Return non-nil if Emacs already activated the packages in `package-user-dir'.
+Emacs activates the installed packages on its own before it loads
+init.el, from ACTIVATED-DIR (the `package-user-dir' at that point)."
+  (and (bound-and-true-p package--activated)
+       (string= (file-truename (file-name-as-directory activated-dir))
+                (file-truename (file-name-as-directory package-user-dir)))))
 
-(package-initialize)
+(let ((activated-dir package-user-dir))
+  ;; set package-user-dir to be relative to Prelude install path
+  (when prelude-override-package-user-dir
+    (setq package-user-dir (expand-file-name "elpa" prelude-dir)))
+  ;; Only activate the packages if Emacs hasn't (e.g. when
+  ;; `package-enable-at-startup' is off, or Prelude isn't installed in
+  ;; `user-emacs-directory').  The archive contents are read when
+  ;; something gets installed.
+  (unless (prelude--packages-activated-p activated-dir)
+    (package-initialize)))
 
 ;; use-package is built-in since Emacs 29
 (setq use-package-verbose t)

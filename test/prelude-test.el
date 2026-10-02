@@ -363,4 +363,14 @@ Prompts are answered with ANSWER and recorded in `prompted'."
     (should (equal (prelude-treesit--recipe 'yaml 'ignore) '(yaml "prelude-yaml-recipe")))
     (should (assq 'yaml treesit-language-source-alist))))
 
+(ert-deftest prelude-packages-activated-only-from-same-dir ()
+  "Packages Emacs activated from another directory don't count."
+  (let ((package--activated t)
+        (package-user-dir "/nonexistent/prelude/elpa"))
+    (should (prelude--packages-activated-p "/nonexistent/prelude/elpa/"))
+    (should-not (prelude--packages-activated-p "/nonexistent/.emacs.d/elpa")))
+  (let ((package--activated nil)
+        (package-user-dir "/nonexistent/prelude/elpa"))
+    (should-not (prelude--packages-activated-p "/nonexistent/prelude/elpa"))))
+
 ;;; prelude-test.el ends here

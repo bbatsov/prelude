@@ -144,6 +144,7 @@ With a prefix ARG updates all installed packages."
   (when (y-or-n-p "Do you want to update Prelude's packages? ")
     (if arg
         (package-upgrade-all)
+      (package-refresh-contents)
       (dolist (package prelude-packages)
         (when (package-installed-p package)
           (package-upgrade package))))
