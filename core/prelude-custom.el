@@ -165,6 +165,17 @@ Set this in `personal/preload', since it takes effect when the core loads."
   :type 'boolean
   :group 'prelude)
 
+(defcustom prelude-treesit-auto-install 'ask
+  "Whether to install missing tree-sitter grammars when they're needed.
+When you open a file whose mode has a tree-sitter variant and the
+grammar for its language isn't installed, Prelude can install it:
+`ask' asks first, `always' installs it right away and nil never does.
+Without the grammar the classic major mode is used."
+  :type '(choice (const :tag "Ask first" ask)
+                 (const :tag "Always" always)
+                 (const :tag "Never" nil))
+  :group 'prelude)
+
 (defcustom prelude-lsp-client 'eglot
   "The LSP client to use in programming modes.
 Eglot is built into Emacs 29+ and requires no extra packages.

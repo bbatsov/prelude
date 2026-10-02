@@ -115,8 +115,10 @@ A typical programming language module follows this pattern:
   (Eglot or lsp-mode).
 - **Add tree-sitter support** with `prelude-treesit-remap`,
   which switches to the tree-sitter mode when its grammar is
-  available. Always add hooks for both the legacy mode and
-  the tree-sitter mode.
+  available (and offers to install it otherwise). When there's
+  no classic mode to remap, map file names directly with
+  `prelude-treesit-auto-mode`. Always add hooks for both the
+  legacy mode and the tree-sitter mode.
 - **Use `with-eval-after-load`** to defer configuration
   until the relevant package is loaded.
 - **Install packages with `use-package` and `:ensure t`**,

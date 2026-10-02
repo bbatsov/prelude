@@ -56,6 +56,9 @@
   (prelude-lsp-enable))
 
 ;; Built-in tree-sitter mode for Rust (requires rust grammar)
+;; (rust-mode is only used if it's installed, e.g. from older Preludes)
+(prelude-treesit-auto-mode "\\.rs\\'" 'rust 'rust-ts-mode 'rust-mode)
+
 (use-package rust-ts-mode
   :ensure t
   :hook (rust-ts-mode . (lambda () (run-hooks 'prelude-rust-mode-hook))))

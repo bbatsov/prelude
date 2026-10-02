@@ -243,6 +243,24 @@ your `personal/preload` config (it has to be set before Prelude's core is loaded
 (setq prelude-smartparens nil)
 ```
 
+### Tree-sitter grammars
+
+Prelude uses tree-sitter based major modes (e.g. `python-ts-mode`) when the
+grammar for the language is installed. When it isn't, Prelude asks whether to
+install it the first time you open a file in that language (this requires a C
+compiler), and falls back to the classic major mode if you decline. You can
+change that in `personal/preload`:
+
+``` emacs-lisp
+;; install missing grammars without asking
+(setq prelude-treesit-auto-install 'always)
+;; never install grammars, just use the classic modes
+(setq prelude-treesit-auto-install nil)
+```
+
+`M-x prelude-treesit-install-grammars` installs the grammars for all of your
+enabled modules at once, which is handy before going offline.
+
 ### Configuration per file or directory
 
 Some of these settings (those that don't need to be pre-loaded) can also be set

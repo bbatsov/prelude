@@ -232,4 +232,135 @@ Whether Prelude got recompiled is recorded in `recompiled'."
       (prelude-use-package-ensure 'elpa-pkg '(t) nil))
     (should (equal prelude-packages '(elpa-pkg)))))
 
+(defmacro prelude-test-with-treesit (available &rest body)
+  "Run BODY with fake tree-sitter modes, where AVAILABLE says if the grammar is.
+`prelude-test-ts-mode' and `prelude-test-classic-mode' record themselves
+in `used', grammar installs and prompts are recorded in `installed' and
+`prompted', and installing a grammar makes it available.  BODY runs in
+a buffer visiting a (nonexistent) file."
+  (declare (indent 1))
+  `(let ((used nil) (installed nil) (prompted nil) (grammar ,available)
+         (prelude-treesit--declined nil)
+         (prelude-treesit--languages nil)
+         (noninteractive nil))
+     (cl-letf (((symbol-function 'prelude-test-ts-mode) (lambda () (push 'ts used)))
+               ((symbol-function 'prelude-test-classic-mode) (lambda () (push 'classic used)))
+               ((symbol-function 'treesit-available-p) (lambda () t))
+               ((symbol-function 'treesit-language-available-p) (lambda (&rest _) grammar))
+               ((symbol-function 'prelude-treesit--recipe) (lambda (&rest _) t))
+               ((symbol-function 'treesit-install-language-grammar)
+                (lambda (lang &rest _) (push lang installed) (setq grammar t))))
+       (with-temp-buffer
+         (setq buffer-file-name "/nonexistent/prelude-test.x")
+         (unwind-protect
+             (progn ,@body)
+           (setq buffer-file-name nil))))))
+
+(defmacro prelude-test--treesit-mode (answer)
+  "Run the Prelude mode function for the fake test language.
+Prompts are answered with ANSWER and recorded in `prompted'."
+  `(cl-letf (((symbol-function 'y-or-n-p)
+              (lambda (&rest _) (push t prompted) ,answer)))
+     (funcall (prelude-treesit-mode-function
+               'prelude-test 'prelude-test-ts-mode 'prelude-test-classic-mode))))
+
+(ert-deftest prelude-treesit-uses-ts-mode-when-grammar-is-available ()
+  (prelude-test-with-treesit t
+    (let ((prelude-treesit-auto-install 'ask))
+      (prelude-test--treesit-mode nil)
+      (should (equal used '(ts)))
+      (should-not prompted))))
+
+(ert-deftest prelude-treesit-installs-missing-grammar-when-accepted ()
+  (prelude-test-with-treesit nil
+    (let ((prelude-treesit-auto-install 'ask))
+      (prelude-test--treesit-mode t)
+      (should (equal installed '(prelude-test)))
+      (should (equal used '(ts))))))
+
+(ert-deftest prelude-treesit-falls-back-and-stops-asking-when-declined ()
+  (prelude-test-with-treesit nil
+    (let ((prelude-treesit-auto-install 'ask))
+      (prelude-test--treesit-mode nil)
+      (prelude-test--treesit-mode nil)
+      (should (equal used '(classic classic)))
+      (should (= (length prompted) 1))
+      (should-not installed))))
+
+(ert-deftest prelude-treesit-respects-auto-install-setting ()
+  (prelude-test-with-treesit nil
+    (let ((prelude-treesit-auto-install nil))
+      (prelude-test--treesit-mode t)
+      (should (equal used '(classic)))
+      (should-not prompted))
+    (let ((prelude-treesit-auto-install 'always))
+      (prelude-test--treesit-mode nil)
+      (should-not prompted)
+      (should (equal installed '(prelude-test))))))
+
+(ert-deftest prelude-treesit-never-prompts-in-batch ()
+  (prelude-test-with-treesit nil
+    (let ((prelude-treesit-auto-install 'ask)
+          (noninteractive t))
+      (prelude-test--treesit-mode t)
+      (should (equal used '(classic)))
+      (should-not prompted))))
+
+(ert-deftest prelude-treesit-falls-back-without-ts-mode ()
+  "A tree-sitter mode this Emacs doesn't have (e.g. on Emacs 29) isn't offered."
+  (prelude-test-with-treesit nil
+    (let ((prelude-treesit-auto-install 'always))
+      (cl-letf (((symbol-function 'prelude-test-ts-mode) nil))
+        (prelude-test--treesit-mode t))
+      (should (equal used '(classic)))
+      (should-not installed))))
+
+(ert-deftest prelude-treesit-installs-fallback-package-on-demand ()
+  (prelude-test-with-treesit nil
+    (let ((prelude-treesit-auto-install nil)
+          (packages nil))
+      (cl-letf (((symbol-function 'prelude-test-classic-mode) nil)
+                ((symbol-function 'prelude-package-install)
+                 (lambda (pkg)
+                   (push pkg packages)
+                   (fset 'prelude-test-classic-mode (lambda () (push 'classic used))))))
+        (funcall (prelude-treesit-mode-function
+                  'prelude-test 'prelude-test-ts-mode
+                  'prelude-test-classic-mode 'prelude-test-pkg)))
+      (should (equal packages '(prelude-test-pkg)))
+      (should (equal used '(classic)))
+      (should-not prompted))))
+
+(ert-deftest prelude-treesit-only-installs-when-visiting-a-file ()
+  "No prompt when a mode function runs for a buffer without a file."
+  (prelude-test-with-treesit nil
+    (let ((prelude-treesit-auto-install 'ask)
+          (buffer-file-name nil))
+      (prelude-test--treesit-mode t)
+      (should (equal used '(classic)))
+      (should-not prompted)
+      ;; that's not a decline, so visiting a file still asks
+      (setq buffer-file-name "/nonexistent/prelude-test.x")
+      (prelude-test--treesit-mode t)
+      (should (equal prompted '(t))))))
+
+(ert-deftest prelude-treesit-undefined-fallback-uses-fundamental-mode ()
+  "A fallback mode that isn't installed (e.g. rust-mode) isn't called."
+  (prelude-test-with-treesit nil
+    (let ((prelude-treesit-auto-install nil))
+      (funcall (prelude-treesit-mode-function
+                'prelude-test 'prelude-test-ts-mode 'prelude-test-undefined-mode))
+      (should (eq major-mode 'fundamental-mode))
+      (should-not used)
+      (should-not prompted))))
+
+(ert-deftest prelude-treesit-recipe-defers-to-emacs ()
+  "Prelude's recipes don't override the ones Emacs already has."
+  (let ((treesit-language-source-alist '((json "emacs-pinned-recipe")))
+        (prelude-treesit-language-sources '((json "prelude-recipe")
+                                            (yaml "prelude-yaml-recipe"))))
+    (should (equal (prelude-treesit--recipe 'json 'ignore) '(json "emacs-pinned-recipe")))
+    (should (equal (prelude-treesit--recipe 'yaml 'ignore) '(yaml "prelude-yaml-recipe")))
+    (should (assq 'yaml treesit-language-source-alist))))
+
 ;;; prelude-test.el ends here

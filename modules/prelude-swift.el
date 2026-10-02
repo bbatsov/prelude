@@ -52,9 +52,11 @@
 (add-hook 'prelude-swift-mode-hook #'prelude-swift-mode-defaults)
 
 ;; Tree-sitter based major mode for Swift (requires the swift grammar)
+(prelude-treesit-auto-mode "\\.swift\\'" 'swift 'swift-ts-mode)
+
 (use-package swift-ts-mode
   :ensure t
-  :mode "\\.swift\\'"
+  :defer t
   :hook (swift-ts-mode . (lambda () (run-hooks 'prelude-swift-mode-hook))))
 
 (provide 'prelude-swift)

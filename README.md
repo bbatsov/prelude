@@ -176,17 +176,18 @@ Prelude 2.0 takes full advantage of.
 
 ## Tree-sitter support
 
-For built-in modes that ship both classic and tree-sitter variants
-(e.g., `python-mode` / `python-ts-mode`), Prelude automatically
-selects the tree-sitter version when a grammar is available and falls
-back to the classic mode when it isn't. Some modules use tree-sitter
-modes unconditionally (e.g., `prelude-ocaml` uses `neocaml` which is
-tree-sitter-only), though such modes typically auto-install their
-grammars.
+For languages with both classic and tree-sitter modes (e.g.,
+`python-mode` / `python-ts-mode`), Prelude uses the tree-sitter mode
+when its grammar is available. When it isn't, Prelude offers to
+install the grammar the first time you open such a file, and uses the
+classic mode if you say no. Set `prelude-treesit-auto-install` to
+`always` to skip the question, or to `nil` to never install grammars.
+`M-x prelude-treesit-install-grammars` installs the grammars for all
+of your enabled modules in one go. Some modules use tree-sitter modes
+that install their own grammars (e.g., `prelude-ocaml` uses
+`neocaml`).
 
-To install tree-sitter grammars, use
-`M-x treesit-install-language-grammar`. See the
-[Emacs manual][ts-grammar] for details.
+See the [Emacs manual][ts-grammar] for more on tree-sitter grammars.
 
 [ts-grammar]: https://www.gnu.org/software/emacs/manual/html_node/emacs/Language-Grammar.html
 
