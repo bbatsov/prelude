@@ -13,6 +13,7 @@
 - [#1469](https://github.com/bbatsov/prelude/pull/1469): Add `prelude-kotlin` module: Kotlin support via [kotlin-mode](https://github.com/Emacs-Kotlin-Mode-Maintainers/kotlin-mode) and LSP.
 - [#1469](https://github.com/bbatsov/prelude/pull/1469): Add `prelude-nix` module: Nix support via [nix-mode](https://github.com/NixOS/nix-mode) and LSP.
 - [#1469](https://github.com/bbatsov/prelude/pull/1469): Add `prelude-php` module: PHP support via [php-mode](https://github.com/emacs-php/php-mode) and LSP.
+- [#1469](https://github.com/bbatsov/prelude/pull/1469): Add `prelude-r` module: R support via [ESS](https://ess.r-project.org/) and LSP.
 - Add `prelude-swift` module: Swift support via the tree-sitter powered `swift-ts-mode` and `sourcekit-lsp` (registered with Eglot, since Eglot has no built-in entry for Swift). Starts an LSP session through the usual `prelude-lsp-enable` abstraction.
 - Add `prelude-mistty` module: a terminal based on [MisTTY](https://github.com/szermatt/mistty), a pure-elisp shell/comint hybrid on top of `term.el` (no native module to compile). Rebinds Prelude's terminal key `C-c t` to `mistty`.
 - Add a `prelude-spell-checker` option to choose between `flyspell` (the default) and [jinx](https://github.com/minad/jinx), a faster libenchant-based spell checker that only checks the visible part of the buffer. Jinx is installed on demand and enabled as a single global mode; set `(setq prelude-spell-checker 'jinx)` in your personal config to opt in (requires libenchant and a C compiler).

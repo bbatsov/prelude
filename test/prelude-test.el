@@ -480,4 +480,8 @@ installed."
   (require 'prelude-php)
   (should (equal (prelude-test--visit "prelude.php") '(php-mode t))))
 
+(ert-deftest prelude-r-sets-up-r-files ()
+  (require 'prelude-r)
+  (should (equal (prelude-test--visit "prelude.R") '(ess-r-mode t))))
+
 ;;; prelude-test.el ends here
