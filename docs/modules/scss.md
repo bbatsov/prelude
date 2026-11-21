@@ -6,19 +6,23 @@
 
 ## SCSS Mode
 
-This module bundles [scss-mode](https://github.com/antonj/scss-mode) for editing
-SCSS (Sassy CSS) files.
-
-It inherits all the CSS module defaults, including:
+Emacs comes with a `scss-mode` for editing SCSS (Sassy CSS) files, and
+that's what the module uses. It's a child of `css-mode`, so it gets
+all the CSS module's defaults:
 
 - **Rainbow mode** for colorizing color strings
 - **2-space indentation**
-- The `prelude-prog-mode-hook` features
+- A language server, when there's one installed
+  (`vscode-css-language-server` handles SCSS as well)
 
-The automatic compile-on-save feature of `scss-mode` is
-**disabled** by default, as it can be disruptive. If you want
-to enable it, add to your personal config:
+If you need something set up differently for SCSS, add a function to
+`prelude-scss-mode-hook`.
 
-```emacs-lisp
-(setq scss-compile-at-save t)
-```
+!!! Note
+
+    Prelude used to install the `scss-mode` package from MELPA. It
+    hasn't been updated in years and no longer loads in a modern
+    Emacs, which left SCSS files in `fundamental-mode`. The module
+    makes sure that the built-in mode is used even if you still have
+    the package installed, but you might as well delete it
+    (`M-x package-delete`).
