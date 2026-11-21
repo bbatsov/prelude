@@ -74,6 +74,7 @@ many more packages available via optional modules.
 The following programming languages have enhanced support in Prelude:
 
 - [C/C++](modules/c.md)
+- [C#](modules/csharp.md)
 - [Clojure](modules/clojure.md)
 - [Common Lisp](modules/common_lisp.md)
 - [CSS](modules/css.md)
