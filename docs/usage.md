@@ -175,6 +175,17 @@ an easy way to navigate and switch projects. Take a look at
 its extensive documentation to get a feel for everything you
 can do with Projectile.
 
+Here's what jumping to a file in the current project looks like.
+<kbd>C-c p f</kbd> lists the project's files, a few letters are enough to
+narrow them down, and <kbd>C-c p t</kbd> takes you from a test to the
+code it tests (and back):
+
+<!-- markdownlint-disable MD013 -->
+
+![Finding a file in a project with C-c p f, then switching from the test to its implementation with C-c p t](images/project-find-file.gif)
+
+<!-- markdownlint-enable MD013 -->
+
 Prelude adds an extra keymap prefix `s-p` (`s` stands for
 `Super`) in addition to the standard one `C-c p`. By default
 on Windows keyboard `Super` is mapped to the `Windows` key
@@ -188,6 +199,20 @@ If you ever forget any of Projectile's keybindings just do a:
 Alternatively you can just press <kbd>s-p</kbd> and wait for
 a moment for `which-key` to kick in and show you the
 available keybindings.
+
+#### Magit
+
+[Magit](https://magit.vc) is how you work with Git in Prelude.
+<kbd>C-x g</kbd> opens the status buffer of the current repository.
+From there <kbd>TAB</kbd> expands a file to show its changes,
+<kbd>s</kbd> stages what's under the cursor and <kbd>c c</kbd> starts
+a commit. Press <kbd>?</kbd> to see everything else you can do.
+
+<!-- markdownlint-disable MD013 -->
+
+![The Magit status buffer under a source file, with the diff of an unstaged change expanded](images/magit-status.png)
+
+<!-- markdownlint-enable MD013 -->
 
 #### Helm
 

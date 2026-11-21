@@ -44,6 +44,12 @@ To turn that off:
 (setq prelude-format-on-save nil)
 ```
 
+<!-- markdownlint-disable MD013 -->
+
+![A badly formatted line of Go gets cleaned up the moment the file is saved with C-x C-s](../images/go-format-on-save.gif)
+
+<!-- markdownlint-enable MD013 -->
+
 Prelude leaves the formatting to [Apheleia](apheleia.md) when that
 module is enabled (it prefers `goimports` as well).
 
