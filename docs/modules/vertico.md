@@ -6,6 +6,16 @@
 completion UI for Emacs. This module sets up Vertico together with complementary
 packages for a modern and lightweight completion experience.
 
+Every command that asks you to pick something gets the same vertical
+list, narrowed down as you type. Here it is for the files of a
+project (<kbd>C-c p f</kbd>):
+
+<!-- markdownlint-disable MD013 -->
+
+![The files of a project listed vertically in the minibuffer, with their permissions, size and age next to them](../images/project-find-file.png)
+
+<!-- markdownlint-enable MD013 -->
+
 !!! Note
 
     This module is an alternative to the [Helm](helm.md), [Ido](ido.md),

@@ -33,6 +33,25 @@ Prelude configures eglot to shut down language servers
 automatically when the last project buffer is closed and
 extends xref navigation across the whole project.
 
+Here's a Go buffer with `gopls` attached. The candidates in the
+completion popup come from the language server, and so does the
+signature in the echo area:
+
+<!-- markdownlint-disable MD013 -->
+
+![Completion candidates for the methods of a Go struct, with their signatures](../images/lsp-go-completion.png)
+
+<!-- markdownlint-enable MD013 -->
+
+Problems are underlined as you type. Move the cursor to one of them
+to see what the language server (or the compiler) has to say:
+
+<!-- markdownlint-disable MD013 -->
+
+![An unused variable underlined in a Go buffer, with the error message in the echo area](../images/lsp-go-diagnostic.png)
+
+<!-- markdownlint-enable MD013 -->
+
 ### Key Bindings
 
 Standard Emacs bindings that work with eglot:

@@ -7,6 +7,12 @@ library to the mix. The final product offers an easy to use Emacs
 configuration for Emacs newcomers and lots of additional power for
 Emacs power users.
 
+<!-- markdownlint-disable MD013 -->
+
+![The welcome screen Prelude shows on startup, with links to the personal config, recent files, projects and a tip of the day](welcome-screen.png)
+
+<!-- markdownlint-enable MD013 -->
+
 !!! Important
 
     Prelude is compatible **ONLY with GNU Emacs 29.1+**. In general you're
