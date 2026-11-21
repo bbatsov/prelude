@@ -45,8 +45,7 @@
   ;; indent according to the syntax of the statement
   (sqlind-minor-mode +1)
   ;; Plenty of people edit SQL without a language server around.
-  (when (executable-find "sqls")
-    (prelude-lsp-enable)))
+  (prelude-lsp-enable 'quiet))
 
 (defun prelude-sql-interactive-mode-defaults ()
   "Default hook for SQL consoles."

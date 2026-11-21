@@ -22,6 +22,7 @@
 (declare-function prelude-ocaml-mode-defaults "prelude-ocaml")
 (declare-function prelude-racket-enable-input-mode "prelude-racket")
 (declare-function prelude-rust-mode-defaults "prelude-rust")
+(declare-function prelude-sh-mode-defaults "prelude-shell")
 
 (ert-deftest prelude-ocaml-mode-defaults-without-ocaml-eglot ()
   "The OCaml mode hook shouldn't fail when ocaml-eglot isn't installed."
@@ -449,11 +450,11 @@ Prompts are answered with ANSWER and recorded in `prompted'."
   (should (equal (assoc-default "build.gradle.kts" prelude-auto-install-alist #'string-match-p)
                  '(kotlin-mode kotlin-mode))))
 
-(defun prelude-test--lsp-enable (programs &optional installed)
+(defun prelude-test--lsp-enable (programs &optional installed quiet)
   "Call `prelude-lsp-enable' in a buffer of a made up `prelude-test-mode'.
 PROGRAMS is the value of `eglot-server-programs' and INSTALLED the list
-of programs that are installed.  Return a list of whether Eglot got
-started and what was reported."
+of programs that are installed.  QUIET is passed on.  Return a list of
+whether Eglot got started and what was reported."
   (require 'eglot)
   (let ((eglot-server-programs programs)
         (prelude-lsp-client 'eglot)
@@ -469,7 +470,7 @@ started and what was reported."
         (setq major-mode 'prelude-test-mode
               buffer-file-name "/nonexistent/prelude.test")
         (unwind-protect
-            (prelude-lsp-enable)
+            (prelude-lsp-enable quiet)
           (setq buffer-file-name nil))))
     (list started reported)))
 
@@ -510,6 +511,33 @@ started and what was reported."
       (should (equal (prelude-test--lsp-enable programs '("other-server"))
                      '(nil nil))))))
 
+(ert-deftest prelude-lsp-enable-can-keep-quiet-about-a-missing-server ()
+  (let ((prelude-lsp--reported-modes nil)
+        (programs '((prelude-test-mode "server"))))
+    (should (equal (prelude-test--lsp-enable programs nil 'quiet) '(nil nil)))
+    (should-not prelude-lsp--reported-modes)
+    (should (equal (prelude-test--lsp-enable programs '("server") 'quiet) '(t nil)))))
+
+(ert-deftest prelude-lsp-enable-keeps-lsp-mode-quiet-as-well ()
+  "lsp-mode doesn't offer to install a server in buffers that asked for quiet."
+  (defvar lsp-enable-suggest-server-download)
+  (defvar lsp-warn-no-matched-clients)
+  (let ((prelude-lsp-client 'lsp-mode)
+        (lsp-enable-suggest-server-download t)
+        (lsp-warn-no-matched-clients t))
+    ;; no need to load (and install) lsp-mode for this
+    (cl-letf (((symbol-value 'features) (cons 'prelude-lsp-mode features))
+              ((symbol-function 'lsp-deferred) #'ignore))
+      (with-temp-buffer
+        (prelude-lsp-enable)
+        (should lsp-enable-suggest-server-download)
+        (should lsp-warn-no-matched-clients))
+      (with-temp-buffer
+        (prelude-lsp-enable 'quiet)
+        (should-not lsp-enable-suggest-server-download)
+        (should-not lsp-warn-no-matched-clients))
+      (should lsp-warn-no-matched-clients))))
+
 (ert-deftest prelude-lsp-enable-leaves-remote-files-to-eglot ()
   (let ((prelude-lsp--reported-modes nil)
         (default-directory "/ssh:prelude-test-host:/tmp/"))
@@ -525,11 +553,13 @@ started and what was reported."
 
 (defun prelude-test--visit (file)
   "Return the major mode used for FILE, and whether LSP got started.
+That's t, or `quiet' if a missing language server isn't to be reported.
 The file isn't created, and missing tree-sitter grammars aren't
 installed."
   (let ((started nil)
         (prelude-treesit-auto-install nil))
-    (cl-letf (((symbol-function 'prelude-lsp-enable) (lambda () (setq started t))))
+    (cl-letf (((symbol-function 'prelude-lsp-enable)
+               (lambda (&optional quiet) (setq started (if quiet 'quiet t)))))
       (with-temp-buffer
         (setq buffer-file-name (expand-file-name file "/nonexistent"))
         (unwind-protect
@@ -567,16 +597,49 @@ installed."
 
 (ert-deftest prelude-sql-sets-up-sql-files ()
   (require 'prelude-sql)
-  (let* ((sqls nil)
-         (executable-find (symbol-function 'executable-find)))
-    (cl-letf (((symbol-function 'executable-find)
-               (lambda (command &rest args)
-                 (if (equal command "sqls")
-                     sqls
-                   (apply executable-find command args)))))
-      (should (equal (prelude-test--visit "prelude.sql") '(sql-mode nil)))
-      (setq sqls "/usr/bin/sqls")
-      (should (equal (prelude-test--visit "prelude.sql") '(sql-mode t))))))
+  (should (equal (prelude-test--visit "prelude.sql") '(sql-mode quiet))))
+
+(ert-deftest prelude-config-languages-start-lsp-quietly ()
+  "Shell scripts, CSS, YAML and JSON get LSP only if a server is around."
+  (dolist (module '(prelude-shell prelude-css prelude-yaml prelude-js))
+    (require module))
+  (pcase-dolist (`(,file . ,modes) '(("prelude.sh" sh-mode bash-ts-mode)
+                                     ("prelude.css" css-mode css-ts-mode)
+                                     ("prelude.yml" yaml-mode yaml-ts-mode)
+                                     ("prelude.json" js-json-mode json-ts-mode)))
+    (pcase-let ((`(,mode ,lsp) (prelude-test--visit file)))
+      (should (memq mode modes))
+      (should (eq lsp 'quiet))))
+  (should (equal (cdr (prelude-test--visit "prelude.js")) '(t))))
+
+(ert-deftest prelude-json-modes-get-the-same-setup ()
+  "Both JSON modes get the JSON defaults, and only those."
+  (require 'prelude-js)
+  (let ((calls nil))
+    (cl-letf (((symbol-function 'prelude-lsp-enable)
+               (lambda (&optional quiet) (push (if quiet 'quiet t) calls))))
+      (with-temp-buffer
+        (js-json-mode)
+        (should subword-mode)
+        (should (equal calls '(quiet))))
+      (setq calls nil)
+      ;; the grammar might be missing, but the hook is there regardless
+      (with-temp-buffer
+        (run-hooks 'json-ts-mode-hook)
+        (should subword-mode)
+        (should (equal calls '(quiet)))))))
+
+(ert-deftest prelude-shell-starts-lsp-for-sh-and-bash-only ()
+  (require 'prelude-shell)
+  (defvar sh-shell)
+  (pcase-dolist (`(,shell . ,expected) '((bash . (quiet)) (sh . (quiet)) (zsh . nil) (fish . nil)))
+    (let ((calls nil))
+      (cl-letf (((symbol-function 'prelude-lsp-enable)
+                 (lambda (&optional quiet) (push (if quiet 'quiet t) calls))))
+        (with-temp-buffer
+          (setq-local sh-shell shell)
+          (prelude-sh-mode-defaults)
+          (should (equal calls expected)))))))
 
 (ert-deftest prelude-prog-mode-hook-runs-once ()
   "Modules don't run the hook themselves in modes derived from `prog-mode'."

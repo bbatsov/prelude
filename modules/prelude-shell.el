@@ -30,6 +30,10 @@
 
 ;;; Code:
 
+(require 'prelude-programming)
+
+(defvar sh-shell)
+
 ;; Use bash-ts-mode when the tree-sitter grammar is available
 (prelude-treesit-remap 'bash 'sh-mode 'bash-ts-mode)
 
@@ -45,7 +49,11 @@
   ;; Auto-detect zsh for prezto files
   (when (and buffer-file-name
              (member (file-name-nondirectory buffer-file-name) prelude-prezto-files))
-    (sh-set-shell "zsh")))
+    (sh-set-shell "zsh"))
+  ;; the language server only understands sh and bash
+  (when (or (derived-mode-p 'bash-ts-mode)
+            (memq sh-shell '(sh bash)))
+    (prelude-lsp-enable 'quiet)))
 
 (add-hook 'prelude-sh-mode-hook #'prelude-sh-mode-defaults)
 

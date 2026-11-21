@@ -43,7 +43,8 @@
   :defer t)
 
 (defun prelude-css-mode-defaults ()
-  (rainbow-mode +1))
+  (rainbow-mode +1)
+  (prelude-lsp-enable 'quiet))
 
 (add-hook 'prelude-css-mode-hook #'prelude-css-mode-defaults)
 

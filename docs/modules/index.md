@@ -112,7 +112,9 @@ A typical programming language module follows this pattern:
 - **Enable `subword-mode`** for CamelCase-aware editing.
 - **Call `prelude-lsp-enable`** for LSP support. This
   respects the user's `prelude-lsp-client` setting
-  (Eglot or lsp-mode).
+  (Eglot or lsp-mode). Pass it a non-nil argument in modules
+  for configuration files and the like, where a missing
+  language server isn't worth a message.
 - **Add tree-sitter support** with `prelude-treesit-remap`,
   which switches to the tree-sitter mode when its grammar is
   available (and offers to install it otherwise). When there's
@@ -199,9 +201,10 @@ depending on `prelude-lsp-client`. A few things follow from that:
 - When the server for a language isn't installed, Prelude doesn't
   start Eglot. Left to its own devices Eglot would complain about the
   missing server for every file you open, while Prelude mentions it
-  once for a major mode and you carry on without LSP. The SQL module
-  doesn't even do that, as people open `.sql` files all the time
-  without having any use for a language server there.
+  once for a major mode and you carry on without LSP. The modules for
+  the kinds of files that people open all the time without having any
+  use for a language server (CSS, JSON, shell scripts, SQL and YAML)
+  don't even do that.
 - The Lisp modules (Clojure, Common Lisp, Emacs Lisp, Racket, Scheme)
   don't start a language server at all. They are built around a REPL
   connection (CIDER, SLIME, Geiser, etc.), which does the same job and

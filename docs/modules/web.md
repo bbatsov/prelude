@@ -14,7 +14,9 @@ embedded code (PHP, JSP, ERB, etc.).
 - `.phtml`, `.tpl`, `.tpl.php`
 - `.jsp`, `.aspx`, `.ascx`
 - `.erb`
-- `.hbs` (Handlebars)
+- `.hbs` (Handlebars), `.mustache`
+- `.njk`, `.jinja`, `.jinja2`
+- `.svelte`, `.vue`
 - `.blade.php` (Laravel Blade)
 - PHP files under `views/`, `html/`, `theme/`, or `templates/` directories
 

@@ -174,6 +174,8 @@ See `prelude-conflicting-modules'."
                  prelude-modules-file))))))
 
 (defvar eglot-server-programs)
+(defvar lsp-enable-suggest-server-download)
+(defvar lsp-warn-no-matched-clients)
 
 (defvar prelude-lsp--reported-modes nil
   "Major modes we've already reported a missing language server for.")
@@ -231,10 +233,11 @@ installed, or if there's no way to tell without starting it."
       (error (and (eq (car err) 'error)
                   (error-message-string err))))))
 
-(defun prelude-lsp--eglot-ensure ()
+(defun prelude-lsp--eglot-ensure (&optional quiet)
   "Start Eglot in the current buffer, unless its server isn't installed.
 Eglot would complain about that for every file you open, while we
-mention it just once for a major mode."
+mention it just once for a major mode, and not at all if QUIET is
+non-nil."
   (when buffer-file-name
     ;; looking for programs on a remote host is slow, so that's left to
     ;; Eglot, which does it only once you start working with the buffer
@@ -242,19 +245,27 @@ mention it just once for a major mode."
                      (prelude-lsp--eglot-missing-server))))
       (cond
        ((not missing) (eglot-ensure))
-       ((not (memq major-mode prelude-lsp--reported-modes))
+       ((not (or quiet (memq major-mode prelude-lsp--reported-modes)))
         (push major-mode prelude-lsp--reported-modes)
         (message "[Prelude] No language server for `%s' buffers: %s"
                  major-mode missing))))))
 
-(defun prelude-lsp-enable ()
+(defun prelude-lsp-enable (&optional quiet)
   "Enable the LSP client configured via `prelude-lsp-client'.
 With Eglot nothing happens when the language server of the buffer isn't
-installed, apart from a message the first time that's noticed."
+installed, apart from a message the first time that's noticed.
+
+If QUIET is non-nil a missing language server isn't mentioned at all.
+That's for the kinds of files that people edit all the time without
+having any use for a language server (configuration files, shell
+scripts, etc)."
   (pcase prelude-lsp-client
-    ('eglot (prelude-lsp--eglot-ensure))
+    ('eglot (prelude-lsp--eglot-ensure quiet))
     ('lsp-mode
      (require 'prelude-lsp-mode)
+     (when quiet
+       (setq-local lsp-warn-no-matched-clients nil
+                   lsp-enable-suggest-server-download nil))
      (lsp-deferred))))
 
 (defun prelude-format-on-save-p ()

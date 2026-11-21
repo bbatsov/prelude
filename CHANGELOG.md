@@ -33,6 +33,7 @@
 
 ### Changes
 
+- [#1472](https://github.com/bbatsov/prelude/pull/1472): Start a language server for shell scripts, CSS, YAML and JSON when there's one installed (`prelude-shell`, `prelude-css`, `prelude-yaml` and `prelude-js`). A missing server isn't mentioned for those, and for SQL, as `prelude-lsp-enable` now takes a `quiet` argument.
 - [#1471](https://github.com/bbatsov/prelude/pull/1471): Don't start Eglot in buffers whose language server isn't installed. Prelude mentions the missing server once for a major mode, instead of Eglot warning about it for every file you open.
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): `prelude-format-on-save` now controls the format on save of the Go and Rust modules, which also leave the formatting to Apheleia when `prelude-apheleia` is enabled (it now prefers `goimports` to `gofmt` as well).
 - Add an `early-init.el` that tunes startup: it raises the GC threshold while Emacs loads (restoring a modest value once startup is over), disables the tool bar via frame parameters so the initial frame is never drawn with one, sets `frame-inhibit-implied-resize`, native-compiles packages at install time (`package-native-compile`), and sets a sane `LANG` for GUI Emacs on macOS (which otherwise starts in the `C` locale and breaks spell-checker dictionaries and subprocess sorting).
@@ -74,6 +75,7 @@
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): Fix opening a Rust file turning off "make scripts executable on save" for every buffer (the function on `after-save-hook` is now `prelude-make-script-executable`, which knows that `#![...]` isn't a shebang).
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): Format Rust buffers on save again (with the language server), as `rust-format-on-save` has no effect in `rust-ts-mode`.
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): Fix `prelude-go`'s key bindings, format on save and `super-save` exemption not working in `go-ts-mode`.
+- [#1472](https://github.com/bbatsov/prelude/pull/1472): Give JSON buffers the same setup in both JSON modes, with a `prelude-json-mode-hook` of their own (`json-ts-mode` buffers got none of it, and neither did `js-json-mode` ones on newer Emacsen).
 - [#1472](https://github.com/bbatsov/prelude/pull/1472): Don't run `prelude-prog-mode-hook` twice in CSS and `web-mode` buffers.
 
 ## 2.1.0 (2026-03-29)

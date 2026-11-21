@@ -1,10 +1,18 @@
 # Prelude CSS
 
+!!! Note
+
+    This module builds on top of the shared [Programming](programming.md)
+    module and the [LSP](lsp.md) module.
+
 ## CSS Mode
 
-Emacs comes with CSS editing support through the built-in
-`css-mode`. This module
-adds a couple of enhancements on top of it:
+The module uses the tree-sitter powered `css-ts-mode` that comes with
+Emacs. Prelude offers to install the `css` grammar the first time you
+open a CSS file (see `prelude-treesit-auto-install`). Without the
+grammar you get the classic `css-mode`.
+
+The module adds a couple of enhancements on top of it:
 
 - **Indent offset**: 2 spaces (`css-indent-offset` set to `2`)
 - **Rainbow mode**:
@@ -12,6 +20,14 @@ adds a couple of enhancements on top of it:
   is enabled, which colorizes color strings (like `#ff0000` or
   `rgb(255, 0, 0)`) with the color they represent
 
-The module also runs the `prelude-prog-mode-hook`, so you get the same baseline
-programming features (whitespace visualization, smartparens, etc.) as in other
-programming modes.
+## LSP support
+
+A language server is started when there's one installed, and nothing
+is said about it when there isn't. Eglot looks for
+`vscode-css-language-server`:
+
+```sh
+npm install -g vscode-langservers-extracted
+```
+
+See the [LSP](lsp.md) module for the available LSP key bindings.
