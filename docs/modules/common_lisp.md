@@ -6,7 +6,8 @@
 
 ## lisp-mode
 
-Not much to say here, as `lisp-mode` is configured in the "Lisp Base" module.
+`lisp-mode` gets the defaults of the "Lisp Base" module. `.cl` files
+and SBCL's `.sbclrc` are opened in it as well.
 
 ## SLIME
 
@@ -26,7 +27,7 @@ If you prefer [Sly](https://github.com/joaotavora/sly), a modernized fork
 of SLIME with features like stickers (non-disruptive value tracing),
 multiple REPLs, flex completion out of the box, and a more polished
 inspector, you can install it in your personal config instead. Note that
-SLIME and Sly conflict with each other -- use one or the other, not both.
+SLIME and Sly conflict with each other - use one or the other, not both.
 
 To switch, drop something like this into a file under
 `~/.emacs.d/personal/` (and remove `prelude-common-lisp` from your

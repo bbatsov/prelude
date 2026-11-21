@@ -10,9 +10,16 @@ Here are some features it provides:
 - auto-pairing of delimiters like parentheses (via `smartparens`)
 - visual cues for whitespace (via `whitespace-mode`)
 - highlighting code annotations (via `hl-todo`)
-- linter integration (via `flycheck`)
+- linter integration (via `flycheck`), which also shows the
+  diagnostics of Eglot (via `flycheck-eglot`)
 - showing current definition name in the modeline
   (via `which-func`)
+- nudging you towards the Emacs way of doing things (via `guru-mode`,
+  which only warns)
+- auto-filling of comments only, when `auto-fill-mode` is on
+
+The module also sets up `makefile-mode`: tabs are used for indentation
+there (as Makefiles require them) and aren't highlighted as a problem.
 
 Most of this boils down to enabling a bunch of minor modes in
 `prog-mode-hook`.
@@ -32,9 +39,9 @@ Emacs key prefixes:
 
 On macOS, Super-based alternatives are also available:
 
-- `s-s` -- splice
-- `s-<right>` / `s-<left>` -- slurp / barf
-- `s-<up>` / `s-<down>` -- splice-killing
+- `s-s` - splice
+- `s-<right>` / `s-<left>` - slurp / barf
+- `s-<up>` / `s-<down>` - splice-killing
 
 ### Using paredit instead of smartparens
 

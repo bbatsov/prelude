@@ -22,7 +22,6 @@ package for Emacs.
 Prelude sets the following AUCTeX defaults:
 
 - **Auto-save** and **auto-parse** of TeX files are enabled
-- **PDF mode** is the default output format
 - **Multi-file support**: `TeX-master` is set to `nil`, so
   AUCTeX will ask for the master file
 - **Auto-fill mode** is enabled for line wrapping

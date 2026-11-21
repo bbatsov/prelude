@@ -21,8 +21,7 @@ gptel supports many providers, including:
 | <kbd>C-c q</kbd> | `gptel-menu` | Transient menu (entry to gptel) |
 
 Inside a gptel chat buffer, <kbd>C-c RET</kbd> sends the current
-prompt and <kbd>C-c C-c</kbd> sends the region (these are gptel's
-own defaults).
+prompt, or the region when it's active (that's gptel's own default).
 
 ## Configuring a backend
 

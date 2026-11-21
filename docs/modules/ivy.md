@@ -8,8 +8,8 @@ its companion packages Swiper and Counsel.
 
 !!! Note
 
-    This module is an alternative to the [Helm](helm.md), [Ido](ido.md),
-    [Vertico](vertico.md) modules - you should
+    This module is an alternative to the [Helm](helm.md), [Ido](ido.md)
+    and [Vertico](vertico.md) modules - you should
     only enable one completion framework.
 
 ## Packages

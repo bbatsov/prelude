@@ -14,9 +14,9 @@ for editing Scala source files, with LSP integration enabled by default.
 The module enables:
 
 - **subword-mode** for CamelCase aware editing
-- **lsp-mode** for IDE-like features via
-  [Metals](https://scalameta.org/metals/) (the Scala language
-  server)
+- **LSP** (Eglot or lsp-mode, see `prelude-lsp-client`) for
+  IDE-like features via [Metals](https://scalameta.org/metals/)
+  (the Scala language server)
 
 ## Prerequisites
 

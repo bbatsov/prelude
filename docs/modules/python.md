@@ -2,48 +2,59 @@
 
 !!! Note
 
-    This module builds on top of the shared [Programming](programming.md) module.
+    This module builds on top of the shared [Programming](programming.md)
+    module and the [LSP](lsp.md) module.
+
+## Package Prerequisites
+
+You'll need Python and a language server. Eglot knows how to start
+quite a few of them, e.g.
+[basedpyright](https://docs.basedpyright.com/),
+[Pyright](https://github.com/microsoft/pyright) and
+[python-lsp-server](https://github.com/python-lsp/python-lsp-server)
+(`pylsp`), and uses the first one it finds. lsp-mode supports the same
+servers.
 
 ## Python Mode
 
-Emacs comes with Python programming support through the built-in
-`python-mode`. Whenever you are editing Python code run `C-h m` to
-look at the Python mode key bindings. Alternatively look at the
-menu bar entries under Python. To toggle the menu bar press `F12`.
+The module uses the tree-sitter powered `python-ts-mode` that comes
+with Emacs. Prelude offers to install the `python` grammar the first
+time you open a Python file (see `prelude-treesit-auto-install`).
+Without the grammar you get the classic `python-mode`.
 
-## Anaconda Mode
+A few things are set up on top of that:
 
-Prelude bundles the powerful
-[anaconda-mode](https://github.com/pythonic-emacs/anaconda-mode),
-which provides code navigation, documentation lookup and completion for Python.
+- `subword-mode` is enabled, so the editing commands understand
+  `CamelCase`
+- `imenu` shows a flat list of definitions (`Class.method`) instead of
+  a tree
+- `PYTHONPATH` is copied from your shell when Emacs wasn't started
+  from a terminal (and so didn't inherit the shell's environment)
 
-Anaconda has integration with popular modes like `company` and `eldoc`.
+Code completion, navigation and documentation come from the language
+server. Prelude used to bundle `anaconda-mode` for those, but that's no
+longer the case.
+
+## Key Bindings
+
+Whenever you are editing Python code run <kbd>C-h m</kbd> to look at
+the Python mode key bindings. The ones you'll use the most are
+<kbd>C-c C-p</kbd> (start a Python shell), <kbd>C-c C-c</kbd> (send the
+buffer to it) and <kbd>C-c C-r</kbd> (send the region).
+
+See the [LSP](lsp.md) module for the available LSP key bindings.
 
 ## Syntax checking
 
 Prelude ships with [Flycheck](https://github.com/flycheck/flycheck),
-an on the fly syntax checker. Flycheck has support for two Python
-syntax checkers, [Pylint](http://www.pylint.org/) and
-[Flake8](http://flake8.readthedocs.org/en/latest/). In
-order to have Flycheck support on the fly syntax checking for
-Python you need to have either of these installed and accessible to
-Emacs. In order to manually choose a checker run `C-c ! s`.
+an on the fly syntax checker. It shows the diagnostics of the language
+server, and can also run tools like
+[Ruff](https://docs.astral.sh/ruff/),
+[Flake8](https://flake8.pycqa.org/) and [Pylint](https://www.pylint.org/)
+when they are installed. Use <kbd>C-c ! s</kbd> to pick a checker
+manually.
 
-## Automatic insertion of file encoding comments
+## Formatting
 
-You can have Prelude auto-detect the encoding of a source buffer and
-insert the appropriate `# coding:` comments.  If you wish to enable
-this, add the following to your configuration:
-
-```emacs-lisp
-(setq prelude-python-mode-set-encoding-automatically t)
-```
-
-!!! Note
-
-    Previously `prelude-python` had this feature enabled
-    by default (up to Prelude 1.1), but it is only
-    necessary on Python 2, because Python 3 uses utf-8
-    as the default file encoding. In 2020 Python 2 became
-    deprecated, so that functionality became mostly
-    obsolete.
+The [Apheleia](apheleia.md) module formats Python code on save (with
+Black, unless you configure another formatter).

@@ -2,7 +2,8 @@
 
 !!! Note
 
-    This module builds on top of the shared [Programming](programming.md) module.
+    This module builds on top of the shared [Programming](programming.md)
+    module and the [LSP](lsp.md) module.
 
 ## Packages
 
@@ -16,20 +17,18 @@ doesn't pull in any third-party packages:
 
 Code intelligence is provided by an LSP server (Eglot by default):
 
-- Code completion (via company-mode)
-- Syntax checking (via Flymake or Flycheck)
+- Code completion
+- Syntax checking (via Flycheck)
 - Eldoc integration for inline type information
 - Navigation, refactoring, and documentation lookup
 
 ## Prerequisites
 
-The tree-sitter modes need the TypeScript grammars installed. You can grab
-them with:
-
-```emacs-lisp
-(treesit-install-language-grammar 'typescript)
-(treesit-install-language-grammar 'tsx)
-```
+The tree-sitter modes need the `typescript` and `tsx` grammars. Prelude
+offers to install them the first time you open a file that needs them
+(see `prelude-treesit-auto-install`). Emacs has no classic mode for
+TypeScript, so without the grammars you get `typescript-mode` if you
+have that package installed, and `fundamental-mode` otherwise.
 
 For code intelligence you need [Node.js](https://nodejs.org/) and a language
 server. The default is
