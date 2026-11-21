@@ -4,6 +4,10 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+  # Prelude installs the latest versions of its packages, so things can
+  # break without a single commit here.
+  schedule:
+    - cron: "0 5 * * 1"
 jobs:
   load-test:
     runs-on: ubuntu-latest
@@ -41,6 +45,21 @@ jobs:
       - name: byte-compile with warnings as errors
         if: matrix.emacs_version == '31.1'
         run: emacs --batch --load init.el --load test/prelude-compile-test.el
+      - name: load everything with lsp-mode as the LSP client
+        run: |
+          echo "(setq prelude-lsp-client 'lsp-mode)" > personal/preload/lsp-mode.el
+          emacs --batch --load init.el --load test/prelude-load-test.el
+          emacs --batch --load init.el --load test/prelude-test.el -f ert-run-tests-batch-and-exit
+      - name: switch back to Eglot
+        if: always()
+        run: rm -f personal/preload/lsp-mode.el
+      # These are left out of the load test, as they don't mix with the
+      # modules it loads (or with each other).
+      - name: load the modules that have to be loaded on their own
+        run: |
+          for module in prelude-ido prelude-ivy prelude-helm-everywhere prelude-evil prelude-key-chord prelude-erc; do
+            emacs --batch --load init.el --eval "(require '$module)"
+          done
       - name: load personal early-init once, before core
         run: |
           printf '%s\n' "(defvar prelude-test-early-init-loads nil)" "(push (featurep 'prelude-core) prelude-test-early-init-loads)" > personal/early-init.el
