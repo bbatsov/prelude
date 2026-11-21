@@ -97,6 +97,11 @@
     :ensure t
     :after eglot
     :config
+    ;; flycheck-eglot calls `eglot-server-capable', which the Eglot of
+    ;; Emacs 29 only has under its old, internal name.  Without it the
+    ;; hook that runs when a language server connects fails.
+    (unless (fboundp 'eglot-server-capable)
+      (defalias 'eglot-server-capable 'eglot--server-capable))
     (global-flycheck-eglot-mode +1)))
 
 ;; Makefiles require tabs for indentation
