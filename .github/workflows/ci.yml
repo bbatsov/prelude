@@ -76,3 +76,9 @@ jobs:
         run: |
           emacs --batch --load init.el --load sample/prelude-modules.el \
             --eval "(let ((loaded (seq-filter #'featurep '(tramp calc eglot ert cperl-mode sh-script nxml-mode exec-path-from-shell crux operate-on-number)))) (when loaded (error \"Loaded at startup: %S\" loaded)))"
+      # A tree-sitter mode only works with the versions of its grammar
+      # it was written for, and those differ between Emacs releases.
+      # This goes last, as the grammars it installs would change what
+      # the other steps test.
+      - name: check the tree-sitter grammars
+        run: emacs --batch --load init.el --load test/prelude-grammar-test.el

@@ -49,28 +49,38 @@
     (cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.23.4")
     (css "https://github.com/tree-sitter/tree-sitter-css" "v0.23.1")
     (elixir "https://github.com/elixir-lang/tree-sitter-elixir" "v0.3.3")
-    (go "https://github.com/tree-sitter/tree-sitter-go" "v0.23.4")
+    (go "https://github.com/tree-sitter/tree-sitter-go"
+        ,(if (< emacs-major-version 31) "v0.20.0" "v0.23.4"))
     (gomod "https://github.com/camdencheek/tree-sitter-go-mod" "v1.1.0")
     (heex "https://github.com/phoenixframework/tree-sitter-heex" "v0.7.0")
     (java "https://github.com/tree-sitter/tree-sitter-java" "v0.23.5")
-    (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.23.1")
+    (javascript "https://github.com/tree-sitter/tree-sitter-javascript"
+                ,(cond ((< emacs-major-version 30) "v0.19.0")
+                       ((< emacs-major-version 31) "v0.20.1")
+                       (t "v0.23.1")))
     (json "https://github.com/tree-sitter/tree-sitter-json" "v0.24.8")
     (python "https://github.com/tree-sitter/tree-sitter-python" "v0.23.6")
     (ruby "https://github.com/tree-sitter/tree-sitter-ruby" "v0.23.1")
     (rust "https://github.com/tree-sitter/tree-sitter-rust" "v0.23.2")
-    (swift "https://github.com/alex-pinkus/tree-sitter-swift" "with-generated-files")
-    (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "tsx/src")
-    (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "typescript/src")
-    (yaml "https://github.com/ikatyang/tree-sitter-yaml" "v0.5.0"))
+    ;; the last release swift-ts-mode can work with
+    (swift "https://github.com/alex-pinkus/tree-sitter-swift" "0.7.1-with-generated-files")
+    (tsx "https://github.com/tree-sitter/tree-sitter-typescript"
+         ,(if (< emacs-major-version 30) "v0.20.3" "v0.23.2") "tsx/src")
+    (typescript "https://github.com/tree-sitter/tree-sitter-typescript"
+                ,(if (< emacs-major-version 30) "v0.20.3" "v0.23.2") "typescript/src")
+    (yaml "https://github.com/tree-sitter-grammars/tree-sitter-yaml" "v0.7.0"))
   "Grammar recipes for the languages Prelude's modules use.
 The format is the same as for `treesit-language-source-alist'.  A recipe
 from here is only used when that variable has none for the language:
 Emacs 31 ships recipes for the grammars of its own tree-sitter modes,
 pinned to versions its tree-sitter library can load.  The versions here
-are the releases closest to those (and the grammars the tree-sitter
-modes of older Emacsen were written against), as automatically
-installing whatever is the latest version of a grammar can easily
-produce one that doesn't work.")
+are the releases closest to those, or the newest ones the tree-sitter
+modes of older Emacsen can work with, which is why some of them depend
+on the Emacs version.  Automatically installing whatever is the latest
+version of a grammar can easily produce one that doesn't work.
+
+test/prelude-grammar-test.el checks all of them, and CI runs it on
+every supported Emacs.")
 
 (defvar prelude-treesit-companion-grammars
   '((javascript jsdoc))

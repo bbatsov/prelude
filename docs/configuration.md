@@ -258,6 +258,13 @@ change that in `personal/preload`:
 (setq prelude-treesit-auto-install nil)
 ```
 
+Prelude installs the version of a grammar that the tree-sitter mode of
+your Emacs was written for, which isn't always the latest one. If the
+highlighting of some language looks broken (e.g. after you've upgraded
+Emacs, or because the grammar was installed by an older Prelude), delete
+its file from the `tree-sitter` folder of your Emacs directory and open
+a file of that language again.
+
 `M-x prelude-treesit-install-grammars` installs the grammars for all of your
 enabled modules at once, which is handy before going offline.
 
