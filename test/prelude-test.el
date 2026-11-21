@@ -12,6 +12,7 @@
 (require 'ert)
 (require 'cl-lib)
 
+(declare-function prelude-java-mode-defaults "prelude-java")
 (declare-function prelude-ocaml-mode-defaults "prelude-ocaml")
 (declare-function prelude-racket-enable-input-mode "prelude-racket")
 
@@ -384,6 +385,55 @@ Prompts are answered with ANSWER and recorded in `prompted'."
   (let ((package--activated nil)
         (package-user-dir "/nonexistent/prelude/elpa"))
     (should-not (prelude--packages-activated-p "/nonexistent/prelude/elpa"))))
+
+(ert-deftest prelude-java-starts-eglot-java-only-when-visiting-a-file ()
+  "The language server isn't installed and started for non-file buffers."
+  (require 'prelude-java)
+  (let ((prelude-lsp-client 'eglot)
+        (started nil))
+    (cl-letf (((symbol-function 'eglot-java-mode)
+               (lambda (&rest _) (push buffer-file-name started))))
+      (with-temp-buffer
+        (prelude-java-mode-defaults)
+        (should-not started)
+        (setq buffer-file-name "/nonexistent/Prelude.java")
+        (unwind-protect
+            (prelude-java-mode-defaults)
+          (setq buffer-file-name nil))
+        (should (equal started '("/nonexistent/Prelude.java")))))))
+
+(ert-deftest prelude-java-mode-defaults-without-eglot-java ()
+  "The Java mode hook shouldn't fail when eglot-java isn't installed."
+  (require 'prelude-java)
+  (let ((prelude-lsp-client 'eglot))
+    (cl-letf (((symbol-function 'eglot-java-mode) nil))
+      (with-temp-buffer
+        (setq buffer-file-name "/nonexistent/Prelude.java")
+        (unwind-protect
+            (prelude-java-mode-defaults)
+          (setq buffer-file-name nil))))))
+
+(defvar eglot-java-mode-map)
+
+(ert-deftest prelude-java-binds-test-and-run-keys-for-the-lsp-client ()
+  "The same keys run tests and main classes with both LSP clients."
+  (require 'prelude-java)
+  (when (eq prelude-lsp-client 'eglot)
+    (require 'eglot-java)
+    (should (eq (lookup-key eglot-java-mode-map (kbd "C-c C-t")) 'eglot-java-run-test))
+    (should (eq (lookup-key eglot-java-mode-map (kbd "C-c C-r")) 'eglot-java-run-main)))
+  (let ((prelude-lsp-client 'lsp-mode))
+    (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore))
+      (with-temp-buffer
+        (prelude-java-mode-defaults)
+        (should (eq (local-key-binding (kbd "C-c C-t")) 'dap-java-run-test-method))
+        (should (eq (local-key-binding (kbd "C-c C-r")) 'dap-java-debug))))))
+
+(ert-deftest prelude-java-uses-tree-sitter-mode ()
+  "`java-mode' is remapped, and Prelude knows where to get the grammar."
+  (require 'prelude-java)
+  (should (assq 'java-mode major-mode-remap-alist))
+  (should (assq 'java prelude-treesit-language-sources)))
 
 (ert-deftest prelude-auto-install-covers-gradle-build-files ()
   "Both flavours of Gradle build files get a major mode on demand."

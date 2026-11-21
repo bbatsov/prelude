@@ -93,3 +93,4 @@ language server installed on your system. Common examples:
 - **Scala**: `metals`
 - **Python**: `pyright` or `pylsp`
 - **Dart**: Dart SDK includes its analysis server
+- **Java**: installed automatically by the [Java](java.md) module
