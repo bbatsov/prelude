@@ -196,9 +196,11 @@ depending on `prelude-lsp-client`. A few things follow from that:
   gets installed is decided when the module is loaded. That's why
   `prelude-lsp-client` has to be set in `personal/preload/` - by the
   time your regular personal config is loaded it's too late.
-- When the server for a language isn't installed, Eglot warns you about
-  it and you carry on without LSP. The SQL module is the only one that
-  checks for the server first, as people open `.sql` files all the time
+- When the server for a language isn't installed, Prelude doesn't
+  start Eglot. Left to its own devices Eglot would complain about the
+  missing server for every file you open, while Prelude mentions it
+  once for a major mode and you carry on without LSP. The SQL module
+  doesn't even do that, as people open `.sql` files all the time
   without having any use for a language server there.
 - The Lisp modules (Clojure, Common Lisp, Emacs Lisp, Racket, Scheme)
   don't start a language server at all. They are built around a REPL

@@ -86,7 +86,16 @@ All lsp-mode key bindings use the <kbd>C-c C-l</kbd> prefix:
 ## Installing Language Servers
 
 Regardless of which client you use, you need the appropriate
-language server installed on your system. Common examples:
+language server installed on your system. When it's missing Prelude
+doesn't start Eglot at all, and tells you so the first time you open a
+file of that kind:
+
+```text
+[Prelude] No language server for ‘zig-mode’ buffers: ‘zls’ isn't installed
+```
+
+Once the server is installed, run `M-x eglot` (or reopen the file).
+Common examples:
 
 - **Go**: `gopls` (`go install golang.org/x/tools/gopls@latest`)
 - **Rust**: `rust-analyzer`
