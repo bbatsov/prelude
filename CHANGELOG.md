@@ -74,6 +74,7 @@
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): Fix opening a Rust file turning off "make scripts executable on save" for every buffer (the function on `after-save-hook` is now `prelude-make-script-executable`, which knows that `#![...]` isn't a shebang).
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): Format Rust buffers on save again (with the language server), as `rust-format-on-save` has no effect in `rust-ts-mode`.
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): Fix `prelude-go`'s key bindings, format on save and `super-save` exemption not working in `go-ts-mode`.
+- [#1472](https://github.com/bbatsov/prelude/pull/1472): Don't run `prelude-prog-mode-hook` twice in CSS and `web-mode` buffers.
 
 ## 2.1.0 (2026-03-29)
 

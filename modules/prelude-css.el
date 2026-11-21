@@ -30,6 +30,8 @@
 
 ;;; Code:
 
+(require 'prelude-programming)
+
 ;; Use css-ts-mode when the tree-sitter grammar is available
 (prelude-treesit-remap 'css 'css-mode 'css-ts-mode)
 
@@ -41,8 +43,7 @@
   :defer t)
 
 (defun prelude-css-mode-defaults ()
-  (rainbow-mode +1)
-  (run-hooks 'prelude-prog-mode-hook))
+  (rainbow-mode +1))
 
 (add-hook 'prelude-css-mode-hook #'prelude-css-mode-defaults)
 
