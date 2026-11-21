@@ -37,7 +37,8 @@
 (defun prelude-yaml-mode-defaults ()
   (whitespace-mode +1)
   (subword-mode +1)
-  (add-hook 'before-save-hook 'prelude-cleanup-maybe nil t))
+  (add-hook 'before-save-hook 'prelude-cleanup-maybe nil t)
+  (prelude-lsp-enable 'quiet))
 
 (add-hook 'prelude-yaml-mode-hook #'prelude-yaml-mode-defaults)
 

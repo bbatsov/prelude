@@ -36,8 +36,8 @@ The module adds a couple of things on top:
 
 ## LSP support
 
-Unlike the other modules, this one doesn't say a word when the
-language server isn't installed. Plenty of people edit SQL without
+A language server is started when there's one installed, and nothing
+is said about it when there isn't. Plenty of people edit SQL without
 one. The server is [sqls](https://github.com/sqls-server/sqls):
 
 ```sh

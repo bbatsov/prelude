@@ -41,10 +41,22 @@
   (subword-mode +1)
   (prelude-lsp-enable))
 
-(add-hook 'prelude-js-mode-hook #'prelude-js-mode-defaults)
+(defun prelude-json-mode-defaults ()
+  (subword-mode +1)
+  ;; JSON is everywhere, a language server for it isn't
+  (prelude-lsp-enable 'quiet))
 
-(add-hook 'js-mode-hook (lambda () (run-hooks 'prelude-js-mode-hook)))
+(add-hook 'prelude-js-mode-hook #'prelude-js-mode-defaults)
+(add-hook 'prelude-json-mode-hook #'prelude-json-mode-defaults)
+
+;; `js-json-mode' is a child of `js-mode' in Emacs 29, but not in newer
+;; versions, so JSON buffers are kept out of the JavaScript hook
+(add-hook 'js-mode-hook (lambda ()
+                          (unless (derived-mode-p 'js-json-mode)
+                            (run-hooks 'prelude-js-mode-hook))))
 (add-hook 'js-ts-mode-hook (lambda () (run-hooks 'prelude-js-mode-hook)))
+(add-hook 'js-json-mode-hook (lambda () (run-hooks 'prelude-json-mode-hook)))
+(add-hook 'json-ts-mode-hook (lambda () (run-hooks 'prelude-json-mode-hook)))
 
 (provide 'prelude-js)
 
