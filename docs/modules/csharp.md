@@ -26,6 +26,13 @@ tree-sitter powered `csharp-ts-mode`. Prelude offers to install the
 `prelude-treesit-auto-install`). Without the grammar you get the classic
 `csharp-mode`.
 
+The version of the grammar depends on your Emacs: `csharp-ts-mode` in
+Emacs 29 was written for a much older grammar than the one in Emacs 30,
+and each of them loses most of its highlighting with the other's
+grammar. If you upgrade from Emacs 29 to 30, delete the old grammar
+(`libtree-sitter-c-sharp` in the `tree-sitter` folder of your Emacs
+directory) and let Prelude install it again.
+
 `subword-mode` is enabled, so the editing commands understand
 `CamelCase`.
 

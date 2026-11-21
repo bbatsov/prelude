@@ -125,6 +125,95 @@ A typical programming language module follows this pattern:
   not manual `package-install` calls. Prelude keeps track of
   the packages installed this way (see `prelude-packages`).
 
+## Design Notes
+
+Most modules are tiny, but a few of the choices behind them aren't
+obvious from the code.
+
+### Which major mode a module uses
+
+Modules prefer the tree-sitter mode that comes with Emacs, as long as
+it needs a single grammar that Prelude can install for you. When the
+grammar is missing (and you don't want it installed) you get the
+classic mode instead.
+
+<!-- markdownlint-disable MD013 -->
+
+| Approach | Modules |
+| -------- | ------- |
+| Built-in tree-sitter mode, classic mode as the fallback | C/C++, C#, CSS, Go, Java, JavaScript (and JSON), Python, Ruby, Shell |
+| Tree-sitter mode only, as Emacs has no classic mode for the language | Rust, Swift, TypeScript, OCaml |
+| Tree-sitter mode, with a package installed on demand as the fallback | Elixir, YAML |
+| Classic mode | everything else |
+
+<!-- markdownlint-enable MD013 -->
+
+A few modules stick with the classic mode even though a tree-sitter
+mode exists:
+
+- **Clojure** - `clojure-ts-mode` needs Emacs 30 and CIDER still relies
+  on `clojure-mode` here and there.
+- **Kotlin** - `kotlin-ts-mode` needs Emacs 30 and works only with the
+  unreleased version of the Kotlin grammar.
+- **PHP** - `php-ts-mode` needs Emacs 30 and half a dozen grammars.
+
+The pages of those modules show how to opt into the tree-sitter mode.
+
+Go is a bit special: `go-ts-mode` does the editing, but `go-mode` is
+still installed, as that's where `gofmt` and `godoc` live.
+
+### Tree-sitter grammars
+
+Grammars are installed the first time you open a file that needs one,
+not at startup, and by default Prelude asks before it does that (see
+`prelude-treesit-auto-install`). Building a grammar takes a C compiler
+and a moment of your time, so it's not something to do for languages
+you might never touch.
+
+Prelude pins the version of every grammar it installs
+(`prelude-treesit-language-sources`). Grammars change their node names
+from time to time, and a tree-sitter mode written against an older
+grammar loses most of its highlighting when that happens, so the
+latest version is rarely the one you want. For the same reason the pin
+can differ between Emacs versions: `csharp-ts-mode` in Emacs 29 needs a
+much older `c-sharp` grammar than the one in Emacs 30.
+
+Emacs 31 knows where to get the grammars of its own modes. Prelude's
+recipes are used only when Emacs has none.
+
+### LSP
+
+Modules call `prelude-lsp-enable`, which starts Eglot or lsp-mode
+depending on `prelude-lsp-client`. A few things follow from that:
+
+- Prelude doesn't install language servers. That's a job for your
+  system's package manager (or the language's own). The exceptions are
+  languages where the server isn't a simple executable and needs a
+  helper package to install and start it: Java (`eglot-java` or
+  `lsp-java`), Julia (`eglot-jl` or `lsp-julia`) and F#
+  (`eglot-fsharp`).
+- Those helper packages are specific to an LSP client, and which one
+  gets installed is decided when the module is loaded. That's why
+  `prelude-lsp-client` has to be set in `personal/preload/` - by the
+  time your regular personal config is loaded it's too late.
+- When the server for a language isn't installed, Eglot warns you about
+  it and you carry on without LSP. The SQL module is the only one that
+  checks for the server first, as people open `.sql` files all the time
+  without having any use for a language server there.
+- The Lisp modules (Clojure, Common Lisp, Emacs Lisp, Racket, Scheme)
+  don't start a language server at all. They are built around a REPL
+  connection (CIDER, SLIME, Geiser, etc.), which does the same job and
+  then some.
+
+### cc-mode and its children
+
+The [C/C++](c.md) module configures `c-mode-common-hook`, which runs for
+every mode built on top of `cc-mode`, not just for C and C++. The
+classic `java-mode` and `csharp-mode` are such modes, and so is
+`php-mode`, so they also get the C module's indentation settings
+when it's enabled. The tree-sitter modes have nothing to do with
+`cc-mode` and aren't affected.
+
 ## Foundation Modules
 
 These modules provide shared functionality used by other modules:

@@ -27,6 +27,22 @@ included.
 `subword-mode` is enabled, so the editing commands understand
 `CamelCase`.
 
+There's a tree-sitter powered
+[kotlin-ts-mode](https://gitlab.com/bricka/emacs-kotlin-ts-mode) as
+well. The module doesn't use it, because it needs Emacs 30 and its
+highlighting works only with the unreleased version of the Kotlin
+grammar, so there's no version of the grammar that Prelude could pin.
+It's easy to opt in if that doesn't bother you:
+
+```emacs-lisp
+(use-package kotlin-ts-mode
+  :ensure t
+  :init
+  (add-to-list 'major-mode-remap-alist '(kotlin-mode . kotlin-ts-mode))
+  :hook (kotlin-ts-mode . (lambda ()
+                            (run-hooks 'prelude-kotlin-mode-hook))))
+```
+
 ## Key Bindings
 
 <!-- markdownlint-disable MD013 -->

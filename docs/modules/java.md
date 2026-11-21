@@ -27,6 +27,10 @@ grammar you get the classic `java-mode`.
 `subword-mode` is enabled, so the editing commands understand
 `CamelCase`.
 
+The classic `java-mode` is built on top of `cc-mode`, so it also gets
+the indentation settings of the [C/C++](c.md) module when that's
+enabled. `java-ts-mode` isn't affected by them.
+
 ## LSP support
 
 Code completion, navigation, refactoring and diagnostics all come from
@@ -34,9 +38,10 @@ JDT LS. How it's wired up depends on `prelude-lsp-client`.
 
 ### Eglot
 
-With Eglot (the default) the module uses
-[eglot-java](https://github.com/yveszoundi/eglot-java), which takes care
-of a few things Eglot doesn't do on its own:
+Eglot can start JDT LS by itself when there's a `jdtls` on your `PATH`,
+but that's about it. With Eglot (the default) the module uses
+[eglot-java](https://github.com/yveszoundi/eglot-java) instead, which
+takes care of a few things Eglot doesn't do on its own:
 
 - it installs JDT LS (in `eglot-java-server-install-dir`) and starts it
 - <kbd>M-.</kbd> works for the classes of the JDK and your
