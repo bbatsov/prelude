@@ -835,4 +835,80 @@ to load and would leave them in `fundamental-mode'."
     (should (memq 'prelude-make-script-executable after-save))
     (should (equal (default-value 'after-save-hook) after-save))))
 
+;;; The module listings
+
+(defun prelude-test--file-string (file)
+  "Return the contents of FILE, which is relative to `prelude-dir'."
+  (with-temp-buffer
+    (insert-file-contents (expand-file-name file prelude-dir))
+    (buffer-string)))
+
+(defun prelude-test--matches (regexp string)
+  "Return what the first group of REGEXP matched in STRING, every time."
+  (let ((matches nil)
+        (start 0))
+    (while (string-match regexp string start)
+      (push (match-string 1 string) matches)
+      (setq start (match-end 0)))
+    (nreverse matches)))
+
+(defun prelude-test--modules ()
+  "Return the names of all modules, without the \"prelude-\" prefix."
+  (mapcar (lambda (file) (string-remove-prefix "prelude-" (file-name-base file)))
+          (directory-files prelude-modules-dir nil "\\`prelude-.*\\.el\\'")))
+
+(defun prelude-test--module-pages ()
+  "Return the names of the module pages of the manual."
+  (delete "index"
+          (mapcar #'file-name-base
+                  (directory-files (expand-file-name "docs/modules" prelude-dir)
+                                   nil "\\.md\\'"))))
+
+(ert-deftest prelude-sample-modules-file-lists-every-module ()
+  (let ((listed (prelude-test--matches "(require 'prelude-\\([a-z-]+\\))"
+                                       (prelude-test--file-string "sample/prelude-modules.el"))))
+    ;; prelude-programming is pulled in by the language modules, and
+    ;; prelude-coffee is a stub that only says the module is gone
+    (should (equal (seq-difference (prelude-test--modules) listed)
+                   '("coffee" "programming")))
+    (should-not (seq-difference listed (prelude-test--modules)))))
+
+(ert-deftest prelude-installation-docs-show-the-sample-modules-file ()
+  (let ((sample (prelude-test--file-string "sample/prelude-modules.el"))
+        (docs (prelude-test--file-string "docs/installation.md")))
+    (should (string-match ";;; Uncomment the modules\\(?:.\\|\n\\)*?\n\n(provide" sample))
+    (should (string-search (string-remove-suffix "\n\n(provide" (match-string 0 sample))
+                           docs))))
+
+(ert-deftest prelude-every-module-has-a-manual-page ()
+  (let ((pages (prelude-test--module-pages)))
+    (dolist (module (prelude-test--modules))
+      (should (member (pcase module
+                        ;; described on the page of another module
+                        ("helm-everywhere" "helm")
+                        ("lsp-mode" "lsp")
+                        ("org" "orgmode")
+                        ;; nothing to document
+                        ("coffee" (car pages))
+                        (_ module))
+                      (append pages
+                              (mapcar (lambda (page) (string-replace "_" "-" page))
+                                      pages)))))))
+
+(ert-deftest prelude-every-manual-page-is-linked ()
+  "Module pages are in the site's navigation and in both module indexes."
+  (let* ((pages (sort (prelude-test--module-pages) #'string<))
+         (index (prelude-test--file-string "docs/modules/index.md"))
+         (languages (substring index
+                               (string-search "## Programming Language Modules" index)
+                               (string-search "## Completion Frameworks" index))))
+    (should (equal (sort (prelude-test--matches "modules/\\([a-z_-]+\\)\\.md"
+                                                (prelude-test--file-string "mkdocs.yml"))
+                         #'string<)
+                   (sort (cons "index" (copy-sequence pages)) #'string<)))
+    (should-not (seq-difference pages (prelude-test--matches "(\\([a-z_-]+\\)\\.md)" index)))
+    (should (equal (prelude-test--matches "(modules/\\([a-z_-]+\\)\\.md)"
+                                          (prelude-test--file-string "docs/index.md"))
+                   (prelude-test--matches "(\\([a-z_-]+\\)\\.md)" languages)))))
+
 ;;; prelude-test.el ends here

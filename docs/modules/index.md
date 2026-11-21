@@ -268,6 +268,7 @@ The following programming languages have enhanced support in Prelude:
 - [SCSS](scss.md)
 - [Shell](shell.md)
 - [SQL](sql.md)
+- [Swift](swift.md)
 - [Terraform](terraform.md)
 - [TypeScript](ts.md)
 - [Web/HTML](web.md)
@@ -294,4 +295,5 @@ only enable **one** of these:
 - [Key Chord](key_chord.md) - simultaneous key press bindings
 - [Literate Programming](literate-programming.md) - org-babel
   and Jupyter notebook support
+- [MisTTY](mistty.md) - a terminal that doesn't need a native module
 - [Org Mode](orgmode.md) - org-mode configuration
