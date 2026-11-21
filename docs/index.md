@@ -104,6 +104,7 @@ The following programming languages have enhanced support in Prelude:
 - [Scheme](modules/scheme.md)
 - [SCSS](modules/scss.md)
 - [Shell](modules/shell.md)
+- [SQL](modules/sql.md)
 - [TypeScript](modules/ts.md)
 - [Web/HTML](modules/web.md)
 - [XML](modules/xml.md)

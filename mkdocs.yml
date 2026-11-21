@@ -49,6 +49,7 @@ nav:
         - Scheme: modules/scheme.md
         - SCSS: modules/scss.md
         - Shell: modules/shell.md
+        - SQL: modules/sql.md
         - Swift: modules/swift.md
         - TypeScript: modules/ts.md
         - Web/HTML: modules/web.md
