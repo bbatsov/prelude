@@ -611,6 +611,14 @@ whether Eglot got started and what was reported."
       (should (equal (prelude-test--lsp-enable '((prelude-test-mode "server")))
                      '(t nil))))))
 
+(ert-deftest prelude-flycheck-eglot-works-with-the-eglot-of-emacs-29 ()
+  "flycheck-eglot needs a function that Eglot has had only since Emacs 30."
+  (require 'prelude-programming)
+  (require 'eglot)
+  (when (eq prelude-lsp-client 'eglot)
+    (should (featurep 'flycheck-eglot))
+    (should (fboundp 'eglot-server-capable))))
+
 (ert-deftest prelude-lsp-enable-needs-a-file ()
   (let ((prelude-lsp-client 'eglot))
     (cl-letf (((symbol-function 'eglot-ensure) (lambda () (error "Started"))))
