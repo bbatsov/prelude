@@ -19,11 +19,9 @@
 ;; for many languages and tools out of the box -- check
 ;; `apheleia-mode-alist' to see what gets formatted by what.
 ;;
-;; A note on overlap: some Prelude language modules (Go, Rust, ...)
-;; install their own format-on-save hooks.  Those will keep working
-;; in parallel with Apheleia, but with this module enabled you can
-;; safely drop them from your config -- Apheleia covers the same
-;; ground with a single, consistent UX.
+;; A note on overlap: some Prelude language modules (Go, Rust) format
+;; on save themselves.  They step aside in the buffers where Apheleia
+;; is enabled (see `prelude-format-on-save-p').
 
 ;;; License:
 
@@ -44,10 +42,21 @@
 
 ;;; Code:
 
+(defvar apheleia-mode-alist)
+
+(defun prelude-apheleia-prefer-goimports ()
+  "Format Go code with goimports instead of gofmt if it's installed.
+That's what `prelude-go' does when it formats the code itself."
+  (when (executable-find "goimports")
+    (dolist (mode '(go-mode go-ts-mode))
+      (setf (alist-get mode apheleia-mode-alist) 'goimports))))
+
 (use-package apheleia
   :ensure t
   :init
-  (apheleia-global-mode +1))
+  (apheleia-global-mode +1)
+  :config
+  (prelude-apheleia-prefer-goimports))
 
 (provide 'prelude-apheleia)
 ;;; prelude-apheleia.el ends here

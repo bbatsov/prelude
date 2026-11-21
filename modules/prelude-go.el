@@ -30,6 +30,12 @@
 
 (require 'prelude-programming)
 
+(defvar go-ts-mode-map)
+
+;; go-mode doesn't autoload these, and go-ts-mode buffers need them too
+(autoload 'gofmt "go-mode" nil t)
+(autoload 'godoc-at-point "go-mode" nil t)
+
 ;; Use go-ts-mode when the tree-sitter grammar is available
 (prelude-treesit-remap 'go 'go-mode 'go-ts-mode)
 
@@ -40,24 +46,36 @@
 ;; certain things, triggering lsp-format-buffer. This causes, inter alia,
 ;; commas to disappear when typing go function invocations
 (add-to-list 'super-save-predicates
-             (lambda () (not (eq major-mode 'go-mode))))
+             (lambda () (not (derived-mode-p 'go-mode 'go-ts-mode))))
+
+(defun prelude-go--define-keys (map)
+  "Add Prelude's Go key bindings to MAP."
+  (define-key map (kbd "C-c a") 'go-test-current-project) ;; current package, really
+  (define-key map (kbd "C-c m") 'go-test-current-file)
+  (define-key map (kbd "C-c .") 'go-test-current-test)
+  (define-key map (kbd "C-c b") 'go-run)
+  (define-key map (kbd "C-h f") 'godoc-at-point))
+
+;; go-ts-mode has a keymap of its own
+(with-eval-after-load 'go-mode
+  (prelude-go--define-keys go-mode-map))
+(with-eval-after-load 'go-ts-mode
+  (prelude-go--define-keys go-ts-mode-map))
+
+(defun prelude-go-format-buffer ()
+  "Format the buffer with gofmt (or goimports), see `prelude-format-on-save-p'.
+Unlike `gofmt-before-save', this works in `go-ts-mode' as well."
+  (when (prelude-format-on-save-p)
+    (gofmt)))
 
 (defun prelude-go-mode-defaults ()
-  ;; Add to default go-mode key bindings
-  (let ((map go-mode-map))
-    (define-key map (kbd "C-c a") 'go-test-current-project) ;; current package, really
-    (define-key map (kbd "C-c m") 'go-test-current-file)
-    (define-key map (kbd "C-c .") 'go-test-current-test)
-    (define-key map (kbd "C-c b") 'go-run)
-    (define-key map (kbd "C-h f") 'godoc-at-point))
-
   ;; Prefer goimports to gofmt if installed
   (let ((goimports (executable-find "goimports")))
     (when goimports
       (setq gofmt-command goimports)))
 
   ;; format before save
-  (add-hook 'before-save-hook #'gofmt-before-save nil t)
+  (add-hook 'before-save-hook #'prelude-go-format-buffer nil t)
 
   ;; Go uses tabs for indentation, so don't highlight them as problems
   (whitespace-toggle-options '(tabs))
