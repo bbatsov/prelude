@@ -394,9 +394,19 @@ Does not indent if the mode is in `prelude-indent-sensitive-modes'."
 (add-hook 'text-mode-hook 'abbrev-mode)
 (diminish 'abbrev-mode)
 
+(defun prelude-make-script-executable ()
+  "Make the file of the current buffer executable if it's a script.
+Rust files often start with an inner attribute (#![...]), which looks
+like a shebang, but isn't one."
+  (unless (save-excursion
+            (save-restriction
+              (widen)
+              (goto-char (point-min))
+              (looking-at-p "#!\\[")))
+    (executable-make-buffer-file-executable-if-script-p)))
+
 ;; make a shell script executable automatically on save
-(add-hook 'after-save-hook
-          'executable-make-buffer-file-executable-if-script-p)
+(add-hook 'after-save-hook #'prelude-make-script-executable)
 
 ;; .zsh file is shell script too
 (add-to-list 'auto-mode-alist '("\\.zsh\\'" . shell-script-mode))
