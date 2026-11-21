@@ -62,7 +62,7 @@ jobs:
           done
       - name: load personal early-init once, before core
         run: |
-          printf '%s\n' "(defvar prelude-test-early-init-loads nil)" "(push (featurep 'prelude-core) prelude-test-early-init-loads)" > personal/early-init.el
+          printf '%s\n' ";;; -*- lexical-binding: t -*-" "(defvar prelude-test-early-init-loads nil)" "(push (featurep 'prelude-core) prelude-test-early-init-loads)" > personal/early-init.el
           emacs --batch --load early-init.el --load init.el \
             --eval "(unless (equal prelude-test-early-init-loads (list nil)) (error \"Expected one load before core, got %S\" prelude-test-early-init-loads))"
       - name: load everything with smartparens disabled
@@ -76,9 +76,77 @@ jobs:
         run: |
           emacs --batch --load init.el --load sample/prelude-modules.el \
             --eval "(let ((loaded (seq-filter #'featurep '(tramp calc eglot ert cperl-mode sh-script nxml-mode exec-path-from-shell crux operate-on-number)))) (when loaded (error \"Loaded at startup: %S\" loaded)))"
+      # Batch mode skips a part of the startup and has no *Warnings*
+      # buffer to shove in the user's face, so this starts a daemon.
+      - name: start a real session with the default modules
+        run: |
+          cp sample/prelude-modules.el personal/prelude-modules.el
+          sh test/prelude-startup-test.sh
+      - name: go back to an empty modules file
+        if: always()
+        run: echo '(provide (quote prelude-modules))' > personal/prelude-modules.el
       # A tree-sitter mode only works with the versions of its grammar
       # it was written for, and those differ between Emacs releases.
       # This goes last, as the grammars it installs would change what
       # the other steps test.
       - name: check the tree-sitter grammars
         run: emacs --batch --load init.el --load test/prelude-grammar-test.el
+
+  # The whole chain a user depends on for LSP: the module's hook,
+  # prelude-lsp-enable, Eglot's choice of a server and a real server.
+  lsp-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        emacs_version:
+          - "29.1"
+          - "31.1"
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: install Emacs
+        uses: purcell/setup-emacs@master
+        with:
+          version: ${{ matrix.emacs_version }}
+      - name: set up Prelude
+        run: |
+          ln -s $(pwd) $HOME/.emacs.d
+          mkdir -p personal
+          echo '(provide (quote prelude-modules))' > personal/prelude-modules.el
+      - name: install language servers
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clangd
+          go install golang.org/x/tools/gopls@latest
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+          pipx install python-lsp-server
+          npm install -g bash-language-server yaml-language-server vscode-langservers-extracted
+      - name: connect to the language servers
+        env:
+          PRELUDE_LSP_TEST_SERVERS: >-
+            clangd gopls pylsp bash-language-server yaml-language-server
+            vscode-css-language-server vscode-json-language-server
+        run: emacs --batch --load init.el --load test/prelude-lsp-test.el
+
+  # Prelude has code that only runs on macOS (core/prelude-macos.el).
+  macos:
+    runs-on: macos-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: install Emacs
+        uses: purcell/setup-emacs@master
+        with:
+          version: "31.1"
+      - name: set up Prelude
+        run: |
+          ln -s $(pwd) $HOME/.emacs.d
+          mkdir -p personal
+          echo '(provide (quote prelude-modules))' > personal/prelude-modules.el
+      - name: load core
+        run: emacs --batch --load init.el
+      - name: load all modules
+        run: emacs --batch --load init.el --load test/prelude-load-test.el
+      - name: run regression tests
+        run: emacs --batch --load init.el --load test/prelude-test.el -f ert-run-tests-batch-and-exit
