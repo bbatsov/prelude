@@ -160,6 +160,7 @@ The following programming languages have enhanced support in Prelude:
 - [Kotlin](kotlin.md)
 - [LaTeX](latex.md)
 - [Lua](lua.md)
+- [Nix](nix.md)
 - [OCaml](ocaml.md)
 - [Perl](perl.md)
 - [Python](python.md)

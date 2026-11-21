@@ -472,4 +472,8 @@ installed."
   (dolist (file '("Prelude.kt" "build.gradle.kts"))
     (should (equal (prelude-test--visit file) '(kotlin-mode t)))))
 
+(ert-deftest prelude-nix-sets-up-nix-files ()
+  (require 'prelude-nix)
+  (should (equal (prelude-test--visit "flake.nix") '(nix-mode t))))
+
 ;;; prelude-test.el ends here

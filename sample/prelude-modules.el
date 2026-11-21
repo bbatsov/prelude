@@ -88,6 +88,7 @@
 ;; (require 'prelude-literate-programming) ;; Setup for Literate Programming
 ;; (require 'prelude-lsp-mode) ;; lsp-mode and lsp-ui setup (loaded on demand when prelude-lsp-client is 'lsp-mode)
 ;; (require 'prelude-lua)
+;; (require 'prelude-nix)
 ;; (require 'prelude-ocaml)
 (require 'prelude-perl)
 ;; (require 'prelude-python)
