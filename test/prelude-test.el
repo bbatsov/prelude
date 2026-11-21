@@ -657,6 +657,20 @@ installed."
             (should (= runs 1))))
       (remove-hook 'prelude-prog-mode-hook count))))
 
+(ert-deftest prelude-scss-uses-the-built-in-mode ()
+  "SCSS files open in the `scss-mode' that comes with Emacs.
+The scss-mode package from MELPA, which Prelude used to install, fails
+to load and would leave them in `fundamental-mode'."
+  (require 'prelude-scss)
+  (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore))
+    (with-temp-buffer
+      (scss-mode)
+      (should (eq major-mode 'scss-mode))
+      (should (derived-mode-p 'css-mode))
+      (should (equal (file-name-base (symbol-file 'scss-mode 'defun)) "css-mode"))
+      ;; the CSS defaults
+      (should (bound-and-true-p rainbow-mode)))))
+
 (ert-deftest prelude-terraform-sets-up-terraform-files ()
   (require 'prelude-terraform)
   (should (equal (prelude-test--visit "main.tf") '(terraform-mode t))))

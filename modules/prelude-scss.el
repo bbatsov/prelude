@@ -32,18 +32,17 @@
 
 (require 'prelude-css)
 
-(defun prelude-scss-mode-defaults ()
-  (prelude-css-mode-defaults))
+;; Emacs has a `scss-mode' of its own (it lives in css-mode.el).  It's a
+;; child of `css-mode', so it gets all of the CSS module's defaults.
+;;
+;; Prelude used to install the scss-mode package from MELPA, which was
+;; last updated in 2018 and fails to load in a modern Emacs, leaving
+;; SCSS files in `fundamental-mode'.  Make sure the built-in mode wins
+;; for those who still have that package around.
+(autoload 'scss-mode "css-mode" nil t)
 
-;; SCSS (Sassy CSS) major mode
-(use-package scss-mode
-  :ensure t
-  :custom
-  ;; Don't auto-compile to CSS on save
-  (scss-compile-at-save nil)
-  :hook (scss-mode . (lambda () (run-hooks 'prelude-scss-mode-hook))))
-
-(add-hook 'prelude-scss-mode-hook #'prelude-scss-mode-defaults)
+(add-hook 'scss-mode-hook (lambda ()
+                            (run-hooks 'prelude-scss-mode-hook)))
 
 (provide 'prelude-scss)
 ;;; prelude-scss.el ends here
