@@ -476,4 +476,8 @@ installed."
   (require 'prelude-nix)
   (should (equal (prelude-test--visit "flake.nix") '(nix-mode t))))
 
+(ert-deftest prelude-php-sets-up-php-files ()
+  (require 'prelude-php)
+  (should (equal (prelude-test--visit "prelude.php") '(php-mode t))))
+
 ;;; prelude-test.el ends here

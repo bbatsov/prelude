@@ -91,6 +91,7 @@
 ;; (require 'prelude-nix)
 ;; (require 'prelude-ocaml)
 (require 'prelude-perl)
+;; (require 'prelude-php)
 ;; (require 'prelude-python)
 ;; (require 'prelude-racket)
 ;; (require 'prelude-ruby)
