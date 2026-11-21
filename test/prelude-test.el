@@ -463,4 +463,8 @@ installed."
     (should lsp)
     (should (assq 'c-sharp prelude-treesit-language-sources))))
 
+(ert-deftest prelude-julia-sets-up-julia-files ()
+  (require 'prelude-julia)
+  (should (equal (prelude-test--visit "prelude.jl") '(julia-mode t))))
+
 ;;; prelude-test.el ends here

@@ -81,6 +81,7 @@
 ;; (require 'prelude-haskell)
 ;; (require 'prelude-java)
 (require 'prelude-js)
+;; (require 'prelude-julia)
 ;; (require 'prelude-latex)
 (require 'prelude-lisp) ;; Common setup for Lisp-like languages
 ;; (require 'prelude-literate-programming) ;; Setup for Literate Programming
