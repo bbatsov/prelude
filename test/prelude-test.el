@@ -449,6 +449,80 @@ Prompts are answered with ANSWER and recorded in `prompted'."
   (should (equal (assoc-default "build.gradle.kts" prelude-auto-install-alist #'string-match-p)
                  '(kotlin-mode kotlin-mode))))
 
+(defun prelude-test--lsp-enable (programs &optional installed)
+  "Call `prelude-lsp-enable' in a buffer of a made up `prelude-test-mode'.
+PROGRAMS is the value of `eglot-server-programs' and INSTALLED the list
+of programs that are installed.  Return a list of whether Eglot got
+started and what was reported."
+  (require 'eglot)
+  (let ((eglot-server-programs programs)
+        (prelude-lsp-client 'eglot)
+        (started nil)
+        (reported nil))
+    (cl-letf (((symbol-function 'eglot-ensure) (lambda () (setq started t)))
+              ((symbol-function 'executable-find)
+               (lambda (program &rest _) (car (member program installed))))
+              ((symbol-function 'message)
+               (lambda (format-string &rest args)
+                 (setq reported (apply #'format-message format-string args)))))
+      (with-temp-buffer
+        (setq major-mode 'prelude-test-mode
+              buffer-file-name "/nonexistent/prelude.test")
+        (unwind-protect
+            (prelude-lsp-enable)
+          (setq buffer-file-name nil))))
+    (list started reported)))
+
+(defun prelude-test-install-and-run-server (&rest _)
+  "Stand in for a package that installs a language server on demand."
+  (error "The server isn't installed yet"))
+
+(put 'prelude-test-mode 'derived-mode-parent 'prelude-test-parent-mode)
+
+(ert-deftest prelude-lsp-enable-starts-eglot-when-the-server-is-installed ()
+  (let ((prelude-lsp--reported-modes nil))
+    (dolist (programs `(((prelude-test-mode "server" "--stdio"))
+                        (((other-mode prelude-test-mode) "server"))
+                        (((prelude-test-mode :language-id "test") "server"))
+                        (((other-mode (prelude-test-mode :language-id "test")) "server"))
+                        ((prelude-test-mode some-server-class "server"))
+                        ((prelude-test-parent-mode "server"))
+                        ((prelude-test-mode . ,(lambda (&rest _) '("server"))))
+                        ((prelude-test-mode . ,(lambda (_interactive) '("server"))))
+                        ((prelude-test-mode . ,(lambda (_interactive project)
+                                                 (and project '("server")))))
+                        ;; things we can't check without starting the server
+                        ((prelude-test-mode "localhost" 7777))
+                        ((prelude-test-mode . prelude-test-install-and-run-server))
+                        ((prelude-test-mode . ,(lambda (&rest _) (signal 'wrong-type-argument nil))))))
+      (should (equal (prelude-test--lsp-enable programs '("server"))
+                     '(t nil))))))
+
+(ert-deftest prelude-lsp-enable-reports-a-missing-server-once ()
+  (dolist (programs `(((prelude-test-mode "server" "--stdio"))
+                      ((prelude-test-mode some-server-class "server"))
+                      ((prelude-test-mode . ,(lambda (&rest _) (error "None of them are installed"))))
+                      ((other-mode "other-server"))))
+    (let ((prelude-lsp--reported-modes nil))
+      (pcase-let ((`(,started ,reported) (prelude-test--lsp-enable programs '("other-server"))))
+        (should-not started)
+        (should (string-prefix-p "[Prelude] No language server" reported)))
+      (should (equal (prelude-test--lsp-enable programs '("other-server"))
+                     '(nil nil))))))
+
+(ert-deftest prelude-lsp-enable-leaves-remote-files-to-eglot ()
+  (let ((prelude-lsp--reported-modes nil)
+        (default-directory "/ssh:prelude-test-host:/tmp/"))
+    (cl-letf (((symbol-function 'file-remote-p) (lambda (file &rest _) (string-prefix-p "/ssh:" file))))
+      (should (equal (prelude-test--lsp-enable '((prelude-test-mode "server")))
+                     '(t nil))))))
+
+(ert-deftest prelude-lsp-enable-needs-a-file ()
+  (let ((prelude-lsp-client 'eglot))
+    (cl-letf (((symbol-function 'eglot-ensure) (lambda () (error "Started"))))
+      (with-temp-buffer
+        (prelude-lsp-enable)))))
+
 (defun prelude-test--visit (file)
   "Return the major mode used for FILE, and whether LSP got started.
 The file isn't created, and missing tree-sitter grammars aren't

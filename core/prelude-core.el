@@ -173,10 +173,86 @@ See `prelude-conflicting-modules'."
                  (mapconcat #'symbol-name enabled ", ")
                  prelude-modules-file))))))
 
+(defvar eglot-server-programs)
+
+(defvar prelude-lsp--reported-modes nil
+  "Major modes we've already reported a missing language server for.")
+
+(defun prelude-lsp--eglot-contact ()
+  "Return the `eglot-server-programs' entry for the current major mode."
+  (seq-some
+   (pcase-lambda (`(,modes . ,contact))
+     ;; MODES is a mode, a (MODE :language-id ID) spec, or a list of those
+     (when (seq-some (lambda (mode)
+                       (derived-mode-p (if (consp mode) (car mode) mode)))
+                     (if (or (symbolp modes) (keywordp (cadr modes)))
+                         (list modes)
+                       modes))
+       contact))
+   eglot-server-programs))
+
+(defun prelude-lsp--eglot-missing-server ()
+  "Return a description of what's missing if Eglot can't start a server here.
+Return nil if the language server of the current buffer seems to be
+installed, or if there's no way to tell without starting it."
+  (require 'eglot)
+  (let ((contact (prelude-lsp--eglot-contact)))
+    (condition-case err
+        (progn
+          ;; `eglot-alternatives' gives us a function that picks the
+          ;; first of several servers that's installed, and signals an
+          ;; error if none of them is.  Named functions are the entry
+          ;; points of packages that install the server on demand, so
+          ;; those are left alone.
+          (when (and (functionp contact) (not (symbolp contact)))
+            (setq contact
+                  (if (eql (cdr (func-arity contact)) 1)
+                      (funcall contact nil)
+                    ;; Eglot 1.17+ passes the project as well
+                    (funcall contact nil
+                             (or (project-current)
+                                 (cons 'transient default-directory))))))
+          ;; skip the class of the server
+          (when (and (consp contact) (symbolp (car contact))
+                     (not (keywordp (car contact))))
+            (setq contact (cdr contact)))
+          (cond
+           ((null contact)
+            (format-message "Eglot doesn't know a language server for `%s'"
+                            major-mode))
+           ;; (PROGRAM ARGS...), as opposed to (HOST PORT)
+           ((and (consp contact) (stringp (car contact))
+                 (not (integerp (cadr contact)))
+                 (not (executable-find (car contact))))
+            (format-message "`%s' isn't installed" (car contact)))))
+      ;; Only a plain error (which is what `eglot-alternatives' signals)
+      ;; tells us something.  If the function failed in any other way
+      ;; we can't tell, and it's Eglot's job to deal with that.
+      (error (and (eq (car err) 'error)
+                  (error-message-string err))))))
+
+(defun prelude-lsp--eglot-ensure ()
+  "Start Eglot in the current buffer, unless its server isn't installed.
+Eglot would complain about that for every file you open, while we
+mention it just once for a major mode."
+  (when buffer-file-name
+    ;; looking for programs on a remote host is slow, so that's left to
+    ;; Eglot, which does it only once you start working with the buffer
+    (let ((missing (unless (file-remote-p default-directory)
+                     (prelude-lsp--eglot-missing-server))))
+      (cond
+       ((not missing) (eglot-ensure))
+       ((not (memq major-mode prelude-lsp--reported-modes))
+        (push major-mode prelude-lsp--reported-modes)
+        (message "[Prelude] No language server for `%s' buffers: %s"
+                 major-mode missing))))))
+
 (defun prelude-lsp-enable ()
-  "Enable the LSP client configured via `prelude-lsp-client'."
+  "Enable the LSP client configured via `prelude-lsp-client'.
+With Eglot nothing happens when the language server of the buffer isn't
+installed, apart from a message the first time that's noticed."
   (pcase prelude-lsp-client
-    ('eglot (eglot-ensure))
+    ('eglot (prelude-lsp--eglot-ensure))
     ('lsp-mode
      (require 'prelude-lsp-mode)
      (lsp-deferred))))

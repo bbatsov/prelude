@@ -36,10 +36,9 @@ The module adds a couple of things on top:
 
 ## LSP support
 
-Unlike the other modules, this one starts a language server only when
-it's installed. Plenty of people edit SQL without one, and they
-shouldn't get a warning about a missing server every time they open a
-`.sql` file. The server is [sqls](https://github.com/sqls-server/sqls):
+Unlike the other modules, this one doesn't say a word when the
+language server isn't installed. Plenty of people edit SQL without
+one. The server is [sqls](https://github.com/sqls-server/sqls):
 
 ```sh
 go install github.com/sqls-server/sqls@latest

@@ -33,6 +33,7 @@
 
 ### Changes
 
+- [#1471](https://github.com/bbatsov/prelude/pull/1471): Don't start Eglot in buffers whose language server isn't installed. Prelude mentions the missing server once for a major mode, instead of Eglot warning about it for every file you open.
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): `prelude-format-on-save` now controls the format on save of the Go and Rust modules, which also leave the formatting to Apheleia when `prelude-apheleia` is enabled (it now prefers `goimports` to `gofmt` as well).
 - Add an `early-init.el` that tunes startup: it raises the GC threshold while Emacs loads (restoring a modest value once startup is over), disables the tool bar via frame parameters so the initial frame is never drawn with one, sets `frame-inhibit-implied-resize`, native-compiles packages at install time (`package-native-compile`), and sets a sane `LANG` for GUI Emacs on macOS (which otherwise starts in the `C` locale and breaks spell-checker dictionaries and subprocess sorting).
 - Modernize the Eglot event-log setting to prefer `eglot-events-buffer-config` on newer Eglot, falling back to the obsolete `eglot-events-buffer-size` on older versions.
