@@ -16,6 +16,7 @@
 (defvar go-ts-mode-map)
 
 (declare-function prelude-apheleia-prefer-goimports "prelude-apheleia")
+(declare-function prelude-fsharp-mode-defaults "prelude-fsharp")
 (declare-function prelude-go-format-buffer "prelude-go")
 (declare-function prelude-go-mode-defaults "prelude-go")
 (declare-function prelude-java-mode-defaults "prelude-java")
@@ -561,7 +562,9 @@ installed."
     (cl-letf (((symbol-function 'prelude-lsp-enable)
                (lambda (&optional quiet) (setq started (if quiet 'quiet t)))))
       (with-temp-buffer
-        (setq buffer-file-name (expand-file-name file "/nonexistent"))
+        ;; some packages look for a project around the file, and not
+        ;; all of them cope with a directory that doesn't exist
+        (setq buffer-file-name (expand-file-name file temporary-file-directory))
         (unwind-protect
             (progn (set-auto-mode)
                    (list major-mode started))
@@ -657,6 +660,30 @@ installed."
             (should (= runs 1))))
       (remove-hook 'prelude-prog-mode-hook count))))
 
+(defun prelude-test--hook-runs-p (mode-hook prelude-hook)
+  "Return non-nil if running MODE-HOOK runs PRELUDE-HOOK."
+  (let* ((ran nil)
+         (record (lambda () (setq ran t))))
+    (add-hook prelude-hook record)
+    (unwind-protect
+        (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore))
+          (with-temp-buffer
+            (run-hooks mode-hook)))
+      (remove-hook prelude-hook record))
+    ran))
+
+(ert-deftest prelude-modules-run-their-hook-from-every-mode-they-set-up ()
+  (dolist (module '(prelude-ocaml prelude-scss prelude-ts))
+    (require module))
+  (pcase-dolist (`(,mode-hook . ,prelude-hook)
+                 '((neocaml-base-mode-hook . prelude-ocaml-mode-hook)
+                   (scss-mode-hook . prelude-scss-mode-hook)
+                   (typescript-ts-mode-hook . prelude-ts-mode-hook)
+                   (tsx-ts-mode-hook . prelude-ts-mode-hook)
+                   (typescript-mode-hook . prelude-ts-mode-hook)))
+    (should (prelude-test--hook-runs-p mode-hook prelude-hook)))
+  (should (memq 'prelude-ocaml-mode-defaults (symbol-value 'prelude-ocaml-mode-hook))))
+
 (ert-deftest prelude-scss-uses-the-built-in-mode ()
   "SCSS files open in the `scss-mode' that comes with Emacs.
 The scss-mode package from MELPA, which Prelude used to install, fails
@@ -670,6 +697,18 @@ to load and would leave them in `fundamental-mode'."
       (should (equal (file-name-base (symbol-file 'scss-mode 'defun)) "css-mode"))
       ;; the CSS defaults
       (should (bound-and-true-p rainbow-mode)))))
+
+(ert-deftest prelude-fsharp-mode-defaults-without-eglot-fsharp ()
+  "The F# mode hook shouldn't fail when eglot-fsharp isn't installed."
+  (require 'prelude-fsharp)
+  (let ((prelude-lsp-client 'eglot)
+        (load-path (seq-remove (lambda (dir) (string-match-p "eglot-fsharp" dir))
+                               load-path)))
+    (cl-letf (((symbol-value 'features) (remq 'eglot-fsharp features))
+              ((symbol-function 'prelude-lsp-enable) #'ignore))
+      (with-temp-buffer
+        (prelude-fsharp-mode-defaults)
+        (should subword-mode)))))
 
 (ert-deftest prelude-terraform-sets-up-terraform-files ()
   (require 'prelude-terraform)

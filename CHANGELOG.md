@@ -78,6 +78,8 @@
 - [#1472](https://github.com/bbatsov/prelude/pull/1472): Give JSON buffers the same setup in both JSON modes, with a `prelude-json-mode-hook` of their own (`json-ts-mode` buffers got none of it, and neither did `js-json-mode` ones on newer Emacsen).
 - [#1472](https://github.com/bbatsov/prelude/pull/1472): Don't run `prelude-prog-mode-hook` twice in CSS and `web-mode` buffers.
 - [#1473](https://github.com/bbatsov/prelude/pull/1473): Fix SCSS files opening in `fundamental-mode` with `prelude-scss` enabled: the module installed the `scss-mode` package from MELPA, which no longer loads, and now uses the `scss-mode` that comes with Emacs.
+- [#1473](https://github.com/bbatsov/prelude/pull/1473): Don't break `fsharp-mode` when `eglot-fsharp` failed to install.
+- [#1473](https://github.com/bbatsov/prelude/pull/1473): Add the missing `prelude-ocaml-mode-hook`, and run `prelude-ts-mode-hook` in `typescript-mode` buffers as well.
 
 ## 2.1.0 (2026-03-29)
 
