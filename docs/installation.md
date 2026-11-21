@@ -172,6 +172,7 @@ modules visit the [docs](modules/index.md).
 (require 'prelude-perl)
 ;; (require 'prelude-php)
 ;; (require 'prelude-python)
+;; (require 'prelude-r)
 ;; (require 'prelude-racket)
 ;; (require 'prelude-ruby)
 ;; (require 'prelude-rust)

@@ -165,6 +165,7 @@ The following programming languages have enhanced support in Prelude:
 - [Perl](perl.md)
 - [PHP](php.md)
 - [Python](python.md)
+- [R](r.md)
 - [Racket](racket.md)
 - [Ruby](ruby.md)
 - [Rust](rust.md)
