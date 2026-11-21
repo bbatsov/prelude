@@ -41,8 +41,11 @@
 (require 'treesit nil t)
 
 (defvar prelude-treesit-language-sources
-  '((bash "https://github.com/tree-sitter/tree-sitter-bash" "v0.23.3")
+  `((bash "https://github.com/tree-sitter/tree-sitter-bash" "v0.23.3")
     (c "https://github.com/tree-sitter/tree-sitter-c" "v0.23.4")
+    (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp"
+             ;; csharp-ts-mode in Emacs 29 can't handle newer grammars
+             ,(if (< emacs-major-version 30) "v0.20.0" "v0.23.1"))
     (cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.23.4")
     (css "https://github.com/tree-sitter/tree-sitter-css" "v0.23.1")
     (elixir "https://github.com/elixir-lang/tree-sitter-elixir" "v0.3.3")

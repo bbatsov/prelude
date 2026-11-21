@@ -19,6 +19,7 @@ nav:
         - Apheleia (Format-on-save): modules/apheleia.md
     - Programming Languages:
         - C/C++: modules/c.md
+        - C#: modules/csharp.md
         - Clojure: modules/clojure.md
         - Common Lisp: modules/common_lisp.md
         - CSS: modules/css.md

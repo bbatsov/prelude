@@ -70,6 +70,7 @@
 (require 'prelude-c)
 ;; (require 'prelude-clojure)
 ;; (require 'prelude-common-lisp)
+;; (require 'prelude-csharp)
 (require 'prelude-css)
 ;; (require 'prelude-dart)
 (require 'prelude-emacs-lisp)

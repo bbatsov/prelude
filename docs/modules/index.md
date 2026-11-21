@@ -143,6 +143,7 @@ These modules provide shared functionality used by other modules:
 The following programming languages have enhanced support in Prelude:
 
 - [C/C++](c.md)
+- [C#](csharp.md)
 - [Clojure](clojure.md)
 - [Common Lisp](common_lisp.md)
 - [CSS](css.md)

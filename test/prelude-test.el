@@ -442,4 +442,25 @@ Prompts are answered with ANSWER and recorded in `prompted'."
   (should (equal (assoc-default "build.gradle.kts" prelude-auto-install-alist #'string-match-p)
                  '(kotlin-mode kotlin-mode))))
 
+(defun prelude-test--visit (file)
+  "Return the major mode used for FILE, and whether LSP got started.
+The file isn't created, and missing tree-sitter grammars aren't
+installed."
+  (let ((started nil)
+        (prelude-treesit-auto-install nil))
+    (cl-letf (((symbol-function 'prelude-lsp-enable) (lambda () (setq started t))))
+      (with-temp-buffer
+        (setq buffer-file-name (expand-file-name file "/nonexistent"))
+        (unwind-protect
+            (progn (set-auto-mode)
+                   (list major-mode started))
+          (setq buffer-file-name nil))))))
+
+(ert-deftest prelude-csharp-sets-up-csharp-files ()
+  (require 'prelude-csharp)
+  (pcase-let ((`(,mode ,lsp) (prelude-test--visit "Prelude.cs")))
+    (should (memq mode '(csharp-mode csharp-ts-mode)))
+    (should lsp)
+    (should (assq 'c-sharp prelude-treesit-language-sources))))
+
 ;;; prelude-test.el ends here
