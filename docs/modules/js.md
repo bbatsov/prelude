@@ -25,6 +25,9 @@ the tree-sitter powered
 the first time you open one (see `prelude-treesit-auto-install`).
 Without the grammar you get the classic `js-mode`.
 
+On Emacs 31+ `js-ts-mode` needs a second grammar, `jsdoc`, and doesn't
+start without it. Prelude installs the two together.
+
 `subword-mode` is enabled, so the editing commands understand
 `CamelCase`.
 

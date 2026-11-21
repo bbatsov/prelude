@@ -72,6 +72,15 @@ modes of older Emacsen were written against), as automatically
 installing whatever is the latest version of a grammar can easily
 produce one that doesn't work.")
 
+(defvar prelude-treesit-companion-grammars
+  '((javascript jsdoc))
+  "Alist of (LANG . GRAMMARS) for the extra grammars a language needs.
+A companion grammar counts only in the Emacs versions whose tree-sitter
+modes install the grammars they need themselves, and only if Emacs has
+a recipe for it.  That's how we know that the mode can't do without it:
+`js-ts-mode' in Emacs 31 doesn't start without the jsdoc grammar, while
+older versions get by without it.")
+
 (defvar prelude-treesit--languages nil
   "Alist of (LANG . TS-MODE) for every language set up by Prelude.")
 
@@ -116,31 +125,52 @@ Return non-nil if the grammar is available afterwards."
                 lang (error-message-string err))
        nil))))
 
+(defun prelude-treesit--grammars (lang ts-mode)
+  "Return the grammars TS-MODE needs: LANG and its companions.
+See `prelude-treesit-companion-grammars'."
+  (let ((companions (and (fboundp 'treesit-ensure-installed) ; Emacs 31+
+                         (alist-get lang prelude-treesit-companion-grammars))))
+    (when companions
+      ;; this loads the mode, so we know which recipes Emacs has
+      (prelude-treesit--recipe lang ts-mode))
+    (cons lang
+          (seq-filter (lambda (companion)
+                        (assq companion treesit-language-source-alist))
+                      companions))))
+
 (defun prelude-treesit--ensure-grammar (lang ts-mode)
   "Return non-nil if the tree-sitter grammar for LANG can be used.
 Install it first if it's missing, as configured by
-`prelude-treesit-auto-install'.  TS-MODE is the mode that needs it."
-  (cond
-   ((not (and (prelude-treesit--supported-p) (fboundp ts-mode))) nil)
-   ((treesit-language-available-p lang) t)
-   ((memq lang prelude-treesit--declined) nil)
-   ;; Only install grammars when visiting a file, not when a mode
-   ;; function gets called for other reasons (e.g. when Org fontifies
-   ;; a source block, or for a new buffer named like a file).
-   ((not buffer-file-name) nil)
-   ((eq prelude-treesit-auto-install 'always)
-    (prelude-treesit--try-install lang ts-mode))
-   ((and (eq prelude-treesit-auto-install 'ask) (not noninteractive))
-    (if (y-or-n-p (format "Install the tree-sitter grammar for %s? " lang))
-        (prelude-treesit--try-install lang ts-mode)
-      (push lang prelude-treesit--declined)
-      nil))))
+`prelude-treesit-auto-install'.  TS-MODE is the mode that needs it.
+The same goes for the companion grammars of LANG."
+  (when (and (prelude-treesit--supported-p) (fboundp ts-mode))
+    (let ((missing (seq-remove #'treesit-language-available-p
+                               (prelude-treesit--grammars lang ts-mode))))
+      (cond
+       ((null missing) t)
+       ((seq-intersection missing prelude-treesit--declined) nil)
+       ;; Only install grammars when visiting a file, not when a mode
+       ;; function gets called for other reasons (e.g. when Org fontifies
+       ;; a source block, or for a new buffer named like a file).
+       ((not buffer-file-name) nil)
+       ((eq prelude-treesit-auto-install 'always)
+        (prelude-treesit--try-install missing ts-mode))
+       ((and (eq prelude-treesit-auto-install 'ask) (not noninteractive))
+        (if (y-or-n-p (format "Install the tree-sitter %s for %s? "
+                              (if (cdr missing) "grammars" "grammar")
+                              (mapconcat #'symbol-name missing " and ")))
+            (prelude-treesit--try-install missing ts-mode)
+          (setq prelude-treesit--declined
+                (append missing prelude-treesit--declined))
+          nil))))))
 
-(defun prelude-treesit--try-install (lang ts-mode)
-  "Install the grammar for LANG, used by TS-MODE, remembering a failure.
-Return non-nil if it got installed."
-  (or (prelude-treesit--install-grammar lang ts-mode)
-      (progn (push lang prelude-treesit--declined) nil)))
+(defun prelude-treesit--try-install (langs ts-mode)
+  "Install the grammars for LANGS, used by TS-MODE, remembering a failure.
+Return non-nil if all of them got installed."
+  (seq-every-p (lambda (lang)
+                 (or (prelude-treesit--install-grammar lang ts-mode)
+                     (progn (push lang prelude-treesit--declined) nil)))
+               langs))
 
 (defun prelude-treesit-mode-function (lang ts-mode &optional fallback-mode fallback-package)
   "Return a major mode function that picks TS-MODE or FALLBACK-MODE.
@@ -185,12 +215,13 @@ FALLBACK-MODE and FALLBACK-PACKAGE are as for
   (unless (prelude-treesit--supported-p)
     (user-error "This Emacs was built without tree-sitter support"))
   (let ((installed nil))
-    (pcase-dolist (`(,lang . ,ts-mode) prelude-treesit--languages)
-      (when (and (fboundp ts-mode)
-                 (not (treesit-language-available-p lang))
-                 (prelude-treesit--install-grammar lang ts-mode))
-        (setq prelude-treesit--declined (delq lang prelude-treesit--declined))
-        (push lang installed)))
+    (pcase-dolist (`(,main . ,ts-mode) prelude-treesit--languages)
+      (when (fboundp ts-mode)
+        (dolist (lang (prelude-treesit--grammars main ts-mode))
+          (when (and (not (treesit-language-available-p lang))
+                     (prelude-treesit--install-grammar lang ts-mode))
+            (setq prelude-treesit--declined (delq lang prelude-treesit--declined))
+            (push lang installed)))))
     (message "[Prelude] %s"
              (if installed
                  (format "Installed tree-sitter grammars: %s"
