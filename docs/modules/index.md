@@ -153,6 +153,7 @@ The following programming languages have enhanced support in Prelude:
 - [F#](fsharp.md)
 - [Go](go.md)
 - [Haskell](haskell.md)
+- [Java](java.md)
 - [JavaScript](js.md)
 - [LaTeX](latex.md)
 - [Lua](lua.md)

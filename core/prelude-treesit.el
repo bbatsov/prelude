@@ -49,6 +49,7 @@
     (go "https://github.com/tree-sitter/tree-sitter-go" "v0.23.4")
     (gomod "https://github.com/camdencheek/tree-sitter-go-mod" "v1.1.0")
     (heex "https://github.com/phoenixframework/tree-sitter-heex" "v0.7.0")
+    (java "https://github.com/tree-sitter/tree-sitter-java" "v0.23.5")
     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.23.1")
     (json "https://github.com/tree-sitter/tree-sitter-json" "v0.24.8")
     (python "https://github.com/tree-sitter/tree-sitter-python" "v0.23.6")
