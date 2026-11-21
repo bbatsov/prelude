@@ -48,6 +48,9 @@
                                      (run-hooks 'prelude-ts-mode-hook)))
 (add-hook 'tsx-ts-mode-hook (lambda ()
                               (run-hooks 'prelude-ts-mode-hook)))
+;; the fallback, for those who have it installed
+(add-hook 'typescript-mode-hook (lambda ()
+                                  (run-hooks 'prelude-ts-mode-hook)))
 
 (provide 'prelude-ts)
 

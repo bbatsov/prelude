@@ -42,11 +42,9 @@
   :config
   (global-hl-todo-mode 1))
 
-;; in Emacs 24 programming major modes generally derive from a common
-;; mode named prog-mode; for others, we'll arrange for our mode
-;; defaults function to run prelude-prog-mode-hook directly.  To
-;; augment and/or counteract these defaults your own function
-;; to prelude-prog-mode-hook, using:
+;; Programming major modes derive from prog-mode, so that's where the
+;; defaults below are hooked up.  To augment and/or counteract them add
+;; your own function to prelude-prog-mode-hook, using:
 ;;
 ;;     (add-hook 'prelude-prog-mode-hook 'my-prog-mode-defaults t)
 ;;

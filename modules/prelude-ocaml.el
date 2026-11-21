@@ -54,7 +54,8 @@
 ;; get the same setup.
 (use-package neocaml
   :ensure t
-  :hook (neocaml-base-mode . prelude-ocaml-mode-defaults)
+  :hook (neocaml-base-mode . (lambda ()
+                               (run-hooks 'prelude-ocaml-mode-hook)))
   :config
   ;; Workaround: register neocaml modes with eglot until neocaml
   ;; ships this fix itself (neocaml >= 20260331).  add-to-list is
@@ -76,6 +77,8 @@
   (use-package ocaml-eglot
     :ensure t
     :defer t))
+
+(add-hook 'prelude-ocaml-mode-hook #'prelude-ocaml-mode-defaults)
 
 (provide 'prelude-ocaml)
 
