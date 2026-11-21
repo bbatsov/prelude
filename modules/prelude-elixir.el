@@ -38,10 +38,10 @@
 (dolist (regexp '("\\.ex\\'" "\\.exs\\'" "mix\\.lock"))
   (prelude-treesit-auto-mode regexp 'elixir 'elixir-ts-mode 'elixir-mode 'elixir-mode))
 
-;; HEEx template support (Phoenix); built into Emacs 30+
-(use-package heex-ts-mode
-  :ensure t
-  :defer t)
+;; HEEx template support (Phoenix).  heex-ts-mode comes with Emacs 30+,
+;; and there's no package to install it from for older versions.
+(when (fboundp 'heex-ts-mode)
+  (prelude-treesit-auto-mode "\\.[hl]?eex\\'" 'heex 'heex-ts-mode))
 
 (defun prelude-elixir-mode-defaults ()
   (subword-mode +1)

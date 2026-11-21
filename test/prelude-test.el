@@ -700,6 +700,15 @@ doesn't follow."
                   (string-prefix-p "prelude-treesit-"
                                    (symbol-name (alist-get mode major-mode-remap-alist))))))))
 
+(ert-deftest prelude-elixir-sets-up-heex-templates-where-possible ()
+  "HEEx templates use the built-in mode of Emacs 30+, and nothing gets installed."
+  (require 'prelude-elixir)
+  (should-not (memq 'heex-ts-mode package-selected-packages))
+  (when (fboundp 'heex-ts-mode)
+    (dolist (file '("index.html.heex" "index.html.eex" "index.html.leex"))
+      (should (eq (assoc-default file auto-mode-alist #'string-match-p)
+                  'prelude-treesit-heex-ts-mode)))))
+
 (ert-deftest prelude-json-modes-get-the-same-setup ()
   "Both JSON modes get the JSON defaults, and only those."
   (require 'prelude-js)
