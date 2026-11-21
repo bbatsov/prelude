@@ -46,10 +46,6 @@
 (defun prelude-rust-mode-defaults ()
   (setq rust-format-on-save t)
 
-  ;; Rust files start with #![...] (inner attributes), which looks
-  ;; like a shebang to Emacs -- prevent auto-chmod on save
-  (remove-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-
   ;; CamelCase aware editing operations
   (subword-mode +1)
 

@@ -505,4 +505,20 @@ installed."
   (require 'prelude-zig)
   (should (equal (prelude-test--visit "prelude.zig") '(zig-mode t))))
 
+(ert-deftest prelude-make-script-executable-ignores-rust-attributes ()
+  "Scripts are made executable on save, Rust files with #![...] aren't."
+  (pcase-dolist (`(,contents . ,executable) '(("#!/bin/sh\necho hi\n" . t)
+                                              ("#![allow(dead_code)]\n" . nil)
+                                              ("echo hi\n" . nil)))
+    (let ((file (make-temp-file "prelude-test")))
+      (unwind-protect
+          (with-temp-buffer
+            (insert contents)
+            (write-region nil nil file nil 'silent)
+            (setq buffer-file-name file)
+            (prelude-make-script-executable)
+            (setq buffer-file-name nil)
+            (should (eq (file-executable-p file) executable)))
+        (delete-file file)))))
+
 ;;; prelude-test.el ends here
