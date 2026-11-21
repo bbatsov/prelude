@@ -19,7 +19,8 @@ npm install -g typescript typescript-language-server
 ## JavaScript Mode
 
 The module doesn't install any packages - it relies on what comes with
-Emacs. JavaScript files are opened in the tree-sitter powered
+Emacs. JavaScript files (`.js`, `.jsx`, `.mjs` and `.cjs`) are opened in
+the tree-sitter powered
 `js-ts-mode`, and Prelude offers to install the `javascript` grammar
 the first time you open one (see `prelude-treesit-auto-install`).
 Without the grammar you get the classic `js-mode`.

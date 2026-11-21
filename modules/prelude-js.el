@@ -35,7 +35,14 @@
 
 ;; Use tree-sitter modes when grammars are available
 (prelude-treesit-remap 'javascript 'js-mode 'js-ts-mode)
+;; JavaScript files are associated with `javascript-mode', an alias of
+;; `js-mode' that has to be remapped separately
+(add-to-list 'major-mode-remap-alist
+             (cons 'javascript-mode (alist-get 'js-mode major-mode-remap-alist)))
 (prelude-treesit-remap 'json 'js-json-mode 'json-ts-mode)
+
+;; Emacs knows about .js and .jsx, but not about ES and CommonJS modules
+(add-to-list 'auto-mode-alist '("\\.[cm]js\\'" . javascript-mode))
 
 (defun prelude-js-mode-defaults ()
   (subword-mode +1)
