@@ -385,4 +385,11 @@ Prompts are answered with ANSWER and recorded in `prompted'."
         (package-user-dir "/nonexistent/prelude/elpa"))
     (should-not (prelude--packages-activated-p "/nonexistent/prelude/elpa"))))
 
+(ert-deftest prelude-auto-install-covers-gradle-build-files ()
+  "Both flavours of Gradle build files get a major mode on demand."
+  (should (equal (assoc-default "build.gradle" prelude-auto-install-alist #'string-match-p)
+                 '(groovy-mode groovy-mode)))
+  (should (equal (assoc-default "build.gradle.kts" prelude-auto-install-alist #'string-match-p)
+                 '(kotlin-mode kotlin-mode))))
+
 ;;; prelude-test.el ends here
