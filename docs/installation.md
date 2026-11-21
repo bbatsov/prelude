@@ -162,6 +162,7 @@ modules visit the [docs](modules/index.md).
 ;; (require 'prelude-java)
 (require 'prelude-js)
 ;; (require 'prelude-julia)
+;; (require 'prelude-kotlin)
 ;; (require 'prelude-latex)
 (require 'prelude-lisp) ;; Common setup for Lisp-like languages
 ;; (require 'prelude-lsp-mode) ;; lsp-mode and lsp-ui setup

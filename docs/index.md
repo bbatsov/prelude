@@ -88,6 +88,7 @@ The following programming languages have enhanced support in Prelude:
 - [Java](modules/java.md)
 - [JavaScript](modules/js.md)
 - [Julia](modules/julia.md)
+- [Kotlin](modules/kotlin.md)
 - [LaTeX](modules/latex.md)
 - [Lua](modules/lua.md)
 - [OCaml](modules/ocaml.md)

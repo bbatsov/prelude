@@ -467,4 +467,9 @@ installed."
   (require 'prelude-julia)
   (should (equal (prelude-test--visit "prelude.jl") '(julia-mode t))))
 
+(ert-deftest prelude-kotlin-sets-up-kotlin-files ()
+  (require 'prelude-kotlin)
+  (dolist (file '("Prelude.kt" "build.gradle.kts"))
+    (should (equal (prelude-test--visit file) '(kotlin-mode t)))))
+
 ;;; prelude-test.el ends here
