@@ -297,6 +297,71 @@ Prompts are answered with ANSWER and recorded in `prompted'."
       (should (= (length prompted) 1))
       (should-not installed))))
 
+(defmacro prelude-test-with-companion-grammar (available recipe &rest body)
+  "Run BODY for a language whose mode needs a companion grammar.
+AVAILABLE is the list of grammars that are installed, out of
+`prelude-test' and `prelude-test-companion'.  RECIPE says if Emacs has
+a recipe for the companion.  Prompts are recorded in `prompted' and
+answered with `answer'."
+  (declare (indent 2))
+  `(let ((available ,available)
+         (answer t)
+         (prelude-treesit-companion-grammars '((prelude-test prelude-test-companion)))
+         (ensure-installed (symbol-function 'treesit-ensure-installed))
+         (treesit-language-source-alist (when ,recipe '((prelude-test-companion "url")))))
+     (prelude-test-with-treesit nil
+       (cl-letf (((symbol-function 'treesit-language-available-p)
+                  (lambda (lang &rest _) (memq lang available)))
+                 ;; companions only count in Emacs 31+, which has this
+                 ((symbol-function 'treesit-ensure-installed)
+                  (or ensure-installed #'ignore))
+                 ((symbol-function 'treesit-install-language-grammar)
+                  (lambda (lang &rest _) (push lang installed) (push lang available)))
+                 ((symbol-function 'y-or-n-p)
+                  (lambda (prompt) (push prompt prompted) answer)))
+         (let ((prelude-treesit-auto-install 'ask)
+               (mode (prelude-treesit-mode-function
+                      'prelude-test 'prelude-test-ts-mode 'prelude-test-classic-mode)))
+           (ignore mode answer)
+           ,@body)))))
+
+(ert-deftest prelude-treesit-installs-companion-grammars ()
+  "A mode's companion grammar is installed together with its main one."
+  (prelude-test-with-companion-grammar nil t
+    (funcall mode)
+    (should (equal prompted
+                   '("Install the tree-sitter grammars for prelude-test and prelude-test-companion? ")))
+    (should (equal installed '(prelude-test-companion prelude-test)))
+    (should (equal used '(ts)))))
+
+(ert-deftest prelude-treesit-needs-the-companion-grammar-too ()
+  "Without the companion the classic mode is used, as the other would fail."
+  (prelude-test-with-companion-grammar '(prelude-test) t
+    (setq answer nil)
+    (funcall mode)
+    (funcall mode)
+    (should (equal prompted
+                   '("Install the tree-sitter grammar for prelude-test-companion? ")))
+    (should (equal used '(classic classic)))
+    (setq prelude-treesit--declined nil
+          answer t)
+    (funcall mode)
+    (should (equal installed '(prelude-test-companion)))
+    (should (equal used '(ts classic classic)))))
+
+(ert-deftest prelude-treesit-ignores-companions-emacs-has-no-recipe-for ()
+  "Emacs versions without a recipe have a mode that doesn't need the grammar."
+  (prelude-test-with-companion-grammar '(prelude-test) nil
+    (funcall mode)
+    (should-not prompted)
+    (should (equal used '(ts)))))
+
+(ert-deftest prelude-treesit-install-grammars-covers-companions ()
+  (prelude-test-with-companion-grammar nil t
+    (let ((inhibit-message t))
+      (prelude-treesit-install-grammars))
+    (should (equal installed '(prelude-test-companion prelude-test)))))
+
 (ert-deftest prelude-treesit-respects-auto-install-setting ()
   (prelude-test-with-treesit nil
     (let ((prelude-treesit-auto-install nil))
