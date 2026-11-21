@@ -80,6 +80,7 @@
 - [#1473](https://github.com/bbatsov/prelude/pull/1473): Fix SCSS files opening in `fundamental-mode` with `prelude-scss` enabled: the module installed the `scss-mode` package from MELPA, which no longer loads, and now uses the `scss-mode` that comes with Emacs.
 - [#1473](https://github.com/bbatsov/prelude/pull/1473): Don't break `fsharp-mode` when `eglot-fsharp` failed to install.
 - [#1473](https://github.com/bbatsov/prelude/pull/1473): Add the missing `prelude-ocaml-mode-hook`, and run `prelude-ts-mode-hook` in `typescript-mode` buffers as well.
+- [#1475](https://github.com/bbatsov/prelude/pull/1475): Open JavaScript files in `js-ts-mode` when its grammar is installed: `.js` files are associated with `javascript-mode`, an alias Prelude didn't remap, so they always ended up in `js-mode`. `.mjs` and `.cjs` files are recognized as JavaScript as well.
 
 ## 2.1.0 (2026-03-29)
 

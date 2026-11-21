@@ -615,6 +615,26 @@ installed."
       (should (eq lsp 'quiet))))
   (should (equal (cdr (prelude-test--visit "prelude.js")) '(t))))
 
+(ert-deftest prelude-tree-sitter-remaps-cover-the-modes-files-open-in ()
+  "The mode a file is associated with is the one Prelude remaps.
+Some of those are aliases (e.g. `javascript-mode'), which the remapping
+doesn't follow."
+  (dolist (module '(prelude-c prelude-csharp prelude-css prelude-go prelude-java
+                              prelude-js prelude-python prelude-ruby prelude-shell))
+    (require module))
+  (dolist (file '("prelude.c" "prelude.h" "prelude.cpp" "Prelude.cs" "prelude.css"
+                  "prelude.go" "Prelude.java" "prelude.js" "prelude.jsx"
+                  "prelude.mjs" "prelude.cjs" "prelude.json" "prelude.py"
+                  "prelude.rb" "prelude.gemspec" "prelude.sh"))
+    (let ((mode (assoc-default file auto-mode-alist #'string-match-p)))
+      (should mode)
+      ;; the tree-sitter modes of older Emacsen associate themselves
+      ;; with their files once their grammar is installed
+      (should (or (eq mode 'c-or-c++-mode)
+                  (string-suffix-p "-ts-mode" (symbol-name mode))
+                  (string-prefix-p "prelude-treesit-"
+                                   (symbol-name (alist-get mode major-mode-remap-alist))))))))
+
 (ert-deftest prelude-json-modes-get-the-same-setup ()
   "Both JSON modes get the JSON defaults, and only those."
   (require 'prelude-js)
