@@ -179,6 +179,7 @@ The following programming languages have enhanced support in Prelude:
 - [Web/HTML](web.md)
 - [XML](xml.md)
 - [YAML](yaml.md)
+- [Zig](zig.md)
 
 ## Completion Frameworks
 

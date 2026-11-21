@@ -187,6 +187,7 @@ modules visit the [docs](modules/index.md).
 (require 'prelude-web) ;; Emacs mode for web templates
 (require 'prelude-xml)
 (require 'prelude-yaml)
+;; (require 'prelude-zig)
 
 ;;; Misc
 (require 'prelude-erc) ;; A popular Emacs IRC client

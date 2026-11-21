@@ -56,6 +56,7 @@ nav:
         - Web/HTML: modules/web.md
         - XML: modules/xml.md
         - YAML: modules/yaml.md
+        - Zig: modules/zig.md
     - Completion Frameworks:
         - Helm: modules/helm.md
         - Ido: modules/ido.md

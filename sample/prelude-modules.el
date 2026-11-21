@@ -108,6 +108,7 @@
 (require 'prelude-web) ;; Emacs mode for web templates
 (require 'prelude-xml)
 (require 'prelude-yaml)
+;; (require 'prelude-zig)
 
 ;;; Misc
 ;; (require 'prelude-ai) ;; LLM-backed chat via gptel

@@ -501,4 +501,8 @@ installed."
   (require 'prelude-terraform)
   (should (equal (prelude-test--visit "main.tf") '(terraform-mode t))))
 
+(ert-deftest prelude-zig-sets-up-zig-files ()
+  (require 'prelude-zig)
+  (should (equal (prelude-test--visit "prelude.zig") '(zig-mode t))))
+
 ;;; prelude-test.el ends here
