@@ -30,9 +30,10 @@
 
 ;;; Code:
 
+(require 'prelude-programming)
+
 (defun prelude-web-mode-defaults ()
-  (subword-mode +1)
-  (run-hooks 'prelude-prog-mode-hook))
+  (subword-mode +1))
 
 ;; web-mode: major mode for editing web templates (HTML, PHP, ERB,
 ;; Jinja, Mustache, JSP, Vue, Svelte, etc.)

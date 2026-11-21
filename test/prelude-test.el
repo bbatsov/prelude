@@ -578,6 +578,22 @@ installed."
       (setq sqls "/usr/bin/sqls")
       (should (equal (prelude-test--visit "prelude.sql") '(sql-mode t))))))
 
+(ert-deftest prelude-prog-mode-hook-runs-once ()
+  "Modules don't run the hook themselves in modes derived from `prog-mode'."
+  (dolist (module '(prelude-css prelude-web))
+    (require module))
+  (let* ((runs 0)
+         (count (lambda () (setq runs (1+ runs)))))
+    (add-hook 'prelude-prog-mode-hook count)
+    (unwind-protect
+        (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore))
+          (dolist (mode '(css-mode web-mode))
+            (setq runs 0)
+            (with-temp-buffer
+              (funcall mode))
+            (should (= runs 1))))
+      (remove-hook 'prelude-prog-mode-hook count))))
+
 (ert-deftest prelude-terraform-sets-up-terraform-files ()
   (require 'prelude-terraform)
   (should (equal (prelude-test--visit "main.tf") '(terraform-mode t))))
