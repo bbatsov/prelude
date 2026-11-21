@@ -163,6 +163,7 @@ The following programming languages have enhanced support in Prelude:
 - [Nix](nix.md)
 - [OCaml](ocaml.md)
 - [Perl](perl.md)
+- [PHP](php.md)
 - [Python](python.md)
 - [Racket](racket.md)
 - [Ruby](ruby.md)
