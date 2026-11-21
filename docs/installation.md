@@ -120,6 +120,8 @@ By default most of the modules that ship with Prelude are not
 loaded. For more information on the functionality provided by these
 modules visit the [docs](modules/index.md).
 
+<!-- markdownlint-disable MD013 -->
+
 ```lisp
 ;;; Uncomment the modules you'd like to use and restart Prelude afterwards
 
@@ -131,7 +133,10 @@ modules visit the [docs](modules/index.md).
 ;; (require 'prelude-helm) ;; Interface for narrowing and search
 ;; (require 'prelude-helm-everywhere) ;; Enable Helm everywhere
 (require 'prelude-company)
+;; (require 'prelude-corfu) ;; Lightweight modern alternative to Company (mutually exclusive with prelude-company)
+;; (require 'prelude-apheleia) ;; Async, unified format-on-save
 ;; (require 'prelude-key-chord) ;; Binds useful features to key combinations
+;; (require 'prelude-eglot-booster) ;; Speeds up Eglot via emacs-lsp-booster (requires the binary)
 
 ;;; Vim emulation
 ;;
@@ -157,6 +162,7 @@ modules visit the [docs](modules/index.md).
 (require 'prelude-emacs-lisp)
 ;; (require 'prelude-erlang)
 ;; (require 'prelude-elixir)
+;; (require 'prelude-fsharp)
 ;; (require 'prelude-go)
 ;; (require 'prelude-haskell)
 ;; (require 'prelude-java)
@@ -165,7 +171,8 @@ modules visit the [docs](modules/index.md).
 ;; (require 'prelude-kotlin)
 ;; (require 'prelude-latex)
 (require 'prelude-lisp) ;; Common setup for Lisp-like languages
-;; (require 'prelude-lsp-mode) ;; lsp-mode and lsp-ui setup
+;; (require 'prelude-literate-programming) ;; Setup for Literate Programming
+;; (require 'prelude-lsp-mode) ;; lsp-mode and lsp-ui setup (loaded on demand when prelude-lsp-client is 'lsp-mode)
 ;; (require 'prelude-lua)
 ;; (require 'prelude-nix)
 ;; (require 'prelude-ocaml)
@@ -190,9 +197,13 @@ modules visit the [docs](modules/index.md).
 ;; (require 'prelude-zig)
 
 ;;; Misc
-(require 'prelude-erc) ;; A popular Emacs IRC client
-;; (require 'prelude-mistty) ;; MisTTY terminal (pure elisp, no native module)
+;; (require 'prelude-ai) ;; LLM-backed chat via gptel
+;; (require 'prelude-erc) ;; A popular Emacs IRC client
+;; (require 'prelude-forge) ;; GitHub/GitLab/Gitea PRs and issues via Magit
+;; (require 'prelude-mistty) ;; MisTTY terminal (pure elisp, no native module; rebinds C-c t)
 ```
+
+<!-- markdownlint-enable MD013 -->
 
 You'll need to adjust your `prelude-modules.el` file once the
 installation is done.
