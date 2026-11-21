@@ -15,6 +15,7 @@
 (declare-function prelude-java-mode-defaults "prelude-java")
 (declare-function prelude-ocaml-mode-defaults "prelude-ocaml")
 (declare-function prelude-racket-enable-input-mode "prelude-racket")
+(declare-function prelude-rust-mode-defaults "prelude-rust")
 
 (ert-deftest prelude-ocaml-mode-defaults-without-ocaml-eglot ()
   "The OCaml mode hook shouldn't fail when ocaml-eglot isn't installed."
@@ -520,5 +521,59 @@ installed."
             (setq buffer-file-name nil)
             (should (eq (file-executable-p file) executable)))
         (delete-file file)))))
+
+(defmacro prelude-test-with-formatters (&rest body)
+  "Run BODY with the formatting commands recording themselves in `calls'."
+  (declare (indent 0))
+  `(let ((calls nil))
+     (cl-letf (((symbol-function 'eglot-managed-p) (lambda () t))
+               ((symbol-function 'eglot-format-buffer) (lambda () (push 'eglot calls)))
+               ((symbol-function 'gofmt) (lambda () (push 'gofmt calls))))
+       ,@body)))
+
+(ert-deftest prelude-lsp-format-on-save-never-blocks-saving ()
+  "A language server that fails to format doesn't signal an error."
+  (cl-letf (((symbol-function 'eglot-managed-p) (lambda () t))
+            ((symbol-function 'eglot-format-buffer) (lambda () (error "Boom"))))
+    ;; ERT turns on `debug-on-error' in Emacs 29, which would defeat
+    ;; `with-demoted-errors'
+    (let ((debug-on-error nil)
+          (inhibit-message t))
+      (prelude-lsp-format-on-save))))
+
+(ert-deftest prelude-lsp-format-on-save-uses-the-client-of-the-buffer ()
+  "The buffer is formatted by lsp-mode when that manages it, or not at all."
+  (defvar lsp-mode)
+  (prelude-test-with-formatters
+    (cl-letf (((symbol-function 'eglot-managed-p) #'ignore)
+              ((symbol-function 'lsp-format-buffer) (lambda () (push 'lsp-mode calls))))
+      (prelude-lsp-format-on-save)
+      (should-not calls)
+      (let ((lsp-mode t))
+        (prelude-lsp-format-on-save))
+      (should (equal calls '(lsp-mode))))))
+
+(defun prelude-test--super-save-p (mode)
+  "Return non-nil if super-save would save a modified file buffer in MODE."
+  (let ((file (make-temp-file "prelude-test")))
+    (unwind-protect
+        (with-temp-buffer
+          (set-visited-file-name file t)
+          (setq major-mode mode)
+          (insert "modified")
+          (prog1 (seq-every-p #'funcall super-save-predicates)
+            (set-buffer-modified-p nil)))
+      (delete-file file))))
+
+(ert-deftest prelude-rust-formats-on-save-and-leaves-global-hooks-alone ()
+  (require 'prelude-rust)
+  (should-not (prelude-test--super-save-p 'rust-ts-mode))
+  (let ((after-save (default-value 'after-save-hook)))
+    (with-temp-buffer
+      (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore))
+        (prelude-rust-mode-defaults))
+      (should (memq 'prelude-lsp-format-on-save before-save-hook)))
+    (should (memq 'prelude-make-script-executable after-save))
+    (should (equal (default-value 'after-save-hook) after-save))))
 
 ;;; prelude-test.el ends here

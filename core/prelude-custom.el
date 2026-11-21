@@ -121,8 +121,8 @@ in the desired elisp file."
   :group 'prelude)
 
 (defcustom prelude-format-on-save t
-  "Run mode specific format on file before it's saved.
-Currently only applies to TypeScript files."
+  "Whether modules should format a file before it's saved.
+Applies to the modules that format on save: Go and Rust."
   :type 'boolean
   :group 'prelude)
 
