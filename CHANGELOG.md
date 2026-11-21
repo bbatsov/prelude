@@ -82,6 +82,7 @@
 - [#1473](https://github.com/bbatsov/prelude/pull/1473): Add the missing `prelude-ocaml-mode-hook`, and run `prelude-ts-mode-hook` in `typescript-mode` buffers as well.
 - [#1475](https://github.com/bbatsov/prelude/pull/1475): Open JavaScript files in `js-ts-mode` when its grammar is installed: `.js` files are associated with `javascript-mode`, an alias Prelude didn't remap, so they always ended up in `js-mode`. `.mjs` and `.cjs` files are recognized as JavaScript as well.
 - [#1475](https://github.com/bbatsov/prelude/pull/1475): Install the `jsdoc` grammar together with the `javascript` one on Emacs 31+, where `js-ts-mode` fails to start without it.
+- [#1476](https://github.com/bbatsov/prelude/pull/1476): Install tree-sitter grammars that work with the modes of the Emacs you're running: the pinned versions of the Go, JavaScript and TypeScript grammars were too new for Emacs 29 and 30 (breaking parts of their highlighting), the latest Swift grammar doesn't work with `swift-ts-mode`, and the YAML one could fail to build.
 
 ## 2.1.0 (2026-03-29)
 

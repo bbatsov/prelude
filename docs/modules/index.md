@@ -178,7 +178,8 @@ from time to time, and a tree-sitter mode written against an older
 grammar loses most of its highlighting when that happens, so the
 latest version is rarely the one you want. For the same reason the pin
 can differ between Emacs versions: `csharp-ts-mode` in Emacs 29 needs a
-much older `c-sharp` grammar than the one in Emacs 30.
+much older `c-sharp` grammar than the one in Emacs 30, and the same
+goes for Go, JavaScript and TypeScript.
 
 Emacs 31 knows where to get the grammars of its own modes. Prelude's
 recipes are used only when Emacs has none.
