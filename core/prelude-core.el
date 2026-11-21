@@ -181,6 +181,25 @@ See `prelude-conflicting-modules'."
      (require 'prelude-lsp-mode)
      (lsp-deferred))))
 
+(defun prelude-format-on-save-p ()
+  "Return non-nil if a module should format the buffer when it's saved.
+That's not the case when `prelude-format-on-save' is off, or when
+Apheleia is already taking care of the formatting."
+  (and prelude-format-on-save
+       (not (bound-and-true-p apheleia-mode))))
+
+(defun prelude-lsp-format-on-save ()
+  "Format the buffer with its language server, if there's one running.
+Meant for `before-save-hook'.  See `prelude-format-on-save-p'."
+  (when (prelude-format-on-save-p)
+    ;; a failed request shouldn't get in the way of saving the file
+    (with-demoted-errors "[Prelude] Couldn't format the buffer: %S"
+      (cond
+       ((and (fboundp 'eglot-managed-p) (eglot-managed-p))
+        (eglot-format-buffer))
+       ((bound-and-true-p lsp-mode)
+        (lsp-format-buffer))))))
+
 ;; Eglot configuration
 (defvar eglot-autoshutdown)
 (defvar eglot-events-buffer-config)
@@ -189,6 +208,8 @@ See `prelude-conflicting-modules'."
 (declare-function eglot-code-action-organize-imports "eglot")
 (declare-function eglot-code-actions "eglot")
 (declare-function eglot-format-buffer "eglot")
+(declare-function eglot-managed-p "eglot")
+(declare-function lsp-format-buffer "lsp-mode")
 (declare-function eglot-rename "eglot")
 
 (with-eval-after-load 'eglot

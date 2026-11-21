@@ -27,8 +27,6 @@
 
 ;;; Code:
 
-(defvar rust-format-on-save)
-
 (require 'prelude-programming)
 
 ;; You may need to install the following packages on your system:
@@ -41,10 +39,11 @@
 ;; Disable super-save in Rust buffers -- auto-saving triggers
 ;; lsp-format-buffer which causes severe hangs during autocomplete
 (add-to-list 'super-save-predicates
-             (lambda () (not (eq major-mode 'rust-ts-mode))))
+             (lambda () (not (derived-mode-p 'rust-ts-mode 'rust-mode))))
 
 (defun prelude-rust-mode-defaults ()
-  (setq rust-format-on-save t)
+  ;; format before save (rust-analyzer runs rustfmt)
+  (add-hook 'before-save-hook #'prelude-lsp-format-on-save nil t)
 
   ;; CamelCase aware editing operations
   (subword-mode +1)
