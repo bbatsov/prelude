@@ -2,11 +2,30 @@
 
 !!! Note
 
-    This module builds on top of the lsp-module.
+    This module builds on top of the shared [Programming](programming.md)
+    module and the [LSP](lsp.md) module.
 
-The dart module is powered by [lsp-dart](https://emacs-lsp.github.io/lsp-dart/).
+## Package Prerequisites
 
-Some features it provides:
+All you need is the Dart SDK (or Flutter, which includes it). The
+language server is a part of the SDK (`dart language-server`).
+
+## Dart Mode
+
+The module uses [dart-mode](https://github.com/emacsorphanage/dart-mode)
+for editing Dart code.
+
+`subword-mode` is enabled, so the editing commands understand
+`CamelCase`.
+
+## LSP support
+
+With Eglot (the default) you get the standard LSP features. See the
+[LSP](lsp.md) module for the available key bindings.
+
+With lsp-mode the module also installs
+[lsp-dart](https://emacs-lsp.github.io/lsp-dart/), which adds a lot on
+top of that:
 
 - Flutter integration
 - Tree views
@@ -14,7 +33,7 @@ Some features it provides:
 - Debug
 - Run tests
 
-Some essential commands:
+Some essential commands (lsp-mode only):
 
 - `lsp-dart-pub-get` - Run pub get or flutter pub get on
   project root.

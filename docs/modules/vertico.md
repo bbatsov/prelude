@@ -50,8 +50,6 @@ Prelude:
 | <kbd>M-g k</kbd> | `consult-global-mark` | Navigate global marks |
 | <kbd>M-g i</kbd> | `consult-imenu` | Navigate imenu |
 | <kbd>M-g I</kbd> | `consult-imenu-multi` | Navigate imenu across buffers |
-| <kbd>M-g e</kbd> | `consult-compile-error` | Navigate compilation errors |
-| <kbd>M-g f</kbd> | `consult-flycheck` | Navigate Flycheck errors |
 
 ### Search (M-s prefix)
 

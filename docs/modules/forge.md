@@ -3,8 +3,8 @@
 ## Overview
 
 [Forge](https://github.com/magit/forge) is a Magit extension for
-working with Git forges -- GitHub, GitLab, Gitea, Bitbucket, and
-others -- without leaving Emacs. With Forge you can:
+working with Git forges - GitHub, GitLab, Gitea, Bitbucket, and
+others - without leaving Emacs. With Forge you can:
 
 - List and view pull requests and issues alongside branches and
   commits in the Magit status buffer.
@@ -18,7 +18,7 @@ on demand when you visit a repository's forge section in Magit.
 
 ## Key Bindings
 
-Forge integrates with Magit's existing key bindings -- there are no
+Forge integrates with Magit's existing key bindings - there are no
 new global keys. Once a repository is set up:
 
 | Key | Where | Description |
@@ -49,7 +49,7 @@ access token with `api` scope.
 
 Open a repo in `magit-status`, then run `M-x forge-add-repository`
 (or use the dispatch menu). Forge will fetch topics into its local
-database -- this can take a moment for large repos.
+database - this can take a moment for large repos.
 
 ### 3. (Optional) Self-hosted instances
 

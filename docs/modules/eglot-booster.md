@@ -50,14 +50,14 @@ load the module will fetch the `eglot-booster` Emacs package via
 
 Open a file with an active Eglot connection and run
 `M-x eglot-events-buffer`. The first lines should mention
-`emacs_lsp_booster::app` -- that confirms the booster is in the
+`emacs_lsp_booster::app` - that confirms the booster is in the
 loop.
 
 ## Customization
 
-- `eglot-booster-no-remote-boost` -- set to `t` to skip boosting
+- `eglot-booster-no-remote-boost` - set to `t` to skip boosting
   servers running over TRAMP. Defaults to `nil`.
-- `eglot-booster-io-only` -- set to `t` to keep Emacs 30+'s native
+- `eglot-booster-io-only` - set to `t` to keep Emacs 30+'s native
   JSON parser (the booster only handles I/O, not bytecode). Useful
   if you want to compare.
 

@@ -6,7 +6,7 @@
 unified format-on-save framework for Emacs. On save, it runs the
 appropriate external formatter (Prettier, Black, Ruff, gofmt,
 rustfmt, ...) asynchronously, then patches the buffer with the
-result. The patching is point-preserving and flicker-free -- it
+result. The patching is point-preserving and flicker-free - it
 feels like the formatter ran instantly with no visible buffer
 churn.
 
@@ -21,7 +21,7 @@ Just two things:
 1. Installs the `apheleia` package.
 2. Enables `apheleia-global-mode`.
 
-That's it -- no further setup required for the languages Apheleia
+That's it - no further setup required for the languages Apheleia
 already knows about.
 
 ## Relationship to language modules

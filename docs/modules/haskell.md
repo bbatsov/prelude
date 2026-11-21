@@ -2,7 +2,8 @@
 
 !!! Note
 
-    This module builds on top of the shared [Programming](programming.md) module.
+    This module builds on top of the shared [Programming](programming.md)
+    module and the [LSP](lsp.md) module.
 
 ## Haskell Mode
 
@@ -21,10 +22,11 @@ Make sure you have GHC and Cabal (or Stack) installed on your system. Run
 <kbd>C-h m</kbd> in a Haskell buffer to see all available key
 bindings and features.
 
-## LSP Alternative
+## LSP support
 
-For a more feature-rich experience, you might want to use
-[Haskell Language Server (HLS)](https://github.com/haskell/haskell-language-server)
-together with the [LSP](lsp.md) module. You'll need to set
-this up yourself in your
-personal config.
+The module starts a language server when there's one installed. Both
+Eglot and lsp-mode use the
+[Haskell Language Server (HLS)](https://github.com/haskell/haskell-language-server),
+which [GHCup](https://www.haskell.org/ghcup/) can install for you.
+
+See the [LSP](lsp.md) module for the available LSP key bindings.

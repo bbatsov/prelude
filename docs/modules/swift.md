@@ -2,7 +2,8 @@
 
 !!! Note
 
-    This module builds on top of the shared [Programming](programming.md) module.
+    This module builds on top of the shared [Programming](programming.md)
+    module and the [LSP](lsp.md) module.
 
 ## Package Prerequisites
 
@@ -14,10 +15,12 @@ your system:
 
 ## Swift Mode
 
-The module uses the tree-sitter powered `swift-ts-mode` for editing
-Swift code, so you'll need the `swift` tree-sitter grammar installed.
-Prelude ships a recipe for it, so `M-x treesit-install-language-grammar
-RET swift` will fetch and build it for you.
+The module uses the tree-sitter powered
+[swift-ts-mode](https://github.com/rechsteiner/swift-ts-mode) for
+editing Swift code. Prelude offers to install the `swift` grammar the
+first time you open a Swift file (see `prelude-treesit-auto-install`).
+There's no classic mode to fall back to, so without the grammar Swift
+files open in `fundamental-mode`.
 
 Whenever you are editing Swift code run <kbd>C-h m</kbd> to look at the
 Swift mode key bindings.

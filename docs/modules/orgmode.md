@@ -11,7 +11,12 @@ It establishes a few extra keybidings:
 
 - `C-c l` (`org-store-link`)
 - `C-c a` (`org-agenda`)
+- `C-c c` (`org-capture`)
 - `C-c b` (`org-switchb`)
+
+In Org buffers `org-indent-mode` is enabled, and `C-a`, `C-c +` and
+`C-c -` do what Org wants them to do, instead of what Prelude binds
+them to everywhere else.
 
 ## org-habits
 

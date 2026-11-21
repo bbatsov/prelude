@@ -73,7 +73,7 @@ The module includes custom evil key bindings for `org-mode`:
 
 ## Magit Integration
 
-HJKL navigation is added to Magit buffers (log, commit, branch manager, status).
+HJKL navigation is added to the Magit log and status buffers.
 
 ## Configuration
 

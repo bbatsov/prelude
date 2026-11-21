@@ -15,7 +15,10 @@ This module bundles [Geiser](https://www.nongnu.org/geiser/), a popular interact
 programming environment for Scheme. People familiar with Common Lisp's SLIME will
 feel right at home with Geiser.
 
-Note that Geiser supports many Scheme implementations:
+Note that Geiser supports many Scheme implementations, each through
+a package of its own (`geiser-guile`, `geiser-chicken`, `geiser-mit`,
+etc). Prelude installs only Geiser itself, so you'll have to install
+the package for your Scheme:
 
 - Guile 2.2 or better
 - Chicken 4.8.0 or better

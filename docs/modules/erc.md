@@ -25,7 +25,7 @@ vista* to something more funkier, please redefine `bye-irc-message` as
 follows:
 
 ```emacs-lisp
-(setq bye-erc-message "adios")
+(setq bye-irc-message "adios")
 ```
 
 ## Reading NickServ passwords from auth-source plugin
