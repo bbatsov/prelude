@@ -110,6 +110,7 @@ The following programming languages have enhanced support in Prelude:
 - [Web/HTML](modules/web.md)
 - [XML](modules/xml.md)
 - [YAML](modules/yaml.md)
+- [Zig](modules/zig.md)
 
 On top of this - basic support for many other programming languages
 will be auto-installed when needed (e.g. the first time you open a
