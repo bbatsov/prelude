@@ -33,6 +33,7 @@
 
 ### Changes
 
+- [#1470](https://github.com/bbatsov/prelude/pull/1470): `prelude-format-on-save` now controls the format on save of the Go and Rust modules, which also leave the formatting to Apheleia when `prelude-apheleia` is enabled (it now prefers `goimports` to `gofmt` as well).
 - Add an `early-init.el` that tunes startup: it raises the GC threshold while Emacs loads (restoring a modest value once startup is over), disables the tool bar via frame parameters so the initial frame is never drawn with one, sets `frame-inhibit-implied-resize`, native-compiles packages at install time (`package-native-compile`), and sets a sane `LANG` for GUI Emacs on macOS (which otherwise starts in the `C` locale and breaks spell-checker dictionaries and subprocess sorting).
 - Modernize the Eglot event-log setting to prefer `eglot-events-buffer-config` on newer Eglot, falling back to the obsolete `eglot-events-buffer-size` on older versions.
 - Bridge Eglot diagnostics into Flycheck via [flycheck-eglot](https://github.com/flycheck/flycheck-eglot) when `prelude-lsp-client` is `eglot`, so LSP diagnostics show up in Prelude's Flycheck UI instead of only through Flymake. Installed on demand; lsp-mode users are unaffected (lsp-mode has its own Flycheck integration).
@@ -71,6 +72,7 @@
 - Keep installing the packages of `use-package :ensure` forms after Prelude gets byte-compiled (as `prelude-update` does). `use-package` ensures packages at compile time when a file is compiled, so the compiled files never installed missing packages (and installed conditional ones regardless of their condition).
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): Fix opening a Rust file turning off "make scripts executable on save" for every buffer (the function on `after-save-hook` is now `prelude-make-script-executable`, which knows that `#![...]` isn't a shebang).
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): Format Rust buffers on save again (with the language server), as `rust-format-on-save` has no effect in `rust-ts-mode`.
+- [#1470](https://github.com/bbatsov/prelude/pull/1470): Fix `prelude-go`'s key bindings, format on save and `super-save` exemption not working in `go-ts-mode`.
 
 ## 2.1.0 (2026-03-29)
 

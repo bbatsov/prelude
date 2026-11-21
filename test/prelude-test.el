@@ -12,6 +12,12 @@
 (require 'ert)
 (require 'cl-lib)
 
+(defvar apheleia-mode-alist)
+(defvar go-ts-mode-map)
+
+(declare-function prelude-apheleia-prefer-goimports "prelude-apheleia")
+(declare-function prelude-go-format-buffer "prelude-go")
+(declare-function prelude-go-mode-defaults "prelude-go")
 (declare-function prelude-java-mode-defaults "prelude-java")
 (declare-function prelude-ocaml-mode-defaults "prelude-ocaml")
 (declare-function prelude-racket-enable-input-mode "prelude-racket")
@@ -531,6 +537,23 @@ installed."
                ((symbol-function 'gofmt) (lambda () (push 'gofmt calls))))
        ,@body)))
 
+(ert-deftest prelude-format-on-save-can-be-turned-off ()
+  "Modules format on save unless that's turned off or Apheleia does it."
+  (require 'prelude-go)
+  (defvar apheleia-mode)
+  (prelude-test-with-formatters
+    (prelude-lsp-format-on-save)
+    (prelude-go-format-buffer)
+    (should (equal calls '(gofmt eglot)))
+    (setq calls nil)
+    (let ((prelude-format-on-save nil))
+      (prelude-lsp-format-on-save)
+      (prelude-go-format-buffer))
+    (let ((apheleia-mode t))
+      (prelude-lsp-format-on-save)
+      (prelude-go-format-buffer))
+    (should-not calls)))
+
 (ert-deftest prelude-lsp-format-on-save-never-blocks-saving ()
   "A language server that fails to format doesn't signal an error."
   (cl-letf (((symbol-function 'eglot-managed-p) (lambda () t))
@@ -553,6 +576,17 @@ installed."
         (prelude-lsp-format-on-save))
       (should (equal calls '(lsp-mode))))))
 
+(ert-deftest prelude-apheleia-prefers-goimports-when-installed ()
+  (require 'prelude-apheleia)
+  (dolist (goimports '(nil "/usr/bin/goimports"))
+    (let ((apheleia-mode-alist (list (cons 'go-mode 'gofmt) (cons 'go-ts-mode 'gofmt))))
+      (cl-letf (((symbol-function 'executable-find) (lambda (&rest _) goimports)))
+        (prelude-apheleia-prefer-goimports))
+      (should (equal apheleia-mode-alist
+                     (if goimports
+                         '((go-mode . goimports) (go-ts-mode . goimports))
+                       '((go-mode . gofmt) (go-ts-mode . gofmt))))))))
+
 (defun prelude-test--super-save-p (mode)
   "Return non-nil if super-save would save a modified file buffer in MODE."
   (let ((file (make-temp-file "prelude-test")))
@@ -564,6 +598,25 @@ installed."
           (prog1 (seq-every-p #'funcall super-save-predicates)
             (set-buffer-modified-p nil)))
       (delete-file file))))
+
+(ert-deftest prelude-go-works-the-same-in-both-go-modes ()
+  "The key bindings, formatting and super-save setup don't depend on the mode."
+  (require 'prelude-go)
+  (should (fboundp 'gofmt))
+  (should (fboundp 'godoc-at-point))
+  (require 'go-mode)
+  (require 'go-ts-mode)
+  (dolist (map (list go-mode-map go-ts-mode-map))
+    (should (eq (lookup-key map (kbd "C-c a")) 'go-test-current-project))
+    (should (eq (lookup-key map (kbd "C-c .")) 'go-test-current-test))
+    (should (eq (lookup-key map (kbd "C-c b")) 'go-run)))
+  (dolist (mode '(go-mode go-ts-mode))
+    (should-not (prelude-test--super-save-p mode)))
+  (should (prelude-test--super-save-p 'fundamental-mode))
+  (with-temp-buffer
+    (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore))
+      (prelude-go-mode-defaults))
+    (should (memq 'prelude-go-format-buffer before-save-hook))))
 
 (ert-deftest prelude-rust-formats-on-save-and-leaves-global-hooks-alone ()
   (require 'prelude-rust)

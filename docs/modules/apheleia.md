@@ -26,20 +26,10 @@ already knows about.
 
 ## Relationship to language modules
 
-Several Prelude language modules install their own format-on-save
-hooks (e.g. `rust-format-on-save` in `prelude-rust`,
-`gofmt-before-save` in `prelude-go`). These keep working with
-Apheleia enabled -- they just run redundantly. If you enable this
-module you can safely drop them from your personal config, or
-disable them with hooks like:
-
-```emacs-lisp
-(with-eval-after-load 'rust-ts-mode
-  (setq rust-format-on-save nil))
-
-(with-eval-after-load 'go-mode
-  (remove-hook 'before-save-hook 'gofmt-before-save))
-```
+A couple of Prelude's language modules format on save themselves
+([Go](go.md) with `gofmt`, [Rust](rust.md) with `rust-analyzer`). They
+step aside in the buffers where Apheleia is enabled, so the code isn't
+formatted twice.
 
 ## Adding a formatter
 

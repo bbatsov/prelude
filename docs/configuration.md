@@ -106,14 +106,13 @@ lexicographical order (files first and then directories of files).  The overall 
 
 ### Personalization Example
 
-Suppose you want to configure `go-mode` to autoformat on each save.  You
-can create a file in `personal/`, let's call this one
-`config-go-mode.el` and add the following to it.
+Suppose you want tabs to be 2 columns wide in Go buffers. You can
+create a file in `personal/`, let's call this one `config-go.el`, and
+add the following to it.
 
 ```emacs-lisp
-(add-hook 'go-mode-hook
+(add-hook 'prelude-go-mode-hook
           (lambda ()
-            (add-hook 'before-save-hook 'gofmt-before-save)
             (setq tab-width 2)))
 ```
 
@@ -187,7 +186,8 @@ If you prefer not to automatically format your file on save, you can disable tha
 (setq prelude-format-on-save nil)
 ```
 
-Currently this only affects automated formatting of Typescript files.
+This affects the modules that format on save (Go and Rust). It has
+no effect on [Apheleia](modules/apheleia.md).
 
 ### Switch LSP client
 
