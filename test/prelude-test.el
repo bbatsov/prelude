@@ -484,4 +484,17 @@ installed."
   (require 'prelude-r)
   (should (equal (prelude-test--visit "prelude.R") '(ess-r-mode t))))
 
+(ert-deftest prelude-sql-sets-up-sql-files ()
+  (require 'prelude-sql)
+  (let* ((sqls nil)
+         (executable-find (symbol-function 'executable-find)))
+    (cl-letf (((symbol-function 'executable-find)
+               (lambda (command &rest args)
+                 (if (equal command "sqls")
+                     sqls
+                   (apply executable-find command args)))))
+      (should (equal (prelude-test--visit "prelude.sql") '(sql-mode nil)))
+      (setq sqls "/usr/bin/sqls")
+      (should (equal (prelude-test--visit "prelude.sql") '(sql-mode t))))))
+
 ;;; prelude-test.el ends here

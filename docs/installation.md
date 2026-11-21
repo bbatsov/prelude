@@ -180,6 +180,7 @@ modules visit the [docs](modules/index.md).
 ;; (require 'prelude-scheme)
 (require 'prelude-shell)
 ;; (require 'prelude-scss)
+;; (require 'prelude-sql)
 ;; (require 'prelude-swift)
 ;; (require 'prelude-ts)
 (require 'prelude-web) ;; Emacs mode for web templates
