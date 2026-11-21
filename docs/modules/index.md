@@ -174,6 +174,7 @@ The following programming languages have enhanced support in Prelude:
 - [SCSS](scss.md)
 - [Shell](shell.md)
 - [SQL](sql.md)
+- [Terraform](terraform.md)
 - [TypeScript](ts.md)
 - [Web/HTML](web.md)
 - [XML](xml.md)

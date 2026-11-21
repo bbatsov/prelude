@@ -51,6 +51,7 @@ nav:
         - Shell: modules/shell.md
         - SQL: modules/sql.md
         - Swift: modules/swift.md
+        - Terraform: modules/terraform.md
         - TypeScript: modules/ts.md
         - Web/HTML: modules/web.md
         - XML: modules/xml.md
