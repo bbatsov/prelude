@@ -103,6 +103,7 @@
 ;; (require 'prelude-scss)
 ;; (require 'prelude-sql)
 ;; (require 'prelude-swift)
+;; (require 'prelude-terraform)
 ;; (require 'prelude-ts)
 (require 'prelude-web) ;; Emacs mode for web templates
 (require 'prelude-xml)

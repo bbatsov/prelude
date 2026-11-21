@@ -497,4 +497,8 @@ installed."
       (setq sqls "/usr/bin/sqls")
       (should (equal (prelude-test--visit "prelude.sql") '(sql-mode t))))))
 
+(ert-deftest prelude-terraform-sets-up-terraform-files ()
+  (require 'prelude-terraform)
+  (should (equal (prelude-test--visit "main.tf") '(terraform-mode t))))
+
 ;;; prelude-test.el ends here
