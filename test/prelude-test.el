@@ -1082,6 +1082,22 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
     ;; make sure the tables are still in a shape we can read
     (should (> checked 60))))
 
+(ert-deftest prelude-options-are-documented ()
+  "Every user option of the core is in the Configuration page's table."
+  (let ((docs (prelude-test--file-string "docs/configuration.md"))
+        (options nil))
+    (mapatoms
+     (lambda (symbol)
+       (when (and (custom-variable-p symbol)
+                  (equal (file-name-base (or (symbol-file symbol 'defvar) ""))
+                         "prelude-custom"))
+         (push symbol options))))
+    (should (> (length options) 15))
+    (dolist (option options)
+      ;; these two are leftovers that nothing reads
+      (unless (memq option '(prelude-auto-save prelude-user-init-file))
+        (should (string-search (format "`%s` |" option) docs))))))
+
 ;;; The module listings
 
 (defun prelude-test--file-string (file)
