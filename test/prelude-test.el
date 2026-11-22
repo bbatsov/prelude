@@ -937,6 +937,52 @@ to load and would leave them in `fundamental-mode'."
     (should (memq 'prelude-make-script-executable after-save))
     (should (equal (default-value 'after-save-hook) after-save))))
 
+(ert-deftest prelude-delete-init-bytecode-removes-compiled-init-files ()
+  "Compiled init files are deleted, and the outdated ones reported."
+  (let ((prelude-dir (file-name-as-directory (make-temp-file "prelude-test" t))))
+    (unwind-protect
+        (cl-flet ((touch (name age)
+                    (let ((file (expand-file-name name prelude-dir)))
+                      (write-region "" nil file nil 'silent)
+                      (set-file-times file (time-subtract nil age))
+                      file)))
+          (touch "init.el" 100)
+          (touch "early-init.el" 100)
+          (touch "other.elc" 200)
+          (let ((stale (touch "early-init.elc" 200)))
+            (touch "init.elc" 50)
+            (should (equal (prelude-delete-init-bytecode) (list stale))))
+          (should (equal (directory-files prelude-dir nil "\\.elc\\'") '("other.elc")))
+          (should-not (prelude-delete-init-bytecode)))
+      (delete-directory prelude-dir t))))
+
+(ert-deftest prelude-delete-init-bytecode-survives-a-read-only-install ()
+  "Not being allowed to delete the files is reported, but isn't an error."
+  (let ((prelude-dir (file-name-as-directory (make-temp-file "prelude-test" t)))
+        (warned nil))
+    (unwind-protect
+        (progn
+          (write-region "" nil (expand-file-name "init.elc" prelude-dir) nil 'silent)
+          (cl-letf (((symbol-function 'delete-file)
+                     (lambda (file &rest _) (signal 'permission-denied (list file))))
+                    ((symbol-function 'display-warning)
+                     (lambda (&rest _) (setq warned t))))
+            (prelude-delete-init-bytecode))
+          (should warned))
+      (delete-directory prelude-dir t))))
+
+(ert-deftest prelude-recompile-init-leaves-the-init-files-alone ()
+  "Only the directories whose code is loaded with `require' get compiled."
+  (let ((compiled nil))
+    (cl-letf (((symbol-function 'byte-recompile-directory)
+               (lambda (dir &rest _) (push dir compiled)))
+              ((symbol-function 'prelude-delete-init-bytecode) #'ignore))
+      (prelude-recompile-init))
+    (should (member prelude-core-dir compiled))
+    (should (member prelude-modules-dir compiled))
+    (should-not (member prelude-dir compiled))
+    (should-not (member prelude-personal-dir compiled))))
+
 (ert-deftest prelude-leaves-fonts-alone ()
   "Fonts are the user's business: nothing in the core sets them."
   (dolist (file (directory-files prelude-core-dir t "\\.el\\'"))

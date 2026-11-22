@@ -86,6 +86,7 @@
 - [#1476](https://github.com/bbatsov/prelude/pull/1476): Install tree-sitter grammars that work with the modes of the Emacs you're running: the pinned versions of the Go, JavaScript and TypeScript grammars were too new for Emacs 29 and 30 (breaking parts of their highlighting), the latest Swift grammar doesn't work with `swift-ts-mode`, and the YAML one could fail to build.
 - [#1476](https://github.com/bbatsov/prelude/pull/1476): Don't try to install `heex-ts-mode` in `prelude-elixir` on Emacs 29, where it isn't available (it's built into Emacs 30+).
 - [#1477](https://github.com/bbatsov/prelude/pull/1477): Fix Eglot failing with `void-function eglot-server-capable` on Emacs 29 as soon as a language server connects (`flycheck-eglot` relies on a function that Eglot got in Emacs 30).
+- [#1480](https://github.com/bbatsov/prelude/pull/1480): Stop Emacs from loading an outdated `init.elc` or `early-init.elc` instead of Prelude's current init files (it prefers them even when the sources are newer). `prelude-update` no longer compiles the two, and compiled copies left by older versions are removed on startup.
 
 ## 2.1.0 (2026-03-29)
 

@@ -62,10 +62,55 @@ to the active region."
 (prelude-install-search-engine "github"     "https://github.com/search?q="                 "Search GitHub: ")
 (prelude-install-search-engine "duckduckgo" "https://duckduckgo.com/?t=lm&q="              "Search DuckDuckGo: ")
 
+(defun prelude-delete-init-bytecode ()
+  "Delete the compiled versions of Prelude's init.el and early-init.el.
+Return the ones that were older than their sources.
+
+Emacs loads init.elc and early-init.elc in preference to the sources,
+even when those are newer.  `load-prefer-newer' is of no help there, as
+it's set by the very files in question.  A compiled init file left
+behind by an older Prelude (or by an update that didn't go through
+`prelude-update') would therefore shadow the current one forever, so
+Prelude doesn't keep them around at all."
+  (let ((stale nil))
+    (dolist (name '("init" "early-init"))
+      (let ((source (expand-file-name (concat name ".el") prelude-dir))
+            (compiled (expand-file-name (concat name ".elc") prelude-dir)))
+        (when (file-exists-p compiled)
+          (when (file-newer-than-file-p source compiled)
+            (push compiled stale))
+          ;; We might not be allowed to, e.g. in a system-wide install.
+          ;; That's no reason to fail to start.
+          (condition-case err
+              (delete-file compiled)
+            (file-error
+             (display-warning
+              'prelude
+              (format "Couldn't delete %s, which Emacs loads instead of %s: %s"
+                      compiled (file-name-nondirectory source)
+                      (error-message-string err))))))))
+    (nreverse stale)))
+
+;; This runs on every startup.  Even if a stale init.elc was loaded, it
+;; has `load-prefer-newer' set, so we get here through the current
+;; source of this file.
+(let ((stale (prelude-delete-init-bytecode)))
+  (when stale
+    (display-warning
+     'prelude
+     (format "Removed outdated byte-code that Emacs was loading instead of Prelude's current init files (%s).  Restart Emacs to start with the right ones."
+             (mapconcat #'file-name-nondirectory stale ", ")))))
+
 (defun prelude-recompile-init ()
-  "Byte-compile all your dotfiles again."
+  "Byte-compile Prelude's core, modules and vendored code again.
+init.el and early-init.el are never compiled, see
+`prelude-delete-init-bytecode'.  Your personal config isn't either, as
+it's loaded from its source files."
   (interactive)
-  (byte-recompile-directory prelude-dir 0))
+  (prelude-delete-init-bytecode)
+  (dolist (dir (list prelude-core-dir prelude-modules-dir prelude-vendor-dir))
+    (when (file-directory-p dir)
+      (byte-recompile-directory dir 0))))
 
 (defvar prelude-tips
   '("Press <C-c o> to open a file with external program."
