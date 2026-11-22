@@ -971,6 +971,21 @@ to load and would leave them in `fundamental-mode'."
           (prelude-yank-indent-advice)))
       (should (eq called indented)))))
 
+(ert-deftest prelude-welcome-screen-stays-out-of-the-way-of-files ()
+  "Starting Emacs with a file (new or not) shows the file, not the welcome screen."
+  (cl-letf (((symbol-function 'prelude-welcome--render) (lambda () 'welcome)))
+    (with-temp-buffer
+      (let ((prelude-welcome--startup-done nil))
+        (should (eq (prelude-welcome--initial-buffer) 'welcome))
+        (setq buffer-file-name "/nonexistent/new-file.txt")
+        (unwind-protect
+            (progn
+              (should (eq (prelude-welcome--initial-buffer) (current-buffer)))
+              ;; later frames (e.g. of emacsclient) get the welcome screen
+              (setq prelude-welcome--startup-done t)
+              (should (eq (prelude-welcome--initial-buffer) 'welcome)))
+          (setq buffer-file-name nil))))))
+
 (ert-deftest prelude-delete-init-bytecode-removes-compiled-init-files ()
   "Compiled init files are deleted, and the outdated ones reported."
   (let ((prelude-dir (file-name-as-directory (make-temp-file "prelude-test" t))))

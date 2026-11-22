@@ -185,18 +185,26 @@
   (interactive)
   (switch-to-buffer (prelude-welcome--render)))
 
-(defun prelude-welcome--file-args-p ()
-  "Non-nil if Emacs was launched with existing-file arguments."
-  (seq-some (lambda (arg)
-              (and (not (string-prefix-p "-" arg))
-                   (file-exists-p arg)))
-            (cdr command-line-args)))
+(defvar prelude-welcome--startup-done nil
+  "Non-nil once Emacs has finished starting up.")
 
-;; Show the welcome screen on startup, unless it's been disabled or
-;; Emacs was launched to open specific files.
-(when (and prelude-welcome-screen
-           (not (prelude-welcome--file-args-p)))
-  (setq initial-buffer-choice #'prelude-welcome--render))
+(add-hook 'emacs-startup-hook
+          (lambda () (setq prelude-welcome--startup-done t)))
+
+(defun prelude-welcome--initial-buffer ()
+  "Return the buffer to show in a new frame, for `initial-buffer-choice'.
+That's the welcome screen, unless Emacs was started to edit a file.  We
+can tell by the current buffer: the files named on the command line
+have been visited by the time this is called, whether they exist or
+not."
+  (if (and (not prelude-welcome--startup-done)
+           buffer-file-name)
+      (current-buffer)
+    (prelude-welcome--render)))
+
+;; Show the welcome screen on startup, unless it's been disabled.
+(when prelude-welcome-screen
+  (setq initial-buffer-choice #'prelude-welcome--initial-buffer))
 
 (provide 'prelude-welcome)
 ;;; prelude-welcome.el ends here
