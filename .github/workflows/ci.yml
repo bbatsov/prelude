@@ -39,6 +39,8 @@ jobs:
         run: emacs --batch --load init.el --load test/prelude-load-test.el
       - name: run regression tests
         run: emacs --batch --load init.el --load test/prelude-test.el -f ert-run-tests-batch-and-exit
+      - name: run the installer against throwaway home directories
+        run: sh test/prelude-installer-test.sh
       # Obsolescence warnings differ between Emacs versions (a name that's
       # obsolete in one may be the only one available in another), so the
       # warnings-as-errors build only runs on the latest stable release.
@@ -150,3 +152,5 @@ jobs:
         run: emacs --batch --load init.el --load test/prelude-load-test.el
       - name: run regression tests
         run: emacs --batch --load init.el --load test/prelude-test.el -f ert-run-tests-batch-and-exit
+      - name: run the installer against throwaway home directories
+        run: sh test/prelude-installer-test.sh

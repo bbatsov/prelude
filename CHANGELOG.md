@@ -87,6 +87,8 @@
 - [#1476](https://github.com/bbatsov/prelude/pull/1476): Don't try to install `heex-ts-mode` in `prelude-elixir` on Emacs 29, where it isn't available (it's built into Emacs 30+).
 - [#1477](https://github.com/bbatsov/prelude/pull/1477): Fix Eglot failing with `void-function eglot-server-capable` on Emacs 29 as soon as a language server connects (`flycheck-eglot` relies on a function that Eglot got in Emacs 30).
 - [#1480](https://github.com/bbatsov/prelude/pull/1480): Stop Emacs from loading an outdated `init.elc` or `early-init.elc` instead of Prelude's current init files (it prefers them even when the sources are newer). `prelude-update` no longer compiles the two, and compiled copies left by older versions are removed on startup.
+- [#1480](https://github.com/bbatsov/prelude/pull/1480): Fix several problems in the installer: it deleted the existing config even when backing it up had failed, never reinstated the old files it promised to keep (on macOS it couldn't at all), byte-compiled the core in a way that kept packages from being installed, and printed garbage with `-c` under some shells.
+- [#1248](https://github.com/bbatsov/prelude/issues/1248): Make the installer leave `~/.emacs` alone when Prelude is installed somewhere other than `~/.emacs.d`.
 
 ## 2.1.0 (2026-03-29)
 
