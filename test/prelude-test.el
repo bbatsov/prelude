@@ -1055,6 +1055,33 @@ to load and would leave them in `fundamental-mode'."
                    "(set-fontset-font\\|(set-frame-font\\|(set-face-attribute 'default"
                    nil t)))))
 
+;;; The manual
+
+(ert-deftest prelude-documented-key-bindings-exist ()
+  "The key binding tables of the Usage page match the keymaps.
+Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
+  (require 'prelude-mode)
+  (let ((usage (prelude-test--file-string "docs/usage.md"))
+        (start 0)
+        (checked 0))
+    (while (string-match "^<kbd>\\(.+?\\)</kbd> | `\\([^`]+\\)` |" usage start)
+      (setq start (match-end 0))
+      (let* ((key (thread-last (match-string 1 usage)
+                               (string-replace "&lt;" "<")
+                               (string-replace "&gt;" ">")
+                               (string-replace "\\\\" "\\")))
+             (command (intern (match-string 2 usage)))
+             (keys (kbd key))
+             ;; `lookup-key' returns a number for a key that runs past
+             ;; a binding in the map
+             (bound (seq-find (lambda (binding) (and binding (symbolp binding)))
+                              (list (lookup-key prelude-mode-map keys)
+                                    (lookup-key global-map keys)))))
+        (setq checked (1+ checked))
+        (should (equal (list key bound) (list key command)))))
+    ;; make sure the tables are still in a shape we can read
+    (should (> checked 60))))
+
 ;;; The module listings
 
 (defun prelude-test--file-string (file)
