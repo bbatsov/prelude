@@ -986,6 +986,20 @@ to load and would leave them in `fundamental-mode'."
               (should (eq (prelude-welcome--initial-buffer) 'welcome)))
           (setq buffer-file-name nil))))))
 
+(ert-deftest prelude-auto-install-leaves-other-files-alone ()
+  (cl-flet ((packages-for (file)
+              (delq nil (mapcar (lambda (entry)
+                                  (and (string-match-p (car entry) file) (cadr entry)))
+                                prelude-auto-install-alist))))
+    (should (equal (packages-for "/project/Cask") '(cask-mode)))
+    (should-not (packages-for "/opt/homebrew/Caskroom/emacs/notes.txt"))
+    ;; a type stub is plain Python, Cython's files are .pyx, .pxd and .pxi
+    (should-not (packages-for "/project/stubs.pyi"))
+    (should (equal (packages-for "/project/defs.pxd") '(cython-mode)))
+    ;; Emacs has modes for these, and the packages only get in their way
+    (should-not (packages-for "/project/style.scss"))
+    (should-not (packages-for "/project/main.rs"))))
+
 (ert-deftest prelude-delete-init-bytecode-removes-compiled-init-files ()
   "Compiled init files are deleted, and the outdated ones reported."
   (let ((prelude-dir (file-name-as-directory (make-temp-file "prelude-test" t))))

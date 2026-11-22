@@ -92,6 +92,7 @@
 - [#1481](https://github.com/bbatsov/prelude/pull/1481): Fix killing a rectangular region (`C-x SPC` followed by `C-w`), which killed the text between point and mark instead.
 - [#1481](https://github.com/bbatsov/prelude/pull/1481): Don't re-indent code yanked into Python buffers using `python-ts-mode` (and other modes derived from the ones in `prelude-indent-sensitive-modes`, which now covers Haskell and F# as well).
 - [#1481](https://github.com/bbatsov/prelude/pull/1481): Don't show the welcome screen next to a new file when Emacs is started with the name of a file that doesn't exist yet.
+- [#1481](https://github.com/bbatsov/prelude/pull/1481): Fix a few automatic package installs: opening an SCSS file installed a broken `scss-mode` over the built-in one, any file under a `Caskroom` directory installed `cask-mode`, and Python type stubs (`.pyi`) were taken for Cython.
 
 ## 2.1.0 (2026-03-29)
 
