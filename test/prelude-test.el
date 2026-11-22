@@ -950,6 +950,27 @@ to load and would leave them in `fundamental-mode'."
       (call-interactively #'kill-region))
     (should (equal (buffer-string) "adef\nadef\nadef\n"))))
 
+(put 'prelude-test-python-mode 'derived-mode-parent 'python-base-mode)
+
+(put 'python-base-mode 'derived-mode-parent 'prog-mode)
+
+(ert-deftest prelude-yank-leaves-indentation-sensitive-code-alone ()
+  "Yanked code is re-indented, except where the indentation carries meaning."
+  (pcase-dolist (`(,mode . ,indented) '((emacs-lisp-mode . t)
+                                        (python-base-mode . nil)
+                                        ;; e.g. `python-ts-mode'
+                                        (prelude-test-python-mode . nil)
+                                        (text-mode . nil)))
+    (let ((called nil))
+      (cl-letf (((symbol-function 'prelude-yank-indent-function)
+                 (lambda (&rest _) (setq called t))))
+        (with-temp-buffer
+          (setq major-mode mode)
+          (insert "  yanked")
+          (set-mark (point-min))
+          (prelude-yank-indent-advice)))
+      (should (eq called indented)))))
+
 (ert-deftest prelude-delete-init-bytecode-removes-compiled-init-files ()
   "Compiled init files are deleted, and the outdated ones reported."
   (let ((prelude-dir (file-name-as-directory (make-temp-file "prelude-test" t))))

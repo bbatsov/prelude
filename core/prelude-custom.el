@@ -115,8 +115,12 @@ in the desired elisp file."
   :group 'prelude)
 
 (defcustom prelude-indent-sensitive-modes
-  '(conf-mode haml-mode python-mode slim-mode yaml-mode)
-  "Modes for which auto-indenting is suppressed."
+  '(conf-mode fsharp-mode haml-mode haskell-mode python-base-mode
+              slim-mode yaml-mode yaml-ts-mode)
+  "Modes for which auto-indenting is suppressed.
+That's the modes of languages where the indentation carries meaning, so
+it can't be worked out from the code.  Modes derived from these are
+covered as well."
   :type '(repeat symbol)
   :group 'prelude)
 
