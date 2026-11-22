@@ -208,7 +208,9 @@
 Used as advice around `kill-region', with ARGS being its arguments."
   (interactive
    (if mark-active
-       (list (region-beginning) (region-end))
+       ;; the third argument says that it's the region we're killing,
+       ;; which is how non-contiguous regions (rectangles) get handled
+       (list (region-beginning) (region-end) 'region)
      (list (line-beginning-position) (line-beginning-position 2))))
   (apply orig-fn args))
 
