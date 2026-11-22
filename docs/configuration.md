@@ -151,6 +151,30 @@ Some settings have to be in place before the package system and the first frame 
 will load it after its own settings, so you can also override those. The file isn't loaded
 again together with the rest of `personal/`.
 
+### Fonts
+
+Prelude doesn't touch your fonts. Emacs picks a monospaced font that's
+available on your system, and a color font for emoji.
+
+The most reliable way to choose a font yourself is to set it before the
+first frame is created, in `personal/early-init.el`:
+
+```emacs-lisp
+;; the size is in points
+(push '(font . "JetBrains Mono-14") default-frame-alist)
+```
+
+That covers every frame, including the ones you open later with
+`emacsclient`. The font has to be installed, otherwise Emacs falls back
+to its default.
+
+If you'd like a different font for emoji (or for any other script), add
+something like this to your personal config:
+
+```emacs-lisp
+(set-fontset-font t 'emoji "Noto Color Emoji")
+```
+
 ### Disabling whitespace-mode
 
 Although `whitespace-mode` is awesome, some people might find it too
