@@ -33,7 +33,6 @@
 (defvar mac-command-modifier)
 (defvar mac-option-modifier)
 (defvar ns-function-modifier)
-(declare-function set-fontset-font "fontset.c")
 
 ;; On macOS Emacs doesn't use the shell PATH if it's not started from
 ;; the shell. Let's fix that:
@@ -66,11 +65,6 @@ Windows external keyboard from time to time."
 
 ;; There's no point in hiding the menu bar on macOS, so let's not do it
 (menu-bar-mode +1)
-
-;; Enable emoji, and stop the UI from freezing when trying to display them.
-(when (display-graphic-p)
-  (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend))
-
 
 (provide 'prelude-macos)
 ;;; prelude-macos.el ends here

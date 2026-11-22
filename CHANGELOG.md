@@ -33,6 +33,7 @@
 
 ### Changes
 
+- [#1479](https://github.com/bbatsov/prelude/pull/1479): Stop forcing Apple Color Emoji on the whole Unicode range on macOS. That was a workaround from 2015; the Emacs versions Prelude supports pick a color font for emoji by themselves. Prelude doesn't configure any fonts now, and the manual shows how to set your own.
 - [#1472](https://github.com/bbatsov/prelude/pull/1472): Start a language server for shell scripts, CSS, YAML and JSON when there's one installed (`prelude-shell`, `prelude-css`, `prelude-yaml` and `prelude-js`). A missing server isn't mentioned for those, and for SQL, as `prelude-lsp-enable` now takes a `quiet` argument.
 - [#1471](https://github.com/bbatsov/prelude/pull/1471): Don't start Eglot in buffers whose language server isn't installed. Prelude mentions the missing server once for a major mode, instead of Eglot warning about it for every file you open.
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): `prelude-format-on-save` now controls the format on save of the Go and Rust modules, which also leave the formatting to Apheleia when `prelude-apheleia` is enabled (it now prefers `goimports` to `gofmt` as well).

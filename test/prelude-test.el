@@ -937,6 +937,15 @@ to load and would leave them in `fundamental-mode'."
     (should (memq 'prelude-make-script-executable after-save))
     (should (equal (default-value 'after-save-hook) after-save))))
 
+(ert-deftest prelude-leaves-fonts-alone ()
+  "Fonts are the user's business: nothing in the core sets them."
+  (dolist (file (directory-files prelude-core-dir t "\\.el\\'"))
+    (with-temp-buffer
+      (insert-file-contents file)
+      (should-not (re-search-forward
+                   "(set-fontset-font\\|(set-frame-font\\|(set-face-attribute 'default"
+                   nil t)))))
+
 ;;; The module listings
 
 (defun prelude-test--file-string (file)
