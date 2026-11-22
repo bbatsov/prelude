@@ -51,64 +51,133 @@ extensions to keybindings.
 
 ### Keymap
 
+Keys are written the way Emacs itself shows them (try
+<kbd>C-h k</kbd>): `C-` is Control, `M-` is Meta (Alt or Option), `S-`
+is Shift and `s-` is Super (the Windows or Command key).
+
 #### Global
+
+These bindings are available everywhere.
+
+<!-- markdownlint-disable MD013 -->
+
+Keybinding | Command | Description
+-----------|---------|------------
+<kbd>C-x \\</kbd> | `align-regexp` | Align the region on a regular expression.
+<kbd>C-^</kbd> | `crux-top-join-line` | Join the current line with the one below it.
+<kbd>C-x m</kbd> | `eshell` | Start Eshell, or switch to it.
+<kbd>C-x M-m</kbd> | `shell` | Start your default shell.
+<kbd>C-x C-m</kbd> | `execute-extended-command` | An alias for <kbd>M-x</kbd> that doesn't need Meta.
+<kbd>C-h A</kbd> | `apropos` | Search in all Emacs symbols.
+<kbd>C-h C-m</kbd> | `discover-my-major` | Show the key bindings of the current major mode.
+<kbd>C-h C-f</kbd> | `find-function` | Jump to the source of a function.
+<kbd>C-h C-k</kbd> | `find-function-on-key` | Jump to the source of the command a key runs.
+<kbd>C-h C-v</kbd> | `find-variable` | Jump to the definition of a variable.
+<kbd>C-h C-l</kbd> | `find-library` | Open the source of a library.
+<kbd>C-h C-i</kbd> | `info-display-manual` | Open one of the Info manuals.
+<kbd>M-z</kbd> | `zop-up-to-char` | Kill up to (but not including) a character, with feedback.
+<kbd>M-Z</kbd> | `zop-to-char` | Kill up to and including a character.
+<kbd>C-&lt;backspace&gt;</kbd> | `crux-kill-line-backwards` | Kill from point to the beginning of the line.
+<kbd>M-/</kbd> | `hippie-expand` | Complete the text before point (a smarter `dabbrev-expand`).
+<kbd>C-x C-b</kbd> | `ibuffer` | List the buffers (a replacement for `list-buffers`).
+<kbd>&lt;f12&gt;</kbd> | `menu-bar-mode` | Toggle the menu bar.
+<kbd>C-c g</kbd> | `magit-file-dispatch` | Magit's commands for the current file.
+<kbd>C-=</kbd> | `er/expand-region` | Select the thing at point, then more and more around it.
+<kbd>C-:</kbd> | `avy-goto-char` | Jump to a character on screen.
+<kbd>C-'</kbd> | `avy-goto-char-2` | Jump to a pair of characters on screen.
+<kbd>M-g f</kbd> | `avy-goto-line` | Jump to a line on screen.
+<kbd>M-g w</kbd> | `avy-goto-word-1` | Jump to a word by its first character.
+<kbd>M-g e</kbd> | `avy-goto-word-0` | Jump to any word on screen.
+<kbd>C-c v</kbd> | `avy-goto-word-or-subword-1` | Jump to a word or a part of a `CamelCase` word.
+<kbd>s-,</kbd> | `avy-goto-char` | Jump to a character on screen.
+<kbd>s-.</kbd> | `avy-goto-word-or-subword-1` | Jump to a word or a part of a `CamelCase` word.
+<kbd>s-w</kbd> | `ace-window` | Jump to a window by its number.
+<kbd>s-y</kbd> | `browse-kill-ring` | Browse the things you've killed.
+
+<!-- markdownlint-enable MD013 -->
+
+A few more things worth knowing about:
+
+- <kbd>C-x o</kbd> runs `ace-window`: with more than two windows it
+  asks which one to go to. <kbd>C-x O</kbd> goes to the previous
+  window, and <kbd>S-&lt;left&gt;</kbd>, <kbd>S-&lt;right&gt;</kbd>,
+  <kbd>S-&lt;up&gt;</kbd> and <kbd>S-&lt;down&gt;</kbd> move between
+  windows directionally.
+- <kbd>C-x M</kbd> starts a new Eshell even if there's one already.
+- <kbd>M-y</kbd> browses the kill ring (with the Vertico module it
+  runs `consult-yank-pop` instead).
+- <kbd>C-w</kbd> kills the current line when there's no active
+  region, and <kbd>M-w</kbd> copies the thing at point (a URL, an
+  email address, or else the line), courtesy of `easy-kill`.
+- <kbd>C-o</kbd> during an incremental search shows all the matches
+  in an Occur buffer.
+- <kbd>C-x g</kbd> opens Magit's status buffer and <kbd>C-x M-g</kbd>
+  its menu of commands. Those are Magit's own bindings.
+- <kbd>M-(</kbd> and <kbd>M-"</kbd> wrap the expression after point in
+  parentheses or quotes in programming modes.
+
+#### Prelude Mode
+
+These come from `prelude-mode`, a global minor mode, so they take
+precedence over the bindings of major modes.
+
+<!-- markdownlint-disable MD013 -->
+
+Keybinding | Command | Description
+-----------|---------|------------
+<kbd>C-a</kbd> | `crux-move-beginning-of-line` | Go to the first non-blank character of the line, then to its beginning. Read [this](https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/) for details.
+<kbd>C-c o</kbd> | `crux-open-with` | Open the current file with an external program.
+<kbd>C-c i</kbd> | `imenu-anywhere` | Jump to a definition in any buffer of the same mode or project.
+<kbd>C-c C-/ g</kbd> | `prelude-google` | Search Google for the region (or a query you type).
+<kbd>C-c C-/ h</kbd> | `prelude-github` | Search GitHub for the region (or a query you type).
+<kbd>C-c C-/ y</kbd> | `prelude-youtube` | Search YouTube for the region (or a query you type).
+<kbd>C-c C-/ d</kbd> | `prelude-duckduckgo` | Search DuckDuckGo for the region (or a query you type).
+<kbd>S-&lt;return&gt;</kbd> | `crux-smart-open-line` | Insert an empty line below the current one and indent it (as in most IDEs).
+<kbd>M-o</kbd> | `crux-smart-open-line` | The same, for terminals.
+<kbd>C-S-&lt;return&gt;</kbd> | `crux-smart-open-line-above` | Insert an empty line above the current one and indent it.
+<kbd>C-S-&lt;up&gt;</kbd> | `move-text-up` | Move the current line or region up (also on <kbd>M-S-&lt;up&gt;</kbd>).
+<kbd>C-S-&lt;down&gt;</kbd> | `move-text-down` | Move the current line or region down (also on <kbd>M-S-&lt;down&gt;</kbd>).
+<kbd>C-c n</kbd> | `crux-cleanup-buffer-or-region` | Fix the indentation of the buffer (or region) and strip trailing whitespace.
+<kbd>C-M-z</kbd> | `crux-indent-defun` | Indent the definition at point.
+<kbd>C-c f</kbd> | `crux-recentf-find-file` | Open a recently visited file.
+<kbd>C-c u</kbd> | `crux-view-url` | Open a new buffer with the contents of a URL.
+<kbd>C-c e</kbd> | `crux-eval-and-replace` | Evaluate the Emacs Lisp expression before point and replace it with the result.
+<kbd>C-c s</kbd> | `crux-swap-windows` | Swap two windows.
+<kbd>C-c D</kbd> | `crux-delete-file-and-buffer` | Delete the current file and its buffer.
+<kbd>C-c d</kbd> | `crux-duplicate-current-line-or-region` | Duplicate the current line (or region).
+<kbd>C-c M-d</kbd> | `crux-duplicate-and-comment-current-line-or-region` | Duplicate the current line (or region) and comment out the original.
+<kbd>C-c r</kbd> | `crux-rename-buffer-and-file` | Rename the current buffer and the file it's visiting.
+<kbd>C-c t</kbd> | `crux-visit-term-buffer` | Open a terminal emulator (`ansi-term`).
+<kbd>C-c k</kbd> | `crux-kill-other-buffers` | Kill all the buffers visiting files, except the current one.
+<kbd>C-c TAB</kbd> | `crux-indent-rigidly-and-copy-to-clipboard` | Copy the region to the clipboard, indented by 4 spaces (handy for Markdown).
+<kbd>C-c I</kbd> | `crux-find-user-init-file` | Open Emacs's init file (that's Prelude's `init.el`).
+<kbd>C-c S</kbd> | `crux-find-shell-init-file` | Open your shell's init file.
+<kbd>s-r</kbd> | `crux-recentf-find-file` | Open a recently visited file.
+<kbd>s-j</kbd> | `crux-top-join-line` | Join the current line with the one below it.
+<kbd>s-k</kbd> | `crux-kill-whole-line` | Kill the whole line.
+<kbd>s-o</kbd> | `crux-smart-open-line-above` | Insert an empty line above the current one.
+<kbd>s-/</kbd> | `hippie-expand` | Complete the text before point.
+<kbd>s-m m</kbd> | `magit-status` | Magit's status buffer.
+<kbd>s-m j</kbd> | `magit-dispatch` | Magit's menu of commands.
+<kbd>s-m k</kbd> | `magit-file-dispatch` | Magit's commands for the current file.
+<kbd>s-m l</kbd> | `magit-log-buffer-file` | The Git log of the current file.
+<kbd>s-m b</kbd> | `magit-blame` | Show who changed each line of the file, and when.
+
+<!-- markdownlint-enable MD013 -->
+
+The bindings that use Super can be turned off with
+`prelude-super-keybindings` (see
+[Configuration](configuration.md)). They don't work in terminals,
+which have no way of sending Super, and neither do
+<kbd>S-&lt;return&gt;</kbd> and friends.
+
+<kbd>C-c .</kbd> is a prefix for doing arithmetic on the number at
+point:
 
 <!-- markdownlint-disable MD013 -->
 
 Keybinding         | Description
 -------------------|------------------------------------------------------------
-<kbd>C-x \\</kbd>   | `align-regexp`
-<kbd>C-+</kbd>     | Increase font size(`text-scale-increase`).
-<kbd>C--</kbd>     | Decrease font size(`text-scale-decrease`).
-<kbd>C-x O</kbd>   | Go back to previous window (the inverse of `other-window` (`C-x o`)).
-<kbd>C-^</kbd>     | Join two lines into one(`crux-top-join-line`).
-<kbd>C-x p</kbd>   | Start `proced` (manage processes from Emacs; works only in Linux).
-<kbd>C-x m</kbd>   | Start `eshell`.
-<kbd>C-x M-m</kbd> | Start your default shell.
-<kbd>C-x C-m</kbd> | Alias for `M-x`.
-<kbd>M-X</kbd>     | Like `M-x` but limited to commands that are relevant to the active major mode.
-<kbd>C-h A</kbd>   | Run `apropos` (search in all Emacs symbols).
-<kbd>C-h C-m</kbd> | Display key bindings of current major mode and descriptions of every binding.
-<kbd>M-/</kbd>     | Run `hippie-expand` (a replacement for the default `dabbrev-expand`).
-<kbd>C-x C-b</kbd> | Open `ibuffer` (a replacement for the default `buffer-list`).
-<kbd>F11</kbd>     | Make the window full screen.
-<kbd>F12</kbd>     | Toggle the Emacs menu bar.
-<kbd>C-x g</kbd>   | Open Magit's status buffer.
-<kbd>C-x M-g</kbd> | Open Magit's popup of popups.
-<kbd>C-c g</kbd>   | Open Magit's file-related commands.
-<kbd>M-Z</kbd>     | Zap up to char.
-<kbd>C-=</kbd>     | Run `expand-region` (incremental text selection).
-<kbd>C-a</kbd>     | Run `crux-move-beginning-of-line`. Read [this](http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/) for details.
-
-#### Prelude Mode
-
-Keybinding         | Description
--------------------|------------------------------------------------------------
-<kbd>C-c o</kbd>   | Open the currently visited file with an external program.
-<kbd>C-c i</kbd>   | Search for a symbol, only for buffers that contain code
-<kbd>C-c g</kbd>   | Search in Google for the thing under point (or an interactive query).
-<kbd>C-c G</kbd>   | Search in GitHub for the thing under point (or an interactive query).
-<kbd>C-c y</kbd>   | Search in YouTube for the thing under point (or an interactive query).
-<kbd>C-c U</kbd>   | Search in Duckduckgo for the thing under point (or an interactive query).
-<kbd>C-S-RET</kbd> or <kbd>Super-o</kbd> | Insert an empty line above the current line and indent it properly.
-<kbd>S-RET</kbd> or <kbd>M-o</kbd> | Insert an empty line and indent it properly (as in most IDEs).
-<kbd>C-S-up</kbd> or <kbd>M-S-up</kbd> | Move the current line or region up.
-<kbd>C-S-down</kbd> or <kbd>M-S-down</kbd>| Move the current line or region down.
-<kbd>C-c n</kbd> | Fix indentation in buffer and strip whitespace.
-<kbd>C-c f</kbd> | Open recently visited file.
-<kbd>C-M-\\</kbd> | Indent region (if selected) or the entire buffer.
-<kbd>C-c u</kbd> | Open a new buffer containing the contents of URL.
-<kbd>C-c e</kbd> | Eval a bit of Emacs Lisp code and replace it with its result.
-<kbd>C-c s</kbd> | Swap two active windows.
-<kbd>C-c D</kbd> | Delete current file and buffer.
-<kbd>C-c d</kbd> | Duplicate the current line (or region).
-<kbd>C-c M-d</kbd> | Duplicate and comment the current line (or region).
-<kbd>C-c r</kbd> | Rename the current buffer and its visiting file if any.
-<kbd>C-c t</kbd> | Open a terminal emulator (`ansi-term`).
-<kbd>C-c k</kbd> | Kill all open buffers except the one you're currently in.
-<kbd>C-c TAB</kbd> | Indent and copy region to clipboard
-<kbd>C-c I</kbd> | Open user's init file.
-<kbd>C-c S</kbd> | Open shell's init file.
 <kbd>C-c . +</kbd> | Increment integer at point. Default is +1.
 <kbd>C-c . -</kbd> | Decrement integer at point. Default is -1.
 <kbd>C-c . *</kbd> | Multiply integer at point. Default is *2.
@@ -120,13 +189,6 @@ Keybinding         | Description
 <kbd>C-c . #</kbd> | Convert integer at point to specified base. Default is 10.
 <kbd>C-c . %</kbd> | Replace integer at point with another specified integer.
 <kbd>C-c . '</kbd> | Perform arithmetic operations on integer at point. User specifies the operator.
-<kbd>Super-r</kbd> | Recent files
-<kbd>Super-j</kbd> | Join lines
-<kbd>Super-k</kbd> | Kill whole line
-<kbd>Super-m m</kbd> | Magit status
-<kbd>Super-m l</kbd> | Magit log
-<kbd>Super-m f</kbd> | Magit file log
-<kbd>Super-m b</kbd> | Magit blame mode
 
 <!-- markdownlint-enable MD013 -->
 
@@ -163,7 +225,7 @@ You can also temporarily swap them with `C-c w`
 !!! Tip
 
     I'd highly recommend to all macOS users to consider
-    [remapping Return to Control](http://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/)
+    [remapping Return to Control](https://emacsredux.com/blog/2013/11/12/a-crazy-productivity-boost-remap-return-to-control/)
     instead. That's an epic productivity boost and it's
     not as crazy as it sounds!
 
@@ -214,63 +276,12 @@ a commit. Press <kbd>?</kbd> to see everything else you can do.
 
 <!-- markdownlint-enable MD013 -->
 
-#### Helm
+#### Completion frameworks
 
-<!-- markdownlint-disable MD013 -->
-
-Helm is setup according to this guide:
-[A Package in a league of its own: Helm](http://tuhdo.github.io/helm-intro.html).
-
-You can learn Helm usage and key bindings following the
-guide. <kbd>C-c h</kbd> is Prelude's default prefix key for
-Helm. If you don't remember any key binding, append
-<kbd>C-h</kbd> after <kbd>C-c h</kbd> for a list of key
-bindings in Helm.
-
-If you love Helm and want to use Helm globally with enhanced
-`helm-find-files`, `helm-buffer-lists`..., you will have to
-also add `(require 'prelude-helm-everywhere)`.
-When `prelude-helm-everywhere` is activated, Helm enables
-these global key bindings:
-
-Key binding        | Description
--------------------|----------------------------------------------
-<kbd>M-x</kbd>     | Run [helm-M-x](http://tuhdo.github.io/helm-intro.html#sec-3), an interactive version of <kbd>M-x</kdb>.
-<kbd>M-y</kbd>     | Run [helm-show-kill-ring](http://tuhdo.github.io/helm-intro.html#sec-4), shows the content of `kill-ring`.
-<kbd>C-x b </kbd>  | Run [helm-mini](http://tuhdo.github.io/helm-intro.html#sec-5), an interactive version of `C-x b` with more features.
-<kbd>C-x C-f</kbd> | Run [helm-find-files](http://tuhdo.github.io/helm-intro.html#sec-6), an interactive version of `find-file` with more features.
-<kbd>C-h f </kbd>  | Run [helm-apropos](http://tuhdo.github.io/helm-intro.html#sec-13), an interactive version of `apropos-command`.
-<kbd>C-h r</kbd>   | Run [helm-info-emacs](http://tuhdo.github.io/helm-intro.html#sec-14), an interactive version of `info-emacs-manual`.
-<kbd>C-h C-l </kbd>| Run `helm-locate-library` that can search for locations of any file loaded into Emacs.
-
-This key binding is activated in `shell-mode`:
-
-Key Binding        | Description
--------------------|----------------------------------------------
-<kbd>C-c C-l</kbd> | Run `helm-comint-input-ring` that shows `shell` history using Helm interface.
-
-This key bindings is activated in `eshell-mode`:
-
-Key Binding        | Description
--------------------|----------------------------------------------
-<kbd>C-c C-l</kbd> | Run `helm-eshell-history` that shows `eshell` history using Helm interface.
-
-<!-- markdownlint-enable MD013 -->
-
-If you prefer Ido in everywhere, you should not add
-`prelude-helm-everywhere`, so you can use Helm along with
-Ido and Prelude's default commands.
-
-You can always reactivate Helm with
-`(prelude-global-helm-global-mode-on)`.
-
-!!! Note
-
-    In `helm-M-x`, you have to pass prefix argument
-    *AFTER* you run `helm-M-x`, because your prefix
-    argument will be displayed in the modeline when in
-    `helm-M-x` buffer. Passing prefix argument **BEFORE**
-    `helm-M-x` **has no effect**.
+The key bindings of Vertico, Helm, Ivy and Ido are described on the
+pages of their modules: [Vertico](modules/vertico.md) (the default),
+[Helm](modules/helm.md), [Ivy](modules/ivy.md) and
+[Ido](modules/ido.md).
 
 #### Key-chords
 
@@ -297,7 +308,7 @@ Keybinding         | Description
 
 In some cases you may not want to have a key-chord that is
 defined by prelude, in which case you can disable the binding
-in your `personal.el` file by setting its command to `nil`.
+in your personal config by setting its command to `nil`.
 For example, to disable the `jj` key-chord add the
 following line:
 
@@ -333,7 +344,7 @@ install [LaTeX](https://www.latex-project.org/get/).
 Afterwards you can do something like:
 
 ```shell
-cd modules/doc
+cd docs
 pdflatex prelude-cheatsheet.tex
 ```
 
@@ -344,7 +355,7 @@ install [Poppler](https://poppler.freedesktop.org/).
 Afterwards you can do something like:
 
 ```shell
-cd modules/doc
+cd docs
 pdftocairo -png -singlefile prelude-cheatsheet.pdf cheatsheet
 ```
 
@@ -353,7 +364,9 @@ pdftocairo -png -singlefile prelude-cheatsheet.pdf cheatsheet
 The default Prelude installation comes with a bare minimum of
 functionality. It will however install add-ons for various programming
 languages and frameworks on demand. For instance - if you try to open
-a `.clj` file `clojure-mode`, `cider` and Prelude's enhanced Lisp
-configuration will be installed automatically for you.
+a `.clj` file `clojure-mode` will be installed automatically for you.
+That gets you the major mode and nothing else. For the full experience
+(CIDER in the case of Clojure) enable the language's
+[module](modules/index.md).
 
 You can, of course, install anything you wish manually as well.
