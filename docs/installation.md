@@ -212,8 +212,9 @@ In case of an automated installation, you'll find this file in the
 `personal` directory of your Emacs installation.
 
 If you are doing a manual install then you first need to copy the
-`prelude-modules.el` available in the sample directory to the root of
-`path/to/prelude/installation` and then adjust that one.
+`prelude-modules.el` available in the sample directory to the
+`personal` directory of `path/to/prelude/installation` and then adjust
+that one. Until you do, Prelude uses the sample file as is.
 
 After you've uncommented a module you should either restart Emacs or
 evaluate the module `require` expression with <kbd>C-x C-e</kbd>.

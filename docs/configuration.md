@@ -93,16 +93,27 @@ Finally, if you don't want any theme at all, you can add this to your
 
 ## Personalizing
 
-All files or directories of files you create under the `personal/` directory are yours for
-personalization.  There is no single special personal config file --
-any files or directories of files you create in the `personal/` directory will be loaded in
-lexicographical order (files first and then directories of files).  The overall loading precedence is:
+Everything under the `personal/` directory is yours. There's no single
+special personal config file - every `.el` file directly in
+`personal/` is loaded, in alphabetical order. Subdirectories are not
+looked into, with the exception of `personal/preload/`.
 
-1. `personal/early-init.el`
-2. `personal/preload/*`
-3. `core/`
-4. `personal/prelude-modules.el` (or deprecated `prelude-modules.el`)
-5. `personal/*`
+Prelude loads things in this order:
+
+1. `personal/early-init.el`, from Prelude's own `early-init.el`
+2. `personal/preload/`, all the `.el` files in it and in its
+   subdirectories
+3. Prelude's core
+4. `personal/prelude-modules.el`, the list of modules you've enabled
+   (the bundled `sample/prelude-modules.el` is used if you don't have
+   one)
+5. the rest of the `.el` files in `personal/`, `custom.el` (where Emacs
+   saves what you set with `M-x customize`) among them
+
+The order matters for Prelude's own options. Many of them are read
+while the core is being loaded, so setting them in a regular personal
+file comes too late - they belong in `personal/preload/`. See the
+[list of options](#prelude-options) for which is which.
 
 ### Personalization Example
 
@@ -141,8 +152,45 @@ still work, but they're deprecated.
 ### Preloading personal config
 
 Sometimes you might want to load code before Prelude has started loading. Prelude will automatically preload all
-Emacs Lisp files in your `personal/preload` directory. Note that at this point you can't using anything from
+Emacs Lisp files in your `personal/preload` directory. Note that at this point you can't use anything from
 Prelude, except a few variables like `prelude-dir`, etc (since nothing is yet loaded).
+
+This is where most of Prelude's options have to be set. A typical preload file looks like this:
+
+```emacs-lisp
+;;; personal/preload/settings.el
+(setq prelude-theme 'modus-vivendi)
+(setq prelude-lsp-client 'lsp-mode)
+(setq prelude-super-keybindings nil)
+```
+
+### Prelude options
+
+The second column says where an option has to be set to have an effect: `preload` means a file in
+`personal/preload/`, `anywhere` means that a regular personal file (or `M-x customize`) will do as well.
+
+Option | Set it in | Default | What it controls
+-------|-----------|---------|-----------------
+`prelude-theme` | preload | `zenburn` | The color theme to load. `nil` leaves the theme alone.
+`prelude-minimalistic-ui` | preload | `nil` | Hide the menu bar and the line numbers.
+`prelude-welcome-screen` | preload | `t` | Show the welcome screen on startup.
+`prelude-super-keybindings` | preload | `t` | Bind commands to keys that use Super.
+`prelude-lsp-client` | preload | `eglot` | The LSP client: `eglot` or `lsp-mode`.
+`prelude-projectile` | preload | `t` | Set up Projectile and its key bindings.
+`prelude-smartparens` | preload | `t` | Set up smartparens.
+`prelude-undo-tree` | preload | `t` | Use undo-tree for undo and redo.
+`prelude-hippie-expand` | preload | `t` | Bind <kbd>M-/</kbd> to `hippie-expand`.
+`prelude-spell-checker` | preload | `flyspell` | The spell checker: `flyspell` or `jinx`.
+`prelude-whitespace-cleanup-style` | preload | `whitespace-cleanup` | How whitespace is cleaned up on save: the whole file, or with `ws-butler` only the lines you've touched.
+`prelude-flyspell` | anywhere | `t` | Check spelling as you type.
+`prelude-whitespace` | anywhere | `t` | Highlight whitespace problems (`whitespace-mode`).
+`prelude-clean-whitespace-on-save` | anywhere | `t` | Clean up whitespace when a file is saved.
+`prelude-guru` | anywhere | `t` | Nudge you towards the Emacs way of doing things (`guru-mode`).
+`prelude-format-on-save` | anywhere | `t` | Let the Go and Rust modules format files on save.
+`prelude-treesit-auto-install` | anywhere | `ask` | What to do about a missing tree-sitter grammar: `ask`, `always` install it, or `nil`.
+`prelude-indent-sensitive-modes` | anywhere | a list of modes | Modes where yanked code isn't re-indented.
+`prelude-yank-indent-modes` | anywhere | a list of modes | Extra (non-programming) modes where yanked text is indented.
+`prelude-yank-indent-threshold` | anywhere | `1000` | Yanked text longer than this many characters isn't indented.
 
 ### Personal early-init
 
@@ -234,7 +282,8 @@ Out-of-the-box Prelude will create two versions of many keybindings in `prelude-
 The reason for this is that there are generally more options for short keybindings with `Super` - e.g. you can
 have `s-p`, `s-g`, etc. There's, however, a problem lying here as well - some operating systems and
 desktop environments might be making heavy use of such keybindings. (in most cases those would intercept them before Emacs does).
-`exwm` also uses those heavily. You prevent Prelude from creating such keybindings via `prelude-super-keybindings`:
+`exwm` also uses those heavily. You prevent Prelude from creating such keybindings via `prelude-super-keybindings`,
+in `personal/preload`:
 
 ```emacs-lisp
 (setq prelude-super-keybindings nil)
@@ -243,7 +292,7 @@ desktop environments might be making heavy use of such keybindings. (in most cas
 ### Disable Projectile
 
 By default, Prelude configures [Projectile](https://github.com/bbatsov/projectile) for project
-interaction. To disable this, add the following to your config.
+interaction. To disable this, add the following to your `personal/preload` config.
 
 ``` emacs-lisp
 (setq prelude-projectile nil)
@@ -252,7 +301,7 @@ interaction. To disable this, add the following to your config.
 ### Disable hippie-expand
 
 By default, Prelude configures `hippie-expand` as a replacement for Emacs' default `dabbrev`. To disable this
-behaviour, add the following to your config.
+behaviour, add the following to your `personal/preload` config.
 
 ``` emacs-lisp
 (setq prelude-hippie-expand nil)
@@ -296,12 +345,18 @@ enabled modules at once, which is handy before going offline.
 
 Some of these settings (those that don't need to be pre-loaded) can also be set
 on a per-file or directory basis by using a file local variable or a
-`.dir-locals.el` file.
+`.dir-locals.el` file. For instance, to keep Prelude from cleaning up
+the whitespace of the files in a project, put this in a `.dir-locals.el`
+at its root:
+
+```emacs-lisp
+((nil . ((prelude-clean-whitespace-on-save . nil))))
+```
 
 ### package-user-dir
 
 By default, prelude sets the directory where downloaded modules are installed to `<prelude-dir>/elpa`. If you want
-to disable this behaviour, set the following variable to nil before loading prelude.
+to disable this behaviour, set the following variable to nil in `personal/preload`.
 
 ```emacs-lisp
 (setq prelude-override-package-user-dir nil)
