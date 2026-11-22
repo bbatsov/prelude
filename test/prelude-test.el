@@ -937,6 +937,19 @@ to load and would leave them in `fundamental-mode'."
     (should (memq 'prelude-make-script-executable after-save))
     (should (equal (default-value 'after-save-hook) after-save))))
 
+(ert-deftest prelude-kill-region-kills-rectangles ()
+  "Our advice doesn't get in the way of killing a rectangular region."
+  (with-temp-buffer
+    (insert "abcdef\nabcdef\nabcdef\n")
+    (goto-char 2)
+    (let ((transient-mark-mode t)
+          (kill-ring nil))
+      (rectangle-mark-mode 1)
+      (forward-line 2)
+      (forward-char 3)
+      (call-interactively #'kill-region))
+    (should (equal (buffer-string) "adef\nadef\nadef\n"))))
+
 (ert-deftest prelude-delete-init-bytecode-removes-compiled-init-files ()
   "Compiled init files are deleted, and the outdated ones reported."
   (let ((prelude-dir (file-name-as-directory (make-temp-file "prelude-test" t))))
