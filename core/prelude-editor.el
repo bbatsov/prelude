@@ -308,7 +308,6 @@ Does nothing when `prelude-spell-checker' is set to something else
   (use-package projectile
     :ensure t
     :config
-    (setq projectile-cache-file (expand-file-name  "projectile.cache" prelude-savefile-dir))
     (projectile-mode t)))
 
 ;; avy allows us to effectively navigate to visible things
@@ -343,9 +342,6 @@ Does nothing when `prelude-spell-checker' is set to something else
   :defer t
   :init
   (setq ediff-window-setup-function 'ediff-setup-windows-plain))
-
-;; clean up obsolete buffers automatically
-(require 'midnight)
 
 ;; smarter kill-ring navigation
 (use-package browse-kill-ring
