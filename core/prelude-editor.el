@@ -383,9 +383,9 @@ Does nothing when `prelude-spell-checker' is set to something else
 (defun prelude-yank-indent-advice (&rest _args)
   "Indent yanked text if in a programming mode.
 Does not indent if the mode is in `prelude-indent-sensitive-modes'."
-  (when (and (not (member major-mode prelude-indent-sensitive-modes))
+  (when (and (not (apply #'derived-mode-p prelude-indent-sensitive-modes))
              (or (derived-mode-p 'prog-mode)
-                 (member major-mode prelude-yank-indent-modes)))
+                 (apply #'derived-mode-p prelude-yank-indent-modes)))
     (let ((transient-mark-mode nil))
       (prelude-yank-indent-function (region-beginning) (region-end)))))
 
