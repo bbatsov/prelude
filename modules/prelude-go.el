@@ -49,12 +49,13 @@
              (lambda () (not (derived-mode-p 'go-mode 'go-ts-mode))))
 
 (defun prelude-go--define-keys (map)
-  "Add Prelude's Go key bindings to MAP."
-  (define-key map (kbd "C-c a") 'go-test-current-project) ;; current package, really
-  (define-key map (kbd "C-c m") 'go-test-current-file)
-  (define-key map (kbd "C-c .") 'go-test-current-test)
-  (define-key map (kbd "C-c b") 'go-run)
-  (define-key map (kbd "C-h f") 'godoc-at-point))
+  "Add Prelude's Go key bindings to MAP.
+The test keys are the ones that `go-ts-mode' has had since Emacs 31."
+  (define-key map (kbd "C-c C-t t") #'go-test-current-test)
+  (define-key map (kbd "C-c C-t f") #'go-test-current-file)
+  ;; the current package, really
+  (define-key map (kbd "C-c C-t p") #'go-test-current-project)
+  (define-key map (kbd "C-c C-r") #'go-run))
 
 ;; go-ts-mode has a keymap of its own
 (with-eval-after-load 'go-mode
@@ -95,7 +96,7 @@ Unlike `gofmt-before-save', this works in `go-ts-mode' as well."
   :hook ((go-mode . (lambda () (run-hooks 'prelude-go-mode-hook)))
          (go-ts-mode . (lambda () (run-hooks 'prelude-go-mode-hook)))))
 
-;; Run Go tests from Emacs (C-c a/m/.)
+;; Run Go tests from Emacs (C-c C-t t/f/p)
 (use-package gotest
   :ensure t
   :defer t)

@@ -907,6 +907,23 @@ to load and would leave them in `fundamental-mode'."
             (set-buffer-modified-p nil)))
       (delete-file file))))
 
+;;; Key bindings of the modules
+
+(ert-deftest prelude-org-binds-only-the-keys-the-org-manual-suggests ()
+  (require 'prelude-org)
+  (should (eq (lookup-key global-map (kbd "C-c l")) 'org-store-link))
+  (should (eq (lookup-key global-map (kbd "C-c a")) 'org-agenda))
+  (should (eq (lookup-key global-map (kbd "C-c c")) 'org-capture))
+  (should-not (eq (lookup-key global-map (kbd "C-c b")) 'org-switchb)))
+
+(ert-deftest prelude-ivy-keeps-off-the-keys-of-others ()
+  "No user keys, no major mode keys and no standard commands replaced by accident.
+The module can't be loaded here, as it takes over the minibuffer."
+  (let ((ivy (prelude-test--file-string "modules/prelude-ivy.el")))
+    (should-not (string-match-p "(kbd \"C-c " ivy))
+    (should-not (string-match-p "(kbd \"C-x l\")" ivy))
+    (should (string-match-p "(kbd \"<f6>\") 'ivy-resume" ivy))))
+
 (ert-deftest prelude-go-works-the-same-in-both-go-modes ()
   "The key bindings, formatting and super-save setup don't depend on the mode."
   (require 'prelude-go)
@@ -915,9 +932,14 @@ to load and would leave them in `fundamental-mode'."
   (require 'go-mode)
   (require 'go-ts-mode)
   (dolist (map (list go-mode-map go-ts-mode-map))
-    (should (eq (lookup-key map (kbd "C-c a")) 'go-test-current-project))
-    (should (eq (lookup-key map (kbd "C-c .")) 'go-test-current-test))
-    (should (eq (lookup-key map (kbd "C-c b")) 'go-run)))
+    (should (eq (lookup-key map (kbd "C-c C-t t")) 'go-test-current-test))
+    (should (eq (lookup-key map (kbd "C-c C-t f")) 'go-test-current-file))
+    (should (eq (lookup-key map (kbd "C-c C-t p")) 'go-test-current-project))
+    (should (eq (lookup-key map (kbd "C-c C-r")) 'go-run))
+    ;; nothing in the way of the user's own keys, of Prelude's global
+    ;; ones (C-c . is for operating on numbers) and of the help commands
+    (dolist (key '("C-c a" "C-c b" "C-c m" "C-c ." "C-h f"))
+      (should-not (commandp (lookup-key map (kbd key))))))
   (dolist (mode '(go-mode go-ts-mode))
     (should-not (prelude-test--super-save-p mode)))
   (should (prelude-test--super-save-p 'fundamental-mode))
