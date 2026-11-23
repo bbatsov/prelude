@@ -33,6 +33,7 @@
 
 ### Changes
 
+- [#1487](https://github.com/bbatsov/prelude/pull/1487): Stop the Go, Ivy and Org modules from taking keys that belong to others. Go's test commands are now on `C-c C-t t`, `C-c C-t f` and `C-c C-t p` (the keys of `go-ts-mode` in Emacs 31) and `go-run` is on `C-c C-r`; Ivy no longer binds `C-c C-r`, `C-c g`, `C-c j`, `C-c a` and `C-x l`; Org no longer binds `C-c b`.
 - [#1486](https://github.com/bbatsov/prelude/pull/1486): Make [Tokyo Night](https://github.com/bbatsov/tokyo-night-emacs) the default theme, with its light variant during the day and the dark one at night: `prelude-theme` can now be a `(DAY . NIGHT)` pair, and `prelude-theme-daytime` says when to switch (with the system's light and dark mode where Emacs knows about it, by the clock elsewhere). Put `(setq prelude-theme 'zenburn)` in `personal/preload` to keep Zenburn.
 - [#1483](https://github.com/bbatsov/prelude/pull/1483): Make all of Prelude's options work when they're set with `M-x customize`. Options that are read while Prelude starts (the theme, the minimalistic UI, the LSP client, etc.) used to be ignored there, as `custom.el` is loaded after the core; Prelude now reads its own options from it first.
 - [#1483](https://github.com/bbatsov/prelude/pull/1483): Make `prelude-auto-save` and `prelude-user-init-file` do something again. The first turns `super-save` off when set to `nil`, the second is what `C-c I` (now `prelude-find-user-init-file`) opens: your personal folder rather than Prelude's `init.el`.

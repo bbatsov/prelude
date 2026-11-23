@@ -34,7 +34,6 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key (kbd "C-c b") 'org-switchb)
 
 (with-eval-after-load 'org
   (require 'org-habit)
@@ -44,12 +43,10 @@
 (defun prelude-org-mode-defaults ()
   ;; clean visual indentation
   (org-indent-mode +1)
-  ;; let org-mode handle C-c +, C-c - and C-a
+  ;; let org-mode handle C-a
   (let ((oldmap (cdr (assoc 'prelude-mode minor-mode-map-alist)))
         (newmap (make-sparse-keymap)))
     (set-keymap-parent newmap oldmap)
-    (define-key newmap (kbd "C-c +") nil)
-    (define-key newmap (kbd "C-c -") nil)
     (define-key newmap (kbd "C-a") 'org-beginning-of-line)
     (make-local-variable 'minor-mode-overriding-map-alist)
     (push `(prelude-mode . ,newmap) minor-mode-overriding-map-alist)))

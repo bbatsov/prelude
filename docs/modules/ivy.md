@@ -26,8 +26,7 @@ its companion packages Swiper and Counsel.
 
 | Key | Command | Description |
 | --- | ------- | ----------- |
-| <kbd>C-c C-r</kbd> | `ivy-resume` | Resume the last Ivy completion session |
-| <kbd>F6</kbd> | `ivy-resume` | Same as above |
+| <kbd>F6</kbd> | `ivy-resume` | Resume the last Ivy completion session |
 
 ### Swiper
 
@@ -46,8 +45,4 @@ its companion packages Swiper and Counsel.
 | <kbd>F1 l</kbd> | `counsel-find-library` | Find Emacs library |
 | <kbd>F2 i</kbd> | `counsel-info-lookup-symbol` | Info lookup |
 | <kbd>F2 u</kbd> | `counsel-unicode-char` | Insert Unicode character |
-| <kbd>C-c g</kbd> | `counsel-git` | Find file in current Git repo |
-| <kbd>C-c j</kbd> | `counsel-git-grep` | Grep in current Git repo |
-| <kbd>C-c a</kbd> | `counsel-ag` | Search with ag (the silver searcher) |
-| <kbd>C-x l</kbd> | `counsel-locate` | Locate file |
 | <kbd>M-y</kbd> | `counsel-yank-pop` | Browse kill ring |

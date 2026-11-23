@@ -63,11 +63,10 @@ middle of typing something.
 
 | Key | Command | Description |
 | --- | ------- | ----------- |
-| <kbd>C-c a</kbd> | `go-test-current-project` | Run the tests of the current package |
-| <kbd>C-c m</kbd> | `go-test-current-file` | Run the tests in the current file |
-| <kbd>C-c .</kbd> | `go-test-current-test` | Run the test at point |
-| <kbd>C-c b</kbd> | `go-run` | Run the current file |
-| <kbd>C-h f</kbd> | `godoc-at-point` | Show the documentation of the thing at point |
+| <kbd>C-c C-t t</kbd> | `go-test-current-test` | Run the test at point |
+| <kbd>C-c C-t f</kbd> | `go-test-current-file` | Run the tests in the current file |
+| <kbd>C-c C-t p</kbd> | `go-test-current-project` | Run the tests of the current package |
+| <kbd>C-c C-r</kbd> | `go-run` | Run the current file |
 | <kbd>C-h G</kbd> | `godoc` | Show the documentation of a package |
 
 <!-- markdownlint-enable MD013 -->
