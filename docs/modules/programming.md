@@ -11,7 +11,7 @@ Here are some features it provides:
 - visual cues for whitespace (via `whitespace-mode`)
 - highlighting code annotations (via `hl-todo`)
 - linter integration (via `flycheck`), which also shows the
-  diagnostics of Eglot (via `flycheck-eglot`)
+  diagnostics of Eglot (via `flycheck-eglot-mode`, a part of Flycheck)
 - showing current definition name in the modeline
   (via `which-func`)
 - nudging you towards the Emacs way of doing things (via `guru-mode`,

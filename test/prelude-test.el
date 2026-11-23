@@ -611,13 +611,17 @@ whether Eglot got started and what was reported."
       (should (equal (prelude-test--lsp-enable '((prelude-test-mode "server")))
                      '(t nil))))))
 
-(ert-deftest prelude-flycheck-eglot-works-with-the-eglot-of-emacs-29 ()
-  "flycheck-eglot needs a function that Eglot has had only since Emacs 30."
+(ert-deftest prelude-eglot-diagnostics-go-through-flycheck ()
+  "With Flycheck's own Eglot support, not with the flycheck-eglot package."
   (require 'prelude-programming)
-  (require 'eglot)
   (when (eq prelude-lsp-client 'eglot)
-    (should (featurep 'flycheck-eglot))
-    (should (fboundp 'eglot-server-capable))))
+    (should (bound-and-true-p global-flycheck-eglot-mode))
+    (should (flycheck-valid-checker-p 'eglot-check))
+    (should (equal (file-name-base (symbol-file 'flycheck-eglot-mode 'defun))
+                   "flycheck"))
+    (should-not (featurep 'flycheck-eglot))
+    (require 'eglot)
+    (should (memq 'flycheck-eglot--managed-mode-update eglot-managed-mode-hook))))
 
 (ert-deftest prelude-lsp-enable-needs-a-file ()
   (let ((prelude-lsp-client 'eglot))
