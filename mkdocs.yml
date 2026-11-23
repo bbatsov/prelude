@@ -71,6 +71,7 @@ nav:
         - Literate Programming: modules/literate-programming.md
         - MisTTY (Terminal): modules/mistty.md
         - Org Mode: modules/orgmode.md
+- Upgrading: upgrading.md
 - FAQ: faq.md
 - Troubleshooting: troubleshooting.md
 - Contributing: contributing.md
