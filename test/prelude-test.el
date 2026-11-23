@@ -1055,6 +1055,32 @@ to load and would leave them in `fundamental-mode'."
                    "(set-fontset-font\\|(set-frame-font\\|(set-face-attribute 'default"
                    nil t)))))
 
+;;; Options
+
+(ert-deftest prelude-saved-options-picks-prelude-options-out-of-custom-file ()
+  "Only Prelude's options are taken from a custom file, and no code is run."
+  (let ((file (make-temp-file "prelude-test" nil ".el")))
+    (unwind-protect
+        (progn
+          (write-region
+           (concat "(error \"Code in custom.el must not be run early\")\n"
+                   "(custom-set-variables\n"
+                   " '(prelude-theme nil)\n"
+                   " '(fill-column 100)\n"
+                   " '(prelude-indent-sensitive-modes '(conf-mode yaml-mode))\n"
+                   " '(prelude-whitespace nil nil nil \"A comment\"))\n"
+                   "(custom-set-faces '(default ((t (:height 140)))))\n")
+           nil file nil 'silent)
+          (should (equal (prelude-saved-options file)
+                         '((prelude-theme . nil)
+                           (prelude-indent-sensitive-modes . (conf-mode yaml-mode))
+                           (prelude-whitespace . nil))))
+          ;; a file that can't be read to the end gives what it has
+          (write-region "(custom-set-variables '(prelude-guru nil))\n(unbalanced" nil file nil 'silent)
+          (should (equal (prelude-saved-options file) '((prelude-guru . nil))))
+          (should-not (prelude-saved-options (concat file ".missing"))))
+      (delete-file file))))
+
 ;;; The manual
 
 (ert-deftest prelude-documented-key-bindings-exist ()

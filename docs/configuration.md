@@ -115,6 +115,11 @@ while the core is being loaded, so setting them in a regular personal
 file comes too late - they belong in `personal/preload/`. See the
 [list of options](#prelude-options) for which is which.
 
+`custom.el` is loaded late on purpose: what you've customized is meant
+to override Prelude's settings, not the other way around. It's loaded
+in alphabetical order with your other personal files, so a file named
+`init.el` or `settings.el` comes after it and has the last word.
+
 ### Personalization Example
 
 Suppose you want tabs to be 2 columns wide in Go buffers. You can
@@ -166,22 +171,30 @@ This is where most of Prelude's options have to be set. A typical preload file l
 
 ### Prelude options
 
-The second column says where an option has to be set to have an effect: `preload` means a file in
-`personal/preload/`, `anywhere` means that a regular personal file (or `M-x customize`) will do as well.
+The second column says where an option has to be set to have an effect. `startup` options are read while
+Prelude is being loaded, so in Lisp they have to be set in a file in `personal/preload/`. `anywhere` means
+that a regular personal file will do as well.
+
+All of them can also be set with `M-x customize-group RET prelude`. Prelude picks its own options out of
+`custom.el` before it loads its core, so the `startup` ones work from there too (after a restart). That
+covers what Customize itself saves, in the `custom.el` of your personal folder.
+
+Pick one of the two ways for any given option. A preload file decides how Prelude starts, but once
+`custom.el` gets loaded its value replaces the one from the preload file, and the two end up disagreeing.
 
 Option | Set it in | Default | What it controls
 -------|-----------|---------|-----------------
-`prelude-theme` | preload | `zenburn` | The color theme to load. `nil` leaves the theme alone.
-`prelude-minimalistic-ui` | preload | `nil` | Hide the menu bar and the line numbers.
-`prelude-welcome-screen` | preload | `t` | Show the welcome screen on startup.
-`prelude-super-keybindings` | preload | `t` | Bind commands to keys that use Super.
-`prelude-lsp-client` | preload | `eglot` | The LSP client: `eglot` or `lsp-mode`.
-`prelude-projectile` | preload | `t` | Set up Projectile and its key bindings.
-`prelude-smartparens` | preload | `t` | Set up smartparens.
-`prelude-undo-tree` | preload | `t` | Use undo-tree for undo and redo.
-`prelude-hippie-expand` | preload | `t` | Bind <kbd>M-/</kbd> to `hippie-expand`.
-`prelude-spell-checker` | preload | `flyspell` | The spell checker: `flyspell` or `jinx`.
-`prelude-whitespace-cleanup-style` | preload | `whitespace-cleanup` | How whitespace is cleaned up on save: the whole file, or with `ws-butler` only the lines you've touched.
+`prelude-theme` | startup | `zenburn` | The color theme to load. `nil` leaves the theme alone.
+`prelude-minimalistic-ui` | startup | `nil` | Hide the menu bar and the line numbers.
+`prelude-welcome-screen` | startup | `t` | Show the welcome screen on startup.
+`prelude-super-keybindings` | startup | `t` | Bind commands to keys that use Super.
+`prelude-lsp-client` | startup | `eglot` | The LSP client: `eglot` or `lsp-mode`.
+`prelude-projectile` | startup | `t` | Set up Projectile and its key bindings.
+`prelude-smartparens` | startup | `t` | Set up smartparens.
+`prelude-undo-tree` | startup | `t` | Use undo-tree for undo and redo.
+`prelude-hippie-expand` | startup | `t` | Bind <kbd>M-/</kbd> to `hippie-expand`.
+`prelude-spell-checker` | startup | `flyspell` | The spell checker: `flyspell` or `jinx`.
+`prelude-whitespace-cleanup-style` | startup | `whitespace-cleanup` | How whitespace is cleaned up on save: the whole file, or with `ws-butler` only the lines you've touched.
 `prelude-flyspell` | anywhere | `t` | Check spelling as you type.
 `prelude-whitespace` | anywhere | `t` | Highlight whitespace problems (`whitespace-mode`).
 `prelude-clean-whitespace-on-save` | anywhere | `t` | Clean up whitespace when a file is saved.
