@@ -1,32 +1,74 @@
 # Troubleshooting
 
-## Updating bundled packages
+## Finding out what's wrong
 
-Generally it's a good idea to do a package update before running
-updating Prelude, since the latest Prelude code might depend on newer
-versions of the bundled packages than you would currently have
-installed.
-
-If you're doing manual Prelude updates you should always do a
-package update first.
-
-```text
-M-x package-list-packages RET U x
-```
-
-That's not necessary if you're using `M-x prelude-update`, since it
-will automatically update the installed packages.
-
-## Problems with flyspell-mode
-
-Prelude makes heavy use of the flyspell-mode package for spell
-checking of various things. The proper operation of flyspell depends
-on the presence of the `aspell` program and an `en` dictionary on your
-system. You can install `aspell` and the dictionary on macOS with
-`homebrew` like this:
+When Emacs complains during startup, run it like this to get a
+backtrace that says where the error comes from:
 
 ```shell
-brew install aspell --with-lang=en
+emacs --debug-init
+```
+
+If the trouble started after you changed your own config, move the
+files out of `personal/` (or comment out half of a file) and bring them
+back one at a time. To check whether a problem has anything to do with
+your config at all, try a pristine copy of Prelude without touching
+your setup:
+
+```shell
+git clone https://github.com/bbatsov/prelude.git /tmp/prelude
+emacs --init-directory=/tmp/prelude
+```
+
+## Errors after updating Prelude
+
+Update with <kbd>M-x prelude-update</kbd> rather than a plain
+`git pull`: it also updates the packages, which the new code may
+depend on, and recompiles Prelude. If you did pull by hand, run
+<kbd>M-x prelude-update-packages</kbd> and
+<kbd>M-x prelude-recompile-init</kbd>, and restart Emacs.
+
+A warning about "outdated byte-code" on startup means that Prelude
+found compiled init files left behind by an older version and removed
+them. Restart Emacs once and it's gone.
+
+## "No language server for ..."
+
+Prelude starts a language server only if it's installed, and tells you
+once when it isn't. Install the server named on the page of the
+language's [module](modules/index.md), make sure Emacs can find it on
+your `PATH`, and reopen the file (or run <kbd>M-x eglot</kbd>).
+
+## Tree-sitter grammars that don't install
+
+Installing a grammar means compiling it, so you need `git` and a C
+compiler (`gcc` or `clang`). Without the grammar Prelude falls back to
+the classic major mode, and you can retry any time with
+<kbd>M-x prelude-treesit-install-grammars</kbd>.
+
+## "Modules ... do the same job"
+
+Some modules are alternatives to each other (Vertico, Helm, Ivy and
+Ido; Company and Corfu). Enabling two of them at once makes them fight
+over the same keys, so Prelude warns you. Keep one per group in
+`personal/prelude-modules.el`.
+
+## Keys with Super don't work
+
+Many desktop environments keep the Super (Windows or Command) key for
+themselves, and terminals can't send it at all. Every command on a
+Super key has another binding (see [Usage](usage.md)), and you can
+turn the Super bindings off with `prelude-super-keybindings`.
+
+## No spell checking
+
+Prelude checks your spelling with Flyspell, which needs the `aspell`
+program and a dictionary for your language. When `aspell` isn't
+installed, spell checking is simply off. On macOS you can get it with
+Homebrew:
+
+```shell
+brew install aspell
 ```
 
 On Linux distros - just use your distro's package manager.
@@ -42,11 +84,12 @@ export TERM=xterm-256color
 
 Source the `.bashrc` file and start Emacs again.
 
-## MELPA error on initial startup
+## Packages that fail to install
 
-If you get some http connection error related to the MELPA repo
-just do a manual `M-x package-refresh-contents` and restart Emacs
-afterwards.
+When a package can't be installed Prelude refreshes the package list
+and tries once more, and warns you if that fails too. The usual reason
+is the network (or MELPA having a bad moment). Run
+<kbd>M-x package-refresh-contents</kbd> and restart Emacs to try again.
 
 ## Warnings on arrow navigation in editor buffers
 
@@ -79,28 +122,10 @@ don't like that simply add this to your personal config:
                 'move-beginning-of-line)
 ```
 
-If you're using term-mode or ansi-term-mode, the above will not
-restore the default behaviour of sending the C-a key sequence directly
-to the terminal. As a workaround, you can remove the C-a binding from
-prelude-mode specifically for these as described in this
-[guide to removing minor mode keybindings][remove-keys]
-by adding something like the following to your personal
-config:
+In terminal emulators (`ansi-term`, `vterm`, `eat`) <kbd>C-a</kbd> is
+passed on to the shell, as you'd expect.
 
-[smart-bol]: http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/
-[remove-keys]: https://emacsredux.com/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/
-
-```emacs-lisp
-(defun my-term-mode-hook ()
-  (let ((oldmap (cdr (assoc 'prelude-mode minor-mode-map-alist)))
-        (newmap (make-sparse-keymap)))
-    (set-keymap-parent newmap oldmap)
-    (define-key newmap (kbd "C-a") nil)
-    (make-local-variable 'minor-mode-overriding-map-alist)
-    (push `(prelude-mode . ,newmap) minor-mode-overriding-map-alist)))
-
-(add-hook 'term-mode-hook 'my-term-mode-hook)
-```
+[smart-bol]: https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/
 
 ## Poor ido matching performance on large datasets
 
