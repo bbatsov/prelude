@@ -34,6 +34,7 @@
 ### Changes
 
 - [#1483](https://github.com/bbatsov/prelude/pull/1483): Make all of Prelude's options work when they're set with `M-x customize`. Options that are read while Prelude starts (the theme, the minimalistic UI, the LSP client, etc.) used to be ignored there, as `custom.el` is loaded after the core; Prelude now reads its own options from it first.
+- [#1483](https://github.com/bbatsov/prelude/pull/1483): Make `prelude-auto-save` and `prelude-user-init-file` do something again. The first turns `super-save` off when set to `nil`, the second is what `C-c I` (now `prelude-find-user-init-file`) opens: your personal folder rather than Prelude's `init.el`.
 - [#1479](https://github.com/bbatsov/prelude/pull/1479): Stop forcing Apple Color Emoji on the whole Unicode range on macOS. That was a workaround from 2015; the Emacs versions Prelude supports pick a color font for emoji by themselves. Prelude doesn't configure any fonts now, and the manual shows how to set your own.
 - [#1472](https://github.com/bbatsov/prelude/pull/1472): Start a language server for shell scripts, CSS, YAML and JSON when there's one installed (`prelude-shell`, `prelude-css`, `prelude-yaml` and `prelude-js`). A missing server isn't mentioned for those, and for SQL, as `prelude-lsp-enable` now takes a `quiet` argument.
 - [#1471](https://github.com/bbatsov/prelude/pull/1471): Don't start Eglot in buffers whose language server isn't installed. Prelude mentions the missing server once for a major mode, instead of Eglot warning about it for every file you open.

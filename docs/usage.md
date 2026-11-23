@@ -150,7 +150,7 @@ Keybinding | Command | Description
 <kbd>C-c t</kbd> | `crux-visit-term-buffer` | Open a terminal emulator (`ansi-term`).
 <kbd>C-c k</kbd> | `crux-kill-other-buffers` | Kill all the buffers visiting files, except the current one.
 <kbd>C-c TAB</kbd> | `crux-indent-rigidly-and-copy-to-clipboard` | Copy the region to the clipboard, indented by 4 spaces (handy for Markdown).
-<kbd>C-c I</kbd> | `crux-find-user-init-file` | Open Emacs's init file (that's Prelude's `init.el`).
+<kbd>C-c I</kbd> | `prelude-find-user-init-file` | Open your personal config (the `personal/` directory, unless you've set `prelude-user-init-file`).
 <kbd>C-c S</kbd> | `crux-find-shell-init-file` | Open your shell's init file.
 <kbd>s-r</kbd> | `crux-recentf-find-file` | Open a recently visited file.
 <kbd>s-j</kbd> | `crux-top-join-line` | Join the current line with the one below it.

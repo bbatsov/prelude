@@ -101,6 +101,12 @@ Prelude doesn't keep them around at all."
      (format "Removed outdated byte-code that Emacs was loading instead of Prelude's current init files (%s).  Restart Emacs to start with the right ones."
              (mapconcat #'file-name-nondirectory stale ", ")))))
 
+(defun prelude-find-user-init-file ()
+  "Open your personal configuration in another window.
+That's `prelude-user-init-file', by default the personal folder."
+  (interactive)
+  (find-file-other-window prelude-user-init-file))
+
 (defun prelude-recompile-init ()
   "Byte-compile Prelude's core, modules and vendored code again.
 init.el and early-init.el are never compiled, see

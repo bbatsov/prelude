@@ -1075,11 +1075,43 @@ to load and would leave them in `fundamental-mode'."
                          '((prelude-theme . nil)
                            (prelude-indent-sensitive-modes . (conf-mode yaml-mode))
                            (prelude-whitespace . nil))))
+          ;; a value that can't be computed doesn't cost us the rest, and
+          ;; the last of several values for an option is the one to use
+          (write-region
+           (concat "(custom-set-variables\n"
+                   " '(prelude-theme 'zenburn)\n"
+                   " '(prelude-guru (prelude-test-undefined-function))\n"
+                   " '(prelude-flyspell nil))\n"
+                   "(custom-set-variables '(prelude-theme 'modus-vivendi))\n")
+           nil file nil 'silent)
+          (let* ((inhibit-message t)
+                 (saved (prelude-saved-options file)))
+            (should (equal (mapcar #'car saved)
+                           '(prelude-theme prelude-flyspell prelude-theme)))
+            (should (eq (cdr (assq 'prelude-theme (reverse saved))) 'modus-vivendi)))
           ;; a file that can't be read to the end gives what it has
           (write-region "(custom-set-variables '(prelude-guru nil))\n(unbalanced" nil file nil 'silent)
           (should (equal (prelude-saved-options file) '((prelude-guru . nil))))
           (should-not (prelude-saved-options (concat file ".missing"))))
       (delete-file file))))
+
+(ert-deftest prelude-auto-save-controls-super-save ()
+  "super-save is turned on only if `prelude-auto-save' says so."
+  (should (eq (bound-and-true-p super-save-mode) prelude-auto-save))
+  ;; the option is read once, at startup, so look at the code as well
+  (should (string-match-p
+           "(when prelude-auto-save\n +(super-save-mode \\+1))"
+           (prelude-test--file-string "core/prelude-editor.el"))))
+
+(ert-deftest prelude-find-user-init-file-opens-the-personal-config ()
+  (should (equal (eval (car (get 'prelude-user-init-file 'standard-value)) t)
+                 prelude-personal-dir))
+  (let ((opened nil))
+    (cl-letf (((symbol-function 'find-file-other-window)
+               (lambda (file &rest _) (setq opened file))))
+      (let ((prelude-user-init-file "/somewhere/my-config.el"))
+        (prelude-find-user-init-file)))
+    (should (equal opened "/somewhere/my-config.el"))))
 
 ;;; The manual
 
@@ -1120,9 +1152,7 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
          (push symbol options))))
     (should (> (length options) 15))
     (dolist (option options)
-      ;; these two are leftovers that nothing reads
-      (unless (memq option '(prelude-auto-save prelude-user-init-file))
-        (should (string-search (format "`%s` |" option) docs))))))
+      (should (string-search (format "`%s` |" option) docs)))))
 
 ;;; The module listings
 

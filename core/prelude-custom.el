@@ -52,7 +52,9 @@ or desktop environments that make heavy use of them."
   :package-version '(prelude . "1.1"))
 
 (defcustom prelude-auto-save t
-  "Non-nil values enable Prelude's auto save."
+  "Non-nil values enable Prelude's auto save.
+Buffers visiting files are saved when you switch to another buffer or
+window, and when Emacs loses focus (see `super-save-mode')."
   :type 'boolean
   :group 'prelude)
 
@@ -102,16 +104,17 @@ requires libenchant and a C compiler to build its native module."
                  (const :tag "Jinx (libenchant)" jinx))
   :group 'prelude)
 
-(defcustom prelude-user-init-file (expand-file-name "personal/"
-                                                    user-emacs-directory)
-  "Path to your personal customization file.
-Prelude recommends you only put personal customizations in the
-personal folder.  This variable allows you to specify a specific
-folder as the one that should be visited when running
-`crux-find-user-init-file'.  This can be easily set to the desired buffer
-in Lisp by putting `(setq prelude-user-init-file load-file-name)'
-in the desired elisp file."
-  :type 'string
+(defvar prelude-personal-dir)
+
+(defcustom prelude-user-init-file (or (bound-and-true-p prelude-personal-dir)
+                                      (expand-file-name "personal/" user-emacs-directory))
+  "The file or directory that holds your personal configuration.
+It's what `prelude-find-user-init-file' takes you to.  The default is
+the personal folder, where Prelude recommends that you keep your
+customizations.  If most of them are in one file, point this at it,
+e.g. by putting `(setq prelude-user-init-file load-file-name)' in that
+file."
+  :type 'file
   :group 'prelude)
 
 (defcustom prelude-indent-sensitive-modes
