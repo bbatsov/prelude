@@ -107,6 +107,51 @@ by Prelude.")
   (message "[Prelude] Loading personal configuration files from files and directories in %s..." prelude-personal-preload-dir)
   (mapc 'load (directory-files-recursively prelude-personal-preload-dir "^[^#\.].*el$")))
 
+;; config changes made through the customize UI will be stored here
+(setq custom-file (expand-file-name "custom.el" prelude-personal-dir))
+
+(defun prelude-saved-options (file)
+  "Return the Prelude options that Customize has saved in FILE.
+The result is an alist of (OPTION . VALUE), with an entry for every
+variable set by a `custom-set-variables' form whose name starts with
+\"prelude-\".  Nothing else in FILE is evaluated."
+  (let ((options nil))
+    (when (file-readable-p file)
+      (with-temp-buffer
+        (insert-file-contents file)
+        (condition-case nil
+            (while t
+              (let ((form (read (current-buffer))))
+                (when (eq (car-safe form) 'custom-set-variables)
+                  (dolist (arg (cdr form))
+                    ;; ARG is (quote (OPTION EXPRESSION ...))
+                    (let ((spec (car-safe (cdr-safe arg))))
+                      (when (and (symbolp (car-safe spec))
+                                 (string-prefix-p "prelude-" (symbol-name (car spec))))
+                        ;; a value we can't compute yet shouldn't cost
+                        ;; us the options that follow it
+                        (condition-case err
+                            (push (cons (car spec) (eval (cadr spec) t)) options)
+                          (error
+                           (message "[Prelude] Can't use the saved value of %s yet: %s"
+                                    (car spec) (error-message-string err))))))))))
+          ;; the end of the file, or something we can't read
+          (error nil))))
+    (nreverse options)))
+
+;; Many of Prelude's options are consulted while its core is being
+;; loaded.  `custom-file' as a whole is loaded only afterwards, together
+;; with the rest of the personal config: people keep all sorts of code
+;; in it, and its settings are supposed to override Prelude's.  So that
+;; Prelude's own options can still be set with the customize UI, we pick
+;; just those out of the file now.  Whatever a preload file has set is
+;; left alone.
+(let ((saved (prelude-saved-options custom-file)))
+  (dolist (option (seq-remove #'boundp (delete-dups (mapcar #'car saved))))
+    ;; if an option is there more than once, the last value counts, as
+    ;; it will when the file is loaded
+    (set-default option (cdr (assq option (reverse saved))))))
+
 (message "[Prelude] Loading Prelude's core modules...")
 
 ;; load the core stuff
@@ -147,9 +192,6 @@ by Prelude.")
   (load (expand-file-name "sample/prelude-modules.el" prelude-dir)))
 
 (prelude-check-module-conflicts)
-
-;; config changes made through the customize UI will be stored here
-(setq custom-file (expand-file-name "custom.el" prelude-personal-dir))
 
 ;; load the personal settings (this includes `custom-file')
 (when (file-exists-p prelude-personal-dir)

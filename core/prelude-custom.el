@@ -138,7 +138,7 @@ Only modes that don't derive from `prog-mode' should be listed here."
 
 (defcustom prelude-yank-indent-threshold 1000
   "Threshold (# chars) over which indentation does not automatically occur."
-  :type 'number
+  :type 'natnum
   :group 'prelude)
 
 (defcustom prelude-welcome-screen t
@@ -150,7 +150,7 @@ arguments (e.g. `emacs foo.rb')."
 
 (defcustom prelude-theme 'zenburn
   "The default color theme, change this in your /personal/preload config."
-  :type 'symbol
+  :type '(choice (const :tag "None" nil) symbol)
   :group 'prelude)
 
 (defcustom prelude-projectile t
