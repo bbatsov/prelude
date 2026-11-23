@@ -24,6 +24,9 @@ You can support the development of Prelude via
 [PayPal](https://www.paypal.me/bbatsov) and
 [Patreon](https://www.patreon.com/bbatsov).
 
+New here? [Install Prelude](installation.md) and then head over to
+[Getting Started](getting-started.md).
+
 ## Features
 
 - Improved UX, that's still in line with Emacs traditions

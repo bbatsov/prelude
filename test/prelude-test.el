@@ -1185,6 +1185,11 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
     (dolist (option options)
       (should (string-search (format "`%s` |" option) docs)))))
 
+(ert-deftest prelude-every-page-of-the-manual-is-in-the-navigation ()
+  (let ((nav (prelude-test--file-string "mkdocs.yml")))
+    (dolist (page (directory-files (expand-file-name "docs" prelude-dir) nil "\\.md\\'"))
+      (should (string-search (format ": %s\n" page) nav)))))
+
 ;;; The module listings
 
 (defun prelude-test--file-string (file)
