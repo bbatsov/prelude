@@ -329,36 +329,6 @@ If you want to use vim keybindings inside of Emacs enable
 the `prelude-evil` module which provides support for
 `evil-mode`.
 
-### Cheatsheet
-
-Use `C-h k <key>` (`<key>` are the ones listed on the left)
-or `C-h f <function>` (`<function>` are the ones listed on
-the right) to see the detailed explanation.
-
-![cheatsheet](cheatsheet.png)
-
-#### PDF generation
-
-To generate a PDF version of the cheatsheet you'll need to
-install [LaTeX](https://www.latex-project.org/get/).
-Afterwards you can do something like:
-
-```shell
-cd docs
-pdflatex prelude-cheatsheet.tex
-```
-
-#### PNG generation
-
-To generate a PNG version of the cheatsheet you'll need to
-install [Poppler](https://poppler.freedesktop.org/).
-Afterwards you can do something like:
-
-```shell
-cd docs
-pdftocairo -png -singlefile prelude-cheatsheet.pdf cheatsheet
-```
-
 ## Automatic package installation
 
 The default Prelude installation comes with a bare minimum of
