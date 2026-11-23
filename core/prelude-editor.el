@@ -354,6 +354,12 @@ Does nothing when `prelude-spell-checker' is set to something else
 ;; instead of having to repeat the C-u prefix each time
 (setq set-mark-command-repeat-pop t)
 
+;; some commands can be repeated by pressing just the last key of
+;; their binding again: C-x } } } keeps widening a window, C-x <right>
+;; <right> keeps switching buffers, M-g n n n keeps going to the next
+;; error
+(repeat-mode +1)
+
 (define-advice exchange-point-and-mark (:before (&rest _) prelude-deactivate-mark)
   "When called with no active region, do not activate mark."
   (interactive

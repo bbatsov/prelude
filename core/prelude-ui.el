@@ -54,6 +54,10 @@
 ;; enable smooth pixel scrolling on graphical displays
 (pixel-scroll-precision-mode t)
 
+;; a right click brings up a menu for the thing that was clicked,
+;; instead of extending the region
+(context-menu-mode +1)
+
 ;; mode line settings
 (line-number-mode t)
 (column-number-mode t)
