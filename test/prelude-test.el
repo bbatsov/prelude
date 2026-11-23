@@ -1132,6 +1132,18 @@ to load and would leave them in `fundamental-mode'."
   (dolist (hook '(term-mode-hook vterm-mode-hook eat-mode-hook))
     (should (memq 'prelude-mode-yield-to-terminal (symbol-value hook)))))
 
+(ert-deftest prelude-personal-config-is-not-checked-like-a-library ()
+  "The personal directory turns off the warnings that make no sense for config."
+  (let* ((locals (with-temp-buffer
+                   (insert-file-contents (expand-file-name ".dir-locals.el" prelude-personal-dir))
+                   (read (current-buffer))))
+         (elisp (alist-get 'emacs-lisp-mode locals))
+         (warnings (alist-get 'byte-compile-warnings elisp)))
+    (should (equal warnings '(not free-vars unresolved)))
+    ;; Flycheck's subprocess applies safe local variables only
+    (should (safe-local-variable-p 'byte-compile-warnings warnings))
+    (should (memq 'emacs-lisp-checkdoc (alist-get 'flycheck-disabled-checkers elisp)))))
+
 ;;; The manual
 
 (ert-deftest prelude-documented-key-bindings-exist ()

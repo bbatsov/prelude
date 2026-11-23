@@ -97,6 +97,7 @@
 - [#1481](https://github.com/bbatsov/prelude/pull/1481): Fix a few automatic package installs: opening an SCSS file installed a broken `scss-mode` over the built-in one, any file under a `Caskroom` directory installed `cask-mode`, and Python type stubs (`.pyi`) were taken for Cython.
 - [#1481](https://github.com/bbatsov/prelude/pull/1481): Stop pointing all projects at a single Projectile cache file (Projectile keeps a cache per project these days).
 - [#1332](https://github.com/bbatsov/prelude/issues/1332): Stop `prelude-mode` from intercepting `C-a` and its other editing keys in terminal emulators (`ansi-term`, `vterm`, `eat`), where they never reached the shell.
+- [#1296](https://github.com/bbatsov/prelude/issues/1296): Don't have Flycheck flag every Prelude variable and function used in a personal config file as undefined.
 
 ## 2.1.0 (2026-03-29)
 
