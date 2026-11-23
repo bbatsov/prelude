@@ -1478,4 +1478,12 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
         (prelude-test--at-time 8 (prelude-theme-sync))
         (should (equal custom-enabled-themes '(light)))))))
 
+;;; Built-in conveniences
+
+(ert-deftest prelude-turns-on-repeat-mode-and-the-context-menu ()
+  (should repeat-mode)
+  ;; M-g n n n
+  (should (eq (get 'next-error 'repeat-map) 'next-error-repeat-map))
+  (should context-menu-mode))
+
 ;;; prelude-test.el ends here

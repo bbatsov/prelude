@@ -33,6 +33,7 @@
 
 ### Changes
 
+- [#1489](https://github.com/bbatsov/prelude/pull/1489): Enable `repeat-mode` (e.g. `M-g n n n` keeps going to the next error) and `context-menu-mode` (a right click brings up a context menu instead of extending the region).
 - [#1488](https://github.com/bbatsov/prelude/pull/1488): Show Eglot's diagnostics with Flycheck's own `flycheck-eglot-mode` (a part of Flycheck since version 39) instead of the `flycheck-eglot` package, which is no longer installed.
 - [#1487](https://github.com/bbatsov/prelude/pull/1487): Stop the Go, Ivy and Org modules from taking keys that belong to others. Go's test commands are now on `C-c C-t t`, `C-c C-t f` and `C-c C-t p` (the keys of `go-ts-mode` in Emacs 31) and `go-run` is on `C-c C-r`; Ivy no longer binds `C-c C-r`, `C-c g`, `C-c j`, `C-c a` and `C-x l`; Org no longer binds `C-c b`.
 - [#1486](https://github.com/bbatsov/prelude/pull/1486): Make [Tokyo Night](https://github.com/bbatsov/tokyo-night-emacs) the default theme, with its light variant during the day and the dark one at night: `prelude-theme` can now be a `(DAY . NIGHT)` pair, and `prelude-theme-daytime` says when to switch (with the system's light and dark mode where Emacs knows about it, by the clock elsewhere). Put `(setq prelude-theme 'zenburn)` in `personal/preload` to keep Zenburn.
