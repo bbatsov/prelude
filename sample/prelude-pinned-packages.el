@@ -85,6 +85,7 @@
         (super-save . "melpa-stable")
         (swift-mode . "melpa-stable")
         (thrift . "melpa-stable")
+        (tokyo-night . "melpa-stable")
         (utop . "melpa-stable")
         (volatile-highlights . "melpa-stable")
         (web-mode . "melpa-stable")

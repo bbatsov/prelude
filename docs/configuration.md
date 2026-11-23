@@ -52,37 +52,76 @@ Emacs provides a dozen of
 built-in themes you can use out-of-the-box by invoking the `M-x
 load-theme` command.
 
-[Zenburn](https://github.com/bbatsov/zenburn-emacs) is the default
-color theme in Prelude, but you can change it at your discretion. Why
-Zenburn? I (and lots of hackers around the world) find it pretty neat
-for some reason. Personally I find the default theme pretty tiresome
-for the eyes, that's why I took that "controversial" decision to
-replace it. You can, of course, easily go back to the default (or
-select another theme entirely).
+[Tokyo Night](https://github.com/bbatsov/tokyo-night-emacs) is the
+default color theme in Prelude: its light variant (`tokyo-night-day`)
+during the day and the dark one (`tokyo-night`) at night. Prelude
+switches between the two on its own.
 
-To disable Zenburn just put in your personal config the following
-line:
+The theme is set with `prelude-theme`, in `personal/preload`. It's
+either one theme, or a pair of a day theme and a night theme:
 
 ```emacs-lisp
-(disable-theme 'zenburn)
+;; one theme around the clock
+(setq prelude-theme 'tokyo-night-storm)
+
+;; a light theme during the day, a dark one at night
+(setq prelude-theme '(modus-operandi . modus-vivendi))
 ```
 
-Or you can use another theme altogether by adding something in `personal/preload` like:
+What counts as day is up to `prelude-theme-daytime`. By default
+Prelude follows the light and dark mode of your system, if Emacs is told
+about it. That's the case in Emacs 31 on Wayland (PGTK builds), Windows
+and Android, and in the
+[Emacs Plus](https://github.com/d12frosted/homebrew-emacs-plus) build
+on macOS. Everywhere else the day lasts from 07:00 to 19:00.
+
+You can set the times yourself:
 
 ```emacs-lisp
-(setq prelude-theme 'tango)
+(setq prelude-theme-daytime '("08:30" . "17:00"))
 ```
+
+or go by the sunrise and the sunset, as long as Emacs knows where you
+are:
+
+```emacs-lisp
+(setq prelude-theme-daytime 'sun)
+(setq calendar-latitude 42.7
+      calendar-longitude 23.3)
+```
+
+To follow the system with an Emacs that isn't told about its
+appearance (e.g. the regular macOS builds) there's the
+[auto-dark](https://github.com/LionyxML/auto-dark-emacs) package, which
+asks the system every few seconds. Turn off Prelude's theme in
+`personal/preload`:
+
+```emacs-lisp
+(setq prelude-theme nil)
+```
+
+and set up `auto-dark` in your personal config:
+
+```emacs-lisp
+(use-package auto-dark
+  :ensure t
+  :config
+  ;; the dark theme goes first
+  (setq auto-dark-themes '((tokyo-night) (tokyo-night-day)))
+  (auto-dark-mode))
+```
+
+If you pick another theme by hand (<kbd>M-x load-theme</kbd>), Prelude
+leaves it alone for the rest of the session.
 
 !!! Note
 
-    To use a non-built-in theme, like [Solarized](https://github.com/bbatsov/solarized-emacs),
-    you'll have to install it from MELPA first by `M-x package-install RET solarized-theme`. Then add
-
-```emacs-lisp
-(setq prelude-theme 'solarized-dark)
-```
-
-in `personal/preload`.
+    To use a theme that isn't built into Emacs, like
+    [Solarized](https://github.com/bbatsov/solarized-emacs), you'll have
+    to install it first with `M-x package-install RET solarized-theme`.
+    [Zenburn](https://github.com/bbatsov/zenburn-emacs), Prelude's
+    default theme for many years, is the exception:
+    `(setq prelude-theme 'zenburn)` is all it takes.
 
 Finally, if you don't want any theme at all, you can add this to your
 `personal/preload`:
@@ -184,7 +223,8 @@ Pick one of the two ways for any given option. A preload file decides how Prelud
 
 Option | Set it in | Default | What it controls
 -------|-----------|---------|-----------------
-`prelude-theme` | startup | `zenburn` | The color theme to load. `nil` leaves the theme alone.
+`prelude-theme` | startup | Tokyo Night | The color theme to load, or a `(DAY . NIGHT)` pair of themes. `nil` leaves the theme alone.
+`prelude-theme-daytime` | startup | `system` | When the day theme is used: `system` to follow the system's light and dark mode, a pair of times, or `sun` for sunrise to sunset.
 `prelude-minimalistic-ui` | startup | `nil` | Hide the menu bar and the line numbers.
 `prelude-welcome-screen` | startup | `t` | Show the welcome screen on startup.
 `prelude-super-keybindings` | startup | `t` | Bind commands to keys that use Super.

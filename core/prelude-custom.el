@@ -151,9 +151,37 @@ arguments (e.g. `emacs foo.rb')."
   :type 'boolean
   :group 'prelude)
 
-(defcustom prelude-theme 'zenburn
-  "The default color theme, change this in your /personal/preload config."
-  :type '(choice (const :tag "None" nil) symbol)
+(defcustom prelude-theme '(tokyo-night-day . tokyo-night)
+  "The color theme Prelude loads on startup.
+Either a theme, or a cons (DAY . NIGHT) of the theme to use during the
+day and the one to use at night.  Prelude switches between the two on
+its own, as told by `prelude-theme-daytime'.  With nil Prelude leaves
+the theme alone.
+
+Change this in your personal/preload config."
+  :type '(choice (const :tag "None" nil)
+                 (symbol :tag "Theme")
+                 (cons :tag "Day and night"
+                       (symbol :tag "Day theme")
+                       (symbol :tag "Night theme")))
+  :group 'prelude)
+
+(defcustom prelude-theme-daytime 'system
+  "When the day theme of `prelude-theme' is in use.
+One of:
+
+- the symbol `system': when the system is in light mode.  Not every
+  Emacs is told about that: it takes Emacs 31 on GTK without X (PGTK),
+  MS-Windows or Android, or the Emacs Plus build on macOS.  Elsewhere
+  the day lasts from 07:00 to 19:00.
+- a cons (START . END) of times like \"07:00\"
+- the symbol `sun': from sunrise to sunset.  Emacs has to know where
+  you are for that: set `calendar-latitude' and `calendar-longitude'."
+  :type '(choice (const :tag "Follow the system's light and dark mode" system)
+                 (cons :tag "From, to"
+                       (string :tag "Day starts at")
+                       (string :tag "Night starts at"))
+                 (const :tag "Sunrise to sunset" sun))
   :group 'prelude)
 
 (defcustom prelude-projectile t

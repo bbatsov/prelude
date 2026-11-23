@@ -27,9 +27,14 @@ the habit to cut "stable" releases of their projects. It seems
 that's changing for the better in recent years, so Prelude's
 defaults might change down the road.
 
-## Why is Zenburn the default color theme?
+## Why is Tokyo Night the default color theme?
 
 No particular reason other than the fact that I like it a lot
-and happen to maintain its Emacs port. I believe it's pretty
-nice improvement over the default Emacs theme, but your
+and happen to maintain its Emacs port. It comes with a light
+variant as well, so Prelude can use that one during the day (or when
+your system is in light mode) and the dark one at night. I believe
+it's pretty nice improvement over the default Emacs theme, but your
 perspective might be different.
+
+Prelude's default used to be Zenburn (another theme I maintain). See
+[Color Themes](configuration.md#color-themes) if you want it back.

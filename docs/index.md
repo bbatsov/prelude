@@ -70,7 +70,7 @@ Here are some of the essential 3rd party packages that Prelude adds to Emacs:
   (auto-save buffers when moving around)
 - [which-key](https://github.com/justbur/emacs-which-key)
   (shows you possible keybindings when you type a partial keybinding)
-- [zenburn-theme](https://github.com/bbatsov/zenburn-emacs)
+- [tokyo-night](https://github.com/bbatsov/tokyo-night-emacs)
   (Prelude's default color theme)
 - [undo-tree](https://elpa.gnu.org/packages/undo-tree.html)
   (A powerful way to navigate your editing history)
