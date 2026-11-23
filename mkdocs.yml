@@ -7,6 +7,7 @@ nav:
 - Installation: installation.md
 - Getting Started: getting-started.md
 - Usage: usage.md
+- Differences from Stock Emacs: differences.md
 - Configuration: configuration.md
 - Modules:
     - Overview: modules/index.md

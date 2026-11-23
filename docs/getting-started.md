@@ -18,7 +18,9 @@ list of modules, this manual. You can always get back to it with
 
 If you're new to Emacs itself, do the built-in tutorial first
 (<kbd>C-h t</kbd>). Prelude changes a lot of defaults, but the basics
-are the same.
+are the same. If you know Emacs well,
+[Differences from Stock Emacs](differences.md) tells you what's going
+to surprise you.
 
 ## Pick your modules
 
