@@ -96,6 +96,7 @@
 - [#1481](https://github.com/bbatsov/prelude/pull/1481): Don't show the welcome screen next to a new file when Emacs is started with the name of a file that doesn't exist yet.
 - [#1481](https://github.com/bbatsov/prelude/pull/1481): Fix a few automatic package installs: opening an SCSS file installed a broken `scss-mode` over the built-in one, any file under a `Caskroom` directory installed `cask-mode`, and Python type stubs (`.pyi`) were taken for Cython.
 - [#1481](https://github.com/bbatsov/prelude/pull/1481): Stop pointing all projects at a single Projectile cache file (Projectile keeps a cache per project these days).
+- [#1332](https://github.com/bbatsov/prelude/issues/1332): Stop `prelude-mode` from intercepting `C-a` and its other editing keys in terminal emulators (`ansi-term`, `vterm`, `eat`), where they never reached the shell.
 
 ## 2.1.0 (2026-03-29)
 
