@@ -12,6 +12,9 @@
 ;; server is listed in the PRELUDE_LSP_TEST_SERVERS environment
 ;; variable (separated by spaces), in which case that's a failure.
 ;;
+;; In the end a Go file with a mistake in it is opened, to see that what
+;; the language server has to say about it arrives in Flycheck.
+;;
 ;; Usage:
 ;;   emacs --batch -l init.el -l test/prelude-lsp-test.el
 
@@ -47,10 +50,12 @@ The first file is the one that gets opened.")
   (when (eglot-managed-p)
     (car (process-command (jsonrpc--process (eglot-current-server))))))
 
-(defun prelude-lsp-test--connect (module files)
+(defun prelude-lsp-test--connect (module files &optional then)
   "Open the first of FILES in a new project, with MODULE loaded.
 Return the program of the language server Eglot connected to, or nil
-if it didn't connect in time."
+if it didn't connect in time.  With THEN, return what that function
+returns when called in the buffer after the server has connected; it's
+given the time by which it has to be done."
   (require module)
   (let ((dir (make-temp-file "prelude-lsp-test" t))
         (prelude-treesit-auto-install nil))
@@ -66,11 +71,37 @@ if it didn't connect in time."
                   (while (and (not (eglot-managed-p))
                               (< (float-time) deadline))
                     (accept-process-output nil 0.1))
-                  (prelude-lsp-test--connected-server))
+                  (if (and then (eglot-managed-p))
+                      (funcall then deadline)
+                    (prelude-lsp-test--connected-server)))
               (ignore-errors (eglot-shutdown-all))
               (set-buffer-modified-p nil)
               (kill-buffer))))
       (delete-directory dir t))))
+
+(defvar flycheck-current-errors)
+(declare-function flycheck-mode "flycheck")
+(declare-function flycheck-buffer "flycheck")
+(declare-function flycheck-running-p "flycheck")
+(declare-function flycheck-error-checker "flycheck")
+(declare-function flycheck-error-message "flycheck")
+
+(defun prelude-lsp-test--flycheck-errors (deadline)
+  "Return the Flycheck errors of the current buffer as (CHECKER . MESSAGE).
+Wait for them to show up until DEADLINE."
+  ;; Flycheck stays out of the way in batch mode
+  (flycheck-mode +1)
+  ;; The server takes its time, and what it reports later makes Flycheck
+  ;; check again only once Emacs is idle, which it never is in batch
+  ;; mode.  So keep asking.
+  (while (and (not flycheck-current-errors)
+              (< (float-time) deadline))
+    (unless (flycheck-running-p)
+      (flycheck-buffer))
+    (accept-process-output nil 1))
+  (mapcar (lambda (err)
+            (cons (flycheck-error-checker err) (flycheck-error-message err)))
+          flycheck-current-errors))
 
 (message "\n[test] Connecting to language servers...\n")
 
@@ -91,13 +122,42 @@ if it didn't connect in time."
    (t
     (message "[test]   - %s: %s isn't installed, skipped" module server))))
 
+(message "\n[test] Looking for the diagnostics of a language server in Flycheck...\n")
+
+(cond
+ ((not (eq prelude-lsp-client 'eglot))
+  (message "[test]   - not using Eglot, skipped"))
+ ((executable-find "gopls")
+  (let ((errors (condition-case err
+                    (prelude-lsp-test--connect
+                     'prelude-go
+                     '(("main.go" . "package main\n\nfunc main() {\n\tunused := 1\n}\n")
+                       ("go.mod" . "module example.com/prelude\n\ngo 1.21\n"))
+                     #'prelude-lsp-test--flycheck-errors)
+                  (error (message "[test]     %s" (error-message-string err))
+                         nil))))
+    (if (and (consp errors)
+             (seq-some (lambda (err)
+                         (and (eq (car err) 'eglot-check)
+                              (string-match-p "declared and not used" (cdr err))))
+                       errors))
+        (message "[test]   ✓ gopls reported the unused variable")
+      (message "[test]   ✗ expected an error about an unused variable from eglot-check, got %S"
+               errors)
+      (push 'flycheck prelude-lsp-test-failures))))
+ ((member "gopls" prelude-lsp-test-required-servers)
+  (message "[test]   ✗ gopls isn't installed")
+  (push 'flycheck prelude-lsp-test-failures))
+ (t
+  (message "[test]   - gopls isn't installed, skipped")))
+
 (message "")
 (if prelude-lsp-test-failures
     (progn
-      (message "[test] FAILED - no language server for: %s"
+      (message "[test] FAILED - problems with: %s"
                (mapconcat #'symbol-name (reverse prelude-lsp-test-failures) ", "))
       (kill-emacs 1))
-  (message "[test] PASSED - connected to every language server that's installed.")
+  (message "[test] PASSED - every language server that's installed works.")
   (kill-emacs 0))
 
 ;;; prelude-lsp-test.el ends here

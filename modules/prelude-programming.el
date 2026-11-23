@@ -86,23 +86,20 @@
 (use-package flycheck
   :ensure t
   :config
-  (global-flycheck-mode +1))
-
-;; When Eglot is the LSP client, route its diagnostics through Flycheck
-;; as well.  On its own Eglot reports only via Flymake, so without this
-;; bridge LSP diagnostics wouldn't show up in Prelude's Flycheck UI.
-;; (lsp-mode has its own Flycheck integration, so this is Eglot-only.)
-(when (eq prelude-lsp-client 'eglot)
-  (use-package flycheck-eglot
-    :ensure t
-    :after eglot
-    :config
-    ;; flycheck-eglot calls `eglot-server-capable', which the Eglot of
-    ;; Emacs 29 only has under its old, internal name.  Without it the
-    ;; hook that runs when a language server connects fails.
-    (unless (fboundp 'eglot-server-capable)
-      (defalias 'eglot-server-capable 'eglot--server-capable))
-    (global-flycheck-eglot-mode +1)))
+  (global-flycheck-mode +1)
+  ;; When Eglot is the LSP client, route its diagnostics through Flycheck
+  ;; as well.  On its own Eglot reports only via Flymake, so without this
+  ;; LSP diagnostics wouldn't show up in Prelude's Flycheck UI.
+  ;; (lsp-mode has its own Flycheck integration, so this is Eglot-only.)
+  (when (eq prelude-lsp-client 'eglot)
+    ;; Flycheck has had the `eglot-check' checker since version 39.  It
+    ;; used to take the flycheck-eglot package.
+    (if (flycheck-valid-checker-p 'eglot-check)
+        (global-flycheck-eglot-mode +1)
+      (display-warning
+       'prelude
+       "This Flycheck is too old to show the diagnostics of language servers.
+Update your packages with M-x prelude-update and restart Emacs."))))
 
 ;; Makefiles require tabs for indentation
 (defun prelude-makefile-mode-defaults ()
