@@ -130,5 +130,33 @@
   :global t
   :group 'prelude)
 
+(defvar prelude-mode-terminal-keys
+  (list (kbd "C-a") (kbd "M-o") (kbd "C-M-z")
+        [(shift return)] [(control shift return)]
+        [(control shift up)] [(control shift down)]
+        [(meta shift up)] [(meta shift down)])
+  "The keys of `prelude-mode' that edit text.
+They mean something else to the program running in a terminal, see
+`prelude-mode-yield-to-terminal'.")
+
+(defun prelude-mode-yield-to-terminal ()
+  "Let the terminal in the current buffer have the editing keys of `prelude-mode'.
+A minor mode's bindings come before those of the major mode, so
+`prelude-mode' would keep keys like \\`C-a' from ever reaching the shell
+in a terminal emulator.  The rest of its bindings (\\`C-c p' and
+friends) keep working."
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map prelude-mode-map)
+    ;; an explicit nil hides the binding of the parent, so the lookup
+    ;; moves on to the keymaps of the terminal
+    (dolist (key prelude-mode-terminal-keys)
+      (define-key map key nil))
+    (setq-local minor-mode-overriding-map-alist
+                (cons (cons 'prelude-mode map)
+                      (assq-delete-all 'prelude-mode minor-mode-overriding-map-alist)))))
+
+(dolist (hook '(term-mode-hook vterm-mode-hook eat-mode-hook))
+  (add-hook hook #'prelude-mode-yield-to-terminal))
+
 (provide 'prelude-mode)
 ;;; prelude-mode.el ends here

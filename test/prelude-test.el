@@ -1113,6 +1113,25 @@ to load and would leave them in `fundamental-mode'."
         (prelude-find-user-init-file)))
     (should (equal opened "/somewhere/my-config.el"))))
 
+(ert-deftest prelude-mode-yields-editing-keys-to-terminals ()
+  "In a terminal emulator `C-a' and friends go to the terminal, `C-c p' doesn't."
+  (require 'prelude-mode)
+  (with-temp-buffer
+    (should (eq (key-binding (kbd "C-a")) 'crux-move-beginning-of-line))
+    (should (eq (key-binding (kbd "M-o")) 'crux-smart-open-line))
+    (prelude-mode-yield-to-terminal)
+    (should-not (eq (key-binding (kbd "C-a")) 'crux-move-beginning-of-line))
+    (should-not (eq (key-binding (kbd "M-o")) 'crux-smart-open-line))
+    (should (eq (key-binding (kbd "C-c o")) 'crux-open-with))
+    ;; calling it again (some modes run their hook twice) changes nothing
+    (prelude-mode-yield-to-terminal)
+    (should (= (length minor-mode-overriding-map-alist) 1)))
+  ;; other buffers are unaffected
+  (with-temp-buffer
+    (should (eq (key-binding (kbd "C-a")) 'crux-move-beginning-of-line)))
+  (dolist (hook '(term-mode-hook vterm-mode-hook eat-mode-hook))
+    (should (memq 'prelude-mode-yield-to-terminal (symbol-value hook)))))
+
 ;;; The manual
 
 (ert-deftest prelude-documented-key-bindings-exist ()
