@@ -33,6 +33,7 @@
 
 ### Changes
 
+- [#1486](https://github.com/bbatsov/prelude/pull/1486): Make [Tokyo Night](https://github.com/bbatsov/tokyo-night-emacs) the default theme, with its light variant during the day and the dark one at night: `prelude-theme` can now be a `(DAY . NIGHT)` pair, and `prelude-theme-daytime` says when to switch (with the system's light and dark mode where Emacs knows about it, by the clock elsewhere). Put `(setq prelude-theme 'zenburn)` in `personal/preload` to keep Zenburn.
 - [#1483](https://github.com/bbatsov/prelude/pull/1483): Make all of Prelude's options work when they're set with `M-x customize`. Options that are read while Prelude starts (the theme, the minimalistic UI, the LSP client, etc.) used to be ignored there, as `custom.el` is loaded after the core; Prelude now reads its own options from it first.
 - [#1483](https://github.com/bbatsov/prelude/pull/1483): Make `prelude-auto-save` and `prelude-user-init-file` do something again. The first turns `super-save` off when set to `nil`, the second is what `C-c I` (now `prelude-find-user-init-file`) opens: your personal folder rather than Prelude's `init.el`.
 - [#1479](https://github.com/bbatsov/prelude/pull/1479): Stop forcing Apple Color Emoji on the whole Unicode range on macOS. That was a workaround from 2015; the Emacs versions Prelude supports pick a color font for emoji by themselves. Prelude doesn't configure any fonts now, and the manual shows how to set your own.

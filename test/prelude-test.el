@@ -1266,4 +1266,190 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
                                           (prelude-test--file-string "docs/index.md"))
                    (prelude-test--matches "(\\([a-z_-]+\\)\\.md)" languages)))))
 
+;;; The theme
+
+(defun prelude-test--at (hour &optional minute)
+  "Return a time on some day, at HOUR and MINUTE."
+  (encode-time (list 0 (or minute 0) hour 15 6 2026 nil -1 nil)))
+
+(ert-deftest prelude-default-theme-is-tokyo-night ()
+  "The light variant during the day, the dark one at night."
+  (should (equal (eval (car (get 'prelude-theme 'standard-value)) t)
+                 '(tokyo-night-day . tokyo-night)))
+  (should (memq prelude-theme--current '(tokyo-night-day tokyo-night)))
+  (should (equal custom-enabled-themes (list prelude-theme--current))))
+
+(ert-deftest prelude-theme-follows-the-time-of-day ()
+  (let ((prelude-theme '(light . dark))
+        (prelude-theme-daytime '("07:30" . "19:00")))
+    (should (eq (prelude-theme-for-time (prelude-test--at 3)) 'dark))
+    (should (eq (prelude-theme-for-time (prelude-test--at 7 29)) 'dark))
+    (should (eq (prelude-theme-for-time (prelude-test--at 7 30)) 'light))
+    (should (eq (prelude-theme-for-time (prelude-test--at 18 59)) 'light))
+    (should (eq (prelude-theme-for-time (prelude-test--at 19)) 'dark))
+    (should (eq (prelude-theme-for-time (prelude-test--at 23 59)) 'dark))))
+
+(ert-deftest prelude-theme-day-can-span-midnight ()
+  (let ((prelude-theme '(light . dark))
+        (prelude-theme-daytime '("22:00" . "06:00")))
+    (should (eq (prelude-theme-for-time (prelude-test--at 23)) 'light))
+    (should (eq (prelude-theme-for-time (prelude-test--at 5)) 'light))
+    (should (eq (prelude-theme-for-time (prelude-test--at 6)) 'dark))
+    (should (eq (prelude-theme-for-time (prelude-test--at 12)) 'dark))))
+
+(ert-deftest prelude-single-theme-is-used-around-the-clock ()
+  (let ((prelude-theme 'zenburn))
+    (should (eq (prelude-theme-for-time (prelude-test--at 3)) 'zenburn))
+    (should (eq (prelude-theme-for-time (prelude-test--at 12)) 'zenburn)))
+  (let ((prelude-theme nil))
+    (should-not (prelude-theme-for-time (prelude-test--at 12)))))
+
+(defvar ns-system-appearance)
+(defvar toolkit-theme)
+(defvar calendar-latitude)
+(defvar calendar-longitude)
+(defvar calendar-time-zone)
+(defvar calendar-daylight-savings-starts)
+(defvar calendar-daylight-savings-ends)
+
+(ert-deftest prelude-theme-can-follow-the-sun ()
+  (require 'solar)
+  ;; Sofia, in its own time zone and without daylight saving time, so
+  ;; that the result doesn't depend on where the tests are run
+  (let ((prelude-theme-daytime 'sun)
+        (prelude-theme--sun nil)
+        (calendar-time-zone 120)
+        (calendar-daylight-savings-starts nil)
+        (calendar-daylight-savings-ends nil)
+        (calendar-latitude nil)
+        (calendar-longitude nil))
+    ;; Emacs doesn't know where it is
+    (should (equal (prelude-theme--daytime) prelude-theme--default-daytime))
+    ;; a location that's set later (e.g. in the personal config) is
+    ;; picked up
+    (setq calendar-latitude 42.7
+          calendar-longitude 23.3)
+    (pcase-let ((`(,sunrise . ,sunset) (prelude-theme--daytime)))
+      (should-not (equal (cons sunrise sunset) prelude-theme--default-daytime))
+      (should (< 3.5 sunrise 8.5))
+      (should (< 15.5 sunset 20.5)))))
+
+(ert-deftest prelude-theme-follows-the-system-where-emacs-knows-about-it ()
+  (should (eq (eval (car (get 'prelude-theme-daytime 'standard-value)) t) 'system))
+  (let ((prelude-theme '(light . dark))
+        (prelude-theme-daytime 'system)
+        (ns-system-appearance nil)
+        (toolkit-theme nil))
+    ;; Emacs Plus on macOS
+    (let ((ns-system-appearance 'dark))
+      (should (eq (prelude-theme-for-time (prelude-test--at 12)) 'dark)))
+    (let ((ns-system-appearance 'light))
+      (should (eq (prelude-theme-for-time (prelude-test--at 23)) 'light)))
+    ;; Emacs 31 on PGTK, MS-Windows and Android
+    (let ((toolkit-theme 'dark))
+      (should (eq (prelude-theme-for-time (prelude-test--at 12)) 'dark)))
+    ;; everywhere else it's the clock, from 07:00 to 19:00
+    (should (eq (prelude-theme-for-time (prelude-test--at 12)) 'light))
+    (should (eq (prelude-theme-for-time (prelude-test--at 6 59)) 'dark))
+    (should (eq (prelude-theme-for-time (prelude-test--at 19)) 'dark))
+    ;; the system has no say when the times are set explicitly
+    (let ((ns-system-appearance 'dark)
+          (prelude-theme-daytime '("07:00" . "19:00")))
+      (should (eq (prelude-theme-for-time (prelude-test--at 12)) 'light)))))
+
+(defmacro prelude-test--with-themes (&rest body)
+  "Run BODY with theme loading replaced by bookkeeping.
+`custom-enabled-themes' is updated the way the real functions do it."
+  (declare (indent 0))
+  `(let ((custom-enabled-themes nil)
+         (prelude-theme--current nil)
+         (prelude-theme--broken nil)
+         (ns-system-appearance nil)
+         (toolkit-theme nil)
+         (prelude-theme '(light . dark))
+         (prelude-theme-daytime '("07:00" . "19:00")))
+     (cl-letf (((symbol-function 'load-theme)
+                (lambda (theme &rest _)
+                  (setq custom-enabled-themes
+                        (cons theme (remq theme custom-enabled-themes)))))
+               ((symbol-function 'disable-theme)
+                (lambda (theme)
+                  (setq custom-enabled-themes (remq theme custom-enabled-themes)))))
+       ,@body)))
+
+(ert-deftest prelude-theme-switches-when-the-system-does ()
+  (should (memq 'prelude-theme--system-changed
+                (bound-and-true-p toolkit-theme-set-functions)))
+  (should (memq 'prelude-theme--system-changed
+                (bound-and-true-p ns-system-appearance-change-functions)))
+  (prelude-test--with-themes
+    (let ((prelude-theme-daytime 'system)
+          (toolkit-theme 'light)
+          (ns-system-appearance nil))
+      (prelude-theme-sync)
+      (should (equal custom-enabled-themes '(light)))
+      (setq toolkit-theme 'dark)
+      (run-hook-with-args 'toolkit-theme-set-functions 'dark)
+      (should (equal custom-enabled-themes '(dark))))))
+
+(defmacro prelude-test--at-time (hour &rest body)
+  "Run BODY as if it were HOUR o'clock."
+  (declare (indent 1))
+  `(cl-letf* ((time (prelude-test--at ,hour))
+              (decode (symbol-function 'decode-time))
+              ((symbol-function 'decode-time)
+               (lambda (&optional when &rest args)
+                 (apply decode (or when time) args))))
+     ,@body))
+
+(ert-deftest prelude-theme-sync-switches-between-day-and-night ()
+  (prelude-test--with-themes
+    (prelude-test--at-time 12 (prelude-theme-sync))
+    (should (equal custom-enabled-themes '(light)))
+    (prelude-test--at-time 13 (prelude-theme-sync))
+    (should (equal custom-enabled-themes '(light)))
+    (prelude-test--at-time 20 (prelude-theme-sync))
+    (should (equal custom-enabled-themes '(dark)))
+    (prelude-test--at-time 8 (prelude-theme-sync))
+    (should (equal custom-enabled-themes '(light)))))
+
+(ert-deftest prelude-theme-sync-respects-a-theme-picked-by-hand ()
+  "Once another theme is in charge, Prelude stops switching."
+  (prelude-test--with-themes
+    (prelude-test--at-time 12 (prelude-theme-sync))
+    (load-theme 'modus-operandi t)
+    (prelude-test--at-time 20 (prelude-theme-sync))
+    (should (equal custom-enabled-themes '(modus-operandi light))))
+  (prelude-test--with-themes
+    (prelude-test--at-time 12 (prelude-theme-sync))
+    (disable-theme 'light)
+    (prelude-test--at-time 20 (prelude-theme-sync))
+    (should-not custom-enabled-themes)))
+
+(ert-deftest prelude-theme-that-fails-to-load-is-reported-once ()
+  "A missing night theme doesn't cost you the day theme, or the next one."
+  (prelude-test--with-themes
+    (let* ((load (symbol-function 'load-theme))
+           (warnings 0))
+      (cl-letf (((symbol-function 'load-theme)
+                 (lambda (theme &rest args)
+                   (if (eq theme 'dark)
+                       (error "Unable to find theme file for `dark'")
+                     (apply load theme args))))
+                ((symbol-function 'display-warning)
+                 (lambda (&rest _) (setq warnings (1+ warnings)))))
+        (prelude-test--at-time 12 (prelude-theme-sync))
+        (prelude-test--at-time 20 (prelude-theme-sync))
+        (prelude-test--at-time 21 (prelude-theme-sync))
+        (should (equal custom-enabled-themes '(light)))
+        (should (= warnings 1))
+        ;; the same on startup, when there's nothing to fall back on
+        (setq custom-enabled-themes nil
+              prelude-theme--current nil
+              prelude-theme--broken nil)
+        (prelude-test--at-time 20 (prelude-theme-sync))
+        (should-not custom-enabled-themes)
+        (prelude-test--at-time 8 (prelude-theme-sync))
+        (should (equal custom-enabled-themes '(light)))))))
+
 ;;; prelude-test.el ends here
