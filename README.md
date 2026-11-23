@@ -1,6 +1,6 @@
 # Emacs Prelude
 
-[![License GPL 3][badge-license]](http://www.gnu.org/licenses/gpl-3.0.txt)
+[![License GPL 3][badge-license]](https://www.gnu.org/licenses/gpl-3.0.txt)
 [![CI](https://github.com/bbatsov/prelude/workflows/CI/badge.svg)](https://github.com/bbatsov/prelude/actions/workflows/ci.yml)
 
 Prelude is an Emacs distribution that aims to enhance the default
@@ -48,7 +48,7 @@ whole manual and just type in your favorite shell the
 following command:
 
 ```shell
-curl -L https://git.io/epre | sh
+curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
 ```
 
 You can now power up your Emacs, sit back and enjoy Prelude.
@@ -108,7 +108,7 @@ it would never enable something like `evil-mode`
 All the third-party packages that it bundles are carefully
 vetted and are known to be of good quality and to have reliable
 maintainers. That generally means that Prelude's unlikely
-to immediate adopt some shiny new package, that has established
+to immediately adopt some shiny new package, that has established
 tried and true alternatives.
 
 In practice this translates to the following:
@@ -122,7 +122,7 @@ In practice this translates to the following:
   modules)
 - Most modules (e.g. modules for programming languages) are
   pretty short and feature setup only for essential packages
-  (in some cases that be just the major mode for the language
+  (in some cases that would be just the major mode for the language
   in question)
 - You don't really need to track Prelude's upstream - you're
   encouraged to just fork it and use it as the basis for your
@@ -174,7 +174,7 @@ has the details.
 
 Check out the project's
 [issue list](https://github.com/bbatsov/prelude/issues?sort=created&direction=desc&state=open)
-a list of unresolved issues. By the way - feel free to fix any
+for a list of unresolved issues. By the way - feel free to fix any
 of them and send me a pull request. :-)
 
 ## Funding

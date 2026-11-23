@@ -4,8 +4,9 @@
 
 Obviously to use the Emacs Prelude you have to install Emacs
 first. We'll assume you can manage this part on your own.
-Aim for the newest stable Emacs release, although as a rule of
-thumb Prelude aims to support the last 2-3 stable releases.
+Prelude needs Emacs 29.1 or newer, and refuses to start on anything
+older. Aim for the newest stable Emacs release; as a rule of thumb
+Prelude supports the last 2-3 stable releases.
 
 For spell-checking to work you should install `aspell`, together with its
 dictionaries for the languages you wish to check.
@@ -41,9 +42,32 @@ The installer script will do the following:
 - Create any additional folders if necessary (e.g. for storing
   package-specific data)
 
-If you have a `.emacs` file it will backed up as `.emacs.pre-prelude`
+If you have a `.emacs` file it will be backed up as `.emacs.pre-prelude`
 and if you have a `.emacs.d` folder, it will be backed up as
-`.emacs.d.pre-prelude.tar`.
+`.emacs.d.pre-prelude.tar`. The files of your old `.emacs.d` that
+Prelude doesn't have a counterpart of (e.g. your snippets) are put back
+in place afterwards.
+
+The installer takes a few options. To pass them on, download it first
+or use `sh -s`:
+
+```shell
+curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh |
+  sh -s -- -d "$HOME/prelude"
+```
+
+<!-- markdownlint-disable MD013 -->
+
+| Option | What it does |
+| ------ | ------------ |
+| `-d`, `--directory DIR` | Install Prelude in `DIR` instead of `~/.emacs.d`. Your `~/.emacs` and `~/.emacs.d` are left alone in that case; start Emacs with `emacs --init-directory DIR`. |
+| `-s`, `--source URL` | Clone Prelude from `URL` (e.g. your own fork). |
+| `-i`, `--into` | Keep the existing `~/.emacs.d` and install Prelude in its `prelude` subdirectory. |
+| `-c`, `--colors` | Colorize the output. |
+| `-v`, `--verbose` | Show what's going on. |
+| `-h`, `--help` | Show the options. |
+
+<!-- markdownlint-enable MD013 -->
 
 #### Via Curl
 
