@@ -193,6 +193,7 @@ Option | Set it in | Default | What it controls
 `prelude-smartparens` | startup | `t` | Set up smartparens.
 `prelude-undo-tree` | startup | `t` | Use undo-tree for undo and redo.
 `prelude-hippie-expand` | startup | `t` | Bind <kbd>M-/</kbd> to `hippie-expand`.
+`prelude-auto-save` | startup | `t` | Save buffers when you switch to another buffer or window, or away from Emacs (`super-save`).
 `prelude-spell-checker` | startup | `flyspell` | The spell checker: `flyspell` or `jinx`.
 `prelude-whitespace-cleanup-style` | startup | `whitespace-cleanup` | How whitespace is cleaned up on save: the whole file, or with `ws-butler` only the lines you've touched.
 `prelude-flyspell` | anywhere | `t` | Check spelling as you type.
@@ -204,6 +205,7 @@ Option | Set it in | Default | What it controls
 `prelude-indent-sensitive-modes` | anywhere | a list of modes | Modes where yanked code isn't re-indented.
 `prelude-yank-indent-modes` | anywhere | a list of modes | Extra (non-programming) modes where yanked text is indented.
 `prelude-yank-indent-threshold` | anywhere | `1000` | Yanked text longer than this many characters isn't indented.
+`prelude-user-init-file` | anywhere | `personal/` | What <kbd>C-c I</kbd> opens: the file or directory with your personal config.
 
 ### Personal early-init
 

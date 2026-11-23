@@ -175,7 +175,8 @@
   :config
   ;; add integration with ace-window
   (add-to-list 'super-save-triggers 'ace-window)
-  (super-save-mode +1))
+  (when prelude-auto-save
+    (super-save-mode +1)))
 
 (define-advice set-buffer-major-mode (:after (buffer) prelude-set-major-mode)
   "Set buffer major mode according to `auto-mode-alist'."

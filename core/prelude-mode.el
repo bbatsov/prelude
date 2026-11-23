@@ -59,7 +59,7 @@
     (define-key map (kbd "C-c t") 'crux-visit-term-buffer)
     (define-key map (kbd "C-c k") 'crux-kill-other-buffers)
     (define-key map (kbd "C-c TAB") 'crux-indent-rigidly-and-copy-to-clipboard)
-    (define-key map (kbd "C-c I") 'crux-find-user-init-file)
+    (define-key map (kbd "C-c I") 'prelude-find-user-init-file)
     (define-key map (kbd "C-c S") 'crux-find-shell-init-file)
     (define-key map (kbd "C-c i") 'imenu-anywhere)
     (when prelude-projectile
@@ -91,6 +91,7 @@
          ["Re-open as root" crux-reopen-as-root]
          ["Delete file and buffer" crux-delete-file-and-buffer]
          ["Rename buffer and file" crux-rename-buffer-and-file]
+         ["Find personal config" prelude-find-user-init-file]
          ["Find init file" crux-find-user-init-file]
          ["Find custom file" crux-find-user-custom-file]
          ["Find shell config file" crux-find-shell-init-file])
