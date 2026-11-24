@@ -33,6 +33,7 @@
 
 ### Changes
 
+- [#1492](https://github.com/bbatsov/prelude/pull/1492): Keep Dired and other buffers that don't visit files up to date (`global-auto-revert-non-file-buffers`), follow symlinks to version-controlled files without asking, and on Emacs 31 save the recent files and the places in files every 5 minutes.
 - [#1491](https://github.com/bbatsov/prelude/pull/1491): Drop the OCaml module's workaround for registering `neocaml` with Eglot, which `neocaml` does itself since version 0.9.
 - [#1489](https://github.com/bbatsov/prelude/pull/1489): Add a manual page on how Prelude's behaviour differs from stock Emacs in ways that aren't obvious.
 - [#1489](https://github.com/bbatsov/prelude/pull/1489): Enable `repeat-mode` (e.g. `M-g n n n` keeps going to the next error) and `context-menu-mode` (a right click brings up a context menu instead of extending the region).

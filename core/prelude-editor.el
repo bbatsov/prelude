@@ -67,6 +67,12 @@
 
 ;; revert buffers automatically when underlying files are changed externally
 (global-auto-revert-mode t)
+;; and keep Dired buffers and the like up to date as well
+(setq global-auto-revert-non-file-buffers t)
+
+;; follow symlinks to files under version control without asking, so
+;; that the version control commands work on them (e.g. in dotfiles)
+(setq vc-follow-symlinks t)
 
 ;; hippie expand is dabbrev expand on steroids
 (when prelude-hippie-expand
@@ -124,6 +130,10 @@
 (setq save-place-file (expand-file-name "saveplace" prelude-savefile-dir))
 ;; activate it for all buffers
 (save-place-mode 1)
+;; save the places every 5 minutes, and not only when Emacs exits,
+;; which it doesn't do cleanly when it crashes (Emacs 31+)
+(when (boundp 'save-place-autosave-interval)
+  (setopt save-place-autosave-interval 300))
 
 ;; savehist keeps track of some history
 (require 'savehist)
@@ -162,6 +172,10 @@
 (add-to-list 'recentf-exclude 'prelude-recentf-exclude-p)
 
 (recentf-mode +1)
+;; save the list every 5 minutes as well, and quietly (Emacs 31+)
+(when (boundp 'recentf-autosave-interval)
+  (setopt recentf-show-messages nil
+          recentf-autosave-interval 300))
 
 ;; use shift + arrow keys to switch between visible buffers
 (require 'windmove)

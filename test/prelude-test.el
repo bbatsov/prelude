@@ -1640,4 +1640,13 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
     (should (memq 'neocaml-mode modes))
     (should (memq 'neocaml-interface-mode modes))))
 
+(ert-deftest prelude-keeps-buffers-and-session-data-current ()
+  (should global-auto-revert-non-file-buffers)
+  (should (eq vc-follow-symlinks t))
+  ;; Emacs 31+
+  (when (boundp 'recentf-autosave-interval)
+    (should (eql recentf-autosave-interval 300))
+    (should (eql save-place-autosave-interval 300))
+    (should-not recentf-show-messages)))
+
 ;;; prelude-test.el ends here
