@@ -33,6 +33,7 @@
 
 ### Changes
 
+- [#1491](https://github.com/bbatsov/prelude/pull/1491): Drop the OCaml module's workaround for registering `neocaml` with Eglot, which `neocaml` does itself since version 0.9.
 - [#1489](https://github.com/bbatsov/prelude/pull/1489): Add a manual page on how Prelude's behaviour differs from stock Emacs in ways that aren't obvious.
 - [#1489](https://github.com/bbatsov/prelude/pull/1489): Enable `repeat-mode` (e.g. `M-g n n n` keeps going to the next error) and `context-menu-mode` (a right click brings up a context menu instead of extending the region).
 - [#1488](https://github.com/bbatsov/prelude/pull/1488): Show Eglot's diagnostics with Flycheck's own `flycheck-eglot-mode` (a part of Flycheck since version 39) instead of the `flycheck-eglot` package, which is no longer installed.

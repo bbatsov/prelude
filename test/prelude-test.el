@@ -1631,4 +1631,13 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
     (should (memq 'lsp-sourcekit lsp-client-packages))
     (should (package-installed-p 'lsp-sourcekit))))
 
+(ert-deftest prelude-ocaml-modes-have-a-language-server ()
+  "neocaml tells Eglot about its modes, with no help from Prelude."
+  (require 'prelude-ocaml)
+  (require 'neocaml)
+  (require 'eglot)
+  (let ((modes (flatten-tree (mapcar #'car eglot-server-programs))))
+    (should (memq 'neocaml-mode modes))
+    (should (memq 'neocaml-interface-mode modes))))
+
 ;;; prelude-test.el ends here
