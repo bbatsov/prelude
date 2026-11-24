@@ -33,6 +33,7 @@
 
 ### Changes
 
+- [#1492](https://github.com/bbatsov/prelude/pull/1492): Search with ripgrep in xref and `project-find-regexp` when it's installed, and log the warnings of native compilation instead of popping up the `*Warnings*` buffer.
 - [#1492](https://github.com/bbatsov/prelude/pull/1492): Leave the commands that are meant for other modes out of `M-x` completion (`read-extended-command-predicate`), whatever the completion framework.
 - [#1492](https://github.com/bbatsov/prelude/pull/1492): Pair delimiters with the built-in `electric-pair-mode` in programming modes when smartparens is turned off (there was no pairing at all then), and turn on `global-so-long-mode` for files with very long lines.
 - [#1492](https://github.com/bbatsov/prelude/pull/1492): Keep Dired and other buffers that don't visit files up to date (`global-auto-revert-non-file-buffers`), follow symlinks to version-controlled files without asking, and on Emacs 31 save the recent files and the places in files every 5 minutes.
