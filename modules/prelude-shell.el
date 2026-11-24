@@ -40,9 +40,11 @@
 ;; recognize prezto files as zsh scripts
 (defvar prelude-prezto-files '("zlogin" "zlogout" "zpreztorc" "zprofile" "zshenv" "zshrc"))
 
-(mapc (lambda (file)
-        (add-to-list 'auto-mode-alist `(,(format "\\%s\\'" file) . sh-mode)))
-      prelude-prezto-files)
+(dolist (file prelude-prezto-files)
+  ;; the file itself, as found in prezto's runcoms directory, or a link
+  ;; to it in the home directory, e.g. ~/.zshrc
+  (add-to-list 'auto-mode-alist
+               (cons (concat "/\\.?" (regexp-quote file) "\\'") 'sh-mode)))
 
 (defun prelude-sh-mode-defaults ()
   (subword-mode +1)

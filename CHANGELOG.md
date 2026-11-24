@@ -61,6 +61,7 @@
 
 ### Bugs fixed
 
+- [#1491](https://github.com/bbatsov/prelude/pull/1491): Match only whole file names for prezto's files (any file ending in `zshrc` opened in `sh-mode`).
 - [#1491](https://github.com/bbatsov/prelude/pull/1491): Stop the LaTeX module from installing `company-auctex` (unmaintained, and pulling in Company for Corfu users); AUCTeX's own completion works with both.
 - [#1491](https://github.com/bbatsov/prelude/pull/1491): Set up `rust-mode` buffers (the fallback for when there's no Rust grammar) like `rust-ts-mode` ones, with LSP, formatting on save and Cargo.
 - [#1490](https://github.com/bbatsov/prelude/pull/1490): Indent C and C++ in the K&R style with 4 spaces as documented, in the tree-sitter modes (which used 2 spaces) and from the first buffer on, without overriding styles set by the user, and stop running the C setup in Java and the other `cc-mode` buffers that aren't C, C++ or Objective-C, where it reported a missing language server that `eglot-java` was about to install.

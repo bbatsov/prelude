@@ -1606,4 +1606,17 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
   (should-not (string-match-p "company-auctex"
                               (prelude-test--file-string "modules/prelude-latex.el"))))
 
+(ert-deftest prelude-shell-and-elixir-file-patterns-match-whole-names ()
+  (require 'prelude-shell)
+  (require 'prelude-elixir)
+  (cl-flet ((mode (file) (assoc-default file auto-mode-alist #'string-match-p)))
+    (should (eq (mode "/home/me/.zprezto/runcoms/zshrc") 'sh-mode))
+    (should (eq (mode "/home/me/.zpreztorc") 'sh-mode))
+    (should-not (eq (mode "/home/me/notes/notzshrc") 'sh-mode))
+    ;; elixir-mode adds a loose pattern of its own, so this checks only
+    ;; Prelude's
+    (should (eq (mode "/code/app/mix.lock") 'prelude-treesit-elixir-ts-mode))
+    (should-not (eq (mode "/code/app/remix.lock") 'prelude-treesit-elixir-ts-mode))
+    (should-not (eq (mode "/code/app/mix.lock.orig") 'prelude-treesit-elixir-ts-mode))))
+
 ;;; prelude-test.el ends here
