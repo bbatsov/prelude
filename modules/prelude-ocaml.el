@@ -54,22 +54,9 @@
 ;; get the same setup.
 (use-package neocaml
   :ensure t
+  ;; neocaml registers its modes with Eglot itself
   :hook (neocaml-base-mode . (lambda ()
-                               (run-hooks 'prelude-ocaml-mode-hook)))
-  :config
-  ;; Workaround: register neocaml modes with eglot until neocaml
-  ;; ships this fix itself (neocaml >= 20260331).  add-to-list is
-  ;; a no-op if the entry already exists.
-  (with-eval-after-load 'eglot
-    (unless (cl-some (lambda (entry)
-                       (and (consp (car entry))
-                            (assq 'neocaml-mode (car entry))))
-                     eglot-server-programs)
-      (add-to-list 'eglot-server-programs
-                   '(((neocaml-mode :language-id "ocaml")
-                      (neocaml-interface-mode
-                       :language-id "ocaml.interface"))
-                     "ocamllsp")))))
+                               (run-hooks 'prelude-ocaml-mode-hook))))
 
 ;; OCaml-specific Eglot extensions (requires ocaml-lsp-server).
 ;; Only installed when Eglot is the configured LSP client.
