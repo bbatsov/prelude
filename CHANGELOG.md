@@ -61,6 +61,7 @@
 
 ### Bugs fixed
 
+- [#1491](https://github.com/bbatsov/prelude/pull/1491): Set up `rust-mode` buffers (the fallback for when there's no Rust grammar) like `rust-ts-mode` ones, with LSP, formatting on save and Cargo.
 - [#1490](https://github.com/bbatsov/prelude/pull/1490): Indent C and C++ in the K&R style with 4 spaces as documented, in the tree-sitter modes (which used 2 spaces) and from the first buffer on, without overriding styles set by the user, and stop running the C setup in Java and the other `cc-mode` buffers that aren't C, C++ or Objective-C, where it reported a missing language server that `eglot-java` was about to install.
 - Update `prelude-helm` to current upstream variable/function names: rename `helm-google-suggest-use-curl-p` to `helm-net-prefer-curl` (deprecated alias since helm 1.7.7), rename `helm-split-window-in-side-p` to `helm-split-window-inside-p` (deprecated alias since helm 2.8.6), drop `helm-ff-file-name-history-use-recentf` (removed from helm; behavior is now unconditional), and drop the `C-c w` binding to `helm-wikipedia-suggest` (function moved to a separate `helm-wikipedia` package).
 - Drop `C-c C-l` binding to `helm-comint-input-ring` in `prelude-helm-everywhere` -- that command was removed from upstream helm.
