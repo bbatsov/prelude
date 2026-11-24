@@ -61,6 +61,7 @@
 
 ### Bugs fixed
 
+- [#1491](https://github.com/bbatsov/prelude/pull/1491): Install `lsp-sourcekit` in the Swift module when lsp-mode is the LSP client, as lsp-mode has no Swift support without it.
 - [#1491](https://github.com/bbatsov/prelude/pull/1491): Match only whole file names for prezto's files (any file ending in `zshrc` opened in `sh-mode`).
 - [#1491](https://github.com/bbatsov/prelude/pull/1491): Stop the LaTeX module from installing `company-auctex` (unmaintained, and pulling in Company for Corfu users); AUCTeX's own completion works with both.
 - [#1491](https://github.com/bbatsov/prelude/pull/1491): Set up `rust-mode` buffers (the fallback for when there's no Rust grammar) like `rust-ts-mode` ones, with LSP, formatting on save and Cargo.

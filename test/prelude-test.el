@@ -1584,6 +1584,7 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
 ;;; Smaller module fixes
 
 (defvar cargo-minor-mode)
+(defvar lsp-client-packages)
 
 (ert-deftest prelude-rust-sets-up-the-fallback-mode-too ()
   "rust-mode gets the same setup as rust-ts-mode, but never twice."
@@ -1618,5 +1619,16 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
     (should (eq (mode "/code/app/mix.lock") 'prelude-treesit-elixir-ts-mode))
     (should-not (eq (mode "/code/app/remix.lock") 'prelude-treesit-elixir-ts-mode))
     (should-not (eq (mode "/code/app/mix.lock.orig") 'prelude-treesit-elixir-ts-mode))))
+
+(ert-deftest prelude-swift-has-a-server-for-both-lsp-clients ()
+  (require 'prelude-swift)
+  (if (eq prelude-lsp-client 'eglot)
+      (progn
+        (require 'eglot)
+        (should (assq 'swift-ts-mode eglot-server-programs)))
+    ;; lsp-mode loads it on its own
+    (require 'lsp-mode)
+    (should (memq 'lsp-sourcekit lsp-client-packages))
+    (should (package-installed-p 'lsp-sourcekit))))
 
 ;;; prelude-test.el ends here

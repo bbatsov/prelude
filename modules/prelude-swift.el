@@ -39,9 +39,15 @@
 ;; * sourcekit-lsp (bundled with the Xcode command line tools)
 
 ;; Eglot has no built-in entry for Swift, so point it at sourcekit-lsp.
-;; (lsp-mode users get Swift support via the lsp-sourcekit package.)
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs '(swift-ts-mode . ("sourcekit-lsp"))))
+
+;; lsp-mode has its Swift client in a package of its own, which it
+;; loads by itself once it's installed
+(when (eq prelude-lsp-client 'lsp-mode)
+  (use-package lsp-sourcekit
+    :ensure t
+    :defer t))
 
 (defun prelude-swift-mode-defaults ()
   "Default coding hook, useful with Swift."

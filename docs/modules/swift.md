@@ -30,5 +30,6 @@ Swift mode key bindings.
 The module starts an LSP session automatically via Prelude's
 `prelude-lsp-enable`, using whichever client `prelude-lsp-client`
 selects (Eglot by default). Eglot has no built-in entry for Swift, so
-the module registers `sourcekit-lsp` for it. lsp-mode users get Swift
-support through the `lsp-sourcekit` package.
+the module registers `sourcekit-lsp` for it. With lsp-mode the module
+installs and loads [lsp-sourcekit](https://github.com/emacs-lsp/lsp-sourcekit),
+lsp-mode's client for `sourcekit-lsp`.
