@@ -1680,4 +1680,34 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
   (should-not (key-binding (kbd "s-y")))
   (should (eq (lookup-key help-map (kbd "C-m")) 'view-order-manuals)))
 
+;;; What Emacs 31 does on its own
+
+(ert-deftest prelude-exchange-point-and-mark-keeps-the-region-inactive ()
+  "Swapping point and mark doesn't activate the region, unless it's active."
+  (with-temp-buffer
+    (transient-mark-mode +1)
+    (insert "one two three")
+    (set-mark 5)
+    (deactivate-mark)
+    (goto-char (point-max))
+    (call-interactively #'exchange-point-and-mark)
+    (should (= (point) 5))
+    (should (= (mark) 14))
+    (should-not (region-active-p))
+    (activate-mark)
+    (call-interactively #'exchange-point-and-mark)
+    (should (= (point) 14))
+    (should (region-active-p))))
+
+(ert-deftest prelude-c-x-shift-o-goes-back-a-window ()
+  (let ((command (key-binding (kbd "C-x O"))))
+    (should (commandp command))
+    (when (fboundp 'other-window-backward)
+      (should (eq command 'other-window-backward)))))
+
+(ert-deftest prelude-crm-indicator-only-where-emacs-has-none ()
+  (require 'prelude-vertico)
+  (should (eq (and (advice-member-p #'prelude-crm-indicator 'completing-read-multiple) t)
+              (< emacs-major-version 31))))
+
 ;;; prelude-test.el ends here
