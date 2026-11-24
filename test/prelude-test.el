@@ -1659,4 +1659,12 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
       (should electric-pair-mode)
       (should-not (bound-and-true-p smartparens-mode)))))
 
+(ert-deftest prelude-completes-only-the-commands-that-apply ()
+  "M-x leaves out what's meant for other modes."
+  (should (eq read-extended-command-predicate #'command-completion-default-include-p))
+  (require 'dired)
+  (with-temp-buffer
+    (should-not (funcall read-extended-command-predicate 'dired-do-delete (current-buffer)))
+    (should (funcall read-extended-command-predicate 'find-file (current-buffer)))))
+
 ;;; prelude-test.el ends here
