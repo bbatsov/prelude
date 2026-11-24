@@ -1581,6 +1581,38 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
   (should (eq (get 'next-error 'repeat-map) 'next-error-repeat-map))
   (should context-menu-mode))
 
+(ert-deftest prelude-keeps-buffers-and-session-data-current ()
+  (should global-auto-revert-non-file-buffers)
+  (should (eq vc-follow-symlinks t))
+  ;; Emacs 31+
+  (when (boundp 'recentf-autosave-interval)
+    (should (eql recentf-autosave-interval 300))
+    (should (eql save-place-autosave-interval 300))
+    (should-not recentf-show-messages)))
+
+(ert-deftest prelude-pairs-delimiters-even-without-smartparens ()
+  (should global-so-long-mode)
+  (require 'prelude-programming)
+  (with-temp-buffer
+    (let ((prelude-smartparens nil))
+      (cl-letf (((symbol-function 'flyspell-prog-mode) #'ignore))
+        (prelude-prog-mode-defaults))
+      (should electric-pair-mode)
+      (should-not (bound-and-true-p smartparens-mode)))))
+
+(ert-deftest prelude-completes-only-the-commands-that-apply ()
+  "M-x leaves out what's meant for other modes."
+  (should (eq read-extended-command-predicate #'command-completion-default-include-p))
+  (require 'info)
+  (with-temp-buffer
+    (should-not (funcall read-extended-command-predicate 'Info-search-next (current-buffer)))
+    (should (funcall read-extended-command-predicate 'find-file (current-buffer)))))
+
+(ert-deftest prelude-uses-ripgrep-when-available ()
+  (if (executable-find "rg")
+      (should (eq xref-search-program 'ripgrep))
+    (should (eq xref-search-program 'grep))))
+
 ;;; Smaller module fixes
 
 (defvar cargo-minor-mode)
@@ -1639,32 +1671,5 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
   (let ((modes (flatten-tree (mapcar #'car eglot-server-programs))))
     (should (memq 'neocaml-mode modes))
     (should (memq 'neocaml-interface-mode modes))))
-
-(ert-deftest prelude-keeps-buffers-and-session-data-current ()
-  (should global-auto-revert-non-file-buffers)
-  (should (eq vc-follow-symlinks t))
-  ;; Emacs 31+
-  (when (boundp 'recentf-autosave-interval)
-    (should (eql recentf-autosave-interval 300))
-    (should (eql save-place-autosave-interval 300))
-    (should-not recentf-show-messages)))
-
-(ert-deftest prelude-pairs-delimiters-even-without-smartparens ()
-  (should global-so-long-mode)
-  (require 'prelude-programming)
-  (with-temp-buffer
-    (let ((prelude-smartparens nil))
-      (cl-letf (((symbol-function 'flyspell-prog-mode) #'ignore))
-        (prelude-prog-mode-defaults))
-      (should electric-pair-mode)
-      (should-not (bound-and-true-p smartparens-mode)))))
-
-(ert-deftest prelude-completes-only-the-commands-that-apply ()
-  "M-x leaves out what's meant for other modes."
-  (should (eq read-extended-command-predicate #'command-completion-default-include-p))
-  (require 'dired)
-  (with-temp-buffer
-    (should-not (funcall read-extended-command-predicate 'dired-do-delete (current-buffer)))
-    (should (funcall read-extended-command-predicate 'find-file (current-buffer)))))
 
 ;;; prelude-test.el ends here

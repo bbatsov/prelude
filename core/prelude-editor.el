@@ -469,6 +469,12 @@ like a shebang, but isn't one."
 ;; typing responsive in large/complex buffers where font-lock is slow
 (setq redisplay-skip-fontification-on-input t)
 
+;; search with ripgrep when it's installed: it's a lot faster than grep
+;; for finding references (e.g. M-? without a language server) and in
+;; project-find-regexp
+(when (executable-find "rg")
+  (setq xref-search-program 'ripgrep))
+
 ;; Compilation from Emacs
 (use-package compile
   :defer t

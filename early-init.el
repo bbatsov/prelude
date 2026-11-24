@@ -59,6 +59,13 @@
 ;; on first load, so you don't hit compilation pauses while working.
 (setq package-native-compile t)
 
+;; Compilation in the background warns about all sorts of things in
+;; packages, which you can do nothing about.  Log the warnings in the
+;; *Warnings* buffer instead of popping it up.
+;; (defined only in Emacs builds with native compilation)
+(defvar native-comp-async-report-warnings-errors)
+(setq native-comp-async-report-warnings-errors 'silent)
+
 ;; GUI Emacs on macOS doesn't inherit the environment from the shell,
 ;; so without LANG it ends up in the "C" locale, which breaks things
 ;; like spell-checker dictionaries and subprocess sorting.
