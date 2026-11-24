@@ -32,36 +32,60 @@
 
 (require 'prelude-programming)
 
-(defvar c-default-style)
-(defvar c-basic-offset)
-(defvar c-ts-mode-indent-style)
+(declare-function c-add-style "cc-styles")
 
 ;; Use tree-sitter modes when grammars are available
 (prelude-treesit-remap 'c 'c-mode 'c-ts-mode)
 (prelude-treesit-remap 'cpp 'c++-mode 'c++-ts-mode)
 
+(defun prelude-c--set-default (variable value)
+  "Set VARIABLE to VALUE, unless it's been set to something else already.
+That's anything other than its standard value, be it in your personal
+config, in personal/preload or with Customize."
+  (let ((variable (indirect-variable variable)))
+    (when (equal (default-value variable)
+                 (eval (car (get variable 'standard-value)) t))
+      (set-default variable value))))
+
+;; K&R style with an indentation of 4 for C, C++ and Objective-C.  A
+;; buffer's style is picked when its mode starts, so this has to be in
+;; place before that, and not in a mode hook.
+
+;; the tree-sitter modes (the offset is `c-ts-indent-offset' in Emacs 31)
+(with-eval-after-load 'c-ts-mode
+  (prelude-c--set-default 'c-ts-mode-indent-style 'k&r)
+  (prelude-c--set-default 'c-ts-mode-indent-offset 4))
+
+;; the classic modes, which have no K&R style with an indentation of 4
+(with-eval-after-load 'cc-styles
+  (c-add-style "prelude" '("k&r" (c-basic-offset . 4))))
+;; the other modes built on cc-mode keep their usual styles
+(with-eval-after-load 'cc-vars
+  (prelude-c--set-default 'c-default-style
+                          '((c-mode . "prelude")
+                            (c++-mode . "prelude")
+                            (objc-mode . "prelude")
+                            (java-mode . "java")
+                            (awk-mode . "awk")
+                            (other . "gnu"))))
+
 (defun prelude-c-mode-common-defaults ()
-  ;; K&R style for classic cc-mode
-  (setq c-default-style "k&r"
-        c-basic-offset 4)
-  (c-set-offset 'substatement-open 0)
-  ;; Match the K&R style in tree-sitter mode (c-set-offset has no
-  ;; effect there since it uses its own indentation engine)
-  (when (derived-mode-p 'c-ts-mode 'c++-ts-mode)
-    (setq c-ts-mode-indent-style 'k&r))
+  "Default coding hook, useful with C and C++."
   (subword-mode +1)
   (prelude-lsp-enable))
 
 (add-hook 'prelude-c-mode-common-hook #'prelude-c-mode-common-defaults)
 
-;; this will affect all modes derived from cc-mode, like
-;; java-mode, php-mode, etc
-(add-hook 'c-mode-common-hook (lambda ()
-                                (run-hooks 'prelude-c-mode-common-hook)))
-(add-hook 'c-ts-mode-hook (lambda ()
-                             (run-hooks 'prelude-c-mode-common-hook)))
-(add-hook 'c++-ts-mode-hook (lambda ()
-                               (run-hooks 'prelude-c-mode-common-hook)))
+(defun prelude-c-setup ()
+  "Run `prelude-c-mode-common-hook'."
+  (run-hooks 'prelude-c-mode-common-hook))
+
+;; Only for C, C++ and Objective-C: the other modes built on cc-mode
+;; (Java, C#, PHP, etc.) are set up by modules of their own.  This runs
+;; ahead of the functions you add to the same hooks, so that those can
+;; change what it did.
+(dolist (hook '(c-mode-hook c++-mode-hook objc-mode-hook c-ts-mode-hook c++-ts-mode-hook))
+  (add-hook hook #'prelude-c-setup -50))
 
 ;; Major mode for CMake build files
 (use-package cmake-mode

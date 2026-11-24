@@ -712,6 +712,101 @@ doesn't follow."
                   (string-prefix-p "prelude-treesit-"
                                    (symbol-name (alist-get mode major-mode-remap-alist))))))))
 
+;;; C and C++
+
+(defvar c-ts-mode-indent-style)
+(defvar c-indentation-style)
+(defvar c-basic-offset)
+
+(defconst prelude-test--c-source
+  "int main(void)\n{\nif (x) {\nfoo();\n}\nreturn 0;\n}\n"
+  "Some C code, without any indentation.")
+
+(defconst prelude-test--c-k&r
+  "int main(void)\n{\n    if (x) {\n        foo();\n    }\n    return 0;\n}\n"
+  "`prelude-test--c-source' indented in the K&R style, with 4 spaces.")
+
+(defconst prelude-test--c-brace-source
+  "int main(void)\n{\nif (x)\n{\nfoo();\n}\n}\n"
+  "C code with a brace on a line of its own, without any indentation.")
+
+(defconst prelude-test--c-brace-k&r
+  "int main(void)\n{\n    if (x)\n    {\n        foo();\n    }\n}\n"
+  "`prelude-test--c-brace-source' in the K&R style (GNU would indent the brace).")
+
+(defun prelude-test--indent-c (mode &optional source)
+  "Return SOURCE (`prelude-test--c-source' by default) indented by MODE."
+  (with-temp-buffer
+    (insert (or source prelude-test--c-source))
+    (funcall mode)
+    (indent-region (point-min) (point-max))
+    (buffer-string)))
+
+(ert-deftest prelude-c-uses-the-k&r-style-with-4-spaces ()
+  "From the first buffer on, whatever the order the modes are used in."
+  (require 'prelude-c)
+  (should (equal (prelude-test--indent-c 'c-mode) prelude-test--c-k&r))
+  (should (equal (prelude-test--indent-c 'c-mode prelude-test--c-brace-source)
+                 prelude-test--c-brace-k&r))
+  (should (equal (prelude-test--indent-c 'c++-mode) prelude-test--c-k&r))
+  (with-temp-buffer
+    (c-mode)
+    (should (equal c-indentation-style "prelude"))
+    (should (= c-basic-offset 4)))
+  (require 'c-ts-mode)
+  (should (eq c-ts-mode-indent-style 'k&r))
+  (should (= (default-value (indirect-variable 'c-ts-mode-indent-offset)) 4))
+  (when (treesit-ready-p 'c t)
+    (let ((prelude-treesit-auto-install nil))
+      (should (equal (prelude-test--indent-c 'c-ts-mode) prelude-test--c-k&r)))))
+
+(define-obsolete-variable-alias 'prelude-test-c-old-option 'prelude-test-c-option "0")
+
+(defcustom prelude-test-c-option 2
+  "An option for testing `prelude-c--set-default'."
+  :type 'natnum
+  :group 'prelude)
+
+(ert-deftest prelude-c-styles-give-way-to-the-users-settings ()
+  "Prelude's style only replaces Emacs's defaults (also through an alias)."
+  (require 'prelude-c)
+  (unwind-protect
+      (progn
+        (prelude-c--set-default 'prelude-test-c-old-option 4)
+        (should (= prelude-test-c-option 4))
+        ;; e.g. set in personal/preload or saved with Customize
+        (setq prelude-test-c-option 8)
+        (prelude-c--set-default 'prelude-test-c-old-option 4)
+        (should (= prelude-test-c-option 8)))
+    (setq prelude-test-c-option 2)))
+
+(ert-deftest prelude-c-setup-runs-ahead-of-the-users-hooks ()
+  "A function added to `c-mode-hook' can undo what Prelude did."
+  (require 'prelude-c)
+  (let* ((subword nil)
+         (record (lambda () (setq subword subword-mode))))
+    (add-hook 'c-mode-hook record)
+    (unwind-protect
+        (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore))
+          (with-temp-buffer
+            (c-mode))
+          (should subword))
+      (remove-hook 'c-mode-hook record))))
+
+(ert-deftest prelude-c-leaves-the-other-cc-modes-alone ()
+  "Java gets its usual style, and none of the C setup (LSP included)."
+  (require 'prelude-c)
+  (let ((ran nil))
+    (cl-letf (((symbol-function 'prelude-c-mode-common-defaults)
+               (lambda () (setq ran t))))
+      (with-temp-buffer
+        (java-mode)
+        (should (equal c-indentation-style "java"))
+        (should-not ran))
+      (with-temp-buffer
+        (c-mode)
+        (should ran)))))
+
 (ert-deftest prelude-elixir-sets-up-heex-templates-where-possible ()
   "HEEx templates use the built-in mode of Emacs 30+, and nothing gets installed."
   (require 'prelude-elixir)
