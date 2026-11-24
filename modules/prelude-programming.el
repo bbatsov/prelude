@@ -72,8 +72,10 @@
   (when prelude-guru
     (guru-mode +1)
     (diminish 'guru-mode))
-  (when prelude-smartparens
-    (smartparens-mode +1))
+  ;; auto-pairing of delimiters, the built-in way when smartparens is off
+  (if prelude-smartparens
+      (smartparens-mode +1)
+    (electric-pair-local-mode +1))
   (prelude-enable-whitespace)
   (prelude-local-comment-auto-fill))
 
