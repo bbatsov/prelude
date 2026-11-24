@@ -1778,4 +1778,38 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
       (should (string-match-p "^Prelude Doctor" (buffer-string))))
     (kill-buffer prelude-doctor-buffer-name)))
 
+;;; ERC
+
+(defvar erc-kill-buffer-on-part)
+(defvar erc-modules)
+
+(ert-deftest prelude-erc-loads-erc-only-when-used ()
+  (let ((erc-was-loaded (featurep 'erc)))
+    (require 'prelude-erc)
+    (unless erc-was-loaded
+      (should-not (featurep 'erc))))
+  (should (equal (eval (car (get 'prelude-erc-servers 'standard-value)) t)
+                 '("irc.libera.chat")))
+  (require 'erc)
+  (should erc-kill-buffer-on-part)
+  (should (memq 'truncate erc-modules)))
+
+(defvar erc-autoaway-idle-seconds)
+
+(ert-deftest prelude-erc-sets-options-before-erc-loads ()
+  "So that personal config, loaded after the modules, has the last word.
+Setting them once ERC loads would override what the user set."
+  (require 'prelude-erc)
+  (unless (featurep 'erc-autoaway)
+    (should (eql (default-value 'erc-autoaway-idle-seconds) 600))))
+
+(ert-deftest prelude-erc-keeps-the-old-names-working ()
+  (require 'prelude-erc)
+  (should (eq (indirect-variable 'my-fav-irc) 'prelude-erc-servers))
+  (should (eq (indirect-variable 'bye-irc-message) 'prelude-erc-quit-message))
+  (should (eq (indirect-function 'start-irc) (indirect-function 'prelude-erc-start)))
+  (should (eq (indirect-function 'stop-irc) (indirect-function 'prelude-erc-stop)))
+  ;; that one was in ERC's namespace, and unused
+  (should-not (fboundp 'erc-notify-allowed-p)))
+
 ;;; prelude-test.el ends here

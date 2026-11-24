@@ -1,56 +1,69 @@
 # Prelude ERC
 
-ERC is a popular IRC client bundled with Emacs.
-ERC is both powerful and complex, that's why Prelude bundles
-some configuration for it, together with a few handy commands
-like `start-irc` and `stop-irc`.
+ERC is the IRC client that comes with Emacs. It's both powerful and
+complex, so Prelude sets it up a bit and adds a couple of commands for
+connecting to your servers and leaving them.
 
-## Customizing Server list
+ERC is loaded only when you start using it, so enabling the module
+doesn't slow down Emacs's startup.
 
-If you want to join a list of servers on `M-x start-irc`, other than
-the default list, please redefine the variable `my-fav-irc` as follows
-in your personal config:
+## Connecting
 
-```emacs-lisp
-(setq my-fav-irc '("irc.freenode.net"
-                   "irc.oftc.net"
-                   "irc.mozilla.org"
-                   "irc.gnome.org"))
-```
-
-## Customizing Last Quit Message
-
-If you want to customize your IRC Last Quit Message from *Asta la
-vista* to something more funkier, please redefine `bye-irc-message` as
-follows:
+<kbd>M-x prelude-erc-start</kbd> connects to every server in
+`prelude-erc-servers`, over TLS (port 6697).
+[Libera.Chat](https://libera.chat), where most of the free software
+channels are, is the default. To connect to others, set the list in
+your personal config:
 
 ```emacs-lisp
-(setq bye-irc-message "adios")
+(setq prelude-erc-servers '("irc.libera.chat" "irc.oftc.net"))
 ```
 
-## Reading NickServ passwords from auth-source plugin
+ERC uses `erc-nick` as your nickname (or your user name, if that's not
+set).
 
-If you want to automatically authenticate while logging into IRC
-servers set the `erc-prompt-for-password` to nil as follows:
+<kbd>M-x prelude-erc-stop</kbd> leaves all the servers with
+`prelude-erc-quit-message` ("Asta la vista" by default).
+
+## Settings
+
+The module changes a few of ERC's defaults:
+
+- The buffers of channels you leave, and of queries and the server when
+  you quit it, are killed.
+- Queries open in the current window.
+- Joins, parts, quits and the like don't count as activity in the mode
+  line.
+- Long buffers get truncated (the `truncate` module).
+- Messages are checked for spelling (the `spelling` module), unless
+  `prelude-flyspell` is off.
+- Everything is UTF-8.
+
+If you turn on ERC's `log` module, the logs go to `~/.erc/logs`. If you
+turn on `autoaway`, you're marked as away after 10 minutes without
+using Emacs.
+
+## NickServ passwords
+
+To log in to NickServ without typing your password, keep it in
+`~/.authinfo.gpg` (or `~/.authinfo`) and tell ERC not to ask for it:
 
 ```emacs-lisp
 (setq erc-prompt-for-password nil)
 ```
 
-Now you can set password in plaintext in `.authinfo` file in the netRC
-format or you it encrypted in `.authinfo.gpg` file after setting up gpg
-in Emacs.
+## A perspective for IRC
 
-## Opening all ERC buffers in a new perspective
-
-Many a time when we start IRC with the `start-irc` command, all the
-channels open in our existing workspace, which can be annoying to
-some; especially to those who like to organize their buffers into
-separate groups (perspectives). To avoid this scenario, it is better
-to group all the ERC buffers into one perspective called `IRC` when
-`start-irc` is called. To enable this set the `prelude-new-irc-persp`
-variable to true as follows:
+If you use [perspective](https://github.com/nex3/perspective-el),
+setting `prelude-new-irc-persp` keeps all the ERC buffers in a
+perspective called `IRC`:
 
 ```emacs-lisp
 (setq prelude-new-irc-persp t)
 ```
+
+## Old names
+
+`start-irc`, `stop-irc`, `my-fav-irc` and `bye-irc-message` are the old
+names of `prelude-erc-start`, `prelude-erc-stop`, `prelude-erc-servers`
+and `prelude-erc-quit-message`. They still work, but they're obsolete.

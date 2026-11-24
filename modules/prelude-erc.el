@@ -31,131 +31,137 @@
 
 ;;; Code:
 
-(require 'erc)
-(require 'erc-log)
-(require 'erc-notify)
-(require 'erc-spelling)
-(require 'erc-autoaway)
+(declare-function erc-quit-server "erc")
+(declare-function erc-server-or-unjoined-channel-buffer-p "erc")
+(declare-function persp-switch "ext:perspective")
+(declare-function persp-kill "ext:perspective")
+(declare-function erc-server-buffer-p "erc")
+(declare-function erc-tls "erc")
+(defvar prelude-flyspell)
+;; ERC's own options
+(defvar erc-interpret-mirc-color)
+(defvar erc-kill-buffer-on-part)
+(defvar erc-kill-queries-on-quit)
+(defvar erc-kill-server-buffer-on-quit)
+(defvar erc-query-display)
+(defvar erc-track-exclude-types)
+(defvar erc-modules)
+(defvar erc-server-coding-system)
+(defvar erc-log-channels-directory)
+(defvar erc-save-buffer-on-part)
+(defvar erc-auto-discard-away)
+(defvar erc-autoaway-idle-seconds)
+(defvar erc-autoaway-idle-method)
+
+(define-obsolete-variable-alias 'my-fav-irc 'prelude-erc-servers "2.2.0")
+
+(defcustom prelude-erc-servers '("irc.libera.chat")
+  "The IRC servers that `prelude-erc-start' connects to, over TLS."
+  :type '(repeat string)
+  :group 'prelude)
+
+(define-obsolete-variable-alias 'bye-irc-message 'prelude-erc-quit-message "2.2.0")
+
+(defcustom prelude-erc-quit-message "Asta la vista"
+  "The message that `prelude-erc-stop' sends when it leaves a server."
+  :type 'string
+  :group 'prelude)
+
+(defcustom prelude-new-irc-persp nil
+  "Non-nil means that `prelude-erc-start' starts IRC in a perspective of its own.
+That takes the perspective package."
+  :type 'boolean
+  :group 'prelude)
+
+;; ERC's options are set now, before ERC is loaded, so that your
+;; personal config (loaded after the modules) and Customize can change
+;; them.  ERC's own definitions leave values that are set alone.
 
 ;; Interpret mIRC-style color commands in IRC chats
 (setq erc-interpret-mirc-color t)
 
-;; The following are commented out by default, but users of other
-;; non-Emacs IRC clients might find them useful.
-;; Kill buffers for channels after /part
-(setq erc-kill-buffer-on-part t)
-;; Kill buffers for private queries after quitting the server
-(setq erc-kill-queries-on-quit t)
-;; Kill buffers for server messages after quitting the server
-(setq erc-kill-server-buffer-on-quit t)
+;; Kill the buffers of channels after /part, and the buffers of
+;; queries and the server after quitting the server
+(setq erc-kill-buffer-on-part t
+      erc-kill-queries-on-quit t
+      erc-kill-server-buffer-on-quit t)
 
 ;; open query buffers in the current window
 (setq erc-query-display 'buffer)
 
 ;; exclude boring stuff from tracking
-(erc-track-mode t)
 (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
                                 "324" "329" "332" "333" "353" "477"))
-
-;; logging
-(setq erc-log-channels-directory "~/.erc/logs/")
-
-(if (not (file-exists-p erc-log-channels-directory))
-    (mkdir erc-log-channels-directory t))
-
-(setq erc-save-buffer-on-part t)
-
-;; truncate long irc buffers
-(erc-truncate-mode +1)
-
-;; enable spell checking
-(when prelude-flyspell
-  (erc-spelling-mode 1))
-;; set different dictionaries by different servers/channels
-;;(setq erc-spelling-dictionaries '(("#emacs" "american")))
-
-(defvar erc-notify-nick-alist nil
-  "Alist of nicks and the last time they tried to trigger a
-notification")
-
-(defvar erc-notify-timeout 10
-  "Number of seconds that must elapse between notifications from
-the same person.")
-
-(defun erc-notify-allowed-p (nick &optional delay)
-  "Return non-nil if a notification should be made for NICK.
-If DELAY is specified, it will be the minimum time in seconds
-that can occur between two notifications.  The default is
-`erc-notify-timeout'."
-  (unless delay (setq delay erc-notify-timeout))
-  (let ((cur-time (time-to-seconds (current-time)))
-        (cur-assoc (assoc nick erc-notify-nick-alist))
-        (last-time nil))
-    (if cur-assoc
-        (progn
-          (setq last-time (cdr cur-assoc))
-          (setcdr cur-assoc cur-time)
-          (> (abs (- cur-time last-time)) delay))
-      (push (cons nick cur-time) erc-notify-nick-alist)
-      t)))
-
-;; autoaway setup
-(setq erc-auto-discard-away t)
-(setq erc-autoaway-idle-seconds 600)
-(setq erc-autoaway-idle-method 'emacs)
 
 ;; utf-8 always and forever
 (setq erc-server-coding-system '(utf-8 . utf-8))
 
+;; where the logs go, if you turn on logging (the `log' module)
+(setq erc-log-channels-directory "~/.erc/logs/"
+      erc-save-buffer-on-part t)
 
-(defvar my-fav-irc '( "irc.freenode.net" )
-  "Stores the list of IRC servers that you want to connect to with start-irc.")
+;; ERC creates the log directory, but not the directories above it
+(with-eval-after-load 'erc-log
+  (when (stringp erc-log-channels-directory)
+    (make-directory erc-log-channels-directory t)))
 
-(defvar bye-irc-message "Asta la vista"
-  "Message string to be sent while quitting IRC.")
+;; set your status to away after 10 minutes without input (the
+;; `autoaway' module)
+(setq erc-auto-discard-away t
+      erc-autoaway-idle-seconds 600
+      erc-autoaway-idle-method 'emacs)
 
-(defcustom prelude-new-irc-persp nil
-  "True (t) means start IRC in new perspective."
-  :type 'boolean
-  :require 'prelude-erc
-  :group 'prelude)
+;; The modules are added to ERC's own list, once there's one
+(with-eval-after-load 'erc
+  ;; truncate long irc buffers
+  (add-to-list 'erc-modules 'truncate)
+  ;; spell checking, with Flyspell
+  (when prelude-flyspell
+    (add-to-list 'erc-modules 'spelling)))
 
-(defun connect-to-erc (server)
-  "Connects securely to IRC SERVER over TLS at port 6697."
+(defun prelude-erc--connect (server)
+  "Connect securely to IRC SERVER over TLS at port 6697.
+The nickname is `erc-nick', as ERC works it out."
   (erc-tls :server server
-           :port 6697
-           :nick erc-nick ))
+           :port 6697))
 
-(defun start-irc ()
-  "Connect to IRC?"
+(define-obsolete-function-alias 'connect-to-erc #'prelude-erc--connect "2.2.0")
+
+(defun prelude-erc-start ()
+  "Connect to the IRC servers in `prelude-erc-servers'."
   (interactive)
   (when (y-or-n-p "Do you want to start IRC? ")
     (when (and prelude-new-irc-persp (fboundp 'persp-switch))
       (persp-switch "IRC"))
-    (mapc #'connect-to-erc my-fav-irc)))
+    (mapc #'prelude-erc--connect prelude-erc-servers)))
 
-(defun filter-server-buffers ()
-  (delq nil
-        (mapcar
-         (lambda (x)
-           (and (if (fboundp 'erc-server-or-unjoined-channel-buffer-p)
-                    (erc-server-or-unjoined-channel-buffer-p x) ; ERC 5.6+
+(define-obsolete-function-alias 'start-irc #'prelude-erc-start "2.2.0")
+
+(defun prelude-erc--server-buffers ()
+  "Return the buffers of the IRC servers that ERC is connected to."
+  (require 'erc)
+  (seq-filter (lambda (buffer)
+                (if (fboundp 'erc-server-or-unjoined-channel-buffer-p)
+                    (erc-server-or-unjoined-channel-buffer-p buffer) ; ERC 5.6+
                   (with-suppressed-warnings ((obsolete erc-server-buffer-p))
-                    (erc-server-buffer-p x)))
-                x))
-         (buffer-list))))
+                    (erc-server-buffer-p buffer))))
+              (buffer-list)))
 
-(defun stop-irc ()
-  "Disconnects from all irc servers."
+(define-obsolete-function-alias 'filter-server-buffers #'prelude-erc--server-buffers "2.2.0")
+
+(defun prelude-erc-stop ()
+  "Disconnect from all the IRC servers, with `prelude-erc-quit-message'."
   (interactive)
   (when (and prelude-new-irc-persp (fboundp 'persp-switch))
     (persp-switch "IRC"))
-  (dolist (buffer (filter-server-buffers))
+  (dolist (buffer (prelude-erc--server-buffers))
     (message "Server buffer: %s" (buffer-name buffer))
     (with-current-buffer buffer
-      (erc-quit-server bye-irc-message)))
+      (erc-quit-server prelude-erc-quit-message)))
   (when (and prelude-new-irc-persp (fboundp 'persp-kill))
     (persp-kill "IRC")))
+
+(define-obsolete-function-alias 'stop-irc #'prelude-erc-stop "2.2.0")
 
 (provide 'prelude-erc)
 
