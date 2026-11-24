@@ -35,7 +35,7 @@
 
 ;; elixir-ts-mode is built-in since Emacs 30.  On Emacs 29,
 ;; fall back to the third-party elixir-mode package.
-(dolist (regexp '("\\.ex\\'" "\\.exs\\'" "mix\\.lock"))
+(dolist (regexp '("\\.ex\\'" "\\.exs\\'" "/mix\\.lock\\'"))
   (prelude-treesit-auto-mode regexp 'elixir 'elixir-ts-mode 'elixir-mode 'elixir-mode))
 
 ;; HEEx template support (Phoenix).  heex-ts-mode comes with Emacs 30+,
