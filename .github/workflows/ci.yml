@@ -59,7 +59,7 @@ jobs:
       # modules it loads (or with each other).
       - name: load the modules that have to be loaded on their own
         run: |
-          for module in prelude-ido prelude-ivy prelude-helm-everywhere prelude-evil prelude-key-chord prelude-erc; do
+          for module in prelude-ido prelude-ivy prelude-helm-everywhere prelude-evil prelude-key-chord prelude-erc prelude-literate-programming; do
             emacs --batch --load init.el --eval "(require '$module)"
           done
       - name: load personal early-init once, before core

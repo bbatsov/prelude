@@ -30,6 +30,10 @@
 
 ;;; Code:
 
+(defvar org-log-done)
+(defvar org-log-into-drawer)
+(declare-function org-indent-mode "org-indent")
+
 ;; a few useful global keybindings for org-mode
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
