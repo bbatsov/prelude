@@ -33,6 +33,7 @@
 
 ### Changes
 
+- [#1493](https://github.com/bbatsov/prelude/pull/1493): Stop installing `browse-kill-ring` and `discover-my-major`: `M-y` is Emacs's own `yank-pop` again, which lets you pick from the kill ring since Emacs 28 (the completion modules still bind their own), `s-y` is gone, and `C-h C-m` is back to `view-order-manuals`.
 - [#1492](https://github.com/bbatsov/prelude/pull/1492): Search with ripgrep in xref and `project-find-regexp` when it's installed, and log the warnings of native compilation instead of popping up the `*Warnings*` buffer.
 - [#1492](https://github.com/bbatsov/prelude/pull/1492): Leave the commands that are meant for other modes out of `M-x` completion (`read-extended-command-predicate`), whatever the completion framework.
 - [#1492](https://github.com/bbatsov/prelude/pull/1492): Pair delimiters with the built-in `electric-pair-mode` in programming modes when smartparens is turned off (there was no pairing at all then), and turn on `global-so-long-mode` for files with very long lines.

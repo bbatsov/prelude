@@ -69,7 +69,6 @@ Keybinding | Command | Description
 <kbd>C-x M-m</kbd> | `shell` | Start your default shell.
 <kbd>C-x C-m</kbd> | `execute-extended-command` | An alias for <kbd>M-x</kbd> that doesn't need Meta.
 <kbd>C-h A</kbd> | `apropos` | Search in all Emacs symbols.
-<kbd>C-h C-m</kbd> | `discover-my-major` | Show the key bindings of the current major mode.
 <kbd>C-h C-f</kbd> | `find-function` | Jump to the source of a function.
 <kbd>C-h C-k</kbd> | `find-function-on-key` | Jump to the source of the command a key runs.
 <kbd>C-h C-v</kbd> | `find-variable` | Jump to the definition of a variable.
@@ -92,7 +91,6 @@ Keybinding | Command | Description
 <kbd>s-,</kbd> | `avy-goto-char` | Jump to a character on screen.
 <kbd>s-.</kbd> | `avy-goto-word-or-subword-1` | Jump to a word or a part of a `CamelCase` word.
 <kbd>s-w</kbd> | `ace-window` | Jump to a window by its number.
-<kbd>s-y</kbd> | `browse-kill-ring` | Browse the things you've killed.
 
 <!-- markdownlint-enable MD013 -->
 
@@ -300,7 +298,7 @@ Keybinding         | Description
 <kbd>JJ</kbd>      | Jump back to previous buffer(`crux-switch-to-previous-buffer`)
 <kbd>uu</kbd>      | View edits as a tree(`undo-tree-visualize`)
 <kbd>xx</kbd>      | Executed extended command(`execute-extended-command`)
-<kbd>yy</kbd>      | Browse the kill ring(`browse-kill-ring`)
+<kbd>yy</kbd>      | Pick something from the kill ring and insert it (`yank-pop`)
 
 <!-- markdownlint-enable MD013 -->
 

@@ -85,7 +85,10 @@ options are described in [Configuration](configuration.md#prelude-options).
 ## Keys that do something else
 
 These standard keys run a different command in Prelude. The
-[Usage](usage.md) page lists the keys that Prelude adds.
+[Usage](usage.md) page lists the keys that Prelude adds. The
+completion modules replace a few more: with [Vertico](modules/vertico.md),
+for instance, <kbd>C-x b</kbd>, <kbd>M-y</kbd> and <kbd>M-g g</kbd> run
+the commands of Consult.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -95,13 +98,11 @@ These standard keys run a different command in Prelude. The
 | <kbd>C-x C-b</kbd> | `list-buffers` | `ibuffer` |
 | <kbd>C-x m</kbd> | `compose-mail` | `eshell` |
 | <kbd>C-x C-m</kbd> | prefix for the coding system commands (<kbd>C-x RET</kbd>) | `execute-extended-command`, i.e. <kbd>M-x</kbd> |
-| <kbd>M-y</kbd> | `yank-pop` | `browse-kill-ring` |
 | <kbd>M-z</kbd> | `zap-to-char` | `zop-up-to-char`: stops before the character and shows what's about to go |
 | <kbd>M-/</kbd> | `dabbrev-expand` | `hippie-expand` (option: `prelude-hippie-expand`) |
 | <kbd>M-o</kbd> | unbound | `crux-smart-open-line` |
 | <kbd>C-&lt;backspace&gt;</kbd> | `backward-kill-word` | `crux-kill-line-backwards` |
 | <kbd>S-&lt;arrow&gt;</kbd> | extends the region | moves to the window in that direction (`windmove`) |
-| <kbd>C-h C-m</kbd> | `view-order-manuals` | `discover-my-major` |
 | <kbd>C-h C-f</kbd> | `view-emacs-FAQ` | `find-function` |
 | right mouse button | extends the region | opens a context menu (`context-menu-mode`) |
 

@@ -16,7 +16,7 @@ simultaneously (or in quick succession).
 | <kbd>JJ</kbd> | `crux-switch-to-previous-buffer` | Switch to previous buffer |
 | <kbd>uu</kbd> | `undo-tree-visualize` | Visualize the undo tree |
 | <kbd>xx</kbd> | `execute-extended-command` | Same as M-x |
-| <kbd>yy</kbd> | `browse-kill-ring` | Browse the kill ring |
+| <kbd>yy</kbd> | `yank-pop` | Pick something from the kill ring and insert it |
 
 ## Adding Your Own Key Chords
 
