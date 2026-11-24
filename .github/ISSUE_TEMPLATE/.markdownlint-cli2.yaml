@@ -1,0 +1,4 @@
+# GitHub shows the title of an issue above its body, so the templates
+# don't start with a heading of their own.
+config:
+  MD041: false

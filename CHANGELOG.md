@@ -6,6 +6,7 @@
 
 ### New features
 
+- [#1495](https://github.com/bbatsov/prelude/pull/1495): Add `M-x prelude-doctor`, which lists what Prelude is missing on your system (programs, tree-sitter grammars, language servers), conflicting modules, and the modules added to Prelude since you made your copy of the modules file.
 - Add a welcome screen shown on startup (unless Emacs is launched to open specific files). It points you at the essentials (personal config location, how to enable modules, the user manual) and offers quick access to recent files, known projects and bookmarks, plus a rotating tip. Reopen it any time with `M-x prelude-welcome`, or turn it off with `(setq prelude-welcome-screen nil)`.
 - [#1466](https://github.com/bbatsov/prelude/issues/1466): Add `prelude-java` module: Java support via `java-ts-mode` and the Eclipse JDT language server, which is installed automatically (by [eglot-java](https://github.com/yveszoundi/eglot-java) or [lsp-java](https://emacs-lsp.github.io/lsp-java/), depending on `prelude-lsp-client`), with key bindings for running tests and main classes.
 - [#1469](https://github.com/bbatsov/prelude/pull/1469): Add `prelude-csharp` module: C# support via the built-in `csharp-ts-mode` (or `csharp-mode`) and LSP.

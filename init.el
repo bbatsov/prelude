@@ -164,6 +164,7 @@ variable set by a `custom-set-variables' form whose name starts with
 (require 'prelude-editor)
 (require 'prelude-global-keybindings)
 (require 'prelude-welcome)
+(require 'prelude-doctor)
 
 ;; macOS specific settings
 (when (eq system-type 'darwin)

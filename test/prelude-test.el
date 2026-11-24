@@ -1710,4 +1710,72 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
   (should (eq (and (advice-member-p #'prelude-crm-indicator 'completing-read-multiple) t)
               (< emacs-major-version 31))))
 
+;;; prelude-doctor
+
+(defun prelude-test--doctor-results ()
+  "Return all the results of `prelude-doctor--checks' as (STATUS TEXT)."
+  (apply #'append (mapcar #'cdr (prelude-doctor--checks))))
+
+(ert-deftest prelude-doctor-reports-missing-grammars-and-servers ()
+  (require 'eglot)
+  (let ((prelude-treesit--languages '((prelude-test-lang . prelude-test-ts-mode)))
+        (eglot-server-programs '((prelude-test-ts-mode "prelude-test-no-such-server")))
+        (prelude-lsp-client 'eglot))
+    (cl-letf (((symbol-function 'treesit-language-available-p) #'ignore))
+      (let ((results (prelude-test--doctor-results)))
+        (when (prelude-treesit--supported-p)
+          (should (seq-find (lambda (result)
+                              (and (eq (car result) 'problem)
+                                   (string-prefix-p "prelude-test-lang: no tree-sitter grammar"
+                                                    (cadr result))))
+                            results)))
+        ;; editing works without a server, so that's only a note
+        (should (seq-find (lambda (result)
+                            (and (eq (car result) 'note)
+                                 (string-match-p "prelude-test-lang: no language server.*prelude-test-no-such-server"
+                                                 (cadr result))))
+                          results))))))
+
+(ert-deftest prelude-doctor-reports-conflicts-and-new-modules ()
+  (let ((prelude-conflicting-modules '((prelude-core prelude-ui)))
+        (prelude-modules-file (make-temp-file "prelude-modules" nil ".el"
+                                              "(require 'prelude-c)\n;; (require 'prelude-go)\n")))
+    (unwind-protect
+        (let* ((results (prelude-test--doctor-results))
+               (new (seq-find (lambda (result)
+                                (string-prefix-p "modules added since" (cadr result)))
+                              results)))
+          (should (member '(problem "these modules do the same job, keep only one: prelude-core prelude-ui")
+                          results))
+          (should new)
+          (should (string-match-p "prelude-vertico" (cadr new)))
+          ;; mentioned in the file, enabled or not
+          (should-not (string-match-p "prelude-c\\b\\|prelude-go\\b" (cadr new))))
+      (delete-file prelude-modules-file))))
+
+(ert-deftest prelude-doctor-reports-only-what-git-says-on-stdout ()
+  (let ((prelude-dir (make-temp-file "prelude-doctor" t)))
+    (unwind-protect
+        (progn
+          ;; a broken repository: git complains on stderr
+          (write-region "" nil (expand-file-name ".git" prelude-dir))
+          (should-not (prelude-doctor--version)))
+      (delete-directory prelude-dir t))))
+
+(ert-deftest prelude-doctor-shows-its-report-in-a-buffer ()
+  (save-window-excursion
+    (prelude-doctor)
+    (with-current-buffer prelude-doctor-buffer-name
+      (should (equal default-directory prelude-dir)))
+    (with-current-buffer prelude-doctor-buffer-name
+      (should (derived-mode-p 'special-mode))
+      (should (string-match-p (regexp-quote (format "Emacs %s" emacs-version)) (buffer-string)))
+      (should (string-match-p "^Programs$" (buffer-string)))
+      ;; g checks again
+      (let ((inhibit-read-only t))
+        (erase-buffer))
+      (revert-buffer)
+      (should (string-match-p "^Prelude Doctor" (buffer-string))))
+    (kill-buffer prelude-doctor-buffer-name)))
+
 ;;; prelude-test.el ends here

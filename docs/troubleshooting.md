@@ -2,6 +2,14 @@
 
 ## Finding out what's wrong
 
+<kbd>M-x prelude-doctor</kbd> checks what Prelude needs from your
+system and lists what's missing: programs like `git` and a C compiler,
+the tree-sitter grammars and the language servers of the modules
+you've enabled, and modules that do the same job. It also tells you
+about the modules that were added to Prelude since you made your copy
+of `personal/prelude-modules.el`. Press <kbd>g</kbd> in its buffer to
+check again after you've installed something.
+
 When Emacs complains during startup, run it like this to get a
 backtrace that says where the error comes from:
 
@@ -35,7 +43,8 @@ them. Restart Emacs once and it's gone.
 ## "No language server for ..."
 
 Prelude starts a language server only if it's installed, and tells you
-once when it isn't. Install the server named on the page of the
+once when it isn't. <kbd>M-x prelude-doctor</kbd> lists the servers
+of all the languages you've enabled. Install the server named on the page of the
 language's [module](modules/index.md), make sure Emacs can find it on
 your `PATH`, and reopen the file (or run <kbd>M-x eglot</kbd>).
 
