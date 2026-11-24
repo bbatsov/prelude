@@ -70,6 +70,10 @@
 ;; enable y/n answers
 (setq use-short-answers t)
 
+;; leave out the commands that are meant for other modes when
+;; completing M-x (e.g. Dired's commands outside of Dired)
+(setq read-extended-command-predicate #'command-completion-default-include-p)
+
 ;; more useful frame title, that show either a file or a
 ;; buffer name (if the buffer isn't visiting a file)
 (setq frame-title-format
