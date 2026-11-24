@@ -117,6 +117,10 @@
 ;; disable annoying blink-matching-paren
 (setq blink-matching-paren nil)
 
+;; files with very long lines (e.g. minified JavaScript) can make Emacs
+;; crawl; open them with the expensive modes turned off
+(global-so-long-mode +1)
+
 ;; diminish keeps the modeline tidy
 (use-package diminish
   :ensure t)

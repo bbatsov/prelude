@@ -7,7 +7,8 @@ modes in Emacs.
 Here are some features it provides:
 
 - spell-checking of comments (via `flyspell-prog-mode`)
-- auto-pairing of delimiters like parentheses (via `smartparens`)
+- auto-pairing of delimiters like parentheses (via `smartparens`, or
+  the built-in `electric-pair-mode` when `prelude-smartparens` is off)
 - visual cues for whitespace (via `whitespace-mode`)
 - highlighting code annotations (via `hl-todo`)
 - linter integration (via `flycheck`), which also shows the

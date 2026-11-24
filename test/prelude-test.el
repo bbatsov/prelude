@@ -1649,4 +1649,14 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
     (should (eql save-place-autosave-interval 300))
     (should-not recentf-show-messages)))
 
+(ert-deftest prelude-pairs-delimiters-even-without-smartparens ()
+  (should global-so-long-mode)
+  (require 'prelude-programming)
+  (with-temp-buffer
+    (let ((prelude-smartparens nil))
+      (cl-letf (((symbol-function 'flyspell-prog-mode) #'ignore))
+        (prelude-prog-mode-defaults))
+      (should electric-pair-mode)
+      (should-not (bound-and-true-p smartparens-mode)))))
+
 ;;; prelude-test.el ends here
