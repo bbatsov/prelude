@@ -12,8 +12,6 @@ package for Emacs.
   TeX/LaTeX editing
 - [cdlatex](https://github.com/cdominik/cdlatex) - fast
   insertion of math symbols and environments
-- [company-auctex](https://github.com/alexeyr/company-auctex) -
-  company-mode backend for AUCTeX (when company is available)
 - [smartparens-latex](https://github.com/Fuco1/smartparens) -
   LaTeX-aware pair handling
 
@@ -27,6 +25,10 @@ Prelude sets the following AUCTeX defaults:
 - **Auto-fill mode** is enabled for line wrapping
 - **Abbrev mode** is enabled for common LaTeX abbreviations
 - **Smartparens** is enabled for delimiter matching
+
+Completion of macros, environments, labels and citations comes from
+AUCTeX itself (through `completion-at-point`), so it works with
+[Company](company.md) and [Corfu](corfu.md) alike.
 
 ### macOS
 

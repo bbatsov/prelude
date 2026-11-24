@@ -32,6 +32,15 @@
 
 (declare-function LaTeX-math-mode "latex")
 
+;; AUCTeX is loaded only when a TeX file is opened
+(defvar TeX-auto-save)
+(defvar TeX-parse-self)
+(defvar TeX-close-quote)
+(defvar TeX-open-quote)
+(defvar TeX-master)
+(defvar TeX-view-program-selection)
+(defvar TeX-view-program-list)
+
 (when prelude-smartparens
   (require 'smartparens-latex))
 
@@ -44,13 +53,6 @@
 (use-package cdlatex
   :ensure t
   :defer t)
-
-;; Company completion for AUCTeX (labels, citations, macros, etc.)
-(use-package company-auctex
-  :ensure t
-  :defer t
-  :after company
-  :config (company-auctex-init))
 
 (defcustom prelude-latex-fast-math-entry 'LaTeX-math-mode
   "Method used for fast math symbol entry in LaTeX."

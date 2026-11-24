@@ -1601,4 +1601,9 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
         (run-hooks 'rust-ts-mode-hook 'rust-mode-hook)
         (should (= setups 2))))))
 
+(ert-deftest prelude-latex-installs-nothing-for-company ()
+  "AUCTeX completes on its own, with Company and Corfu alike."
+  (should-not (string-match-p "company-auctex"
+                              (prelude-test--file-string "modules/prelude-latex.el"))))
+
 ;;; prelude-test.el ends here
