@@ -1,4 +1,4 @@
-;;; prelude-apheleia.el --- Async format-on-save via Apheleia  -*- lexical-binding: t; -*-
+;;; prelude-apheleia.el --- Emacs Prelude: Async format-on-save via Apheleia.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;
@@ -16,7 +16,7 @@
 ;;
 ;; Enabling this module installs Apheleia and turns on
 ;; `apheleia-global-mode'.  Apheleia ships with sensible defaults
-;; for many languages and tools out of the box -- check
+;; for many languages and tools out of the box; check
 ;; `apheleia-mode-alist' to see what gets formatted by what.
 ;;
 ;; A note on overlap: some Prelude language modules (Go, Rust) format

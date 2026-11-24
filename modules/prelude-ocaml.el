@@ -68,5 +68,4 @@
 (add-hook 'prelude-ocaml-mode-hook #'prelude-ocaml-mode-defaults)
 
 (provide 'prelude-ocaml)
-
 ;;; prelude-ocaml.el ends here

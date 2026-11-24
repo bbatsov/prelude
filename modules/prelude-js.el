@@ -66,5 +66,4 @@
 (add-hook 'json-ts-mode-hook (lambda () (run-hooks 'prelude-json-mode-hook)))
 
 (provide 'prelude-js)
-
 ;;; prelude-js.el ends here

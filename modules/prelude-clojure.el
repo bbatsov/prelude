@@ -42,7 +42,7 @@
   (run-hooks 'prelude-interactive-lisp-coding-hook))
 
 ;; For tree-sitter support on Emacs 30+, install clojure-ts-mode
-;; separately -- it auto-remaps clojure-mode buffers when present.
+;; separately; it remaps clojure-mode buffers when it's present.
 (use-package clojure-mode
   :ensure t
   :hook (clojure-mode . (lambda ()
@@ -62,5 +62,4 @@
 (add-hook 'prelude-cider-repl-mode-hook #'prelude-cider-repl-mode-defaults)
 
 (provide 'prelude-clojure)
-
 ;;; prelude-clojure.el ends here

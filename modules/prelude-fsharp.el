@@ -1,6 +1,7 @@
 ;;; prelude-fsharp.el --- Emacs Prelude: F# programming support.  -*- lexical-binding: t; -*-
 ;;
 ;; Author: Andre Boechat <andre.boechat@tutanota.com>
+;; URL: https://github.com/bbatsov/prelude
 
 ;; This file is not part of GNU Emacs.
 
@@ -55,5 +56,4 @@
 (add-hook 'prelude-fsharp-mode-hook #'prelude-fsharp-mode-defaults)
 
 (provide 'prelude-fsharp)
-
 ;;; prelude-fsharp.el ends here

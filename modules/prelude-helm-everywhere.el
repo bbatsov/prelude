@@ -1,4 +1,4 @@
-;;; prelude-helm-everywhere.el --- Enable Helm everywhere  -*- lexical-binding: t; -*-
+;;; prelude-helm-everywhere.el --- Emacs Prelude: Helm everywhere.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2014-2026 Tu, Do Hoang
 ;;
@@ -66,4 +66,4 @@
           (helm-projectile-on))))
 
 (provide 'prelude-helm-everywhere)
-;; prelude-helm-everywhere.el ends here.
+;;; prelude-helm-everywhere.el ends here

@@ -1,4 +1,4 @@
-;;; prelude-helm.el --- Helm setup  -*- lexical-binding: t; -*-
+;;; prelude-helm.el --- Emacs Prelude: Helm setup.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;
@@ -60,5 +60,4 @@
 (push "Press <C-c p h> to navigate a project in Helm." prelude-tips)
 
 (provide 'prelude-helm)
-
 ;;; prelude-helm.el ends here

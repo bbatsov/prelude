@@ -57,5 +57,4 @@
 (add-hook 'prelude-racket-mode-hook #'prelude-racket-mode-defaults)
 
 (provide 'prelude-racket)
-
 ;;; prelude-racket.el ends here

@@ -92,5 +92,4 @@
                                     (whitespace-mode -1))))
 
 (provide 'prelude-common-lisp)
-
 ;;; prelude-common-lisp.el ends here

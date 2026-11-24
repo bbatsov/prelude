@@ -3,6 +3,7 @@
 ;; Copyright © 2011-2026 Gleb Peregud
 ;;
 ;; Author: Gleb Peregud <gleber.p@gmail.com>
+;; URL: https://github.com/bbatsov/prelude
 
 ;; This file is not part of GNU Emacs.
 
@@ -51,5 +52,4 @@
 (add-hook 'prelude-erlang-mode-hook #'prelude-erlang-mode-defaults)
 
 (provide 'prelude-erlang)
-
 ;;; prelude-erlang.el ends here

@@ -1,6 +1,7 @@
 ;;; prelude-literate-programming.el --- Emacs Prelude: Literate Programming Support  -*- lexical-binding: t; -*-
 ;;
 ;; Author: Koustubh Sinkar
+;; URL: https://github.com/bbatsov/prelude
 ;; Version: 1.0.0
 ;; Keywords: literate programming
 

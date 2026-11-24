@@ -13,7 +13,7 @@
 ;; pull requests, issues, and discussions on Git forges (GitHub,
 ;; GitLab, Gitea, etc.) directly from Emacs.
 ;;
-;; Forge integrates with Magit automatically once loaded -- forge
+;; Forge integrates with Magit automatically once loaded: forge
 ;; sections appear in the Magit status buffer, and `'' (apostrophe)
 ;; opens the forge dispatch menu.  You'll need to configure an
 ;; authentication token; see the module documentation for details.

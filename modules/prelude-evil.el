@@ -147,4 +147,6 @@
     ">" 'org-metaright ; indent
     ))
 (prelude-evil-key-bindings-for-org)
+
 (provide 'prelude-evil)
+;;; prelude-evil.el ends here

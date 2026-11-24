@@ -1,6 +1,7 @@
 ;;; prelude-rust.el --- Emacs Prelude: Rust programming support.  -*- lexical-binding: t; -*-
 ;;
 ;; Authors: Doug MacEachern, Manoel Vilela, Ben Alex, Daniel Gerlach
+;; URL: https://github.com/bbatsov/prelude
 
 ;; This file is not part of GNU Emacs.
 
@@ -36,8 +37,8 @@
 ;; * rust-analyzer as lsp server needs to be in global path, see:
 ;; https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary
 
-;; Disable super-save in Rust buffers -- auto-saving triggers
-;; lsp-format-buffer which causes severe hangs during autocomplete
+;; Disable super-save in Rust buffers: auto-saving triggers
+;; lsp-format-buffer, which causes severe hangs during autocomplete
 (add-to-list 'super-save-predicates
              (lambda () (not (derived-mode-p 'rust-ts-mode 'rust-mode))))
 

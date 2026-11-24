@@ -1334,6 +1334,24 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
   (mapcar (lambda (file) (string-remove-prefix "prelude-" (file-name-base file)))
           (directory-files prelude-modules-dir nil "\\`prelude-.*\\.el\\'")))
 
+(ert-deftest prelude-modules-have-the-standard-header-and-footer ()
+  "The first line, the project URL and the last two lines of every module."
+  (dolist (module (prelude-test--modules))
+    (let ((name (concat "prelude-" module))
+          (source (prelude-test--file-string
+                   (format "modules/prelude-%s.el" module))))
+      (ert-info (name :prefix "Module: ")
+        (should (string-match-p
+                 (format "\\`;;; %s\\.el --- Emacs Prelude: .+  -\\*- lexical-binding: t; -\\*-\n"
+                         (regexp-quote name))
+                 source))
+        (should (string-match-p "^;; URL: https://github\\.com/bbatsov/prelude$" source))
+        (should (string-suffix-p (format "\n(provide '%s)\n;;; %s.el ends here\n" name name)
+                                 source))
+        ;; no double dashes in comments: GitHub's Markdown and some
+        ;; fonts turn them into something else, and they read as a tic
+        (should-not (string-match-p "^ *;.* -- " source))))))
+
 (defun prelude-test--module-pages ()
   "Return the names of the module pages of the manual."
   (delete "index"

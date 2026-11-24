@@ -3,6 +3,7 @@
 ;; Copyright © 2023-2026 LEE Dongjun
 ;;
 ;; Author: LEE Dongjun <redongjun@gmail.com>
+;; URL: https://github.com/bbatsov/prelude
 
 ;; This file is not part of GNU Emacs.
 
@@ -53,5 +54,4 @@
                                   (run-hooks 'prelude-ts-mode-hook)))
 
 (provide 'prelude-ts)
-
 ;;; prelude-ts.el ends here
