@@ -715,6 +715,7 @@ doesn't follow."
 ;;; C and C++
 
 (defvar c-ts-mode-indent-style)
+(defvar subword-mode)
 (defvar c-indentation-style)
 (defvar c-basic-offset)
 
@@ -1811,5 +1812,27 @@ Setting them once ERC loads would override what the user set."
   (should (eq (indirect-function 'stop-irc) (indirect-function 'prelude-erc-stop)))
   ;; that one was in ERC's namespace, and unused
   (should-not (fboundp 'erc-notify-allowed-p)))
+
+;;; Literate programming
+
+(defvar org-babel-load-languages)
+(defvar org-confirm-babel-evaluate)
+
+(ert-deftest prelude-literate-programming-sets-up-babel-when-org-loads ()
+  "And leaves Org's question before running code alone."
+  ;; (installing the packages, as CI does on its first run, loads Org)
+  (let ((org-was-loaded (or (featurep 'org)
+                            (not (package-installed-p 'ob-async)))))
+    (require 'prelude-literate-programming)
+    (unless org-was-loaded
+      (should-not (featurep 'org))))
+  (require 'org)
+  (dolist (lang '(python shell js deno))
+    (should (alist-get lang org-babel-load-languages)))
+  ;; the languages of other modules stay
+  (should (alist-get 'emacs-lisp org-babel-load-languages))
+  (should (eq (default-value 'org-confirm-babel-evaluate) t))
+  (should (featurep 'ob-async))
+  (should-not (boundp 'org-babel-language-list)))
 
 ;;; prelude-test.el ends here

@@ -41,6 +41,8 @@
            (prelude-fetch-shell-environment-p))
   (exec-path-from-shell-copy-env "PYTHONPATH"))
 
+(declare-function python-imenu-create-flat-index "python")
+
 (defun prelude-python-mode-defaults ()
   "Defaults for Python programming."
   (subword-mode +1)

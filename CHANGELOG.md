@@ -34,6 +34,7 @@
 
 ### Changes
 
+- [#1497](https://github.com/bbatsov/prelude/pull/1497): Tidy up the literate programming module: Org asks before running code blocks again (the module turned that off without saying so, which let exported Org files run their code), Org's setup waits for Org to load, `deno` code blocks work (`ob-deno` was installed but not loaded), and `elpy`, which was installed but never turned on, is gone.
 - [#1496](https://github.com/bbatsov/prelude/pull/1496): Bring the ERC module up to date: it connects to Libera.Chat instead of the long gone Freenode, loads ERC only when it's used, and its commands and options have Prelude names (`prelude-erc-start`, `prelude-erc-stop`, `prelude-erc-servers`, `prelude-erc-quit-message`), with the old ones kept as obsolete aliases.
 - [#1494](https://github.com/bbatsov/prelude/pull/1494): On Emacs 31, leave `C-x O`, `C-x C-x` without an active region and the prompt of `completing-read-multiple` to Emacs itself, which does what Prelude used to do for them (the latter showed the separator twice).
 - [#1493](https://github.com/bbatsov/prelude/pull/1493): Stop installing `browse-kill-ring` and `discover-my-major`: `M-y` is Emacs's own `yank-pop` again, which lets you pick from the kill ring since Emacs 28 (the completion modules still bind their own), `s-y` is gone, and `C-h C-m` is back to `view-order-manuals`.

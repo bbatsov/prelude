@@ -30,12 +30,14 @@
 ;;; Code:
 
 (declare-function ob-ipython-auto-configure-kernels "ob-ipython")
+(defvar org-babel-load-languages)
+(defvar ob-async-no-async-languages-alist)
 
 (defvar prelude-ipynb-packages
   '(code-cells   ; file mode for code-cells
     ein          ; Emacs Ipython Notebook (Jupyter Client)
-    elpy         ; emacs python development environment
-    ))
+    )
+  "Packages for working with Jupyter notebooks.")
 
 (defvar prelude-ob-packages
   '(ob-async   ; asynchronous execution of code-blocks
@@ -43,63 +45,45 @@
     ob-tmux    ; for shell
     ob-deno    ; for javascript
     ob-typescript
-    ))
-
+    )
+  "Packages that teach Org Babel more languages, or more tricks.")
 
 (dolist (package (append prelude-ipynb-packages prelude-ob-packages))
   (prelude-use-package-ensure package '(t) nil))
 
-(setq prelude-ob-loader-list
+(defvar prelude-ob-loader-list
   '((python . t)
     (ipython . t)
     (shell . t)
     (js . t)
-    (typescript . t)
-    ;; Include other languages here...
-    ))
+    (deno . t)
+    (typescript . t))
+  "The languages whose code blocks Org Babel runs.
+Set it in personal/preload to change it, as it takes effect when Org
+is loaded.")
 
-;; Run/highlight code using babel in org-mode
-(org-babel-do-load-languages
- 'org-babel-load-languages prelude-ob-loader-list)
+;; Org is loaded only once you use it
+(with-eval-after-load 'org
+  ;; Run code blocks using babel in org-mode.  A language whose package
+  ;; couldn't be installed is left out, as it would keep the others
+  ;; (and with them Org) from loading.
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   (append (seq-filter (lambda (language)
+                         (locate-library (format "ob-%s" (car language))))
+                       prelude-ob-loader-list)
+           org-babel-load-languages))
+  ;; :async code blocks
+  (require 'ob-async nil t))
 
 ;; ob-ipython queries Jupyter for its kernels whenever an Org buffer is
 ;; opened, which fails (and breaks `org-mode') if Jupyter isn't installed.
-(unless (executable-find "jupyter")
-  (remove-hook 'org-mode-hook #'ob-ipython-auto-configure-kernels))
-
-;; Syntax highlight in #+BEGIN_SRC blocks
-(setq org-src-fontify-natively t)
-
-;; Don't prompt before running code in org
-(setq org-confirm-babel-evaluate nil)
+(with-eval-after-load 'ob-ipython
+  (unless (executable-find "jupyter")
+    (remove-hook 'org-mode-hook #'ob-ipython-auto-configure-kernels)))
 
 ;; Fix an incompatibility between the ob-async and ob-ipython packages
 (setq ob-async-no-async-languages-alist '("ipython"))
-
-(defvar org-babel-language-list
-  '(ob-cfengine3
-    ob-clojurescript
-    ob-dao
-    ob-diagrams
-    ob-elixir
-    ob-elm
-    ob-go
-    ob-graphql
-    ob-http
-    ob-ipython
-    ob-julia-vterm
-    ob-kotlin
-    ob-mongo
-    ob-prolog
-    ob-restclient
-    ob-rust
-    ob-sml
-    ob-sql-mode
-    ob-translate
-    ob-typescript
-    ob-uart
-    ))
-;;; TODO Write a function to enable org-babel for each function
 
 (provide 'prelude-literate-programming)
 ;;; prelude-literate-programming.el ends here
