@@ -33,10 +33,12 @@
 ;; Align your code in a pretty way.
 (global-set-key (kbd "C-x \\") 'align-regexp)
 
-;; Window switching. (C-x o goes to the next window)
-(global-set-key (kbd "C-x O") (lambda ()
-                                (interactive)
-                                (other-window -1))) ;; back one
+;; Window switching. (C-x o goes to the next window, and C-x O back to
+;; the previous one, which Emacs 31 does on its own)
+(unless (fboundp 'other-window-backward)
+  (global-set-key (kbd "C-x O") (lambda ()
+                                  (interactive)
+                                  (other-window -1))))
 
 ;; Indentation help
 (global-set-key (kbd "C-^") 'crux-top-join-line)

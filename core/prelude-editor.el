@@ -372,10 +372,19 @@ Does nothing when `prelude-spell-checker' is set to something else
 ;; error
 (repeat-mode +1)
 
-(define-advice exchange-point-and-mark (:before (&rest _) prelude-deactivate-mark)
-  "When called with no active region, do not activate mark."
+;; C-x C-x without an active region swaps point and mark, but doesn't
+;; activate the region
+(defun prelude-exchange-point-and-mark-advice (&rest _)
+  "Make `exchange-point-and-mark' leave an inactive region inactive.
+Used as :before advice, for Emacsen older than 31."
   (interactive
    (list (not (region-active-p)))))
+
+(defvar exchange-point-and-mark-highlight-region)
+(if (boundp 'exchange-point-and-mark-highlight-region)
+    ;; Emacs 31+
+    (setq exchange-point-and-mark-highlight-region nil)
+  (advice-add 'exchange-point-and-mark :before #'prelude-exchange-point-and-mark-advice))
 
 (require 'tabify)
 (defmacro with-region-or-buffer (func)
