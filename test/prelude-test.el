@@ -1672,4 +1672,12 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
     (should (memq 'neocaml-mode modes))
     (should (memq 'neocaml-interface-mode modes))))
 
+;;; Built-ins instead of packages
+
+(ert-deftest prelude-leaves-the-kill-ring-and-major-mode-help-to-emacs ()
+  "M-y and C-h C-m are Emacs's own (unless a completion module rebinds M-y)."
+  (should-not (eq (key-binding (kbd "M-y")) 'browse-kill-ring))
+  (should-not (key-binding (kbd "s-y")))
+  (should (eq (lookup-key help-map (kbd "C-m")) 'view-order-manuals)))
+
 ;;; prelude-test.el ends here

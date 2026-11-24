@@ -362,12 +362,6 @@ Does nothing when `prelude-spell-checker' is set to something else
   :init
   (setq ediff-window-setup-function 'ediff-setup-windows-plain))
 
-;; smarter kill-ring navigation
-(use-package browse-kill-ring
-  :ensure t
-  :bind (("M-y" . browse-kill-ring)
-         ("s-y" . browse-kill-ring)))
-
 ;; after C-u C-SPC, keep popping the mark ring with just C-SPC
 ;; instead of having to repeat the C-u prefix each time
 (setq set-mark-command-repeat-pop t)
@@ -536,7 +530,6 @@ like a shebang, but isn't one."
 ;; in prelude-mode.el and prelude-global-keybindings.el
 (use-package ace-window :ensure t :defer t)
 (use-package ag :ensure t :defer t)
-(use-package discover-my-major :ensure t :defer t)
 (use-package git-modes :ensure t :defer t)
 (use-package git-timemachine :ensure t :defer t)
 (use-package imenu-anywhere :ensure t :defer t)
