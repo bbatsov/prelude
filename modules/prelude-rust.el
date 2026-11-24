@@ -54,14 +54,23 @@
 ;; (rust-mode is only used if it's installed, e.g. from older Preludes)
 (prelude-treesit-auto-mode "\\.rs\\'" 'rust 'rust-ts-mode 'rust-mode)
 
-(use-package rust-ts-mode
-  :ensure t
-  :hook (rust-ts-mode . (lambda () (run-hooks 'prelude-rust-mode-hook))))
-
 ;; Interface to Cargo commands (C-c C-c C-b to build, etc.)
 (use-package cargo
   :ensure t
-  :hook (rust-ts-mode . cargo-minor-mode))
+  :defer t)
+
+(defun prelude-rust-setup ()
+  "Set up a Rust buffer: turn on Cargo, run `prelude-rust-mode-hook'.
+The hook comes last, so that the functions on it can change anything."
+  (cargo-minor-mode +1)
+  (run-hooks 'prelude-rust-mode-hook))
+
+(add-hook 'rust-ts-mode-hook #'prelude-rust-setup)
+;; the fallback, unless it's built on rust-ts-mode (which rust-mode can
+;; be), in which case the hook above has done the job
+(add-hook 'rust-mode-hook (lambda ()
+                            (unless (derived-mode-p 'rust-ts-mode)
+                              (prelude-rust-setup))))
 
 ;; Configures Flycheck to use cargo/clippy for Rust diagnostics
 (use-package flycheck-rust

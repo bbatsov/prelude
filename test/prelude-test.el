@@ -1581,4 +1581,24 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
   (should (eq (get 'next-error 'repeat-map) 'next-error-repeat-map))
   (should context-menu-mode))
 
+;;; Smaller module fixes
+
+(defvar cargo-minor-mode)
+
+(ert-deftest prelude-rust-sets-up-the-fallback-mode-too ()
+  "rust-mode gets the same setup as rust-ts-mode, but never twice."
+  (require 'prelude-rust)
+  (let ((setups 0))
+    (cl-letf (((symbol-function 'prelude-rust-mode-defaults)
+               (lambda () (setq setups (1+ setups)))))
+      (with-temp-buffer
+        (run-hooks 'rust-mode-hook)
+        (should (= setups 1))
+        (should cargo-minor-mode))
+      (with-temp-buffer
+        (setq major-mode 'prelude-test-rust-mode)
+        (put 'prelude-test-rust-mode 'derived-mode-parent 'rust-ts-mode)
+        (run-hooks 'rust-ts-mode-hook 'rust-mode-hook)
+        (should (= setups 2))))))
+
 ;;; prelude-test.el ends here
