@@ -53,5 +53,4 @@
                               (run-hooks 'prelude-scheme-mode-hook)))
 
 (provide 'prelude-scheme)
-
 ;;; prelude-scheme.el ends here

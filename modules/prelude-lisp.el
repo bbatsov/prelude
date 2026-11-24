@@ -61,5 +61,4 @@
 (add-hook 'prelude-interactive-lisp-coding-hook #'prelude-interactive-lisp-coding-defaults)
 
 (provide 'prelude-lisp)
-
 ;;; prelude-lisp.el ends here

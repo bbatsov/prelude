@@ -59,5 +59,4 @@
                                  (run-hooks 'prelude-python-mode-hook)))
 
 (provide 'prelude-python)
-
 ;;; prelude-python.el ends here

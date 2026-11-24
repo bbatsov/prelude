@@ -1,4 +1,4 @@
-;;; prelude-key-chord.el --- Key chord setup  -*- lexical-binding: t; -*-
+;;; prelude-key-chord.el --- Emacs Prelude: Key chord setup.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;
@@ -55,5 +55,4 @@
 (key-chord-mode +1)
 
 (provide 'prelude-key-chord)
-
 ;;; prelude-key-chord.el ends here

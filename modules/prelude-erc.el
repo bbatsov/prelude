@@ -164,5 +164,4 @@ The nickname is `erc-nick', as ERC works it out."
 (define-obsolete-function-alias 'stop-irc #'prelude-erc-stop "2.2.0")
 
 (provide 'prelude-erc)
-
 ;;; prelude-erc.el ends here

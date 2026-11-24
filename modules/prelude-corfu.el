@@ -1,4 +1,4 @@
-;;; prelude-corfu.el --- Corfu in-buffer completion setup  -*- lexical-binding: t; -*-
+;;; prelude-corfu.el --- Emacs Prelude: Corfu in-buffer completion setup.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;
@@ -9,7 +9,7 @@
 
 ;;; Commentary:
 
-;; Corfu is a minimal in-buffer completion UI -- a modern, lightweight
+;; Corfu is a minimal in-buffer completion UI, a modern, lightweight
 ;; alternative to Company.  It pairs naturally with the
 ;; vertico/orderless/marginalia stack in `prelude-vertico'.
 ;;
@@ -17,7 +17,7 @@
 ;; (file paths, dabbrev, keywords, etc.).  This module enables a few
 ;; sensible defaults; add more from your personal config if you want.
 ;;
-;; This module is mutually exclusive with `prelude-company' -- enable
+;; This module is mutually exclusive with `prelude-company': enable
 ;; one or the other, not both.
 
 ;;; License:

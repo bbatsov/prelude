@@ -3,6 +3,7 @@
 ;; Copyright © 2014-2026 Samuel Tonini
 ;;
 ;; Author: Samuel Tonini <tonini.samuel@gmail.com>
+;; URL: https://github.com/bbatsov/prelude
 
 ;; This file is not part of GNU Emacs.
 
@@ -55,5 +56,4 @@
                                  (run-hooks 'prelude-elixir-mode-hook)))
 
 (provide 'prelude-elixir)
-
 ;;; prelude-elixir.el ends here

@@ -93,5 +93,4 @@ config, in personal/preload or with Customize."
   :defer t)
 
 (provide 'prelude-c)
-
 ;;; prelude-c.el ends here

@@ -60,5 +60,4 @@
 (add-hook 'org-mode-hook (lambda () (run-hooks 'prelude-org-mode-hook)))
 
 (provide 'prelude-org)
-
 ;;; prelude-org.el ends here

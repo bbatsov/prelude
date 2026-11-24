@@ -80,5 +80,4 @@
                              (run-hooks 'prelude-cperl-mode-hook)) t)
 
 (provide 'prelude-perl)
-
 ;;; prelude-perl.el ends here

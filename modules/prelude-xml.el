@@ -56,5 +56,4 @@
                             (run-hooks 'prelude-xml-mode-hook)))
 
 (provide 'prelude-xml)
-
 ;;; prelude-xml.el ends here

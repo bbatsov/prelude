@@ -122,5 +122,4 @@ Start `ielm' if it's not already running."
   (add-hook 'minibuffer-setup-hook 'prelude-conditionally-enable-smartparens-mode))
 
 (provide 'prelude-emacs-lisp)
-
 ;;; prelude-emacs-lisp.el ends here

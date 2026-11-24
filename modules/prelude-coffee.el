@@ -19,5 +19,4 @@
 (message "prelude-coffee has been removed. Install coffee-mode manually if needed.")
 
 (provide 'prelude-coffee)
-
 ;;; prelude-coffee.el ends here

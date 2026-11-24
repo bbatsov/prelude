@@ -1,4 +1,4 @@
-;;; prelude-lsp-mode.el --- lsp-mode setup  -*- lexical-binding: t; -*-
+;;; prelude-lsp-mode.el --- Emacs Prelude: lsp-mode setup.  -*- lexical-binding: t; -*-
 ;;
 ;; Copyright © 2011-2026 Bozhidar Batsov
 ;;

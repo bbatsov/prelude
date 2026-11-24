@@ -58,5 +58,4 @@
 (add-hook 'prelude-lua-mode-hook #'prelude-lua-mode-defaults)
 
 (provide 'prelude-lua)
-
 ;;; prelude-lua.el ends here

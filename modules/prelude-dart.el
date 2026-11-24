@@ -63,5 +63,4 @@
 (add-hook 'prelude-dart-mode-hook #'prelude-dart-mode-defaults)
 
 (provide 'prelude-dart)
-
 ;;; prelude-dart.el ends here

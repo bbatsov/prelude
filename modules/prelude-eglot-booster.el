@@ -10,18 +10,18 @@
 ;;; Commentary:
 
 ;; Speeds up Eglot by routing its JSON-RPC traffic through
-;; `emacs-lsp-booster' -- a small Rust wrapper that pre-parses LSP
+;; `emacs-lsp-booster', a small Rust wrapper that pre-parses LSP
 ;; messages before handing them to Emacs.  The win is most visible
 ;; with verbose servers (rust-analyzer, gopls, tsserver) on large
 ;; projects.
 ;;
 ;; The module pulls in eglot-booster from GitHub via
 ;; `package-vc-install' and enables `eglot-booster-mode' once Eglot
-;; loads -- but only if the `emacs-lsp-booster' binary is on your
+;; loads, but only if the `emacs-lsp-booster' binary is on your
 ;; PATH.  If it isn't, the module logs a hint and exits cleanly so
 ;; Eglot continues to work as before.
 ;;
-;; The booster binary is a separate install -- see the module
+;; The booster binary is a separate install; see the module
 ;; documentation for details.
 
 ;;; License:

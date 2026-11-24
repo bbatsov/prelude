@@ -17,7 +17,7 @@
 ;; This module installs gptel and binds `gptel-menu' (the transient
 ;; entry point that exposes all gptel commands) to `C-c q'.  You still
 ;; need to configure a backend and supply an API key in your personal
-;; config -- see the module's documentation for examples.
+;; config (see the module's documentation for examples).
 
 ;;; License:
 

@@ -46,5 +46,4 @@
 (add-hook 'prelude-scala-mode-hook #'prelude-scala-mode-defaults)
 
 (provide 'prelude-scala)
-
 ;;; prelude-scala.el ends here

@@ -67,7 +67,7 @@
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 
-;; Disable smart quote insertion -- many users prefer to manage
+;; Disable smart quote insertion: many users prefer to manage
 ;; quotes manually or via a snippet system
 (setq TeX-close-quote "")
 (setq TeX-open-quote "")
@@ -104,5 +104,4 @@
                              (run-hooks 'prelude-latex-mode-hook)))
 
 (provide 'prelude-latex)
-
 ;;; prelude-latex.el ends here
