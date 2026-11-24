@@ -21,10 +21,10 @@ a problem will expedite its solution.*
 
 ## Environment & Version information
 
-### Emacs version
-
-*E.g. 24.5* (use <kbd>M-x emacs-version</kbd> to check it if unsure)
+*Paste the output of <kbd>M-x prelude-doctor</kbd> here. It has the
+versions of Emacs and Prelude, the modules you've enabled and the
+programs Prelude found on your system.*
 
 ### Operating system
 
-*E.g. Fedora 23, OS X 10.11 "El Capitan", Windows 10, etc*
+E.g. Fedora 43, macOS 26, Windows 11.

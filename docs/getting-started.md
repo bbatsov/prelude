@@ -111,5 +111,7 @@ Emacs afterwards.
 
 ## When something goes wrong
 
-Start with [Troubleshooting](troubleshooting.md) and the [FAQ](faq.md).
-If that doesn't help, see [Support](support.md).
+<kbd>M-x prelude-doctor</kbd> tells you what Prelude is missing on
+your system. Beyond that, start with
+[Troubleshooting](troubleshooting.md) and the [FAQ](faq.md). If that
+doesn't help, see [Support](support.md).
