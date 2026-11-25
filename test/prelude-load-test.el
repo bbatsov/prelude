@@ -15,18 +15,20 @@
   "List of (module . error) pairs collected during the load test.")
 
 (defvar prelude-load-test-excluded-modules
-  '(prelude-ido
+  `(prelude-ido
     prelude-ivy
     prelude-helm
     prelude-helm-everywhere
-    prelude-lsp-mode
+    ,@(unless (eq prelude-lsp-client 'lsp-mode)
+        '(prelude-lsp-mode))
     prelude-erc
     prelude-coffee
     prelude-literate-programming)
   "Modules left out of the load test.
-Mutually exclusive modules (ido/ivy/helm, lsp-mode instead of Eglot)
-and modules with heavy external deps or global side effects.
-CI loads them on their own, see test/prelude-standalone-test.el.")
+Mutually exclusive modules (ido/ivy/helm, and lsp-mode unless it's the
+LSP client) and modules with heavy external deps or global side effects.
+CI loads the completion modules, ERC and literate programming on their
+own instead, see test/prelude-standalone-test.el.")
 
 (defvar prelude-load-test-modules
   (seq-difference

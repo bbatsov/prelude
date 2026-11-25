@@ -34,6 +34,7 @@
 
 ### Changes
 
+- [#1500](https://github.com/bbatsov/prelude/pull/1500): Set up lsp-mode and lsp-ui with `use-package` too, and load the lsp-mode module in the load test when lsp-mode is the LSP client.
 - [#1500](https://github.com/bbatsov/prelude/pull/1500): Set up Evil and key-chord with `use-package` as well, and load them with the other modules in the load test.
 - [#1500](https://github.com/bbatsov/prelude/pull/1500): Set up Company, Ido, Ivy and Helm with `use-package`, the way the other modules do it, and test each of these modules in CI.
 - [#1499](https://github.com/bbatsov/prelude/pull/1499): Set up each major mode with a named function on the hooks of the mode, the way you'd do it in your own config (see [Upgrading](https://prelude.emacsredux.com/en/latest/upgrading/)):
@@ -77,6 +78,7 @@
 
 ### Bugs fixed
 
+- [#1500](https://github.com/bbatsov/prelude/pull/1500): Leave lsp-ui's options (`lsp-ui-doc-enable` and the like) to your personal config, which the lsp-mode module overrode as soon as lsp-mode got loaded.
 - [#1500](https://github.com/bbatsov/prelude/pull/1500): Turn on `evil-visualstar` in the Evil module, which installed it but never turned it on, so `*` and `#` in visual state didn't search for the selection.
 - [#1500](https://github.com/bbatsov/prelude/pull/1500): Load the Helm module with Projectile turned off (`prelude-projectile`), which failed because Helm's keymap wasn't loaded yet.
 - [#1499](https://github.com/bbatsov/prelude/pull/1499): Set the options of Dart, Erlang, F#, Go, Perl and Ruby (`gofmt-command`, `cperl-indent-level` and the like) once, when the module is loaded, instead of every time a buffer is opened, which undid what you set in your personal config.

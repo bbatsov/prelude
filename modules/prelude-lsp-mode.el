@@ -31,27 +31,34 @@
 ;;; Code:
 
 (defvar lsp-ui-mode-map)
-(defvar lsp-ui-sideline-enable)
-(defvar lsp-ui-doc-enable)
-(defvar lsp-ui-doc-position)
-(defvar lsp-ui-doc-delay)
-(defvar lsp-ui-peek-enable)
-(defvar lsp-ui-peek-always-show)
 
-(use-package lsp-mode :ensure t :defer t)
-(use-package lsp-ui :ensure t :defer t)
+(use-package lsp-mode
+  :ensure t
+  :defer t
+  :custom
+  ;; read when lsp-mode is loaded, so it has to be set before that
+  (lsp-keymap-prefix "C-c C-l")
+  (lsp-keep-workspace-alive nil)
+  (lsp-auto-guess-root t)
+  (lsp-idle-delay 0.5)
+  (lsp-log-io nil)
+  (lsp-completion-provider :capf))
 
-(setq lsp-keymap-prefix "C-c C-l")
-(setq lsp-keep-workspace-alive nil)
-(setq lsp-auto-guess-root t)
-(setq lsp-idle-delay 0.5)
-(setq lsp-log-io nil)
-(setq lsp-completion-provider :capf)
-
-(with-eval-after-load 'lsp-mode
-  (require 'lsp-ui)
+;; lsp-mode turns on lsp-ui by itself.  (Not with `:after lsp-mode':
+;; that would set the options below only once lsp-mode is loaded,
+;; overriding the personal config.)
+(use-package lsp-ui
+  :ensure t
+  :defer t
+  :custom
+  (lsp-ui-sideline-enable t)
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-position 'at-point)
+  (lsp-ui-doc-delay 0.5)
+  (lsp-ui-peek-enable t)
+  (lsp-ui-peek-always-show t)
+  :config
   (require 'lsp-ui-imenu)
-
   (define-key lsp-ui-mode-map (kbd "C-c C-l .") 'lsp-ui-peek-find-definitions)
   (define-key lsp-ui-mode-map (kbd "C-c C-l ?") 'lsp-ui-peek-find-references)
   (define-key lsp-ui-mode-map (kbd "C-c C-l r") 'lsp-rename)
@@ -62,14 +69,7 @@
   (define-key lsp-ui-mode-map (kbd "C-c C-l e") 'lsp-execute-code-action)
   (define-key lsp-ui-mode-map (kbd "C-c C-l f") 'lsp-format-buffer)
   (define-key lsp-ui-mode-map (kbd "C-c C-l o") 'lsp-organize-imports)
-  (define-key lsp-ui-mode-map (kbd "C-c C-l m") 'lsp-ui-imenu)
-
-  (setq lsp-ui-sideline-enable t)
-  (setq lsp-ui-doc-enable t)
-  (setq lsp-ui-doc-position 'at-point)
-  (setq lsp-ui-doc-delay 0.5)
-  (setq lsp-ui-peek-enable t)
-  (setq lsp-ui-peek-always-show t))
+  (define-key lsp-ui-mode-map (kbd "C-c C-l m") 'lsp-ui-imenu))
 
 (provide 'prelude-lsp-mode)
 ;;; prelude-lsp-mode.el ends here

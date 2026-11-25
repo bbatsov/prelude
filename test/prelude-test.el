@@ -969,6 +969,22 @@ that personal config adds to them, which get the last word."
         (prelude-dart-setup)
         (should subword-mode)))))
 
+(ert-deftest prelude-modules-set-no-options-after-other-packages ()
+  "`use-package' runs `:custom' and `:init' only after the packages in `:after'.
+That's usually after the personal config, whose settings they'd undo."
+  (let ((wrong nil))
+    (dolist (file (directory-files prelude-modules-dir t "\\.el\\'"))
+      (with-temp-buffer
+        (insert-file-contents file)
+        (condition-case nil
+            (while t
+              (dolist (form (prelude-test--use-package-forms (read (current-buffer))))
+                (when (and (memq :after form)
+                           (or (memq :custom form) (memq :init form)))
+                  (push (list (file-name-nondirectory file) (cadr form)) wrong))))
+          (end-of-file nil))))
+    (should-not wrong)))
+
 (ert-deftest prelude-modules-put-no-lambdas-on-hooks ()
   "A named function on a hook can be removed, and says what it is."
   (should-not
