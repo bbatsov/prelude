@@ -44,3 +44,22 @@ Some essential commands (lsp-mode only):
 - `lsp-dart-run-all-tests` - Run all tests from project.
 - `lsp-dart-run-test-file` - Run all tests from current
   test buffer.
+
+The module also sets lsp-dart up for debugging with
+[dap-mode](https://emacs-lsp.github.io/dap-mode/), which takes a
+debugger that lsp-dart downloads the first time.
+
+## Key Bindings
+
+With lsp-mode the module adds two keys for lsp-dart's outlines:
+
+<!-- markdownlint-disable MD013 -->
+
+| Key | Command | Description |
+| --- | ------- | ----------- |
+| <kbd>C-c C-l D s o</kbd> | `lsp-dart-show-outline` | Show the outline of the file |
+| <kbd>C-c C-l D s f</kbd> | `lsp-dart-show-flutter-outline` | Show the Flutter outline |
+
+<!-- markdownlint-enable MD013 -->
+
+See the [LSP](lsp.md) module for the other LSP key bindings.

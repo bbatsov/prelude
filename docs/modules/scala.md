@@ -6,29 +6,24 @@
     [Programming](programming.md) module and the
     [LSP](lsp.md) module.
 
-## Scala Mode
+## Package Prerequisites
 
-This module bundles [scala-mode](https://github.com/hvesalai/emacs-scala-mode)
-for editing Scala source files, with LSP integration enabled by default.
-
-The module enables:
-
-- **subword-mode** for CamelCase aware editing
-- **LSP** (Eglot or lsp-mode, see `prelude-lsp-client`) for
-  IDE-like features via [Metals](https://scalameta.org/metals/)
-  (the Scala language server)
-
-## Prerequisites
-
-You need to install [Metals](https://scalameta.org/metals/)
-for LSP support.
-The easiest way is via [Coursier](https://get-coursier.io/):
+You'll need a JDK, and [Metals](https://scalameta.org/metals/) (the
+Scala language server) for the IDE features. The easiest way to install
+it is with [Coursier](https://get-coursier.io/):
 
 ```sh
 cs install metals
 ```
 
 Make sure the `metals` binary is in your `$PATH`.
+
+## Scala Mode
+
+The module uses [scala-mode](https://github.com/hvesalai/emacs-scala-mode)
+for editing Scala code. `subword-mode` is enabled, so the editing
+commands understand `CamelCase`, and the language server is started
+when it's installed.
 
 ## Key Bindings
 
