@@ -25,4 +25,3 @@ You can adjust the configuration further in your personal config.
 
 `company-mode` has [many extensions](https://github.com/company-mode/company-mode/wiki/Third-Party-Packages)
 for various programming languages.
-Some of Prelude's modules will install and enable the relevant extensions when necessary.

@@ -13,6 +13,7 @@ from `crux-visit-term-buffer` to `mistty`, on the assumption that if
 you've turned it on you'd rather that key opened MisTTY. You can pick a
 different binding in your personal config if you prefer.
 
-Inside a MisTTY buffer, <kbd>C-c C-j</kbd> toggles between the
-terminal and the Emacs editing modes, and <kbd>C-c C-q</kbd> sends the
+Inside a MisTTY buffer, <kbd>C-c C-j</kbd> switches between the MisTTY
+buffer and its fullscreen terminal buffer (for programs like `vim` or
+`less` that take over the screen), and <kbd>C-c C-q</kbd> sends the
 next key sequence straight to the terminal.

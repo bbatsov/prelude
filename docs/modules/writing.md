@@ -227,7 +227,7 @@ in mind that a tree-sitter mode often has a keymap of its own (e.g.
 `go-ts-mode-map`). Follow the [key binding
 conventions](https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Binding-Conventions.html)
 of Emacs. <kbd>C-c</kbd> followed by a letter is reserved for users, so
-a module never binds it, but <kbd>C-c</kbd> followed by a control
+a language module never binds it, but <kbd>C-c</kbd> followed by a control
 character is fair game in the keymap of a major mode. Don't take away
 keys that people rely on in stock Emacs, and prefer the bindings that
 the mode already has.

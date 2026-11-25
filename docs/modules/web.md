@@ -49,8 +49,10 @@ A few of the commands of `web-mode`:
 | <kbd>C-c C-n</kbd> | `web-mode-navigate` | Jump to the matching tag |
 | <kbd>C-c C-e /</kbd> | `web-mode-element-close` | Close the element at point |
 | <kbd>M-;</kbd> | `web-mode-comment-or-uncomment` | Comment or uncomment |
-| <kbd>C-c TAB</kbd> | `web-mode-buffer-indent` | Indent the buffer |
 
 <!-- markdownlint-enable MD013 -->
 
-Run <kbd>C-h m</kbd> in a `web-mode` buffer for all key bindings.
+Run <kbd>C-h m</kbd> in a `web-mode` buffer for all key bindings. One
+of them, <kbd>C-c C-i</kbd> (`web-mode-buffer-indent`), is the same key
+as Prelude's <kbd>C-c TAB</kbd> (`crux-indent-rigidly-and-copy-to-clipboard`),
+which takes precedence, so run that one with <kbd>M-x</kbd>.

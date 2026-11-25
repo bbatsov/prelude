@@ -40,7 +40,9 @@ last candidate takes you back to the first one:
 | `corfu-cycle` | `t` | Wrap around at end of list |
 
 `corfu-popupinfo-mode` is enabled by default - it shows
-documentation for the highlighted candidate in a side popup.
+documentation for the highlighted candidate in a side popup. So is
+`corfu-history-mode`, which puts the candidates you've picked recently
+first (and remembers them across sessions, with `savehist`).
 
 ## Default Cape sources
 

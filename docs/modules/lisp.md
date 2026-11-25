@@ -7,9 +7,11 @@
 Basic shared configuration for Lisp-like programming languages.
 This module provides:
 
-- `smartparens-strict-mode` in Lisp major modes and REPL buffers
-  (prevents unbalanced delimiter deletion)
-- `rainbow-delimiters` in Lisp major modes and REPL buffers
+- `smartparens-strict-mode` in Lisp major modes and in the REPLs of
+  Clojure (CIDER), Emacs Lisp (IELM) and Common Lisp (SLIME), which
+  keeps the delimiters balanced when you delete things
+- `rainbow-delimiters` in Lisp major modes and in the CIDER and IELM
+  REPLs
 
 The setups of the Lisp language modules get those from
 `prelude-lisp-coding-setup` (and from

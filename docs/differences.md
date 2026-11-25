@@ -47,8 +47,9 @@ options are described in [Configuration](configuration.md#prelude-options).
 ## Editing
 
 - **<kbd>C-w</kbd> with no active region kills the current line**, and
-  <kbd>M-w</kbd> copies the word at point (more of it if you press
-  <kbd>w</kbd>, <kbd>s</kbd> or <kbd>l</kbd> afterwards, see
+  <kbd>M-w</kbd> copies the thing at point (a URL, an email address,
+  or else the line), and pressing <kbd>w</kbd>, <kbd>s</kbd> or
+  <kbd>l</kbd> afterwards copies a word, a sexp or a list instead (see
   [easy-kill](https://github.com/leoliu/easy-kill)). Stock Emacs would
   use the text between point and the mark.
 - **Typing replaces the selection** (`delete-selection-mode`).
@@ -81,6 +82,9 @@ options are described in [Configuration](configuration.md#prelude-options).
 - **Some commands repeat with their last key** (`repeat-mode`): after
   <kbd>M-g n</kbd> another <kbd>n</kbd> goes to the next error. If
   the key you press next doesn't seem to insert itself, that's why.
+- **Files with very long lines open in `so-long-mode`**
+  (`global-so-long-mode`), which keeps Emacs responsive in them (e.g.
+  in minified JavaScript).
 
 ## Keys that do something else
 
@@ -129,6 +133,9 @@ turned off with `prelude-super-keybindings`.
 
 - **Questions are answered with <kbd>y</kbd> or <kbd>n</kbd>**, never
   by typing out `yes` or `no`.
+- **<kbd>M-x</kbd> leaves out the commands meant for other modes**
+  (`read-extended-command-predicate`), so you don't get offered the
+  commands of Dired in a Ruby buffer.
 - **Help windows get selected** when they pop up, so <kbd>q</kbd>
   closes them right away.
 - **Dired deletes and copies directories recursively** without asking

@@ -53,12 +53,13 @@ Prelude:
 | <kbd>C-x 4 b</kbd> | `consult-buffer-other-window` | Buffer in other window |
 | <kbd>C-x 5 b</kbd> | `consult-buffer-other-frame` | Buffer in other frame |
 | <kbd>M-y</kbd> | `consult-yank-pop` | Browse kill ring |
+| <kbd>C-x M-:</kbd> | `consult-complex-command` | Repeat a complex command |
 
 ### Navigation (M-g prefix)
 
 | Key | Command | Description |
 | --- | ------- | ----------- |
-| <kbd>M-g g</kbd> | `consult-goto-line` | Go to line |
+| <kbd>M-g g</kbd>, <kbd>M-g M-g</kbd> | `consult-goto-line` | Go to line |
 | <kbd>M-g o</kbd> | `consult-outline` | Navigate outline headings |
 | <kbd>M-g m</kbd> | `consult-mark` | Navigate marks |
 | <kbd>M-g k</kbd> | `consult-global-mark` | Navigate global marks |
@@ -78,6 +79,7 @@ Prelude:
 | <kbd>M-s F</kbd> | `consult-locate` | Locate files |
 | <kbd>M-s k</kbd> | `consult-keep-lines` | Keep matching lines |
 | <kbd>M-s u</kbd> | `consult-focus-lines` | Focus on matching lines |
+| <kbd>M-s m</kbd> | `multi-occur` | Search several buffers with `occur` |
 
 ### Registers
 
@@ -86,6 +88,18 @@ Prelude:
 | <kbd>M-#</kbd> | `consult-register-load` | Load register |
 | <kbd>M-'</kbd> | `consult-register-store` | Store register |
 | <kbd>C-M-#</kbd> | `consult-register` | Browse registers |
+
+## In the Minibuffer
+
+When you pick a file, <kbd>RET</kbd> on a directory goes into it,
+<kbd>DEL</kbd> deletes a whole directory of the path at once and
+<kbd>M-DEL</kbd> a word of it (that's the `vertico-directory`
+extension).
+
+Consult's commands that list several kinds of candidates (e.g.
+`consult-buffer`) can be narrowed down to one of them: type
+<kbd>&lt;</kbd> followed by the key of the group (e.g. <kbd>&lt; b</kbd>
+for buffers), and <kbd>&lt;</kbd> again to widen.
 
 ## Completion Style
 
@@ -107,8 +121,10 @@ symbol, ...) and it offers the actions that make sense for it.
 
 A particularly handy trick is `embark-export`: from a `consult-ripgrep` (or
 `consult-line`, etc.) session you can export the whole candidate set into a
-proper `grep`/`occur` buffer, which you can then edit in place with
-[wgrep](https://github.com/mhayashi1120/Emacs-wgrep).
+proper `grep`/`occur` buffer. You can edit an `occur` buffer in place
+with <kbd>e</kbd>, and a `grep` one with the
+[wgrep](https://github.com/mhayashi1120/Emacs-wgrep) package (which
+Prelude doesn't install).
 
 !!! Note
 

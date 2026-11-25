@@ -30,8 +30,10 @@ It uses standard Emacs facilities (xref, eldoc, flymake,
 completion-at-point) rather than introducing its own UI.
 
 Prelude configures eglot to shut down language servers
-automatically when the last project buffer is closed and
-extends xref navigation across the whole project.
+automatically when the last project buffer is closed, and to keep
+managing the files outside of the project that xref takes you to
+(e.g. the source of a library), so you can keep jumping around from
+there.
 
 Here's a Go buffer with `gopls` attached. The candidates in the
 completion popup come from the language server, and so does the

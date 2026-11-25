@@ -32,7 +32,7 @@ Prelude supports two methods for fast math symbol entry, controlled by
 the `prelude-latex-fast-math-entry` variable:
 
 - `LaTeX-math-mode` (the default): AUCTeX's math mode, with
-  <kbd>`</kbd> as a prefix key (e.g. <kbd>` a</kbd> inserts `\alpha`)
+  <kbd>&#96;</kbd> as a prefix key (e.g. <kbd>&#96; a</kbd> inserts `\alpha`)
 - `cdlatex`: [CDLaTeX](https://github.com/cdominik/cdlatex), for even
   faster input
 - `nil`: no fast math entry
@@ -57,7 +57,7 @@ A few of AUCTeX's commands:
 | <kbd>C-c C-s</kbd> | `LaTeX-section` | Insert a section |
 | <kbd>C-c ]</kbd> | `LaTeX-close-environment` | Close the current environment |
 | <kbd>C-c C-f</kbd> | `TeX-font` | Change the font of the region (or insert it) |
-| <kbd>C-c `</kbd> | `TeX-next-error` | Go to the next error |
+| <kbd>C-c &#96;</kbd> | `TeX-next-error` | Go to the next error |
 
 <!-- markdownlint-enable MD013 -->
 

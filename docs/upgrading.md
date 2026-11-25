@@ -46,6 +46,52 @@ hooks of the mode:
 (remove-hook 'ruby-ts-mode-hook #'prelude-ruby-setup)
 ```
 
+### The theme
+
+[Tokyo Night](https://github.com/bbatsov/tokyo-night-emacs) replaced
+Zenburn as the default theme, with its light variant during the day and
+the dark one at night (see [Color Themes](configuration.md#color-themes)).
+To keep Zenburn, put this in a file in `personal/preload`:
+
+```emacs-lisp
+(setq prelude-theme 'zenburn)
+```
+
+### Key bindings
+
+- <kbd>M-y</kbd> is Emacs's own `yank-pop` again (which lets you pick
+  from the kill ring), unless your completion module binds its own,
+  and <kbd>s-y</kbd> is gone. <kbd>C-h C-m</kbd> is back to
+  `view-order-manuals`.
+- The Go module's test commands moved to <kbd>C-c C-t t</kbd>,
+  <kbd>C-c C-t f</kbd> and <kbd>C-c C-t p</kbd>, and `go-run` to
+  <kbd>C-c C-r</kbd>.
+- The Ivy module no longer binds <kbd>C-c C-r</kbd>, <kbd>C-c g</kbd>,
+  <kbd>C-c j</kbd>, <kbd>C-c a</kbd> and <kbd>C-x l</kbd>, the Org
+  module no longer binds <kbd>C-c b</kbd>, and the Helm module no
+  longer binds <kbd>C-c w</kbd>.
+- The Vertico module leaves <kbd>M-g e</kbd> and <kbd>M-g f</kbd> to
+  avy.
+- <kbd>C-c I</kbd> opens your personal config (`prelude-user-init-file`)
+  instead of Prelude's `init.el`.
+
+### Packages
+
+- Prelude installs its packages with `use-package` and `:ensure t`.
+  `prelude-require-package` and `prelude-require-packages` still work,
+  but they're obsolete, so use `use-package` in your personal config as
+  well.
+- Prelude no longer installs or sets up `browse-kill-ring`,
+  `discover-my-major`, `smartrep`, `gist`, `company-auctex`, `elpy` and
+  the `flycheck-eglot` package (Flycheck has `flycheck-eglot-mode` of
+  its own now), and on Emacs 30 and newer `which-key` and
+  `editorconfig`, which are built in there. Packages that you installed
+  before stay installed, but set them up in your personal config if
+  you want to keep using them.
+- The ERC module connects to Libera.Chat, and its commands and options
+  have Prelude names (`prelude-erc-start`, `prelude-erc-servers`, etc.).
+  The old ones still work, but they're obsolete.
+
 ## Upgrading to Prelude 2.0
 
 Prelude 2.0 is a major release that modernizes the entire

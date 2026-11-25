@@ -27,10 +27,6 @@ grammar you get the classic `java-mode`.
 `subword-mode` is enabled, so the editing commands understand
 `CamelCase`.
 
-The classic `java-mode` is built on top of `cc-mode`, so it also gets
-the indentation settings of the [C/C++](c.md) module when that's
-enabled. `java-ts-mode` isn't affected by them.
-
 ## LSP support
 
 Code completion, navigation, refactoring and diagnostics all come from
