@@ -1001,14 +1001,25 @@ That's usually after the personal config, whose settings they'd undo."
           (end-of-file nil))))
     (should-not wrong)))
 
-(ert-deftest prelude-modules-put-no-lambdas-on-hooks ()
+(ert-deftest prelude-puts-no-lambdas-on-hooks ()
   "A named function on a hook can be removed, and says what it is."
   (should-not
    (seq-filter (lambda (file)
                  ;; (add-hook 'some-hook (lambda ...)) or :hook (mode . (lambda ...))
                  (string-match-p "\\(?:(add-hook [^ \t\n]+[ \t\n]+\\(?:#'\\)?\\|\\.[ \t\n]+\\)(lambda"
                                  (prelude-test--file-string file)))
-               (directory-files (expand-file-name "modules" prelude-dir) t "\\.el\\'"))))
+               (append (mapcar (lambda (file) (expand-file-name file prelude-dir))
+                               '("init.el" "early-init.el"))
+                       (directory-files (expand-file-name "core" prelude-dir) t "\\.el\\'")
+                       (directory-files (expand-file-name "modules" prelude-dir) t "\\.el\\'")))))
+
+(ert-deftest prelude-savehist-saves-a-plain-kill-ring ()
+  "Savehist gets only strings without text properties from the kill ring."
+  (should (memq #'prelude-strip-kill-ring savehist-save-hook))
+  (let ((kill-ring (list (propertize "foo" 'face 'bold) 42 "bar")))
+    (prelude-strip-kill-ring)
+    (should (equal kill-ring '("foo" "bar")))
+    (should-not (text-properties-at 0 (car kill-ring)))))
 
 (ert-deftest prelude-scss-uses-the-built-in-mode ()
   "SCSS files open in the `scss-mode' that comes with Emacs.
