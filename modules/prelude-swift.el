@@ -49,21 +49,20 @@
     :ensure t
     :defer t))
 
-(defun prelude-swift-mode-defaults ()
-  "Default coding hook, useful with Swift."
+(defun prelude-swift-setup ()
+  "Set up a Swift buffer."
   ;; CamelCase aware editing operations
   (subword-mode +1)
   (prelude-lsp-enable))
-
-(add-hook 'prelude-swift-mode-hook #'prelude-swift-mode-defaults)
 
 ;; Tree-sitter based major mode for Swift (requires the swift grammar)
 (prelude-treesit-auto-mode "\\.swift\\'" 'swift 'swift-ts-mode)
 
 (use-package swift-ts-mode
   :ensure t
-  :defer t
-  :hook (swift-ts-mode . (lambda () (run-hooks 'prelude-swift-mode-hook))))
+  :defer t)
+
+(add-hook 'swift-ts-mode-hook #'prelude-swift-setup -50)
 
 (provide 'prelude-swift)
 ;;; prelude-swift.el ends here

@@ -188,6 +188,11 @@ things that stock Emacs leaves off:
   one. Option: `prelude-treesit-auto-install`.
 - **A language server is started automatically** (with Eglot) when you
   open a file and the server is installed. Option: `prelude-lsp-client`.
+- **Prelude's setup of a mode is a function on the mode's hook**, like
+  `prelude-python-setup` on `python-mode-hook` and
+  `python-ts-mode-hook`. It runs before the functions you add to the
+  hook, and removing it from the hook leaves the mode alone. See
+  [Configuration](configuration.md#personalization-example).
 - <kbd>C-c p</kbd> is the prefix of
   [Projectile](https://docs.projectile.mx)'s commands. Option:
   `prelude-projectile`.

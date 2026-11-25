@@ -42,15 +42,6 @@
 (add-to-list 'super-save-predicates
              (lambda () (not (derived-mode-p 'rust-ts-mode 'rust-mode))))
 
-(defun prelude-rust-mode-defaults ()
-  ;; format before save (rust-analyzer runs rustfmt)
-  (add-hook 'before-save-hook #'prelude-lsp-format-on-save nil t)
-
-  ;; CamelCase aware editing operations
-  (subword-mode +1)
-
-  (prelude-lsp-enable))
-
 ;; Built-in tree-sitter mode for Rust (requires rust grammar)
 ;; (rust-mode is only used if it's installed, e.g. from older Preludes)
 (prelude-treesit-auto-mode "\\.rs\\'" 'rust 'rust-ts-mode 'rust-mode)
@@ -61,17 +52,28 @@
   :defer t)
 
 (defun prelude-rust-setup ()
-  "Set up a Rust buffer: turn on Cargo, run `prelude-rust-mode-hook'.
-The hook comes last, so that the functions on it can change anything."
+  "Set up a Rust buffer."
   (cargo-minor-mode +1)
+  ;; format before save (rust-analyzer runs rustfmt)
+  (add-hook 'before-save-hook #'prelude-lsp-format-on-save nil t)
+  ;; CamelCase aware editing operations
+  (subword-mode +1)
+  (prelude-lsp-enable)
   (run-hooks 'prelude-rust-mode-hook))
 
-(add-hook 'rust-ts-mode-hook #'prelude-rust-setup)
-;; the fallback, unless it's built on rust-ts-mode (which rust-mode can
-;; be), in which case the hook above has done the job
-(add-hook 'rust-mode-hook (lambda ()
-                            (unless (derived-mode-p 'rust-ts-mode)
-                              (prelude-rust-setup))))
+(make-obsolete-variable 'prelude-rust-mode-hook
+                        "use `rust-ts-mode-hook' (or `rust-mode-hook' for rust-mode) instead."
+                        "2.2.0")
+
+(defun prelude-rust-fallback-setup ()
+  "Set up a `rust-mode' buffer, unless it's built on `rust-ts-mode'.
+`rust-mode' can be, and then the setup has run from the hook of
+`rust-ts-mode' already."
+  (unless (derived-mode-p 'rust-ts-mode)
+    (prelude-rust-setup)))
+
+(add-hook 'rust-ts-mode-hook #'prelude-rust-setup -50)
+(add-hook 'rust-mode-hook #'prelude-rust-fallback-setup -50)
 
 ;; Configures Flycheck to use cargo/clippy for Rust diagnostics
 (use-package flycheck-rust
@@ -82,8 +84,6 @@ The hook comes last, so that the functions on it can change anything."
 (use-package ron-mode
   :ensure t
   :defer t)
-
-(add-hook 'prelude-rust-mode-hook #'prelude-rust-mode-defaults)
 
 (provide 'prelude-rust)
 ;;; prelude-rust.el ends here

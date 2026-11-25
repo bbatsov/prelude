@@ -34,8 +34,8 @@
 
 (declare-function eglot-jl-init "eglot-jl")
 
-(defun prelude-julia-mode-defaults ()
-  "Default coding hook, useful with Julia."
+(defun prelude-julia-setup ()
+  "Set up a Julia buffer."
   ;; CamelCase aware editing operations
   (subword-mode +1)
   ;; send code to a Julia REPL (C-c C-c, C-c C-z, etc.)
@@ -47,8 +47,7 @@
 
 (use-package julia-mode
   :ensure t
-  :defer t
-  :hook (julia-mode . (lambda () (run-hooks 'prelude-julia-mode-hook))))
+  :defer t)
 
 ;; Run a Julia REPL in a terminal buffer and send code to it
 (use-package julia-repl
@@ -74,7 +73,7 @@
     :ensure t
     :defer t))
 
-(add-hook 'prelude-julia-mode-hook #'prelude-julia-mode-defaults)
+(add-hook 'julia-mode-hook #'prelude-julia-setup -50)
 
 (provide 'prelude-julia)
 ;;; prelude-julia.el ends here

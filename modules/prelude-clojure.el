@@ -33,33 +33,42 @@
 
 (require 'prelude-lisp)
 
-(defun prelude-clojure-mode-defaults ()
+(defun prelude-clojure-setup ()
+  "Set up a Clojure buffer."
   (subword-mode +1)
-  (run-hooks 'prelude-lisp-coding-hook))
+  (prelude-lisp-coding-setup)
+  (run-hooks 'prelude-clojure-mode-hook))
 
-(defun prelude-cider-repl-mode-defaults ()
+(make-obsolete-variable 'prelude-clojure-mode-hook
+                        "use `clojure-mode-hook' and `clojure-ts-mode-hook' instead."
+                        "2.2.0")
+
+(defun prelude-cider-repl-setup ()
+  "Set up a CIDER REPL buffer."
   (subword-mode +1)
-  (run-hooks 'prelude-interactive-lisp-coding-hook))
+  (prelude-interactive-lisp-coding-setup)
+  (run-hooks 'prelude-cider-repl-mode-hook))
+
+(make-obsolete-variable 'prelude-cider-repl-mode-hook
+                        "use `cider-repl-mode-hook' instead."
+                        "2.2.0")
 
 ;; For tree-sitter support on Emacs 30+, install clojure-ts-mode
 ;; separately; it remaps clojure-mode buffers when it's present.
 (use-package clojure-mode
   :ensure t
-  :hook (clojure-mode . (lambda ()
-                           (run-hooks 'prelude-clojure-mode-hook))))
+  :defer t)
 
-;; CIDER: Clojure Interactive Development Environment that Rocks
+;; CIDER: Clojure Interactive Development Environment that Rocks.
+;; (To debug it, set `nrepl-log-messages' to log all nREPL messages.)
 (use-package cider
   :ensure t
-  :defer t
-  :config
-  ;; Enable to log all nREPL messages for debugging
-  ;; (setq nrepl-log-messages t)
-  :hook (cider-repl-mode . (lambda ()
-                              (run-hooks 'prelude-cider-repl-mode-hook))))
+  :defer t)
 
-(add-hook 'prelude-clojure-mode-hook #'prelude-clojure-mode-defaults)
-(add-hook 'prelude-cider-repl-mode-hook #'prelude-cider-repl-mode-defaults)
+(add-hook 'clojure-mode-hook #'prelude-clojure-setup -50)
+;; clojure-ts-mode isn't built on clojure-mode
+(add-hook 'clojure-ts-mode-hook #'prelude-clojure-setup -50)
+(add-hook 'cider-repl-mode-hook #'prelude-cider-repl-setup -50)
 
 (provide 'prelude-clojure)
 ;;; prelude-clojure.el ends here

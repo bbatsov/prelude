@@ -35,16 +35,16 @@
 (require 'prelude-lisp)
 (declare-function crux-start-or-switch-to "crux")
 
+(defun prelude-recompile-elc ()
+  "Recompile the current file of Prelude, if it was compiled before."
+  (when (and
+         (string-prefix-p prelude-dir (file-truename buffer-file-name))
+         (file-exists-p (byte-compile-dest-file buffer-file-name)))
+    (emacs-lisp-byte-compile)))
+
 (defun prelude-recompile-elc-on-save ()
   "Recompile your elc when saving an elisp file."
-  (add-hook 'after-save-hook
-            (lambda ()
-              (when (and
-                     (string-prefix-p prelude-dir (file-truename buffer-file-name))
-                     (file-exists-p (byte-compile-dest-file buffer-file-name)))
-                (emacs-lisp-byte-compile)))
-            nil
-            t))
+  (add-hook 'after-save-hook #'prelude-recompile-elc nil t))
 
 (defun prelude-visit-ielm ()
   "Switch to default `ielm' buffer.
@@ -62,19 +62,21 @@ Start `ielm' if it's not already running."
     (when (and file-name (string-match-p ".*-tests?\\.el\\'" file-name))
       (setq-local flycheck-checkers '(emacs-lisp)))))
 
-(defun prelude-emacs-lisp-mode-defaults ()
-  "Sensible defaults for `emacs-lisp-mode'."
-  (run-hooks 'prelude-lisp-coding-hook)
+(defun prelude-emacs-lisp-setup ()
+  "Set up an Emacs Lisp buffer."
+  (prelude-lisp-coding-setup)
   (eldoc-mode +1)
   (prelude-recompile-elc-on-save)
   (rainbow-mode +1)
   (setq mode-name "EL")
-  (prelude-conditional-emacs-lisp-checker))
+  (prelude-conditional-emacs-lisp-checker)
+  (run-hooks 'prelude-emacs-lisp-mode-hook))
 
-(add-hook 'prelude-emacs-lisp-mode-hook #'prelude-emacs-lisp-mode-defaults)
+(make-obsolete-variable 'prelude-emacs-lisp-mode-hook
+                        "use `emacs-lisp-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'emacs-lisp-mode-hook (lambda ()
-                                  (run-hooks 'prelude-emacs-lisp-mode-hook)))
+(add-hook 'emacs-lisp-mode-hook #'prelude-emacs-lisp-setup -50)
 
 ;; Recognize Emacs package build tool files as Emacs Lisp
 (add-to-list 'auto-mode-alist '("Cask\\'" . emacs-lisp-mode))
@@ -82,15 +84,17 @@ Start `ielm' if it's not already running."
 (add-to-list 'auto-mode-alist '("Eldev\\'" . emacs-lisp-mode))
 
 ;; ielm is an interactive Emacs Lisp shell
-(defun prelude-ielm-mode-defaults ()
-  "Sensible defaults for `ielm'."
-  (run-hooks 'prelude-interactive-lisp-coding-hook)
-  (eldoc-mode +1))
+(defun prelude-ielm-setup ()
+  "Set up an IELM buffer."
+  (prelude-interactive-lisp-coding-setup)
+  (eldoc-mode +1)
+  (run-hooks 'prelude-ielm-mode-hook))
 
-(add-hook 'prelude-ielm-mode-hook #'prelude-ielm-mode-defaults)
+(make-obsolete-variable 'prelude-ielm-mode-hook
+                        "use `ielm-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'ielm-mode-hook (lambda ()
-                            (run-hooks 'prelude-ielm-mode-hook)))
+(add-hook 'ielm-mode-hook #'prelude-ielm-setup -50)
 
 ;; M-. to jump to Elisp definition, C-c C-d to describe symbol at
 ;; point.  Complements built-in xref with Elisp-specific navigation.

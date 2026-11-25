@@ -40,15 +40,15 @@
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs '(sql-mode . ("sqls"))))
 
-(defun prelude-sql-mode-defaults ()
-  "Default coding hook, useful with SQL."
+(defun prelude-sql-setup ()
+  "Set up a SQL buffer."
   ;; indent according to the syntax of the statement
   (sqlind-minor-mode +1)
   ;; Plenty of people edit SQL without a language server around.
   (prelude-lsp-enable 'quiet))
 
-(defun prelude-sql-interactive-mode-defaults ()
-  "Default hook for SQL consoles."
+(defun prelude-sql-interactive-setup ()
+  "Set up a SQL console."
   ;; wide result sets are unreadable when their rows get wrapped
   (setq truncate-lines t))
 
@@ -57,13 +57,8 @@
   :ensure t
   :defer t)
 
-(add-hook 'prelude-sql-mode-hook #'prelude-sql-mode-defaults)
-(add-hook 'prelude-sql-interactive-mode-hook #'prelude-sql-interactive-mode-defaults)
-
-(add-hook 'sql-mode-hook (lambda ()
-                           (run-hooks 'prelude-sql-mode-hook)))
-(add-hook 'sql-interactive-mode-hook (lambda ()
-                                       (run-hooks 'prelude-sql-interactive-mode-hook)))
+(add-hook 'sql-mode-hook #'prelude-sql-setup -50)
+(add-hook 'sql-interactive-mode-hook #'prelude-sql-interactive-setup -50)
 
 (provide 'prelude-sql)
 ;;; prelude-sql.el ends here

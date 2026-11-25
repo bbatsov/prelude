@@ -44,16 +44,18 @@
 (when (fboundp 'heex-ts-mode)
   (prelude-treesit-auto-mode "\\.[hl]?eex\\'" 'heex 'heex-ts-mode))
 
-(defun prelude-elixir-mode-defaults ()
+(defun prelude-elixir-setup ()
+  "Set up an Elixir buffer."
   (subword-mode +1)
-  (prelude-lsp-enable))
+  (prelude-lsp-enable)
+  (run-hooks 'prelude-elixir-mode-hook))
 
-(add-hook 'prelude-elixir-mode-hook #'prelude-elixir-mode-defaults)
+(make-obsolete-variable 'prelude-elixir-mode-hook
+                        "use `elixir-mode-hook' and `elixir-ts-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'elixir-mode-hook (lambda ()
-                              (run-hooks 'prelude-elixir-mode-hook)))
-(add-hook 'elixir-ts-mode-hook (lambda ()
-                                 (run-hooks 'prelude-elixir-mode-hook)))
+(add-hook 'elixir-mode-hook #'prelude-elixir-setup -50)
+(add-hook 'elixir-ts-mode-hook #'prelude-elixir-setup -50)
 
 (provide 'prelude-elixir)
 ;;; prelude-elixir.el ends here

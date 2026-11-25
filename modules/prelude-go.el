@@ -69,7 +69,8 @@ Unlike `gofmt-before-save', this works in `go-ts-mode' as well."
   (when (prelude-format-on-save-p)
     (gofmt)))
 
-(defun prelude-go-mode-defaults ()
+(defun prelude-go-setup ()
+  "Set up a Go buffer."
   ;; Prefer goimports to gofmt if installed
   (let ((goimports (executable-find "goimports")))
     (when goimports
@@ -84,7 +85,12 @@ Unlike `gofmt-before-save', this works in `go-ts-mode' as well."
   ;; CamelCase aware editing operations
   (subword-mode +1)
 
-  (prelude-lsp-enable))
+  (prelude-lsp-enable)
+  (run-hooks 'prelude-go-mode-hook))
+
+(make-obsolete-variable 'prelude-go-mode-hook
+                        "use `go-mode-hook' and `go-ts-mode-hook' instead."
+                        "2.2.0")
 
 ;; Major mode for Go; also provides gofmt integration.
 ;; go-ts-mode (built-in) is used when the tree-sitter grammar is
@@ -92,16 +98,15 @@ Unlike `gofmt-before-save', this works in `go-ts-mode' as well."
 (use-package go-mode
   :ensure t
   :defer t
-  :bind (:map help-map ("G" . godoc))
-  :hook ((go-mode . (lambda () (run-hooks 'prelude-go-mode-hook)))
-         (go-ts-mode . (lambda () (run-hooks 'prelude-go-mode-hook)))))
+  :bind (:map help-map ("G" . godoc)))
 
 ;; Run Go tests from Emacs (C-c C-t t/f/p)
 (use-package gotest
   :ensure t
   :defer t)
 
-(add-hook 'prelude-go-mode-hook #'prelude-go-mode-defaults)
+(add-hook 'go-mode-hook #'prelude-go-setup -50)
+(add-hook 'go-ts-mode-hook #'prelude-go-setup -50)
 
 (provide 'prelude-go)
 ;;; prelude-go.el ends here

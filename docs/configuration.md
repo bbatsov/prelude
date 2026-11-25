@@ -166,9 +166,23 @@ create a file in `personal/`, let's call this one `config-go.el`, and
 add the following to it.
 
 ```emacs-lisp
-(add-hook 'prelude-go-mode-hook
-          (lambda ()
-            (setq tab-width 2)))
+(defun my-go-setup ()
+  (setq tab-width 2))
+
+(add-hook 'go-mode-hook #'my-go-setup)
+(add-hook 'go-ts-mode-hook #'my-go-setup)
+```
+
+That's the hook of `go-mode` and the hook of `go-ts-mode`, which Prelude
+uses when the Go grammar is installed. Prelude sets up Go buffers from
+the same hooks, with `prelude-go-setup`, and that runs before the
+functions you add to them, so yours have the last word. To do without
+Prelude's setup of a mode altogether, remove its function from the
+hooks:
+
+```emacs-lisp
+(remove-hook 'go-mode-hook #'prelude-go-setup)
+(remove-hook 'go-ts-mode-hook #'prelude-go-setup)
 ```
 
 ### General Tips

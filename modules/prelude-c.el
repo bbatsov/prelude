@@ -69,21 +69,18 @@ config, in personal/preload or with Customize."
                             (awk-mode . "awk")
                             (other . "gnu"))))
 
-(defun prelude-c-mode-common-defaults ()
-  "Default coding hook, useful with C and C++."
-  (subword-mode +1)
-  (prelude-lsp-enable))
-
-(add-hook 'prelude-c-mode-common-hook #'prelude-c-mode-common-defaults)
-
 (defun prelude-c-setup ()
-  "Run `prelude-c-mode-common-hook'."
+  "Set up a C, C++ or Objective-C buffer."
+  (subword-mode +1)
+  (prelude-lsp-enable)
   (run-hooks 'prelude-c-mode-common-hook))
 
+(make-obsolete-variable 'prelude-c-mode-common-hook
+                        "use the hooks of the C, C++ and Objective-C modes instead."
+                        "2.2.0")
+
 ;; Only for C, C++ and Objective-C: the other modes built on cc-mode
-;; (Java, C#, PHP, etc.) are set up by modules of their own.  This runs
-;; ahead of the functions you add to the same hooks, so that those can
-;; change what it did.
+;; (Java, C#, PHP, etc.) are set up by modules of their own.
 (dolist (hook '(c-mode-hook c++-mode-hook objc-mode-hook c-ts-mode-hook c++-ts-mode-hook))
   (add-hook hook #'prelude-c-setup -50))
 

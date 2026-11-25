@@ -34,9 +34,15 @@
 
 (require 'prelude-programming)
 
-(defun prelude-lua-mode-defaults ()
+(defun prelude-lua-setup ()
+  "Set up a Lua buffer."
   (subword-mode +1)
-  (prelude-lsp-enable))
+  (prelude-lsp-enable)
+  (run-hooks 'prelude-lua-mode-hook))
+
+(make-obsolete-variable 'prelude-lua-mode-hook
+                        "use `lua-mode-hook' instead."
+                        "2.2.0")
 
 (use-package lua-mode
   :ensure t
@@ -51,11 +57,9 @@
               ("C-c C-b" . lua-send-buffer)
               ("C-c C-f" . lua-send-defun)
               ("C-c C-r" . lua-send-region)
-              ("C-c C-z" . lua-show-process-buffer))
-  :hook (lua-mode . (lambda ()
-                      (run-hooks 'prelude-lua-mode-hook))))
+              ("C-c C-z" . lua-show-process-buffer)))
 
-(add-hook 'prelude-lua-mode-hook #'prelude-lua-mode-defaults)
+(add-hook 'lua-mode-hook #'prelude-lua-setup -50)
 
 (provide 'prelude-lua)
 ;;; prelude-lua.el ends here

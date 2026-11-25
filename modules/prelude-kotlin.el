@@ -36,18 +36,17 @@
 ;; * a JDK and the Kotlin compiler
 ;; * kotlin-language-server
 
-(defun prelude-kotlin-mode-defaults ()
-  "Default coding hook, useful with Kotlin."
+(defun prelude-kotlin-setup ()
+  "Set up a Kotlin buffer."
   ;; CamelCase aware editing operations
   (subword-mode +1)
   (prelude-lsp-enable))
 
 (use-package kotlin-mode
   :ensure t
-  :defer t
-  :hook (kotlin-mode . (lambda () (run-hooks 'prelude-kotlin-mode-hook))))
+  :defer t)
 
-(add-hook 'prelude-kotlin-mode-hook #'prelude-kotlin-mode-defaults)
+(add-hook 'kotlin-mode-hook #'prelude-kotlin-setup -50)
 
 (provide 'prelude-kotlin)
 ;;; prelude-kotlin.el ends here

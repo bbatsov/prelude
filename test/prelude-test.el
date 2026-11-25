@@ -16,23 +16,24 @@
 (defvar go-ts-mode-map)
 
 (declare-function prelude-apheleia-prefer-goimports "prelude-apheleia")
-(declare-function prelude-fsharp-mode-defaults "prelude-fsharp")
+(declare-function prelude-fsharp-setup "prelude-fsharp")
 (declare-function prelude-go-format-buffer "prelude-go")
-(declare-function prelude-go-mode-defaults "prelude-go")
-(declare-function prelude-java-mode-defaults "prelude-java")
-(declare-function prelude-ocaml-mode-defaults "prelude-ocaml")
+(declare-function prelude-go-setup "prelude-go")
+(declare-function prelude-java-setup "prelude-java")
+(declare-function prelude-ocaml-setup "prelude-ocaml")
+(declare-function prelude-prog-setup "prelude-programming")
 (declare-function prelude-racket-enable-input-mode "prelude-racket")
-(declare-function prelude-rust-mode-defaults "prelude-rust")
-(declare-function prelude-sh-mode-defaults "prelude-shell")
+(declare-function prelude-rust-setup "prelude-rust")
+(declare-function prelude-shell-setup "prelude-shell")
 
-(ert-deftest prelude-ocaml-mode-defaults-without-ocaml-eglot ()
+(ert-deftest prelude-ocaml-setup-without-ocaml-eglot ()
   "The OCaml mode hook shouldn't fail when ocaml-eglot isn't installed."
   (require 'prelude-ocaml)
   (let ((prelude-lsp-client 'eglot))
     (cl-letf (((symbol-function 'ocaml-eglot-mode) nil)
               ((symbol-function 'prelude-lsp-enable) #'ignore))
       (with-temp-buffer
-        (prelude-ocaml-mode-defaults)))))
+        (prelude-ocaml-setup)))))
 
 (defmacro prelude-test-with-stale-archives (&rest body)
   "Run BODY with package installs failing until the archives are refreshed.
@@ -103,14 +104,20 @@ The calls made to both are recorded in order in `calls'."
         (should (equal calls '((install foo))))
         (should enabled)))))
 
-(defvar prelude-ruby-mode-hook)
-
-(ert-deftest prelude-module-keeps-user-mode-hook-functions ()
-  "Loading a module doesn't drop functions already on its mode hook."
-  (let ((prelude-ruby-mode-hook (list #'ignore)))
-    (load "prelude-ruby" nil t)
-    (should (memq #'ignore prelude-ruby-mode-hook))
-    (should (memq #'prelude-ruby-mode-defaults prelude-ruby-mode-hook))))
+(ert-deftest prelude-obsolete-mode-hooks-still-run ()
+  "The functions on an obsolete hook run after Prelude's setup."
+  (require 'prelude-ruby)
+  (should (get 'prelude-ruby-mode-hook 'byte-obsolete-variable))
+  (let* ((subword nil)
+         (record (lambda () (setq subword (bound-and-true-p subword-mode)))))
+    (add-hook 'prelude-ruby-mode-hook record)
+    (unwind-protect
+        (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore)
+                  ((symbol-function 'inf-ruby-minor-mode) #'ignore))
+          (with-temp-buffer
+            (run-hooks 'ruby-mode-hook))
+          (should subword))
+      (remove-hook 'prelude-ruby-mode-hook record))))
 
 (ert-deftest prelude-racket-input-mode-falls-back-on-older-racket-mode ()
   "Older racket-mode versions only have `racket-unicode-input-method-enable'."
@@ -468,15 +475,15 @@ answered with `answer'."
     (cl-letf (((symbol-function 'eglot-java-mode)
                (lambda (&rest _) (push buffer-file-name started))))
       (with-temp-buffer
-        (prelude-java-mode-defaults)
+        (prelude-java-setup)
         (should-not started)
         (setq buffer-file-name "/nonexistent/Prelude.java")
         (unwind-protect
-            (prelude-java-mode-defaults)
+            (prelude-java-setup)
           (setq buffer-file-name nil))
         (should (equal started '("/nonexistent/Prelude.java")))))))
 
-(ert-deftest prelude-java-mode-defaults-without-eglot-java ()
+(ert-deftest prelude-java-setup-without-eglot-java ()
   "The Java mode hook shouldn't fail when eglot-java isn't installed."
   (require 'prelude-java)
   (let ((prelude-lsp-client 'eglot))
@@ -484,7 +491,7 @@ answered with `answer'."
       (with-temp-buffer
         (setq buffer-file-name "/nonexistent/Prelude.java")
         (unwind-protect
-            (prelude-java-mode-defaults)
+            (prelude-java-setup)
           (setq buffer-file-name nil))))))
 
 (defvar eglot-java-mode-map)
@@ -499,7 +506,7 @@ answered with `answer'."
   (let ((prelude-lsp-client 'lsp-mode))
     (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore))
       (with-temp-buffer
-        (prelude-java-mode-defaults)
+        (prelude-java-setup)
         (should (eq (local-key-binding (kbd "C-c C-t")) 'dap-java-run-test-method))
         (should (eq (local-key-binding (kbd "C-c C-r")) 'dap-java-debug))))))
 
@@ -798,7 +805,7 @@ doesn't follow."
   "Java gets its usual style, and none of the C setup (LSP included)."
   (require 'prelude-c)
   (let ((ran nil))
-    (cl-letf (((symbol-function 'prelude-c-mode-common-defaults)
+    (cl-letf (((symbol-function 'prelude-c-setup)
                (lambda () (setq ran t))))
       (with-temp-buffer
         (java-mode)
@@ -843,48 +850,101 @@ doesn't follow."
                  (lambda (&optional quiet) (push (if quiet 'quiet t) calls))))
         (with-temp-buffer
           (setq-local sh-shell shell)
-          (prelude-sh-mode-defaults)
+          (prelude-shell-setup)
           (should (equal calls expected)))))))
 
-(ert-deftest prelude-prog-mode-hook-runs-once ()
-  "Modules don't run the hook themselves in modes derived from `prog-mode'."
+(ert-deftest prelude-prog-setup-runs-once ()
+  "Modules don't run it themselves in modes derived from `prog-mode'."
   (dolist (module '(prelude-css prelude-web))
     (require module))
-  (let* ((runs 0)
-         (count (lambda () (setq runs (1+ runs)))))
-    (add-hook 'prelude-prog-mode-hook count)
-    (unwind-protect
-        (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore))
-          (dolist (mode '(css-mode web-mode))
-            (setq runs 0)
-            (with-temp-buffer
-              (funcall mode))
-            (should (= runs 1))))
-      (remove-hook 'prelude-prog-mode-hook count))))
+  (let ((runs 0))
+    (cl-letf (((symbol-function 'prelude-prog-setup) (lambda () (setq runs (1+ runs))))
+              ((symbol-function 'prelude-lsp-enable) #'ignore))
+      (dolist (mode '(css-mode web-mode))
+        (setq runs 0)
+        (with-temp-buffer
+          (funcall mode))
+        (should (= runs 1))))))
 
-(defun prelude-test--hook-runs-p (mode-hook prelude-hook)
-  "Return non-nil if running MODE-HOOK runs PRELUDE-HOOK."
-  (let* ((ran nil)
-         (record (lambda () (setq ran t))))
-    (add-hook prelude-hook record)
-    (unwind-protect
-        (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore))
-          (with-temp-buffer
-            (run-hooks mode-hook)))
-      (remove-hook prelude-hook record))
-    ran))
+(defconst prelude-test--setups
+  '((prelude-programming prelude-prog-setup prog-mode-hook)
+    (prelude-programming prelude-makefile-setup makefile-mode-hook)
+    (prelude-c prelude-c-setup
+               c-mode-hook c++-mode-hook objc-mode-hook c-ts-mode-hook c++-ts-mode-hook)
+    (prelude-clojure prelude-clojure-setup clojure-mode-hook clojure-ts-mode-hook)
+    (prelude-clojure prelude-cider-repl-setup cider-repl-mode-hook)
+    (prelude-common-lisp prelude-lisp-coding-setup lisp-mode-hook)
+    (prelude-common-lisp prelude-slime-repl-setup slime-repl-mode-hook)
+    (prelude-csharp prelude-csharp-setup csharp-mode-hook csharp-ts-mode-hook)
+    (prelude-css prelude-css-setup css-mode-hook css-ts-mode-hook)
+    (prelude-dart prelude-dart-setup dart-mode-hook)
+    (prelude-elixir prelude-elixir-setup elixir-mode-hook elixir-ts-mode-hook)
+    (prelude-emacs-lisp prelude-emacs-lisp-setup emacs-lisp-mode-hook)
+    (prelude-emacs-lisp prelude-ielm-setup ielm-mode-hook)
+    (prelude-erlang prelude-erlang-setup erlang-mode-hook)
+    (prelude-fsharp prelude-fsharp-setup fsharp-mode-hook)
+    (prelude-go prelude-go-setup go-mode-hook go-ts-mode-hook)
+    (prelude-haskell prelude-haskell-setup haskell-mode-hook)
+    (prelude-java prelude-java-setup java-mode-hook java-ts-mode-hook)
+    (prelude-js prelude-js-setup js-mode-hook js-ts-mode-hook)
+    (prelude-js prelude-json-setup js-json-mode-hook json-ts-mode-hook)
+    (prelude-julia prelude-julia-setup julia-mode-hook)
+    (prelude-kotlin prelude-kotlin-setup kotlin-mode-hook)
+    (prelude-latex prelude-latex-setup LaTeX-mode-hook)
+    (prelude-lua prelude-lua-setup lua-mode-hook)
+    (prelude-nix prelude-nix-setup nix-mode-hook)
+    (prelude-ocaml prelude-ocaml-setup neocaml-base-mode-hook)
+    (prelude-org prelude-org-setup org-mode-hook)
+    (prelude-perl prelude-perl-setup cperl-mode-hook)
+    (prelude-php prelude-php-setup php-mode-hook php-ts-mode-hook)
+    (prelude-python prelude-python-setup python-mode-hook python-ts-mode-hook)
+    (prelude-r prelude-r-setup ess-r-mode-hook)
+    (prelude-racket prelude-racket-setup racket-mode-hook)
+    (prelude-ruby prelude-ruby-setup ruby-mode-hook ruby-ts-mode-hook)
+    (prelude-rust prelude-rust-setup rust-ts-mode-hook)
+    (prelude-rust prelude-rust-fallback-setup rust-mode-hook)
+    (prelude-scala prelude-scala-setup scala-mode-hook)
+    (prelude-scheme prelude-scheme-setup scheme-mode-hook)
+    (prelude-scss prelude-scss-setup scss-mode-hook)
+    (prelude-shell prelude-shell-setup sh-mode-hook bash-ts-mode-hook)
+    (prelude-sql prelude-sql-setup sql-mode-hook)
+    (prelude-sql prelude-sql-interactive-setup sql-interactive-mode-hook)
+    (prelude-swift prelude-swift-setup swift-ts-mode-hook)
+    (prelude-terraform prelude-terraform-setup terraform-mode-hook)
+    (prelude-ts prelude-typescript-setup
+                typescript-ts-mode-hook tsx-ts-mode-hook typescript-mode-hook)
+    (prelude-web prelude-web-setup web-mode-hook)
+    (prelude-xml prelude-xml-setup nxml-mode-hook)
+    (prelude-yaml prelude-yaml-setup yaml-mode-hook yaml-ts-mode-hook)
+    (prelude-zig prelude-zig-setup zig-mode-hook))
+  "The setup functions of the modules, with the hooks they go on.")
 
-(ert-deftest prelude-modules-run-their-hook-from-every-mode-they-set-up ()
-  (dolist (module '(prelude-ocaml prelude-scss prelude-ts))
-    (require module))
-  (pcase-dolist (`(,mode-hook . ,prelude-hook)
-                 '((neocaml-base-mode-hook . prelude-ocaml-mode-hook)
-                   (scss-mode-hook . prelude-scss-mode-hook)
-                   (typescript-ts-mode-hook . prelude-ts-mode-hook)
-                   (tsx-ts-mode-hook . prelude-ts-mode-hook)
-                   (typescript-mode-hook . prelude-ts-mode-hook)))
-    (should (prelude-test--hook-runs-p mode-hook prelude-hook)))
-  (should (memq 'prelude-ocaml-mode-defaults (symbol-value 'prelude-ocaml-mode-hook))))
+(defun prelude-test--personal-setup ()
+  "Stand in for a function that personal config adds to a mode hook.")
+
+(ert-deftest prelude-modules-set-up-their-modes-ahead-of-personal-config ()
+  "Every setup is on the hooks of its modes, ahead of the functions
+that personal config adds to them, which get the last word."
+  (let ((wrong nil))
+    (pcase-dolist (`(,module ,setup . ,hooks) prelude-test--setups)
+      (require module)
+      (dolist (hook hooks)
+        (add-hook hook #'prelude-test--personal-setup)
+        (let ((functions (default-value hook)))
+          (unless (< (or (cl-position setup functions) most-positive-fixnum)
+                     (cl-position #'prelude-test--personal-setup functions))
+            (push (cons hook setup) wrong)))
+        (remove-hook hook #'prelude-test--personal-setup)))
+    (should-not wrong)))
+
+(ert-deftest prelude-modules-put-no-lambdas-on-hooks ()
+  "A named function on a hook can be removed, and says what it is."
+  (should-not
+   (seq-filter (lambda (file)
+                 ;; (add-hook 'some-hook (lambda ...)) or :hook (mode . (lambda ...))
+                 (string-match-p "\\(?:(add-hook [^ \t\n]+[ \t\n]+\\(?:#'\\)?\\|\\.[ \t\n]+\\)(lambda"
+                                 (prelude-test--file-string file)))
+               (directory-files (expand-file-name "modules" prelude-dir) t "\\.el\\'"))))
 
 (ert-deftest prelude-scss-uses-the-built-in-mode ()
   "SCSS files open in the `scss-mode' that comes with Emacs.
@@ -900,7 +960,7 @@ to load and would leave them in `fundamental-mode'."
       ;; the CSS defaults
       (should (bound-and-true-p rainbow-mode)))))
 
-(ert-deftest prelude-fsharp-mode-defaults-without-eglot-fsharp ()
+(ert-deftest prelude-fsharp-setup-without-eglot-fsharp ()
   "The F# mode hook shouldn't fail when eglot-fsharp isn't installed."
   (require 'prelude-fsharp)
   (let ((prelude-lsp-client 'eglot)
@@ -909,7 +969,7 @@ to load and would leave them in `fundamental-mode'."
     (cl-letf (((symbol-value 'features) (remq 'eglot-fsharp features))
               ((symbol-function 'prelude-lsp-enable) #'ignore))
       (with-temp-buffer
-        (prelude-fsharp-mode-defaults)
+        (prelude-fsharp-setup)
         (should subword-mode)))))
 
 (ert-deftest prelude-terraform-sets-up-terraform-files ()
@@ -1045,7 +1105,7 @@ The module can't be loaded here, as it takes over the minibuffer."
   (should (prelude-test--super-save-p 'fundamental-mode))
   (with-temp-buffer
     (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore))
-      (prelude-go-mode-defaults))
+      (prelude-go-setup))
     (should (memq 'prelude-go-format-buffer before-save-hook))))
 
 (ert-deftest prelude-rust-formats-on-save-and-leaves-global-hooks-alone ()
@@ -1054,7 +1114,8 @@ The module can't be loaded here, as it takes over the minibuffer."
   (let ((after-save (default-value 'after-save-hook)))
     (with-temp-buffer
       (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore))
-        (prelude-rust-mode-defaults))
+        (prelude-rust-setup))
+      (should cargo-minor-mode)
       (should (memq 'prelude-lsp-format-on-save before-save-hook)))
     (should (memq 'prelude-make-script-executable after-save))
     (should (equal (default-value 'after-save-hook) after-save))))
@@ -1615,7 +1676,7 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
   (with-temp-buffer
     (let ((prelude-smartparens nil))
       (cl-letf (((symbol-function 'flyspell-prog-mode) #'ignore))
-        (prelude-prog-mode-defaults))
+        (prelude-prog-setup))
       (should electric-pair-mode)
       (should-not (bound-and-true-p smartparens-mode)))))
 
@@ -1641,12 +1702,11 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
   "rust-mode gets the same setup as rust-ts-mode, but never twice."
   (require 'prelude-rust)
   (let ((setups 0))
-    (cl-letf (((symbol-function 'prelude-rust-mode-defaults)
+    (cl-letf (((symbol-function 'prelude-rust-setup)
                (lambda () (setq setups (1+ setups)))))
       (with-temp-buffer
         (run-hooks 'rust-mode-hook)
-        (should (= setups 1))
-        (should cargo-minor-mode))
+        (should (= setups 1)))
       (with-temp-buffer
         (setq major-mode 'prelude-test-rust-mode)
         (put 'prelude-test-rust-mode 'derived-mode-parent 'rust-ts-mode)
@@ -1771,6 +1831,21 @@ Checks every row of the form <kbd>KEY</kbd> | `COMMAND` | ..."
           ;; mentioned in the file, enabled or not
           (should-not (string-match-p "prelude-c\\b\\|prelude-go\\b" (cadr new))))
       (delete-file prelude-modules-file))))
+
+(ert-deftest prelude-doctor-reports-obsolete-hooks-in-use ()
+  (require 'prelude-ruby)
+  (add-hook 'prelude-ruby-mode-hook #'ignore)
+  (unwind-protect
+      (should (member '(note "prelude-ruby-mode-hook is obsolete, use \u2018ruby-mode-hook\u2019 and \u2018ruby-ts-mode-hook\u2019 instead.")
+                      (let ((text-quoting-style 'curve))
+                        (prelude-test--doctor-results))))
+    (remove-hook 'prelude-ruby-mode-hook #'ignore))
+  ;; an empty hook is no longer in use
+  (should-not (memq 'prelude-ruby-mode-hook (prelude-doctor--obsolete-variables)))
+  ;; and an alias has the value of the variable it stands for
+  (defvar prelude-test--new-option t)
+  (define-obsolete-variable-alias 'prelude-test--old-option 'prelude-test--new-option "2.2.0")
+  (should-not (memq 'prelude-test--old-option (prelude-doctor--obsolete-variables))))
 
 (ert-deftest prelude-doctor-reports-only-what-git-says-on-stdout ()
   (let ((prelude-dir (make-temp-file "prelude-doctor" t)))

@@ -35,23 +35,20 @@
 ;; You may need to install a language server on your system:
 ;; phpactor or intelephense.
 
-(defun prelude-php-mode-defaults ()
-  "Default coding hook, useful with PHP."
+(defun prelude-php-setup ()
+  "Set up a PHP buffer."
   ;; CamelCase aware editing operations
   (subword-mode +1)
   (prelude-lsp-enable))
 
 (use-package php-mode
   :ensure t
-  :defer t
-  :hook (php-mode . (lambda () (run-hooks 'prelude-php-mode-hook))))
+  :defer t)
 
+(add-hook 'php-mode-hook #'prelude-php-setup -50)
 ;; Emacs 30+ comes with php-ts-mode.  It's not used by default (it
 ;; needs half a dozen grammars), but it gets the same setup.
-(add-hook 'php-ts-mode-hook (lambda ()
-                              (run-hooks 'prelude-php-mode-hook)))
-
-(add-hook 'prelude-php-mode-hook #'prelude-php-mode-defaults)
+(add-hook 'php-ts-mode-hook #'prelude-php-setup -50)
 
 (provide 'prelude-php)
 ;;; prelude-php.el ends here

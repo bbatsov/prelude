@@ -87,8 +87,8 @@
           ("PDF Viewer" "open %o")
           ("HTML Viewer" "open %o"))))
 
-(defun prelude-latex-mode-defaults ()
-  "Default Prelude hook for `LaTeX-mode'."
+(defun prelude-latex-setup ()
+  "Set up a LaTeX buffer."
   (turn-on-auto-fill)
   (abbrev-mode +1)
   (subword-mode +1)
@@ -96,12 +96,14 @@
     (smartparens-mode +1))
   (pcase prelude-latex-fast-math-entry
     ('LaTeX-math-mode (LaTeX-math-mode 1))
-    ('cdlatex (turn-on-cdlatex))))
+    ('cdlatex (turn-on-cdlatex)))
+  (run-hooks 'prelude-latex-mode-hook))
 
-(add-hook 'prelude-latex-mode-hook #'prelude-latex-mode-defaults)
+(make-obsolete-variable 'prelude-latex-mode-hook
+                        "use `LaTeX-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'LaTeX-mode-hook (lambda ()
-                             (run-hooks 'prelude-latex-mode-hook)))
+(add-hook 'LaTeX-mode-hook #'prelude-latex-setup -50)
 
 (provide 'prelude-latex)
 ;;; prelude-latex.el ends here

@@ -13,46 +13,25 @@ packages and provide some sensible baseline configuration for them.
 Here's a real example.
 
 ``` emacs-lisp
-;;; prelude-ruby.el --- Emacs Prelude: A nice setup for Ruby devs.
+;;; prelude-csharp.el --- Emacs Prelude: C# programming support.
 ;;; Code:
 
 (require 'prelude-programming)
 
-;; Use ruby-ts-mode when the tree-sitter grammar is available
-(prelude-treesit-remap 'ruby 'ruby-mode 'ruby-ts-mode)
+;; Use csharp-ts-mode when the tree-sitter grammar is available
+(prelude-treesit-remap 'c-sharp 'csharp-mode 'csharp-ts-mode)
 
-;; We never want to edit Rubinius bytecode
-(add-to-list 'completion-ignored-extensions ".rbc")
-
-(defun prelude-ruby-mode-defaults ()
-  ;; Don't auto-insert encoding comments
-  ;; Those are almost never needed in Ruby 2+
-  (setq ruby-insert-encoding-magic-comment nil)
-  (inf-ruby-minor-mode +1)
+(defun prelude-csharp-setup ()
+  "Set up a C# buffer."
   ;; CamelCase aware editing operations
   (subword-mode +1)
   (prelude-lsp-enable))
 
-;; Run a Ruby REPL (IRB/Pry) inside Emacs and send code to it
-(use-package inf-ruby
-  :ensure t
-  :defer t)
+(add-hook 'csharp-mode-hook #'prelude-csharp-setup -50)
+(add-hook 'csharp-ts-mode-hook #'prelude-csharp-setup -50)
 
-;; Browse Ruby documentation via ri (C-h R)
-(use-package yari
-  :ensure t
-  :defer t
-  :bind (:map help-map ("R" . yari)))
-
-(add-hook 'prelude-ruby-mode-hook #'prelude-ruby-mode-defaults)
-
-(add-hook 'ruby-mode-hook (lambda ()
-                            (run-hooks 'prelude-ruby-mode-hook)))
-(add-hook 'ruby-ts-mode-hook (lambda ()
-                               (run-hooks 'prelude-ruby-mode-hook)))
-
-(provide 'prelude-ruby)
-;;; prelude-ruby.el ends here
+(provide 'prelude-csharp)
+;;; prelude-csharp.el ends here
 ```
 
 To use a module you simply have to require it. No new
@@ -80,18 +59,13 @@ A typical programming language module follows this pattern:
   :ensure t
   :defer t)
 
-(defun prelude-example-mode-defaults ()
+(defun prelude-example-setup ()
+  "Set up an Example buffer."
   (subword-mode +1)
   (prelude-lsp-enable))
 
-(add-hook 'prelude-example-mode-hook #'prelude-example-mode-defaults)
-
-(add-hook 'example-mode-hook
-          (lambda ()
-            (run-hooks 'prelude-example-mode-hook)))
-(add-hook 'example-ts-mode-hook
-          (lambda ()
-            (run-hooks 'prelude-example-mode-hook)))
+(add-hook 'example-mode-hook #'prelude-example-setup -50)
+(add-hook 'example-ts-mode-hook #'prelude-example-setup -50)
 
 (provide 'prelude-example)
 ;;; prelude-example.el ends here
@@ -102,13 +76,12 @@ A typical programming language module follows this pattern:
 - **Require `prelude-programming`** as the foundation for
   all programming language modules. Lisp-family modules
   should require `prelude-lisp` instead.
-- **Define a `prelude-*-mode-defaults` function** with the
-  mode-specific setup. This makes it easy for users to
-  override.
-- **Use the `prelude-*-mode-hook` pattern**: add the
-  defaults function to the hook with `add-hook`, and run the
-  hook from the major mode hooks. Users can then add to it,
-  or remove the defaults function, from their personal config.
+- **Define a `prelude-*-setup` function** with the setup of
+  the mode's buffers, and add it to the hooks of the mode with
+  `add-hook`, at a depth of -50. It then runs before the
+  functions that users add to the same hooks, and users who
+  don't want it can remove it from the hooks. Don't put lambdas
+  on hooks.
 - **Enable `subword-mode`** for CamelCase-aware editing.
 - **Call `prelude-lsp-enable`** for LSP support. This
   respects the user's `prelude-lsp-client` setting
@@ -213,12 +186,13 @@ depending on `prelude-lsp-client`. A few things follow from that:
 
 ### cc-mode and its children
 
-The [C/C++](c.md) module configures `c-mode-common-hook`, which runs for
-every mode built on top of `cc-mode`, not just for C and C++. The
-classic `java-mode` and `csharp-mode` are such modes, and so is
-`php-mode`, so they also get the C module's indentation settings
-when it's enabled. The tree-sitter modes have nothing to do with
-`cc-mode` and aren't affected.
+The classic `java-mode` and `csharp-mode` are built on top of
+`cc-mode`, like `c-mode`, so they share `c-mode-common-hook` and the
+indentation styles of `cc-mode` with it. The [C/C++](c.md) module
+doesn't touch either of those: its setup is on the hooks of the C, C++
+and Objective-C modes, and it changes the default style only for
+them. The other modes built on `cc-mode` keep their usual styles and
+get the setup of their own modules.
 
 ## Foundation Modules
 

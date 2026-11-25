@@ -34,18 +34,20 @@
 ;; otherwise fall back to yaml-mode from MELPA
 (prelude-treesit-auto-mode "\\.ya?ml\\'" 'yaml 'yaml-ts-mode 'yaml-mode 'yaml-mode)
 
-(defun prelude-yaml-mode-defaults ()
+(defun prelude-yaml-setup ()
+  "Set up a YAML buffer."
   (whitespace-mode +1)
   (subword-mode +1)
   (add-hook 'before-save-hook 'prelude-cleanup-maybe nil t)
-  (prelude-lsp-enable 'quiet))
+  (prelude-lsp-enable 'quiet)
+  (run-hooks 'prelude-yaml-mode-hook))
 
-(add-hook 'prelude-yaml-mode-hook #'prelude-yaml-mode-defaults)
+(make-obsolete-variable 'prelude-yaml-mode-hook
+                        "use `yaml-mode-hook' and `yaml-ts-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'yaml-mode-hook (lambda ()
-                            (run-hooks 'prelude-yaml-mode-hook)))
-(add-hook 'yaml-ts-mode-hook (lambda ()
-                               (run-hooks 'prelude-yaml-mode-hook)))
+(add-hook 'yaml-mode-hook #'prelude-yaml-setup -50)
+(add-hook 'yaml-ts-mode-hook #'prelude-yaml-setup -50)
 
 (provide 'prelude-yaml)
 ;;; prelude-yaml.el ends here

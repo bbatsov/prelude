@@ -39,8 +39,7 @@ It's easy to opt in if that doesn't bother you:
   :ensure t
   :init
   (add-to-list 'major-mode-remap-alist '(kotlin-mode . kotlin-ts-mode))
-  :hook (kotlin-ts-mode . (lambda ()
-                            (run-hooks 'prelude-kotlin-mode-hook))))
+  :hook (kotlin-ts-mode . prelude-kotlin-setup))
 ```
 
 ## Key Bindings

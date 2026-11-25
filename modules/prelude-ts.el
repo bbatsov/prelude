@@ -39,19 +39,20 @@
 (prelude-treesit-auto-mode "\\.ts\\'" 'typescript 'typescript-ts-mode 'typescript-mode)
 (prelude-treesit-auto-mode "\\.tsx\\'" 'tsx 'tsx-ts-mode 'typescript-mode)
 
-(defun prelude-ts-mode-defaults ()
+(defun prelude-typescript-setup ()
+  "Set up a TypeScript buffer."
   (subword-mode +1)
-  (prelude-lsp-enable))
+  (prelude-lsp-enable)
+  (run-hooks 'prelude-ts-mode-hook))
 
-(add-hook 'prelude-ts-mode-hook #'prelude-ts-mode-defaults)
+(make-obsolete-variable 'prelude-ts-mode-hook
+                        "use `typescript-ts-mode-hook', `tsx-ts-mode-hook' and `typescript-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'typescript-ts-mode-hook (lambda ()
-                                     (run-hooks 'prelude-ts-mode-hook)))
-(add-hook 'tsx-ts-mode-hook (lambda ()
-                              (run-hooks 'prelude-ts-mode-hook)))
+(add-hook 'typescript-ts-mode-hook #'prelude-typescript-setup -50)
+(add-hook 'tsx-ts-mode-hook #'prelude-typescript-setup -50)
 ;; the fallback, for those who have it installed
-(add-hook 'typescript-mode-hook (lambda ()
-                                  (run-hooks 'prelude-ts-mode-hook)))
+(add-hook 'typescript-mode-hook #'prelude-typescript-setup -50)
 
 (provide 'prelude-ts)
 ;;; prelude-ts.el ends here

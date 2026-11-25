@@ -51,10 +51,11 @@
 
 (define-key isearch-mode-map (kbd "C-o") 'helm-occur-from-isearch)
 
-;; use helm to list eshell history
-(add-hook 'eshell-mode-hook
-          #'(lambda ()
-              (substitute-key-definition 'eshell-list-history 'helm-eshell-history eshell-mode-map)))
+(defun prelude-helm-eshell-setup ()
+  "Use Helm to list the Eshell history."
+  (substitute-key-definition 'eshell-list-history 'helm-eshell-history eshell-mode-map))
+
+(add-hook 'eshell-mode-hook #'prelude-helm-eshell-setup)
 
 (helm-mode 1)
 

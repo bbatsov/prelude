@@ -36,18 +36,17 @@
 ;; * zig
 ;; * zls (the Zig language server)
 
-(defun prelude-zig-mode-defaults ()
-  "Default coding hook, useful with Zig."
+(defun prelude-zig-setup ()
+  "Set up a Zig buffer."
   ;; CamelCase aware editing operations
   (subword-mode +1)
   (prelude-lsp-enable))
 
 (use-package zig-mode
   :ensure t
-  :defer t
-  :hook (zig-mode . (lambda () (run-hooks 'prelude-zig-mode-hook))))
+  :defer t)
 
-(add-hook 'prelude-zig-mode-hook #'prelude-zig-mode-defaults)
+(add-hook 'zig-mode-hook #'prelude-zig-setup -50)
 
 (provide 'prelude-zig)
 ;;; prelude-zig.el ends here

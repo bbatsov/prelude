@@ -43,22 +43,30 @@
   ;;(define-key lisp-mode-shared-map (kbd "M-[") (prelude-wrap-with "["))
   (define-key lisp-mode-shared-map (kbd "M-\"") (prelude-wrap-with "\"")))
 
-;; a great lisp coding hook
-(defun prelude-lisp-coding-defaults ()
-  (when prelude-smartparens
-    (smartparens-strict-mode +1))
-  (rainbow-delimiters-mode +1))
+;; The setups of the Lisp modes call these two
 
-(add-hook 'prelude-lisp-coding-hook #'prelude-lisp-coding-defaults)
-
-;; interactive modes don't need whitespace checks
-(defun prelude-interactive-lisp-coding-defaults ()
+(defun prelude-lisp-coding-setup ()
+  "Set up a buffer of Lisp code."
   (when prelude-smartparens
     (smartparens-strict-mode +1))
   (rainbow-delimiters-mode +1)
-  (whitespace-mode -1))
+  (run-hooks 'prelude-lisp-coding-hook))
 
-(add-hook 'prelude-interactive-lisp-coding-hook #'prelude-interactive-lisp-coding-defaults)
+(make-obsolete-variable 'prelude-lisp-coding-hook
+                        "use the hooks of the Lisp modes instead."
+                        "2.2.0")
+
+(defun prelude-interactive-lisp-coding-setup ()
+  "Set up a Lisp REPL buffer, which doesn't need whitespace checks."
+  (when prelude-smartparens
+    (smartparens-strict-mode +1))
+  (rainbow-delimiters-mode +1)
+  (whitespace-mode -1)
+  (run-hooks 'prelude-interactive-lisp-coding-hook))
+
+(make-obsolete-variable 'prelude-interactive-lisp-coding-hook
+                        "use the hooks of the Lisp REPL modes instead."
+                        "2.2.0")
 
 (provide 'prelude-lisp)
 ;;; prelude-lisp.el ends here

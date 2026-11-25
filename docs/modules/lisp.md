@@ -7,6 +7,15 @@ This module provides:
   (prevents unbalanced delimiter deletion)
 - `rainbow-delimiters` in Lisp major modes and REPL buffers
 
+The setups of the Lisp language modules get those from
+`prelude-lisp-coding-setup` (and from
+`prelude-interactive-lisp-coding-setup` in REPL buffers). To give
+another Lisp mode the same, add the function to the hook of the mode:
+
+```emacs-lisp
+(add-hook 'fennel-mode-hook #'prelude-lisp-coding-setup)
+```
+
 Prelude uses smartparens with its own default keybinding set, not
 the paredit compatibility set. This avoids keybinding conflicts
 with standard Emacs prefixes like `M-s` (`search-map`) and `M-?`

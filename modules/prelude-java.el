@@ -40,8 +40,8 @@
 ;; Use java-ts-mode when the tree-sitter grammar is available
 (prelude-treesit-remap 'java 'java-mode 'java-ts-mode)
 
-(defun prelude-java-mode-defaults ()
-  "Default coding hook, useful with Java."
+(defun prelude-java-setup ()
+  "Set up a Java buffer."
   ;; CamelCase aware editing operations
   (subword-mode +1)
   (pcase prelude-lsp-client
@@ -80,12 +80,8 @@
     :ensure nil
     :commands (dap-java-run-test-method dap-java-debug)))
 
-(add-hook 'prelude-java-mode-hook #'prelude-java-mode-defaults)
-
-(add-hook 'java-mode-hook (lambda ()
-                            (run-hooks 'prelude-java-mode-hook)))
-(add-hook 'java-ts-mode-hook (lambda ()
-                               (run-hooks 'prelude-java-mode-hook)))
+(add-hook 'java-mode-hook #'prelude-java-setup -50)
+(add-hook 'java-ts-mode-hook #'prelude-java-setup -50)
 
 (provide 'prelude-java)
 ;;; prelude-java.el ends here

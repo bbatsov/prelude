@@ -16,7 +16,7 @@ all the CSS module's defaults:
   (`vscode-css-language-server` handles SCSS as well)
 
 If you need something set up differently for SCSS, add a function to
-`prelude-scss-mode-hook`.
+`scss-mode-hook`.
 
 !!! Note
 

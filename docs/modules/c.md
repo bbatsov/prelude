@@ -60,13 +60,16 @@ so to use something else just set them, in your personal config or with
 ```
 
 The rest of the C setup (`subword-mode` and the language server) is
-in `prelude-c-mode-common-defaults`, which is run from
-`prelude-c-mode-common-hook` in C, C++ and Objective-C buffers. Add your own
-functions to that hook to change it:
+in `prelude-c-setup`, which runs from the hooks of the C, C++ and
+Objective-C modes, before the functions you add to them. Add your own
+to change it:
 
 ```emacs-lisp
-(add-hook 'prelude-c-mode-common-hook
-          (lambda () (subword-mode -1)))
+(defun my-c-setup ()
+  (subword-mode -1))
+
+(dolist (hook '(c-mode-hook c++-mode-hook c-ts-mode-hook c++-ts-mode-hook))
+  (add-hook hook #'my-c-setup))
 ```
 
 ## Key Bindings

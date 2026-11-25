@@ -46,7 +46,8 @@
   (add-to-list 'auto-mode-alist
                (cons (concat "/\\.?" (regexp-quote file) "\\'") 'sh-mode)))
 
-(defun prelude-sh-mode-defaults ()
+(defun prelude-shell-setup ()
+  "Set up a shell script buffer."
   (subword-mode +1)
   ;; Auto-detect zsh for prezto files
   (when (and buffer-file-name
@@ -55,14 +56,15 @@
   ;; the language server only understands sh and bash
   (when (or (derived-mode-p 'bash-ts-mode)
             (memq sh-shell '(sh bash)))
-    (prelude-lsp-enable 'quiet)))
+    (prelude-lsp-enable 'quiet))
+  (run-hooks 'prelude-sh-mode-hook))
 
-(add-hook 'prelude-sh-mode-hook #'prelude-sh-mode-defaults)
+(make-obsolete-variable 'prelude-sh-mode-hook
+                        "use `sh-mode-hook' and `bash-ts-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'sh-mode-hook (lambda ()
-                          (run-hooks 'prelude-sh-mode-hook)))
-(add-hook 'bash-ts-mode-hook (lambda ()
-                               (run-hooks 'prelude-sh-mode-hook)))
+(add-hook 'sh-mode-hook #'prelude-shell-setup -50)
+(add-hook 'bash-ts-mode-hook #'prelude-shell-setup -50)
 
 (provide 'prelude-shell)
 ;;; prelude-shell.el ends here

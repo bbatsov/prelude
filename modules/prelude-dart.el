@@ -38,7 +38,8 @@
 
 (require 'prelude-programming)
 
-(defun prelude-dart-mode-defaults ()
+(defun prelude-dart-setup ()
+  "Set up a Dart buffer."
   (subword-mode +1)
   (prelude-lsp-enable)
   (when (eq prelude-lsp-client 'lsp-mode)
@@ -46,12 +47,16 @@
           '(dap-debug-template-configurations-provider))
     (lsp-dart-define-key "s o" #'lsp-dart-show-outline)
     (lsp-dart-define-key "s f" #'lsp-dart-show-flutter-outline)
-    (lsp-dart-dap-setup)))
+    (lsp-dart-dap-setup))
+  (run-hooks 'prelude-dart-mode-hook))
+
+(make-obsolete-variable 'prelude-dart-mode-hook
+                        "use `dart-mode-hook' instead."
+                        "2.2.0")
 
 (use-package dart-mode
   :ensure t
-  :hook (dart-mode . (lambda ()
-                       (run-hooks 'prelude-dart-mode-hook))))
+  :defer t)
 
 ;; Flutter-specific features on top of lsp-mode (outline views, DAP
 ;; debugging, hot reload, etc.)
@@ -60,7 +65,7 @@
     :ensure t
     :defer t))
 
-(add-hook 'prelude-dart-mode-hook #'prelude-dart-mode-defaults)
+(add-hook 'dart-mode-hook #'prelude-dart-setup -50)
 
 (provide 'prelude-dart)
 ;;; prelude-dart.el ends here
