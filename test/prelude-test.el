@@ -1255,6 +1255,24 @@ to load and would leave them in `fundamental-mode'."
             (should-not display-line-numbers-mode)))
       (global-display-line-numbers-mode (if global-on 1 -1)))))
 
+(ert-deftest prelude-welcome-screen-lists-the-known-projects ()
+  "The known projects get listed before anything asked Projectile for them.
+Projectile reads them from its file only when they're first needed."
+  (require 'projectile)
+  (let* ((file (make-temp-file "prelude-projects"))
+         (projectile-known-projects-file file)
+         (projectile-known-projects nil)
+         (projectile-known-projects-on-file nil))
+    (unwind-protect
+        (progn
+          (with-temp-file file (prin1 '("~/projects/prelude/" "~/projects/projectile/") (current-buffer)))
+          (prelude-test--with-welcome-screen
+            (goto-char (point-min))
+            (should (search-forward "Projects" nil t))
+            (should (search-forward "~/projects/prelude/" nil t))
+            (should (search-forward "~/projects/projectile/" nil t))))
+      (delete-file file))))
+
 (ert-deftest prelude-auto-install-leaves-other-files-alone ()
   (cl-flet ((packages-for (file)
               (delq nil (mapcar (lambda (entry)
