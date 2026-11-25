@@ -79,6 +79,7 @@
 
 ### Bugs fixed
 
+- [#1503](https://github.com/bbatsov/prelude/pull/1503): Keep line numbers off the welcome screen.
 - [#1501](https://github.com/bbatsov/prelude/pull/1501): Keep `C-c C-l`, the prefix of Prelude's Eglot commands, in OCaml buffers, where ocaml-eglot took it for `ocaml-eglot-find-definition` (which `M-.` does as well).
 - [#1500](https://github.com/bbatsov/prelude/pull/1500): Leave lsp-ui's options (`lsp-ui-doc-enable` and the like) to your personal config, which the lsp-mode module overrode as soon as lsp-mode got loaded.
 - [#1500](https://github.com/bbatsov/prelude/pull/1500): Turn on `evil-visualstar` in the Evil module, which installed it but never turned it on, so `*` and `#` in visual state didn't search for the selection.
