@@ -35,7 +35,8 @@
 
 (require 'prelude-programming)
 
-(defun prelude-ocaml-mode-defaults ()
+(defun prelude-ocaml-setup ()
+  "Set up an OCaml buffer."
   ;; CamelCase aware editing operations
   (subword-mode +1)
   ;; ocaml-eglot-mode adds OCaml-specific LSP commands
@@ -49,14 +50,11 @@
   (prelude-lsp-enable))
 
 ;; Tree-sitter powered major mode for OCaml, Dune, and utop.
-;; Replaces the older tuareg + merlin + utop stack.
-;; Hook into neocaml-base-mode so both .ml and .mli buffers
-;; get the same setup.
+;; Replaces the older tuareg + merlin + utop stack.  It registers its
+;; modes with Eglot itself.
 (use-package neocaml
   :ensure t
-  ;; neocaml registers its modes with Eglot itself
-  :hook (neocaml-base-mode . (lambda ()
-                               (run-hooks 'prelude-ocaml-mode-hook))))
+  :defer t)
 
 ;; OCaml-specific Eglot extensions (requires ocaml-lsp-server).
 ;; Only installed when Eglot is the configured LSP client.
@@ -65,7 +63,8 @@
     :ensure t
     :defer t))
 
-(add-hook 'prelude-ocaml-mode-hook #'prelude-ocaml-mode-defaults)
+;; the parent of the modes for .ml and .mli files
+(add-hook 'neocaml-base-mode-hook #'prelude-ocaml-setup -50)
 
 (provide 'prelude-ocaml)
 ;;; prelude-ocaml.el ends here

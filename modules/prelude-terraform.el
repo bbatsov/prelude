@@ -36,16 +36,15 @@
 ;; * terraform (or tofu)
 ;; * terraform-ls
 
-(defun prelude-terraform-mode-defaults ()
-  "Default coding hook, useful with Terraform."
+(defun prelude-terraform-setup ()
+  "Set up a Terraform buffer."
   (prelude-lsp-enable))
 
 (use-package terraform-mode
   :ensure t
-  :defer t
-  :hook (terraform-mode . (lambda () (run-hooks 'prelude-terraform-mode-hook))))
+  :defer t)
 
-(add-hook 'prelude-terraform-mode-hook #'prelude-terraform-mode-defaults)
+(add-hook 'terraform-mode-hook #'prelude-terraform-setup -50)
 
 (provide 'prelude-terraform)
 ;;; prelude-terraform.el ends here

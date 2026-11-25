@@ -25,5 +25,5 @@ Racket Mode provides:
 | <kbd>M-RET</kbd> | `racket-run` | Run the current file in the REPL |
 | <kbd>M-.</kbd> | `xref-find-definitions` | Jump to definition |
 
-The common Lisp coding hook is also enabled, providing `smartparens-strict-mode`
-and `rainbow-delimiters`.
+Like the other Lisp modes, Racket buffers get `smartparens-strict-mode`
+and `rainbow-delimiters` from the [Lisp Base](lisp.md) module.

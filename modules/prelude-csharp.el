@@ -36,18 +36,14 @@
 ;; Use csharp-ts-mode when the tree-sitter grammar is available
 (prelude-treesit-remap 'c-sharp 'csharp-mode 'csharp-ts-mode)
 
-(defun prelude-csharp-mode-defaults ()
-  "Default coding hook, useful with C#."
+(defun prelude-csharp-setup ()
+  "Set up a C# buffer."
   ;; CamelCase aware editing operations
   (subword-mode +1)
   (prelude-lsp-enable))
 
-(add-hook 'prelude-csharp-mode-hook #'prelude-csharp-mode-defaults)
-
-(add-hook 'csharp-mode-hook (lambda ()
-                              (run-hooks 'prelude-csharp-mode-hook)))
-(add-hook 'csharp-ts-mode-hook (lambda ()
-                                 (run-hooks 'prelude-csharp-mode-hook)))
+(add-hook 'csharp-mode-hook #'prelude-csharp-setup -50)
+(add-hook 'csharp-ts-mode-hook #'prelude-csharp-setup -50)
 
 (provide 'prelude-csharp)
 ;;; prelude-csharp.el ends here

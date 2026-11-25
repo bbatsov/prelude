@@ -43,20 +43,21 @@
 
 (declare-function python-imenu-create-flat-index "python")
 
-(defun prelude-python-mode-defaults ()
-  "Defaults for Python programming."
+(defun prelude-python-setup ()
+  "Set up a Python buffer."
   (subword-mode +1)
   (eldoc-mode +1)
   (prelude-lsp-enable)
   (setq-local imenu-create-index-function
-              #'python-imenu-create-flat-index))
+              #'python-imenu-create-flat-index)
+  (run-hooks 'prelude-python-mode-hook))
 
-(add-hook 'prelude-python-mode-hook #'prelude-python-mode-defaults)
+(make-obsolete-variable 'prelude-python-mode-hook
+                        "use `python-mode-hook' and `python-ts-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'python-mode-hook (lambda ()
-                              (run-hooks 'prelude-python-mode-hook)))
-(add-hook 'python-ts-mode-hook (lambda ()
-                                 (run-hooks 'prelude-python-mode-hook)))
+(add-hook 'python-mode-hook #'prelude-python-setup -50)
+(add-hook 'python-ts-mode-hook #'prelude-python-setup -50)
 
 (provide 'prelude-python)
 ;;; prelude-python.el ends here

@@ -32,8 +32,14 @@
 
 (require 'prelude-lisp)
 
-(defun prelude-scheme-mode-defaults ()
-  (run-hooks 'prelude-lisp-coding-hook))
+(defun prelude-scheme-setup ()
+  "Set up a Scheme buffer."
+  (prelude-lisp-coding-setup)
+  (run-hooks 'prelude-scheme-mode-hook))
+
+(make-obsolete-variable 'prelude-scheme-mode-hook
+                        "use `scheme-mode-hook' instead."
+                        "2.2.0")
 
 ;; Geiser: REPL-driven development for Scheme (Guile, Chicken, Chez,
 ;; Racket, etc.)
@@ -47,10 +53,7 @@
   (geiser-repl-history-filename
    (expand-file-name "geiser-history" prelude-savefile-dir)))
 
-(add-hook 'prelude-scheme-mode-hook #'prelude-scheme-mode-defaults)
-
-(add-hook 'scheme-mode-hook (lambda ()
-                              (run-hooks 'prelude-scheme-mode-hook)))
+(add-hook 'scheme-mode-hook #'prelude-scheme-setup -50)
 
 (provide 'prelude-scheme)
 ;;; prelude-scheme.el ends here

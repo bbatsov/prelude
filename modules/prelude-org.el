@@ -44,7 +44,8 @@
   (setq org-log-done t)
   (setq org-log-into-drawer t))
 
-(defun prelude-org-mode-defaults ()
+(defun prelude-org-setup ()
+  "Set up an Org buffer."
   ;; clean visual indentation
   (org-indent-mode +1)
   ;; let org-mode handle C-a
@@ -53,11 +54,14 @@
     (set-keymap-parent newmap oldmap)
     (define-key newmap (kbd "C-a") 'org-beginning-of-line)
     (make-local-variable 'minor-mode-overriding-map-alist)
-    (push `(prelude-mode . ,newmap) minor-mode-overriding-map-alist)))
+    (push `(prelude-mode . ,newmap) minor-mode-overriding-map-alist))
+  (run-hooks 'prelude-org-mode-hook))
 
-(add-hook 'prelude-org-mode-hook #'prelude-org-mode-defaults)
+(make-obsolete-variable 'prelude-org-mode-hook
+                        "use `org-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'org-mode-hook (lambda () (run-hooks 'prelude-org-mode-hook)))
+(add-hook 'org-mode-hook #'prelude-org-setup -50)
 
 (provide 'prelude-org)
 ;;; prelude-org.el ends here

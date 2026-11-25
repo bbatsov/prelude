@@ -41,8 +41,17 @@
 ;; for those who still have that package around.
 (autoload 'scss-mode "css-mode" nil t)
 
-(add-hook 'scss-mode-hook (lambda ()
-                            (run-hooks 'prelude-scss-mode-hook)))
+;; SCSS buffers need nothing on top of that, but the obsolete hook
+;; still runs, for the configs that use it
+(defun prelude-scss-setup ()
+  "Set up an SCSS buffer."
+  (run-hooks 'prelude-scss-mode-hook))
+
+(make-obsolete-variable 'prelude-scss-mode-hook
+                        "use `scss-mode-hook' instead."
+                        "2.2.0")
+
+(add-hook 'scss-mode-hook #'prelude-scss-setup -50)
 
 (provide 'prelude-scss)
 ;;; prelude-scss.el ends here

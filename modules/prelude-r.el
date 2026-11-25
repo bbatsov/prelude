@@ -35,16 +35,15 @@
 ;; You may need to install the language server (it's an R package):
 ;;   install.packages("languageserver")
 
-(defun prelude-r-mode-defaults ()
-  "Default coding hook, useful with R."
+(defun prelude-r-setup ()
+  "Set up an R buffer."
   (prelude-lsp-enable))
 
 (use-package ess
   :ensure t
-  :defer t
-  :hook (ess-r-mode . (lambda () (run-hooks 'prelude-r-mode-hook))))
+  :defer t)
 
-(add-hook 'prelude-r-mode-hook #'prelude-r-mode-defaults)
+(add-hook 'ess-r-mode-hook #'prelude-r-setup -50)
 
 (provide 'prelude-r)
 ;;; prelude-r.el ends here

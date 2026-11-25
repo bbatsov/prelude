@@ -41,7 +41,7 @@
 ;; Open files with .cl extension in lisp-mode
 (add-to-list 'auto-mode-alist '("\\.cl\\'" . lisp-mode))
 
-(add-hook 'lisp-mode-hook (lambda () (run-hooks 'prelude-lisp-coding-hook)))
+(add-hook 'lisp-mode-hook #'prelude-lisp-coding-setup -50)
 
 ;; Default Lisp for `M-x run-lisp' (the built-in inferior Lisp mode).
 (setq inferior-lisp-program "sbcl")
@@ -68,6 +68,10 @@
   ;; slime-quicklisp adds Quicklisp integration.
   (setq slime-contribs '(slime-fancy slime-cl-indent slime-quicklisp))
 
+  ;; Uncomment to let the Lisp process evaluate Emacs Lisp.
+  ;; Useful for advanced setups but a potential security risk.
+  ;; (setq slime-enable-evaluate-in-emacs t)
+
   ;; Actually load the contribs configured above.  Without this
   ;; slime-fancy's completion function (slime-c-p-c-completion-at-point)
   ;; is never defined and company-capf fails with a void-function error.
@@ -77,19 +81,17 @@
   ;; when there's no running Lisp session.  Skip it unless we're
   ;; connected, otherwise company errors on every keystroke in a Lisp
   ;; buffer that isn't attached to a REPL.
-  (advice-add 'slime--completion-at-point :before-while #'slime-connected-p)
+  (advice-add 'slime--completion-at-point :before-while #'slime-connected-p))
 
-  ;; Uncomment to let the Lisp process evaluate Emacs Lisp.
-  ;; Useful for advanced setups but a potential security risk.
-  ;; (setq slime-enable-evaluate-in-emacs t)
+;; rainbow-delimiters messes up colors in slime-repl, so this takes the
+;; place of `prelude-interactive-lisp-coding-setup'
+(defun prelude-slime-repl-setup ()
+  "Set up a SLIME REPL buffer."
+  (when prelude-smartparens
+    (smartparens-strict-mode +1))
+  (whitespace-mode -1))
 
-  ;; rainbow-delimiters messes up colors in slime-repl, so we
-  ;; configure the REPL hooks directly instead of using
-  ;; prelude-lisp-coding-defaults.
-  (add-hook 'slime-repl-mode-hook (lambda ()
-                                    (when prelude-smartparens
-                                      (smartparens-strict-mode +1))
-                                    (whitespace-mode -1))))
+(add-hook 'slime-repl-mode-hook #'prelude-slime-repl-setup -50)
 
 (provide 'prelude-common-lisp)
 ;;; prelude-common-lisp.el ends here

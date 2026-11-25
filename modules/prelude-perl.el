@@ -50,7 +50,8 @@
 ;; C-h P to look up Perl documentation
 (define-key 'help-command (kbd "P") 'cperl-perldoc)
 
-(defun prelude-cperl-mode-defaults ()
+(defun prelude-perl-setup ()
+  "Set up a Perl buffer."
   (setq cperl-indent-level 4)
   (setq cperl-continued-statement-offset 8)
   ;; Fine-grained control over electric behavior instead of the
@@ -72,12 +73,14 @@
   (when (< emacs-major-version 30)
     (with-suppressed-warnings ((obsolete cperl-invalid-face))
       (setq cperl-invalid-face nil)))
-  (subword-mode +1))
+  (subword-mode +1)
+  (run-hooks 'prelude-cperl-mode-hook))
 
-(add-hook 'prelude-cperl-mode-hook #'prelude-cperl-mode-defaults)
+(make-obsolete-variable 'prelude-cperl-mode-hook
+                        "use `cperl-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'cperl-mode-hook (lambda ()
-                             (run-hooks 'prelude-cperl-mode-hook)) t)
+(add-hook 'cperl-mode-hook #'prelude-perl-setup -50)
 
 (provide 'prelude-perl)
 ;;; prelude-perl.el ends here

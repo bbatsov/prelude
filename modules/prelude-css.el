@@ -42,16 +42,18 @@
   :ensure t
   :defer t)
 
-(defun prelude-css-mode-defaults ()
+(defun prelude-css-setup ()
+  "Set up a CSS buffer."
   (rainbow-mode +1)
-  (prelude-lsp-enable 'quiet))
+  (prelude-lsp-enable 'quiet)
+  (run-hooks 'prelude-css-mode-hook))
 
-(add-hook 'prelude-css-mode-hook #'prelude-css-mode-defaults)
+(make-obsolete-variable 'prelude-css-mode-hook
+                        "use `css-mode-hook' and `css-ts-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'css-mode-hook (lambda ()
-                           (run-hooks 'prelude-css-mode-hook)))
-(add-hook 'css-ts-mode-hook (lambda ()
-                              (run-hooks 'prelude-css-mode-hook)))
+(add-hook 'css-mode-hook #'prelude-css-setup -50)
+(add-hook 'css-ts-mode-hook #'prelude-css-setup -50)
 
 (provide 'prelude-css)
 ;;; prelude-css.el ends here

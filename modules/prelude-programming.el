@@ -42,14 +42,6 @@
   :config
   (global-hl-todo-mode 1))
 
-;; Programming major modes derive from prog-mode, so that's where the
-;; defaults below are hooked up.  To augment and/or counteract them add
-;; your own function to prelude-prog-mode-hook, using:
-;;
-;;     (add-hook 'prelude-prog-mode-hook 'my-prog-mode-defaults t)
-;;
-;; (the final optional t sets the *append* argument)
-
 (when prelude-smartparens
   ;; smart curly braces
   (sp-pair "{" nil :post-handlers
@@ -63,8 +55,8 @@
   :init
   (setq guru-warn-only t))
 
-(defun prelude-prog-mode-defaults ()
-  "Default coding hook, useful with any programming language."
+(defun prelude-prog-setup ()
+  "Set up a buffer of any programming language."
   (when (and prelude-flyspell
              (eq prelude-spell-checker 'flyspell)
              (executable-find ispell-program-name))
@@ -77,12 +69,18 @@
       (smartparens-mode +1)
     (electric-pair-local-mode +1))
   (prelude-enable-whitespace)
-  (prelude-local-comment-auto-fill))
+  (prelude-local-comment-auto-fill)
+  (run-hooks 'prelude-prog-mode-hook))
 
-(add-hook 'prelude-prog-mode-hook #'prelude-prog-mode-defaults)
+(make-obsolete-variable 'prelude-prog-mode-hook
+                        "use `prog-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'prog-mode-hook (lambda ()
-                            (run-hooks 'prelude-prog-mode-hook)))
+;; Programming major modes derive from prog-mode, so that's where the
+;; setup above goes.  It runs ahead of the functions you add to
+;; `prog-mode-hook' (as do the setups of the language modules on the
+;; hooks of their modes), so that those can change anything it did.
+(add-hook 'prog-mode-hook #'prelude-prog-setup -50)
 
 ;; enable on-the-fly syntax checking
 (use-package flycheck
@@ -104,14 +102,17 @@
 Update your packages with M-x prelude-update and restart Emacs."))))
 
 ;; Makefiles require tabs for indentation
-(defun prelude-makefile-mode-defaults ()
+(defun prelude-makefile-setup ()
+  "Set up a Makefile buffer."
   (whitespace-toggle-options '(tabs))
-  (setq indent-tabs-mode t))
+  (setq indent-tabs-mode t)
+  (run-hooks 'prelude-makefile-mode-hook))
 
-(add-hook 'prelude-makefile-mode-hook #'prelude-makefile-mode-defaults)
+(make-obsolete-variable 'prelude-makefile-mode-hook
+                        "use `makefile-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'makefile-mode-hook (lambda ()
-                                (run-hooks 'prelude-makefile-mode-hook)))
+(add-hook 'makefile-mode-hook #'prelude-makefile-setup -50)
 
 (provide 'prelude-programming)
 ;;; prelude-programming.el ends here

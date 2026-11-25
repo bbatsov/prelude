@@ -34,16 +34,21 @@
 
 (require 'prelude-programming)
 
-(defun prelude-scala-mode-defaults ()
+(defun prelude-scala-setup ()
+  "Set up a Scala buffer."
   (subword-mode +1)
-  (prelude-lsp-enable))
+  (prelude-lsp-enable)
+  (run-hooks 'prelude-scala-mode-hook))
+
+(make-obsolete-variable 'prelude-scala-mode-hook
+                        "use `scala-mode-hook' instead."
+                        "2.2.0")
 
 (use-package scala-mode
   :ensure t
-  :hook (scala-mode . (lambda ()
-                        (run-hooks 'prelude-scala-mode-hook))))
+  :defer t)
 
-(add-hook 'prelude-scala-mode-hook #'prelude-scala-mode-defaults)
+(add-hook 'scala-mode-hook #'prelude-scala-setup -50)
 
 (provide 'prelude-scala)
 ;;; prelude-scala.el ends here

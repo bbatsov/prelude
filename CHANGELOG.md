@@ -34,6 +34,11 @@
 
 ### Changes
 
+- [#1499](https://github.com/bbatsov/prelude/pull/1499): Set up each major mode with a named function on the hooks of the mode, the way you'd do it in your own config (see [Upgrading](https://prelude.emacsredux.com/en/latest/upgrading/)):
+  - `prelude-ruby-setup` is on `ruby-mode-hook` and `ruby-ts-mode-hook`, for instance, and runs before the functions you add to them, so that those have the last word.
+  - The `prelude-*-mode-hook`s, `prelude-lisp-coding-hook` and `prelude-interactive-lisp-coding-hook` are obsolete. Prelude's setup still runs them at the end, and `M-x prelude-doctor` lists the ones your config uses, but running one from the hook of another mode no longer gives that mode Prelude's setup.
+  - The `prelude-*-mode-defaults` functions are gone.
+  - `clojure-ts-mode` buffers get the Clojure setup.
 - [#1497](https://github.com/bbatsov/prelude/pull/1497): Tidy up the literate programming module: Org asks before running code blocks again (the module turned that off without saying so, which let exported Org files run their code), Org's setup waits for Org to load, `deno` code blocks work (`ob-deno` was installed but not loaded), and `elpy`, which was installed but never turned on, is gone.
 - [#1496](https://github.com/bbatsov/prelude/pull/1496): Bring the ERC module up to date: it connects to Libera.Chat instead of the long gone Freenode, loads ERC only when it's used, and its commands and options have Prelude names (`prelude-erc-start`, `prelude-erc-stop`, `prelude-erc-servers`, `prelude-erc-quit-message`), with the old ones kept as obsolete aliases.
 - [#1494](https://github.com/bbatsov/prelude/pull/1494): On Emacs 31, leave `C-x O`, `C-x C-x` without an active region and the prompt of `completing-read-multiple` to Emacs itself, which does what Prelude used to do for them (the latter showed the separator twice).
@@ -63,7 +68,6 @@
 - Set `consult-narrow-key` to `<` in `prelude-vertico`, so you can narrow consult candidates to a single group (e.g. `< b` for buffers in `consult-buffer`).
 - Tidy up `prelude-common-lisp`: drop stale `slime-autodoc-use-multiline-p` setting (the variable was removed from upstream SLIME; modern autodoc honors `eldoc-echo-area-use-multiline-p`), set `inferior-lisp-program` to `sbcl` so `M-x run-lisp` works without SLIME, and add `slime-quicklisp` to `slime-contribs` for Quicklisp integration.
 - Enable `lexical-binding` in all of Prelude's Emacs Lisp files (including the sample `prelude-modules.el`), which silences the missing-cookie warnings Emacs 31 prints on every startup.
-- Modules now `add-hook` their defaults to Prelude's hooks (`prelude-<lang>-mode-hook`, `prelude-lisp-coding-hook`, etc.) instead of `setq`-ing them, so functions you add to those hooks in `personal/preload` are no longer thrown away when the module loads.
 - Stop installing `gist` (unused), and only install `which-key` and `editorconfig` on Emacs 29, since both are built into Emacs 30+.
 - Replace the unmaintained `smartrep` package with a plain transient keymap for the `C-c .` operate-on-number bindings. They work the same way: after the first operation, the operator keys can be repeated without the prefix.
 - Install all of Prelude's packages with `use-package` and `:ensure t`, and deprecate `prelude-require-package` and `prelude-require-packages` in favour of it. `prelude-packages` now starts out empty and gets filled in with every package Prelude ensures (including ones from modules), so `prelude-update-packages` and `prelude-list-foreign-packages` keep working, and your own `use-package :ensure` forms are tracked the same way.
@@ -99,11 +103,11 @@
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): Fix opening a Rust file turning off "make scripts executable on save" for every buffer (the function on `after-save-hook` is now `prelude-make-script-executable`, which knows that `#![...]` isn't a shebang).
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): Format Rust buffers on save again (with the language server), as `rust-format-on-save` has no effect in `rust-ts-mode`.
 - [#1470](https://github.com/bbatsov/prelude/pull/1470): Fix `prelude-go`'s key bindings, format on save and `super-save` exemption not working in `go-ts-mode`.
-- [#1472](https://github.com/bbatsov/prelude/pull/1472): Give JSON buffers the same setup in both JSON modes, with a `prelude-json-mode-hook` of their own (`json-ts-mode` buffers got none of it, and neither did `js-json-mode` ones on newer Emacsen).
+- [#1472](https://github.com/bbatsov/prelude/pull/1472): Give JSON buffers the same setup in both JSON modes (`json-ts-mode` buffers got none of it, and neither did `js-json-mode` ones on newer Emacsen).
 - [#1472](https://github.com/bbatsov/prelude/pull/1472): Don't run `prelude-prog-mode-hook` twice in CSS and `web-mode` buffers.
 - [#1473](https://github.com/bbatsov/prelude/pull/1473): Fix SCSS files opening in `fundamental-mode` with `prelude-scss` enabled: the module installed the `scss-mode` package from MELPA, which no longer loads, and now uses the `scss-mode` that comes with Emacs.
 - [#1473](https://github.com/bbatsov/prelude/pull/1473): Don't break `fsharp-mode` when `eglot-fsharp` failed to install.
-- [#1473](https://github.com/bbatsov/prelude/pull/1473): Add the missing `prelude-ocaml-mode-hook`, and run `prelude-ts-mode-hook` in `typescript-mode` buffers as well.
+- [#1473](https://github.com/bbatsov/prelude/pull/1473): Set up `typescript-mode` buffers (for those who still have the package) like `typescript-ts-mode` ones.
 - [#1475](https://github.com/bbatsov/prelude/pull/1475): Open JavaScript files in `js-ts-mode` when its grammar is installed: `.js` files are associated with `javascript-mode`, an alias Prelude didn't remap, so they always ended up in `js-mode`. `.mjs` and `.cjs` files are recognized as JavaScript as well.
 - [#1475](https://github.com/bbatsov/prelude/pull/1475): Install the `jsdoc` grammar together with the `javascript` one on Emacs 31+, where `js-ts-mode` fails to start without it.
 - [#1476](https://github.com/bbatsov/prelude/pull/1476): Install tree-sitter grammars that work with the modes of the Emacs you're running: the pinned versions of the Go, JavaScript and TypeScript grammars were too new for Emacs 29 and 30 (breaking parts of their highlighting), the latest Swift grammar doesn't work with `swift-ts-mode`, and the YAML one could fail to build.

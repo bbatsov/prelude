@@ -34,21 +34,26 @@
 
 (require 'prelude-programming)
 
-(defun prelude-haskell-mode-defaults ()
+(defun prelude-haskell-setup ()
+  "Set up a Haskell buffer."
   (subword-mode +1)
   (eldoc-mode +1)
   ;; Haskell's layout-based indentation
   (haskell-indentation-mode +1)
   ;; GHCi integration: type info, jump to definition, REPL interaction
   (interactive-haskell-mode +1)
-  (prelude-lsp-enable))
+  (prelude-lsp-enable)
+  (run-hooks 'prelude-haskell-mode-hook))
+
+(make-obsolete-variable 'prelude-haskell-mode-hook
+                        "use `haskell-mode-hook' instead."
+                        "2.2.0")
 
 (use-package haskell-mode
   :ensure t
-  :hook (haskell-mode . (lambda ()
-                          (run-hooks 'prelude-haskell-mode-hook))))
+  :defer t)
 
-(add-hook 'prelude-haskell-mode-hook #'prelude-haskell-mode-defaults)
+(add-hook 'haskell-mode-hook #'prelude-haskell-setup -50)
 
 (provide 'prelude-haskell)
 ;;; prelude-haskell.el ends here

@@ -41,20 +41,24 @@
     (with-suppressed-warnings ((obsolete racket-unicode-input-method-enable))
       (racket-unicode-input-method-enable))))
 
-(defun prelude-racket-mode-defaults ()
-  (run-hooks 'prelude-lisp-coding-hook)
-  (prelude-racket-enable-input-mode))
+(defun prelude-racket-setup ()
+  "Set up a Racket buffer."
+  (prelude-lisp-coding-setup)
+  (prelude-racket-enable-input-mode)
+  (run-hooks 'prelude-racket-mode-hook))
+
+(make-obsolete-variable 'prelude-racket-mode-hook
+                        "use `racket-mode-hook' instead."
+                        "2.2.0")
 
 ;; IDE-like Racket support with REPL, docs, and macro expansion
 (use-package racket-mode
   :ensure t
   :bind (:map racket-mode-map
               ("M-RET" . racket-run))
-  :hook ((racket-mode . (lambda ()
-                           (run-hooks 'prelude-racket-mode-hook)))
-         (racket-repl-mode . prelude-racket-enable-input-mode)))
+  :hook (racket-repl-mode . prelude-racket-enable-input-mode))
 
-(add-hook 'prelude-racket-mode-hook #'prelude-racket-mode-defaults)
+(add-hook 'racket-mode-hook #'prelude-racket-setup -50)
 
 (provide 'prelude-racket)
 ;;; prelude-racket.el ends here

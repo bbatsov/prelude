@@ -34,22 +34,27 @@
 
 (require 'prelude-programming)
 
-(defun prelude-erlang-mode-defaults ()
+(defun prelude-erlang-setup ()
+  "Set up an Erlang buffer."
   (subword-mode +1)
   (prelude-lsp-enable)
   ;; Use Projectile's compile command instead of erlang-mode's default
   (when prelude-projectile
     (require 'projectile)
-    (setq erlang-compile-function 'projectile-compile-project)))
+    (setq erlang-compile-function 'projectile-compile-project))
+  (run-hooks 'prelude-erlang-mode-hook))
+
+(make-obsolete-variable 'prelude-erlang-mode-hook
+                        "use `erlang-mode-hook' instead."
+                        "2.2.0")
 
 ;; Major mode for Erlang.  Install erlang_ls for LSP support:
 ;;   https://github.com/erlang-ls/erlang_ls
 (use-package erlang
   :ensure t
-  :hook (erlang-mode . (lambda ()
-                         (run-hooks 'prelude-erlang-mode-hook))))
+  :defer t)
 
-(add-hook 'prelude-erlang-mode-hook #'prelude-erlang-mode-defaults)
+(add-hook 'erlang-mode-hook #'prelude-erlang-setup -50)
 
 (provide 'prelude-erlang)
 ;;; prelude-erlang.el ends here

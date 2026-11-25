@@ -7,6 +7,45 @@ the releases where there's more to it. The
 [changelog](https://github.com/bbatsov/prelude/blob/master/CHANGELOG.md)
 has the full list of changes in every release.
 
+## Upgrading to Prelude 2.2
+
+### How modules set up major modes
+
+Prelude used to set up a major mode with a `prelude-*-mode-defaults`
+function on a hook of its own, like `prelude-ruby-mode-hook`, which it
+ran from the hooks of the mode. Now there's one setup function per mode,
+right on the hooks of the mode: `prelude-ruby-setup` is on
+`ruby-mode-hook` and `ruby-ts-mode-hook`, for instance, and
+`prelude-prog-setup` is on `prog-mode-hook`. It runs before the
+functions you add to the same hooks, so those have the last word (they
+used to run before Prelude's setup).
+
+What that means for your personal config:
+
+- Functions that you add to a `prelude-*-mode-hook` (or to
+  `prelude-lisp-coding-hook`) still run, after Prelude's setup, but the
+  hooks are obsolete and they'll go away in a future release. Add the
+  functions to the hooks of the modes instead. `M-x prelude-doctor`
+  lists the obsolete hooks that you're using.
+- If you ran one of those hooks from the hook of another mode, to give
+  that mode Prelude's setup, that no longer does anything, as Prelude's
+  setup isn't on the hooks anymore. Add the setup function to the hook
+  instead, e.g. `(add-hook 'fennel-mode-hook #'prelude-lisp-coding-setup)`.
+- A function of yours that has to run before Prelude's setup of a mode,
+  because it changes something the setup looks at, now runs after it.
+  Add it to the hook at a depth below -50, e.g.
+  `(add-hook 'python-mode-hook #'my-python-setup -60)`.
+- The `prelude-*-mode-defaults` functions are gone.
+
+To keep Prelude's setup out of a mode, which you used to do by removing
+its defaults function from its hook, remove the setup function from the
+hooks of the mode:
+
+```emacs-lisp
+(remove-hook 'ruby-mode-hook #'prelude-ruby-setup)
+(remove-hook 'ruby-ts-mode-hook #'prelude-ruby-setup)
+```
+
 ## Upgrading to Prelude 2.0
 
 Prelude 2.0 is a major release that modernizes the entire

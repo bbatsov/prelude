@@ -12,9 +12,10 @@
 
 ;; M-x prelude-doctor lists what Prelude needs from your system that's
 ;; missing (programs, tree-sitter grammars, language servers), the
-;; modules that you've enabled, and the modules that were added to
-;; Prelude since you made your copy of the modules file.  The report
-;; doubles as the information a bug report needs.
+;; modules that you've enabled, the modules that were added to Prelude
+;; since you made your copy of the modules file, and the obsolete
+;; Prelude hooks your config still uses.  The report doubles as the
+;; information a bug report needs.
 
 ;;; License:
 
@@ -91,6 +92,22 @@ Those were most likely added to Prelude after you made your copy."
       (expand-file-name "sample/prelude-modules.el" prelude-dir))
      (prelude-doctor--mentioned-modules prelude-modules-file))))
 
+(defun prelude-doctor--obsolete-variables ()
+  "Return the obsolete Prelude variables that your config gives a value.
+Those are mostly the hooks Prelude used to run in the buffers of the
+major modes, which the hooks of the modes themselves have replaced."
+  (let ((found nil))
+    (mapatoms
+     (lambda (symbol)
+       (when (and (string-prefix-p "prelude-" (symbol-name symbol))
+                  (get symbol 'byte-obsolete-variable)
+                  ;; an alias has the value of the variable it stands for
+                  (eq (indirect-variable symbol) symbol)
+                  (default-boundp symbol)
+                  (default-value symbol))
+         (push symbol found))))
+    (sort found #'string<)))
+
 (defun prelude-doctor--language-server (ts-mode)
   "Return what's missing for the language server of TS-MODE, or nil."
   (with-temp-buffer
@@ -133,7 +150,15 @@ A result is (STATUS TEXT), where STATUS is `ok', `problem' or `note'."
             (let ((new (prelude-doctor--new-modules)))
               (when new
                 (list (list 'note (format "modules added since you made your copy of the modules file: %s"
-                                          (string-join new " "))))))))
+                                          (string-join new " "))))))
+            ;; they still work, but not for much longer
+            (mapcar (lambda (variable)
+                      (let ((instead (car (get variable 'byte-obsolete-variable))))
+                        (list 'note (format "%s is obsolete, %s" variable
+                                            (if (stringp instead)
+                                                (substitute-quotes instead)
+                                              (format-message "use `%s' instead." instead))))))
+                    (prelude-doctor--obsolete-variables))))
      (cons "Programs"
            (delq nil
                  (list

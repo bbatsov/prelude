@@ -35,16 +35,15 @@
 ;; You may need to install a language server on your system:
 ;; nil or nixd.
 
-(defun prelude-nix-mode-defaults ()
-  "Default coding hook, useful with Nix."
+(defun prelude-nix-setup ()
+  "Set up a Nix buffer."
   (prelude-lsp-enable))
 
 (use-package nix-mode
   :ensure t
-  :defer t
-  :hook (nix-mode . (lambda () (run-hooks 'prelude-nix-mode-hook))))
+  :defer t)
 
-(add-hook 'prelude-nix-mode-hook #'prelude-nix-mode-defaults)
+(add-hook 'nix-mode-hook #'prelude-nix-setup -50)
 
 (provide 'prelude-nix)
 ;;; prelude-nix.el ends here

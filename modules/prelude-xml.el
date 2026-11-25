@@ -47,13 +47,16 @@
 (setq nxml-bind-meta-tab-to-complete-flag t)
 (setq nxml-slash-auto-complete-flag t)
 
-(defun prelude-xml-mode-defaults ()
-  (subword-mode +1))
+(defun prelude-xml-setup ()
+  "Set up an XML buffer."
+  (subword-mode +1)
+  (run-hooks 'prelude-xml-mode-hook))
 
-(add-hook 'prelude-xml-mode-hook #'prelude-xml-mode-defaults)
+(make-obsolete-variable 'prelude-xml-mode-hook
+                        "use `nxml-mode-hook' instead."
+                        "2.2.0")
 
-(add-hook 'nxml-mode-hook (lambda ()
-                            (run-hooks 'prelude-xml-mode-hook)))
+(add-hook 'nxml-mode-hook #'prelude-xml-setup -50)
 
 (provide 'prelude-xml)
 ;;; prelude-xml.el ends here
