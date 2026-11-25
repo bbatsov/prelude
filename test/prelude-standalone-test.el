@@ -2,13 +2,13 @@
 
 ;;; Commentary:
 
-;; The completion modules change Emacs globally, and some of them can't
-;; be loaded together, so CI loads each of them in an Emacs of its own
-;; and runs these tests there.  A test runs only when
+;; The completion modules, Evil and key-chord change Emacs globally, and
+;; some of them can't be loaded together, so CI loads each of them in an
+;; Emacs of its own and runs these tests there.  A test runs only when
 ;; its module has been loaded.
 ;;
 ;; Usage:
-;;   emacs --batch -l init.el --eval "(require 'prelude-ivy)" \
+;;   emacs --batch -l init.el --eval "(require 'prelude-evil)" \
 ;;     -l test/prelude-standalone-test.el -f ert-run-tests-batch-and-exit
 
 ;;; Code:
@@ -16,13 +16,20 @@
 (require 'ert)
 
 (defvar company-idle-delay)
+(defvar evil-normal-state-map)
+(defvar evil-visual-state-map)
 (defvar helm-command-map)
 (defvar global-company-mode)
+(defvar global-evil-surround-mode)
+(defvar global-evil-visualstar-mode)
+(defvar evil-mode)
+(defvar evil-emacs-state-cursor)
 (defvar helm-mode)
 (defvar ido-mode)
 (defvar ido-ubiquitous-mode)
 (defvar flx-ido-mode)
 (defvar ivy-mode)
+(defvar key-chord-mode)
 
 (ert-deftest prelude-company-completes-everywhere ()
   (skip-unless (featurep 'prelude-company))
@@ -70,6 +77,21 @@
   (should helm-mode)
   (should (eq (key-binding (kbd "M-x")) 'helm-M-x))
   (should (eq (lookup-key isearch-mode-map (kbd "C-o")) 'helm-occur-from-isearch)))
+
+(ert-deftest prelude-evil-turns-on-its-extensions ()
+  (skip-unless (featurep 'prelude-evil))
+  (should evil-mode)
+  (should (equal evil-emacs-state-cursor '("red" box)))
+  (should global-evil-surround-mode)
+  ;; installed, but never turned on before
+  (should global-evil-visualstar-mode)
+  (should (eq (lookup-key evil-normal-state-map (kbd "C-A")) 'evil-numbers/inc-at-pt))
+  (should (eq (lookup-key evil-visual-state-map (kbd ">")) 'prelude-shift-right-visual)))
+
+(ert-deftest prelude-key-chord-defines-its-chords ()
+  (skip-unless (featurep 'prelude-key-chord))
+  (should key-chord-mode)
+  (should (eq (lookup-key (current-global-map) [key-chord ?j ?j]) 'avy-goto-word-1)))
 
 (provide 'prelude-standalone-test)
 ;;; prelude-standalone-test.el ends here
