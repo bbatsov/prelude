@@ -1225,6 +1225,25 @@ to load and would leave them in `fundamental-mode'."
               (should (eq (prelude-welcome--initial-buffer) 'welcome)))
           (setq buffer-file-name nil))))))
 
+(defmacro prelude-test--with-welcome-screen (&rest body)
+  "Render the welcome screen, run BODY in its buffer, then kill it."
+  (declare (indent 0))
+  `(unwind-protect
+       (with-current-buffer (prelude-welcome--render)
+         ,@body)
+     (when (get-buffer prelude-welcome-buffer-name)
+       (kill-buffer prelude-welcome-buffer-name))))
+
+(ert-deftest prelude-welcome-screen-has-no-line-numbers ()
+  "The welcome screen keeps the line numbers of `prelude-ui' out."
+  (let ((global-on global-display-line-numbers-mode))
+    (unwind-protect
+        (progn
+          (global-display-line-numbers-mode 1)
+          (prelude-test--with-welcome-screen
+            (should-not display-line-numbers-mode)))
+      (global-display-line-numbers-mode (if global-on 1 -1)))))
+
 (ert-deftest prelude-auto-install-leaves-other-files-alone ()
   (cl-flet ((packages-for (file)
               (delq nil (mapcar (lambda (entry)

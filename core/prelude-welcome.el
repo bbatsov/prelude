@@ -68,7 +68,10 @@
 (define-derived-mode prelude-welcome-mode special-mode "Prelude Welcome"
   "Major mode for the Prelude welcome screen."
   (setq-local cursor-type nil)
-  (setq-local truncate-lines t))
+  (setq-local truncate-lines t)
+  ;; there's no code here, and `global-display-line-numbers-mode' won't
+  ;; turn them back on after this
+  (display-line-numbers-mode -1))
 
 (defun prelude-welcome--heading (text)
   "Insert a section heading TEXT."
