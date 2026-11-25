@@ -124,11 +124,20 @@
                                (lambda () (find-file file)))
       (insert "\n"))))
 
+(defun prelude-welcome--known-projects ()
+  "Return Projectile's known projects, if Projectile is loaded.
+Newer versions of Projectile read them from their file only when
+they're first asked for, with the function `projectile-known-projects'."
+  (when (featurep 'projectile)
+    (if (fboundp 'projectile-known-projects)
+        (projectile-known-projects)
+      (bound-and-true-p projectile-known-projects))))
+
 (defun prelude-welcome--insert-projects (n)
   "Insert up to N known projects."
-  (when (bound-and-true-p projectile-known-projects)
+  (when-let* ((projects (prelude-welcome--known-projects)))
     (prelude-welcome--heading "Projects")
-    (dolist (project (seq-take projectile-known-projects n))
+    (dolist (project (seq-take projects n))
       (insert "  ")
       (prelude-welcome--button (abbreviate-file-name project)
                                (format "Switch to project %s" project)
