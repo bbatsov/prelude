@@ -42,12 +42,6 @@
   "Set up a Dart buffer."
   (subword-mode +1)
   (prelude-lsp-enable)
-  (when (eq prelude-lsp-client 'lsp-mode)
-    (setq dap-launch-configuration-providers
-          '(dap-debug-template-configurations-provider))
-    (lsp-dart-define-key "s o" #'lsp-dart-show-outline)
-    (lsp-dart-define-key "s f" #'lsp-dart-show-flutter-outline)
-    (lsp-dart-dap-setup))
   (run-hooks 'prelude-dart-mode-hook))
 
 (make-obsolete-variable 'prelude-dart-mode-hook
@@ -63,7 +57,13 @@
 (when (eq prelude-lsp-client 'lsp-mode)
   (use-package lsp-dart
     :ensure t
-    :defer t))
+    :defer t
+    :config
+    (setq dap-launch-configuration-providers
+          '(dap-debug-template-configurations-provider))
+    (lsp-dart-define-key "s o" #'lsp-dart-show-outline)
+    (lsp-dart-define-key "s f" #'lsp-dart-show-flutter-outline)
+    (lsp-dart-dap-setup)))
 
 (add-hook 'dart-mode-hook #'prelude-dart-setup -50)
 

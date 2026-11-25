@@ -937,6 +937,38 @@ that personal config adds to them, which get the last word."
         (remove-hook hook #'prelude-test--personal-setup)))
     (should-not wrong)))
 
+(ert-deftest prelude-setups-leave-global-options-to-personal-config ()
+  "What a personal config sets isn't undone whenever a buffer is opened."
+  (pcase-dolist (`(,module ,setup ,variable)
+                 '((prelude-erlang prelude-erlang-setup erlang-compile-function)
+                   (prelude-fsharp prelude-fsharp-setup inferior-fsharp-program)
+                   (prelude-go prelude-go-setup gofmt-command)
+                   (prelude-perl prelude-perl-setup cperl-indent-level)
+                   (prelude-ruby prelude-ruby-setup ruby-insert-encoding-magic-comment)))
+    (require module)
+    (let ((bound (default-boundp variable))
+          (value (and (default-boundp variable) (default-value variable))))
+      (set-default variable 'prelude-test-value)
+      (unwind-protect
+          (cl-letf (((symbol-function 'prelude-lsp-enable) #'ignore)
+                    ((symbol-function 'inf-ruby-minor-mode) #'ignore))
+            (with-temp-buffer
+              (funcall setup))
+            (should (eq (default-value variable) 'prelude-test-value)))
+        (if bound
+            (set-default variable value)
+          (makunbound variable))))))
+
+(ert-deftest prelude-dart-setup-needs-no-lsp-dart ()
+  "With lsp-mode, the first Dart buffer used to fail: lsp-dart wasn't loaded yet."
+  (require 'prelude-dart)
+  (let ((prelude-lsp-client 'lsp-mode))
+    (cl-letf (((symbol-value 'features) (remq 'lsp-dart features))
+              ((symbol-function 'prelude-lsp-enable) #'ignore))
+      (with-temp-buffer
+        (prelude-dart-setup)
+        (should subword-mode)))))
+
 (ert-deftest prelude-modules-put-no-lambdas-on-hooks ()
   "A named function on a hook can be removed, and says what it is."
   (should-not

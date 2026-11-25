@@ -40,11 +40,12 @@
 ;; We never want to edit Rubinius bytecode
 (add-to-list 'completion-ignored-extensions ".rbc")
 
+;; Don't auto-insert encoding comments
+;; Those are almost never needed in Ruby 2+
+(setq ruby-insert-encoding-magic-comment nil)
+
 (defun prelude-ruby-setup ()
   "Set up a Ruby buffer."
-  ;; Don't auto-insert encoding comments
-  ;; Those are almost never needed in Ruby 2+
-  (setq ruby-insert-encoding-magic-comment nil)
   (inf-ruby-minor-mode +1)
   ;; CamelCase aware editing operations
   (subword-mode +1)

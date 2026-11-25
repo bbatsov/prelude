@@ -75,6 +75,8 @@
 
 ### Bugs fixed
 
+- [#1499](https://github.com/bbatsov/prelude/pull/1499): Set the options of Dart, Erlang, F#, Go, Perl and Ruby (`gofmt-command`, `cperl-indent-level` and the like) once, when the module is loaded, instead of every time a buffer is opened, which undid what you set in your personal config.
+- [#1499](https://github.com/bbatsov/prelude/pull/1499): Set up the first Dart buffer of a session with lsp-mode as the LSP client, which failed because lsp-dart wasn't loaded yet.
 - [#1499](https://github.com/bbatsov/prelude/pull/1499): Keep the warnings that some tree-sitter modes show when they're loaded without their grammar out of sight when Prelude loads them, as it was meant to, in the first buffer of a session too.
 - [#1491](https://github.com/bbatsov/prelude/pull/1491): Install `lsp-sourcekit` in the Swift module when lsp-mode is the LSP client, as lsp-mode has no Swift support without it.
 - [#1491](https://github.com/bbatsov/prelude/pull/1491): Match only whole file names for prezto's files (any file ending in `zshrc` opened in `sh-mode`).

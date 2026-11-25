@@ -32,10 +32,11 @@
 
 (require 'prelude-programming)
 
+;; Use the .NET CLI to run the F# interactive REPL
+(setq inferior-fsharp-program "dotnet fsi --readline-")
+
 (defun prelude-fsharp-setup ()
   "Set up an F# buffer."
-  ;; Use the .NET CLI to run the F# interactive REPL
-  (setq inferior-fsharp-program "dotnet fsi --readline-")
   (subword-mode +1)
   ;; a failed install shouldn't break the whole mode hook
   (when (eq prelude-lsp-client 'eglot)
