@@ -20,14 +20,13 @@
     prelude-helm
     prelude-helm-everywhere
     prelude-lsp-mode
-    prelude-evil
     prelude-erc
-    prelude-key-chord
     prelude-coffee
     prelude-literate-programming)
   "Modules left out of the load test.
 Mutually exclusive modules (ido/ivy/helm, lsp-mode instead of Eglot)
-and modules with heavy external deps or global side effects.")
+and modules with heavy external deps or global side effects.
+CI loads them on their own, see test/prelude-standalone-test.el.")
 
 (defvar prelude-load-test-modules
   (seq-difference
