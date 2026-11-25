@@ -32,42 +32,36 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(use-package ivy :ensure t :defer t)
-(use-package swiper :ensure t :defer t)
-(use-package counsel :ensure t :defer t)
 
-;;; Ivy
-;;
 ;; ivy is a powerful alternative to the popular ido-mode
+(use-package ivy
+  :ensure t
+  :diminish
+  :custom
+  (ivy-use-virtual-buffers t)
+  :bind ("<f6>" . ivy-resume)
+  :init
+  (setq enable-recursive-minibuffers t)
+  (ivy-mode 1))
 
-(require 'ivy)
-
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
-(global-set-key (kbd "<f6>") 'ivy-resume)
-
-(diminish 'ivy-mode)
-
-;;; Swiper
-;;
 ;; swiper provides enhanced buffer search
+(use-package swiper
+  :ensure t
+  :bind ("C-s" . swiper))
 
-(global-set-key "\C-s" 'swiper)
-
-;;; Counsel
-;;
 ;; counsel supercharges a lot of commands with some ivy magic
-
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "<f1> f") 'counsel-describe-function)
-(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-(global-set-key (kbd "<f1> l") 'counsel-find-library)
-(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-(global-set-key (kbd "M-y") 'counsel-yank-pop)
-(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+(use-package counsel
+  :ensure t
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("<f1> f" . counsel-describe-function)
+         ("<f1> v" . counsel-describe-variable)
+         ("<f1> l" . counsel-find-library)
+         ("<f2> i" . counsel-info-lookup-symbol)
+         ("<f2> u" . counsel-unicode-char)
+         ("M-y" . counsel-yank-pop)
+         :map minibuffer-local-map
+         ("C-r" . counsel-minibuffer-history)))
 
 (provide 'prelude-ivy)
 ;;; prelude-ivy.el ends here

@@ -55,13 +55,18 @@ jobs:
       - name: switch back to Eglot
         if: always()
         run: rm -f personal/preload/lsp-mode.el
-      # These are left out of the load test, as they don't mix with the
-      # modules it loads (or with each other).
-      - name: load the modules that have to be loaded on their own
+      # Some of these are left out of the load test, as they don't mix
+      # with the modules it loads (or with each other), and all of them
+      # change Emacs globally, so each one gets an Emacs of its own.
+      - name: test the modules that have to be loaded on their own
         run: |
-          for module in prelude-ido prelude-ivy prelude-helm-everywhere prelude-evil prelude-key-chord prelude-erc prelude-literate-programming; do
-            emacs --batch --load init.el --eval "(require '$module)"
+          for module in prelude-company prelude-ido prelude-ivy prelude-helm prelude-helm-everywhere prelude-evil prelude-key-chord prelude-erc prelude-literate-programming; do
+            emacs --batch --load init.el --eval "(require '$module)" --load test/prelude-standalone-test.el -f ert-run-tests-batch-and-exit
           done
+          # Helm without Projectile, which used to fail to load
+          emacs --batch --load init.el --eval "(setq prelude-projectile nil)" --eval "(require 'prelude-helm)" --load test/prelude-standalone-test.el -f ert-run-tests-batch-and-exit
+          # Helm loaded before the module, as it is when it gets installed
+          emacs --batch --load init.el --eval "(require 'helm)" --eval "(require 'prelude-helm)" --load test/prelude-standalone-test.el -f ert-run-tests-batch-and-exit
       - name: load personal early-init once, before core
         run: |
           printf '%s\n' ";;; -*- lexical-binding: t -*-" "(defvar prelude-test-early-init-loads nil)" "(push (featurep 'prelude-core) prelude-test-early-init-loads)" > personal/early-init.el
