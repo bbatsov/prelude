@@ -11,6 +11,7 @@ nav:
 - Configuration: configuration.md
 - Modules:
     - Overview: modules/index.md
+    - Writing a Module: modules/writing.md
     - Foundation Modules:
         - Programming: modules/programming.md
         - Lisp Base: modules/lisp.md

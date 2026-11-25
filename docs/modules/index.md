@@ -39,66 +39,8 @@ concepts. No magic.
 
 ## Writing a Module
 
-When writing or modifying a module, follow these conventions
-for consistency:
-
-### Structure
-
-A typical programming language module follows this pattern:
-
-``` emacs-lisp
-;;; prelude-example.el --- Emacs Prelude: Example config.
-;;; Code:
-
-(require 'prelude-programming)
-
-;; Use the tree-sitter mode when its grammar is available
-(prelude-treesit-remap 'example 'example-mode 'example-ts-mode)
-
-(use-package example-mode
-  :ensure t
-  :defer t)
-
-(defun prelude-example-setup ()
-  "Set up an Example buffer."
-  (subword-mode +1)
-  (prelude-lsp-enable))
-
-(add-hook 'example-mode-hook #'prelude-example-setup -50)
-(add-hook 'example-ts-mode-hook #'prelude-example-setup -50)
-
-(provide 'prelude-example)
-;;; prelude-example.el ends here
-```
-
-### Conventions
-
-- **Require `prelude-programming`** as the foundation for
-  all programming language modules. Lisp-family modules
-  should require `prelude-lisp` instead.
-- **Define a `prelude-*-setup` function** with the setup of
-  the mode's buffers, and add it to the hooks of the mode with
-  `add-hook`, at a depth of -50. It then runs before the
-  functions that users add to the same hooks, and users who
-  don't want it can remove it from the hooks. Don't put lambdas
-  on hooks.
-- **Enable `subword-mode`** for CamelCase-aware editing.
-- **Call `prelude-lsp-enable`** for LSP support. This
-  respects the user's `prelude-lsp-client` setting
-  (Eglot or lsp-mode). Pass it a non-nil argument in modules
-  for configuration files and the like, where a missing
-  language server isn't worth a message.
-- **Add tree-sitter support** with `prelude-treesit-remap`,
-  which switches to the tree-sitter mode when its grammar is
-  available (and offers to install it otherwise). When there's
-  no classic mode to remap, map file names directly with
-  `prelude-treesit-auto-mode`. Always add hooks for both the
-  legacy mode and the tree-sitter mode.
-- **Use `with-eval-after-load`** to defer configuration
-  until the relevant package is loaded.
-- **Install packages with `use-package` and `:ensure t`**,
-  not manual `package-install` calls. Prelude keeps track of
-  the packages installed this way (see `prelude-packages`).
+[Writing a Module](writing.md) covers how modules are put together
+and the conventions they follow.
 
 ## Design Notes
 

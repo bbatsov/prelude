@@ -21,7 +21,7 @@ is in line with the [contribution
 guidelines](https://github.com/bbatsov/prelude/blob/master/CONTRIBUTING.md).
 
 If you're contributing a new module or modifying an existing one,
-please follow the [module conventions](modules/index.md#writing-a-module).
+please follow the [module conventions](modules/writing.md).
 
 ## Documentation
 

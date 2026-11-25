@@ -21,7 +21,8 @@ try to follow these guidelines when you do so.
 - Use a topic branch to easily amend a pull request later, if necessary.
 - Write [good commit messages][4].
 - Update the [changelog][5].
-- Use the same coding conventions as the rest of the project.
+- Use the same coding conventions as the rest of the project. If you're
+  adding or changing a module, read [Writing a Module][7] first.
 - Verify your Emacs Lisp code with `checkdoc` (<kbd>C-c ? d</kbd>).
 - Open a [pull request][6] that relates to *only* one subject with a clear title
   and description in grammatically correct, complete sentences.
@@ -32,3 +33,4 @@ try to follow these guidelines when you do so.
 [4]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
 [5]: https://github.com/bbatsov/prelude/blob/master/CHANGELOG.md
 [6]: https://help.github.com/articles/using-pull-requests
+[7]: https://prelude.emacsredux.com/en/latest/modules/writing/
