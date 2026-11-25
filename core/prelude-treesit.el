@@ -40,6 +40,11 @@
 
 (require 'treesit nil t)
 
+;; bound in `prelude-treesit--recipe', most likely before warnings.el
+;; has been loaded
+(defvar warning-minimum-level)
+(defvar warning-minimum-log-level)
+
 (defvar prelude-treesit-language-sources
   `((bash "https://github.com/tree-sitter/tree-sitter-bash" "v0.23.3")
     (c "https://github.com/tree-sitter/tree-sitter-c" "v0.23.4")

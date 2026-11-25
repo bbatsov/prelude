@@ -71,6 +71,7 @@
 
 ### Bugs fixed
 
+- [#1499](https://github.com/bbatsov/prelude/pull/1499): Keep the warnings that some tree-sitter modes show when they're loaded without their grammar out of sight when Prelude loads them, as it was meant to, in the first buffer of a session too.
 - [#1491](https://github.com/bbatsov/prelude/pull/1491): Install `lsp-sourcekit` in the Swift module when lsp-mode is the LSP client, as lsp-mode has no Swift support without it.
 - [#1491](https://github.com/bbatsov/prelude/pull/1491): Match only whole file names for prezto's files (any file ending in `zshrc` opened in `sh-mode`).
 - [#1491](https://github.com/bbatsov/prelude/pull/1491): Stop the LaTeX module from installing `company-auctex` (unmaintained, and pulling in Company for Corfu users); AUCTeX's own completion works with both.
