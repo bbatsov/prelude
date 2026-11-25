@@ -16,10 +16,12 @@ many major modes out of the box. Look at `apheleia-formatters` and
 
 ## What this module does
 
-Just two things:
+Not much:
 
 1. Installs the `apheleia` package.
 2. Enables `apheleia-global-mode`.
+3. Formats Go code with `goimports` instead of `gofmt` when
+   `goimports` is installed.
 
 That's it - no further setup required for the languages Apheleia
 already knows about.

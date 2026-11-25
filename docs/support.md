@@ -20,12 +20,10 @@ hesitant to subscribe.
 
 [mailing-list]: https://groups.google.com/forum/#!forum/emacs-prelude
 
-## Freenode
+## GitHub Discussions
 
-If you're into IRC you can visit the `#prelude` channel on Freenode.
-It's not actively
-monitored by the Prelude maintainers themselves, but still you can get support
-from other Prelude users there.
+Questions and ideas that aren't bug reports are welcome in
+[GitHub Discussions](https://github.com/bbatsov/prelude/discussions).
 
 ## Stackoverflow
 

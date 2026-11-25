@@ -4,8 +4,9 @@
 
 <kbd>M-x prelude-doctor</kbd> checks what Prelude needs from your
 system and lists what's missing: programs like `git` and a C compiler,
-the tree-sitter grammars and the language servers of the modules
-you've enabled, and modules that do the same job. It also tells you
+the tree-sitter grammars of the modules you've enabled (and their
+language servers, with Eglot as the LSP client), and modules that do
+the same job. It also tells you
 about the modules that were added to Prelude since you made your copy
 of `personal/prelude-modules.el`. Press <kbd>g</kbd> in its buffer to
 check again after you've installed something.
@@ -43,8 +44,9 @@ them. Restart Emacs once and it's gone.
 ## "No language server for ..."
 
 Prelude starts a language server only if it's installed, and tells you
-once when it isn't. <kbd>M-x prelude-doctor</kbd> lists the servers
-of all the languages you've enabled. Install the server named on the page of the
+once when it isn't. With Eglot, <kbd>M-x prelude-doctor</kbd> lists the
+servers of the languages you've enabled that have a tree-sitter mode.
+Install the server named on the page of the
 language's [module](modules/index.md), make sure Emacs can find it on
 your `PATH`, and reopen the file (or run <kbd>M-x eglot</kbd>).
 
@@ -127,8 +129,7 @@ Prelude overrides `C-a` to behave as described in this
 don't like that simply add this to your personal config:
 
 ```emacs-lisp
-(global-set-key [remap move-beginning-of-line]
-                'move-beginning-of-line)
+(define-key prelude-mode-map (kbd "C-a") nil)
 ```
 
 In terminal emulators (`ansi-term`, `vterm`, `eat`) <kbd>C-a</kbd> is

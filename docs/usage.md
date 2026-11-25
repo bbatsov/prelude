@@ -112,7 +112,8 @@ A few more things worth knowing about:
 - <kbd>C-x g</kbd> opens Magit's status buffer and <kbd>C-x M-g</kbd>
   its menu of commands. Those are Magit's own bindings.
 - <kbd>M-(</kbd> and <kbd>M-"</kbd> wrap the expression after point in
-  parentheses or quotes in programming modes.
+  parentheses or quotes in programming modes (unless smartparens is
+  turned off).
 
 #### Prelude Mode
 

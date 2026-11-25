@@ -266,7 +266,9 @@ Option | Set it in | Default | What it controls
 Some settings have to be in place before the package system and the first frame are set up (e.g.
 `default-frame-alist` tweaks). Put those in `personal/early-init.el` and Prelude's own `early-init.el`
 will load it after its own settings, so you can also override those. The file isn't loaded
-again together with the rest of `personal/`.
+again together with the rest of `personal/`. As it's Prelude's `early-init.el` that loads it, it
+only works when Prelude's directory is your Emacs directory, not when you load Prelude's `init.el`
+from a config of your own (e.g. after installing Prelude with `-i`, or for all users).
 
 ### Fonts
 
