@@ -22,9 +22,6 @@ first time you open a Swift file (see `prelude-treesit-auto-install`).
 There's no classic mode to fall back to, so without the grammar Swift
 files open in `fundamental-mode`.
 
-Whenever you are editing Swift code run <kbd>C-h m</kbd> to look at the
-Swift mode key bindings.
-
 ## LSP support
 
 The module starts an LSP session automatically via Prelude's
@@ -33,3 +30,8 @@ selects (Eglot by default). Eglot has no built-in entry for Swift, so
 the module registers `sourcekit-lsp` for it. With lsp-mode the module
 installs and loads [lsp-sourcekit](https://github.com/emacs-lsp/lsp-sourcekit),
 lsp-mode's client for `sourcekit-lsp`.
+
+## Key Bindings
+
+See the [LSP](lsp.md) module for the available LSP key bindings. Run
+<kbd>C-h m</kbd> in a Swift buffer for all key bindings.

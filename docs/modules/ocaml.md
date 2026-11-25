@@ -2,33 +2,47 @@
 
 !!! Note
 
-    This module builds on top of the shared
-    [Programming](programming.md) module.
+    This module builds on top of the shared [Programming](programming.md)
+    module and the [LSP](lsp.md) module.
 
-## Overview
+## Package Prerequisites
 
-Prelude provides a modern OCaml development experience
-powered by TreeSitter and LSP:
-
-- [neocaml](https://github.com/bbatsov/neocaml) - a
-  TreeSitter-powered major mode for OCaml (includes built-in
-  support for Dune files and utop)
-- [ocaml-eglot](https://github.com/tarides/ocaml-eglot) -
-  OCaml-specific LSP extensions via Eglot (enabled when
-  `prelude-lsp-client` is set to `eglot`, the default)
-
-LSP integration provides code completion, type information,
-diagnostics, code navigation, and refactoring out of the box.
-
-## Prerequisites
-
-You need [OPAM](https://opam.ocaml.org/) and the OCaml LSP
-server installed:
+You'll need [OPAM](https://opam.ocaml.org/) and the OCaml language
+server:
 
 ```sh
 opam install ocaml-lsp-server
 ```
 
-!!! Note
+## OCaml Mode
 
-    This module requires Emacs 29.1+ (for TreeSitter support).
+The module uses [neocaml](https://github.com/bbatsov/neocaml), a
+tree-sitter powered major mode for OCaml, which also comes with support
+for Dune files and utop. It installs the grammars it needs by itself.
+
+`subword-mode` is enabled, so the editing commands understand
+`CamelCase`, and the language server takes care of completion, type
+information, diagnostics, navigation and refactoring. With Eglot (the
+default LSP client) the module also turns on
+[ocaml-eglot](https://github.com/tarides/ocaml-eglot), which adds the
+OCaml-specific features of the language server.
+
+## Key Bindings
+
+These come from ocaml-eglot, and work only with Eglot:
+
+<!-- markdownlint-disable MD013 -->
+
+| Key | Command | Description |
+| --- | ------- | ----------- |
+| <kbd>C-c C-a</kbd> | `ocaml-eglot-alternate-file` | Switch between the `.ml` and the `.mli` file |
+| <kbd>C-c C-t</kbd> | `ocaml-eglot-type-enclosing` | Show the type of the expression at point |
+| <kbd>C-c \|</kbd> | `ocaml-eglot-destruct` | Destruct the expression at point (e.g. into a `match`) |
+
+<!-- markdownlint-enable MD013 -->
+
+ocaml-eglot also binds <kbd>C-c C-l</kbd>, which the module takes back
+for Prelude's Eglot commands (<kbd>M-.</kbd> jumps to definitions just
+as well). See the [LSP](lsp.md) module for those, and the documentation
+of neocaml for its own key bindings. Run <kbd>C-h m</kbd> in an OCaml
+buffer for all key bindings.
