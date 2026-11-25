@@ -31,31 +31,38 @@
 
 ;;; Code:
 
-(use-package helm :ensure t :defer t)
+;; Helm gets loaded right away, so that its commands are under C-c h
+;; from the start (the keymap isn't autoloaded).
+(use-package helm
+  :ensure t
+  :demand t
+  :custom
+  ;; See https://github.com/bbatsov/prelude/pull/670 for a detailed
+  ;; discussion of these options.
+  (helm-split-window-inside-p t)
+  (helm-buffers-fuzzy-matching t)
+  (helm-move-to-line-cycle-in-source t)
+  (helm-ff-search-library-in-sexp t)
+  :bind (:map helm-command-map
+              ("o" . helm-occur)
+              ("g" . helm-do-grep-ag)
+              ("SPC" . helm-all-mark-rings))
+  :init
+  (when (executable-find "curl")
+    (setq helm-net-prefer-curl t))
+  :config
+  ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+  ;; Helm moves the binding when the option is set with `setopt' (or
+  ;; Customize), and this leaves alone a prefix of your own, set in
+  ;; personal/preload.
+  (when (equal helm-command-prefix-key
+               (eval (car (get 'helm-command-prefix-key 'standard-value)) t))
+    (setopt helm-command-prefix-key "C-c h")))
 
 (when prelude-projectile
-  (use-package helm-projectile :ensure t :defer t)
-  (require 'helm-projectile))
-
-(when (executable-find "curl")
-  (setq helm-net-prefer-curl t))
-
-;; See https://github.com/bbatsov/prelude/pull/670 for a detailed
-;; discussion of these options.
-(setq helm-split-window-inside-p        t
-      helm-buffers-fuzzy-matching       t
-      helm-move-to-line-cycle-in-source t
-      helm-ff-search-library-in-sexp    t)
-
-;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
-;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
-;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
-(global-set-key (kbd "C-c h") 'helm-command-prefix)
-(global-unset-key (kbd "C-x c"))
-
-(define-key helm-command-map (kbd "o")   'helm-occur)
-(define-key helm-command-map (kbd "g")   'helm-do-grep-ag)
-(define-key helm-command-map (kbd "SPC") 'helm-all-mark-rings)
+  (use-package helm-projectile
+    :ensure t
+    :demand t))
 
 (push "Press <C-c p h> to navigate a project in Helm." prelude-tips)
 

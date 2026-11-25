@@ -29,21 +29,21 @@
 ;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
-(use-package company :ensure t :defer t)
 
-(require 'company)
-
-(setq company-idle-delay 0.5)
-(setq company-show-quick-access t)
-(setq company-tooltip-limit 10)
-(setq company-minimum-prefix-length 2)
-(setq company-tooltip-align-annotations t)
-;; invert the navigation direction if the the completion popup-isearch-match
-;; is displayed on top (happens near the bottom of windows)
-(setq company-tooltip-flip-when-above t)
-
-(global-company-mode 1)
-(diminish 'company-mode)
+(use-package company
+  :ensure t
+  :diminish
+  :custom
+  (company-idle-delay 0.5)
+  (company-show-quick-access t)
+  (company-tooltip-limit 10)
+  (company-minimum-prefix-length 2)
+  (company-tooltip-align-annotations t)
+  ;; invert the navigation direction if the the completion popup-isearch-match
+  ;; is displayed on top (happens near the bottom of windows)
+  (company-tooltip-flip-when-above t)
+  :init
+  (global-company-mode 1))
 
 (provide 'prelude-company)
 ;;; prelude-company.el ends here

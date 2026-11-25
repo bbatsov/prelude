@@ -273,7 +273,9 @@ module, add its setup function and the hooks it goes on to
 module (e.g. what the setup turns on, the key bindings, the file names
 it handles). CI loads every module (`test/prelude-load-test.el`), so a
 module that can't be loaded together with the others has to be added
-to the exceptions there. You can run the tests like this:
+to the exceptions there. Such modules (e.g. the completion modules) are
+loaded one by one in CI instead, each with the tests in
+`test/prelude-standalone-test.el`. You can run the tests like this:
 
 ``` shell
 emacs --batch -l init.el -l test/prelude-test.el -f ert-run-tests-batch-and-exit

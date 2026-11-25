@@ -34,6 +34,7 @@
 
 ### Changes
 
+- [#1500](https://github.com/bbatsov/prelude/pull/1500): Set up Company, Ido, Ivy and Helm with `use-package`, the way the other modules do it, and test each of these modules in CI.
 - [#1499](https://github.com/bbatsov/prelude/pull/1499): Set up each major mode with a named function on the hooks of the mode, the way you'd do it in your own config (see [Upgrading](https://prelude.emacsredux.com/en/latest/upgrading/)):
   - `prelude-ruby-setup` is on `ruby-mode-hook` and `ruby-ts-mode-hook`, for instance, and runs before the functions you add to them, so that those have the last word.
   - The `prelude-*-mode-hook`s, `prelude-lisp-coding-hook` and `prelude-interactive-lisp-coding-hook` are obsolete. Prelude's setup still runs them at the end, and `M-x prelude-doctor` lists the ones your config uses, but running one from the hook of another mode no longer gives that mode Prelude's setup.
@@ -75,6 +76,7 @@
 
 ### Bugs fixed
 
+- [#1500](https://github.com/bbatsov/prelude/pull/1500): Load the Helm module with Projectile turned off (`prelude-projectile`), which failed because Helm's keymap wasn't loaded yet.
 - [#1499](https://github.com/bbatsov/prelude/pull/1499): Set the options of Dart, Erlang, F#, Go, Perl and Ruby (`gofmt-command`, `cperl-indent-level` and the like) once, when the module is loaded, instead of every time a buffer is opened, which undid what you set in your personal config.
 - [#1499](https://github.com/bbatsov/prelude/pull/1499): Set up the first Dart buffer of a session with lsp-mode as the LSP client, which failed because lsp-dart wasn't loaded yet.
 - [#1499](https://github.com/bbatsov/prelude/pull/1499): Keep the warnings that some tree-sitter modes show when they're loaded without their grammar out of sight when Prelude loads them, as it was meant to, in the first buffer of a session too.
