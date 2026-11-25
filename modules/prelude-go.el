@@ -31,6 +31,7 @@
 (require 'prelude-programming)
 
 (defvar go-ts-mode-map)
+(defvar gofmt-command)
 
 ;; go-mode doesn't autoload these, and go-ts-mode buffers need them too
 (autoload 'gofmt "go-mode" nil t)
@@ -69,12 +70,13 @@ Unlike `gofmt-before-save', this works in `go-ts-mode' as well."
   (when (prelude-format-on-save-p)
     (gofmt)))
 
+;; Prefer goimports to gofmt if installed
+(let ((goimports (executable-find "goimports")))
+  (when goimports
+    (setq gofmt-command goimports)))
+
 (defun prelude-go-setup ()
   "Set up a Go buffer."
-  ;; Prefer goimports to gofmt if installed
-  (let ((goimports (executable-find "goimports")))
-    (when goimports
-      (setq gofmt-command goimports)))
 
   ;; format before save
   (add-hook 'before-save-hook #'prelude-go-format-buffer nil t)

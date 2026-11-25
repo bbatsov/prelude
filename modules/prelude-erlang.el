@@ -34,14 +34,14 @@
 
 (require 'prelude-programming)
 
+;; Use Projectile's compile command instead of erlang-mode's default
+(when prelude-projectile
+  (setq erlang-compile-function #'projectile-compile-project))
+
 (defun prelude-erlang-setup ()
   "Set up an Erlang buffer."
   (subword-mode +1)
   (prelude-lsp-enable)
-  ;; Use Projectile's compile command instead of erlang-mode's default
-  (when prelude-projectile
-    (require 'projectile)
-    (setq erlang-compile-function 'projectile-compile-project))
   (run-hooks 'prelude-erlang-mode-hook))
 
 (make-obsolete-variable 'prelude-erlang-mode-hook

@@ -50,29 +50,32 @@
 ;; C-h P to look up Perl documentation
 (define-key 'help-command (kbd "P") 'cperl-perldoc)
 
+(setq cperl-indent-level 4)
+(setq cperl-continued-statement-offset 8)
+;; Fine-grained control over electric behavior instead of the
+;; all-or-nothing cperl-hairy option
+(setq cperl-font-lock t)
+(setq cperl-electric-lbrace-space t)
+(setq cperl-electric-parens nil)
+(setq cperl-electric-linefeed nil)
+(setq cperl-electric-keywords nil)
+(setq cperl-info-on-command-no-prompt t)
+(setq cperl-clobber-lisp-bindings t)
+(setq cperl-lazy-help-time 3)
+
+;; Don't highlight trailing whitespace (Emacs 30+ cperl-mode follows
+;; `show-trailing-whitespace' instead, which is off by default)
+(when (< emacs-major-version 30)
+  (with-suppressed-warnings ((obsolete cperl-invalid-face))
+    (setq cperl-invalid-face nil)))
+
+;; Remove distracting background colors on array/hash variables
+(with-eval-after-load 'cperl-mode
+  (set-face-background 'cperl-array-face nil)
+  (set-face-background 'cperl-hash-face nil))
+
 (defun prelude-perl-setup ()
   "Set up a Perl buffer."
-  (setq cperl-indent-level 4)
-  (setq cperl-continued-statement-offset 8)
-  ;; Fine-grained control over electric behavior instead of the
-  ;; all-or-nothing cperl-hairy option
-  (setq cperl-font-lock t)
-  (setq cperl-electric-lbrace-space t)
-  (setq cperl-electric-parens nil)
-  (setq cperl-electric-linefeed nil)
-  (setq cperl-electric-keywords nil)
-  (setq cperl-info-on-command-no-prompt t)
-  (setq cperl-clobber-lisp-bindings t)
-  (setq cperl-lazy-help-time 3)
-
-  ;; Remove distracting background colors on array/hash variables
-  (set-face-background 'cperl-array-face nil)
-  (set-face-background 'cperl-hash-face nil)
-  ;; Don't highlight trailing whitespace (Emacs 30+ cperl-mode follows
-  ;; `show-trailing-whitespace' instead, which is off by default)
-  (when (< emacs-major-version 30)
-    (with-suppressed-warnings ((obsolete cperl-invalid-face))
-      (setq cperl-invalid-face nil)))
   (subword-mode +1)
   (run-hooks 'prelude-cperl-mode-hook))
 
