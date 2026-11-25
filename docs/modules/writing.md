@@ -198,7 +198,13 @@ level of the module, like `example-indent-offset` above. The module is
 loaded before the personal config, so whatever the user sets there (or
 with Customize) wins. A `defcustom` keeps the value that a variable had
 before its package got loaded, so it's fine to set the variable before
-that. The `:custom` of `use-package` does the job as well.
+that. The `:custom` of `use-package` does the job as well, but keep in
+mind that in a `use-package` with `:after` it runs only once the other
+package is loaded (`:init` too), and that's usually after the personal
+config. The tests check that no module does that. Also, `:custom` works
+only for real options: a variable that the package makes with `defvar`
+(e.g. the cursors of Evil's states) has to be set with `setq` in
+`:init`.
 
 Don't set such options in the setup function, as that would undo the
 user's setting every time a buffer is opened. Don't set them in a
