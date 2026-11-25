@@ -41,10 +41,12 @@
 ;; pauses for rare, long freezes).
 (setq gc-cons-threshold most-positive-fixnum)
 
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (setq gc-cons-threshold (* 50 1000 1000) ; 50MB
-                  gc-cons-percentage 0.2)))
+(defun prelude-restore-gc-threshold ()
+  "Restore a modest garbage collection threshold after startup."
+  (setq gc-cons-threshold (* 50 1000 1000) ; 50MB
+        gc-cons-percentage 0.2))
+
+(add-hook 'emacs-startup-hook #'prelude-restore-gc-threshold)
 
 ;; Disable the tool bar via frame parameters, so the initial frame is
 ;; never created with one in the first place.  Toggling `tool-bar-mode'

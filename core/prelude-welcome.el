@@ -188,8 +188,11 @@
 (defvar prelude-welcome--startup-done nil
   "Non-nil once Emacs has finished starting up.")
 
-(add-hook 'emacs-startup-hook
-          (lambda () (setq prelude-welcome--startup-done t)))
+(defun prelude-welcome--note-startup-done ()
+  "Note that Emacs has finished starting up."
+  (setq prelude-welcome--startup-done t))
+
+(add-hook 'emacs-startup-hook #'prelude-welcome--note-startup-done)
 
 (defun prelude-welcome--initial-buffer ()
   "Return the buffer to show in a new frame, for `initial-buffer-choice'.

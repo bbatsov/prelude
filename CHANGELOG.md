@@ -34,6 +34,7 @@
 
 ### Changes
 
+- [#1502](https://github.com/bbatsov/prelude/pull/1502): Put named functions instead of lambdas on the hooks that Prelude's core uses (e.g. the one that lowers the GC threshold after startup), so you can take them off with `remove-hook`.
 - [#1500](https://github.com/bbatsov/prelude/pull/1500): Set up lsp-mode and lsp-ui with `use-package` too, and load the lsp-mode module in the load test when lsp-mode is the LSP client.
 - [#1500](https://github.com/bbatsov/prelude/pull/1500): Set up Evil and key-chord with `use-package` as well, and load them with the other modules in the load test.
 - [#1500](https://github.com/bbatsov/prelude/pull/1500): Set up Company, Ido, Ivy and Helm with `use-package`, the way the other modules do it, and test each of these modules in CI.
