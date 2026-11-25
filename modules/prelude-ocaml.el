@@ -61,7 +61,11 @@
 (when (eq prelude-lsp-client 'eglot)
   (use-package ocaml-eglot
     :ensure t
-    :defer t))
+    :defer t
+    :config
+    ;; C-c C-l is the prefix of Prelude's Eglot commands (rename, code
+    ;; actions, etc.), and M-. finds definitions anyway
+    (define-key ocaml-eglot-mode-map (kbd "C-c C-l") nil)))
 
 ;; the parent of the modes for .ml and .mli files
 (add-hook 'neocaml-base-mode-hook #'prelude-ocaml-setup -50)

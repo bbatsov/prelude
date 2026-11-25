@@ -26,6 +26,22 @@
 (declare-function prelude-rust-setup "prelude-rust")
 (declare-function prelude-shell-setup "prelude-shell")
 
+(defvar eglot--managed-mode)
+(defvar ocaml-eglot-mode)
+
+(ert-deftest prelude-ocaml-keeps-the-eglot-prefix ()
+  "ocaml-eglot used to take C-c C-l, the prefix of Prelude's Eglot keys."
+  (require 'prelude-ocaml)
+  ;; the module sets up ocaml-eglot only for Eglot
+  (skip-unless (and (eq prelude-lsp-client 'eglot)
+                    (require 'eglot nil t)
+                    (require 'ocaml-eglot nil t)))
+  (with-temp-buffer
+    (setq-local eglot--managed-mode t)
+    (setq-local ocaml-eglot-mode t)
+    (should (eq (key-binding (kbd "C-c C-l r")) 'eglot-rename))
+    (should (eq (key-binding (kbd "C-c C-a")) 'ocaml-eglot-alternate-file))))
+
 (ert-deftest prelude-ocaml-setup-without-ocaml-eglot ()
   "The OCaml mode hook shouldn't fail when ocaml-eglot isn't installed."
   (require 'prelude-ocaml)
