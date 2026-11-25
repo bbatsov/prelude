@@ -7,9 +7,9 @@
 ## SQL Mode
 
 Emacs comes with `sql-mode`, which can also run the console of pretty
-much any database (`M-x sql-postgres`, `M-x sql-mysql`, `M-x sql-sqlite`,
-etc). When a console is running you can send code to it straight from
-a SQL buffer:
+much any database (<kbd>M-x sql-postgres</kbd>,
+<kbd>M-x sql-mysql</kbd>, <kbd>M-x sql-sqlite</kbd>, etc). When a
+console is running you can send code to it straight from a SQL buffer:
 
 <!-- markdownlint-disable MD013 -->
 
@@ -23,7 +23,7 @@ a SQL buffer:
 <!-- markdownlint-enable MD013 -->
 
 `sql-mode` highlights standard SQL by default. Use
-`M-x sql-set-product` (or set `sql-product`) to get the keywords of
+<kbd>M-x sql-set-product</kbd> (or set `sql-product`) to get the keywords of
 your database.
 
 The module adds a couple of things on top:

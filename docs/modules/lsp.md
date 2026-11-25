@@ -113,7 +113,7 @@ file of that kind:
 [Prelude] No language server for ‘zig-mode’ buffers: ‘zls’ isn't installed
 ```
 
-Once the server is installed, run `M-x eglot` (or reopen the file).
+Once the server is installed, run <kbd>M-x eglot</kbd> (or reopen the file).
 Common examples:
 
 - **Go**: `gopls` (`go install golang.org/x/tools/gopls@latest`)

@@ -4,6 +4,8 @@
 
     This module builds on the built-in [Org mode](https://orgmode.org).
 
+    This module is enabled by default.
+
 ## Org Mode
 
 The module adds the global key bindings that the Org manual suggests:

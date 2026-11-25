@@ -49,7 +49,7 @@ load the module will fetch the `eglot-booster` Emacs package via
 ### 3. Verify
 
 Open a file with an active Eglot connection and run
-`M-x eglot-events-buffer`. The first lines should mention
+<kbd>M-x eglot-events-buffer</kbd>. The first lines should mention
 `emacs_lsp_booster::app` - that confirms the booster is in the
 loop.
 

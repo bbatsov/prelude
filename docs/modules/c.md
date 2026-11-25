@@ -5,6 +5,8 @@
     This module builds on top of the shared [Programming](programming.md)
     module and the [LSP](lsp.md) module.
 
+    This module is enabled by default.
+
 ## Package Prerequisites
 
 You'll need a compiler and a language server. Eglot looks for

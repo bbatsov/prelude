@@ -1,5 +1,9 @@
 # Prelude Vertico
 
+!!! Note
+
+    This module is enabled by default.
+
 ## Overview
 
 [Vertico](https://github.com/minad/vertico) is a minimalistic vertical

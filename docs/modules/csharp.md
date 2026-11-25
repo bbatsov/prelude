@@ -16,7 +16,7 @@ and [csharp-ls](https://github.com/razzmatazz/csharp-language-server)
 dotnet tool install --global csharp-ls
 ```
 
-lsp-mode can install a server for you (`M-x lsp-install-server`).
+lsp-mode can install a server for you (<kbd>M-x lsp-install-server</kbd>).
 
 ## C# Mode
 

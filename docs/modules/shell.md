@@ -5,6 +5,8 @@
     This module builds on top of the shared [Programming](programming.md)
     module and the [LSP](lsp.md) module.
 
+    This module is enabled by default.
+
 ## Shell Script Mode
 
 The module uses the tree-sitter powered `bash-ts-mode` that comes with

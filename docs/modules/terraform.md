@@ -27,7 +27,7 @@ editing Terraform files. A few of its commands:
 
 <!-- markdownlint-enable MD013 -->
 
-`M-x terraform-format-buffer` runs `terraform fmt`. To do that every
+<kbd>M-x terraform-format-buffer</kbd> runs `terraform fmt`. To do that every
 time you save a file:
 
 ```emacs-lisp

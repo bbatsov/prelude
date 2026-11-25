@@ -49,5 +49,5 @@ for the formatter spec and built-in entries you can copy from.
 ## Disabling per buffer
 
 If you need to skip formatting for a specific buffer, run
-`M-x apheleia-mode` to toggle it off locally. To skip a whole
+<kbd>M-x apheleia-mode</kbd> to toggle it off locally. To skip a whole
 project, set a directory-local `apheleia-inhibit` to `t`.
