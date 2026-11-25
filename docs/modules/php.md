@@ -10,7 +10,7 @@
 You'll need PHP and a language server. Eglot knows how to start
 [Phpactor](https://phpactor.readthedocs.io/) (`phpactor`), and lsp-mode
 can install [Intelephense](https://intelephense.com/) for you
-(`M-x lsp-install-server`).
+(<kbd>M-x lsp-install-server</kbd>).
 
 ## PHP Mode
 
@@ -23,7 +23,7 @@ editing PHP code. Templates that mix PHP and HTML are better served by
 
 Emacs 30+ comes with a tree-sitter powered `php-ts-mode` as well. The
 module doesn't use it by default, as it needs quite a few grammars
-(`M-x php-ts-mode-install-parsers` installs them), but it gets the same
+(<kbd>M-x php-ts-mode-install-parsers</kbd> installs them), but it gets the same
 setup when you switch to it:
 
 ```emacs-lisp

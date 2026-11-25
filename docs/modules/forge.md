@@ -47,7 +47,7 @@ access token with `api` scope.
 
 ### 2. Add a repository
 
-Open a repo in `magit-status`, then run `M-x forge-add-repository`
+Open a repo in `magit-status`, then run <kbd>M-x forge-add-repository</kbd>
 (or use the dispatch menu). Forge will fetch topics into its local
 database - this can take a moment for large repos.
 

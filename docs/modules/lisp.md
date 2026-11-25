@@ -1,5 +1,9 @@
 # Prelude Lisp
 
+!!! Note
+
+    This module is enabled by default.
+
 Basic shared configuration for Lisp-like programming languages.
 This module provides:
 
@@ -18,7 +22,7 @@ another Lisp mode the same, add the function to the hook of the mode:
 
 Prelude uses smartparens with its own default keybinding set, not
 the paredit compatibility set. This avoids keybinding conflicts
-with standard Emacs prefixes like `M-s` (`search-map`) and `M-?`
+with standard Emacs prefixes like <kbd>M-s</kbd> (`search-map`) and <kbd>M-?</kbd>
 (`xref-find-references`). See the
 [Programming module docs](programming.md#smartparens-keybindings)
 for details and workarounds if you use paredit.

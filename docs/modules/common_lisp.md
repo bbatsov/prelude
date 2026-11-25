@@ -16,10 +16,10 @@ programming environment for Common Lisp, and enables many of its essential featu
 
 SLIME supports many Common Lisp implementations. Prelude defaults to
 [SBCL](http://www.sbcl.org/) on all platforms. You can change this via
-`slime-default-lisp`, or use `M-- M-x slime` to pick an implementation
+`slime-default-lisp`, or use <kbd>M-- M-x slime</kbd> to pick an implementation
 interactively.
 
-You can start SLIME with `M-x slime`.
+You can start SLIME with <kbd>M-x slime</kbd>.
 
 ## Alternatives
 
@@ -40,4 +40,4 @@ To switch, drop something like this into a file under
   (setq inferior-lisp-program "sbcl"))
 ```
 
-Then start it with `M-x sly`.
+Then start it with <kbd>M-x sly</kbd>.

@@ -32,7 +32,7 @@ bindings:
 
 <!-- markdownlint-enable MD013 -->
 
-`M-x R` starts an R console. Check out the
+<kbd>M-x R</kbd> starts an R console. Check out the
 [ESS manual](https://ess.r-project.org/Manual/ess.html) for everything
 else.
 

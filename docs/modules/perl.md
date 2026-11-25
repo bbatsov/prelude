@@ -4,6 +4,8 @@
 
     This module builds on top of the shared [Programming](programming.md) module.
 
+    This module is enabled by default.
+
 ## cperl-mode
 
 This module configures [cperl-mode](https://www.emacswiki.org/emacs/CPerlMode)

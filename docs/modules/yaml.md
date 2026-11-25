@@ -4,6 +4,8 @@
 
     This module builds on top of the [LSP](lsp.md) module.
 
+    This module is enabled by default.
+
 ## YAML Mode
 
 The module uses the tree-sitter powered `yaml-ts-mode` that comes with

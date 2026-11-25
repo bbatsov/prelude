@@ -31,29 +31,29 @@ Prelude uses smartparens' own default keybinding set (not the
 paredit compatibility set). This avoids conflicts with standard
 Emacs key prefixes:
 
-- `M-D` for `sp-splice-sexp` (instead of paredit's `M-s`,
+- <kbd>M-D</kbd> for `sp-splice-sexp` (instead of paredit's <kbd>M-s</kbd>,
   which shadows the `search-map` prefix)
-- `sp-convolute-sexp` is unbound (instead of paredit's `M-?`,
+- `sp-convolute-sexp` is unbound (instead of paredit's <kbd>M-?</kbd>,
   which shadows `xref-find-references`)
-- `C-M-<backspace>` / `C-M-<delete>` for splice-killing
-  (instead of paredit's `M-<up>` / `M-<down>`)
+- <kbd>C-M-&lt;backspace&gt;</kbd> / <kbd>C-M-&lt;delete&gt;</kbd> for splice-killing
+  (instead of paredit's <kbd>M-&lt;up&gt;</kbd> / <kbd>M-&lt;down&gt;</kbd>)
 
 On macOS, Super-based alternatives are also available:
 
-- `s-s` - splice
-- `s-<right>` / `s-<left>` - slurp / barf
-- `s-<up>` / `s-<down>` - splice-killing
+- <kbd>s-s</kbd> - splice
+- <kbd>s-&lt;right&gt;</kbd> / <kbd>s-&lt;left&gt;</kbd> - slurp / barf
+- <kbd>s-&lt;up&gt;</kbd> / <kbd>s-&lt;down&gt;</kbd> - splice-killing
 
 ### Using paredit instead of smartparens
 
 If you prefer paredit over smartparens, be aware that paredit's
 default keybindings have several conflicts with modern Emacs:
 
-- `M-s` (`paredit-splice-sexp`) shadows the `search-map`
+- <kbd>M-s</kbd> (`paredit-splice-sexp`) shadows the `search-map`
   prefix used by `occur`, `isearch-forward-symbol-at-point`,
   and consult commands like `consult-line` and
   `consult-ripgrep`.
-- `M-?` (`paredit-convolute-sexp`) shadows
+- <kbd>M-?</kbd> (`paredit-convolute-sexp`) shadows
   `xref-find-references`, which is essential for LSP
   (Eglot/lsp-mode) users.
 

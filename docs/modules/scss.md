@@ -25,4 +25,4 @@ If you need something set up differently for SCSS, add a function to
     Emacs, which left SCSS files in `fundamental-mode`. The module
     makes sure that the built-in mode is used even if you still have
     the package installed, but you might as well delete it
-    (`M-x package-delete`).
+    (<kbd>M-x package-delete</kbd>).
