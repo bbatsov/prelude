@@ -62,16 +62,16 @@ Standard Emacs bindings that work with eglot:
 - <kbd>M-?</kbd> - find references (xref)
 - <kbd>C-h .</kbd> - documentation at point (eldoc)
 
-Prelude additions under the <kbd>C-c C-l</kbd> prefix:
+Prelude additions under the <kbd>C-c L</kbd> prefix:
 
 <!-- markdownlint-disable MD013 -->
 
 | Key | Command | Description |
 | --- | ------- | ----------- |
-| <kbd>C-c C-l r</kbd> | `eglot-rename` | Rename symbol |
-| <kbd>C-c C-l e</kbd> | `eglot-code-actions` | Code actions |
-| <kbd>C-c C-l f</kbd> | `eglot-format-buffer` | Format buffer |
-| <kbd>C-c C-l o</kbd> | `eglot-code-action-organize-imports` | Organize imports |
+| <kbd>C-c L r</kbd> | `eglot-rename` | Rename symbol |
+| <kbd>C-c L e</kbd> | `eglot-code-actions` | Code actions |
+| <kbd>C-c L f</kbd> | `eglot-format-buffer` | Format buffer |
+| <kbd>C-c L o</kbd> | `eglot-code-action-organize-imports` | Organize imports |
 
 <!-- markdownlint-enable MD013 -->
 
@@ -84,23 +84,23 @@ When `prelude-lsp-client` is set to `lsp-mode`, the
 
 ### lsp-mode Key Bindings
 
-All lsp-mode key bindings use the <kbd>C-c C-l</kbd> prefix:
+All lsp-mode key bindings use the <kbd>C-c L</kbd> prefix:
 
 <!-- markdownlint-disable MD013 -->
 
 | Key | Command | Description |
 | --- | ------- | ----------- |
-| <kbd>C-c C-l .</kbd> | `lsp-ui-peek-find-definitions` | Peek at definition |
-| <kbd>C-c C-l ?</kbd> | `lsp-ui-peek-find-references` | Peek at references |
-| <kbd>C-c C-l r</kbd> | `lsp-rename` | Rename symbol |
-| <kbd>C-c C-l x</kbd> | `lsp-workspace-restart` | Restart workspace |
-| <kbd>C-c C-l w</kbd> | `lsp-ui-peek-find-workspace-symbol` | Find symbol |
-| <kbd>C-c C-l i</kbd> | `lsp-ui-peek-find-implementation` | Find implementation |
-| <kbd>C-c C-l d</kbd> | `lsp-describe-thing-at-point` | Describe at point |
-| <kbd>C-c C-l e</kbd> | `lsp-execute-code-action` | Code action |
-| <kbd>C-c C-l f</kbd> | `lsp-format-buffer` | Format buffer |
-| <kbd>C-c C-l o</kbd> | `lsp-organize-imports` | Organize imports |
-| <kbd>C-c C-l m</kbd> | `lsp-ui-imenu` | LSP imenu |
+| <kbd>C-c L .</kbd> | `lsp-ui-peek-find-definitions` | Peek at definition |
+| <kbd>C-c L ?</kbd> | `lsp-ui-peek-find-references` | Peek at references |
+| <kbd>C-c L r</kbd> | `lsp-rename` | Rename symbol |
+| <kbd>C-c L x</kbd> | `lsp-workspace-restart` | Restart workspace |
+| <kbd>C-c L w</kbd> | `lsp-ui-peek-find-workspace-symbol` | Find symbol |
+| <kbd>C-c L i</kbd> | `lsp-ui-peek-find-implementation` | Find implementation |
+| <kbd>C-c L d</kbd> | `lsp-describe-thing-at-point` | Describe at point |
+| <kbd>C-c L e</kbd> | `lsp-execute-code-action` | Code action |
+| <kbd>C-c L f</kbd> | `lsp-format-buffer` | Format buffer |
+| <kbd>C-c L o</kbd> | `lsp-organize-imports` | Organize imports |
+| <kbd>C-c L m</kbd> | `lsp-ui-imenu` | LSP imenu |
 
 <!-- markdownlint-enable MD013 -->
 

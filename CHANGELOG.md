@@ -2,6 +2,12 @@
 
 # Change log
 
+## master (unreleased)
+
+### Changes
+
+- [#1506](https://github.com/bbatsov/prelude/pull/1506): Move Prelude's Eglot and lsp-mode commands from `C-c C-l` to `C-c L`, so the `C-c C-l` of major modes (e.g. `python-shell-send-file`, `haskell-process-load-file` and `ruby-load-file`) works in buffers with a language server.
+
 ## 2.2.0 (2026-11-25)
 
 ### New features
