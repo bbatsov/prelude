@@ -361,10 +361,13 @@ Meant for `before-save-hook'.  See `prelude-format-on-save-p'."
       (setq eglot-events-buffer-size 0)))                       ; older Eglot
   (setq eglot-extend-to-xref t)
 
-  (define-key eglot-mode-map (kbd "C-c C-l r") #'eglot-rename)
-  (define-key eglot-mode-map (kbd "C-c C-l e") #'eglot-code-actions)
-  (define-key eglot-mode-map (kbd "C-c C-l f") #'eglot-format-buffer)
-  (define-key eglot-mode-map (kbd "C-c C-l o") #'eglot-code-action-organize-imports))
+  ;; not under C-c C-l: C-c followed by a control character belongs to
+  ;; the major modes, and many of them use C-c C-l (e.g. to load the
+  ;; file in a REPL), which a key of Eglot's minor mode would hide
+  (define-key eglot-mode-map (kbd "C-c L r") #'eglot-rename)
+  (define-key eglot-mode-map (kbd "C-c L e") #'eglot-code-actions)
+  (define-key eglot-mode-map (kbd "C-c L f") #'eglot-format-buffer)
+  (define-key eglot-mode-map (kbd "C-c L o") #'eglot-code-action-organize-imports))
 
 (provide 'prelude-core)
 ;;; prelude-core.el ends here

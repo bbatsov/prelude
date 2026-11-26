@@ -57,8 +57,8 @@ With lsp-mode the module adds two keys for lsp-dart's outlines:
 
 | Key | Command | Description |
 | --- | ------- | ----------- |
-| <kbd>C-c C-l D s o</kbd> | `lsp-dart-show-outline` | Show the outline of the file |
-| <kbd>C-c C-l D s f</kbd> | `lsp-dart-show-flutter-outline` | Show the Flutter outline |
+| <kbd>C-c L D s o</kbd> | `lsp-dart-show-outline` | Show the outline of the file |
+| <kbd>C-c L D s f</kbd> | `lsp-dart-show-flutter-outline` | Show the Flutter outline |
 
 <!-- markdownlint-enable MD013 -->
 

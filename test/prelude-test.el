@@ -28,9 +28,20 @@
 
 (defvar eglot--managed-mode)
 (defvar ocaml-eglot-mode)
+(defvar python-mode-map)
 
-(ert-deftest prelude-ocaml-keeps-the-eglot-prefix ()
-  "ocaml-eglot used to take C-c C-l, the prefix of Prelude's Eglot keys."
+(ert-deftest prelude-eglot-leaves-c-c-c-l-to-the-major-mode ()
+  "Prelude's Eglot keys used to hide the C-c C-l of the major mode."
+  (require 'eglot)
+  (require 'python)
+  (with-temp-buffer
+    (use-local-map python-mode-map)
+    (setq-local eglot--managed-mode t)
+    (should (eq (key-binding (kbd "C-c C-l")) 'python-shell-send-file))
+    (should (eq (key-binding (kbd "C-c L r")) 'eglot-rename))))
+
+(ert-deftest prelude-ocaml-eglot-keeps-its-c-c-c-l ()
+  "ocaml-eglot's C-c C-l and Prelude's Eglot keys work side by side."
   (require 'prelude-ocaml)
   ;; the module sets up ocaml-eglot only for Eglot
   (skip-unless (and (eq prelude-lsp-client 'eglot)
@@ -39,8 +50,24 @@
   (with-temp-buffer
     (setq-local eglot--managed-mode t)
     (setq-local ocaml-eglot-mode t)
-    (should (eq (key-binding (kbd "C-c C-l r")) 'eglot-rename))
+    (should (eq (key-binding (kbd "C-c L r")) 'eglot-rename))
+    (should (eq (key-binding (kbd "C-c C-l")) 'ocaml-eglot-find-definition))
     (should (eq (key-binding (kbd "C-c C-a")) 'ocaml-eglot-alternate-file))))
+
+(ert-deftest prelude-lsp-mode-leaves-c-c-c-l-to-the-major-mode ()
+  "Prelude's lsp-mode keys are under C-c L, like its Eglot ones."
+  (defvar lsp-keymap-prefix)
+  (defvar lsp-mode-map)
+  (defvar lsp-ui-mode-map)
+  (skip-unless (eq prelude-lsp-client 'lsp-mode))
+  (require 'prelude-lsp-mode)
+  (require 'lsp-mode)
+  (require 'lsp-ui)
+  (should (equal lsp-keymap-prefix "C-c L"))
+  (should (keymapp (lookup-key lsp-mode-map (kbd "C-c L"))))
+  (should (eq (lookup-key lsp-ui-mode-map (kbd "C-c L r")) 'lsp-rename))
+  (dolist (map (list lsp-mode-map lsp-ui-mode-map))
+    (should-not (lookup-key map (kbd "C-c C-l")))))
 
 (ert-deftest prelude-ocaml-setup-without-ocaml-eglot ()
   "The OCaml mode hook shouldn't fail when ocaml-eglot isn't installed."

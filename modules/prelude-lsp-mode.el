@@ -37,7 +37,7 @@
   :defer t
   :custom
   ;; read when lsp-mode is loaded, so it has to be set before that
-  (lsp-keymap-prefix "C-c C-l")
+  (lsp-keymap-prefix "C-c L")
   (lsp-keep-workspace-alive nil)
   (lsp-auto-guess-root t)
   (lsp-idle-delay 0.5)
@@ -59,17 +59,17 @@
   (lsp-ui-peek-always-show t)
   :config
   (require 'lsp-ui-imenu)
-  (define-key lsp-ui-mode-map (kbd "C-c C-l .") 'lsp-ui-peek-find-definitions)
-  (define-key lsp-ui-mode-map (kbd "C-c C-l ?") 'lsp-ui-peek-find-references)
-  (define-key lsp-ui-mode-map (kbd "C-c C-l r") 'lsp-rename)
-  (define-key lsp-ui-mode-map (kbd "C-c C-l x") 'lsp-workspace-restart)
-  (define-key lsp-ui-mode-map (kbd "C-c C-l w") 'lsp-ui-peek-find-workspace-symbol)
-  (define-key lsp-ui-mode-map (kbd "C-c C-l i") 'lsp-ui-peek-find-implementation)
-  (define-key lsp-ui-mode-map (kbd "C-c C-l d") 'lsp-describe-thing-at-point)
-  (define-key lsp-ui-mode-map (kbd "C-c C-l e") 'lsp-execute-code-action)
-  (define-key lsp-ui-mode-map (kbd "C-c C-l f") 'lsp-format-buffer)
-  (define-key lsp-ui-mode-map (kbd "C-c C-l o") 'lsp-organize-imports)
-  (define-key lsp-ui-mode-map (kbd "C-c C-l m") 'lsp-ui-imenu))
+  (define-key lsp-ui-mode-map (kbd "C-c L .") 'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map (kbd "C-c L ?") 'lsp-ui-peek-find-references)
+  (define-key lsp-ui-mode-map (kbd "C-c L r") 'lsp-rename)
+  (define-key lsp-ui-mode-map (kbd "C-c L x") 'lsp-workspace-restart)
+  (define-key lsp-ui-mode-map (kbd "C-c L w") 'lsp-ui-peek-find-workspace-symbol)
+  (define-key lsp-ui-mode-map (kbd "C-c L i") 'lsp-ui-peek-find-implementation)
+  (define-key lsp-ui-mode-map (kbd "C-c L d") 'lsp-describe-thing-at-point)
+  (define-key lsp-ui-mode-map (kbd "C-c L e") 'lsp-execute-code-action)
+  (define-key lsp-ui-mode-map (kbd "C-c L f") 'lsp-format-buffer)
+  (define-key lsp-ui-mode-map (kbd "C-c L o") 'lsp-organize-imports)
+  (define-key lsp-ui-mode-map (kbd "C-c L m") 'lsp-ui-imenu))
 
 (provide 'prelude-lsp-mode)
 ;;; prelude-lsp-mode.el ends here

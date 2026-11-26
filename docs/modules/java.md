@@ -107,7 +107,7 @@ open a Gradle build file.
 
 ## Formatting
 
-<kbd>C-c C-l f</kbd> formats the buffer with JDT LS. If you'd rather
+<kbd>C-c L f</kbd> formats the buffer with JDT LS. If you'd rather
 have format-on-save, the [Apheleia](apheleia.md) module supports
 [google-java-format](https://github.com/google/google-java-format) out
 of the box.

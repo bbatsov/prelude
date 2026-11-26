@@ -38,11 +38,10 @@ These come from ocaml-eglot, and work only with Eglot:
 | <kbd>C-c C-a</kbd> | `ocaml-eglot-alternate-file` | Switch between the `.ml` and the `.mli` file |
 | <kbd>C-c C-t</kbd> | `ocaml-eglot-type-enclosing` | Show the type of the expression at point |
 | <kbd>C-c \|</kbd> | `ocaml-eglot-destruct` | Destruct the expression at point (e.g. into a `match`) |
+| <kbd>C-c C-l</kbd> | `ocaml-eglot-find-definition` | Jump to the definition (like <kbd>M-.</kbd>) |
 
 <!-- markdownlint-enable MD013 -->
 
-ocaml-eglot also binds <kbd>C-c C-l</kbd>, which the module takes back
-for Prelude's Eglot commands (<kbd>M-.</kbd> jumps to definitions just
-as well). See the [LSP](lsp.md) module for those, and the documentation
-of neocaml for its own key bindings. Run <kbd>C-h m</kbd> in an OCaml
-buffer for all key bindings.
+See the [LSP](lsp.md) module for Prelude's own Eglot commands, and the
+documentation of neocaml for its key bindings. Run <kbd>C-h m</kbd> in
+an OCaml buffer for all key bindings.

@@ -7,6 +7,14 @@ the releases where there's more to it. The
 [changelog](https://github.com/bbatsov/prelude/blob/master/CHANGELOG.md)
 has the full list of changes in every release.
 
+## Upgrading to Prelude 2.2.1
+
+Prelude's commands for Eglot and lsp-mode (rename, code actions,
+formatting, etc.) moved from <kbd>C-c C-l</kbd> to <kbd>C-c L</kbd>.
+Many major modes use <kbd>C-c C-l</kbd> themselves, e.g. Python's to
+send the file to the REPL, or Haskell's and Ruby's to load it there,
+and in buffers with a language server those keys didn't work.
+
 ## Upgrading to Prelude 2.2
 
 ### How modules set up major modes
