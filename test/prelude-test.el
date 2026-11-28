@@ -246,6 +246,16 @@ the packages installed from a VCS."
       (prelude-update-packages))
     (should (equal (reverse upgraded) '(outdated (vc checkout))))))
 
+(ert-deftest prelude-dirs-are-trusted ()
+  "Emacs 30+ keeps Flycheck from checking Emacs Lisp it doesn't trust."
+  (skip-unless (boundp 'trusted-content))
+  (dolist (dir (list prelude-core-dir prelude-modules-dir prelude-personal-dir))
+    (with-temp-buffer
+      (setq buffer-file-name (expand-file-name "my-config.el" dir)
+            buffer-file-truename (abbreviate-file-name
+                                  (file-truename buffer-file-name)))
+      (should (trusted-content-p)))))
+
 (ert-deftest prelude-operate-on-number-keys-repeat ()
   "After \\`C-c .' the operator keys keep working without the prefix."
   (with-temp-buffer
