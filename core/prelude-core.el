@@ -186,6 +186,14 @@ way Emacs started from a terminal does."
     (prelude-recompile-init)
     (message "Update finished. Restart Emacs to complete the process.")))
 
+(defun prelude--package-outdated-p (desc)
+  "Return non-nil if the package archives have a newer version of DESC.
+DESC is the descriptor of an installed package."
+  (let ((available (cadr (assq (package-desc-name desc) package-archive-contents))))
+    (and available
+         (version-list-< (package-desc-version desc)
+                         (package-desc-version available)))))
+
 (defun prelude-update-packages (&optional arg)
   "Update Prelude's packages.
 This covers every package Prelude installs (see `prelude-packages').
@@ -196,9 +204,15 @@ With a prefix ARG updates all installed packages."
     (if arg
         (package-upgrade-all)
       (package-refresh-contents)
+      ;; `package-upgrade' reinstalls a package that's up to date on
+      ;; Emacs 29 and 30, and on Emacs 31 it signals an error for it, and
+      ;; for a package installed from a VCS
       (dolist (package prelude-packages)
-        (when (package-installed-p package)
-          (package-upgrade package))))
+        (let ((desc (cadr (assq package package-alist))))
+          (cond
+           ((null desc))
+           ((package-vc-p desc) (package-vc-upgrade desc))
+           ((prelude--package-outdated-p desc) (package-upgrade package))))))
     (message "Update finished. Restart Emacs to complete the process.")))
 
 (defun prelude-wrap-with (s)

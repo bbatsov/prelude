@@ -223,6 +223,29 @@ Whether Prelude got recompiled is recorded in `recompiled'."
       (should recompiled)
       (should (equal default-directory "/tmp/")))))
 
+(ert-deftest prelude-update-packages-skips-up-to-date-packages ()
+  "Only the packages with a newer version in the archives get upgraded.
+On Emacs 31 `package-upgrade' signals an error for the others, and for
+the packages installed from a VCS."
+  (let* ((outdated (package-desc-create :name 'outdated :version '(1)))
+         (current (package-desc-create :name 'current :version '(1)))
+         (checkout (package-desc-create :name 'checkout :version '(1) :kind 'vc))
+         (package-alist `((outdated ,outdated) (current ,current) (checkout ,checkout)))
+         (package-archive-contents
+          `((outdated ,(package-desc-create :name 'outdated :version '(2)))
+            (current ,current)
+            (checkout ,(package-desc-create :name 'checkout :version '(2)))))
+         (prelude-packages '(outdated current checkout not-installed))
+         (upgraded nil))
+    (cl-letf (((symbol-function 'y-or-n-p) (lambda (&rest _) t))
+              ((symbol-function 'package-refresh-contents) #'ignore)
+              ((symbol-function 'package-upgrade)
+               (lambda (package) (push package upgraded)))
+              ((symbol-function 'package-vc-upgrade)
+               (lambda (desc) (push (list 'vc (package-desc-name desc)) upgraded))))
+      (prelude-update-packages))
+    (should (equal (reverse upgraded) '(outdated (vc checkout))))))
+
 (ert-deftest prelude-operate-on-number-keys-repeat ()
   "After \\`C-c .' the operator keys keep working without the prefix."
   (with-temp-buffer
