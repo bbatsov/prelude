@@ -256,6 +256,27 @@ the packages installed from a VCS."
                                   (file-truename buffer-file-name)))
       (should (trusted-content-p)))))
 
+(ert-deftest prelude-package-install-keeps-only-errors ()
+  "Installing at startup used to pop up the byte compiler's warnings."
+  (let ((delayed-warnings-list '((prelude "kept"))))
+    (cl-letf (((symbol-function 'package-install)
+               (lambda (_package)
+                 (delay-warning 'bytecomp "obsolete function")
+                 (delay-warning 'bytecomp "broken" :error))))
+      (prelude-package-install 'foo))
+    (should (equal (mapcar #'cadr delayed-warnings-list) '("broken" "kept")))))
+
+(ert-deftest prelude-package-install-keeps-errors-of-failed-installs ()
+  "The errors that explain a failed install aren't dropped."
+  (let ((delayed-warnings-list nil)
+        (prelude--package-archives-refreshed t))
+    (cl-letf (((symbol-function 'package-install)
+               (lambda (_package)
+                 (delay-warning 'bytecomp "broken" :error)
+                 (error "Install failed"))))
+      (should-error (prelude-package-install 'foo)))
+    (should (equal (mapcar #'cadr delayed-warnings-list) '("broken")))))
+
 (ert-deftest prelude-operate-on-number-keys-repeat ()
   "After \\`C-c .' the operator keys keep working without the prefix."
   (with-temp-buffer

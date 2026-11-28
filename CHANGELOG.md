@@ -12,6 +12,7 @@
 
 - [#1510](https://github.com/bbatsov/prelude/pull/1510): Upgrade only the outdated packages in `prelude-update-packages` (the welcome screen's [Update packages]), which reinstalled every package on Emacs 29 and 30, and stopped at the first up-to-date one with "Cannot upgrade" on Emacs 31.
 - [#1510](https://github.com/bbatsov/prelude/pull/1510): Add the personal directory, and Prelude's own `core` and `modules`, to `trusted-content`, so Flycheck checks the Emacs Lisp files there on Emacs 30 and newer.
+- [#1510](https://github.com/bbatsov/prelude/pull/1510): Keep the warnings raised by installing packages at startup (e.g. the byte compiler's on the first start) from popping up, unless they're errors.
 
 ## 2.2.0 (2026-11-25)
 
