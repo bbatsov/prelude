@@ -81,6 +81,22 @@ run, which is what `prelude-update-packages' and
 (defvar prelude--package-archives-refreshed nil
   "Non-nil once `prelude-package-install' has refreshed the package archives.")
 
+(defun prelude--package-install-quietly (package)
+  "Install PACKAGE, dropping the warnings it raises during startup.
+Only the errors are kept.  `package.el' keeps the byte compiler's
+warnings about the code of a new package out of sight, but during
+startup Emacs holds all warnings back and shows them once init is
+over, the byte compiler's included (as of Emacs 31.1)."
+  (let ((queued delayed-warnings-list))
+    (setq delayed-warnings-list nil)
+    (unwind-protect
+        (package-install package)
+      (setq delayed-warnings-list
+            (append (seq-filter (lambda (warning)
+                                  (memq (nth 2 warning) '(:error :emergency)))
+                                delayed-warnings-list)
+                    queued)))))
+
 (defun prelude-package-install (package)
   "Install PACKAGE, refreshing the package archives and retrying on failure.
 
@@ -93,14 +109,14 @@ most once per session."
   (when (assq package package-pinned-packages)
     (package-read-all-archive-contents))
   (condition-case err
-      (package-install package)
+      (prelude--package-install-quietly package)
     (error
      (if prelude--package-archives-refreshed
          (signal (car err) (cdr err))
        (message "[Prelude] Failed to install %s, refreshing the package archives and retrying..." package)
        (package-refresh-contents)
        (setq prelude--package-archives-refreshed t)
-       (package-install package)))))
+       (prelude--package-install-quietly package)))))
 
 (defun prelude-use-package-ensure (name args state &optional no-refresh)
   "Install the packages of a `use-package' form with `prelude-package-install'.
