@@ -201,6 +201,16 @@ variable set by a `custom-set-variables' form whose name starts with
                (directory-files prelude-personal-dir 't "^[^#\.].*\\.el$")
                (list prelude-modules-file prelude-personal-early-init-file))))
 
+;; Emacs 30+ won't let Flycheck and Flymake byte-compile Emacs Lisp it
+;; doesn't trust, and Prelude runs the code in these dirs anyway.  This
+;; comes after `custom-file', which can set `trusted-content' as a
+;; whole.  Trusted directories are matched against abbreviated true names.
+(when (and (boundp 'trusted-content) (listp trusted-content))
+  (dolist (dir (list prelude-core-dir prelude-modules-dir prelude-personal-dir))
+    (add-to-list 'trusted-content
+                 (file-name-as-directory
+                  (abbreviate-file-name (file-truename dir))))))
+
 (message "[Prelude] Prelude is ready to do thy bidding, Master %s!" prelude-user)
 
 (prelude-eval-after-init
