@@ -16,6 +16,7 @@ places
 .smex-items
 savefile/
 projectile-bookmarks.eld
+projectile-frecency.eld
 session*
 .cask
 tramp
@@ -29,6 +30,7 @@ prelude-cheatsheet.log
 transient/
 var/
 .cache/
+org-persist/
 .lsp-session*
 gotools/
 eln-cache/
